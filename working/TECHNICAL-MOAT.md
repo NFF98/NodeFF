@@ -184,3 +184,18 @@ Potential defensibility comes from:
 - high-performing reusable Blueprint families.
 
 This also creates a disciplined expansion loop: add capabilities because observed unsupported intents justify them, rather than continuously expanding the runtime based on isolated prompts.
+
+
+## 12. Wiring Graph as a Learnable Asset — Working Addition
+The Action→State→Rule→View→Effect model creates a more precise composition graph than “Prompt→UI” alone:
+
+`Intent → selected capabilities → bindings/wiring → execution outcomes → failures/refinements → reusable wiring patterns`
+
+Potential defensibility can accumulate in:
+- which capability combinations solve which intents;
+- which bindings/rules are stable;
+- which degradations users accept/reject;
+- which runtime/capability versions produce reliable outcomes;
+- which wiring patterns are frequently forked/reused.
+
+Again, the JSON format itself is not the moat. The validated composition/reliability graph may be.
