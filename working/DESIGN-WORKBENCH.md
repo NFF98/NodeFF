@@ -131,3 +131,103 @@ Business Plan 的階段描述應調整為：
 - `working/APP-ARCHITECTURE.md`
 - `working/INFRA-ARCHITECTURE.md`
 - `working/TECHNICAL-MOAT.md`
+
+
+---
+
+## 新主題：NodeFF 的核心不是 Decision App，而是 Idea-to-App
+
+### 問題
+
+Business Plan 目前有一句：
+
+> 「任何人遇到一個複雜決策 → NodeFF 立即變成一個可互動、可分享、可交易的小 App」
+
+這個描述把 NodeFF 的產品範圍縮得太窄。
+
+NodeFF 不應被定義成「Decision Generator」。
+
+Decision 只是目前容易理解、容易建立 use case 的其中一類。
+
+---
+
+## 修正方向
+
+更接近 NodeFF 本質的描述是：
+
+> **任何人有一個想法、需求、情境或互動構想，只要它適合被做成一個 App，就不需要先去搜尋哪個既有 App 可以完成，而是直接讓 NodeFF 幫他把想法變成可用的 Micro-App。**
+
+概念轉換：
+
+```text
+Old Model
+Idea / Need
+ → Search App
+ → Install / Learn / Configure
+ → Use
+
+NodeFF Model
+Idea / Need
+ → Describe Intent
+ → NodeFF creates usable Micro-App
+ → Use / Share / Remix
+```
+
+因此 NodeFF 解決的不是單一 domain 問題，而是：
+
+> **從「Search for an App」轉成「Create the App I need now」。**
+
+---
+
+## Use Case 不應過早定死
+
+目前已知可能包括：
+
+- Decision
+- Fun / Party
+- Social Interaction
+- Sentimental / Emotional Expression
+- Personal Utility
+- Group Activity
+- Temporary Tool
+- Creative Interaction
+- 其他目前尚未發現的 Micro-App 類型
+
+Phase 1 可以先選幾個容易驗證的 use case 作為 Wedge，但不能把這些 Wedge 誤寫成 NodeFF 的最終產品定義。
+
+正確關係：
+
+```text
+Product Vision
+= Idea / Need → Micro-App
+
+Phase 1 Wedge
+= 從少數高機率 use cases 開始驗證
+
+Observed Usage
+= 用真實數據重新判斷最強 category
+```
+
+---
+
+## 目前產品定位候選
+
+較佳候選句：
+
+> **NodeFF 讓任何人不必先找 App，而是直接把當下的想法或需求變成 App。**
+
+更完整版本：
+
+> **當一個人產生「如果現在有個 App 可以幫我做這件事就好了」的念頭時，NodeFF 直接把這個念頭變成可互動、可分享、可 Remix 的 Micro-App。**
+
+---
+
+## 對 Business Plan 的影響
+
+未來 `sync` 時需修正：
+
+- 商業核心：從「複雜決策」提升為「Idea / Need → App」
+- Phase 1 use case：明確標示為 Wedge，不是產品邊界
+- Product Vision：不可被 Decision / Calculator / Party 任一類型綁死
+- PMF 方法：實際 use case category 由真實 usage data 驗證，而不是事先假定
+
