@@ -54,4 +54,31 @@ A recurring hypothesis from the discussion is:
 
 This remains a working hypothesis and is not yet an approved product decision.
 
+### Phase 1 Scope — Working
+The uploaded Phase 1 material frames NFF as a **dynamic micro-application engine**, not a replacement for native apps.
+
+**Boundary / positioning:**
+- Native Apps: high-stickiness, long-lifecycle experiences with deep identity/data, background system capabilities.
+- NFF: instant-intent, single-session, disposable experiences with zero-download / zero-registration entry.
+- NFF is aimed at long-tail, fragmented, dynamically generated, C2C/social micro-app experiences rather than replacing mature native apps.
+
+**Phase 1 boundary model under discussion:**
+- **Tier 1:** lightweight client-side / ephemeral experiences, including real-time social games, calculators, timers, and browser/WASM workloads.
+- **Tier 2:** experiences requiring paid runtime APIs, persistent cloud storage, heavier AI/media computation, or larger/longer-lived rooms.
+- **Tier 3:** requests exceeding browser/OS/security boundaries or lacking meaningful UI value; these are rejected or redirected.
+- Core engine behavior under discussion: existing Lego primitives → direct declarative rendering; missing specialized UI → generic form fallback; heavy workloads → cloud-worker escalation; unsafe/unsupported system-level requests → hard reject.
+- Security direction: no arbitrary dynamic JavaScript execution; generated JSON selects approved primitives and parameters.
+
+**Phase 1 product/experience direction:**
+- Consumer entry should preserve the zero-friction principle.
+- Creator experiences can use progressive authentication when persistent ownership, history, or paid capabilities become necessary.
+- Candidate experience categories include social games, group decisions, cost splitting, temporary calculators/tools, and other short-lived intent-driven micro-apps.
+
+**Open decisions from the Phase 1 material:**
+1. Runtime LLM usage: quota within free tier vs. automatically Tier 2 when runtime AI is required.
+2. Ephemeral room limits: proposed example is 10 concurrent users / 15-minute idle destruction.
+3. Macro-app reframing: automatically reduce a large-app request to an NFF-sized intent, or ask for confirmation first.
+
+**Working note / better suggestion:** Keep Phase 1 focused on proving the **instant-intent → generated micro-app → share/use → disappear** loop. Treat exact cost figures, room limits, and technical thresholds as provisional until validated by implementation and real usage.
+
 **Important:** Everything in this file remains working discussion material unless explicitly approved and moved into `spec/` or `decisions/`.
