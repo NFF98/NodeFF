@@ -416,3 +416,53 @@ Do **not** embed arbitrary JavaScript such as `Math.random()` in WidgetSpec.
 - the Micro-App explicitly uses an approved runtime-AI capability (Tier 2).
 
 This boundary should be explicit in the future LegoSpec capability model.
+
+
+## 17. Blueprint CAS / Personal Pointer / Fork Architecture — Working
+
+### 17.1 Content-Addressable Blueprint Identity
+Candidate architecture uses content-addressable storage (CAS) for immutable Blueprint content.
+
+`Canonical WidgetSpec → canonical serialization → cryptographic digest → blueprint_content_id`
+
+The digest identifies exact canonical content. It is not itself an ownership or authorization mechanism.
+
+### 17.2 Storage Separation
+**Common Blueprint Pool**
+- immutable Blueprint body;
+- schema/runtime compatibility metadata;
+- validation/policy status;
+- optional lineage references stored as metadata.
+
+**Personal Asset Pool**
+- account/anonymous-owner reference as permitted;
+- Blueprint pointer;
+- created/saved/forked relationship;
+- ownership/edit rights;
+- user-specific persistent settings/history where applicable.
+
+**Instance State**
+Remains a separate concept. A room/snapshot's mutable state must not mutate the immutable Blueprint.
+
+### 17.3 Retrieval
+Candidate flow:
+`route → Blueprint ID/hash → edge/cache/registry → compatibility + integrity check → hydrate Universal Lego Player`
+
+For room mode:
+`validated Blueprint + room_id → connect realtime adapter → hydrate room state/deltas → local rule execution`
+
+Realtime provider remains replaceable; PartyKit is a candidate adapter, not part of the Blueprint identity.
+
+### 17.4 Fork / Differential Compiler
+`Base immutable Blueprint → user refinement → compiler produces constrained delta/new candidate → apply → validate → canonicalize → hash → store/dedupe → create lineage + personal pointer`
+
+A Fork never edits the original immutable content in place.
+
+### 17.5 Versioning
+Do not encode semantic version meaning directly into the cryptographic content hash. Keep separate concepts:
+- `content_id/hash` = immutable content identity;
+- `blueprint_id` = optional stable logical identity;
+- `revision/lineage` = relationship among versions/forks;
+- `instance_id` = concrete current-use state/session.
+
+This separation will matter for publishing, rollback, moderation, cache invalidation and analytics.
