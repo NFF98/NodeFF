@@ -136,7 +136,6 @@ Working constraints：
 
 **Status：Working。**
 
-
 ## 12. Detailed Infrastructure Design Inputs — Working
 
 ### 12.1 Serverless + Edge-first Direction
@@ -184,3 +183,95 @@ Compiler failure → retry/fallback. Runtime failure → client isolation. Room 
 - backup/DR
 - SLO/capacity targets
 - observability provider
+
+## 13. App Instance Infrastructure — Detailed Working Design
+
+### 13.1 Cost Allocation Model
+Working hypothesis:
+- Initial semantic compilation is the main LLM-related platform cost.
+- Normal UI interaction and deterministic calculations should remain client-side.
+- Share/open of a lightweight instance should primarily consume delivery/bandwidth rather than server compute.
+- Realtime collaboration, persistent storage, external APIs and Tier 2 workloads introduce additional platform costs.
+
+User-provided estimates such as 0.0003–0.0005 USD per initial generation and “near-zero” sharing/storage are retained as **benchmarks to validate**, not committed cost facts.
+
+### 13.2 Snapshot Storage Tiers
+Candidate three-way model:
+1. **URL Hash / LocalStorage:** small, ephemeral, non-sensitive instance state.
+2. **Short Link / KV or DB:** large payloads, stable references, clean URLs, or durable sharing.
+3. **Realtime Room:** shared base contract + ephemeral synchronized state.
+
+A prior “90% lightweight / 10% complex” split is a planning hypothesis only; production distribution should be measured.
+
+### 13.3 Snapshot Hydration
+Candidate flow:
+
+```
+URL / Short Link / Room
+       ↓
+Decode / Fetch
+       ↓
+Schema + Version Validation
+       ↓
+Blueprint / Spec Resolution
+       ↓
+Instance State Hydration
+       ↓
+Local Runtime
+```
+
+The system should not call the LLM merely to reconstruct an already-valid shared instance.
+
+### 13.4 Realtime Delta Transport
+For shared editing, prefer validated state deltas rather than repeatedly transmitting full WidgetSpec payloads.
+
+Working requirements:
+- Base contract/version must be known by all participants.
+- Delta schema must be validated.
+- Ordering / deduplication / conflict semantics must be defined before production realtime.
+- Clients should recalculate deterministic formulas locally where possible.
+- Room state should remain ephemeral unless explicitly persisted.
+
+### 13.5 Data Placement Boundary
+```
+Client
+ ├─ UI state
+ ├─ deterministic formulas
+ ├─ valid WidgetSpec / compatible contract
+ └─ local recovery state
+
+Edge/API
+ ├─ routing / gate
+ ├─ compiler request
+ ├─ cache
+ └─ short-link / room coordination as required
+
+Persistent backend
+ ├─ Blueprint metadata
+ ├─ ownership / publishing
+ ├─ history
+ ├─ quota / commerce
+ └─ required durable records
+```
+
+### 13.6 Cost/Performance Validation Plan
+The following user-provided numbers should become benchmark/SLO candidates rather than assumptions:
+- compiler latency target;
+- instance hydration target;
+- local recalculation target;
+- runtime bundle size;
+- browser memory target;
+- generation token cost;
+- snapshot size;
+- URL payload threshold;
+- realtime delta size and frequency.
+
+Benchmark on representative mobile/desktop devices and real network conditions before locking the figures.
+
+## 14. Infrastructure Questions Added
+1. What exact URL payload size/encoding threshold should trigger short-link fallback?
+2. What is the minimum durable data required for a short-link?
+3. What realtime protocol provides ordering, deduplication and conflict resolution?
+4. Which state changes are safe to broadcast to all room participants?
+5. What are the bandwidth and observability costs at 1M / 10M / 100M interactions?
+6. Which compiler latency and LLM cost targets are realistic for the chosen model/provider?
