@@ -588,7 +588,7 @@ The business must validate:
 
 ## 24. Metrics and Claims That Are Not Facts Yet
 
-Do not treat the following previously discussed figures as established:
+Do not treat the following figures as established:
 - 80% registration drop-off;
 - specific anonymous CPUI;
 - specific registered monthly cost;
