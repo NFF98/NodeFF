@@ -191,3 +191,58 @@ NodeFF 的核心技術方向暫定為：**約 12–15 個高階領域 Component 
 User Prompt → Normalize → SHA-256 Key → Edge KV Lookup → Hit: Verified LegoSpec / Miss: Layer 2
 
 **Working caution：** 「去除空格與標點後直接 hash」目前只是候選 normalization 策略；不同語意但文字不同的 prompt 仍可能造成 cache miss，未來可考慮 canonical intent key / semantic cache。
+
+### Detailed Design — Layer 3: Contract Layer / LegoSpec JSON Schema (Working)
+
+**定位：** NodeFF 架構的核心契約層。以宣告式 Schema 嚴格定義 State、UI Layout、Logic/Actions，以及資料與畫面的綁定關係。
+
+**Schema 核心三大區塊：**
+- **state：** 定義所有變數的初始值與型別（目前討論包含 Number、String、Array）。
+- **layout：** 定義 UI Lego/Component 的排列順序與層級。
+- **logic/actions：** 定義 UI 互動如何改變 State，例如數學公式或狀態機變更。
+
+**Working JSON Contract example：**
+```json
+{
+  "archetype": "calculation",
+  "state": { "budget": 400, "item_price": 100 },
+  "layout": [
+    { "type": "NumberInput", "bind": "budget", "label": "預算上限" },
+    { "type": "StatCard", "expression": "budget / item_price", "label": "可買數量" }
+  ]
+}
+```
+
+此契約的核心目的，是讓 LLM 產生明確結構，而不是讓前端透過 Regex 猜測變數或 UI 關係。
+
+**15 個高階 Domain Primitives（Working Catalog）：**
+1–4 **Input Controls：** NumberInput、TextInput、SelectChoice、ToggleSwitch。
+5–7 **Data & Visualization：** StatCard、DataTable、ChartVisualizer。
+8–13 **Rich Media & Interactive Engine：** Model3DViewer、LottieAnimator、WheelSpinner、DiceRoller、VideoPlayer、ConfettiTrigger。
+14–15 **Layout & Composition：** Container、Repeater。
+
+**TypeScript / Zod schema direction（Working）：**
+- 使用 Zod 建立 component contract。
+- 共通 BaseItem：`id` optional、`label` required。
+- Input components 使用 `bind` 指向 state key；NumberInput 支援 min/max/step/unit；TextInput 支援 placeholder；SelectChoice 支援 label/value options；ToggleSwitch 綁定 boolean state。
+- StatCard 使用 expression 與 optional format；DataTable 綁定 array 並定義 columns；ChartVisualizer 定義 bar/line/pie、資料來源與 x/y keys。
+- Model3DViewer 使用 model URL、autoRotate 與 optional triggerState；LottieAnimator 使用 source URL、loop、speed；WheelSpinner 使用 items 與 bind；DiceRoller 使用 1–6 顆骰子與 bind；VideoPlayer 使用 source URL、autoplay、muted；ConfettiTrigger 使用 condition。
+- Container 為遞迴 children 容器；Repeater 綁定 array state 並以 render 定義重複子藍圖。
+- 最終以 discriminated union（以 `type` 為 discriminator）組成 LegoSpec Component Item Schema。
+
+**State Binding Protocol（Working）：**
+- 具修改能力的 components（例如 NumberInput、SelectChoice、WheelSpinner、DiceRoller）透過統一 state context / bridge，概念上以 `onChange(key, value)` 寫入瀏覽器記憶體中的 gameState。
+- 表現/統計 components（例如 StatCard、ConfettiTrigger）在 gameState 變更後重新求值，不直接持有業務 state。
+- Expression 使用受限制的 sandbox evaluator（目前材料舉例 expr-eval）執行數學/邏輯 expression。
+- Container 與 Repeater 提供巢狀與重複組合能力，讓 Domain Primitives 可以組合成具備資料、互動、動畫與 Rich Media 的微應用。
+
+**Security boundary（Working）：**
+- LegoSpec 是 declarative contract，不是任意程式碼執行介面。
+- Component parameters 與 state binding 必須經 Schema validation。
+- 仍維持 Layer 2 / Layer 3 的核心原則：LLM 產生 JSON contract；Renderer/Runtime 只執行 Registry 中被允許的 component types 與受限制的 expression。
+
+**Working caution / design points：**
+- 「15 個」目前記錄為現有設計 catalog，不代表未來永遠只能有 15 個；Registry 應保留版本化與擴充能力。
+- `logic/actions` 已列為 Schema 三大區塊，但目前提供的 JSON example 尚未展示該區塊；詳細 action/state-machine contract 仍需在後續詳細設計補齊。
+- 原始材料同時使用 `computed` 與 `expression` 兩種命名；目前工作筆記以 `expression` 為主，但正式 Schema 命名尚未批准。
+- 「100% 符合定義」與「封鎖任何 ACE」先視為設計目標；正式安全模型需在 Security 詳細設計中明確定義 validator、sandbox、allowlist 與 threat model。
