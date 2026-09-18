@@ -471,3 +471,99 @@ The latest discussion adds these concepts to the system-design workout:
 > **Blueprint defines reusable capability; Instance defines current reality; Context connects one micro-app to the next.**
 
 These should become first-class concepts in later data-model and API design rather than being mixed into one generic “app” object.
+
+
+### Latest Working Input — Heavy Tasks / Control Plane / Compilation Paths
+
+#### 1. NFF Control Plane Boundary
+New working principle:
+> **NFF Engine 是輕量 Control Plane，不是 Heavy Compute Plane。**
+
+NFF 核心負責：
+- UI rendering
+- state packaging / transport
+- realtime synchronization
+- intent routing / commerce orchestration
+- presentation of asynchronous task status
+
+Heavy work should be delegated to either:
+1. browser-side WASM / Web Workers;
+2. external cloud APIs / dedicated workers;
+3. external persistent storage when durable large-scale data is required.
+
+#### 2. Chat Boundary
+**Room Chat** fits the NFF ephemeral-session model:
+- text / stickers can use the room's realtime broadcast channel;
+- room-only messages may remain ephemeral and disappear with the room;
+- WebRTC voice is a possible capability for live sessions.
+
+**Long-lived communication** such as Discord/Telegram-style history, account systems and background notifications is outside the natural NFF core and should not be treated as a native replacement target.
+
+Important distinction: ephemeral room chat is a candidate capability; exact retention, WebRTC behavior and provider architecture remain to be designed.
+
+#### 3. Heavy Task Delegation
+Three working paths:
+
+| Task | Execution | NFF Role |
+|---|---|---|
+| Browser-capable heavy work | WASM / Web Workers | UI + parameters + progress/result presentation |
+| Server-required heavy work | Async Action → external API/worker | Orchestrator + status dashboard + result presentation |
+| Large/durable data | External storage / approved backend | Controlled connector/reference, not NFF core data plane |
+
+Examples include image processing, audio processing, browser ML, video generation, long-form AI processing and large data queries.
+
+#### 4. Golden Rule
+Working architecture rule:
+> **「NFF 只做輕量控制面；重型運算與大型持久資料交給瀏覽器本地算力或專業外部服務。」**
+
+This protects the intended product properties:
+- no installation;
+- fast runtime startup;
+- small runtime;
+- client-first execution;
+- platform cost concentrated on compilation and explicitly requested heavy capabilities.
+
+The exact claims of "$0", "3 seconds", or "near-zero marginal cost" remain targets/hypotheses until benchmarked.
+
+#### 5. Cold Path / Warm Path
+Introduce a clear distinction:
+
+**Cold Path — Async Compilation**
+`User Intent → Routing → LLM Compiler → Validation → WidgetSpec/Blueprint`
+
+The first generation may take materially longer than runtime rendering because it includes semantic compilation and provider latency.
+
+**Warm Path — Runtime Execution**
+`Shared Blueprint/Instance → Fetch/Decode → Validate → Hydrate → Render`
+
+A valid existing Blueprint/Instance should not require another LLM call merely to open, share or continue it.
+
+#### 6. Spec Registry / Cache
+Working direction:
+- verified WidgetSpec/Blueprints may be cached and reused;
+- exact/canonical prompt cache and semantic/canonical-intent reuse are distinct mechanisms;
+- cache entries must be tied to schema/component/policy versions;
+- cache reuse must never bypass validation or security policy.
+
+The proposed "10ms semantic hit" is a performance target, not a guarantee.
+
+#### 7. Loading UX During Cold Compilation
+During first-time generation, the Experience Shell may immediately show a lightweight skeleton/loading state and then hydrate the resulting WidgetSpec into the real card.
+
+Working UX goal:
+**不要假裝 0 秒；讓等待期間仍有明確、可理解的產品回饋。**
+
+### Architecture Principle Added
+**Compile Once → Reuse Many → Execute Locally**
+
+The product distinction is:
+- compilation is the expensive/slow path;
+- distribution/opening is the warm path;
+- interaction is primarily local runtime execution;
+- heavy capabilities are explicitly delegated.
+
+This reinforces:
+**Intent → WidgetSpec → Data/State → NFF Runtime**
+rather than:
+**Intent → generate a new application deployment for every user.**
+
