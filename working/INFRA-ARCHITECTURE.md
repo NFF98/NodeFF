@@ -404,3 +404,45 @@ Cache lifecycle must define:
 - validation/security status;
 - semantic equivalence confidence;
 - invalidation after runtime/schema/policy changes.
+
+
+## 17. Content-Addressable Blueprint Infrastructure — Working
+
+### 17.1 CAS Registry
+Candidate infrastructure:
+`Compiler Candidate → Validate → Canonicalize → SHA-256 (or approved digest) → CAS Registry/Object Store → Edge Cache`
+
+Identical canonical Blueprint content can deduplicate to one stored object.
+
+### 17.2 Common vs Personal Storage
+**Common layer:** immutable Blueprint blobs addressed by content ID.
+
+**Personal layer:** lightweight references and account-bound metadata. Personal history/settings/state are stored only when product requirements justify persistence.
+
+This avoids coupling global executable content with per-user authorization records.
+
+### 17.3 Retrieval Path
+`HTTP route/room reference → edge lookup → Blueprint object → integrity/compatibility checks → client`
+
+Exact sub-5ms retrieval and zero marginal cost are performance/economic targets, not infrastructure guarantees.
+
+### 17.4 Realtime Binding
+Room connection metadata should reference the immutable Blueprint content/version plus room identity. Room mutable state/deltas remain separate from CAS.
+
+Realtime provider should be behind an adapter; current PartyKit references remain candidate implementation details.
+
+### 17.5 CAS Security / Operations
+Required detailed design later:
+- deterministic JSON canonicalization;
+- digest algorithm/version;
+- trusted vs untrusted/quarantined registry status;
+- schema/component-runtime compatibility;
+- policy revalidation;
+- cache invalidation;
+- garbage collection/reference counting;
+- abuse/storage amplification controls;
+- maximum Blueprint size;
+- authorization for private/unpublished Blueprints;
+- moderation/takedown behavior.
+
+A content hash is not an access-control boundary: knowing a hash must not automatically grant access to private content.
