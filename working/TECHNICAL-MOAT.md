@@ -1,246 +1,281 @@
-# NodeFF Technical Moat — Working Brain
+# NodeFF Technical Moat
 
-> Status: WORKING / NOT OFFICIAL SSOT
->
-> Purpose: Consolidated defensibility thesis. This file explicitly separates commodity technologies from assets that may compound through NodeFF usage.
+> Status: Working. Not authoritative until promoted through the NodeFF SSOT process.
 
----
+## 1. Defensibility Thesis
 
-## 1. Core Thesis
+NodeFF's moat is not "LLM generates UI."
 
-"LLM generates UI" is **not** a moat.
-
-Neither are:
+The following are useful but broadly reproducible:
 - React;
-- Zod;
 - JSON;
+- Zod;
+- edge KV;
+- CAS;
 - Supabase;
-- Cloudflare/Vercel;
 - PartyKit;
-- a component registry;
-- CAS by itself;
+- a component map;
 - an LLM provider;
+- Structured Outputs;
 - a prompt template;
-- 15 primitives by themselves.
+- a 15-component library.
 
-Potential defensibility emerges from a compounding system:
+Potential defensibility comes from a compounding knowledge system built from real execution:
 
 ```text
 Intent
  → Capability Selection
  → Declarative Wiring
  → Blueprint
- → Execution Outcome
- → Failure / Correction
+ → Execution
+ → Outcome / Failure
+ → User Correction
  → Reuse / Remix
- → Better Compiler + Better Registry
+ → Better Retrieval + Compiler + Registry
 ```
 
 ---
 
-## 2. Moat Stack
+## 2. Core Moat Model
 
 ```text
-                Intent Commerce / Capability Network
-                             ↑
-                    Remix / Lineage Graph
-                             ↑
-                 Trusted Blueprint Families
-                             ↑
-              Reliability / Recovery Knowledge
-                             ↑
-            Intent → Capability → Wiring Dataset
-                             ↑
-              Rule Grammar + Primitive Ontology
-                             ↑
-              LegoSpec + Trusted Runtime
+             Intent Commerce / Capability Network
+                          ↑
+                  Remix / Lineage Graph
+                          ↑
+              Trusted Blueprint Families
+                          ↑
+           Reliability / Recovery Knowledge
+                          ↑
+        Intent → Capability → Wiring Knowledge
+                          ↑
+            Rule Grammar + Capability Ontology
+                          ↑
+               LegoSpec + Trusted Runtime
 ```
 
-The lower layers are necessary infrastructure. The upper layers may compound through use.
+The lower layers are necessary platform foundations.
+
+The upper layers become defensible only if repeated product usage creates information a competitor cannot cheaply reproduce.
 
 ---
 
-## 3. LegoSpec Protocol
+## 3. LegoSpec Protocol Value
 
-A stable, versioned declarative contract creates strategic value by making:
-- compiler providers replaceable;
-- runtime deterministic enough to validate;
-- artifacts shareable;
-- artifacts cacheable;
-- artifacts remixable;
-- execution auditable.
+A stable declarative protocol enables:
+- model-provider independence;
+- runtime/provider independence;
+- validation;
+- sharing;
+- content addressing;
+- replay;
+- remix;
+- compatibility control;
+- instrumentation.
 
-The format itself is copyable.
+The syntax itself is not a moat.
 
-Potential defensibility comes from:
-- mature compatibility;
-- large trusted corpus;
-- real-world composition patterns;
-- tooling and validation quality.
-
----
-
-## 4. Universal Runtime + Capability Ontology
-
-The runtime's value is not raw component count.
-
-It is:
-- coverage of useful intents;
-- safe composition;
-- predictable state behavior;
-- backward compatibility;
-- performance;
-- graceful failure;
-- security;
-- compositional richness.
-
-The Capability Registry becomes more valuable as it accumulates:
-- primitive semantics;
-- operator semantics;
-- version history;
-- compatibility;
-- observed usage;
-- failure evidence;
-- successful composition patterns.
+Protocol value becomes harder to copy when it carries:
+- mature backwards compatibility;
+- trusted artifacts;
+- proven composition patterns;
+- migration tooling;
+- high-quality runtime behavior.
 
 ---
 
-## 5. Intent → Capability Selection Data
+## 4. Capability Ontology
 
-Each successful compilation can generate structured evidence:
+The Capability Registry is more than a component list.
+
+Over time it may encode:
+- what each capability means;
+- its state contract;
+- compatible actions/rules/views/effects;
+- version compatibility;
+- security behavior;
+- fallback behavior;
+- observed successful combinations;
+- observed failure modes.
+
+A mature capability ontology helps the compiler map human intent into executable structures more reliably.
+
+The moat is not "we have DiceRoller." It is knowing **when, how and with what other capabilities it successfully satisfies real intent**.
+
+---
+
+## 5. Intent-to-Wiring Knowledge
+
+NodeFF can observe a structured mapping:
 
 ```text
 Intent
  → semantic decomposition
- → selected primitives/functions
- → bindings
- → outcome
-```
-
-Over time, NodeFF can learn which capability combinations work for which intent structures.
-
-This may be more valuable than a generic prompt dataset.
-
----
-
-## 6. Wiring Graph
-
-The Action → State → Rule → View → Effect model produces a precise composition graph.
-
-Potential data:
-
-```text
-Intent
- → Action set
- → State model
+ → selected capabilities
+ → state model
  → Rule AST
- → View composition
- → Effects
- → user outcome
+ → bindings
+ → view/effect composition
+ → result
 ```
 
-Useful questions:
-- which bindings repeatedly succeed?
-- which rule patterns are stable?
-- which primitive combinations are frequently remixed?
-- which compositions cause semantic mismatch?
+This creates a domain-specific dataset that is closer to NodeFF's core problem than generic prompt logs.
 
-This can improve compilation and retrieval.
+Potential learning:
+- which primitives solve which intent patterns;
+- which state structures recur;
+- which rule fragments are reusable;
+- which bindings are robust;
+- which compositions users reject.
 
 ---
 
-## 7. Reliability Graph
+## 6. Reliability Graph
 
-High-value failure classes:
-- malformed candidate;
-- validation failure;
-- schema-valid semantic mismatch;
-- unsupported capability;
-- wrong archetype/composition;
-- runtime component failure;
-- user refinement;
-- successful repair.
-
-Graph:
+Failure history is potentially one of the strongest compounding assets.
 
 ```text
 Intent
- → Candidate Blueprint
+ → Candidate
  → Validation
- → Execution
+ → Runtime
  → Failure / Correction
  → Repair / Fork
  → Successful Descendant
 ```
 
-This creates knowledge competitors cannot obtain merely by calling the same LLM API.
+High-value labels:
+- malformed candidate;
+- schema validation failure;
+- invalid binding;
+- unsupported capability;
+- wrong composition/archetype;
+- schema-valid semantic mismatch;
+- runtime component/action failure;
+- user refinement;
+- successful repair.
+
+The important data is not only "what worked."
+
+It is:
+
+> **What looked executable but was wrong, why it was wrong, and what change made it useful.**
 
 ---
 
-## 8. Semantic Mismatch as Valuable Data
+## 7. Semantic-Mismatch Knowledge
 
-One of NodeFF's most valuable datasets may be:
-
-> **What looked valid but was wrong — and how the user corrected it.**
+Prototype failures demonstrate why semantic mismatch is distinct from syntax failure.
 
 Examples:
-- ROI intent compiled into unrelated selection UI;
-- nutrition intent compiled into bill split;
-- numeric extraction produced nonsensical arithmetic.
+- nutrition intent rendered as bill splitting;
+- lunch decision reduced to meaningless arithmetic;
+- ROI intent mapped to an unrelated random-choice UI.
 
-This is more strategically useful than counting JSON syntax failures.
+These failures expose a valuable learning layer:
+
+```text
+User Intent
+ → wrong semantic mapping
+ → user rejection/refinement
+ → corrected mapping
+```
+
+A generic LLM provider does not automatically own this NodeFF-specific execution feedback.
 
 ---
 
-## 9. Assumption Graph
+## 8. Assumption Graph
 
-For ambiguous intents:
+Fuzzy intents often require assumptions.
 
 ```text
 Fuzzy Intent
- → Compiler Assumptions
- → User Keeps / Changes / Rejects
+ → Explicit Compiler Assumptions
+ → User Keeps / Modifies / Rejects
  → Outcome
 ```
 
 This can teach NodeFF:
-- which defaults are acceptable;
-- which should be surfaced;
-- when clarification is better;
-- when a reusable Blueprint family exists.
+- which assumptions can be safely defaulted;
+- which should always be surfaced;
+- which contexts require clarification;
+- which defaults are culturally/domain-sensitive;
+- which scenario structures form reusable Blueprint families.
 
-Guardrail:
-Do not convert culturally inferred behavior into universal "truth."
+The value comes from observed user correction, not from treating model-inferred social norms as truth.
+
+---
+
+## 9. Rule Grammar Knowledge
+
+A safe generic Rule AST can support many domains without shipping new frontend code for every intent.
+
+Commodity:
+- AST syntax;
+- IF/SUM/MAX operators.
+
+Potentially defensible:
+- mappings from human rules into safe AST structures;
+- validated reusable rule fragments;
+- semantic repair patterns;
+- operator combinations known to be reliable;
+- compatibility/migration history;
+- execution-outcome data.
+
+This creates a corpus of executable human-intent logic rather than raw generated code.
 
 ---
 
 ## 10. Trusted Blueprint Families
 
-If many successful Blueprints cluster around reusable patterns, NodeFF can move from pure generation toward retrieval + minimal transformation.
-
-Future direction:
+As usage grows, successful artifacts may cluster into reusable families.
 
 ```text
 Intent
  → Retrieve Trusted Blueprint Family
- → Small Semantic Delta
+ → Apply Small Semantic Delta
  → Validate
  → Execute
 ```
 
-Benefits:
-- faster generation;
-- lower LLM cost;
-- higher reliability;
-- more consistent UX.
+If successful, NodeFF can shift some traffic from generation-from-scratch to retrieval + adaptation.
 
-The trusted corpus may become a meaningful compounding asset.
+Benefits:
+- lower compilation cost;
+- lower latency;
+- higher semantic consistency;
+- fewer failure opportunities;
+- better starting points for remix.
+
+A trusted family is valuable because it has execution history, not merely because its JSON exists.
 
 ---
 
-## 11. Content-Addressed Lineage Graph
+## 11. Trust and Admission Data
 
-CAS enables exact immutable identity:
+The Common Pool must distinguish between:
+- merely valid;
+- trusted;
+- degraded;
+- quarantined;
+- deprecated.
+
+This status can be informed by:
+- validation;
+- runtime failure rate;
+- semantic mismatch reports;
+- successful reuse;
+- repair lineage;
+- policy status.
+
+A mature trust/admission system is harder to recreate than a content hash store.
+
+---
+
+## 12. Content-Addressed Lineage
+
+CAS gives exact immutable identity.
 
 ```text
 Blueprint A
@@ -251,194 +286,230 @@ Blueprint A
 
 CAS itself is commodity infrastructure.
 
-Potential moat:
-- lineage;
+The strategic asset is the graph around it:
+- ancestry;
+- semantic deltas;
 - usage;
-- outcome quality;
-- failure history;
-- reuse frequency;
-- semantic relationships.
+- success;
+- failure;
+- corrections;
+- reuse;
+- popularity;
+- trust.
 
-This graph can show which Blueprint families survive repeated real-world use.
-
----
-
-## 12. Remix Graph
-
-Remix can become more than a social feature.
-
-It creates evidence of:
-- reusable structures;
-- creator preferences;
-- accepted defaults;
-- successful deltas;
-- high-value primitive combinations.
-
-A strong remix graph may improve:
-- discovery;
-- retrieval;
-- compilation;
-- creator retention.
+This creates a history of which executable ideas survive repeated use.
 
 ---
 
-## 13. Generic Rule Grammar
+## 13. Remix Graph
 
-A safe generic Rule AST can become strategically important if it supports broad classes of logic without frontend code changes.
+Remix activity reveals:
+- which Blueprints are useful starting points;
+- which assumptions are frequently changed;
+- which capabilities compose well;
+- which semantic deltas recur;
+- which descendants outperform ancestors.
 
-Potential advantages:
-- composability;
-- analyzability;
-- validation;
-- portability;
-- deterministic execution;
-- compact serialization.
-
-The moat is not the AST syntax.
-
-The potential moat is:
-- mature operator ontology;
-- safe execution semantics;
-- mappings from human rules to AST;
-- real-world successful AST corpus;
-- repair/failure data.
+Remix therefore contributes both growth and technical learning.
 
 ---
 
 ## 14. Capability Expansion Loop
 
-A disciplined registry can grow from observed demand:
+Registry growth should be demand-driven.
 
 ```text
-Unsupported Intent Cluster
- → identify missing capability
- → design primitive/function
- → register/version/test
+Repeated Unsupported Intent
+ → missing-capability cluster
+ → design safe primitive/function
+ → version/register/test
  → compiler gains capability
- → observe usage/outcomes
+ → observe outcomes
 ```
 
-This is better than adding primitives ad hoc from isolated prompts.
+This prevents an uncontrolled component zoo.
 
-Over time, NodeFF can develop a capability ontology informed by actual intent demand.
-
----
-
-## 15. Compiler Improvement Flywheel
-
-```text
-More Intent Usage
- → More Success/Failure Evidence
- → Better Retrieval + Capability Selection
- → Better Blueprint Quality
- → More Reuse
- → Lower Cost / Faster UX
- → More Usage
-```
-
-This flywheel must be earned through data quality and user trust.
+A mature registry becomes a map of the capability surface actually demanded by users.
 
 ---
 
-## 16. Economic Moat
+## 15. Semantic Retrieval Loop
 
-If trusted reuse becomes strong:
-
-- fewer LLM calls per successful use;
-- lower marginal compiler cost;
-- faster warm-path response;
-- fewer semantic failures;
-- higher share conversion.
-
-The economic advantage comes from the trusted corpus + retrieval/reuse system, not merely edge caching.
-
----
-
-## 17. Capability Network / Intent Commerce
-
-Long-term possibility:
+Potential future compilation strategy:
 
 ```text
 Intent
- → capability selection
- → paid/free API/service
- → interactive Micro-App
- → transaction/outcome
+ → canonical/semantic retrieval
+ → trusted candidate family
+ → compare required delta
+ → minimal refinement
+ → full validation
+ → execute
 ```
 
-If many capability providers and users participate, this may create network effects.
+This may outperform always asking an LLM to rebuild from zero.
 
-This remains speculative until supply/demand density is proven.
-
----
-
-## 18. What Would Make the Moat Real
-
-A candidate moat should satisfy several of these:
-
-1. grows automatically through product usage;
-2. improves product quality;
-3. improves cost/latency;
-4. is difficult to recreate without equivalent usage data;
-5. creates switching cost or network effect;
-6. improves trusted retrieval/reuse;
-7. creates unique compiler/runtime knowledge.
+The quality of retrieval depends on the accumulated graph of:
+- intents;
+- Blueprints;
+- assumptions;
+- outcomes;
+- corrections.
 
 ---
 
-## 19. What Is Not Defensible Alone
+## 16. Economic Flywheel
 
-Do not claim as moat:
-- "we use AI";
-- "we use structured output";
-- "we use Zod";
-- "we have JSON";
-- "we use CAS";
-- "we use React";
-- "we have a plugin architecture";
-- "we have 15 components";
-- "we use an edge cache";
-- "we use an LLM router."
+If trusted reuse becomes substantial:
 
-Competitors can copy these rapidly.
+```text
+More Usage
+ → More Trusted Blueprint Families
+ → Higher Reuse
+ → Fewer LLM Compilations
+ → Lower Cost + Faster Response
+ → Better UX
+ → More Usage
+```
+
+The economic moat is not edge caching alone.
+
+It is the ability to serve a growing portion of intent from **trusted, semantically appropriate reusable structures**.
 
 ---
 
-## 20. Privacy and Data Governance
+## 17. Reliability Flywheel
 
-The Reliability Graph only becomes an asset if collected lawfully and trustworthily.
+```text
+More Executions
+ → More Failure/Correction Evidence
+ → Better Semantic Mapping
+ → Better Validation/Admission
+ → Fewer Bad Blueprints
+ → More Trust
+ → More Executions
+```
 
-Need explicit rules for:
-- anonymization/pseudonymization;
-- telemetry consent;
+This flywheel directly addresses the biggest product risk: plausible but wrong Micro-Apps.
+
+---
+
+## 18. Capability Network
+
+Long-term:
+
+```text
+Intent
+ → Capability Match
+ → Provider Capability
+ → Micro-App Composition
+ → Transaction / Outcome
+```
+
+If NodeFF attracts both capability providers and users, a network effect may emerge.
+
+Potential supply:
+- AI APIs;
+- specialized tools;
+- datasets;
+- booking;
+- commerce;
+- media generation;
+- computation.
+
+This becomes a moat only if actual supply/demand liquidity develops.
+
+---
+
+## 19. Intent Commerce Data
+
+If commerce emerges, NodeFF may learn:
+- which intents lead to paid capabilities;
+- which capabilities compose together;
+- which interaction surfaces convert;
+- which outcomes drive repeat use.
+
+This can improve routing and product economics.
+
+It must be governed carefully to avoid opaque or manipulative steering.
+
+---
+
+## 20. What Is Commodity
+
+Do not present these as standalone moat:
+- LLM access;
+- multi-model routing;
+- prompt engineering;
+- JSON Schema;
+- Zod;
+- React;
+- Tailwind;
+- WebSockets;
+- edge caching;
+- CAS;
+- database choice;
+- component plugin architecture;
+- primitive count;
+- "no-code" positioning.
+
+These may be excellent implementation choices while remaining easy to copy.
+
+---
+
+## 21. What Would Make a Moat Real
+
+A candidate moat becomes credible when it:
+1. compounds automatically from product use;
+2. materially improves semantic correctness;
+3. reduces latency/cost;
+4. improves safe capability coverage;
+5. is difficult to recreate without comparable interaction history;
+6. increases creator/user switching cost;
+7. creates network effects;
+8. improves trusted retrieval/reuse;
+9. produces measurable advantage over generation-from-scratch.
+
+---
+
+## 22. Data Governance Constraint
+
+The Reliability/Composition Graph can only become an asset if collected legitimately.
+
+Required governance:
+- clear telemetry purpose;
+- data minimization;
+- pseudonymization where appropriate;
+- private/public boundaries;
 - retention;
 - deletion;
-- private content;
-- external API data;
-- training/research reuse;
-- access controls.
+- access control;
+- external-provider data policy;
+- user choice where required;
+- separate policy for model training/research reuse.
 
-Anonymous use does not equal permission for unrestricted model training.
+Anonymous interaction is not unrestricted training consent.
 
 ---
 
-## 21. Strategic Priority
+## 23. Defensibility Priority
 
-Do not build "moat infrastructure" prematurely.
+Do not prematurely build infrastructure solely because it sounds defensible.
 
-First validate:
+First prove:
 
 ```text
 Intent
  → Correct Interactive Blueprint
- → Use
+ → Meaningful Use
  → Share
  → Remix
 ```
 
-Then structure the naturally occurring data around:
+Then structure the naturally generated evidence around:
 - success;
 - failure;
+- assumptions;
 - repair;
 - reuse;
 - lineage;
@@ -446,36 +517,35 @@ Then structure the naturally occurring data around:
 
 ---
 
-## 22. Most Promising Defensibility Thesis
+## 24. Current Strongest Moat Thesis
 
-Current strongest combined thesis:
+> **NodeFF's strongest potential moat is a proprietary Reliability + Composition Graph: a continuously improving body of evidence about how human intent maps to safe executable capabilities, how those compositions fail, how users correct them, and which Blueprint families survive repeated execution, sharing and remix.**
 
-> **NodeFF's defensibility may come from a proprietary Reliability + Composition Graph that learns how human intent maps to safe executable capability combinations, how those combinations fail, how users correct them, and which resulting Blueprint families survive repeated use and remix.**
-
-This combines:
-- semantic compiler learning;
+The graph combines:
+- intent semantics;
 - capability ontology;
 - Rule AST patterns;
-- trusted Blueprint corpus;
-- failure/repair evidence;
-- remix lineage;
-- execution outcomes.
+- assumption corrections;
+- Blueprint trust;
+- execution outcomes;
+- failure/repair paths;
+- lineage/remix;
+- reuse.
+
+If this graph materially improves correctness, reuse, cost and creation speed, it becomes more defensible than any single model or infrastructure provider.
 
 ---
 
-## 23. Open Moat Questions
+## 25. Questions That Must Be Proven
 
-1. Which telemetry can be collected legitimately?
-2. Does Blueprint reuse reach meaningful scale?
-3. Does retrieval outperform generation?
-4. Do remix families emerge organically?
-5. Which intents repeat enough to create reusable families?
-6. Which missing-capability clusters justify registry expansion?
-7. Can reliability data materially improve semantic correctness?
-8. Does Intent Commerce generate network effects?
-9. Which layer creates genuine switching cost?
-10. Can competitors recreate equivalent graphs cheaply?
+- Does Blueprint reuse become frequent enough to matter?
+- Does semantic retrieval outperform clean generation?
+- Can failure/correction data materially improve compiler quality?
+- Do stable Blueprint families emerge?
+- Does remix produce meaningful lineage/network value?
+- Which intent clusters justify new capabilities?
+- What user data can legitimately contribute to the graph?
+- Does the graph create measurable latency/cost/quality advantage?
+- Does Intent Commerce develop enough supply and demand for network effects?
+- Which assets produce real switching cost?
 
----
-
-**Status: WORKING / CONSOLIDATED**
