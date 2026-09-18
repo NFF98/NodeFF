@@ -593,3 +593,43 @@ Candidate:
 `validation error → sanitized structured repair feedback → compiler repair attempt → full revalidation`
 
 Do not blindly echo raw internal errors, secrets or unsafe payloads back to a model. Retry remains bounded by retry/cost/circuit-breaker policy.
+
+
+## 21. Contract Security / Determinism / Capability Context — Working
+
+### 21.1 JSON Is Transport, Not Sandbox
+Security controls must apply to JSON fields that can influence runtime behavior:
+- expression grammar;
+- URLs/media sources;
+- rendered text/HTML policy;
+- patch paths;
+- action/effect names;
+- component props;
+- payload/decompression sizes.
+
+No `eval()` / `new Function()`; only allowlisted interpreters/capabilities.
+
+### 21.2 Compiler Metadata
+Compiler capability metadata should be generated/versioned from Registry SSOT for each compilation request. A request sees a fixed capability snapshot; the platform can evolve the registry over time.
+
+Store/associate relevant registry/schema version with compiled Blueprints for later compatibility checks.
+
+### 21.3 Replay / Cache Compatibility
+CAS identity alone is not enough for deterministic execution across runtime upgrades.
+
+Cache/replay metadata should consider:
+- schema version;
+- runtime compatibility;
+- capability versions;
+- policy status;
+- optional RNG seed/external snapshot identifiers.
+
+### 21.4 Latency / Cost Corrections
+Do not encode “0ms”, “zero latency”, “100% sandbox safety”, “99.9% valid”, or “0 cost” as guarantees.
+
+Use measurable SLO/benchmark language once providers, payload sizes, regions and test methodology are defined.
+
+### 21.5 URL / WebSocket Safety
+JSON portability does not imply arbitrary payload safety. URL snapshots and realtime messages still require schema validation, authorization where relevant, size/rate limits and sanitization.
+
+Compression is not encryption.
