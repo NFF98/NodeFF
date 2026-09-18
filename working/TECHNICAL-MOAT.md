@@ -117,3 +117,21 @@ Original → Fork → Remix → New Version
 - 哪一層最難被複製？
 
 **Status：Working。**
+
+
+## 8. Content-Addressable Blueprint Graph — Working Addition
+A CAS-based Blueprint registry could strengthen the existing Blueprint Reuse / Semantic Cache moat.
+
+Potential compounding data structure:
+`Intent → canonical Blueprint content ID → executions → successful outcomes/errors → forks → descendant content IDs → reuse`
+
+Potential advantages:
+- exact content deduplication;
+- immutable reproducibility;
+- efficient global reuse/cache;
+- explicit fork/lineage graph;
+- ability to learn which Blueprint families survive repeated execution/remix.
+
+Important distinction:
+- CAS itself (hash-addressed storage) is commodity infrastructure and **not the moat**.
+- The defensible asset would be the accumulated, validated graph connecting intents, reusable Blueprint families, runtime outcomes, recovery history and remix behavior.
