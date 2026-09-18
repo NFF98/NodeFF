@@ -542,3 +542,85 @@ Never silently convert semantic uncertainty into fake calculations.
 Production compiler credentials belong server/edge-side. Browser code calls an NFF compiler endpoint; the endpoint calls the selected LLM provider through an adapter.
 
 Provider/model remains replaceable and is not part of Player architecture.
+
+
+## 19. Implementation Blueprint / Complex Declarative Logic — Working
+
+### 19.1 Implementation Ownership Boundary
+Cursor/implementation agents receive explicit contracts for:
+- allowed dependencies/frameworks;
+- state ownership;
+- schema source of truth;
+- component registry;
+- action/rule grammar;
+- security restrictions;
+- test/acceptance criteria.
+
+Implementation agents must not introduce a second semantic router, arbitrary-code execution, or alternative contract without an approved architecture change.
+
+### 19.2 Schema Source of Truth
+Avoid maintaining a TypeScript interface and a Zod runtime schema as independently editable definitions if they represent the same contract; that creates schema drift.
+
+Preferred working direction:
+`Runtime Schema → inferred TypeScript types`
+or another single-source generation mechanism.
+
+Exact schema tooling remains to be approved.
+
+### 19.3 Cross-Field Contract Validation
+LegoSpec validation needs more than shape checking:
+1. structural/type validation;
+2. state-bind reference validation;
+3. expression AST/function/reference validation;
+4. patch path/value validation;
+5. component capability validation;
+6. schema/runtime version compatibility;
+7. semantic/capability quality gate.
+
+Retry should occur only for repairable compiler failures and within a defined retry budget.
+
+### 19.4 Weighted Entity Primitive
+Candidate higher-order primitive:
+`WeightedGroupList`
+
+It represents an array of entities with fields such as:
+- stable id;
+- label/name;
+- count;
+- weight;
+- optional metadata.
+
+The primitive renders/edit controls but does not own the business rule determining what a “fair” weight is.
+
+### 19.5 Normalized Distribution Rule
+For groups with count `c_i` and weight `w_i`:
+
+`W = Σ(c_i × w_i)`
+
+Candidate per-person allocation:
+`p_i = total × w_i / W`
+
+Candidate group allocation:
+`g_i = total × (c_i × w_i) / W`
+
+The contract should represent this through approved rule functions/AST rather than arbitrary JavaScript.
+
+### 19.6 Preset / Patch Model
+A preset is a named, inspectable state transition:
+`Preset → validated patch → state update → dependency-aware recomputation → render`
+
+Preset patches must be restricted to allowed mutable state paths and validated against the target schema.
+
+### 19.7 Assumption Provenance
+Compiler-generated defaults should carry provenance, e.g.:
+- `user_provided`;
+- `compiler_assumption`;
+- `template_default`;
+- `external_capability`.
+
+This allows UI to distinguish what the user actually said from what NFF inferred.
+
+For ambiguous social heuristics, compiler assumptions should be editable and surfaced rather than silently treated as truth.
+
+### 19.8 Runtime Performance
+Local deterministic recomputation should be designed for responsive interaction, but claims such as “0ms” are not literal performance guarantees. Establish benchmark budgets later.
