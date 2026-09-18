@@ -618,3 +618,41 @@ A generated Blueprint should be reusable without recompilation:
 - refinement that changes the contract may invoke compiler/delta-patch flow again.
 
 Therefore “LLM only once” applies to a specific successful compilation/version, not necessarily the entire lifetime of a Micro-App if the user later requests semantic changes or runtime-AI capabilities.
+
+
+### Latest Working Input — Content-Addressable Blueprint Storage / Fork
+
+#### Common Pool vs Personal Pool
+Working storage model separates immutable Blueprint content from user ownership/personalization.
+
+**Global Common Pool**
+- Stores immutable, validated WidgetSpec/Blueprint content.
+- Canonicalized Blueprint content is content-addressed by cryptographic hash.
+- Structurally/content-identical canonical Specs should resolve to the same content ID and need not be duplicated.
+- Shared links, rooms and caches may reference this immutable Blueprint ID.
+
+**User Personal Pool**
+- Stores references/pointers to Blueprint IDs plus user-specific metadata/state where persistence is required.
+- Examples: created, saved/favorited, ownership/editing rights, history, custom settings and paid/account-bound metadata.
+- Personal records should not duplicate the immutable Blueprint body unnecessarily.
+
+Working principle:
+> **Blueprint content and user permissions are separate concerns.**
+
+#### Retrieval / Runtime Flow
+`URL/Room Reference → resolve spec_hash → Edge/Registry retrieval → validate compatibility → Client Hydration → optional Room Binding → local deterministic runtime`
+
+Opening an existing valid Blueprint should require **0 LLM calls**. Exact retrieval latency and "$0 marginal cost" remain benchmark/goal claims, not guarantees.
+
+#### Fork / Differential Editing
+Candidate flow:
+`Base Blueprint hash → semantic refinement request → compiler/delta generation → apply to base → full schema/security validation → canonicalize → new immutable Blueprint hash → user pointer updated/created`
+
+Important: the new hash should be derived from the final canonical Blueprint content, not manually treated as a mutable “v2” identifier. Human-readable versions/lineage may exist as metadata.
+
+#### CAS Guardrails
+- Hashing requires deterministic canonical serialization; raw JSON text with different key ordering/formatting must not accidentally create different identities for equivalent canonical content.
+- Hash identity proves content identity/integrity, not authorship, ownership, safety or trust.
+- Only validated/policy-approved artifacts should enter a trusted executable registry/cache tier.
+- Blueprint lineage/Fork relationships should be stored separately from immutable content identity.
+- Personal Instance state should not automatically become part of the globally deduplicated Blueprint.
