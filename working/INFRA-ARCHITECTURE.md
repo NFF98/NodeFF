@@ -539,3 +539,57 @@ Preset/delta patches require:
 
 ### 19.6 Performance Claims
 User-provided values such as Zod validation “1ms”, edge retrieval “<5ms” and local update “0ms” remain benchmark targets/examples, not guarantees.
+
+
+## 20. Cache Identity / Registry Distribution / Share Transport — Working
+
+### 20.1 Two Different Hash Problems
+Do not conflate Prompt hashing with Blueprint CAS.
+
+**Prompt/canonical-intent cache key**
+Used to search for a reusable candidate Blueprint.
+
+**Blueprint content hash**
+Derived from canonical validated Blueprint content and used as immutable content identity.
+
+A raw “remove punctuation/whitespace then SHA-256” prompt key can be an exact-cache optimization, but cannot provide semantic deduplication by itself.
+
+### 20.2 Cache Admission
+A cache entry should reference validation metadata:
+- schema version;
+- capability registry version;
+- runtime compatibility;
+- policy/security status;
+- quality/trust status;
+- created/validated timestamps as appropriate.
+
+“Validated” means it passed defined gates; it does not mean bug-free.
+
+### 20.3 Compiler Context Distribution
+Generate model capability context from the Capability Registry rather than hand-editing a separate whitelist in prompts. This reduces drift among:
+- runtime components;
+- schema;
+- compiler instructions;
+- tests;
+- documentation.
+
+### 20.4 URL Snapshot Safety
+Compressed URL payloads require:
+- maximum encoded/decoded size;
+- decompression-bomb/resource limits;
+- schema/version validation;
+- integrity checks where appropriate;
+- sensitive-field exclusion;
+- no assumption that compression makes data private.
+
+### 20.5 Realtime Claims
+PartyKit remains a candidate provider behind an adapter. “0ms sync” is not a literal guarantee. Room destruction/idle TTL must be explicitly configured/verified against chosen provider semantics.
+
+### 20.6 Provider-neutral Durable Storage
+Supabase, Cloudflare KV/object storage or other services remain candidates. Logical architecture must not couple ownership/auth/version semantics to one vendor.
+
+### 20.7 Self-Correction Loop
+Candidate:
+`validation error → sanitized structured repair feedback → compiler repair attempt → full revalidation`
+
+Do not blindly echo raw internal errors, secrets or unsafe payloads back to a model. Retry remains bounded by retry/cost/circuit-breaker policy.
