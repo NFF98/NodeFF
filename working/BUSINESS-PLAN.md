@@ -2,27 +2,510 @@
 
 > 狀態：Working。除非依 NodeFF SSOT 流程正式升格，否則不具權威性。
 
-## 1. 商業核心假設
+## 1. 商業核心
 
-NodeFF 要挑戰的是傳統 App 模式：使用者必須先尋找、安裝、學習、設定，再在不同 App 之間切換，才能完成一個其實只需要幾分鐘的任務。
+NodeFF 要改變的不是某一種 App，而是「使用者為了完成一個短暫需求，必須先找 App、安裝 App、學 App、再切換 App」的使用模式。
 
-NodeFF 的互動模型是：
+NodeFF 的核心體驗是：
 
 > **表達 Intent → 立即得到可互動、可分享、可 Remix 的 Micro-App。**
 
-NodeFF 不是「很多計算機的集合」，也不是 AI Code Generator。
+NodeFF 不是：
+- AI Code Generator；
+- 計算機集合；
+- Generic Form Builder；
+- 所有 Native App 的替代品。
 
-更大的產品假設是：
+核心產品假設：
 
-> **任何短暫的人類 Intent、決策、社交互動或輕量工作流程，都可以在不安裝、不部署、不寫程式的情況下，轉化成一個 Disposable Interactive Product。**
+> **短暫、情境化、需要互動或多人參與的 Intent，可以直接變成 Disposable Micro-App，而不需要安裝、部署或寫程式。**
 
-討論中形成的核心表述：
+最重要的產品判斷仍然是：
 
-> 「20 人怎麼分帳」不是產品本身；「任何人遇到一個複雜決策 → NodeFF 秒變成一個可互動、可分享、可交易的小 App」才可能是產品。
+> 「20 人怎麼分帳」不是產品；  
+> 「任何人遇到一個複雜決策 → NodeFF 立即變成一個可互動、可分享、可交易的小 App」才可能是產品。
 
 ---
 
-## 2. 五個產品原則
+# 2. 商業發展地圖
+
+NodeFF 不應同時追求所有可能性。
+
+目前商業發展分成三個階段：
+
+```text
+短期：證明產品核心循環
+        ↓
+中期：建立 Reuse / Creator / Paid Value
+        ↓
+長期：Intent Commerce / Capability Network
+```
+
+---
+
+# 3. 短期：Phase 1 — 先證明核心循環
+
+## 3.1 唯一優先目標
+
+Phase 1 最重要的問題只有一個：
+
+> **使用者能否描述一個短暫需求，快速得到正確有用的 Micro-App，立即使用、分享，並讓另一個人繼續使用或 Remix？**
+
+必須先證明：
+
+```text
+Intent
+ → Correct Micro-App
+ → Immediate Use
+ → Share
+ → Recipient Use
+ → Remix / Create
+```
+
+在這個循環成立以前，不應把主要資源投入 Marketplace、Creator Economy、Enterprise 或大量 Paid Feature。
+
+---
+
+## 3.2 Phase 1 的目標使用場景
+
+初期不追求「任何 App」。
+
+優先聚焦在具有以下共同特徵的 Intent：
+
+- 短生命週期；
+- 可互動；
+- 有明確輸入與結果；
+- 可以調整規則；
+- 適合分享；
+- 最好具有多人／Social 性質。
+
+優先場景合併成三類：
+
+### A. Decision / Allocation
+
+例如：
+- 晚餐吃什麼；
+- 旅行方案；
+- 投票；
+- 分帳；
+- 權重式分配；
+- 家庭／活動費用；
+- ROI／Scenario 比較。
+
+### B. Party / Social Interaction
+
+例如：
+- Dice；
+- Wheel；
+- Card；
+- Timer；
+- Scoreboard；
+- Turn-based party interaction。
+
+### C. Disposable Utility
+
+例如：
+- 一次性 Calculator；
+- Temporary Tracker；
+- Decision Table；
+- Parameterized Tool。
+
+Phase 1 的目的不是證明每一個類別都成功，而是找到最容易形成：
+
+> **Create → Use → Share → Remix**
+
+的 Wedge。
+
+---
+
+## 3.3 Phase 1 的產品體驗
+
+### Creation
+
+不能只依賴空白 Prompt Box。
+
+核心 Creation UX：
+
+- Inspiration Capsules；
+- Editable Prompt Template；
+- Ghost Examples；
+- Progressive Refinement；
+- Fork & Remix。
+
+使用者學習路徑：
+
+> **copy → modify → combine → create from scratch**
+
+產品原則：
+
+> **先完成，再學會；不是先學會，才能完成。**
+
+### Assumption UX
+
+模糊 Intent 不應被模型偷偷替使用者決定。
+
+例如：
+
+```text
+「20 人公司聚餐依職級分帳」
+ → 可見的 role assumptions
+ → editable counts
+ → editable weights
+ → result breakdown
+```
+
+產品價值之一是：
+
+> **Fuzzy Intent → Explicit Assumptions → Interactive Model → User Adjustment**
+
+### Quality
+
+Phase 1 最大風險不是 JSON Error，而是：
+
+> **Micro-App 看起來正常，但其實解錯問題。**
+
+因此 Semantic Correctness 優先於 Visual Polish。
+
+---
+
+## 3.4 Phase 1 的 Distribution / Growth
+
+NodeFF 的 Growth 應該由 Artifact 驅動，不是由 Account 驅動。
+
+```text
+Creator creates
+ → Share
+ → Recipient opens instantly
+ → Uses
+ → Remix / Creates
+ → New artifact
+```
+
+所以：
+
+- Share 是核心產品行為，不是 Export；
+- Remix 必須比重新從空白開始容易；
+- Recipient 不應先被 Registration Wall 擋住。
+
+### Anonymous-First
+
+短期原則：
+
+- Consumer 不登入即可使用 Shared Micro-App；
+- Creator 在可行時可先匿名建立與分享；
+- 只有當 Durable Value 出現時才要求 Authentication。
+
+Durable Value 包含：
+- ownership；
+- permanent editing；
+- history；
+- cross-device persistence；
+- publishing；
+- paid quota。
+
+---
+
+## 3.5 Phase 1 Business Model
+
+Phase 1 的主要任務不是最大化 Revenue，而是驗證：
+
+1. 有人願意 Create；
+2. 產物真的 Useful；
+3. 有人願意 Share；
+4. Recipient 真的會 Use；
+5. Recipient 會 Remix／Create；
+6. Semantic Reliability 足夠建立 Trust。
+
+### Tier 1 — 核心免費體驗
+
+主要包含：
+- client-side execution；
+- approved primitives；
+- deterministic local rules；
+- small shareable snapshot；
+- bounded compilation；
+- modest ephemeral collaboration。
+
+### Tier 2 — 成本型能力
+
+只有真的產生成本／Durable Value 時才考慮收費：
+
+- runtime AI；
+- heavy external API；
+- media generation；
+- larger／longer live room；
+- durable cloud state；
+- persistent history；
+- premium capability。
+
+### Tier 3 — 不支援
+
+- arbitrary code；
+- unsafe OS/system access；
+- 核心語意無法安全表達的需求。
+
+---
+
+## 3.6 Phase 1 必看的 Metrics
+
+只保留能直接判斷核心循環是否成立的指標。
+
+### Product Quality
+- Intent → executable Blueprint success rate；
+- Semantic Mismatch Rate；
+- Refinement Rate；
+- Time to First Useful Result。
+
+### Activation / Usage
+- Successful Executed Intents；
+- meaningful interactions per Instance；
+- repeat creation。
+
+### Viral
+- Share Rate；
+- Share → Open；
+- Open → Use；
+- Use → Remix/Create。
+
+### Retention
+- Anonymous cohort repeat use；
+- Creator repeat creation。
+
+Phase 1 不需要先用大量 Revenue Metric 讓焦點分散。
+
+---
+
+## 3.7 Phase 1 必須驗證的假設
+
+最重要的假設：
+
+1. 某些 Intent 確實比 Chat Answer 更適合 Interactive Micro-App。
+2. No-login experience 能提高使用與分享。
+3. Share 的 Recipient 會真的互動。
+4. Remix 會自然發生。
+5. Social／Decision／Party 類別具有 organic distribution。
+6. Visible Assumptions 能提高信任，而不是增加負擔。
+7. Semantic Reliability 可以達到 repeat-use 水準。
+8. Runtime economics 足以支援 generous free usage。
+
+如果這些不成立，Long-term Platform Story 沒有意義。
+
+---
+
+# 4. 中期：PMF 後 — 建立 Reuse、Identity 與 Creator Value
+
+只有 Phase 1 核心循環成立後，才進入這個階段。
+
+## 4.1 Trusted Blueprint Reuse
+
+從：
+
+```text
+每次 Intent → 從零 Compile
+```
+
+逐步變成：
+
+```text
+Intent
+ → Retrieve Trusted Blueprint Family
+ → Minimal Semantic Delta
+ → Validate
+ → Execute
+```
+
+商業價值：
+
+- 更快；
+- 更便宜；
+- 更穩定；
+- 更少 Semantic Failure；
+- 更適合 Remix。
+
+這是 NodeFF 從「AI 生成工具」走向「可累積平台」的重要轉折。
+
+---
+
+## 4.2 Progressive Identity
+
+當使用者已得到價值後，再提供：
+
+- Save；
+- Ownership；
+- Version History；
+- Publishing；
+- Cross-device；
+- Private Blueprint；
+- Paid Quota。
+
+使用者生命週期可逐步成為：
+
+```text
+Use
+ → Remix
+ → Create
+ → Save
+ → Publish
+```
+
+Authentication 是 Durable Value 的交換，不是進站門票。
+
+---
+
+## 4.3 Creator Layer
+
+如果有穩定的 Reuse 與 Remix 行為，再建立 Creator Value：
+
+- Blueprint Discovery；
+- Creator Profile／Reputation；
+- Publishing；
+- Reusable Blueprint Families；
+- Premium Blueprint／Capability；
+- Creator Monetization。
+
+Creator Economy 不應在缺乏使用量與 Remix 行為前過早建立。
+
+---
+
+## 4.4 中期 Monetization
+
+中期可驗證：
+
+1. Durable Storage／History；
+2. Premium Capability；
+3. Larger／Longer Realtime；
+4. Runtime AI／Heavy API；
+5. Creator Paid Artifact；
+6. Private／Team Workspace。
+
+付費點應建立在：
+
+> **Durable Value 或 Real Marginal Cost**
+
+而不是把核心 creation/share loop 人為鎖住。
+
+---
+
+## 4.5 中期 Metrics
+
+除了 Phase 1 Metrics，新增：
+
+- Blueprint Reuse Rate；
+- Retrieval vs Fresh Compilation Ratio；
+- Anonymous → Registered Creator Conversion；
+- Save／Publish Rate；
+- Creator Retention；
+- Paid Capability Usage；
+- Free → Paid Conversion；
+- Cost per Successful Intent。
+
+---
+
+# 5. 長期：Intent Commerce 與 Capability Network
+
+這是 NodeFF 的平台化方向，不是 Phase 1 Roadmap。
+
+長期可能演進成：
+
+```text
+User Intent
+ → Capability Selection
+ → Dynamic Micro-App
+ → External API / Service
+ → Transaction / Outcome
+```
+
+使用者不需要知道功能屬於哪一個傳統 App。
+
+可能的 Capability Provider：
+
+- AI Service；
+- Data Source；
+- Booking；
+- Commerce；
+- Media Generation；
+- Specialized Calculation；
+- External Workflow；
+- Paid API。
+
+NodeFF 的角色變成：
+
+> **Intent → Capability → Interaction → Transaction 的 Control Plane。**
+
+---
+
+## 5.1 Intent Commerce
+
+如果某個 Intent 需要外部付費能力：
+
+```text
+Intent
+ → Capability Match
+ → Price / Permission
+ → Execute
+ → Result
+```
+
+NodeFF 可能收取：
+- Capability transaction fee；
+- API margin；
+- Marketplace commission；
+- Creator revenue share。
+
+但 Intent Commerce 只有在實際供需形成後才成立。
+
+---
+
+## 5.2 Capability Network Effect
+
+真正的長期 Network Effect 可能是：
+
+```text
+More Users
+ → More Intent Demand
+ → More Capability Providers
+ → More Capability Coverage
+ → Better Micro-Apps
+ → More Users
+```
+
+這目前仍是 Strategic Hypothesis。
+
+不能在沒有供需密度前假設 Marketplace 本身就是 moat。
+
+---
+
+# 6. 商業 Flywheel
+
+如果前述三個階段逐步成立，NodeFF 的核心 Flywheel 可能是：
+
+```text
+More Intent
+ → More Correct Blueprints
+ → More Trusted Reuse
+ → Lower Cost / Faster UX
+ → More Sharing
+ → More Remix
+ → More Intent
+```
+
+同時產生第二個品質 Flywheel：
+
+```text
+More Usage
+ → More Failure / Correction Data
+ → Better Semantic Reliability
+ → More Trust
+ → More Usage
+```
+
+這兩個 Flywheel 比單純追求「更多 AI Generation」更重要。
+
+---
+
+# 7. 五個產品原則
+
+所有階段都必須維持：
 
 1. **No install setup**
 2. **Everyone is the creator**
@@ -30,629 +513,66 @@ NodeFF 不是「很多計算機的集合」，也不是 AI Code Generator。
 4. **Intent Commerce**
 5. **Fun and socialable**
 
-除非經 SSOT 流程明確修改，產品、架構與商業模式都應維持這五個特性。
+其中前四項很容易讓產品最後變成 Tool Platform，因此第五項 **Fun and socialable** 必須持續作為產品檢查點，避免 NodeFF 退化成 Generic Form Builder。
 
 ---
 
-## 3. 使用者問題
+# 8. 商業 Guardrails
 
-傳統 App 的 friction 在以下情況特別明顯：
-
-- 需求只存在幾分鐘或幾小時；
-- 需求高度依賴當下的人、資料或情境；
-- 需求太小，不值得安裝與設定一個完整 App；
-- 固定 UI 無法表達特殊規則；
-- 任務本身就是多人互動；
-- 每次條件都略有不同，固定 template 不夠彈性。
-
-Chat AI 能理解這些需求，但很多時候只回傳文字，而不是一個大家可以一起操作的互動物件。
-
-NodeFF 的機會位於三者之間：
-
-- 一次性的聊天回答；
-- 固定功能的傳統 App；
-- 客製化軟體開發。
+1. **短期只證明核心 Loop，不同時做全部 Platform Vision。**
+2. First Value 前不強制 Registration。
+3. Share 是核心 Distribution。
+4. Remix 是核心 Creation Mechanism。
+5. Semantic Correctness 高於 Visual Polish。
+6. Assumption 必須可見，不得偽裝成事實。
+7. Existing Blueprint 不應反覆消耗 LLM。
+8. Paid Feature 優先綁定 Durable Value 或 Real Cost。
+9. Product Boundary 必須誠實，不承諾 Arbitrary Software Generation。
+10. Business／Cost／Growth 數字在量測前一律視為 Hypothesis。
+11. 不因 Marketplace／Creator Economy 聽起來宏大，就提前犧牲 Phase 1 Focus。
+12. NodeFF 必須維持 Fun／Social／Shareable，而不是變成另一個 Enterprise Form Builder。
 
 ---
 
-## 4. 核心價值主張
+# 9. 尚未驗證的數字
 
-NodeFF 把 Intent 轉成**可執行的互動物件**。
+以下目前都不是事實：
 
-```text
-Intent
- → Interactive Model
- → Use
- → Share
- → Other People Use
- → Remix / Refine
- → New Blueprint
-```
-
-這個 artifact 同時可以成為：
-
-- 產品介面；
-- 分享物件；
-- 協作物件；
-- Remix 起點；
-- 未來的交易介面。
-
----
-
-## 5. 最適合的使用場景
-
-NodeFF 初期最適合的 territory：
-
-### 社交決策
-- 晚餐吃什麼；
-- 旅行方案選擇；
-- 禮物選擇；
-- 投票；
-- 群組協調。
-
-### 共同金錢／資源分配
-- 分帳；
-- 權重式分攤；
-- 活動費用分配；
-- 家庭分工／費用；
-- 情境比較。
-
-### Party／輕量遊戲
-- 骰子；
-- 轉盤；
-- 卡牌；
-- 排行榜；
-- 計時器；
-- 回合制互動。
-
-### Disposable Tools
-- 一次性計算器；
-- ROI／Scenario Model；
-- 臨時 Tracker；
-- Decision Table；
-- Parameterized Utility。
-
-### Temporary Live Session
-- 群體互動；
-- ephemeral room state；
-- 短時間協作。
-
-這些 use case 的共同點不是 domain，而是：
-
-> **短生命週期、可互動、可調整、可分享。**
-
----
-
-## 6. 產品邊界
-
-NodeFF 不應宣稱可以取代所有軟體。
-
-傳統 Native／Dedicated App 在以下需求仍然更適合：
-
-- 長生命週期；
-- 深度 Identity；
-- Background Execution；
-- 複雜 Durable History；
-- 成熟 Notification；
-- Hardware／OS Integration；
-- 高頻率連續圖形運算；
-- 高度客製、任意行為。
-
-NodeFF 的核心是：
-
-> **Instant Intent + Disposable + Composable Micro-App。**
-
-清楚的邊界同時保護使用者期待、成本模型與安全模型。
-
----
-
-## 7. Creation Experience
-
-單一空白 Prompt Box 的思考成本太高。
-
-NodeFF 應讓使用者在「完成事情」的過程中自然學會創作。
-
-### Inspiration Capsules
-
-Capsule 不是 Demo Gallery，而是 Editable Creation Seed。
-
-使用者點擊後，應看到一段完整、可修改的需求文字，而不是只看到完成品。
-
-### Implicit Intent Formula
-
-使用者可以逐步學會：
-
-```text
-[情境 / 主題]
-+ [成員 / 數據]
-+ [特殊規則 / 條件]
-```
-
-不需要正式學 Prompt Engineering。
-
-### Ghost Examples
-
-輸入框可輪播自然語言範例，持續告訴使用者：
-
-> 普通日常語言也能直接變成互動工具。
-
-### Progressive Refinement
-
-第一個 Prompt 不需要完美。
-
-```text
-rough intent
- → useful first Micro-App
- → contextual suggestion
- → incremental refinement
-```
-
-學習路徑：
-
-> **copy → modify → combine → create from scratch**
-
-UX 原則：
-
-> **先完成，再學會；不是先學會，才能完成。**
-
-NodeFF 應該讓人覺得是在「創造」，而不是在上 Prompt 課。
-
----
-
-## 8. 使用者生命週期
-
-理想 progression：
-
-```text
-Open
- → Use
- → Remix
- → Create
- → Share
- → Save
- → Publish
- → Monetize
-```
-
-不是每個人都需要走完整條路。
-
-最重要的 Early Loop 是：
-
-```text
-Intent
- → Correct Micro-App
- → Immediate Use
- → Share
- → Recipient Uses
- → Recipient Remixes / Creates
-```
-
----
-
-## 9. Anonymous-First Strategy
-
-不應用 Registration 阻擋 First Value。
-
-### Consumer
-- 不登入即可開啟 shared Micro-App；
-- 立即使用。
-
-### Creator
-- 在可行範圍內，不註冊也可建立與分享 ephemeral artifact。
-
-### Progressive Authentication
-
-當使用者要求 durable value 時再要求 identity：
-
-- ownership；
-- permanent editing；
-- history；
-- publishing；
-- cross-device persistence；
-- paid quota；
-- monetization；
-- payout。
-
-這讓帳號 friction 與清楚的 user benefit 綁在一起。
-
-Anonymous continuity 優先使用 privacy-conscious first-party identifier，不預設 fingerprinting。
-
----
-
-## 10. Share 即 Distribution
-
-NodeFF 有三種主要 distribution mode。
-
-### Portable Snapshot
-小型、公開、非敏感 Instance 透過 URL 分享。
-
-### Durable Reference
-Short Link 解析到 persistent artifact／reference。
-
-### Live Room
-多人進入同一個 temporary interactive session。
-
-最重要的 growth property：
-
-> **接收者不需要安裝 Creator 的 App，就能直接使用該 artifact。**
-
-因此每一個成功 Micro-App 都可能同時是一個 distribution object。
-
----
-
-## 11. Fork & Remix
-
-Remix 應該比從空白開始更容易。
-
-```text
-Shared Blueprint
- → Open
- → Change one assumption/rule/input
- → Validate
- → New Blueprint
-```
-
-Remix 同時提供：
-
-- 更低的 Creator friction；
-- viral continuation；
-- reusable structure；
-- 可觀察的 preference／correction data；
-- Blueprint family 形成的可能。
-
----
-
-## 12. 產品品質定義
-
-NodeFF 最大的產品風險不是 JSON 壞掉。
-
-真正危險的是：
-
-> **Micro-App 看起來很完整、也能操作，但其實解錯問題。**
-
-Prototype failure history 已出現過：
-
-- 營養需求被做成 AA 分帳；
-- 午餐選擇被做成無意義算術；
-- ROI Intent 被映射到不相關的 random-choice UI。
-
-因此品質指標必須包含：
-
-- semantic mismatch；
-- unsupported semantics；
-- user correction／refinement；
-- successful repair；
-- repeat execution；
-- Blueprint family reuse。
-
-畫面漂亮不等於產品成功。
-
----
-
-## 13. Assumption 作為產品 UX
-
-許多高價值 Intent 本來就很模糊。
-
-NodeFF 可以把 ambiguity 轉成 editable model。
-
-例如：
-
-```text
-「20 人公司聚餐依職級分帳」
- → visible role assumptions
- → editable counts
- → editable weights
- → scenario presets
- → result breakdown
-```
-
-Compiler 不得把模型推測的社會慣例當成事實。
-
-這形成一種重要產品 interaction：
-
-> **Fuzzy Intent → Explicit Assumptions → Interactive Model → User Adjustment**
-
----
-
-## 14. Tier Model
-
-### Tier 1 — Lightweight / Free-Oriented
-
-適合：
-- client-side deterministic execution；
-- approved primitives；
-- local rules；
-- portable snapshots；
-- modest ephemeral rooms；
-- bounded compilation quota。
-
-### Tier 2 — Paid / Cost-Bearing
-
-由 durable 或高成本能力觸發，例如：
-- persistent runtime AI；
-- heavy external API；
-- media generation；
-- larger／longer realtime；
-- durable cloud state；
-- premium ownership／history；
-- specialized paid capability。
-
-### Tier 3 — Unsupported / Redirect
-
-例如：
-- arbitrary code execution；
-- unsafe OS／system access；
-- unsupported runtime capability；
-- 無法安全表達核心語意的需求。
-
-實際 entitlement／limit 尚未定案。
-
----
-
-## 15. Compile-Once Economics
-
-架構刻意把昂貴的 Semantic Compilation 與廉價的重複 execution 分開。
-
-```text
-One successful compilation
- → many local interactions
- → many opens
- → many shares
- → many remixes/reuses
-```
-
-成本主要集中在：
-- initial compilation；
-- semantic refinement；
-- runtime-AI request；
-- realtime；
-- durable storage；
-- external API；
-- moderation／security；
-- observability；
-- bandwidth。
-
-Trusted Blueprint reuse 越高，這個經濟模型越有利。
-
----
-
-## 16. Reuse Economics
-
-可能形成：
-
-```text
-More successful intents
- → more trusted Blueprint families
- → more retrieval/reuse
- → fewer cold compilations
- → lower cost + faster response
- → better UX
- → more usage
-```
-
-這是需要驗證的 business hypothesis。
-
-Cache hit rate、cost reduction、latency 都必須量測，不可預設。
-
----
-
-## 17. Creator Economics
-
-「Everyone is the creator」代表使用者可以在不需要以下能力的情況下建立互動 artifact：
-
-- source code；
-- deployment；
-- App Store Review；
-- package management；
-- 專門 frontend development。
-
-潛在 creator value：
-- save／publish useful Blueprint；
-- reputation／discovery；
-- Remix successful artifact；
-- connect paid capability；
-- 最終透過 usage 或 transaction monetization。
-
-Creator monetization 是 PMF 後的擴張方向，不是 Phase 1 的先決條件。
-
----
-
-## 18. Intent Commerce
-
-長期方向：
-
-```text
-Intent
- → Capability Selection
- → Micro-App
- → API / Service / Transaction
- → Outcome
-```
-
-可能的 capability supply：
-- AI service；
-- data source；
-- booking；
-- specialized calculation；
-- media generation；
-- commerce／transaction API；
-- paid Blueprint／capability package。
-
-NodeFF 長期可能成為「使用者消費能力」的 orchestration 與 interaction layer，而不必關心功能原本屬於哪個傳統 App。
-
-這仍然是 strategic hypothesis，不是已驗證 marketplace。
-
----
-
-## 19. Monetization Paths
-
-可能 revenue mechanism：
-
-1. compiler／runtime-AI quota；
-2. durable history／storage；
-3. 更大或更長的 live room；
-4. premium capability；
-5. external API pass-through + margin；
-6. Intent Commerce transaction fee；
-7. creator monetization；
-8. private／team environment；
-9. 未來若有需求，再加入 enterprise governance。
-
-Monetization 不得破壞 zero-friction first use。
-
----
-
-## 20. Growth Model
-
-Growth 應該是 artifact-driven，而不是 account-driven。
-
-```text
-Creator makes useful/fun artifact
- → shares it
- → recipient opens instantly
- → recipient interacts
- → recipient remixes/creates
- → new artifact
-```
-
-重要 metrics：
-
-- share rate；
-- share → open；
-- open → meaningful interaction；
-- interaction → remix／create；
-- remix descendants per Blueprint family；
-- repeat creation；
-- anonymous → registered creator conversion。
-
-K-factor 只有在其組成指標實際量測後才有意義。
-
----
-
-## 21. Measurement Model
-
-### Activation
-- intent → executable Blueprint success；
-- time to first useful result；
-- semantic success／refinement rate。
-
-### Engagement
-- executed intents；
-- meaningful Instance interactions；
-- Blueprint opens；
-- repeat creation；
-- repeat sharing。
-
-### Viral
-- share／open／use／remix funnel；
-- descendants per shared artifact；
-- recipient-to-creator conversion。
-
-### Retention
-- anonymous browser／device cohort；
-- registered creator cohort；
-- repeat use／creation。
-
-### Monetization
-- free → paid；
-- premium capability usage；
-- paid creator activity；
-- transaction volume／GMV（如適用）。
-
-Anonymous identifier 不得被當成精確的人數。
-
----
-
-## 22. Trust、Privacy 與 Ownership
-
-NodeFF 可能處理私人、短暫的群組資料。
-
-商業可行性依賴以下 trust：
-
-- 哪些資料可以進 share URL；
-- telemetry collection；
-- retention；
-- deletion；
-- private／public Blueprint distinction；
-- moderation；
-- creator ownership；
-- external capability data transfer；
-- training／research reuse。
-
-Anonymous usage 不代表使用者同意資料可無限制拿去 model training。
-
-Durable artifact ownership 必須明確且經 authentication。
-
----
-
-## 23. PMF 假設
-
-NodeFF 必須驗證：
-
-1. 對某些 Intent，使用者真的偏好 Interactive Micro-App，而不是 Chat Answer。
-2. No-login access 能實質提升分享與使用。
-3. 接收者會互動，而不只是看。
-4. Remix 會自然發生。
-5. Social／Decision／Party 類別具有 organic sharing。
-6. 使用者能理解並信任 visible assumptions。
-7. Semantic reliability 足以支撐 repeat use。
-8. Blueprint family reuse 頻率足以產生經濟價值。
-9. Progressive Auth 在產生價值後能順利轉換。
-10. 使用者願意為 durable／expensive capability 付費。
-11. Intent Commerce 有真實 provider／user demand。
-12. Runtime economics 能支撐 generous free usage。
-
----
-
-## 24. 尚未驗證的數字
-
-以下不得當成已成立事實：
-
-- 80% registration drop-off；
-- 特定 anonymous CPUI；
-- 特定 registered monthly cost；
+- 80% Registration Drop-off；
+- 特定 Anonymous CPUI；
+- 特定 Registered Monthly Cost；
 - K-factor > 1；
-- 5M monthly intents；
-- 90% cache／cost reduction；
-- 固定 room limits；
-- exact model cost；
-- zero marginal cost；
-- guaranteed millisecond latency。
+- 5M Monthly Intents；
+- 90% Cache／Cost Reduction；
+- 固定 Room Limit；
+- Exact Model Cost；
+- Zero Marginal Cost；
+- Guaranteed Millisecond Latency。
 
-在 NodeFF 實際量測前，它們都只是 benchmark／hypothesis。
+未經 NodeFF 真實數據驗證前，不應用於正式 Business Case。
 
 ---
 
-## 25. Phase 1 商業目標
+# 10. 目前 Focus
 
-Phase 1 在擴張成大平台故事之前，只需要先證明一件事：
+目前不需要同時回答「NodeFF 最終可以成為多大的平台」。
 
-> **一個人能否表達短暫 Intent，快速得到正確有用的 Micro-App，立即使用、分享，並讓另一個人使用或 Remix？**
+現在只需要回答：
 
-最小 proof loop：
+> **NodeFF 能不能讓一個真實 Intent 變成正確、有用、可分享，而且會被下一個人繼續使用的 Micro-App？**
+
+如果答案是 Yes，再進入：
 
 ```text
-Intent
- → Correct Interactive Blueprint
- → Immediate Value
- → Share
- → Recipient Use
- → Remix
+Phase 1 Core Loop
+      ↓
+Trusted Reuse
+      ↓
+Creator / Paid Value
+      ↓
+Intent Commerce
+      ↓
+Capability Network
 ```
 
-Marketplace、Creator Economy 與更大的 Network Effect，應建立在這個 loop 的證據之上。
-
----
-
-## 26. 商業 Guardrails
-
-1. First Value 前不強制 Registration。
-2. Share 是核心產品行為，不是 Export Feature。
-3. Remix 必須降低 Creation Friction。
-4. 既有 Blueprint execution 不應反覆消耗 LLM。
-5. Semantic Correctness 比 Visual Polish 更重要。
-6. Assumption 必須可見，不得假裝成事實。
-7. Product Boundary 必須誠實。
-8. Pricing／Cost／Performance 數字在量測前都維持 hypothesis。
-9. Paid Feature 應綁定 durable value 或 expensive capability。
-10. NodeFF 必須保留 Fun／Social 性質，不能退化成只有 Generic Form Builder。
+這就是目前 Business Plan 的優先順序。
