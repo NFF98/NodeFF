@@ -716,3 +716,66 @@ User-proposed order is directionally useful:
 4. semantic compiler.
 
 Before Cursor execution, each step still requires acceptance tests and security constraints. This sequence remains Working until implementation is explicitly authorized.
+
+
+## 21. Action-State-Rule-View-Effect Wiring Model — Working
+
+### 21.1 Core Declarative Wiring
+Candidate LegoSpec execution model:
+
+`Action → State Transition → Rule/Capability Evaluation → View Projection → Effect`
+
+This gives Layer 2 a bounded language for composition without authoring code.
+
+Candidate concepts:
+- **Action**: user/runtime event such as roll, click, select, submit, timer tick.
+- **State**: typed mutable instance data.
+- **Rule/Capability**: approved deterministic computation/transition.
+- **View**: approved component projection of state/results.
+- **Effect**: approved bounded presentation effect such as confetti.
+
+### 21.2 Conditional Effects
+Effects must use a restricted condition grammar/AST and an allowlisted effect registry. No arbitrary callback/function body.
+
+### 21.3 Capability Selection
+Layer 2 receives machine-readable capability metadata from the Registry and performs:
+`intent decomposition → capability selection → binding → candidate contract`
+
+Layer 3 remains the validated transport/execution contract between compiler and runtime.
+
+### 21.4 Runtime Boundary, Not JSON Myth
+Do not document “JSON cannot describe physics” as a universal technical fact. JSON can configure a prebuilt physics engine.
+
+The NFF rule is:
+> **If the trusted Runtime/Capability Registry does not expose that engine/capability, the compiler cannot invent it.**
+
+Thus hard walls are deliberate capability/security/product boundaries.
+
+### 21.5 Deterministic Replay Requirements
+“Same JSON → same result” only holds under explicit determinism conditions.
+
+Replay identity may require:
+- Blueprint content/version;
+- Runtime version;
+- Capability versions;
+- initial Instance state;
+- RNG seed/event log for randomness;
+- external data snapshot/version where applicable;
+- ordered action/delta log for interaction replay.
+
+Without these, the same Blueprint can legitimately produce different random or external-data results.
+
+### 21.6 Unsupported Capability Contract
+Candidate response state:
+- `unsupported_capability`;
+- requested capability;
+- nearest supported capability, if any;
+- degradation description;
+- whether user confirmation is required.
+
+Material semantic degradation should be transparent and preferably confirmed, not silently substituted.
+
+### 21.7 Layer Independence
+Layer 3 makes compiler/runtime implementations replaceable, but “complete ignorance of each other” is too strong. Both sides intentionally depend on the same versioned contract and Capability Registry semantics.
+
+Decoupling means implementation independence behind a shared contract, not absence of shared protocol knowledge.
