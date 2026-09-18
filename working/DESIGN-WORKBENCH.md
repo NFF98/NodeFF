@@ -231,3 +231,35 @@ Observed Usage
 - Product Vision：不可被 Decision / Calculator / Party 任一類型綁死
 - PMF 方法：實際 use case category 由真實 usage data 驗證，而不是事先假定
 
+
+
+---
+
+## CEO 主口號 / 核心宣言
+
+> **意圖就是 App。**
+
+定位：
+- NodeFF 的 CEO 主口號；
+- 對外最核心、最簡潔的產品宣言；
+- 表達 NodeFF 想改寫「先找 App，再使用 App」的傳統軟體心智。
+
+其背後的產品轉換：
+
+```text
+Old Model
+Intent
+ → Search App
+ → Install / Learn / Configure
+ → Use
+
+NodeFF
+Intent
+ → App
+```
+
+此口號不限定 Decision、Utility、Fun、Social 或其他 use case。
+
+它表達的是更高層的產品願景：
+
+> **使用者不再先尋找一個既有 App；使用者的意圖本身，就成為 App 的起點。**
