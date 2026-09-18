@@ -1,865 +1,792 @@
-# NodeFF App Architecture（Working）
+# NodeFF Application Architecture — Working Brain
 
-> 本文件為系統規格討論前的工作版，不是官方 SSOT。
+> Status: WORKING / NOT OFFICIAL SSOT
+>
+> Purpose: Consolidated application architecture for NodeFF. This file replaces prior accumulated working notes. It is the current architecture brain for discussion and future promotion into official `spec/` only after explicit Founder approval.
 
-## 1. 目的
-定義 NodeFF 從「自然語言 Intent」到「可執行、可分享、可消失 Micro-App」的產品/應用程式架構，以及各模組責任邊界。
+---
 
-## 2. 核心產品循環
+## 1. Product Identity
 
-**Intent → Compile → Validate → Render → Interact → Share/Remix → Refine → Dispose**
+NodeFF is an **Intent-to-Interactive-App Protocol and Runtime**.
 
-核心原則：
-- 使用者不需要安裝 App。
-- LLM 是一次性 Semantic Compiler，不是每次互動的 runtime。
-- LegoSpec 是核心 Contract。
-- Browser Universal Lego Player 是主要執行環境。
-- 多人即時 session 可透過 ephemeral room。
-- 生成結果本質上是可分享、可 remix 的 Micro-App。
-- Runtime 不執行任意 JavaScript。
+A user expresses an intent in natural language. NodeFF compiles that intent into a controlled declarative Blueprint, validates it, and executes it in a trusted Universal Player.
 
-## 3. Logical Architecture
+NodeFF is **not**:
+- an AI code generator;
+- a platform that deploys one application per generated Micro-App;
+- a general arbitrary-JavaScript runtime;
+- a native-app replacement for every use case.
 
-```
-User
- ↓
-Experience / Prompt UI
- ↓
-Layer 1 — Ingestion & Routing
- ├─ Safety / Tier Gate
- ├─ Normalize
- ├─ Cache
- └─ Dispatch
- ↓
-Layer 2 — Semantic Compiler
- ├─ Context Injector
- ├─ LLM
- ├─ Intent / Archetype
- └─ Retry
- ↓
-Layer 3 — Contract
- ├─ LegoSpec Schema
- ├─ Component Allowlist
- ├─ State Binding Validation
- └─ Notice / Fallback Validation
- ↓
-Layer 4 — Universal Lego Player
- ├─ Registry / Factory
- ├─ Reactive State
- ├─ Expression Sandbox
- ├─ Error Boundary
- └─ Share Hydration
- ↓
-Browser Micro-App
- ├─ Local interaction
- ├─ Optional PartyKit session
- └─ Optional approved external capabilities
+Core model:
+
+```text
+Intent
+  ↓
+Semantic Compiler
+  ↓
+Validated Blueprint / LegoSpec
+  ↓
+Universal Player
+  ↓
+Interactive Micro-App
 ```
 
-## 4. Application Domains
+Deployment principle:
 
-### A. Experience Shell
-負責 Prompt、靈感膠囊、Fork & Remix、生成狀態、結果卡與 Progressive Refinement。
+> **NFF deploys the Runtime, not every generated App.**
 
-### B. Compiler
-負責把 Intent 轉成 declarative LegoSpec，不直接產生可執行任意 code。
+---
 
-### C. Contract
-負責 Schema、version、validation、capability allowlist 與 fallback contract。
+## 2. Primary Product Loop
 
-### D. Player Runtime
-負責 component render、state、expression、interaction、error isolation。
-
-### E. Session
-負責多人 ephemeral state / room synchronization；不承擔自然語言理解。
-
-### F. Share / Remix
-負責可分享 URL、Blueprint identity、版本/來源與 remix 關係。
-
-### G. Capability / Commerce
-負責未來 C2C capability/API、計費、usage metering 與交易；與核心 renderer 解耦。
-
-## 5. State Ownership
-- UI transient state → Browser memory。
-- Shareable public state → URL/hash 或 approved share payload。
-- Ephemeral multiplayer state → Session layer。
-- Persistent creator/history/commerce data → Backend DB。
-- Secrets / credentials → 永不進入 client LegoSpec 或 URL。
-
-## 6. Boundary Rules
-- Layer 1 不做 semantic generation。
-- Layer 2 不直接執行 code。
-- Layer 3 不負責 UI runtime。
-- Layer 4 不理解 intent、不決定 business fallback。
-- Session 不成為永久資料庫。
-- Business rules 不應硬編入 Universal Player。
-- Capability providers 透過受控 contract 接入。
-
-## 7. Major Data Flows
-
-### New Intent
-Prompt → Normalize → Cache → Compiler → Schema Validation → Verified LegoSpec → Player。
-
-### Remix
-Shared Blueprint → Hydrate → User edits → Delta Patch / Recompile → New Blueprint version。
-
-### Multiplayer
-Player → Room Join → Ephemeral Session State → Sync → Leave / TTL Destroy。
-
-### Runtime Failure
-Primitive error → Local Error Boundary → Component fallback → Telemetry → Blueprint health evaluation。
-
-## 8. Open Design Items
-- LegoSpec versioning / backward compatibility
-- Action/state-machine contract
-- Session synchronization contract
-- capability API contract
-- authentication boundary
-- blueprint identity / publishing model
-- telemetry schema
-- commerce transaction boundary
-
-**Status：Working。**
-
-## 9. Detailed Application Design Inputs — Working
-
-### 9.1 Product Runtime Identity
-Current direction: NodeFF is not primarily an AI code generator. It is a **Dynamic UI Runtime Engine** and an **Intent-to-UI Protocol**. Natural language is compiled into declarative LegoSpec; the NodeFF runtime executes that controlled contract.
-
-### 9.2 Dual Persistence Model
-Separate two concepts:
-- **Template / Blueprint:** reusable micro-app definition used by Community/Gallery and Fork & Remix; may contain prompt/template, LegoSpec, metadata, version and remix/source relationship. It must not inherit private instance data.
-- **Instance Snapshot:** a specific execution state containing the current user-entered state plus the applicable LegoSpec/reference. Intended for exact sharing, resume and continuation. Candidate transport: URL hash, compressed payload, or short-link indirection when too large.
-
-Reload/share should restore a valid instance without requiring LLM recompilation merely to recover state.
-
-### 9.3 State Preservation Guardrail
-Desired behavior is **state preservation without recompilation**. Normal interaction updates local state; reload/resume hydrates recoverable state; sharing reproduces the shared instance state when its payload is valid and complete.
-
-Engineering correction: do not make “write to LocalStorage and URL Hash every millisecond” a hard requirement. Prefer debounced/batched persistence and canonical state serialization. Browser storage can be cleared or quota-limited, and URLs have practical size limits. The product goal is **deterministic state restoration**, not an absolute guarantee under every browser/storage failure. Sensitive data must not enter share URLs by default.
-
-### 9.4 App-to-App Context / Prompt Piping
-Support controlled composition between micro-apps:
-- App A produces a standard **Universal Context Payload**.
-- Candidate fields: `summary`, `rawText`, `structuredData`.
-- User selects a suggested next action such as “轉化為下一個工具”.
-- App B receives approved context as initial input/state.
-- Transport may use URL payload, local session state or approved backend/share reference.
-- Context transfer must be schema-controlled; arbitrary hidden data transfer is prohibited.
-
-Working flow: **App A result → Context Payload → user-selected next capability → App B hydration → continue task**.
-
-### 9.5 Experience Shell — Inspiration Capsule
-Treat Inspiration Capsules as **creation scaffolds**, not static demos: editable example prompt, variable highlighting, Ghost Text and Progressive Refinement. Desired learning progression: **copy → modify → combine → create from scratch**. UX principle: **先完成，再學會；不是先學會，才能完成。** Prefer outcome-led presentation while keeping the prompt editable underneath.
-
-### 9.6 Infrastructure-Aligned Application Flow
-Assume edge-first + client-first execution: edge handles gate/normalization/cache/routing where appropriate; compiler performs semantic generation; verified LegoSpec returns to browser; normal interaction stays client-side without repeated LLM calls; realtime is invoked only for shared live state; persistent backend is introduced only for durable needs such as ownership, history, publishing, quota and commerce.
-
-Latency guardrail: edge proximity can reduce network latency but cannot guarantee 3-second end-to-end generation. LLM inference, cold starts, provider latency and downstream services remain part of the total path. “3 seconds” is a product target/measurement, not an architectural guarantee.
-
-### 9.7 Development Workflow — Working
-Current workflow: **GitHub SSOT → Cursor executes → ChatGPT audits**. Cursor, GitHub, Supabase and managed edge/serverless hosting are candidate MVP tools/stack, not approved vendor decisions. Provider abstraction should preserve replaceability.
-
-## 10. Architecture Suggestions / Questions to Resolve
-1. Separate **Blueprint ID** from **Instance ID**.
-2. Define canonical state serialization for resume/share/remix.
-3. Define payload size thresholds: URL hash for small ephemeral state; short-link/backend indirection for large/stable state.
-4. Define context permissions: which output fields may leave App A.
-5. Treat edge as a deployment/execution strategy, not a promise that every operation runs at the nearest CDN node.
-6. Keep hosting, database and LLM providers replaceable.
-
-## 11. App Instance — Detailed Working Design Inputs
-
-### 11.1 Instance Cost Model
-Working hypothesis: most Micro-App instances should be **client-executed**, so ongoing interaction/rendering should have near-zero incremental platform compute cost. Platform cost is expected to concentrate on initial compilation and exceptional capabilities such as realtime, persistent storage or external APIs.
-
-Candidate operating split:
-- **Lightweight instance:** state/spec transported through compressed URL Hash plus local browser recovery; no persistent DB required.
-- **Large/stable instance:** use short-link/backend or KV indirection when URL payload size, stable identity or durable reference requires it.
-- **Realtime instance:** store/share a room base spec once, then synchronize small state deltas through a realtime channel.
-
-The previously discussed “90% / 10%” distribution is a planning hypothesis, not a measured production ratio.
-
-### 11.2 Snapshot Share Mechanics
-Candidate flow:
-
-```
-Current App Instance
-  ↓
-Canonicalize Logic + UI Spec + State
-  ↓
-Compress
-  ├─ small → URL Hash
-  └─ large/stable → Short Link / Backend Reference
-  ↓
-Receiver opens link
-  ↓
-Hydrate + Validate
-  ↓
-Render same valid Instance state
-  ↓
-Optional Fork / Remix
+```text
+Intent
+ → Compile
+ → Validate
+ → Execute
+ → Interact
+ → Share
+ → Remix / Refine
+ → Reuse
 ```
 
-The share payload conceptually contains the information required to restore the instance, but implementation should distinguish:
-- reusable **Blueprint**;
-- concrete **Instance State**;
-- schema/version metadata required for compatible hydration.
+A successful existing Blueprint should require **0 LLM calls merely to open, run, share, or replay normal deterministic interaction**.
 
-“Exact restoration” is the target for a valid, complete payload. It is not a promise that every browser/storage failure is recoverable.
+LLM is primarily a **compile-time semantic component**, not the normal interaction runtime.
 
-### 11.3 Instance vs Blueprint Publishing
-- Instance may contain personal/user-entered state.
-- Publishing a reusable Blueprint should not silently publish private instance data.
-- Publishing should explicitly derive a clean template/blueprint representation from the current instance.
-- Blueprint and Instance should have separate identities and lifecycle/version semantics.
+---
 
-### 11.4 Realtime Collaboration
-For multiplayer/shared editing:
-- A room may use a base Blueprint/LegoSpec plus an initial instance state.
-- Subsequent user interactions should preferably transmit **validated Delta State** rather than repeatedly transmit the full spec.
-- Each client keeps the executable contract locally and applies incoming deltas to local state.
-- Recalculation remains local when the required formulas/logic are deterministic and available client-side.
-- Room/session state remains ephemeral unless the product explicitly promotes it to persistent history.
+## 3. Four-Layer Architecture
 
-### 11.5 Dynamic Variations Without Fixed App Templates
-NFF should not be designed as a hard-coded set of ten fixed cards. The working architecture is:
-**Primitive UI Components + Declarative Logic + Reactive State + Generic Fallback**.
+### Layer 1 — Ingestion & Routing
 
-Candidate primitives include:
-- Numeric input / slider
-- Toggle / selection group
-- Dynamic item list
-- Countdown / progress visualization
-- Result / summary display
+Responsibilities:
+- receive natural-language intent;
+- safety/policy/tier gate;
+- normalization;
+- exact/canonical-intent cache lookup;
+- route to compiler or reusable Blueprint;
+- enforce request-level limits.
 
-The exact primitive registry is still open.
+Layer 1 does **not** invent semantic logic.
 
-A new variation should normally be represented by a different composition/configuration of approved primitives and declarative rules, rather than requiring a new bespoke React component for each user request.
+### Layer 2 — Semantic Compiler
 
-### 11.6 Spec Diff / Remix
-For a refinement such as “加 5% 服務費”:
-1. Current validated Spec + user refinement intent is sent to the compiler.
-2. Compiler returns a validated revised Spec or explicit Delta Patch.
-3. Existing compatible instance state is mapped/preserved where possible.
-4. Player hydrates the revised contract without unnecessarily discarding user-entered state.
+Responsibilities:
+- understand free-form natural language;
+- decompose intent into approved capabilities;
+- identify state, actions, rules, views, effects and assumptions;
+- choose primitives from Capability Registry;
+- generate a structured candidate Blueprint;
+- generate transparent assumptions/defaults where allowed;
+- request repair/refinement when needed.
 
-The exact patch format (e.g. RFC 6902) remains a design choice; the important contract is **minimal semantic change + state preservation**.
+Layer 2 does **not** emit arbitrary JavaScript.
 
-### 11.7 Declarative Logic / Formula Engine
-Working concept: **Logic as Data**.
+Compiler mental model:
 
-A WidgetSpec may express formulas/rules declaratively rather than embedding arbitrary JavaScript. Candidate logic categories:
-- arithmetic/formula rules;
-- conditional rules;
-- state-derived calculations;
-- bounded transformations;
-- approved deterministic algorithms such as settlement/minimization.
+```text
+Natural Language
+  ↓
+Intent Decomposition
+  ↓
+Capability Selection
+  ↓
+Action / State / Rule / View / Effect Wiring
+  ↓
+Structured Candidate
+```
 
-Example concept:
+### Layer 3 — LegoSpec Contract
+
+Layer 3 is the versioned declarative contract between compiler and runtime.
+
+It defines:
+- schema/version;
+- state model;
+- primitive instances;
+- action/state transitions;
+- rule representation;
+- effects;
+- presets/patches;
+- assumptions/provenance;
+- compatibility metadata.
+
+Layer 3 is **data**, not generated executable code.
+
+Validation must include more than JSON shape:
+1. structural/schema validation;
+2. bind/reference validation;
+3. rule/function validation;
+4. patch-path validation;
+5. capability allowlist validation;
+6. version compatibility;
+7. size/complexity/resource limits;
+8. policy/security checks;
+9. semantic/capability quality gates where defined.
+
+Important:
+
+> **Schema Valid ≠ Semantic Correct.**
+
+### Layer 4 — Universal Lego Player
+
+Layer 4 is the trusted browser runtime.
+
+Responsibilities:
+- hydrate a validated Blueprint/Instance;
+- render approved primitives;
+- own reactive instance state;
+- execute approved state transitions;
+- evaluate approved Rule AST/functions;
+- run bounded effects;
+- isolate component failures;
+- support snapshot/share hydration;
+- bind optional realtime sessions.
+
+Layer 4 must **not**:
+- classify free-form natural language;
+- guess business meaning;
+- silently invent formulas;
+- execute arbitrary JS;
+- contain domain-specific hardcoded app logic in core.
+
+---
+
+## 4. Core Execution Model
+
+The preferred declarative execution model is:
+
+```text
+Action
+  ↓
+State Transition
+  ↓
+Rule / Capability
+  ↓
+View Projection
+  ↓
+Effect
+```
+
+Example:
+
+```text
+DiceRoller action
+  ↓
+state.dice
+  ↓
+rule AST / approved function
+  ↓
+StatCard
+  ↓
+condition → Confetti
+```
+
+The compiler produces the wiring. The runtime executes the wiring.
+
+---
+
+## 5. Capability Registry
+
+The Capability Registry is a critical architectural boundary and should become a machine-readable source of truth.
+
+Preferred flow:
+
+```text
+Capability Registry
+  ├─→ Compiler capability metadata
+  ├─→ Layer 3 schema constraints
+  ├─→ Layer 4 component/function registry
+  ├─→ Tests
+  └─→ Documentation
+```
+
+Do **not** maintain separate manual copies of the same allowlist in:
+- frontend code;
+- Zod schema;
+- System Prompt;
+- docs.
+
+Each capability should eventually carry metadata such as:
+- name/type;
+- version;
+- props schema;
+- state/bind contract;
+- actions/events;
+- rule/operator dependencies;
+- fallback behavior;
+- security classification;
+- runtime compatibility.
+
+---
+
+## 6. Candidate Initial Rich Primitive Catalog
+
+Current candidate initial catalog:
+
+### Input Controls
+1. `NumberInput`
+2. `TextInput`
+3. `SelectChoice`
+4. `ToggleSwitch`
+
+### Data & Visualization
+5. `StatCard`
+6. `DataTable`
+7. `ChartVisualizer`
+
+### Rich Media & Interactive
+8. `Model3DViewer`
+9. `LottieAnimator`
+10. `WheelSpinner`
+11. `DiceRoller`
+12. `VideoPlayer`
+13. `ConfettiTrigger`
+
+### Layout & Composition
+14. `Container`
+15. `Repeater`
+
+These 15 are a **candidate starting surface**, not a permanent closed list.
+
+Future primitives are added only through Registry registration + implementation + schema + tests + compatibility metadata.
+
+---
+
+## 7. Generic Rule Engine
+
+### Current Direction
+
+NodeFF should avoid both extremes:
+
+**Bad extreme A:** hardcode domain functions for every new game/use case.
+
+```text
+calculate18La()
+calculateMahjong()
+calculatePoker()
+calculateROI()
+...
+```
+
+**Bad extreme B:** let LLM write unrestricted expression/code strings.
+
+Preferred direction:
+
+> **Typed declarative Rule AST + audited generic standard library.**
+
+Candidate generic operations:
+- IF
+- SUM
+- MIN
+- MAX
+- UNIQUE
+- COUNT
+- COUNT_MATCHES
+- arithmetic
+- comparison
+- logical operators
+- bounded array operations
+- bounded normalization operations
+
+Conceptual example:
 
 ```json
 {
-  "logic": {
-    "currencyRate": 0.21,
-    "hasTax": true,
-    "taxRate": 0.10,
-    "formulas": {
-      "itemShare": "price * (personWeight / totalWeight)",
-      "grandTotal": "hasTax ? rawTotal * (1 + taxRate) : rawTotal"
-    },
-    "settlementAlgorithm": "minimize_transfers"
-  }
+  "op": "SUM",
+  "args": [
+    {
+      "op": "UNIQUE",
+      "args": [{ "ref": "state.dice" }]
+    }
+  ]
 }
 ```
 
-The expression evaluator must remain sandboxed and allowlisted. No `eval` or arbitrary dynamic JavaScript. Complex business-specific algorithms should be represented as approved capabilities/operations rather than silently added to the universal player.
+This is preferable to arbitrary code and may be preferable to unrestricted expression strings because it improves:
+- static validation;
+- dependency analysis;
+- allowlisting;
+- complexity limits;
+- deterministic serialization;
+- migrations/versioning;
+- auditability.
 
-### 11.8 Generic Dynamic Form Fallback
-When a request cannot map cleanly to a specialized primitive composition, the system should prefer a transparent generic form representation when safe and meaningful:
+### Domain Capability Escape Hatch
 
-**Inputs → Logic → Outputs**
+Some complex functions may eventually require approved domain capabilities.
 
-This is a graceful-degradation path, not a guarantee that every natural-language request can always be fulfilled. Unsupported, unsafe, or semantically ambiguous requests may still require notice, refinement or rejection according to the Contract/Tier rules.
+Those must live behind:
 
-### 11.9 Performance / Cost Claims — Validation Status
-User-provided candidate figures such as 300ms compiler generation, 30ms hydration, 16ms local recalculation, 50KB gzip runtime, 15–35MB memory, 0.0003–0.0005 USD per generation, 500-character URL threshold and 1KB average snapshot are **targets/estimates to benchmark**, not current architecture guarantees.
+```text
+Universal Player
+  ↓
+Capability / Function Registry
+  ↓
+Versioned Approved Domain Capability
+```
 
-Likewise, “1M interactions ≈ $0 platform compute” is a business hypothesis that depends on CDN, bandwidth, observability, realtime, storage and other provider pricing.
+They do not belong in Universal Player core.
 
-## 12. Architecture Questions Added From This Discussion
-1. What is the canonical `WidgetSpec` schema for UI + logic + state references?
-2. Which data is safe to embed in URL Hash, and what must use short-link/backend storage?
-3. What exact threshold triggers URL Hash → short-link?
-4. Is realtime state based on Supabase Realtime, PartyKit, or an adapter interface?
-5. How are concurrent deltas ordered, deduplicated and conflict-resolved?
-6. Which declarative formulas/algorithms are built into Layer 4 versus exposed as approved capabilities?
-7. How does Spec Diff preserve/migrate state when fields are renamed, removed or structurally changed?
-8. What is the version compatibility policy for old shared Instances?
+---
 
+## 8. State Model
 
-## 15. Control Plane / Heavy Task Boundary — Working
+Separate these concepts:
 
-### 15.1 NFF as Lightweight Control Plane
-Working architectural principle:
+### Blueprint
+Reusable immutable declarative capability/UI/rule definition.
 
-> **NFF Engine 是輕量 Control Plane，不是 Heavy Compute Plane。**
+### Instance
+Concrete current-use state of a Blueprint.
 
-NFF core is responsible for:
-- UI rendering;
-- state packaging and transport;
-- realtime synchronization;
-- intent routing / commerce orchestration;
-- presentation of asynchronous task status and results.
+### Context
+Controlled payload passed from one Micro-App to another.
 
-Heavy work is delegated to:
-1. browser-side WASM / Web Workers;
-2. external cloud APIs / dedicated workers;
-3. external persistent storage when durable large-scale data is required.
+### Delta
+Validated runtime state update.
 
-### 15.2 Chat
-**Room Chat:** ephemeral text/sticker messaging can use the room realtime broadcast channel. WebRTC voice is a possible live-room capability.
+Principle:
 
-**Long-lived Chat:** Discord/Telegram-style message history, account systems and background notifications require a durable communication platform and should remain outside the NFF core positioning.
+> **Blueprint defines reusable capability; Instance defines current reality; Context connects one Micro-App to the next.**
 
-Exact retention, WebRTC behavior and provider architecture remain open.
+---
 
-### 15.3 Heavy Task Execution Paths
+## 9. State Binding Protocol
 
-| Task Type | Execution | NFF Role |
-|---|---|---|
-| Browser-capable heavy work | WASM / Web Workers | UI, parameters, progress and result presentation |
-| Server-required heavy work | Async Action → external API/worker | Orchestration, status dashboard and result presentation |
-| Large/durable data | External storage / approved backend | Controlled connector/reference rather than NFF core data plane |
+Writable components emit explicit typed transitions.
 
-Examples may include image/audio processing, browser ML, video generation, long-form AI processing and large data queries.
+Conceptual:
 
-### 15.4 Golden Rule
-> **「NFF 只做輕量控制面；重型運算與大型持久資料交給瀏覽器本地算力或專業外部服務。」**
+```text
+Component interaction
+ → dispatch/update(key, value)
+ → Instance State
+ → dependency-aware recompute
+ → affected Views/Effects
+```
 
-This supports the intended client-first / low-fixed-cost architecture.
+Components should not hide business state internally.
 
-Important guardrail: "$0", "3 seconds", "near-zero marginal cost" and similar figures are goals/hypotheses until benchmarked; external API, bandwidth, storage, observability and realtime costs still exist.
+Bindings must validate:
+- key existence;
+- expected type;
+- mutability;
+- allowed path.
 
-### 15.5 Cold Path vs Warm Path
+---
 
-**Cold Path — Async Compilation**
-`User Intent → Routing → LLM Compiler → Validation → WidgetSpec/Blueprint`
+## 10. Assumptions and Semantic Defaulting
 
-First-time generation may take materially longer because semantic compilation and provider latency are involved.
+NodeFF can turn ambiguity into an editable interactive model, but inferred defaults must never masquerade as facts.
 
-**Warm Path — Runtime Execution**
-`Shared Blueprint/Instance → Fetch/Decode → Validate → Hydrate → Render`
+Candidate provenance:
+- `user_provided`
+- `compiler_assumption`
+- `template_default`
+- `external_capability`
 
-A valid existing Blueprint/Instance must not require another LLM call merely to open, share or continue it.
+Example:
+A "20-person company dinner by seniority" request may compile into editable role counts/weights, but "boss pays 5x" is an assumption, not an objective truth.
 
-### 15.6 Spec Registry / Cache
-Verified WidgetSpec/Blueprints may be cached and reused.
+Preferred UX:
 
-Cache design must distinguish:
-- exact/canonical prompt cache;
-- semantic/canonical-intent reuse;
-- published Blueprint reuse.
+> **Make assumptions visible and editable.**
 
-Cache entries should be bound to schema version, component registry version and policy/security status. Cache reuse must never bypass validation/security checks.
+---
 
-Proposed single-digit/millisecond cache-hit latency is a target, not a guarantee.
+## 11. Semantic Failure Model
 
-### 15.7 Cold Compilation UX
-During first-time generation, Experience Shell may immediately show a lightweight skeleton/loading state and then hydrate the resulting WidgetSpec into the executable card.
+Key failure classes:
 
-UX principle:
-> **不要假裝 0 秒；讓等待期間仍有明確、可理解的產品回饋。**
+- `GENERATION_FAILED`
+- `VALIDATION_FAILED`
+- `SEMANTIC_MISMATCH`
+- `UNSUPPORTED_SEMANTICS`
+- `RUNTIME_COMPONENT_ERROR`
+- `BLUEPRINT_DEGRADED`
 
-### 15.8 Deployment Implication
-Compilation and runtime distribution remain separate from application deployment:
+Critical principle:
 
-**Compile Once → Reuse Many → Execute Locally**
+> **render_success does not equal task_success.**
 
-The platform should continue to represent new Micro-Apps primarily as declarative specs/data rather than newly deployed application code.
+A schema-valid, perfectly rendered Blueprint can still solve the wrong problem.
 
+Recovery flow:
 
-## 16. Identity / Progressive Auth / Runtime-AI Boundary — Working
+```text
+Candidate
+ → validation/capability gate
+ → semantic quality gate
+ → trusted Blueprint
 
-### 16.1 Dual-Track Identity
-Working UX architecture:
-- Consumer opens/uses shared Micro-App with no mandatory account.
-- Creator may create/share an ephemeral Micro-App before registration.
-- Registration is triggered when durable account-bound value is requested: ownership, permanent editing, cross-device history, paid quota, publishing/monetization or other persistent capabilities.
+If failure:
+ → bounded repair
+ OR targeted user refinement
+ OR transparent unsupported/degraded result
+```
 
-Anonymous continuity should use a random first-party `anonymous_id` where practical. Device fingerprinting should not be the default because of privacy/compliance implications.
+---
 
-### 16.2 Identity Promotion
-Candidate flow:
-`anonymous_id → create/use/share → user requests durable value → authenticate → claim/migrate eligible anonymous artifacts → account identity`
+## 12. Fallback and Degradation
 
-The claim/migration contract must prevent one user from claiming another person's shared artifact merely because they possess a URL.
+Dynamic Form Fallback is **not a semantic brain**.
 
-### 16.3 Cartridge Runtime Model
-Working mental model:
-- **WidgetSpec/Blueprint = cartridge / rules + UI contract**
-- **Universal Lego Player = trusted cartridge player**
-- **Instance State = current save/session state**
+It may render already-known typed semantics:
+- number → NumberInput;
+- enum/options → SelectChoice;
+- boolean → ToggleSwitch;
+- known result → StatCard.
 
-A compiled card does not call the LLM for ordinary deterministic interaction.
+It must not invent:
+- business rules;
+- formulas;
+- domain facts;
+- options;
+- meaning.
 
-Example dice behavior must be represented declaratively:
-`Action: ROLL_DICE → Runtime approved RNG operation → State update → Rule evaluation → View/Effect`
+Unsupported capability flow:
 
-Do **not** embed arbitrary JavaScript such as `Math.random()` in WidgetSpec.
-
-### 16.4 When LLM Can Reappear
-“Compile once” means no LLM during normal deterministic runtime. LLM/compiler may legitimately reappear when:
-- user asks for semantic refinement/remix that changes the contract;
-- cache miss requires a new Blueprint;
-- invalid generation requires controlled retry;
-- the Micro-App explicitly uses an approved runtime-AI capability (Tier 2).
-
-This boundary should be explicit in the future LegoSpec capability model.
-
-
-## 17. Blueprint CAS / Personal Pointer / Fork Architecture — Working
-
-### 17.1 Content-Addressable Blueprint Identity
-Candidate architecture uses content-addressable storage (CAS) for immutable Blueprint content.
-
-`Canonical WidgetSpec → canonical serialization → cryptographic digest → blueprint_content_id`
-
-The digest identifies exact canonical content. It is not itself an ownership or authorization mechanism.
-
-### 17.2 Storage Separation
-**Common Blueprint Pool**
-- immutable Blueprint body;
-- schema/runtime compatibility metadata;
-- validation/policy status;
-- optional lineage references stored as metadata.
-
-**Personal Asset Pool**
-- account/anonymous-owner reference as permitted;
-- Blueprint pointer;
-- created/saved/forked relationship;
-- ownership/edit rights;
-- user-specific persistent settings/history where applicable.
-
-**Instance State**
-Remains a separate concept. A room/snapshot's mutable state must not mutate the immutable Blueprint.
-
-### 17.3 Retrieval
-Candidate flow:
-`route → Blueprint ID/hash → edge/cache/registry → compatibility + integrity check → hydrate Universal Lego Player`
-
-For room mode:
-`validated Blueprint + room_id → connect realtime adapter → hydrate room state/deltas → local rule execution`
-
-Realtime provider remains replaceable; PartyKit is a candidate adapter, not part of the Blueprint identity.
-
-### 17.4 Fork / Differential Compiler
-`Base immutable Blueprint → user refinement → compiler produces constrained delta/new candidate → apply → validate → canonicalize → hash → store/dedupe → create lineage + personal pointer`
-
-A Fork never edits the original immutable content in place.
-
-### 17.5 Versioning
-Do not encode semantic version meaning directly into the cryptographic content hash. Keep separate concepts:
-- `content_id/hash` = immutable content identity;
-- `blueprint_id` = optional stable logical identity;
-- `revision/lineage` = relationship among versions/forks;
-- `instance_id` = concrete current-use state/session.
-
-This separation will matter for publishing, rollback, moderation, cache invalidation and analytics.
-
-
-## 18. Failure Case Study — Compiler / Player Boundary — Working
-
-### 18.1 Failure Pattern
-A prototype client synthesizer used Regex/numeric extraction/heuristics to convert arbitrary prompts into UI and logic. This caused semantically unrelated Specs to render successfully while solving the wrong problem.
-
-This is a dangerous failure class because the runtime can appear healthy while the contract is semantically wrong.
-
-### 18.2 Correct Responsibility Split
-**Semantic Compiler**
-- interprets natural language;
-- identifies required state/actions/rules/views;
-- selects approved primitives/capabilities;
-- emits a structured LegoSpec candidate.
-
-**Contract/Validation Layer**
-- schema/type validation;
-- binding/expression validation;
-- primitive/capability allowlist;
-- security/policy checks;
-- compatibility/version checks;
-- semantic-confidence/refinement policy where defined.
-
-**Universal Lego Player**
-- render approved primitives;
-- hydrate/update state;
-- execute approved declarative actions/rules;
-- display effects/results;
-- isolate runtime failures.
-
-The Player does not classify free-form Prompt text.
-
-### 18.3 No Heuristic Semantic Router in Player
-Remove architectural dependence on:
-- `if prompt contains X`;
-- Regex domain detection;
-- numeric extraction followed by guessed arithmetic;
-- reuse of an unrelated existing Blueprint with a changed title.
-
-Small deterministic parsers remain acceptable only for explicitly bounded contracts after semantic compilation, not as a universal natural-language understanding layer.
-
-### 18.4 Archetypes
-Compiler-level archetypes may guide composition, e.g.:
-- decision/choice;
-- numeric calculation;
-- structured information/data entry.
-
-These are examples, not a fixed exhaustive set. The LegoSpec itself remains the executable contract.
-
-### 18.5 Dynamic Form Fallback
-Dynamic Form is the fallback **View strategy** when specialized components are unavailable but typed semantics are already known.
-
-It may map:
-- known number field → NumberInput;
-- known enum/options → SelectChoice/Tag-like selector;
-- known boolean → ToggleSwitch;
-- known computed output → Stat/Result component.
-
-It must not manufacture unknown domain rules or facts.
-
-### 18.6 Semantic Failure State
-Introduce a distinct failure category:
-**SEMANTIC_MISMATCH / UNSUPPORTED_SEMANTICS**
-
-A syntactically valid Spec can still be semantically invalid.
-
-Candidate recovery:
-`Candidate Spec → semantic/capability gate fails → controlled repair or targeted user refinement → recompile → validate`
-
-Never silently convert semantic uncertainty into fake calculations.
-
-### 18.7 Compiler API Boundary
-Production compiler credentials belong server/edge-side. Browser code calls an NFF compiler endpoint; the endpoint calls the selected LLM provider through an adapter.
-
-Provider/model remains replaceable and is not part of Player architecture.
-
-
-## 19. Implementation Blueprint / Complex Declarative Logic — Working
-
-### 19.1 Implementation Ownership Boundary
-Cursor/implementation agents receive explicit contracts for:
-- allowed dependencies/frameworks;
-- state ownership;
-- schema source of truth;
-- component registry;
-- action/rule grammar;
-- security restrictions;
-- test/acceptance criteria.
-
-Implementation agents must not introduce a second semantic router, arbitrary-code execution, or alternative contract without an approved architecture change.
-
-### 19.2 Schema Source of Truth
-Avoid maintaining a TypeScript interface and a Zod runtime schema as independently editable definitions if they represent the same contract; that creates schema drift.
-
-Preferred working direction:
-`Runtime Schema → inferred TypeScript types`
-or another single-source generation mechanism.
-
-Exact schema tooling remains to be approved.
-
-### 19.3 Cross-Field Contract Validation
-LegoSpec validation needs more than shape checking:
-1. structural/type validation;
-2. state-bind reference validation;
-3. expression AST/function/reference validation;
-4. patch path/value validation;
-5. component capability validation;
-6. schema/runtime version compatibility;
-7. semantic/capability quality gate.
-
-Retry should occur only for repairable compiler failures and within a defined retry budget.
-
-### 19.4 Weighted Entity Primitive
-Candidate higher-order primitive:
-`WeightedGroupList`
-
-It represents an array of entities with fields such as:
-- stable id;
-- label/name;
-- count;
-- weight;
-- optional metadata.
-
-The primitive renders/edit controls but does not own the business rule determining what a “fair” weight is.
-
-### 19.5 Normalized Distribution Rule
-For groups with count `c_i` and weight `w_i`:
-
-`W = Σ(c_i × w_i)`
-
-Candidate per-person allocation:
-`p_i = total × w_i / W`
-
-Candidate group allocation:
-`g_i = total × (c_i × w_i) / W`
-
-The contract should represent this through approved rule functions/AST rather than arbitrary JavaScript.
-
-### 19.6 Preset / Patch Model
-A preset is a named, inspectable state transition:
-`Preset → validated patch → state update → dependency-aware recomputation → render`
-
-Preset patches must be restricted to allowed mutable state paths and validated against the target schema.
-
-### 19.7 Assumption Provenance
-Compiler-generated defaults should carry provenance, e.g.:
-- `user_provided`;
-- `compiler_assumption`;
-- `template_default`;
-- `external_capability`.
-
-This allows UI to distinguish what the user actually said from what NFF inferred.
-
-For ambiguous social heuristics, compiler assumptions should be editable and surfaced rather than silently treated as truth.
-
-### 19.8 Runtime Performance
-Local deterministic recomputation should be designed for responsive interaction, but claims such as “0ms” are not literal performance guarantees. Establish benchmark budgets later.
-
-
-## 20. Primitive / Capability Registry and Sharing Modes — Working
-
-### 20.1 Registry as Machine-Readable Contract
-Do not maintain the LLM allowlist as manually duplicated prose in a System Prompt.
-
-Preferred direction:
-`Capability Registry SSOT → runtime registry + schema constraints + compiler capability context + docs/tests`
-
-Adding a new primitive such as `SlotMachine` should require registration metadata and implementation/tests, after which compiler context is generated from the same registry.
-
-Candidate capability metadata:
-- type/name;
-- version;
-- props schema;
-- bind/state contract;
-- actions/events;
-- supported expressions/functions;
-- fallback behavior;
-- security classification;
-- runtime/component compatibility.
-
-### 20.2 Primitive Families
-Candidate families:
-- Controls: NumberInput, Slider, Toggle, SelectChoice;
-- Displays: StatCard, ProgressBar, LeaderBoard, HistoryList;
-- Party: DiceRoller, WheelSpinner, CardFlipper, Timer;
-- Decision: WeightedGroupList, PresetSelector, TagList;
-- structural primitives already under discussion such as Container/Repeater.
-
-Exact names/count remain Working. “10–15” is a design target, not a permanent architectural limit.
-
-### 20.3 Composition Before New Primitive
-Compiler should prefer composing approved primitives when semantics are preserved.
-
-If requested capability is absent:
-1. compose existing capabilities if semantically equivalent;
+1. compose approved primitives if semantics are preserved;
 2. degrade presentation only if core semantics remain intact;
-3. use typed Dynamic Form when semantics/rules are already known;
-4. otherwise emit unsupported/partial capability notice or ask for refinement.
+3. use typed generic form only if semantics are already known;
+4. otherwise return transparent unsupported/refinement state.
 
-Never invent a generic calculation merely to avoid an unsupported state.
+Do not silently convert "build Angry Birds" into a numeric text game and claim the original request was fulfilled.
 
-### 20.4 Domain Capability Functions
-Complex reusable rules can live in an approved capability/function registry.
+---
 
-Example conceptual call:
-`CALCULATE_18_LA(current_dice)`
+## 13. Product Hard Walls
 
-But this must be isolated from Universal Player core:
-`Player → Function/Capability Registry → allowlisted pure deterministic function`
+Strong in-scope:
+- discrete / turn-based interaction;
+- dice, wheel, cards, timers, voting, scoreboards;
+- arithmetic and weighted distribution;
+- interactive decision models;
+- deterministic state composition;
+- rich media via approved primitives.
 
-Requirements:
-- explicit input/output schema;
-- deterministic where required;
-- no arbitrary side effects;
-- versioned;
-- unit-tested;
-- resource bounded;
-- declared dependency from Blueprint.
+Out-of-scope for core unless a separately approved capability exists:
+- arbitrary continuous 60fps physics engines;
+- unrestricted canvas/custom rendering;
+- arbitrary user/LLM code execution;
+- unbounded recursive/agentic RPG systems;
+- unsupported OS/system access.
 
-### 20.5 Portable Snapshot
-`Blueprint/Instance → canonical serialization → compression → URL fragment`
+Important nuance:
 
-On open:
-`decode → decompress → size/version/integrity/schema/security validation → hydrate`
+> JSON itself is not the hard wall. The approved Runtime/Capability Registry is the hard wall.
 
-URL fragment is transport only. Large, sensitive, durable or permissioned data must use an indirection/reference path.
+---
 
-### 20.6 Live Room
-`Blueprint content ID + room_id → room adapter → room state/deltas`
+## 14. Share / Save / Live Modes
 
-Mutable room state never mutates the immutable Blueprint. Provider-specific TTL and presence behavior stay behind the realtime adapter.
+### A. Portable Snapshot
 
-### 20.7 Durable Save
-Durable save should distinguish:
-- immutable Blueprint content in CAS/Common Pool;
-- logical Blueprint/version/lineage metadata;
-- personal ownership/save pointer;
-- persistent Instance state when explicitly needed.
+Small, non-sensitive Blueprint/Instance payload:
 
-“Only owner may modify” means owner may create a new revision/fork or change metadata/pointers; immutable content-addressed Blueprint bodies are not edited in place.
+```text
+Canonicalize
+ → Compress
+ → URL Fragment
+ → Receiver
+ → Decode
+ → Validate
+ → Hydrate
+```
 
-### 20.8 Implementation Order — Candidate
-User-proposed order is directionally useful:
-1. contract/schema;
-2. state + rule/action engine;
-3. Player + minimal primitives;
-4. semantic compiler.
+Guardrails:
+- URL fragment = transport, not database;
+- compression ≠ encryption;
+- sensitive data excluded by default;
+- decoded-size limits required;
+- no decompression-bomb risk;
+- explicit share or debounced persistence, not write-on-every-mutation.
 
-Before Cursor execution, each step still requires acceptance tests and security constraints. This sequence remains Working until implementation is explicitly authorized.
+### B. Ephemeral Live Room
 
+```text
+Blueprint content ID
+ + room_id
+ + mutable Instance state/deltas
+```
 
-## 21. Action-State-Rule-View-Effect Wiring Model — Working
+Realtime mutable state must remain separate from immutable Blueprint content.
 
-### 21.1 Core Declarative Wiring
-Candidate LegoSpec execution model:
+Provider is abstracted.
 
-`Action → State Transition → Rule/Capability Evaluation → View Projection → Effect`
+### C. Durable Save
 
-This gives Layer 2 a bounded language for composition without authoring code.
+Separate:
+- immutable Blueprint content;
+- logical Blueprint identity/version/lineage;
+- user save/ownership pointer;
+- persistent Instance state only when needed.
 
-Candidate concepts:
-- **Action**: user/runtime event such as roll, click, select, submit, timer tick.
-- **State**: typed mutable instance data.
-- **Rule/Capability**: approved deterministic computation/transition.
-- **View**: approved component projection of state/results.
-- **Effect**: approved bounded presentation effect such as confetti.
+Immutable CAS bodies are never "edited in place"; editing creates a new revision/content identity.
 
-### 21.2 Conditional Effects
-Effects must use a restricted condition grammar/AST and an allowlisted effect registry. No arbitrary callback/function body.
+---
 
-### 21.3 Capability Selection
-Layer 2 receives machine-readable capability metadata from the Registry and performs:
-`intent decomposition → capability selection → binding → candidate contract`
+## 15. Content-Addressed Blueprint Model
 
-Layer 3 remains the validated transport/execution contract between compiler and runtime.
+Preferred conceptual model:
 
-### 21.4 Runtime Boundary, Not JSON Myth
-Do not document “JSON cannot describe physics” as a universal technical fact. JSON can configure a prebuilt physics engine.
+```text
+Canonical Validated Blueprint
+  ↓
+Content Hash
+  ↓
+Common Pool / CAS
+  ↓
+Referenced by
+  ├─ users
+  ├─ rooms
+  ├─ short links
+  └─ lineage/remix graph
+```
 
-The NFF rule is:
-> **If the trusted Runtime/Capability Registry does not expose that engine/capability, the compiler cannot invent it.**
+Separate:
+- `content_id/hash` = exact immutable content identity;
+- `blueprint_id` = optional stable logical identity;
+- `revision/lineage` = ancestry/version graph;
+- `instance_id` = concrete use state.
 
-Thus hard walls are deliberate capability/security/product boundaries.
+A content hash proves content identity/integrity, not:
+- ownership;
+- trust;
+- safety;
+- access permission.
 
-### 21.5 Deterministic Replay Requirements
-“Same JSON → same result” only holds under explicit determinism conditions.
+---
 
-Replay identity may require:
+## 16. Cache Model
+
+Two distinct cache identities:
+
+### Prompt / Canonical-Intent Cache
+Used to discover reusable Blueprint candidates.
+
+### Blueprint Content Hash
+Used for immutable exact content identity.
+
+A normalized Prompt SHA-256 can be an exact-cache optimization, but it is not semantic deduplication.
+
+Cache reuse must remain aware of:
+- schema version;
+- Capability Registry version;
+- Runtime compatibility;
+- security/policy status;
+- quality/trust status.
+
+Bad schema-valid but semantically wrong Blueprints must not poison the Common Pool.
+
+---
+
+## 17. Determinism and Replay
+
+"Same Blueprint JSON" alone does not guarantee identical runtime result.
+
+Exact replay may require:
 - Blueprint content/version;
 - Runtime version;
-- Capability versions;
+- capability versions;
 - initial Instance state;
-- RNG seed/event log for randomness;
-- external data snapshot/version where applicable;
-- ordered action/delta log for interaction replay.
+- RNG seed/outcome log;
+- action/delta log;
+- external data snapshot/version.
 
-Without these, the same Blueprint can legitimately produce different random or external-data results.
+Random actions such as Dice/Wheel must use trusted Runtime RNG, never raw generated JavaScript like `Math.random()`.
 
-### 21.6 Unsupported Capability Contract
-Candidate response state:
-- `unsupported_capability`;
-- requested capability;
-- nearest supported capability, if any;
-- degradation description;
-- whether user confirmation is required.
+---
 
-Material semantic degradation should be transparent and preferably confirmed, not silently substituted.
+## 18. Security Model
 
-### 21.7 Layer Independence
-Layer 3 makes compiler/runtime implementations replaceable, but “complete ignorance of each other” is too strong. Both sides intentionally depend on the same versioned contract and Capability Registry semantics.
+Forbidden:
+- `eval()`;
+- `new Function()`;
+- arbitrary generated JS/TS;
+- arbitrary HTML/script execution;
+- untrusted capability names.
 
-Decoupling means implementation independence behind a shared contract, not absence of shared protocol knowledge.
+JSON is transport, not automatically a sandbox.
 
+Safety comes from:
 
-## 22. Candidate Rich Primitive Catalog / Generic Rule VM — Working
+```text
+Data-only Contract
++ Runtime Schema
++ Capability Allowlist
++ Safe Rule VM
++ Sanitization
++ CSP / URL policy
++ Size / complexity limits
++ No arbitrary code
+```
 
-### 22.1 Candidate Initial 15
-Proposed initial catalog:
-1. NumberInput
-2. TextInput
-3. SelectChoice
-4. ToggleSwitch
-5. StatCard
-6. DataTable
-7. ChartVisualizer
-8. Model3DViewer
-9. LottieAnimator
-10. WheelSpinner
-11. DiceRoller
-12. VideoPlayer
-13. ConfettiTrigger
-14. Container
-15. Repeater
+Remote media primitives require:
+- allowed schemes/origins;
+- CSP;
+- MIME/type validation;
+- size limits;
+- redirect policy;
+- privacy/tracking considerations.
 
-These names and schemas are Working candidates pending detailed contract review.
+Recursive Container/Repeater requires:
+- depth limits;
+- node limits;
+- repeat-item limits;
+- evaluation/render budgets.
 
-### 22.2 Layer Placement
-- **Layer 3** owns the versioned data contract/schema describing allowed component instances and rule wiring.
-- **Layer 4** owns actual component implementations, state bridge, evaluator, hydration, error isolation and rendering.
-- **Capability Registry SSOT** should drive both sides to prevent duplicated definitions.
+---
 
-Zod is an implementation candidate for Layer 3 runtime validation; it should not become a second independent definition beside a separately maintained TypeScript interface.
+## 19. Identity and Progressive Auth
 
-### 22.3 State Binding Protocol
-Candidate:
-- writable components emit typed state transitions rather than owning hidden business state;
-- read-only views derive values from state/rule outputs;
-- nested composition uses Container/Repeater with explicit depth/size limits.
+Consumer path:
+- open/use shared Micro-App without mandatory registration.
 
-Bindings must be validated against expected state type, not merely state-key existence.
+Creator path:
+- create/share ephemeral Micro-App anonymously;
+- authenticate only when durable value is requested.
 
-### 22.4 Generic Rule VM
-Preferred architecture for portable complex rules:
-`Layer 2 domain understanding → restricted declarative Rule AST → Layer 3 contract → Layer 4 generic Rule VM`
+Durable triggers may include:
+- ownership;
+- permanent editing;
+- history;
+- publishing;
+- paid quota;
+- monetization.
 
-The VM exposes audited generic operations rather than game names.
+Use random first-party `anonymous_id` where practical.
 
-This can allow new rule combinations without a frontend release, provided the requested logic fits the approved grammar.
+Do not default to device fingerprinting.
 
-Domain-specific capability functions remain an escape hatch, versioned through Capability Registry, not Universal Player core.
+Anonymous → authenticated claim flow must include ownership proof / claim token / replay protection.
 
-### 22.5 Expression Strings vs Typed AST
-The current examples use free-form `expression: string`. Before approval, evaluate whether a typed Rule AST is safer/more analyzable than arbitrary expression strings.
+---
 
-Reasons:
-- reference validation;
-- function allowlisting;
-- complexity/resource limits;
-- deterministic serialization;
-- migration/versioning;
-- static dependency graph;
-- easier semantic inspection.
+## 20. App-to-App Composition
 
-Example conceptual AST:
-`{ op: "SUM", args: [...] }`
-rather than an unrestricted textual expression.
+Candidate Universal Context Payload:
+- `summary`
+- `rawText`
+- `structuredData`
 
-### 22.6 Rich Media Security
-URL-bearing primitives (Model3DViewer, LottieAnimator, VideoPlayer) require source policy, protocol/domain allowlisting or proxying as appropriate, CSP, content-size/type limits and failure handling.
+Flow:
 
-A valid `z.string().url()` is not sufficient security validation.
+```text
+App A result
+ → user selects next capability
+ → controlled Context Payload
+ → App B hydration
+```
 
-### 22.7 Recursive Composition Limits
-Container/Repeater recursion must have:
-- maximum nesting depth;
-- maximum total nodes;
-- maximum repeated items;
-- render/evaluation budgets.
+Context transfer must be explicit, schema-controlled, and privacy-aware.
 
-Schema-valid recursive content can still cause resource exhaustion.
+---
 
-### 22.8 Graceful Degradation
-Unknown component types should normally be rejected before trusted execution. Layer 4 Error Boundary remains the final containment layer for corrupted/legacy/incompatible artifacts; it is not the normal mechanism for accepting unknown types.
+## 21. Implementation Ownership
 
-### 22.9 URL Hydration
-Do not rewrite compressed state to `window.location.hash` on every state mutation. Use explicit snapshot/share or debounced/batched persistence according to product mode.
+Architecture/Spec owns:
+- allowed frameworks/dependencies;
+- schema;
+- state model;
+- rule grammar;
+- security boundaries;
+- primitive registry;
+- acceptance criteria.
+
+Cursor executes approved contracts.
+
+> **Cursor must not silently make architecture decisions.**
+
+Implementation agents must not:
+- invent a second semantic router;
+- introduce arbitrary code execution;
+- create a parallel schema/runtime;
+- reinterpret SSOT.
+
+---
+
+## 22. Candidate Implementation Technologies
+
+Not yet approved as permanent architecture:
+
+- React
+- Tailwind CSS
+- shadcn/ui
+- Zod
+- Zustand / reducer-based state
+- Vercel AI SDK or direct provider SDK behind adapter
+- PartyKit or alternative realtime provider
+- Supabase / Cloudflare / alternatives for persistence
+- typed Rule AST preferred for evaluation; `expr-eval` remains only a candidate fallback/implementation option subject to threat modeling.
+
+Vendor choices remain replaceable.
+
+---
+
+## 23. Candidate Build Order
+
+Before implementation, contracts and acceptance tests must be fixed.
+
+Candidate order:
+
+1. Layer 3 schema + Capability Registry contract
+2. State engine + Rule VM
+3. Universal Player + minimum primitives
+4. validation/security boundaries
+5. semantic compiler
+6. share/snapshot
+7. realtime
+8. CAS/registry
+9. progressive auth/persistence
+10. telemetry/reliability loop
+
+---
+
+## 24. Open Decisions
+
+Must be resolved before official spec lock:
+
+1. Typed Rule AST vs restricted expression-string representation.
+2. Exact initial primitive catalog and props.
+3. Capability Registry source-of-truth format.
+4. Blueprint schema/version strategy.
+5. Runtime/capability compatibility strategy.
+6. CAS canonicalization and digest rules.
+7. Cache admission quality policy.
+8. Snapshot URL size threshold.
+9. Realtime protocol/provider.
+10. Retry/repair budget.
+11. Semantic quality gate.
+12. External media source policy.
+13. Runtime AI boundary for Tier 1 vs Tier 2.
+14. Exact anonymity → ownership claim protocol.
+
+---
+
+## 25. Non-Negotiable Architecture Guardrails
+
+1. No arbitrary generated JavaScript.
+2. No `eval()` / `new Function()`.
+3. Universal Player does not infer free-form intent.
+4. Schema-valid does not imply semantic correctness.
+5. Dynamic Form does not invent unknown meaning.
+6. Blueprint, Instance, Context and Delta remain separate.
+7. URL Hash is transport, not DB.
+8. Local storage is recovery convenience, not authoritative persistence.
+9. Sensitive state is excluded from URLs by default.
+10. Existing valid Blueprint opens with 0 LLM calls.
+11. Heavy work is delegated outside NFF core.
+12. Vendor-specific technology remains behind interfaces.
+13. Cache never bypasses validation/security.
+14. Degradation is transparent.
+15. Common Pool admission must prevent semantic cache poisoning.
+16. Runtime core remains generic.
+17. Architecture lives in GitHub SSOT/working brain, not chat memory.
+
+---
+
+**Status: WORKING / CONSOLIDATED**
