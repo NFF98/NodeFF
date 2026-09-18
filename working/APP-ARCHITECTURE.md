@@ -779,3 +779,87 @@ Material semantic degradation should be transparent and preferably confirmed, no
 Layer 3 makes compiler/runtime implementations replaceable, but “complete ignorance of each other” is too strong. Both sides intentionally depend on the same versioned contract and Capability Registry semantics.
 
 Decoupling means implementation independence behind a shared contract, not absence of shared protocol knowledge.
+
+
+## 22. Candidate Rich Primitive Catalog / Generic Rule VM — Working
+
+### 22.1 Candidate Initial 15
+Proposed initial catalog:
+1. NumberInput
+2. TextInput
+3. SelectChoice
+4. ToggleSwitch
+5. StatCard
+6. DataTable
+7. ChartVisualizer
+8. Model3DViewer
+9. LottieAnimator
+10. WheelSpinner
+11. DiceRoller
+12. VideoPlayer
+13. ConfettiTrigger
+14. Container
+15. Repeater
+
+These names and schemas are Working candidates pending detailed contract review.
+
+### 22.2 Layer Placement
+- **Layer 3** owns the versioned data contract/schema describing allowed component instances and rule wiring.
+- **Layer 4** owns actual component implementations, state bridge, evaluator, hydration, error isolation and rendering.
+- **Capability Registry SSOT** should drive both sides to prevent duplicated definitions.
+
+Zod is an implementation candidate for Layer 3 runtime validation; it should not become a second independent definition beside a separately maintained TypeScript interface.
+
+### 22.3 State Binding Protocol
+Candidate:
+- writable components emit typed state transitions rather than owning hidden business state;
+- read-only views derive values from state/rule outputs;
+- nested composition uses Container/Repeater with explicit depth/size limits.
+
+Bindings must be validated against expected state type, not merely state-key existence.
+
+### 22.4 Generic Rule VM
+Preferred architecture for portable complex rules:
+`Layer 2 domain understanding → restricted declarative Rule AST → Layer 3 contract → Layer 4 generic Rule VM`
+
+The VM exposes audited generic operations rather than game names.
+
+This can allow new rule combinations without a frontend release, provided the requested logic fits the approved grammar.
+
+Domain-specific capability functions remain an escape hatch, versioned through Capability Registry, not Universal Player core.
+
+### 22.5 Expression Strings vs Typed AST
+The current examples use free-form `expression: string`. Before approval, evaluate whether a typed Rule AST is safer/more analyzable than arbitrary expression strings.
+
+Reasons:
+- reference validation;
+- function allowlisting;
+- complexity/resource limits;
+- deterministic serialization;
+- migration/versioning;
+- static dependency graph;
+- easier semantic inspection.
+
+Example conceptual AST:
+`{ op: "SUM", args: [...] }`
+rather than an unrestricted textual expression.
+
+### 22.6 Rich Media Security
+URL-bearing primitives (Model3DViewer, LottieAnimator, VideoPlayer) require source policy, protocol/domain allowlisting or proxying as appropriate, CSP, content-size/type limits and failure handling.
+
+A valid `z.string().url()` is not sufficient security validation.
+
+### 22.7 Recursive Composition Limits
+Container/Repeater recursion must have:
+- maximum nesting depth;
+- maximum total nodes;
+- maximum repeated items;
+- render/evaluation budgets.
+
+Schema-valid recursive content can still cause resource exhaustion.
+
+### 22.8 Graceful Degradation
+Unknown component types should normally be rejected before trusted execution. Layer 4 Error Boundary remains the final containment layer for corrupted/legacy/incompatible artifacts; it is not the normal mechanism for accepting unknown types.
+
+### 22.9 URL Hydration
+Do not rewrite compressed state to `window.location.hash` on every state mutation. Use explicit snapshot/share or debounced/batched persistence according to product mode.
