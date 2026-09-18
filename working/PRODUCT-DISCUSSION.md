@@ -149,3 +149,45 @@ A second UX principle worth validating later: the capsule should be **outcome-le
 
 ### Working Status
 All content in this file remains working discussion material unless explicitly approved and moved into `spec/` or `decisions/`.
+
+### Detailed Design — Layer 2: Semantic Compiler Layer (Working)
+
+**定位：** 將非結構化的自然語言，轉換為符合 NodeFF 定義的結構化 JSON。
+
+**核心元件 / processing：**
+- **Context Injector：** 注入 System Prompt 與 NFF Component Registry 可用清單，讓 LLM 只知道目前前端可使用的 Lego/Component primitives。
+- **LLM Inference Engine：** 可使用 Groq / OpenAI 相容 API；強制 Structured Outputs（JSON Mode）。
+- **Intent Convergence：** 將自然語言意圖收斂為可處理的 Archetype，例如「午餐吃什麼」→ Decision Archetype、「算熱量」→ Entity Archetype。
+- **Schema Validator：** 後端以 Pydantic 或 Zod 做第一次結構驗證，並檢查 bind 的變數是否存在於 initialState；失敗時觸發內部 Retry。
+
+**核心工程決策（Working）：One-time Compiler**
+- LLM 不負責使用者每次互動時的即時運算。
+- LLM 將自然語言一次性編譯成宣告式 DSL：LegoSpec JSON AST。
+- JSON 傳送完成後，後續 Slider、Input、狀態變更等互動由瀏覽器端 runtime 處理，以避免每次互動都重新呼叫 LLM。
+- 目標是將 LLM interaction cost 從隨互動次數增加的模式，轉為一次編譯後由 client runtime 持續處理。
+
+**與 Layer 1 的接口關係（Working）：**
+- Layer 1 負責邊界路由、快取命中與請求派發。
+- Cache Miss 的新請求進入 Layer 2。
+- Layer 2 產生並驗證 LegoSpec JSON AST，成功後交給後續 Layer。
+
+**Architecture Boundary（Working）：**
+NodeFF 的核心技術方向暫定為：**約 12–15 個高階領域 Component Libraries（可包含 3D、動畫、影音等 Rich Primitives）＋純宣告式 JSON Contract＋瀏覽器端 AST 安全沙盒 Renderer/Runtime。**
+
+**Working caution：** 上述「100%」、「O(1)」、「sub-millisecond」、「12–15 個」等數字/性能表述目前視為設計目標或假設，不視為已驗證的實際性能保證；後續詳細設計與實測再確認。
+
+### Detailed Design — Layer 1: Ingestion & Routing Layer (Working)
+
+**定位：** 接收 User Prompt，進行成本與安全性過濾，並決定請求走向。
+
+**核心 processing：**
+- **Tier 3 Defense Interception：** 檢查惡意 payload、純閒聊/知識問答、或要求底層 OS 權限等不適用請求；命中後直接阻斷並回傳純文字/錯誤卡片。
+- **Edge KV Cache：** 以 prompt normalization 後的 SHA-256 作為 Key，以已驗證的 LegoSpec JSON Blueprint 作為 Value；Cache Hit 時直接回傳，繞過 LLM。
+- **Task Dispatch：** Cache Miss 時封裝 request 並派送至 Layer 2。
+
+**Edge KV Working Definition：** Edge KV 是部署於 CDN edge 的低延遲 key-value storage，例如 Cloudflare KV / Vercel KV。其用途是讓相同或可標準化為相同 key 的意圖可以重用已驗證 blueprint。
+
+**Cache flow（Working）：**
+User Prompt → Normalize → SHA-256 Key → Edge KV Lookup → Hit: Verified LegoSpec / Miss: Layer 2
+
+**Working caution：** 「去除空格與標點後直接 hash」目前只是候選 normalization 策略；不同語意但文字不同的 prompt 仍可能造成 cache miss，未來可考慮 canonical intent key / semantic cache。
