@@ -296,3 +296,84 @@ Likewise, “1M interactions ≈ $0 platform compute” is a business hypothesis
 6. Which declarative formulas/algorithms are built into Layer 4 versus exposed as approved capabilities?
 7. How does Spec Diff preserve/migrate state when fields are renamed, removed or structurally changed?
 8. What is the version compatibility policy for old shared Instances?
+
+
+## 15. Control Plane / Heavy Task Boundary — Working
+
+### 15.1 NFF as Lightweight Control Plane
+Working architectural principle:
+
+> **NFF Engine 是輕量 Control Plane，不是 Heavy Compute Plane。**
+
+NFF core is responsible for:
+- UI rendering;
+- state packaging and transport;
+- realtime synchronization;
+- intent routing / commerce orchestration;
+- presentation of asynchronous task status and results.
+
+Heavy work is delegated to:
+1. browser-side WASM / Web Workers;
+2. external cloud APIs / dedicated workers;
+3. external persistent storage when durable large-scale data is required.
+
+### 15.2 Chat
+**Room Chat:** ephemeral text/sticker messaging can use the room realtime broadcast channel. WebRTC voice is a possible live-room capability.
+
+**Long-lived Chat:** Discord/Telegram-style message history, account systems and background notifications require a durable communication platform and should remain outside the NFF core positioning.
+
+Exact retention, WebRTC behavior and provider architecture remain open.
+
+### 15.3 Heavy Task Execution Paths
+
+| Task Type | Execution | NFF Role |
+|---|---|---|
+| Browser-capable heavy work | WASM / Web Workers | UI, parameters, progress and result presentation |
+| Server-required heavy work | Async Action → external API/worker | Orchestration, status dashboard and result presentation |
+| Large/durable data | External storage / approved backend | Controlled connector/reference rather than NFF core data plane |
+
+Examples may include image/audio processing, browser ML, video generation, long-form AI processing and large data queries.
+
+### 15.4 Golden Rule
+> **「NFF 只做輕量控制面；重型運算與大型持久資料交給瀏覽器本地算力或專業外部服務。」**
+
+This supports the intended client-first / low-fixed-cost architecture.
+
+Important guardrail: "$0", "3 seconds", "near-zero marginal cost" and similar figures are goals/hypotheses until benchmarked; external API, bandwidth, storage, observability and realtime costs still exist.
+
+### 15.5 Cold Path vs Warm Path
+
+**Cold Path — Async Compilation**
+`User Intent → Routing → LLM Compiler → Validation → WidgetSpec/Blueprint`
+
+First-time generation may take materially longer because semantic compilation and provider latency are involved.
+
+**Warm Path — Runtime Execution**
+`Shared Blueprint/Instance → Fetch/Decode → Validate → Hydrate → Render`
+
+A valid existing Blueprint/Instance must not require another LLM call merely to open, share or continue it.
+
+### 15.6 Spec Registry / Cache
+Verified WidgetSpec/Blueprints may be cached and reused.
+
+Cache design must distinguish:
+- exact/canonical prompt cache;
+- semantic/canonical-intent reuse;
+- published Blueprint reuse.
+
+Cache entries should be bound to schema version, component registry version and policy/security status. Cache reuse must never bypass validation/security checks.
+
+Proposed single-digit/millisecond cache-hit latency is a target, not a guarantee.
+
+### 15.7 Cold Compilation UX
+During first-time generation, Experience Shell may immediately show a lightweight skeleton/loading state and then hydrate the resulting WidgetSpec into the executable card.
+
+UX principle:
+> **不要假裝 0 秒；讓等待期間仍有明確、可理解的產品回饋。**
+
+### 15.8 Deployment Implication
+Compilation and runtime distribution remain separate from application deployment:
+
+**Compile Once → Reuse Many → Execute Locally**
+
+The platform should continue to represent new Micro-Apps primarily as declarative specs/data rather than newly deployed application code.
