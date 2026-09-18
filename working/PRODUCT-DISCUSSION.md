@@ -352,3 +352,105 @@ Layer 4 可提供類似 spreadsheet 的**通用資料運算 primitives**，例�
    Layer 2/3 決定合法的 fallback contract；Layer 4 只忠實執行與呈現。這能維持「Layer 4 無語意、無業務決策」的乾淨邊界。
 
 **Working status:** 本節全部仍屬 working material，尚未成為官方 SSOT。
+
+
+### Error Handling & System Recovery — Working
+
+**目標：** NodeFF 的錯誤處理不是單一「Error Page」，而是依錯誤發生階段採取不同的 recovery strategy，並盡量維持使用者流程不中斷。
+
+#### 1. Four Major Error Scenarios
+
+| Error Scenario | Cause |
+|---|---|
+| **Error in Making（生成階段失敗）** | LLM 輸出破損 JSON、連線 timeout、或輸出未通過 NFF Primitive / Schema validation。 |
+| **Made but Error in Request（生成成功但意圖不符）** | JSON 合法，但生成結果與使用者原始意圖不一致，例如要求 6 顆骰子加倍，卻產生 4 顆一般骰子。 |
+| **Made but Run Error（生成成功但執行崩潰）** | 初次 render 正常，但互動後發生 runtime exception，例如除以零、undefined / NaN、或狀態流程進入無效狀態。 |
+| **System Recovery Pipeline（跨層錯誤）** | 錯誤跨越 generation、validation、runtime 等多個階段，需要連續 recovery / telemetry。 |
+
+#### 2. System Recovery Pipeline
+
+Working flow：
+
+```
+[User Request / Interaction]
+        │
+        ├── (1) Generation failure?
+        │       └──► Edge/Compiler Retry
+        │                 └── failure
+        │                       └──► Generic Base Spec / Safe Fallback
+        │
+        ├── (2) Intent mismatch?
+        │       └──► User Micro-Refinement
+        │                 └──► LLM Delta Patch
+        │
+        └── (3) Runtime failure?
+                └──► Layer 4 Error Boundary
+                          └──► Local Component Fallback
+                                    └──► Telemetry + Invalid Mark
+```
+
+**核心原則：**
+- Generation error → 修復「藍圖」。
+- Intent mismatch → 修復「藍圖與使用者意圖的差集」。
+- Runtime error → 隔離「壞掉的元件」，不要讓整張 micro-app 崩潰。
+- Recovery 失敗 → 提供安全、可理解的 fallback，而不是 White Screen。
+
+#### 3. Client-Side Error Boundary
+
+Layer 4 的每個可執行 Primitive 應有局部錯誤隔離能力。
+
+若某個 component 的 expression / runtime logic 發生 exception：
+- 該 component 顯示安全的錯誤狀態，例如「運算異常，已恢復預設值」。
+- 不應直接造成整張 card / micro-app White Screen。
+- 不應影響同一 PartyKit room 的其他 UI 或多人 session。
+
+這與 Layer 3 Schema Validation 的責任不同：
+- **Layer 3：** 阻止 invalid contract 進入 runtime。
+- **Layer 4：** 防止合法 contract 在實際執行時的 exception 擴散。
+
+#### 4. Algorithmic Downgrade / Invalid Blueprint Handling
+
+Working proposal：
+
+- 若同一 Blueprint 在 Client Runtime 持續觸發 execution error，可將其標記為 invalid / unhealthy。
+- 原始材料提出「超過 2 次即降權 / Unpublish」作為候選策略。
+- 這個 **2 次門檻目前不應視為正式規格**；正式設計需要再決定計數方式、時間窗口、去重方式、是否以版本為單位，以及 false-positive protection。
+- Unpublish / Common Pool 的具體資料模型與權限邏輯，後續應在詳細設計補齊。
+
+#### 5. Graceful Degradation
+
+對使用者而言，系統應盡可能維持「仍然可以完成事情」：
+
+**特殊能力失敗 → 標準 UI fallback → 核心資料 / session 能力繼續運作。**
+
+例如：
+- 特殊動畫失敗 → fallback 到標準按鈕 / 選單。
+- 單一計算元件失敗 → 該區塊顯示安全狀態，不影響其他元件。
+- 整張 Blueprint 無法安全執行 → 回到 Generic Base Spec / Safe Fallback。
+
+**UX principle：**
+> **不中斷流程，但不隱瞞錯誤。**
+
+#### 6. Telemetry / Recovery Observability
+
+每次 recovery 都應留下最小必要的 telemetry event，以便後續定位壞 Blueprint 與改善生成品質。
+
+Working event categories：
+- generation_failed
+- validation_failed
+- intent_refinement
+- runtime_component_error
+- blueprint_degraded
+- fallback_rendered
+
+Telemetry 不應記錄不必要的敏感使用者資料；正式 Privacy / Security Design 再定義 retention、sampling、PII handling 與 access control。
+
+#### 7. Important Design Suggestions
+
+1. **不要把「Self-Healing」理解成系統可以任意修改自己的程式。** NodeFF 的 recovery 應是受控的 retry、delta patch、fallback、component isolation 與 blueprint quarantine，而不是 runtime 自我生成 / 執行任意 code。
+2. **Error Recovery 必須有上限。** Retry / Delta Patch 不應無限循環；正式設計需要定義 retry budget / circuit breaker。
+3. **Intent mismatch 最好保留使用者控制權。** 系統可以提供 refinement suggestion，但不應偷偷修改使用者需求後直接替換結果。
+4. **「2 次即 Unpublish」先保留為候選，不升格為硬規則。** Client error 次數本身可能受到瀏覽器、網路或 transient failure 影響。
+5. **Recovery outcome 要可觀測。** 否則「降級成功」與「其實一直壞」在營運上無法區分。
+
+**Working status:** 本節全部仍屬 working material，尚未成為官方 SSOT。
