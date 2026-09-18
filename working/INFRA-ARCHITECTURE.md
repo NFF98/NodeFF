@@ -1,28 +1,28 @@
-# NodeFF Infrastructure Architecture
+# NodeFF 基礎設施架構
 
-> Status: Working. Not authoritative until promoted through the NodeFF SSOT process.
+> 狀態：Working。除非依 NodeFF SSOT 流程正式升格，否則不具權威性。
 
-## 1. Infrastructure Mission
+## 1. 基礎設施使命
 
-NodeFF infrastructure supports a **client-first, edge-assisted control plane**.
+NodeFF Infrastructure 採用 **client-first、edge-assisted 的 Control Plane**。
 
-It is responsible for:
-- request routing;
-- semantic compilation;
-- Blueprint validation/distribution;
-- identity/quota;
-- lightweight persistence;
-- realtime coordination;
-- telemetry;
-- external-capability orchestration.
+負責：
+- request routing；
+- semantic compilation；
+- Blueprint validation／distribution；
+- identity／quota；
+- lightweight persistence；
+- realtime coordination；
+- telemetry；
+- external capability orchestration。
 
-It is not intended to become the default execution plane for every interaction or heavy workload.
+它不是每次互動與所有 heavy workload 的預設 execution plane。
 
-> **NFF is a lightweight Control Plane, not a Heavy Compute Plane.**
+> **NFF 是 Lightweight Control Plane，不是 Heavy Compute Plane。**
 
 ---
 
-## 2. Logical Topology
+## 2. 邏輯拓撲
 
 ```text
 Browser
@@ -49,9 +49,9 @@ NFF Edge / API Boundary
 
 ---
 
-## 3. Cold Path and Warm Path
+## 3. Cold Path 與 Warm Path
 
-### Cold Path — New or Semantically Changed Intent
+### Cold Path — 新 Intent 或語意已變更
 
 ```text
 Intent
@@ -65,9 +65,9 @@ Intent
  → Return to Client
 ```
 
-The cold path contains model/provider latency and compiler cost.
+Cold Path 包含 model／provider latency 與 compiler cost。
 
-### Warm Path — Existing Blueprint
+### Warm Path — 既有 Blueprint
 
 ```text
 Reference / Snapshot
@@ -77,56 +77,56 @@ Reference / Snapshot
  → Execute Locally
 ```
 
-Warm execution does not invoke the LLM merely to open or interact with an existing valid artifact.
+Warm execution 不應只因「開啟／互動既有有效 artifact」而呼叫 LLM。
 
 ---
 
-## 4. Compiler Service Boundary
+## 4. Compiler Service 邊界
 
-All production model compilation passes through an NFF-controlled endpoint.
+Production 環境的所有 model compilation 都必須經過 NFF 控制的 endpoint。
 
-Responsibilities:
-- provider credentials;
-- anonymous/account quota;
-- rate limiting;
-- abuse/policy gate;
-- model routing;
-- versioned Capability Registry context;
-- schema/rule version selection;
-- timeout/token budgets;
-- repair policy;
-- cost/latency telemetry;
-- trusted-admission validation.
+責任：
+- provider credentials；
+- anonymous／account quota；
+- rate limiting；
+- abuse／policy gate；
+- model routing；
+- versioned Capability Registry context；
+- schema／rule version selection；
+- timeout／token budget；
+- repair policy；
+- cost／latency telemetry；
+- trusted-admission validation。
 
-Provider secrets never ship in browser-visible environment variables.
+Provider secret 永遠不得進入 browser-visible environment variables。
 
-The compiler service exposes an NFF-owned interface so model vendors remain replaceable.
+Compiler service 必須提供 NFF 自有介面，讓 model vendor 可以替換。
 
 ---
 
 ## 5. Compiler Context
 
-The compiler receives a versioned capability snapshot generated from the Capability Registry.
+Compiler 接收由 Capability Registry 產生的版本化 capability snapshot。
 
-Do not hand-maintain a second primitive whitelist in the System Prompt.
+不得再人工維護第二份 primitive whitelist 於 System Prompt。
 
-Compiler context should identify:
-- available primitives;
-- allowed props;
-- state contracts;
-- actions/events;
-- Rule VM operators;
-- capability limits;
-- degradation rules;
-- schema/runtime version.
+Compiler context 應包含：
+- available primitives；
+- allowed props；
+- state contracts；
+- actions／events；
+- Rule VM operators；
+- capability limits；
+- degradation rules；
+- schema／runtime version。
 
-A compilation request sees a fixed capability snapshot even while the platform evolves over time.
+每次 compilation request 都使用固定版本的 capability snapshot，即使平台本身持續演進。
 
 ---
 
-## 6. Validation and Trust Admission
+## 6. Validation 與 Trust Admission
 
-Trusted Blueprint admission path:
+Trusted Blueprint 的 admission path：
 
 ```text
 Candidate
@@ -143,23 +143,23 @@ Candidate
  → Registry Trust State
 ```
 
-A schema-valid candidate is not automatically trusted.
+Schema-valid candidate 不等於 trusted。
 
-Possible registry states:
-- untrusted;
-- validating;
-- trusted;
-- degraded;
-- quarantined;
-- deprecated.
+可能的 registry state：
+- untrusted；
+- validating；
+- trusted；
+- degraded；
+- quarantined；
+- deprecated。
 
-A cache hit cannot bypass the gates appropriate to the artifact's trust/version state.
+Cache hit 不得繞過與該 artifact trust／version 狀態相對應的檢查。
 
 ---
 
-## 7. Repair and Retry
+## 7. Repair 與 Retry
 
-Structural or contract failures may enter a bounded repair loop:
+Structural／contract failure 可進入有界 repair loop：
 
 ```text
 Validation Failure
@@ -168,23 +168,23 @@ Validation Failure
  → full revalidation
 ```
 
-Policy defines:
-- retryable error classes;
-- maximum attempts;
-- token/time budget;
-- circuit breaker;
-- provider fallback if allowed;
-- telemetry.
+Policy 必須定義：
+- retryable error classes；
+- maximum attempts；
+- token／time budget；
+- circuit breaker；
+- 如允許時的 provider fallback；
+- telemetry。
 
-Semantic mismatch is different from malformed output. It may require user refinement rather than automatic retry.
+Semantic mismatch 與 malformed output 不同；前者可能需要使用者 refinement，而不是 blind retry。
 
-Never expose secrets or unsafe internal payloads in repair prompts.
+Repair prompt 不得包含 secret 或不安全的 internal payload。
 
 ---
 
-## 8. Blueprint Registry and Content Addressing
+## 8. Blueprint Registry 與 Content Addressing
 
-Validated immutable Blueprint content may be stored in a content-addressable Common Pool.
+經驗證的 immutable Blueprint content 可進入 content-addressable Common Pool。
 
 ```text
 Validated Blueprint
@@ -195,82 +195,83 @@ Validated Blueprint
  → edge/cache distribution
 ```
 
-Store separately:
-- content object;
-- logical Blueprint identity;
-- lineage/revision;
-- trust/policy metadata;
-- user ownership/save pointer;
-- Instance state.
+必須分離保存：
+- content object；
+- logical Blueprint identity；
+- lineage／revision；
+- trust／policy metadata；
+- user ownership／save pointer；
+- Instance state。
 
-Hash possession is not authorization.
+知道 hash 不等於具有 authorization。
 
-Private/unpublished artifact access requires independent authorization.
+Private／unpublished artifact 仍需要獨立存取控制。
 
 ---
 
 ## 9. Canonicalization
 
-Content hashing requires deterministic canonicalization.
+Content hash 必須建立在 deterministic canonicalization 之上。
 
-The canonicalization specification must define:
-- key ordering;
-- number representation;
-- omitted/default fields;
-- Unicode normalization if relevant;
-- schema version;
-- digest algorithm/version.
+Canonicalization spec 必須定義：
+- key ordering；
+- number representation；
+- omitted／default fields；
+- 必要時的 Unicode normalization；
+- schema version；
+- digest algorithm／version。
 
-Equivalent logical content must not accidentally produce different identities solely because of serialization formatting.
+邏輯上等價的內容，不應只因 JSON formatting 或 key ordering 不同而產生不同 identity。
 
 ---
 
 ## 10. Cache Architecture
 
-Three different cache/reuse concerns exist.
+存在三種不同問題：
 
 ### Exact Prompt Cache
-
-Fast reuse for identical or strictly canonicalized text.
+針對完全相同或嚴格 canonicalized text 的快速 reuse。
 
 ### Canonical-Intent / Semantic Reuse
-
-Finds a likely trusted Blueprint family for semantically similar intent.
+尋找語意上可能符合的 trusted Blueprint family。
 
 ### Blueprint Content Cache
+依 immutable content hash 做精確 retrieval。
 
-Exact retrieval by immutable content hash.
+三種 key 不可混用。
 
-These keys are not interchangeable.
+「去標點／空格後做 Prompt SHA-256」最多只是 exact-cache optimization，不是 semantic identity。
 
-A punctuation/whitespace-stripped Prompt SHA-256 is at most an exact-cache optimization. It is not a semantic identity.
-
-Cache metadata includes:
-- schema version;
-- Registry version;
-- Runtime compatibility;
-- policy/security status;
-- trust/quality status.
+Cache metadata 至少需要：
+- schema version；
+- Registry version；
+- Runtime compatibility；
+- policy／security status；
+- trust／quality status。
 
 ---
 
-## 11. Cache Poisoning Defense
+## 11. Cache Poisoning 防禦
 
-A Blueprint may pass schema validation yet be semantically wrong.
+Blueprint 可能：
+- syntax valid；
+- schema valid；
+- runtime renderable；
+- 但 semantic wrong。
 
-Therefore:
-- trusted Common Pool admission includes quality status beyond shape validation;
-- semantic mismatch reports affect reuse confidence;
-- unhealthy versions may be quarantined/deprioritized;
-- remediation produces a new validated revision rather than mutating immutable content.
+因此：
+- Trusted Common Pool admission 必須包含 shape 之外的 quality status；
+- semantic mismatch report 會影響 reuse confidence；
+- unhealthy version 可被 quarantine／deprioritize；
+- 修復後產生新 revision，不修改 immutable content。
 
-The system must not amplify a wrong Blueprint globally simply because it is cheap to reuse.
+系統不能只因一份 Blueprint 很便宜可 reuse，就把錯誤大規模放大。
 
 ---
 
 ## 12. Portable Snapshot Transport
 
-Suitable only for small, non-sensitive snapshots.
+只適用於小型、非敏感 snapshot。
 
 ```text
 Canonical Snapshot
@@ -282,35 +283,35 @@ Canonical Snapshot
  → hydrate
 ```
 
-Controls:
-- maximum encoded size;
-- maximum decoded size;
-- decompression limits;
-- sensitive-field exclusion;
-- integrity/version checks where required.
+控制：
+- maximum encoded size；
+- maximum decoded size；
+- decompression limits；
+- sensitive-field exclusion；
+- 必要時的 integrity／version checks。
 
-Compression does not provide confidentiality.
+Compression 不提供 confidentiality。
 
-URL Hash is a transport mechanism, not authoritative persistence.
+URL Hash 是 transport，不是 authoritative persistence。
 
 ---
 
 ## 13. Durable Reference Path
 
-Use a short-link/backend reference when:
-- payload is too large;
-- stable identity is required;
-- access control is required;
-- durable ownership/history is required;
-- sensitive data must not travel in the URL.
+以下情況使用 short-link／backend reference：
+- payload 太大；
+- 需要 stable identity；
+- 需要 access control；
+- 需要 durable ownership／history；
+- sensitive data 不應出現在 URL。
 
-The short reference resolves to authorized server-side metadata/content references; it does not imply mutable Blueprint blobs.
+Short reference 解析到受授權的 server-side metadata／content reference，不代表 Blueprint blob 本身可變。
 
 ---
 
-## 14. Realtime Rooms
+## 14. Realtime Room
 
-Realtime is optional, not the default execution model.
+Realtime 是選用能力，不是預設 execution model。
 
 ```text
 Immutable Blueprint Reference
@@ -319,24 +320,24 @@ Immutable Blueprint Reference
  + Ordered Validated Deltas
 ```
 
-The provider stays behind an adapter.
+Provider 必須藏在 adapter 後方。
 
-The protocol must define:
-- room identity;
-- presence;
-- join/reconnect;
-- ordering;
-- deduplication;
-- conflict handling;
-- state snapshot/recovery;
-- idle TTL;
-- participant limits;
-- rate limits;
-- abuse controls.
+Protocol 必須定義：
+- room identity；
+- presence；
+- join／reconnect；
+- ordering；
+- deduplication；
+- conflict handling；
+- state snapshot／recovery；
+- idle TTL；
+- participant limits；
+- rate limits；
+- abuse controls。
 
-No "0ms sync" guarantee is assumed.
+不假設 literal「0ms sync」。
 
-Ephemeral room chat may share the same realtime boundary. Long-lived Discord/Telegram-style history, background notifications and durable messaging are outside the NFF core unless explicitly added as a separate capability.
+Ephemeral room chat 可以共用 realtime boundary。Discord／Telegram 型長期歷史、background notification、durable messaging 不屬於 NFF core，除非未來另行定義成獨立 capability。
 
 ---
 
@@ -344,12 +345,12 @@ Ephemeral room chat may share the same realtime boundary. Long-lived Discord/Tel
 
 ### Browser Compute
 
-Use Web Workers, WASM or browser-native compute when appropriate.
+適合時使用 Web Workers、WASM 或 browser-native compute。
 
-NFF provides:
-- parameters;
-- progress;
-- result visualization.
+NFF 負責：
+- parameters；
+- progress；
+- result visualization。
 
 ### External Job
 
@@ -362,128 +363,128 @@ NFF Action
  → Player presentation
 ```
 
-Used for:
-- heavy AI;
-- media generation;
-- long-running processing;
-- large database queries;
-- specialized compute.
+用於：
+- heavy AI；
+- media generation；
+- long-running processing；
+- large database query；
+- specialized compute。
 
 ### Durable Large Data
 
-Large durable datasets remain in suitable external/backend storage. NFF keeps controlled references, permissions and presentation logic.
+大型長期資料應放在適合的 external／backend storage。NFF 僅保存必要的 controlled reference、permission 與 presentation logic。
 
 ---
 
 ## 16. Runtime Rule VM
 
-Preferred infrastructure contract:
-- typed Rule AST;
-- explicit operator/function registry;
-- deterministic evaluation semantics;
-- versioned grammar;
-- execution step/size limits;
-- no host-object access;
-- no arbitrary property traversal;
-- no arbitrary code.
+較佳 infrastructure contract：
+- typed Rule AST；
+- explicit operator／function registry；
+- deterministic evaluation semantics；
+- versioned grammar；
+- execution step／size limits；
+- no host-object access；
+- no arbitrary property traversal；
+- no arbitrary code。
 
-An expression library such as `expr-eval` is acceptable only if it satisfies the NFF threat model. "Not eval()" is not a security proof.
+若考慮 `expr-eval` 等 expression library，必須先滿足 NFF threat model。「不是 eval」不是安全證明。
 
-Threat model includes:
-- exposed functions/operators;
-- property/prototype escape;
-- recursion;
-- CPU exhaustion;
-- memory exhaustion;
-- oversized collections;
-- non-determinism.
-
----
-
-## 17. Patch and Delta Security
-
-Runtime state patches require:
-- allowlisted operations;
-- allowlisted mutable paths;
-- type validation;
-- resulting-state validation;
-- maximum operation count;
-- maximum payload size.
-
-Runtime patches cannot alter:
-- schema;
-- capability declarations;
-- ownership;
-- trust metadata;
-- protected Blueprint fields.
-
-Semantic Blueprint refinement runs through the compiler/validation path and creates a new content identity where content changes.
+Threat model 包含：
+- exposed functions／operators；
+- property／prototype escape；
+- recursion；
+- CPU exhaustion；
+- memory exhaustion；
+- oversized collections；
+- non-determinism。
 
 ---
 
-## 18. External Asset Boundary
+## 17. Patch 與 Delta Security
 
-Remote 3D, Lottie, video or other media is untrusted external content.
+Runtime state patch 必須具備：
+- allowlisted operations；
+- allowlisted mutable paths；
+- type validation；
+- resulting-state validation；
+- maximum operation count；
+- maximum payload size。
 
-Controls may include:
-- allowed schemes/origins;
-- CSP;
-- MIME/content checks;
-- size limits;
-- redirect rules;
-- privacy/tracking restrictions;
-- optional proxy/cache;
-- timeout/fallback behavior.
+Runtime patch 不得修改：
+- schema；
+- capability declaration；
+- ownership；
+- trust metadata；
+- protected Blueprint fields。
 
-A syntactically valid URL is not sufficient validation.
+Semantic Blueprint refinement 必須經過 Compiler／Validation path；只要 content 改變，就產生新的 content identity。
+
+---
+
+## 18. External Asset 邊界
+
+Remote 3D、Lottie、Video 等 media 都是 untrusted external content。
+
+控制可能包括：
+- allowed schemes／origins；
+- CSP；
+- MIME／content checks；
+- size limits；
+- redirect rules；
+- privacy／tracking restrictions；
+- optional proxy／cache；
+- timeout／fallback behavior。
+
+單純通過 `url()` 格式驗證不足以代表安全。
 
 ---
 
 ## 19. Resource Budgets
 
-Schema-valid payloads can still exhaust the runtime.
+Schema-valid payload 仍可能造成 Runtime resource exhaustion。
 
-Set explicit budgets for:
-- Blueprint bytes;
-- decoded snapshot bytes;
-- component nodes;
-- nesting depth;
-- Repeater expansion;
-- Rule AST nodes;
-- evaluation steps;
-- state size;
-- patch operations;
-- media count;
-- external asset size.
+必須為下列項目設定明確 budget：
+- Blueprint bytes；
+- decoded snapshot bytes；
+- component nodes；
+- nesting depth；
+- Repeater expansion；
+- Rule AST nodes；
+- evaluation steps；
+- state size；
+- patch operations；
+- media count；
+- external asset size。
 
-Resource-budget violations fail closed or degrade according to contract policy.
-
----
-
-## 20. Determinism and Replay Metadata
-
-Exact replay may require:
-- content hash;
-- schema version;
-- Runtime version;
-- capability versions;
-- Rule VM version;
-- initial state;
-- RNG seed/outcome log;
-- ordered actions/deltas;
-- external-data snapshot/version.
-
-Content addressing alone does not guarantee replay equivalence across environment/version changes.
+超過 resource budget 時應 fail closed，或依 contract policy 明確降級。
 
 ---
 
-## 21. Identity and Progressive Auth Infrastructure
+## 20. Determinism 與 Replay Metadata
 
-Default consumer path:
-- no mandatory registration;
-- privacy-conscious first-party `anonymous_id` where continuity is needed.
+精確 replay 可能需要：
+- content hash；
+- schema version；
+- Runtime version；
+- capability versions；
+- Rule VM version；
+- initial state；
+- RNG seed／outcome log；
+- ordered actions／deltas；
+- external-data snapshot／version。
 
-Authentication is introduced for durable account-bound value.
+Content addressing 本身無法保證跨 Runtime／環境版本的 replay equivalence。
+
+---
+
+## 21. Identity 與 Progressive Auth Infrastructure
+
+預設 Consumer path：
+- 不強制註冊；
+- 需要 continuity 時使用 privacy-conscious first-party `anonymous_id`。
+
+只有 durable account-bound value 才導入 authentication。
 
 ```text
 anonymous_id
@@ -494,148 +495,147 @@ anonymous_id
  → associate/migrate eligible records
 ```
 
-Possession of a public/shared link is not sufficient proof of ownership.
+持有 public／shared link 不足以證明 ownership。
 
-Device fingerprinting is not the default identity mechanism.
+Device fingerprinting 不作為預設 identity mechanism。
 
 ---
 
 ## 22. Data Placement
 
 ### Browser
-- transient UI state;
-- normal Instance state;
-- cached trusted Blueprint;
-- local recovery state.
+- transient UI state；
+- 一般 Instance state；
+- cached trusted Blueprint；
+- local recovery state。
 
 ### Share Transport
-- explicitly shareable, non-sensitive snapshot/context.
+- 明確可分享、非敏感的 snapshot／context。
 
 ### Ephemeral Backend
-- room state;
-- presence;
-- live deltas;
-- short-lived job/session coordination.
+- room state；
+- presence；
+- live deltas；
+- short-lived job／session coordination。
 
 ### Durable Backend
-- accounts;
-- ownership/save pointers;
-- publishing metadata;
-- quota/billing;
-- history where required;
-- commerce;
-- trusted registry metadata;
-- protected references.
+- accounts；
+- ownership／save pointers；
+- publishing metadata；
+- quota／billing；
+- 必要時的 history；
+- commerce；
+- trusted registry metadata；
+- protected references。
 
 ### Never Client-Exposed
-- provider secrets;
-- privileged credentials;
-- signing keys.
+- provider secrets；
+- privileged credentials；
+- signing keys。
 
-LocalStorage is local recovery convenience, not authoritative persistence.
+LocalStorage 只是 local recovery convenience，不是 authoritative persistence。
 
 ---
 
-## 23. Telemetry and Reliability Signals
+## 23. Telemetry 與 Reliability Signals
 
-Core events include:
-- compilation started/completed/failed;
-- validation failure;
-- semantic mismatch;
-- unsupported semantics;
-- repair attempted/failed/succeeded;
-- wrong composition/archetype;
-- runtime component error;
-- degraded/fallback render;
-- Blueprint opened;
-- Blueprint remixed;
-- share opened;
-- capability invoked.
+核心 events 包括：
+- compilation started／completed／failed；
+- validation failure；
+- semantic mismatch；
+- unsupported semantics；
+- repair attempted／failed／succeeded；
+- wrong composition／archetype；
+- runtime component error；
+- degraded／fallback render；
+- Blueprint opened；
+- Blueprint remixed；
+- share opened；
+- capability invoked。
 
-Separate:
-- render success;
-- runtime success;
-- task-success proxy;
-- user correction/refinement.
+必須區分：
+- render success；
+- runtime success；
+- task-success proxy；
+- user correction／refinement。
 
-Telemetry collection requires explicit privacy, retention and reuse governance.
+Telemetry 必須另有 privacy、retention 與 reuse governance。
 
 ---
 
 ## 24. Security Invariants
 
-1. No provider secret in browser code.
-2. No arbitrary Blueprint JavaScript.
-3. No `eval()` or `new Function()`.
-4. JSON is data transport, not automatically a sandbox.
-5. Only registered components/operators/actions execute.
-6. Remote content is constrained.
-7. Untrusted boundaries revalidate.
-8. Resource budgets are enforced.
-9. Cache cannot bypass policy/trust checks.
-10. Hash is not authorization.
-11. Compression is not encryption.
-12. Unknown capabilities fail closed.
-13. Error Boundary is defense-in-depth, not validation.
-14. Semantic trust is distinct from schema validity.
+1. Browser code 不得包含 provider secret。
+2. Blueprint 不得包含任意 JavaScript。
+3. 不使用 `eval()` 或 `new Function()`。
+4. JSON 是資料 transport，不自動等於 sandbox。
+5. 只有 registered component／operator／action 可以執行。
+6. Remote content 必須受限制。
+7. Untrusted boundary 需要重新 validation。
+8. Resource budget 必須執行。
+9. Cache 不得繞過 policy／trust checks。
+10. Hash 不等於 authorization。
+11. Compression 不等於 encryption。
+12. Unknown capability 必須 fail closed。
+13. Error Boundary 是 defense-in-depth，不是主要 validation。
+14. Semantic trust 與 schema validity 必須分離。
 
 ---
 
 ## 25. Vendor Abstraction
 
-Discussed candidates include:
-- Vercel / Cloudflare;
-- Supabase;
-- PartyKit;
-- OpenAI / Anthropic / DeepSeek / Groq or other model providers;
-- Zod;
-- Zustand;
-- React;
-- `lz-string`;
-- `expr-eval`.
+已討論候選包括：
+- Vercel／Cloudflare；
+- Supabase；
+- PartyKit；
+- OpenAI／Anthropic／DeepSeek／Groq 或其他 model provider；
+- Zod；
+- Zustand；
+- React；
+- `lz-string`；
+- `expr-eval`。
 
-None is an architectural dependency until explicitly approved. Provider-specific behavior, pricing and quota must remain outside core protocol semantics.
-
----
-
-## 26. Performance and Cost Claims
-
-The following remain measurement targets or hypotheses unless benchmarked:
-- 0ms local interaction;
-- sub-5ms/sub-10ms cache;
-- 1ms validation;
-- 90% cost reduction;
-- zero marginal cost;
-- 100% sandbox safety;
-- 99.9% structured correctness;
-- fixed free-room limits;
-- exact generation latency;
-- exact provider unit economics.
-
-Performance requirements should eventually be expressed as measured SLOs with:
-- workload;
-- region;
-- payload size;
-- percentile;
-- provider/configuration;
-- test methodology.
+未經明確批准，任何一項都不是架構依賴。Provider-specific behavior、pricing、quota 不得進入核心 protocol semantics。
 
 ---
 
-## 27. Decisions Still Open
+## 26. Performance 與 Cost Claims
 
-- hosting/edge provider;
-- model adapter implementation;
-- realtime provider/protocol;
-- durable store/object store;
-- CAS canonicalization/digest;
-- Registry persistence/distribution;
-- Rule VM implementation;
-- retry/circuit-breaker policy;
-- trust/admission scoring;
-- URL snapshot size threshold;
-- media proxy/source policy;
-- room limits/TTL;
-- privacy/telemetry retention;
-- private Blueprint authorization model.
+以下在 benchmark 前都只是 measurement target／hypothesis：
+- 0ms local interaction；
+- sub-5ms／sub-10ms cache；
+- 1ms validation；
+- 90% cost reduction；
+- zero marginal cost；
+- 100% sandbox safety；
+- 99.9% structured correctness；
+- fixed free-room limits；
+- exact generation latency；
+- exact provider unit economics。
 
+未來 Performance requirement 應使用可測量的 SLO，並明確標示：
+- workload；
+- region；
+- payload size；
+- percentile；
+- provider／configuration；
+- test methodology。
+
+---
+
+## 27. 尚未決定的 Infrastructure 項目
+
+- hosting／edge provider；
+- model adapter implementation；
+- realtime provider／protocol；
+- durable store／object store；
+- CAS canonicalization／digest；
+- Registry persistence／distribution；
+- Rule VM implementation；
+- retry／circuit-breaker policy；
+- trust／admission scoring；
+- URL snapshot size threshold；
+- media proxy／source policy；
+- room limits／TTL；
+- privacy／telemetry retention；
+- private Blueprint authorization model。
