@@ -454,3 +454,20 @@ Telemetry 不應記錄不必要的敏感使用者資料；正式 Privacy / Secur
 5. **Recovery outcome 要可觀測。** 否則「降級成功」與「其實一直壞」在營運上無法區分。
 
 **Working status:** 本節全部仍屬 working material，尚未成為官方 SSOT。
+
+
+### Detailed App Design Inputs — Latest Working Discussion
+
+The latest discussion adds these concepts to the system-design workout:
+- **Product identity:** Dynamic UI Runtime Engine + Intent-to-UI Protocol.
+- **Dual persistence:** Template/Blueprint versus filled Instance Snapshot.
+- **State preservation:** restore valid state without LLM recompilation; LocalStorage and URL hash are mechanisms, not absolute guarantees.
+- **App-to-App composition:** Universal Context Payload (`summary`, `rawText`, `structuredData` are current candidates) moves approved output from App A to a user-selected App B.
+- **Experience Shell:** Inspiration Capsules are creation scaffolds using Fork & Remix, Ghost Text and Progressive Refinement.
+- **Infrastructure alignment:** edge-first/client-first is a strategy, not a guarantee of nearest-node execution or 3-second generation.
+- **Implementation candidates:** Cursor + GitHub + managed serverless hosting + candidate Supabase persistence; vendor choices remain open.
+
+**New working architectural principle:**
+> **Blueprint defines reusable capability; Instance defines current reality; Context connects one micro-app to the next.**
+
+These should become first-class concepts in later data-model and API design rather than being mixed into one generic “app” object.
