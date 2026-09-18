@@ -348,3 +348,59 @@ Do not collapse these into one "$0" claim:
 - observability.
 
 They are separate cost dimensions and should be measured separately before formal pricing/SLO decisions.
+
+
+## 16. Anonymous Identity / Metrics / Cache Economics — Working
+
+### 16.1 Anonymous-first Infrastructure
+Avoid creating durable account/DB records for every participant by default. Candidate anonymous continuity uses a random first-party browser identifier plus aggregate telemetry.
+
+Do not assume anonymous mode is literally $0: analytics ingestion, edge requests, bandwidth, abuse controls and observability can still incur cost.
+
+Device fingerprinting is not a default architecture choice because it can create privacy/compliance risk. Prefer first-party random identifiers with clear retention/deletion rules.
+
+### 16.2 Progressive Auth Infrastructure
+Persistent identity services become necessary when users request:
+- durable ownership/editing;
+- cross-device history;
+- paid quota/billing;
+- publishing/monetization;
+- persistent statistics or other account-bound data.
+
+Candidate promotion flow:
+`anonymous session → authenticated account → secure artifact claim/migration`
+
+Claim tokens/ownership proofs and replay protections need detailed design.
+
+### 16.3 Measurement Semantics
+Track anonymous browser/device cohorts separately from authenticated user cohorts.
+
+Candidate events/dimensions:
+- anonymous_id / account_id where applicable;
+- create, open, execute, share, remix;
+- anonymous_to_registered conversion;
+- cohort return;
+- cache hit/miss;
+- compiler invocation;
+- runtime-AI invocation.
+
+Anonymous IDs must not be presented as exact human-user counts.
+
+### 16.4 LLM Cost Boundary
+For a verified compiled Blueprint:
+- open/share/hydrate → no LLM required;
+- deterministic runtime actions → no LLM required;
+- cache/registry hit → no LLM required;
+- semantic contract change/cache miss/retry/runtime-AI capability → may require LLM.
+
+Thus the cost model should measure **LLM calls per successful compilation/version**, not assume “one LLM call forever.”
+
+### 16.5 Cache Persistence
+Blueprint reuse requires a durable-enough cache/registry strategy. URL embedding can distribute a specific artifact, but global reuse/search requires an indexed cache/registry.
+
+Cache lifecycle must define:
+- version compatibility;
+- TTL/eviction;
+- validation/security status;
+- semantic equivalence confidence;
+- invalidation after runtime/schema/policy changes.
