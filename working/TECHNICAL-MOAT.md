@@ -154,3 +154,15 @@ High-value failure labels include:
 The moat is not “using an LLM.” It may emerge from a proprietary reliability graph showing which intent structures compile into which Blueprint families, where they fail, how users correct them, and which repaired descendants subsequently execute successfully.
 
 Guardrail: failure/telemetry collection must follow explicit privacy, retention and data-governance rules; anonymous usage does not mean unrestricted training-data rights.
+
+
+## 10. Assumption-to-Interactive-Model Graph — Working Addition
+The weighted social-distribution example suggests another useful data layer:
+
+`Fuzzy Intent → Explicit Assumptions → Declarative Model → User Adjustments → Outcome/Reuse`
+
+Potential learning value comes from observing which assumptions users keep, change or reject, and which declarative models are repeatedly reused/remixed.
+
+This can improve future compiler behavior without hard-coding social heuristics into the runtime.
+
+Important guardrail: the moat should come from validated interaction/reliability patterns, not from treating inferred social norms as universal truth.
