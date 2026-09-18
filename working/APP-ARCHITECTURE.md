@@ -119,3 +119,51 @@ Primitive error → Local Error Boundary → Component fallback → Telemetry �
 - commerce transaction boundary
 
 **Status：Working。**
+
+
+## 9. Detailed Application Design Inputs — Working
+
+### 9.1 Product Runtime Identity
+Current direction: NodeFF is not primarily an AI code generator. It is a **Dynamic UI Runtime Engine** and an **Intent-to-UI Protocol**. Natural language is compiled into declarative LegoSpec; the NodeFF runtime executes that controlled contract.
+
+### 9.2 Dual Persistence Model
+Separate two concepts:
+- **Template / Blueprint:** reusable micro-app definition used by Community/Gallery and Fork & Remix; may contain prompt/template, LegoSpec, metadata, version and remix/source relationship. It must not inherit private instance data.
+- **Instance Snapshot:** a specific execution state containing the current user-entered state plus the applicable LegoSpec/reference. Intended for exact sharing, resume and continuation. Candidate transport: URL hash, compressed payload, or short-link indirection when too large.
+
+Reload/share should restore a valid instance without requiring LLM recompilation merely to recover state.
+
+### 9.3 State Preservation Guardrail
+Desired behavior is **state preservation without recompilation**. Normal interaction updates local state; reload/resume hydrates recoverable state; sharing reproduces the shared instance state when its payload is valid and complete.
+
+Engineering correction: do not make “write to LocalStorage and URL Hash every millisecond” a hard requirement. Prefer debounced/batched persistence and canonical state serialization. Browser storage can be cleared or quota-limited, and URLs have practical size limits. The product goal is **deterministic state restoration**, not an absolute guarantee under every browser/storage failure. Sensitive data must not enter share URLs by default.
+
+### 9.4 App-to-App Context / Prompt Piping
+Support controlled composition between micro-apps:
+- App A produces a standard **Universal Context Payload**.
+- Candidate fields: `summary`, `rawText`, `structuredData`.
+- User selects a suggested next action such as “轉化為下一個工具”.
+- App B receives approved context as initial input/state.
+- Transport may use URL payload, local session state or approved backend/share reference.
+- Context transfer must be schema-controlled; arbitrary hidden data transfer is prohibited.
+
+Working flow: **App A result → Context Payload → user-selected next capability → App B hydration → continue task**.
+
+### 9.5 Experience Shell — Inspiration Capsule
+Treat Inspiration Capsules as **creation scaffolds**, not static demos: editable example prompt, variable highlighting, Ghost Text and Progressive Refinement. Desired learning progression: **copy → modify → combine → create from scratch**. UX principle: **先完成，再學會；不是先學會，才能完成。** Prefer outcome-led presentation while keeping the prompt editable underneath.
+
+### 9.6 Infrastructure-Aligned Application Flow
+Assume edge-first + client-first execution: edge handles gate/normalization/cache/routing where appropriate; compiler performs semantic generation; verified LegoSpec returns to browser; normal interaction stays client-side without repeated LLM calls; realtime is invoked only for shared live state; persistent backend is introduced only for durable needs such as ownership, history, publishing, quota and commerce.
+
+Latency guardrail: edge proximity can reduce network latency but cannot guarantee 3-second end-to-end generation. LLM inference, cold starts, provider latency and downstream services remain part of the total path. “3 seconds” is a product target/measurement, not an architectural guarantee.
+
+### 9.7 Development Workflow — Working
+Current workflow: **GitHub SSOT → Cursor executes → ChatGPT audits**. Cursor, GitHub, Supabase and managed edge/serverless hosting are candidate MVP tools/stack, not approved vendor decisions. Provider abstraction should preserve replaceability.
+
+## 10. Architecture Suggestions / Questions to Resolve
+1. Separate **Blueprint ID** from **Instance ID**.
+2. Define canonical state serialization for resume/share/remix.
+3. Define payload size thresholds: URL hash for small ephemeral state; short-link/backend indirection for large/stable state.
+4. Define context permissions: which output fields may leave App A.
+5. Treat edge as a deployment/execution strategy, not a promise that every operation runs at the nearest CDN node.
+6. Keep hosting, database and LLM providers replaceable.
