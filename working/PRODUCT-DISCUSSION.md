@@ -771,3 +771,52 @@ Once the validated model exists:
 `Slider/Preset → State Patch → Deterministic Rule Evaluation → Local UI Update`
 
 No LLM is required for these deterministic interactions.
+
+
+### Additional Working Detail — Cache, Sharing, Primitive Strategy
+
+#### Edge Cache Semantics
+Edge KV/edge cache is useful for reusing already-validated Blueprint references, but **raw normalized Prompt SHA-256 is not sufficient as the universal cache identity**.
+
+Separate:
+- `prompt_cache_key` / canonical-intent lookup = discovery/reuse hint;
+- `blueprint_content_hash` = immutable canonical Blueprint identity.
+
+Two prompts can mean the same thing while hashing differently; two superficially similar prompts can require different assumptions/state. Cache hits must remain schema/runtime/policy compatible.
+
+Claims such as “<10ms”, “90% cost reduction”, and “verified means no bugs” are targets/hypotheses, not guarantees.
+
+#### Three Sharing/Persistence Modes — Working
+1. **Portable URL snapshot** — small, non-sensitive Blueprint/Instance payloads may be compressed into URL hash.
+2. **Ephemeral live room** — Blueprint reference + room identity + mutable state/deltas.
+3. **Durable cloud reference** — persistent Blueprint/Instance/ownership metadata with progressive authentication where required.
+
+Guardrails:
+- URL size limits apply;
+- sensitive/private state is excluded from URL by default;
+- realtime latency is not literally 0ms;
+- room TTL/provider behavior is policy/configuration, not assumed;
+- durable Blueprint content should follow the Common Pool/Personal Pointer separation rather than blindly duplicating per-user Spec blobs.
+
+#### Three-Tier Primitive Strategy
+Working primitive strategy:
+- base controls/display;
+- higher-order interaction/party/decision primitives;
+- safe compositional fallback.
+
+The allowlist is an extensible capability surface, not a tiny permanent list and not permission for generated JS.
+
+Important correction:
+> **Fallback preserves supported capability; it must not fabricate unsupported semantics.**
+
+A 3D dice request may safely degrade visual fidelity to a supported Dice primitive if gameplay semantics remain valid. A specialized domain instrument cannot be reduced to Input→Math→Output unless the required domain transformation is actually known and supported.
+
+#### Domain Logic Functions
+Named runtime functions can be safer and more reliable than asking the model to synthesize complex expressions repeatedly.
+
+However, a function such as `CALCULATE_18_LA` is a **domain capability/plugin**, not generic Universal Player core logic.
+
+Working split:
+`Universal Runtime → approved Capability Registry → optional domain capability function`
+
+This preserves the rule that Layer 4 core remains generic.
