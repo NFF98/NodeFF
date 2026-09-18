@@ -166,3 +166,21 @@ Potential learning value comes from observing which assumptions users keep, chan
 This can improve future compiler behavior without hard-coding social heuristics into the runtime.
 
 Important guardrail: the moat should come from validated interaction/reliability patterns, not from treating inferred social norms as universal truth.
+
+
+## 11. Capability Registry as Compounding Platform Surface — Working Addition
+The extensible primitive/function registry can become strategically important when connected to compiler and runtime telemetry:
+
+`Capability added → compiler can discover it → Blueprints compose it → executions/failures measured → reuse/remix patterns learned`
+
+The moat is not the existence of a component map or plugin architecture; those are standard techniques.
+
+Potential defensibility comes from:
+- a well-designed capability ontology;
+- validated composition patterns;
+- intent→capability selection data;
+- compatibility/version history;
+- failure/fallback evidence;
+- high-performing reusable Blueprint families.
+
+This also creates a disciplined expansion loop: add capabilities because observed unsupported intents justify them, rather than continuously expanding the runtime based on isolated prompts.
