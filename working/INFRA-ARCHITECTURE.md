@@ -633,3 +633,43 @@ Use measurable SLO/benchmark language once providers, payload sizes, regions and
 JSON portability does not imply arbitrary payload safety. URL snapshots and realtime messages still require schema validation, authorization where relevant, size/rate limits and sanitization.
 
 Compression is not encryption.
+
+
+## 22. Rich Capability Runtime Security — Working
+
+### 22.1 External Asset Boundary
+Primitives loading remote 3D/Lottie/video assets expand the attack and cost surface. Detailed design must address:
+- allowed URL schemes/origins;
+- CSP;
+- MIME/content validation;
+- maximum asset size;
+- redirects;
+- tracking/privacy;
+- unavailable/malicious assets;
+- optional NFF media proxy/cache.
+
+### 22.2 Contract Complexity Limits
+Validate resource budgets in addition to schema shape:
+- node count;
+- recursive depth;
+- Repeater expansion;
+- expression/AST node count;
+- state payload size;
+- URL snapshot decoded size;
+- media count.
+
+### 22.3 Generic Rule Runtime
+If NFF moves from textual `expr-eval` expressions toward a typed Rule AST/VM, runtime infrastructure should version:
+- rule grammar;
+- function/operator registry;
+- evaluator version;
+- complexity limits;
+- deterministic behavior.
+
+This is a candidate architectural improvement, not yet approved.
+
+### 22.4 Deterministic Random Actions
+Dice/Wheel components should use a trusted runtime RNG action. If exact replay is required, capture seed/outcome/event metadata according to replay policy.
+
+### 22.5 Validation Placement
+Validation should occur before trusted Common Pool admission and again at untrusted transport boundaries where needed. Layer 4 Error Boundary is defense-in-depth, not a substitute for compiler/contract validation.
