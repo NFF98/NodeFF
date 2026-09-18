@@ -1,280 +1,151 @@
-# NodeFF Infrastructure Architecture — Working Brain
+# NodeFF Infrastructure Architecture
 
-> Status: WORKING / NOT OFFICIAL SSOT
->
-> Purpose: Consolidated infrastructure architecture for NodeFF. This file replaces prior accumulated working notes and defines the current infrastructure direction without locking unapproved vendors.
+> Status: Working. Not authoritative until promoted through the NodeFF SSOT process.
+
+## 1. Infrastructure Mission
+
+NodeFF infrastructure supports a **client-first, edge-assisted control plane**.
+
+It is responsible for:
+- request routing;
+- semantic compilation;
+- Blueprint validation/distribution;
+- identity/quota;
+- lightweight persistence;
+- realtime coordination;
+- telemetry;
+- external-capability orchestration.
+
+It is not intended to become the default execution plane for every interaction or heavy workload.
+
+> **NFF is a lightweight Control Plane, not a Heavy Compute Plane.**
 
 ---
 
-## 1. Infrastructure Principle
-
-NodeFF is designed as a **lightweight Control Plane**, not a Heavy Compute Plane.
-
-Golden rule:
-
-> **NFF handles intent routing, compilation orchestration, Blueprint delivery, runtime coordination, state transport and commerce/control-plane concerns. Heavy computation and large durable data should run in the browser or specialized external services.**
-
----
-
-## 2. High-Level Infrastructure
+## 2. Logical Topology
 
 ```text
-Browser / Client
-  │
-  ├─ Local Universal Player
+Browser
+  ├─ Universal Player
   ├─ Local Instance State
-  ├─ Optional Web Worker / WASM
-  │
-  ▼
-Edge / API Boundary
-  ├─ Safety / Abuse / Tier Gate
-  ├─ Cache / Registry Lookup
-  ├─ Compiler API
+  ├─ Rule VM
+  └─ Optional Worker/WASM
+       │
+       ▼
+NFF Edge / API Boundary
+  ├─ Policy / Abuse / Tier Gate
+  ├─ Cache / Registry Resolution
+  ├─ Compiler Endpoint
   ├─ Auth / Quota
-  └─ Routing
-  │
-  ├──────────────→ LLM Provider Adapter(s)
-  │
-  ├──────────────→ Blueprint Registry / CAS
-  │
-  ├──────────────→ Durable Metadata / Account Store
-  │
-  ├──────────────→ Realtime Adapter / Rooms
-  │
-  └──────────────→ External Capabilities / Workers
+  ├─ Share / Short-Link Resolution
+  └─ Capability Orchestration
+       │
+       ├─ LLM Provider Adapter
+       ├─ Blueprint Registry / CAS
+       ├─ Durable Metadata Store
+       ├─ Realtime Adapter
+       └─ External APIs / Workers / Storage
 ```
 
 ---
 
-## 3. Cold Path vs Warm Path
+## 3. Cold Path and Warm Path
 
-### Cold Path — Compilation
+### Cold Path — New or Semantically Changed Intent
 
 ```text
 Intent
- → Edge/API Gate
- → Cache Lookup
- → Compiler
+ → Gate
+ → Cache/Reuse Lookup
+ → Semantic Compiler
  → Structured Candidate
- → Validation
+ → Validation Pipeline
  → Trusted Blueprint
- → CAS/Response
+ → Canonicalize / Store
+ → Return to Client
 ```
 
-Cold path may involve LLM latency and cost.
+The cold path contains model/provider latency and compiler cost.
 
 ### Warm Path — Existing Blueprint
 
 ```text
-Blueprint/Instance Reference
- → Resolve
- → Validate Compatibility
+Reference / Snapshot
+ → Resolve / Decode
+ → Compatibility + Trust Check
  → Hydrate
  → Execute Locally
 ```
 
-Warm path should not require LLM merely to open or interact with an existing valid Blueprint.
-
-Principle:
-
-> **Compile Once → Reuse Many → Execute Locally**
+Warm execution does not invoke the LLM merely to open or interact with an existing valid artifact.
 
 ---
 
 ## 4. Compiler Service Boundary
 
-Production compiler must run behind an NFF-controlled server/edge API boundary.
-
-```text
-Browser
- → NFF Compiler Endpoint
- → Model Provider Adapter
- → Structured Candidate
- → Validation Pipeline
- → Trusted Blueprint
-```
+All production model compilation passes through an NFF-controlled endpoint.
 
 Responsibilities:
 - provider credentials;
 - anonymous/account quota;
-- rate limits;
-- abuse protection;
-- model/provider routing;
-- schema version;
-- Capability Registry snapshot;
-- timeout/retry;
-- cost telemetry;
-- sanitized repair loop;
-- final validation before trusted admission.
+- rate limiting;
+- abuse/policy gate;
+- model routing;
+- versioned Capability Registry context;
+- schema/rule version selection;
+- timeout/token budgets;
+- repair policy;
+- cost/latency telemetry;
+- trusted-admission validation.
 
-Production provider secrets must never be shipped in browser-visible build variables.
+Provider secrets never ship in browser-visible environment variables.
 
----
-
-## 5. Provider Abstraction
-
-NodeFF must not depend architecturally on one LLM provider.
-
-Preferred interface:
-
-```text
-CompilerService
- → ModelProviderAdapter
-   ├─ Provider A
-   ├─ Provider B
-   └─ Provider C
-```
-
-Vercel AI SDK may be useful, but remains an implementation candidate.
-
-Same principle applies to:
-- realtime;
-- durable storage;
-- object storage;
-- authentication;
-- external workers.
+The compiler service exposes an NFF-owned interface so model vendors remain replaceable.
 
 ---
 
-## 6. Validation Pipeline
+## 5. Compiler Context
 
-Candidate trusted-admission path:
+The compiler receives a versioned capability snapshot generated from the Capability Registry.
+
+Do not hand-maintain a second primitive whitelist in the System Prompt.
+
+Compiler context should identify:
+- available primitives;
+- allowed props;
+- state contracts;
+- actions/events;
+- Rule VM operators;
+- capability limits;
+- degradation rules;
+- schema/runtime version.
+
+A compilation request sees a fixed capability snapshot even while the platform evolves over time.
+
+---
+
+## 6. Validation and Trust Admission
+
+Trusted Blueprint admission path:
 
 ```text
-Model Candidate
+Candidate
  → Structural Schema
- → Cross-field References
- → Rule AST Validation
+ → State/Bind References
+ → Rule AST / Operator Check
  → Patch Validation
- → Capability Validation
- → Complexity Budgets
+ → Capability Check
+ → Resource Budgets
  → Security / Policy
  → Semantic Quality Gate
  → Canonicalization
  → Content Hash
- → Trusted Registry
+ → Registry Trust State
 ```
 
-No cache path may bypass these gates.
+A schema-valid candidate is not automatically trusted.
 
----
-
-## 7. Retry / Self-Correction
-
-Repair loop:
-
-```text
-Validation Failure
- → sanitized structured error
- → bounded compiler repair
- → full revalidation
-```
-
-Retry policy must define:
-- retryable errors;
-- max attempts;
-- token/time budget;
-- circuit breaker;
-- telemetry.
-
-Semantic mismatch may require user refinement instead of blind retry.
-
-Never send secrets or raw unsafe internal data back to a model.
-
----
-
-## 8. Capability Registry Distribution
-
-Capability metadata should be generated from Registry SSOT.
-
-Each compile request receives a versioned capability snapshot.
-
-Blueprint metadata should record compatibility context, including:
-- schema version;
-- Capability Registry version;
-- Runtime compatibility;
-- rule grammar version.
-
-This reduces drift among:
-- compiler prompt/context;
-- runtime components;
-- schema;
-- tests;
-- docs.
-
----
-
-## 9. Blueprint Registry / CAS
-
-Candidate pipeline:
-
-```text
-Validated Blueprint
- → Canonical Serialization
- → Digest
- → Immutable CAS Object
- → Registry Metadata
- → Edge Cache
-```
-
-Separate:
-- immutable content;
-- logical Blueprint identity;
-- lineage/revision;
-- ownership/save pointers;
-- Instance state.
-
-Common Pool:
-- immutable trusted Blueprint content.
-
-Personal layer:
-- references;
-- ownership;
-- favorites;
-- history;
-- account metadata;
-- paid metadata.
-
-Knowing a hash must not automatically grant access to private content.
-
----
-
-## 10. Cache Architecture
-
-### Exact Prompt Cache
-Fast optimization for exact/canonicalized prompt reuse.
-
-### Semantic / Canonical-Intent Reuse
-Retrieves likely reusable Blueprint families.
-
-### Blueprint Content Cache
-Immutable content lookup by content hash.
-
-These are different concerns.
-
-Raw punctuation-stripped Prompt SHA-256 is not universal semantic deduplication.
-
-Cache entries should retain:
-- validation status;
-- quality/trust status;
-- schema version;
-- registry version;
-- runtime compatibility;
-- policy status.
-
----
-
-## 11. Cache Poisoning Protection
-
-A Blueprint can be:
-- syntactically valid;
-- schema valid;
-- runtime renderable;
-- semantically wrong.
-
-Therefore, trusted Common Pool admission cannot equal "schema passed".
-
-Candidate statuses:
+Possible registry states:
 - untrusted;
 - validating;
 - trusted;
@@ -282,368 +153,489 @@ Candidate statuses:
 - quarantined;
 - deprecated.
 
-Failure reports may reduce reuse priority or quarantine bad artifacts.
+A cache hit cannot bypass the gates appropriate to the artifact's trust/version state.
 
 ---
 
-## 12. Share Transport
+## 7. Repair and Retry
 
-### URL Snapshot
-
-Suitable for:
-- small;
-- non-sensitive;
-- portable;
-- self-contained snapshots.
-
-Pipeline:
+Structural or contract failures may enter a bounded repair loop:
 
 ```text
-Canonical Payload
- → Compress
- → URL Fragment
- → Decode
- → Resource Limit Check
- → Schema/Compatibility Validation
- → Hydrate
+Validation Failure
+ → sanitized machine-readable errors
+ → compiler repair
+ → full revalidation
 ```
 
-Requirements:
-- max encoded size;
-- max decoded size;
+Policy defines:
+- retryable error classes;
+- maximum attempts;
+- token/time budget;
+- circuit breaker;
+- provider fallback if allowed;
+- telemetry.
+
+Semantic mismatch is different from malformed output. It may require user refinement rather than automatic retry.
+
+Never expose secrets or unsafe internal payloads in repair prompts.
+
+---
+
+## 8. Blueprint Registry and Content Addressing
+
+Validated immutable Blueprint content may be stored in a content-addressable Common Pool.
+
+```text
+Validated Blueprint
+ → deterministic canonical serialization
+ → digest
+ → immutable content object
+ → registry metadata
+ → edge/cache distribution
+```
+
+Store separately:
+- content object;
+- logical Blueprint identity;
+- lineage/revision;
+- trust/policy metadata;
+- user ownership/save pointer;
+- Instance state.
+
+Hash possession is not authorization.
+
+Private/unpublished artifact access requires independent authorization.
+
+---
+
+## 9. Canonicalization
+
+Content hashing requires deterministic canonicalization.
+
+The canonicalization specification must define:
+- key ordering;
+- number representation;
+- omitted/default fields;
+- Unicode normalization if relevant;
+- schema version;
+- digest algorithm/version.
+
+Equivalent logical content must not accidentally produce different identities solely because of serialization formatting.
+
+---
+
+## 10. Cache Architecture
+
+Three different cache/reuse concerns exist.
+
+### Exact Prompt Cache
+
+Fast reuse for identical or strictly canonicalized text.
+
+### Canonical-Intent / Semantic Reuse
+
+Finds a likely trusted Blueprint family for semantically similar intent.
+
+### Blueprint Content Cache
+
+Exact retrieval by immutable content hash.
+
+These keys are not interchangeable.
+
+A punctuation/whitespace-stripped Prompt SHA-256 is at most an exact-cache optimization. It is not a semantic identity.
+
+Cache metadata includes:
+- schema version;
+- Registry version;
+- Runtime compatibility;
+- policy/security status;
+- trust/quality status.
+
+---
+
+## 11. Cache Poisoning Defense
+
+A Blueprint may pass schema validation yet be semantically wrong.
+
+Therefore:
+- trusted Common Pool admission includes quality status beyond shape validation;
+- semantic mismatch reports affect reuse confidence;
+- unhealthy versions may be quarantined/deprioritized;
+- remediation produces a new validated revision rather than mutating immutable content.
+
+The system must not amplify a wrong Blueprint globally simply because it is cheap to reuse.
+
+---
+
+## 12. Portable Snapshot Transport
+
+Suitable only for small, non-sensitive snapshots.
+
+```text
+Canonical Snapshot
+ → compress
+ → URL Fragment
+ → decode
+ → decompression/resource guard
+ → schema/version/security validation
+ → hydrate
+```
+
+Controls:
+- maximum encoded size;
+- maximum decoded size;
 - decompression limits;
 - sensitive-field exclusion;
-- integrity/version checks;
-- no assumption that compression provides privacy.
+- integrity/version checks where required.
 
-### Short Link / Backend Reference
+Compression does not provide confidentiality.
 
-Use when:
-- payload too large;
-- stable identity needed;
-- permissions required;
-- durable reference needed.
+URL Hash is a transport mechanism, not authoritative persistence.
 
 ---
 
-## 13. Realtime Infrastructure
+## 13. Durable Reference Path
 
-Realtime is optional and activated only when product mode requires live synchronization.
+Use a short-link/backend reference when:
+- payload is too large;
+- stable identity is required;
+- access control is required;
+- durable ownership/history is required;
+- sensitive data must not travel in the URL.
 
-Logical model:
+The short reference resolves to authorized server-side metadata/content references; it does not imply mutable Blueprint blobs.
+
+---
+
+## 14. Realtime Rooms
+
+Realtime is optional, not the default execution model.
 
 ```text
-Immutable Blueprint
+Immutable Blueprint Reference
  + Room ID
  + Mutable Room Instance State
- + Validated Deltas
+ + Ordered Validated Deltas
 ```
 
-Room mutable state never mutates the immutable Blueprint.
+The provider stays behind an adapter.
 
-Realtime provider remains behind an adapter.
-
-Policy must define:
-- room size;
-- idle TTL;
-- reconnect;
-- ordering;
-- dedupe;
-- conflict strategy;
+The protocol must define:
+- room identity;
 - presence;
+- join/reconnect;
+- ordering;
+- deduplication;
+- conflict handling;
+- state snapshot/recovery;
+- idle TTL;
+- participant limits;
 - rate limits;
 - abuse controls.
 
-No assumption of literal "0ms sync".
+No "0ms sync" guarantee is assumed.
+
+Ephemeral room chat may share the same realtime boundary. Long-lived Discord/Telegram-style history, background notifications and durable messaging are outside the NFF core unless explicitly added as a separate capability.
 
 ---
 
-## 14. Heavy Work Paths
+## 15. Heavy Work Delegation
 
 ### Browser Compute
-Use:
-- Web Workers;
-- WASM;
-- browser-native compute.
 
-NFF handles:
+Use Web Workers, WASM or browser-native compute when appropriate.
+
+NFF provides:
 - parameters;
 - progress;
-- result presentation.
+- result visualization.
 
-### External Worker/API
-Use when task requires:
-- expensive AI;
-- long-running generation;
-- specialized compute;
-- large database query.
-
-Pattern:
+### External Job
 
 ```text
 NFF Action
- → External Job
- → Async Status
- → Poll/Webhook/Event
- → Result
+ → external API/worker
+ → job/status reference
+ → webhook/poll/event
+ → result
+ → Player presentation
 ```
 
-The Micro-App becomes a status/progress/result surface.
+Used for:
+- heavy AI;
+- media generation;
+- long-running processing;
+- large database queries;
+- specialized compute.
 
 ### Durable Large Data
-Keep large durable datasets outside the lightweight Runtime core.
 
-NFF stores controlled references/permissions as needed.
+Large durable datasets remain in suitable external/backend storage. NFF keeps controlled references, permissions and presentation logic.
 
 ---
 
-## 15. Runtime Rule VM
+## 16. Runtime Rule VM
 
-Preferred direction:
+Preferred infrastructure contract:
 - typed Rule AST;
-- explicit operator/function allowlist;
-- deterministic evaluator;
+- explicit operator/function registry;
+- deterministic evaluation semantics;
 - versioned grammar;
-- resource-bounded execution.
+- execution step/size limits;
+- no host-object access;
+- no arbitrary property traversal;
+- no arbitrary code.
 
-If an expression library such as `expr-eval` is considered, it must pass threat-model testing.
-
-"Not eval()" does not automatically mean safe.
+An expression library such as `expr-eval` is acceptable only if it satisfies the NFF threat model. "Not eval()" is not a security proof.
 
 Threat model includes:
-- unsafe function exposure;
-- property access;
-- prototype escape;
+- exposed functions/operators;
+- property/prototype escape;
 - recursion;
-- oversized expressions;
 - CPU exhaustion;
 - memory exhaustion;
-- oversized arrays.
+- oversized collections;
+- non-determinism.
 
 ---
 
-## 16. Patch / Delta Security
+## 17. Patch and Delta Security
 
-Runtime patches require:
-- allowed operations;
-- allowed mutable paths;
+Runtime state patches require:
+- allowlisted operations;
+- allowlisted mutable paths;
 - type validation;
-- result validation;
-- operation count limit;
-- payload size limit;
-- protected metadata boundaries.
+- resulting-state validation;
+- maximum operation count;
+- maximum payload size.
 
-Preset patching cannot mutate schema, capability declarations, ownership or protected Blueprint metadata.
+Runtime patches cannot alter:
+- schema;
+- capability declarations;
+- ownership;
+- trust metadata;
+- protected Blueprint fields.
+
+Semantic Blueprint refinement runs through the compiler/validation path and creates a new content identity where content changes.
 
 ---
 
-## 17. External Asset Security
+## 18. External Asset Boundary
 
-Remote media capabilities such as 3D models, Lottie and video create an external-content boundary.
+Remote 3D, Lottie, video or other media is untrusted external content.
 
-Requirements:
-- scheme/origin allowlist;
+Controls may include:
+- allowed schemes/origins;
 - CSP;
-- MIME validation;
+- MIME/content checks;
 - size limits;
-- redirect handling;
-- tracking/privacy consideration;
-- failure fallback;
-- optional proxy/cache policy.
+- redirect rules;
+- privacy/tracking restrictions;
+- optional proxy/cache;
+- timeout/fallback behavior.
 
-A valid URL string alone is insufficient.
+A syntactically valid URL is not sufficient validation.
 
 ---
 
-## 18. Resource Budgets
+## 19. Resource Budgets
 
-Schema-valid content can still attack availability.
+Schema-valid payloads can still exhaust the runtime.
 
-Validate budgets for:
-- total Blueprint bytes;
+Set explicit budgets for:
+- Blueprint bytes;
 - decoded snapshot bytes;
-- component node count;
+- component nodes;
 - nesting depth;
 - Repeater expansion;
-- Rule AST node count;
+- Rule AST nodes;
 - evaluation steps;
 - state size;
+- patch operations;
 - media count;
-- remote asset size.
+- external asset size.
+
+Resource-budget violations fail closed or degrade according to contract policy.
 
 ---
 
-## 19. Determinism / Replay Metadata
+## 20. Determinism and Replay Metadata
 
-For reproducible execution, track as needed:
-- Blueprint content hash;
+Exact replay may require:
+- content hash;
 - schema version;
 - Runtime version;
 - capability versions;
-- rule grammar/evaluator version;
+- Rule VM version;
 - initial state;
-- RNG seed/outcomes;
-- action log;
-- external data version/snapshot.
+- RNG seed/outcome log;
+- ordered actions/deltas;
+- external-data snapshot/version.
 
-CAS alone does not guarantee replay equivalence.
+Content addressing alone does not guarantee replay equivalence across environment/version changes.
 
 ---
 
-## 20. Identity Infrastructure
+## 21. Identity and Progressive Auth Infrastructure
 
-Anonymous-first consumer flow:
-- random first-party anonymous ID;
-- no mandatory login.
+Default consumer path:
+- no mandatory registration;
+- privacy-conscious first-party `anonymous_id` where continuity is needed.
 
-Authentication appears when durable/account-bound value is requested.
-
-Identity promotion:
+Authentication is introduced for durable account-bound value.
 
 ```text
 anonymous_id
  → create/use/share
- → durable-value request
+ → durable value requested
  → authenticate
  → prove claim eligibility
- → migrate/associate eligible artifacts
+ → associate/migrate eligible records
 ```
 
-Do not use possession of a shared URL as sole proof of ownership.
+Possession of a public/shared link is not sufficient proof of ownership.
+
+Device fingerprinting is not the default identity mechanism.
 
 ---
 
-## 21. Data Classes
+## 22. Data Placement
 
-### Client-only
+### Browser
 - transient UI state;
-- local Instance state;
-- cached Blueprint.
+- normal Instance state;
+- cached trusted Blueprint;
+- local recovery state.
 
-### Share transport
-- small public snapshot;
-- non-sensitive context.
+### Share Transport
+- explicitly shareable, non-sensitive snapshot/context.
 
-### Ephemeral backend
+### Ephemeral Backend
 - room state;
 - presence;
-- live deltas.
+- live deltas;
+- short-lived job/session coordination.
 
-### Durable backend
-- account;
-- ownership pointers;
+### Durable Backend
+- accounts;
+- ownership/save pointers;
 - publishing metadata;
-- history when opted/needed;
+- quota/billing;
+- history where required;
 - commerce;
-- quota;
-- trusted Blueprint registry metadata.
+- trusted registry metadata;
+- protected references.
 
-### Never client-exposed
+### Never Client-Exposed
 - provider secrets;
-- internal credentials;
-- privileged signing keys.
+- privileged credentials;
+- signing keys.
+
+LocalStorage is local recovery convenience, not authoritative persistence.
 
 ---
 
-## 22. Telemetry
+## 23. Telemetry and Reliability Signals
 
-Candidate events:
-- generation_started
-- generation_failed
-- validation_failed
-- semantic_mismatch
-- unsupported_semantics
-- compiler_repair_attempted
-- compiler_repair_failed
-- wrong_archetype_detected
-- runtime_component_error
-- blueprint_degraded
-- fallback_rendered
-- blueprint_opened
-- blueprint_remixed
-- share_opened
-- capability_invoked
+Core events include:
+- compilation started/completed/failed;
+- validation failure;
+- semantic mismatch;
+- unsupported semantics;
+- repair attempted/failed/succeeded;
+- wrong composition/archetype;
+- runtime component error;
+- degraded/fallback render;
+- Blueprint opened;
+- Blueprint remixed;
+- share opened;
+- capability invoked.
 
-Track separately:
+Separate:
 - render success;
-- user task success proxy;
-- correction/refinement;
-- runtime reliability.
+- runtime success;
+- task-success proxy;
+- user correction/refinement.
 
-Privacy, retention and training/reuse rights require explicit governance.
+Telemetry collection requires explicit privacy, retention and reuse governance.
 
 ---
 
-## 23. Security Non-Negotiables
+## 24. Security Invariants
 
-1. No production LLM secret in browser.
-2. No arbitrary JavaScript from Blueprint.
-3. No `eval()` / `new Function()`.
-4. JSON alone is not considered a sandbox.
-5. Rule/function capability allowlist.
-6. Strict transport/resource limits.
-7. Remote content policy.
-8. Validation at trust boundaries.
-9. Cache does not bypass validation.
+1. No provider secret in browser code.
+2. No arbitrary Blueprint JavaScript.
+3. No `eval()` or `new Function()`.
+4. JSON is data transport, not automatically a sandbox.
+5. Only registered components/operators/actions execute.
+6. Remote content is constrained.
+7. Untrusted boundaries revalidate.
+8. Resource budgets are enforced.
+9. Cache cannot bypass policy/trust checks.
 10. Hash is not authorization.
 11. Compression is not encryption.
-12. Unknown capability does not execute.
-13. Error Boundary is defense-in-depth, not primary validation.
+12. Unknown capabilities fail closed.
+13. Error Boundary is defense-in-depth, not validation.
+14. Semantic trust is distinct from schema validity.
 
 ---
 
-## 24. Vendor Status
+## 25. Vendor Abstraction
 
-Current vendors/libraries discussed are candidates only:
-- Vercel / Cloudflare
-- Supabase
-- PartyKit
-- OpenAI / Claude / DeepSeek / Groq or others
-- Zod
-- Zustand
-- expr-eval
-- lz-string
-- React / Tailwind / shadcn
+Discussed candidates include:
+- Vercel / Cloudflare;
+- Supabase;
+- PartyKit;
+- OpenAI / Anthropic / DeepSeek / Groq or other model providers;
+- Zod;
+- Zustand;
+- React;
+- `lz-string`;
+- `expr-eval`.
 
-Architecture should survive replacement of any one of them.
+None is an architectural dependency until explicitly approved. Provider-specific behavior, pricing and quota must remain outside core protocol semantics.
 
 ---
 
-## 25. Claims That Remain Targets / Hypotheses
+## 26. Performance and Cost Claims
 
-Do not encode as guarantees:
-- 0ms interaction;
-- <5ms / <10ms cache;
+The following remain measurement targets or hypotheses unless benchmarked:
+- 0ms local interaction;
+- sub-5ms/sub-10ms cache;
 - 1ms validation;
 - 90% cost reduction;
-- $0 marginal cost;
+- zero marginal cost;
 - 100% sandbox safety;
 - 99.9% structured correctness;
 - fixed free-room limits;
-- exact LLM latency;
-- exact provider pricing.
+- exact generation latency;
+- exact provider unit economics.
 
-These require benchmarking and provider validation.
-
----
-
-## 26. Open Infrastructure Decisions
-
-1. Runtime hosting/edge provider.
-2. LLM provider adapter implementation.
-3. Realtime provider.
-4. persistent DB/object store.
-5. CAS canonicalization algorithm.
-6. digest/version policy.
-7. Rule VM implementation.
-8. retry budget.
-9. trust/admission scoring.
-10. URL snapshot size threshold.
-11. media proxy policy.
-12. room TTL/limits.
-13. telemetry retention/privacy policy.
-14. private Blueprint authorization model.
+Performance requirements should eventually be expressed as measured SLOs with:
+- workload;
+- region;
+- payload size;
+- percentile;
+- provider/configuration;
+- test methodology.
 
 ---
 
-**Status: WORKING / CONSOLIDATED**
+## 27. Decisions Still Open
+
+- hosting/edge provider;
+- model adapter implementation;
+- realtime provider/protocol;
+- durable store/object store;
+- CAS canonicalization/digest;
+- Registry persistence/distribution;
+- Rule VM implementation;
+- retry/circuit-breaker policy;
+- trust/admission scoring;
+- URL snapshot size threshold;
+- media proxy/source policy;
+- room limits/TTL;
+- privacy/telemetry retention;
+- private Blueprint authorization model.
+
