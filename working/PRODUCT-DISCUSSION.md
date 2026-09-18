@@ -246,3 +246,109 @@ User Prompt → Normalize → SHA-256 Key → Edge KV Lookup → Hit: Verified L
 - `logic/actions` 已列為 Schema 三大區塊，但目前提供的 JSON example 尚未展示該區塊；詳細 action/state-machine contract 仍需在後續詳細設計補齊。
 - 原始材料同時使用 `computed` 與 `expression` 兩種命名；目前工作筆記以 `expression` 為主，但正式 Schema 命名尚未批准。
 - 「100% 符合定義」與「封鎖任何 ACE」先視為設計目標；正式安全模型需在 Security 詳細設計中明確定義 validator、sandbox、allowlist 與 threat model。
+
+### Detailed Design — Layer 4: Universal Lego Player Layer (Working)
+
+**定位：** Layer 4 是前端端的 **Universal Lego Player / Rendering & Runtime Layer**。它不理解使用者語意，也不負責決定產品/業務意圖；它依照 Layer 3 的已驗證 LegoSpec Contract，在瀏覽器中完成渲染、狀態管理、受限運算、互動與容錯。
+
+**核心責任：**
+1. **Component Registry & Factory** — 依據 LegoSpec 的 `type` 從 allowlisted Registry 載入對應 React Component。
+2. **Local Reactive State Store** — 將 LegoSpec 的 state hydration 到瀏覽器記憶體；Input/Action 更新 state 後，由 reactive subscription 精準觸發相關 UI 更新。
+3. **Sandboxed Expression Evaluator** — 執行受限制的 expression，例如 `SUM`、`MAX`、`IF` 等；禁止 `eval()` 與任意 JavaScript execution。
+4. **URL Hash Hydrator / Compressor** — 支援無資料庫分享；將可分享的 LegoSpec/state 壓縮至 URL hash，開啟連結後反向 hydration。
+5. **Graceful Degradation & Error Boundary** — 未知 component、無效 expression 或單一 Lego runtime error 不得導致整頁 White Screen；應隔離並降級為安全提示/文字。
+
+**Layer 3 / Layer 4 分工：**
+- Layer 3：定義「長相與規則是什麼」— Contract / Validation。
+- Layer 4：決定「如何在瀏覽器把它跑起來」— Rendering / State / Runtime Execution。
+- Layer 4 不進行自然語言理解、不重新解讀 intent，也不自行發明 component type。
+
+#### Transparent Protocol / Graceful Degradation
+
+當需求超越 NodeFF 當前能力邊界時，系統不應假裝完成，也不應直接讓使用者得到空白/錯誤結果。
+
+Working protocol：
+- Layer 2 必須將「能力不足 + 替代方案」編碼進 LegoSpec 的 `notice`。
+- Layer 4 在卡片頂部渲染 notice banner。
+- 下方仍正常渲染可執行的替代 LegoSpec。
+- 使用者因此能清楚知道「原始需求沒有被完整實現」以及「目前提供的是什麼替代方案」。
+
+Example concept:
+```json
+{
+  "title": "憤怒鳥：角度與力量試算版",
+  "notice": {
+    "type": "warning",
+    "message": "⚠️ 本平台不支援 3D/物理動態遊戲。已將需求轉換為彈道角度、力量與機率計算的數值試算卡。"
+  },
+  "state": {
+    "angle": 45,
+    "power": 80
+  },
+  "layout": [
+    { "type": "NumberInput", "label": "發射角度 (0-90°)", "bind": "angle" },
+    { "type": "Slider", "label": "拉弓力量 (0-100)", "bind": "power" },
+    {
+      "type": "StatCard",
+      "label": "預測命中率 & 破壞力",
+      "expression": "..."
+    }
+  ]
+}
+```
+
+**UX principle：**
+> **Transparent limitation + usable fallback > silent substitution.**
+
+#### Lego-fication / Five Atomic Roles
+
+Working model: 多數 NodeFF 派對/決策微應用可由以下五類原子組合：
+1. **State** — 儲存目前資料/遊戲狀態。
+2. **Action** — 使用者觸發互動，例如 Button、DiceRoller、WheelSpinner、Timer。
+3. **Rule / Expression** — 受限制的純資料運算與規則。
+4. **View** — 顯示結果，例如 StatCard、LeaderBoard、CardFlipper。
+5. **Effect** — WOW feedback，例如 Confetti、SoundEffect、Vibrate。
+
+LLM 的工作不是生成任意程式，而是生成 wiring blueprint，例如：
+**Action → State → Rule → View → Effect**。
+
+#### Technical Boundary / Hard Wall (Working)
+
+目前材料提出的主要 hard walls：
+- 需要連續 60fps 物理碰撞 / 自由 Canvas / 3D action gameplay 的需求，不屬於目前 Layer 4 的標準微應用 runtime。
+- 複雜、多分支、長篇 RPG / 大型 AI NPC 狀態系統，不屬於目前 declarative micro-app contract 的目標範圍。
+- 需要前端未預建的任意 custom function / arbitrary JavaScript / 任意外部媒體執行的需求，不應由 LLM 自行發明 runtime capability。
+- 超出能力時應依 Transparent Protocol 產生 notice + 可行 fallback，而不是 silent downgrade。
+
+#### Built-in Formula / Rule Runtime (Working)
+
+Layer 4 可提供類似 spreadsheet 的**通用資料運算 primitives**，例如：
+- `IF(condition, a, b)`
+- `COUNT_MATCHES(array, value)`
+- `UNIQUE(array)`
+- `SUM(array)`
+- `MAX(array)`
+
+這些應保持為通用 runtime primitives，而非把特定產品的業務規則硬編進 Layer 4。
+
+#### Important Design Notes / Suggestions
+
+1. **Layer 4 的「無腦 renderer」與「預建 Rule Engine」要切乾淨。**  
+   `SUM/MAX/IF` 這類 generic functions 可以屬於 runtime；但 `CALCULATE_18_LA`、特定遊戲稱號/得分規則屬於 domain logic，不應直接寫死在 Universal Player。否則 Layer 4 會逐漸變成「業務邏輯大雜燴」。
+
+2. **「3D」與「3D 遊戲 Hard Wall」需要在正式設計中分開定義。**  
+   可以保留 Rich Primitive（例如 Model3DViewer）作為受控展示元件，但不等於支援任意 3D engine / 60fps physics / action gameplay。正式 spec 應把「3D Viewer」與「3D Game Runtime」視為不同能力。
+
+3. **URL hash 不應預設承載敏感資料。**  
+   Hash 雖不會像一般 query parameter 一樣直接送至 server，但分享、瀏覽器歷史、截圖/複製連結等仍可能暴露資料。正式 Security Design 應定義可進入 share URL 的資料範圍與敏感資料禁止規則。
+
+4. **Transparent Protocol 最好由 Schema 強制驗證。**  
+   若某個 request 被 Layer 2 判定為 fallback/degraded，Layer 3 validator 應要求 `notice`；不要只依賴 System Prompt，避免 LLM 漏填。
+
+5. **Error Boundary 與 validation 要有層級。**  
+   Schema-invalid 應在 Layer 3 擋下；runtime exception 才由 Layer 4 Error Boundary 處理。兩者不要混為同一種錯誤。
+
+6. **Layer 4 不應自行決定「降級成什麼」。**  
+   Layer 2/3 決定合法的 fallback contract；Layer 4 只忠實執行與呈現。這能維持「Layer 4 無語意、無業務決策」的乾淨邊界。
+
+**Working status:** 本節全部仍屬 working material，尚未成為官方 SSOT。
