@@ -624,3 +624,95 @@ For ambiguous social heuristics, compiler assumptions should be editable and sur
 
 ### 19.8 Runtime Performance
 Local deterministic recomputation should be designed for responsive interaction, but claims such as “0ms” are not literal performance guarantees. Establish benchmark budgets later.
+
+
+## 20. Primitive / Capability Registry and Sharing Modes — Working
+
+### 20.1 Registry as Machine-Readable Contract
+Do not maintain the LLM allowlist as manually duplicated prose in a System Prompt.
+
+Preferred direction:
+`Capability Registry SSOT → runtime registry + schema constraints + compiler capability context + docs/tests`
+
+Adding a new primitive such as `SlotMachine` should require registration metadata and implementation/tests, after which compiler context is generated from the same registry.
+
+Candidate capability metadata:
+- type/name;
+- version;
+- props schema;
+- bind/state contract;
+- actions/events;
+- supported expressions/functions;
+- fallback behavior;
+- security classification;
+- runtime/component compatibility.
+
+### 20.2 Primitive Families
+Candidate families:
+- Controls: NumberInput, Slider, Toggle, SelectChoice;
+- Displays: StatCard, ProgressBar, LeaderBoard, HistoryList;
+- Party: DiceRoller, WheelSpinner, CardFlipper, Timer;
+- Decision: WeightedGroupList, PresetSelector, TagList;
+- structural primitives already under discussion such as Container/Repeater.
+
+Exact names/count remain Working. “10–15” is a design target, not a permanent architectural limit.
+
+### 20.3 Composition Before New Primitive
+Compiler should prefer composing approved primitives when semantics are preserved.
+
+If requested capability is absent:
+1. compose existing capabilities if semantically equivalent;
+2. degrade presentation only if core semantics remain intact;
+3. use typed Dynamic Form when semantics/rules are already known;
+4. otherwise emit unsupported/partial capability notice or ask for refinement.
+
+Never invent a generic calculation merely to avoid an unsupported state.
+
+### 20.4 Domain Capability Functions
+Complex reusable rules can live in an approved capability/function registry.
+
+Example conceptual call:
+`CALCULATE_18_LA(current_dice)`
+
+But this must be isolated from Universal Player core:
+`Player → Function/Capability Registry → allowlisted pure deterministic function`
+
+Requirements:
+- explicit input/output schema;
+- deterministic where required;
+- no arbitrary side effects;
+- versioned;
+- unit-tested;
+- resource bounded;
+- declared dependency from Blueprint.
+
+### 20.5 Portable Snapshot
+`Blueprint/Instance → canonical serialization → compression → URL fragment`
+
+On open:
+`decode → decompress → size/version/integrity/schema/security validation → hydrate`
+
+URL fragment is transport only. Large, sensitive, durable or permissioned data must use an indirection/reference path.
+
+### 20.6 Live Room
+`Blueprint content ID + room_id → room adapter → room state/deltas`
+
+Mutable room state never mutates the immutable Blueprint. Provider-specific TTL and presence behavior stay behind the realtime adapter.
+
+### 20.7 Durable Save
+Durable save should distinguish:
+- immutable Blueprint content in CAS/Common Pool;
+- logical Blueprint/version/lineage metadata;
+- personal ownership/save pointer;
+- persistent Instance state when explicitly needed.
+
+“Only owner may modify” means owner may create a new revision/fork or change metadata/pointers; immutable content-addressed Blueprint bodies are not edited in place.
+
+### 20.8 Implementation Order — Candidate
+User-proposed order is directionally useful:
+1. contract/schema;
+2. state + rule/action engine;
+3. Player + minimal primitives;
+4. semantic compiler.
+
+Before Cursor execution, each step still requires acceptance tests and security constraints. This sequence remains Working until implementation is explicitly authorized.
