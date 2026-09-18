@@ -135,3 +135,52 @@ Working constraints：
 - observability stack
 
 **Status：Working。**
+
+
+## 12. Detailed Infrastructure Design Inputs — Working
+
+### 12.1 Serverless + Edge-first Direction
+Working direction is **serverless + edge-first + client-first** to minimize fixed infrastructure operations and keep short-lived micro-app execution close to the client where practical.
+
+These are goals, not guarantees:
+- Managed infrastructure is preferred; this does not mean literally no backend infrastructure.
+- No-traffic cost is not guaranteed to be $0 because providers may charge for storage, observability or other services.
+- Edge execution does not mean every operation runs at the physically nearest CDN node.
+- End-to-end latency still depends on LLM inference, network path, provider availability and downstream services.
+- “3-second generation” should be measured as a product/SLO target.
+
+### 12.2 Candidate Hosting Models
+Current candidates are Vercel/Cloudflare-class managed platforms for MVP speed and low operations, and AWS-native services for later granular control if scale/cost/data requirements justify it. No vendor is approved yet. The application contract must remain vendor-neutral.
+
+### 12.3 State / Persistence Infrastructure
+Distinguish:
+1. Browser state — transient interaction and resumable local state.
+2. Share payload — compact, non-sensitive instance state.
+3. Ephemeral session state — multiplayer room memory.
+4. Persistent records — blueprint, ownership, publishing, history, quota, commerce and required audit/telemetry.
+
+URL Hash is a transport mechanism, not a database. LocalStorage is a local recovery mechanism, not an authoritative persistence layer.
+
+### 12.4 Short-link Strategy
+Use short-link/backend indirection when payload size, clean URLs, stable identity/versioning or durable references make embedded URL state impractical.
+
+Candidate flow: **Instance State → serialize/compress → small: URL hash / large or stable: short-link reference → approved backend/KV**.
+
+### 12.5 Cache Strategy
+Retain **Prompt → normalization → cache key → Edge KV → verified LegoSpec / compiler**, while distinguishing exact/canonical prompt cache, semantic/canonical-intent cache and published Blueprint reuse. Cache hits must respect LegoSpec version, component registry version, policy/security status and materially relevant context.
+
+### 12.6 Cost Boundary
+Optimize for client-side execution, one-time compilation, cache reuse, ephemeral rooms and usage-based backend capabilities only when necessary. Edge infrastructure must not be treated as proof that LLM inference is cheap or free.
+
+### 12.7 Recovery / Durability
+Compiler failure → retry/fallback. Runtime failure → client isolation. Room failure → room-level recovery. Persistent backend failure → never silently claim data was saved. Corrupt/unsupported share payload → safe recovery or upgrade path.
+
+### 12.8 Open Infrastructure Questions
+- MVP hosting provider and edge runtime limits
+- LLM provider/location and latency budget
+- KV, realtime and persistent DB choices
+- short-link implementation
+- payload compression/size threshold
+- backup/DR
+- SLO/capacity targets
+- observability provider
