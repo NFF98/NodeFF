@@ -656,3 +656,60 @@ Important: the new hash should be derived from the final canonical Blueprint con
 - Only validated/policy-approved artifacts should enter a trusted executable registry/cache tier.
 - Blueprint lineage/Fork relationships should be stored separately from immutable content identity.
 - Personal Instance state should not automatically become part of the globally deduplicated Blueprint.
+
+
+### Failure Case Study — Semantic Guessing in the Client
+
+#### Observed Failure
+Prototype logic in `Home.tsx` / `universalSynthesizer.ts` attempted to infer arbitrary natural-language intent using Regex/heuristics and then reused a narrow existing Spec shape.
+
+Observed examples:
+- a nutrition intent was rendered as an AA bill-splitting card;
+- lunch-choice intent was reduced to meaningless numeric arithmetic;
+- breakfast/macronutrient intent was reduced to counting input numbers;
+- business ROI intent was mapped into an unrelated random food-choice UI.
+
+These are not isolated rendering bugs. They expose an architecture-boundary violation.
+
+#### Root Cause
+The client-side Universal Lego Player was implicitly asked to perform two incompatible jobs:
+1. **Semantic interpretation/compiler responsibility** — understand an open-ended natural-language intent and decide domain logic/UI.
+2. **Deterministic runtime responsibility** — render and execute an already-defined LegoSpec.
+
+Regex, keyword routing, hard-coded `if/else`, or increasingly large heuristic rule libraries cannot serve as the general semantic compiler for open-ended prompts.
+
+#### Architectural Correction
+`Natural-language Prompt → Semantic Compiler → validated LegoSpec → Universal Lego Player`
+
+The Universal Lego Player must **not guess user intent**. It consumes a validated contract.
+
+The semantic compiler may use an LLM with constrained structured output, but its output is still untrusted until schema/security/compatibility validation succeeds.
+
+#### Archetype Role
+Archetypes such as decision/choice, structured information, and numeric calculation can help the compiler choose suitable interaction patterns. They are compiler-level semantic abstractions, not hard-coded keyword routes inside the Player.
+
+Archetypes must remain extensible; three examples are not a permanent exhaustive taxonomy.
+
+#### Dynamic Form Fallback Correction
+Dynamic Form Fallback is a **safe rendering fallback**, not a substitute semantic brain.
+
+It can represent known typed inputs/actions/results when specialized UI is unavailable. It must not invent formulas, domain facts, options or semantics merely because the original intent is unknown.
+
+Principle:
+> **Unknown UI can degrade generically; unknown meaning must not be fabricated.**
+
+#### Failure UX
+If semantic compilation cannot produce a sufficiently valid/grounded executable Spec:
+- do not emit a plausible-looking but semantically false Micro-App;
+- return a transparent notice, safe partial Spec, or targeted refinement request;
+- preserve the original intent for retry/refinement.
+
+This case strongly validates the existing principle:
+> **不中斷流程，但不隱瞞錯誤。**
+
+#### Security Correction
+API keys must not be shipped as `VITE_LLM_API_KEY` or other browser-exposed secrets in production. Compiler calls should normally pass through a controlled server/edge endpoint that owns provider credentials, rate limits, policy and telemetry.
+
+#### Accuracy Correction
+A real LLM does not make arbitrary Prompt compilation “100% correct.” The architecture should target:
+`LLM semantic candidate → structured output → validator → capability check → optional repair/refinement → trusted runtime`
