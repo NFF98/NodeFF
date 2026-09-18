@@ -871,3 +871,34 @@ Safety comes from:
 `JSON data-only contract + strict schema + allowlisted capabilities + safe interpreters + sanitization + resource limits + no eval/new Function`
 
 Likewise, unchanged Blueprint JSON does not by itself guarantee identical visible results unless runtime/component versions, external inputs, randomness and environment are controlled.
+
+
+### Rich Primitive Catalog / Rule-Portability Detail — Working
+
+The latest proposal makes the initial rich capability surface concrete with 15 candidate primitives across controls, data/visualization, rich interaction/media, and composition.
+
+This remains a **candidate initial catalog**, not a permanent closed set and not yet SSOT-approved.
+
+A key product promise becomes:
+`Intent → Action/State/Rule/View/Effect wiring using approved primitives → local deterministic interaction`
+
+#### Important Rule-Ownership Refinement
+Two earlier directions must be reconciled:
+1. domain-specific functions such as `CALCULATE_18_LA`;
+2. a domain-neutral standard function library from which Layer 2 composes rules.
+
+Preferred Working direction:
+- Universal Player core should expose **generic, audited operators/functions** where practical;
+- Layer 2 may compose those into declarative rule ASTs;
+- domain capability plugins remain possible only when a rule cannot safely/compactly be expressed with the generic grammar.
+
+This avoids hard-coding every future game into Layer 4 while also avoiding an unrestricted expression language.
+
+Examples of candidate generic operations:
+`IF`, `SUM`, `MAX`, `UNIQUE`, `COUNT_MATCHES`, bounded map/filter/reduce-like operations if safely specified.
+
+#### Rule Knowledge Guardrail
+The LLM's world knowledge is not authoritative. For culturally variable or disputed game/domain rules, the compiler should surface assumptions/rule variant or ask for clarification rather than silently claiming one universal rule.
+
+#### SSOT Lesson
+The supplied case study reinforces the existing NodeFF governance already present in this repo: architecture memory belongs in repository documents, not chat history. We should **not create a second docs/ SSOT tree** beside the existing `SSOT.md`, `spec/`, `decisions/`, `execution/`, and `working/` hierarchy.
