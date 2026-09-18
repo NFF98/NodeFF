@@ -81,4 +81,71 @@ The uploaded Phase 1 material frames NFF as a **dynamic micro-application engine
 
 **Working note / better suggestion:** Keep Phase 1 focused on proving the **instant-intent → generated micro-app → share/use → disappear** loop. Treat exact cost figures, room limits, and technical thresholds as provisional until validated by implementation and real usage.
 
-**Important:** Everything in this file remains working discussion material unless explicitly approved and moved into `spec/` or `decisions/`.
+### UI/UX Design — Working
+The user proposes that **「靈感膠囊」不是展示 Demo，而是降低思考成本的 Prompt 教學與創作入口**. Its core purpose is to teach users how to give better instructions through **Fork & Remix** rather than asking them to start from a blank input box.
+
+**Four mechanisms under discussion:**
+
+#### 1. 點擊即帶入「可編輯樣板」(Fork & Remix)
+Clicking an inspiration capsule does not immediately jump to a generated result. Instead, the complete example text is inserted into the Prompt input and key variables are highlighted for editing.
+
+Example:
+- Capsule: **[ 💰 3人多幣分帳 ]**
+- Input becomes: **「3人去[東京]旅遊，[小明]付日幣 15000，[小華]負擔雙份」**
+- User can directly change 「東京」→「韓國」、 「日幣」→「韓幣」 and immediately learn how to express their own need.
+
+Working UX principle: **editing an existing example should be easier than inventing a request from zero.**
+
+#### 2. 建立「三段式心智模型」(The Implicit Formula)
+Through comparison of 3–5 capsules, users can implicitly learn a useful input structure:
+
+**[ 情境/主題 ] + [ 成員/數據 ] + [ 特殊規則/條件 ]**
+
+Examples:
+- **[ 5人開會 ] + [ 時薪 500 元 ] + [ 預計討論 1 小時 ]**
+- **[ 晚餐決策 ] + [ 燒肉/拉麵/健康餐 ] + [ 預算 400 內、不要火鍋 ]**
+
+The intended behavior is that users gradually copy this structure into their own requests without needing to study a formal Prompt tutorial.
+
+#### 3. 靜態與動態 Ghost Text (打字機預覽)
+When the input is empty, the placeholder can automatically rotate through complete natural-language examples in a typewriter-like presentation.
+
+Examples:
+- 「深蹲 5 組，從 60kg 開始每組加 5kg，每組休息 90 秒」
+- 「月薪 65,000，扶養 1 人，幫我算實領薪資與勞健保」
+
+Purpose: continuously demonstrate that **ordinary everyday language can be directly turned into a usable NFF experience.**
+
+#### 4. 漸進式對話微調 (Progressive Refinement)
+The first request does not need to be perfect.
+
+Example flow:
+1. User: **「幫我做個 3 人分帳」**
+2. NFF generates a basic 3-person bill-splitting card.
+3. The generated card then presents contextual suggestion capsules such as:
+   - **[ 💡 試試加入：匯率換算 ]**
+   - **[ 💡 試試加入：權重比例 ]**
+4. User incrementally improves the generated micro-app instead of rewriting the original request.
+
+This turns Prompt learning into a low-pressure loop:
+
+**點擊現成範例 → 替換關鍵字 → 生成 → 隨手微調**
+
+### UI/UX Working Hypothesis
+The deeper UX idea is not merely **「教使用者寫 Prompt」**, but **「讓使用者在完成事情的過程中，自然學會如何描述需求」**.
+
+Inspiration capsules therefore function simultaneously as:
+- examples,
+- editable templates,
+- learning scaffolds,
+- starting points for creation,
+- and remixable/shareable seeds.
+
+The desired experience is that users gradually move from **copying → modifying → combining → creating from scratch**, without needing to understand prompt-engineering terminology.
+
+**Better suggestion:** Avoid making the product feel like a Prompt school. The UI should optimize for **getting the user to a useful result quickly**, while the learning happens invisibly through examples and refinement. In other words: **「先完成，再學會；不是先學會，才能完成。」**
+
+A second UX principle worth validating later: the capsule should be **outcome-led rather than prompt-led**. Show users what they can make/do (e.g. 「3人多幣分帳」) and let the editable prompt remain the mechanism underneath. This keeps NFF feeling like a consumer creation tool rather than an AI prompt editor.
+
+### Working Status
+All content in this file remains working discussion material unless explicitly approved and moved into `spec/` or `decisions/`.
