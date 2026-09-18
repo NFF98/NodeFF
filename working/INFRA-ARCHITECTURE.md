@@ -484,3 +484,58 @@ A render-success event must not be treated as task success.
 A semantically wrong but schema-valid Blueprint must not become globally reusable merely because it has a valid hash.
 
 Trusted Common Pool admission should require the appropriate quality/validation status. Failure reports can quarantine/deprioritize a Blueprint and prevent a bad cached artifact from multiplying globally.
+
+
+## 19. Compiler Validation / Provider Abstraction — Working
+
+### 19.1 Provider Adapter
+The compiler service should expose an NFF-owned interface independent of any one model vendor.
+
+Candidate:
+`CompilerService → ModelProviderAdapter → selected provider`
+
+Vercel AI SDK may be one implementation option. Provider portability is an architectural requirement; a specific SDK is not yet approved as permanent infrastructure.
+
+### 19.2 Structured Output Pipeline
+Candidate:
+`Prompt + Registry Context + Schema → Model → Structured Candidate → Runtime Schema Validation → Cross-field Validation → Security/Capability Gate → CAS`
+
+Only the final validated artifact can enter a trusted reusable pool.
+
+### 19.3 Retry
+“Retry once” is currently a candidate policy, not a fixed invariant.
+
+Retry design must define:
+- retryable error classes;
+- maximum attempts;
+- repair context;
+- timeout/token budget;
+- circuit breaker;
+- telemetry.
+
+Semantic mismatch may require user refinement rather than blind automatic retry.
+
+### 19.4 Expression Engine Security
+Do not equate “not eval()” with “100% sandbox safe.”
+
+Any expression library must be threat-modeled and tested for:
+- available functions/operators;
+- object/property access;
+- prototype/property escape;
+- resource exhaustion;
+- recursion/complexity;
+- oversized arrays/expressions;
+- deterministic execution requirements.
+
+Prefer an explicit NFF function allowlist/AST grammar. `expr-eval` remains a candidate until validated against the threat model.
+
+### 19.5 Patch Engine Security
+Preset/delta patches require:
+- allowed operations;
+- allowed paths;
+- schema-valid resulting state;
+- size/operation limits;
+- rejection of protected metadata/contract mutations during runtime state patches.
+
+### 19.6 Performance Claims
+User-provided values such as Zod validation “1ms”, edge retrieval “<5ms” and local update “0ms” remain benchmark targets/examples, not guarantees.
