@@ -1,580 +1,782 @@
 # NodeFF 技術護城河
 
-> 狀態：Working。除非依 NodeFF SSOT 流程正式升格，否則不具權威性。
+> 狀態：Working。本文描述 NodeFF 技術護城河的設計模型與長期累積機制；除非依 SSOT 流程正式升格，否則不具正式規格效力。
 
-## 1. Defensibility 核心假設
+# 1. 核心命題
 
-NodeFF 的護城河不是「LLM 會生成 UI」。
+NodeFF 的產品宣言是：
 
-以下技術都很有用，但本身容易被複製：
+> **意圖就是 App。**
 
-- React；
-- JSON；
-- Zod；
-- Edge KV；
-- CAS；
-- Supabase；
-- PartyKit；
-- Component Map；
-- LLM Provider；
-- Structured Outputs；
-- Prompt Template；
-- 15 個 Primitive。
+要讓這句話成立，真正困難的不是「讓 LLM 產生一段 UI」。
 
-真正可能形成 Defensibility 的，是由真實 execution 持續累積的知識系統：
+真正困難的是：
 
-```text
+> **如何讓極其多樣的人類意圖，都能被轉成安全、可執行、可互動、可組合，而且在不同裝置與時間仍可重現的 App。**
+
+因此 NodeFF 的技術護城河不應建立在單一 Model、Framework 或 Component Library 上，而應建立在三個互相強化的層次：
+
+~~~text
+Learning Graph
+人類 Intent、成功、失敗、修正、Reuse、Remix 的累積知識
+        ↑
+Composition Intelligence
+知道哪些 Capability 應該如何組合才能實現某個 Intent
+        ↑
+Capability Fabric
+一套廣而深、可驗證、可組合、跨媒體的 App 執行能力底座
+~~~
+
+這三層合在一起，才可能讓 NodeFF 從「AI 生成 UI」變成真正的 **Intent-to-App Platform**。
+
+---
+
+# 2. 第一層護城河：Capability Fabric
+
+## 2.1 Capability Fabric 是什麼
+
+NodeFF 不應把底層能力理解成「15 個 UI Primitive」。
+
+更正確的概念是：
+
+> **Capability Fabric = NodeFF 能安全執行的全部原子能力與高階能力。**
+
+每一個 Micro-App 都是從這個能力空間中取出需要的部分，再由 Compiler 組合。
+
+~~~text
 Intent
  → Capability Selection
- → Declarative Wiring
+ → Capability Composition
+ → Wiring / Rules / State
+ → Executable App
+~~~
+
+Capability Fabric 的目標不是支援所有任意程式碼，而是：
+
+> **用有限但持續擴張的可信任能力，覆蓋盡可能大的 App 空間。**
+
+---
+
+# 3. Capability Fabric 的能力地圖
+
+NodeFF 的基礎能力應以「能力家族」設計，而不是不斷增加互不相關的 Component。
+
+## A. Interface & Layout
+
+負責基本 App 結構：
+
+- Text
+- Button
+- Card
+- Container
+- Grid
+- Tabs
+- Modal
+- Repeater / List
+- Form Controls
+- Navigation
+- Responsive Layout
+
+這些是所有 App 的基本表達層。
+
+## B. Data & Visualization
+
+讓 Intent 可以變成資料工具：
+
+- Table
+- Stat
+- Chart
+- Timeline
+- Progress
+- Ranking
+- Comparison
+- Map
+- Calendar
+- Tree / Graph
+- Dashboard
+
+用途包括 Calculator、Tracker、Decision Tool、Planner、Analysis、Simulation Result。
+
+## C. Game & Interaction
+
+不是只提供 DiceRoller 或 WheelSpinner，而是建立可組合的遊戲能力：
+
+- Random Generator
+- Dice
+- Wheel
+- Card / Deck
+- Score
+- Timer
+- Turn
+- Round
+- Team
+- Player
+- Inventory
+- Progression
+- Win / Lose Condition
+- Simple Physics / Motion
+- Achievement / Reward Effect
+
+這些能力組合後，可支援 Party Game、Quiz、Classroom Activity、Couple Game、Family Game、Social Challenge、Lightweight Board Game。
+
+真正的價值不是「有骰子」，而是：
+
+> **骰子、回合、玩家、計分、動畫、音效與規則可以互相組合。**
+
+## D. Animation & Motion
+
+Animation 不應只是裝飾，而是 App 的第一級能力：
+
+- Lottie
+- Timeline Animation
+- Transition
+- State-driven Animation
+- Particle
+- Confetti
+- Motion Path
+- Gesture Response
+- Scene Transition
+
+可承載 Celebration、Storytelling、Emotional Experience、Game Feedback、Interactive Presentation、Visual Instruction。
+
+## E. Audio / Video / AV
+
+NodeFF 應具備媒體型 App 的組合能力：
+
+- Audio Player
+- Video Player
+- Audio Recorder
+- Camera Input
+- Image Viewer
+- Image Capture
+- Playlist
+- Subtitle / Caption
+- Timeline Cue
+- Media Synchronization
+- Audio Effect Trigger
+
+未來可延伸 Speech-to-Text、Text-to-Speech、Generated Music、Generated Voice、Generated Video。
+
+這些能力讓「意圖就是 App」不被限制在表單與文字。
+
+## F. 2D / 3D Spatial
+
+3D 不應只是單一 Model3DViewer。
+
+Capability Fabric 應逐步具備：
+
+- 3D Scene
+- 3D Model
+- Camera
+- Lighting
+- Object Transform
+- Object Selection
+- Hotspot
+- Annotation
+- Scene State
+- Controlled Interaction
+
+可形成 Product Viewer、Educational Model、Museum / Exhibition、Interactive Story、Spatial Planner、Simple 3D Experience。
+
+NodeFF 不需要一開始成為 Unity，但應建立可擴張的受控 3D Capability Domain。
+
+## G. AR / VR / XR
+
+VR 不應被當作 Phase 1 功能，但 Capability Model 必須能向 Spatial Computing 延伸。
+
+未來候選：
+
+- WebXR Session
+- Spatial Anchor
+- Gaze
+- Controller Input
+- Hand Interaction
+- Immersive Scene
+- 3D UI Panel
+- Shared Spatial State
+
+重要的是：
+
+> **LegoSpec 與 Capability Registry 不應在今天的 2D DOM UI 就封死未來的 App 表達能力。**
+
+## H. Device & Sensor
+
+部分 Intent 需要真實世界輸入：
+
+- Camera
+- Microphone
+- Geolocation
+- Orientation
+- Motion
+- Clipboard
+- File
+- QR / Barcode
+- Notification
+- Haptic
+
+這些 Capability 必須具備清楚 Permission Boundary。
+
+## I. Realtime & Social
+
+多人 App 需要：
+
+- Room
+- Presence
+- Shared State
+- Vote
+- Chat-lite
+- Turn Synchronization
+- Shared Score
+- Collaborative Input
+- Event Broadcast
+
+這讓 NodeFF 可以從「一個人的 Disposable App」擴展到「多人瞬時 App」。
+
+## J. AI & External Capability
+
+AI 不應只存在於 Compiler。
+
+經批准的 Runtime Capability 可以包括：
+
+- Text Generation
+- Image Generation
+- Speech
+- Classification
+- Search
+- Translation
+- External API
+- Booking
+- Payment
+- Data Provider
+- Specialized Computation
+
+這些屬於 Cost-bearing / Permission-bearing Capability，應與純本地能力清楚區分。
+
+---
+
+# 4. Capability 不是 Component
+
+這是 NodeFF 技術設計的關鍵。
+
+一個 Capability 不只是 React Component。
+
+每個 Capability 應至少定義：
+
+~~~text
+Semantic Meaning
+Inputs
+Outputs
+State Contract
+Actions
+Events
+Rules
+Permissions
+Resource Cost
+Security Class
+Runtime Support
+Fallback
+Version
+Compatibility
+Telemetry
+Tests
+~~~
+
+例如 VideoPlayer 不只是「顯示影片」。
+
+它應理解並暴露 source、play / pause、current time、duration、cue、ended event、subtitle、media permission、allowed origins、state binding。
+
+這樣 Compiler 才真的可以「理解它能做什麼」。
+
+---
+
+# 5. Capability Fabric 本身能不能成為 Moat？
+
+單獨一個 Component 不是 moat。
+
+Three.js、React、WebXR、Lottie、Video API 都是公開技術。
+
+但以下組合可以逐步形成技術優勢：
+
+> **Comprehensive Capability Coverage + Unified Contract + Safe Runtime + Cross-Capability Composition + Backward Compatibility**
+
+競爭者也可以有 3D Viewer、Dice、Video、Chart。
+
+但 NodeFF 若能穩定做到：
+
+~~~text
+Timer
+ + Video
+ + Multiplayer
+ + Score
+ + Animation
+ + Rule
+ + 3D Scene
+~~~
+
+而 Compiler 可以從一句自然語言正確 Wiring，這就不再只是 Component Library。
+
+真正值得累積的是：
+
+> **一套可以承載非常多種人類意圖的 Executable Capability Language。**
+
+---
+
+# 6. 第二層護城河：Composition Intelligence
+
+Capability 越多，不代表產品越強。
+
+如果有 500 個 Capability，但 Compiler 不知道何時、如何組合，反而會更差。
+
+因此第二層是：
+
+> **Intent → Capability → Wiring**
+
+NodeFF 必須逐步學會：
+
+- 哪些 Intent 需要哪些 Capability；
+- 哪些能力常一起出現；
+- State 怎麼設計；
+- Event 怎麼連接；
+- Rule 怎麼表示；
+- 哪些 Interaction Pattern 最自然；
+- 哪些組合 technically valid 但 UX 很差；
+- 哪些能力搭配會造成安全或效能問題。
+
+例如：
+
+~~~text
+「幫我們做一個聚會抽懲罰遊戲」
+
+不是只有：
+Wheel
+
+而可能是：
+Players
++ Wheel
++ Round
++ Random
++ Challenge Card
++ Score
++ Sound
++ Animation
++ Shared Room
+~~~
+
+真正的智能不是選到 Wheel，而是把整個 App 的能力組起來。
+
+---
+
+# 7. Capability Composition Graph
+
+NodeFF 應逐步形成 Capability Graph：
+
+~~~text
+Capability
+ ├─ commonly used with
+ ├─ incompatible with
+ ├─ requires
+ ├─ enhances
+ ├─ alternatives
+ ├─ security constraints
+ ├─ latency/cost profile
+ └─ successful composition patterns
+~~~
+
+例如：
+
+~~~text
+CardDeck
+ ├─ Player
+ ├─ Turn
+ ├─ Score
+ ├─ Random
+ └─ Animation
+
+3DScene
+ ├─ Model
+ ├─ Camera
+ ├─ Hotspot
+ ├─ Audio
+ └─ Timeline
+~~~
+
+這個 Graph 能直接改善 Compiler 的設計能力。
+
+---
+
+# 8. 第三層護城河：Intent & Execution Learning Graph
+
+NodeFF 每一次真實使用都可能產生學習資料：
+
+~~~text
+Intent
+ → Selected Capabilities
+ → Composition
  → Blueprint
  → Execution
- → Outcome / Failure
- → User Correction
- → Reuse / Remix
- → Better Retrieval + Compiler + Registry
-```
+ → User Behavior
+ → Success / Failure
+ → Correction
+ → Remix
+~~~
+
+真正有價值的不是 Prompt Log，而是：
+
+> **這個 Intent 最後用什麼可執行結構成功了。**
+
+長期可以累積 Intent Pattern、Capability Selection、Wiring Pattern、Rule Pattern、Assumption、Failure、User Correction、Successful Descendant、Reuse、Remix、Retention。
+
+這形成 NodeFF 專屬的 **Intent-to-Software Dataset**。
 
 ---
 
-## 2. Moat Stack
+# 9. Reliability Knowledge
 
-```text
-             Intent Commerce / Capability Network
-                          ↑
-                  Remix / Lineage Graph
-                          ↑
-              Trusted Blueprint Families
-                          ↑
-           Reliability / Recovery Knowledge
-                          ↑
-        Intent → Capability → Wiring Knowledge
-                          ↑
-            Rule Grammar + Capability Ontology
-                          ↑
-               LegoSpec + Trusted Runtime
-```
+生成 App 最危險的錯誤不是 Crash，而是：
 
-底層是必要的 Platform Foundation。
+> **可以用，但解錯問題。**
 
-上層只有在產品真實使用不斷產生競爭者難以低成本重建的資訊時，才真正變成 moat。
+因此 NodeFF 必須累積：
 
----
+- Semantic Mismatch
+- Unsupported Intent
+- Wrong Capability Choice
+- Wrong Rule
+- Wrong Default
+- Invalid Wiring
+- Runtime Failure
+- User Correction
+- Successful Repair
 
-## 3. LegoSpec Protocol 的價值
+久而久之，NodeFF 不只是知道「怎麼生成」，還知道：
 
-穩定的 declarative protocol 可以提供：
+> **哪些生成方式看起來合理，但其實會失敗。**
 
-- model-provider independence；
-- runtime／provider independence；
-- validation；
-- sharing；
-- content addressing；
-- replay；
-- remix；
-- compatibility control；
-- instrumentation。
-
-LegoSpec syntax 本身不構成 moat。
-
-真正難複製的價值可能來自：
-
-- 成熟 backward compatibility；
-- 大量 trusted artifact；
-- 經實際使用證明的 composition pattern；
-- migration tooling；
-- 高品質 runtime behavior。
+這是 Generic LLM 很難單靠公開訓練資料擁有的產品級知識。
 
 ---
 
-## 4. Capability Ontology
+# 10. Trusted Blueprint Families
 
-Capability Registry 不只是 Component List。
+當某類 Intent 已反覆被成功建立：
 
-長期可以累積：
-
-- capability 真正代表的語意；
-- state contract；
-- 可搭配的 Action／Rule／View／Effect；
-- version compatibility；
-- security behavior；
-- fallback behavior；
-- 已觀察到的成功組合；
-- 已觀察到的 failure mode。
-
-成熟的 Capability Ontology 能讓 Compiler 更可靠地把 human intent 映射成 executable structure。
-
-真正的 moat 不是「我們有 DiceRoller」，而是：
-
-> **我們知道什麼 Intent 應該在什麼條件下，以什麼方式，與哪些能力一起組合，才會真的成功。**
-
----
-
-## 5. Intent-to-Wiring Knowledge
-
-NodeFF 可以觀察完整 mapping：
-
-```text
+~~~text
 Intent
- → semantic decomposition
- → selected capabilities
- → state model
- → Rule AST
- → bindings
- → view/effect composition
- → result
-```
-
-這比一般 Prompt Log 更接近 NodeFF 的核心問題。
-
-可能累積：
-
-- 哪些 primitive 適合哪些 intent pattern；
-- 哪些 state structure 會反覆出現；
-- 哪些 rule fragment 可重用；
-- 哪些 binding 最穩定；
-- 哪些 composition 常被使用者拒絕。
-
----
-
-## 6. Reliability Graph
-
-Failure history 可能是 NodeFF 最重要的 compounding asset 之一。
-
-```text
-Intent
- → Candidate
- → Validation
- → Runtime
- → Failure / Correction
- → Repair / Fork
- → Successful Descendant
-```
-
-高價值 label：
-
-- malformed candidate；
-- schema validation failure；
-- invalid binding；
-- unsupported capability；
-- wrong composition／archetype；
-- schema-valid semantic mismatch；
-- runtime component／action failure；
-- user refinement；
-- successful repair。
-
-真正有價值的不只是「什麼成功」。
-
-更重要的是：
-
-> **什麼看起來可以執行、其實是錯的；錯在哪裡；使用者做了什麼修改才變成有用。**
-
----
-
-## 7. Semantic Mismatch Knowledge
-
-Prototype failure 已證明 semantic mismatch 與 syntax failure 完全不同。
-
-典型例子：
-
-- 營養 Intent 被做成 Bill Split；
-- 午餐決策被做成無意義算術；
-- ROI Intent 被映射成無關 random-choice UI。
-
-這產生一種很有價值的 learning layer：
-
-```text
-User Intent
- → wrong semantic mapping
- → user rejection/refinement
- → corrected mapping
-```
-
-通用 LLM Provider 並不會自動擁有這些 NodeFF-specific execution feedback。
-
----
-
-## 8. Assumption Graph
-
-模糊 Intent 往往需要 assumption。
-
-```text
-Fuzzy Intent
- → Explicit Compiler Assumptions
- → User Keeps / Modifies / Rejects
- → Outcome
-```
-
-NodeFF 因此可以學到：
-
-- 哪些 assumption 可以安全 default；
-- 哪些一定要顯示；
-- 哪些情境應先 clarification；
-- 哪些 default 具有文化／domain sensitivity；
-- 哪些 scenario structure 能形成 reusable Blueprint family。
-
-價值來自「使用者怎麼改」，而不是把模型推測的社會規範當成普遍真理。
-
----
-
-## 9. Rule Grammar Knowledge
-
-安全的 Generic Rule AST 可以在不為每個新 Intent 改前端程式碼的情況下，涵蓋更多 domain。
-
-Commodity：
-- AST syntax；
-- IF／SUM／MAX 等 operator。
-
-可能形成 Defensibility：
-- human rule → safe AST 的 mapping；
-- validated reusable rule fragment；
-- semantic repair pattern；
-- 已知可靠的 operator combination；
-- compatibility／migration history；
-- execution outcome data。
-
-最終累積的不是 raw generated code，而是：
-
-> **可安全執行的人類規則語料庫。**
-
----
-
-## 10. Trusted Blueprint Families
-
-隨著使用量增加，成功 artifact 可能自然聚成 Blueprint Family。
-
-```text
-Intent
- → Retrieve Trusted Blueprint Family
- → Apply Small Semantic Delta
+ → Trusted Blueprint Family
+ → Small Semantic Delta
  → Validate
  → Execute
-```
+~~~
 
-如果成立，NodeFF 就能把部分流量從「每次從零生成」轉成「retrieval + adaptation」。
+就不需要每次從零設計。
 
-可能帶來：
+例如可能形成：
 
-- 更低 compiler cost；
-- 更低 latency；
-- 更高 semantic consistency；
-- 更少 failure opportunity；
-- 更好的 Remix starting point。
+- Party Wheel Family
+- Couple Question Game Family
+- Weighted Split Family
+- Interactive Story Family
+- Product Comparison Family
+- 3D Exhibition Family
 
-Trusted Family 的價值來自真實 execution history，而不是 JSON 存在本身。
+Blueprint Family 本身不是 Template Gallery，而是：
 
----
+> **被真實 Execution 證明可靠的 App 結構。**
 
-## 11. Trust 與 Admission Data
-
-Common Pool 必須分辨：
-
-- merely valid；
-- trusted；
-- degraded；
-- quarantined；
-- deprecated。
-
-這些狀態可參考：
-
-- validation；
-- runtime failure rate；
-- semantic mismatch report；
-- successful reuse；
-- repair lineage；
-- policy status。
-
-成熟的 trust／admission system 比單純 content hash store 更難複製。
+它可改善 Correctness、Latency、Cost、Consistency、Remixability。
 
 ---
 
-## 12. Content-Addressed Lineage
+# 11. Capability Expansion Flywheel
 
-CAS 提供精確 immutable identity。
+Capability Fabric 不應由工程師憑想像無限制增加。
 
-```text
+正確循環：
+
+~~~text
+Unsupported / Weak Intent Cluster
+ → Identify Missing Capability
+ → Design Generic Capability
+ → Add Contract + Runtime + Tests
+ → Compiler Can Use It
+ → Observe Real Usage
+ → Refine
+~~~
+
+例如大量 Intent 都需要：
+
+> 「把幾張照片做成一段互動回憶」
+
+真正缺的可能不是一個特製 Memory App，而是：
+
+- Timeline
+- Media Sequence
+- Transition
+- Music Cue
+- Text Overlay
+
+這樣 Registry 越來越強，卻不會變成 Component Zoo。
+
+---
+
+# 12. Capability Density
+
+NodeFF 應關注的不只是 Capability 數量，而是：
+
+> **Capability Density：少量通用能力能組出多少有用 App。**
+
+高價值 Capability 通常具備：
+
+- 可服務多種 Intent；
+- 能與很多其他 Capability 組合；
+- 語意清楚；
+- Runtime 行為穩定；
+- 安全界線清楚；
+- 可被 Compiler 正確選擇。
+
+因此：
+
+> **100 個高度可組合 Capability，可能比 10,000 個專用 Template 更有價值。**
+
+---
+
+# 13. Cross-Media Composition 是重要差異化
+
+NodeFF 不應被限制成：
+
+> Text + Form + Chart Generator
+
+更大的能力空間是：
+
+~~~text
+Data
++ Game
++ Animation
++ Audio
++ Video
++ 3D
++ Realtime
++ AI
+~~~
+
+而且它們共享同一套：
+
+- State
+- Action
+- Rule
+- Event
+- Permission
+- Wiring
+
+如此使用者的一個 Intent 才能選擇最合適的表達形式。
+
+例如：
+
+> 「幫我做一個給女朋友的生日驚喜」
+
+可能變成：
+
+~~~text
+Photo Timeline
++ Music
++ Animated Message
++ Mini Quiz
++ 3D Gift Box
++ Final Reveal
+~~~
+
+這類 Sentimental / Creative Intent 正是單純 Decision Tool 無法涵蓋的領域。
+
+---
+
+# 14. Protocol & Runtime Moat
+
+LegoSpec syntax 本身不是 moat。
+
+真正值得長期投資的是：
+
+- Stable Contract
+- Versioning
+- Migration
+- Compatibility
+- Deterministic Runtime
+- Capability Admission
+- Security Boundary
+- Replay
+- Cross-device Execution
+- Degradation
+- Telemetry
+
+當大量 App 依賴這套 Runtime 後，Runtime 的成熟度會形成 Switching Cost。
+
+不是 API 文件難抄，而是多年相容性、行為穩定性與 ecosystem 很難一次複製。
+
+---
+
+# 15. Content / Lineage / Remix Graph
+
+每個 Blueprint 不只是檔案。
+
+NodeFF 可以建立：
+
+~~~text
 Blueprint A
  → Fork B
  → Remix C
- → Descendant D
-```
+ → Improved D
+~~~
 
-CAS 本身是 commodity infrastructure。
+並知道：
 
-真正的 strategic asset 是周邊 Graph：
+- 哪個 ancestor 最穩定；
+- 哪些 modification 最常發生；
+- 哪個 descendant 使用更久；
+- 哪種 Capability 組合更受歡迎；
+- 哪些 App Family 會自然繁殖。
 
-- ancestry；
-- semantic delta；
-- usage；
-- success；
-- failure；
-- correction；
-- reuse；
-- popularity；
-- trust。
-
-這會形成「哪些 executable idea 經得起反覆真實使用」的歷史。
+因此 Remix 同時是 Growth Mechanism、Product Discovery、Technical Learning 與 Moat Data。
 
 ---
 
-## 13. Remix Graph
+# 16. Economic Moat
 
-Remix activity 可以揭露：
+如果 Composition Intelligence 與 Trusted Reuse 成立：
 
-- 哪些 Blueprint 是好 starting point；
-- 哪些 assumption 經常被修改；
-- 哪些 capability 很適合一起組合；
-- 哪些 semantic delta 反覆出現；
-- 哪些 descendant 比 ancestor 表現更好。
-
-因此 Remix 同時貢獻 Growth 與 Technical Learning。
-
----
-
-## 14. Capability Expansion Loop
-
-Registry 應由真實需求驅動成長。
-
-```text
-Repeated Unsupported Intent
- → missing-capability cluster
- → design safe primitive/function
- → version/register/test
- → compiler gains capability
- → observe outcomes
-```
-
-這可以避免 uncontrolled component zoo。
-
-長期成熟 Registry 會變成：
-
-> **由真實使用者 Intent 需求塑造出的 Capability Map。**
-
----
-
-## 15. Semantic Retrieval Loop
-
-未來可能的 compilation strategy：
-
-```text
-Intent
- → canonical/semantic retrieval
- → trusted candidate family
- → compare required delta
- → minimal refinement
- → full validation
- → execute
-```
-
-這可能比每次都要求 LLM 從零建立更穩定。
-
-Retrieval quality 依賴累積 Graph：
-
-- intents；
-- Blueprints；
-- assumptions；
-- outcomes；
-- corrections。
-
----
-
-## 16. Economic Flywheel
-
-若 Trusted Reuse 達到足夠規模：
-
-```text
+~~~text
 More Usage
- → More Trusted Blueprint Families
- → Higher Reuse
- → Fewer LLM Compilations
- → Lower Cost + Faster Response
- → Better UX
+ → More Trusted Structures
+ → Better Retrieval
+ → Less Cold Generation
+ → Lower Cost
+ → Faster Result
+ → Higher Reliability
  → More Usage
-```
+~~~
 
-Economic Moat 不是 Edge Cache 本身。
+這才是 Compile-Once Economics 真正可能形成的護城河。
 
-真正的優勢是：
+不是「Cache 很快」，而是：
 
-> **越來越多 Intent 能由可信任、語意適合、經驗證的 reusable structure 直接服務。**
-
----
-
-## 17. Reliability Flywheel
-
-```text
-More Executions
- → More Failure/Correction Evidence
- → Better Semantic Mapping
- → Better Validation/Admission
- → Fewer Bad Blueprints
- → More Trust
- → More Executions
-```
-
-這個 flywheel 直接打擊 NodeFF 最大風險：
-
-> **看起來合理但其實解錯問題的 Micro-App。**
+> **競爭者需要重新思考與生成的 Intent，NodeFF 已經知道一個經驗證的執行結構。**
 
 ---
 
-## 18. Capability Network
+# 17. 未來 Capability Network
 
-長期可能形成：
+長期若第三方可以提供經認證的 Capability：
 
-```text
+~~~text
 Intent
- → Capability Match
- → Provider Capability
- → Micro-App Composition
- → Transaction / Outcome
-```
+ → NodeFF Compiler
+ → Capability Graph
+ → Internal + External Capabilities
+ → App
+~~~
 
-如果 NodeFF 同時吸引 Capability Provider 與使用者，就可能產生 Network Effect。
+外部能力可能包括 Booking、Payment、Search、Commerce、AI Model、Data Source、Specialized Tool、Device Service。
 
-Potential Supply：
-- AI API；
-- specialized tool；
-- dataset；
-- booking；
-- commerce；
-- media generation；
-- computation。
+若形成供需網路，NodeFF 就可能從 Runtime Platform 進一步變成 **Capability Network**。
 
-只有在供需雙方真的形成 liquidity 後，才可以稱為 moat。
+這是長期方向，不應在 PMF 前假設已成立。
 
 ---
 
-## 19. Intent Commerce Data
+# 18. 哪些不是護城河
 
-若 Intent Commerce 成立，NodeFF 可能進一步學到：
+以下本身不是 moat：
 
-- 哪些 Intent 會導向 paid capability；
-- 哪些 capability 經常被一起使用；
-- 哪種 interaction surface 會轉換；
-- 哪些 outcome 會帶來 repeat use。
+- React
+- Three.js
+- WebXR
+- Lottie
+- WebSocket
+- Zod
+- Supabase
+- LLM API
+- Prompt Engineering
+- JSON Schema
+- CAS
+- Component Count
+- Model Routing
 
-這些資料可以改善 routing 與 unit economics。
+真正的護城河來自：
 
-但必須有清楚 governance，避免形成不透明或操縱性的 capability steering。
-
----
-
-## 20. 哪些不是 Moat
-
-以下不應單獨宣稱為護城河：
-
-- LLM access；
-- multi-model routing；
-- prompt engineering；
-- JSON Schema；
-- Zod；
-- React；
-- Tailwind；
-- WebSocket；
-- edge caching；
-- CAS；
-- database choice；
-- component plugin architecture；
-- primitive count；
-- no-code positioning。
-
-它們可以是非常好的技術選擇，但競爭者同樣可以快速採用。
+> **這些技術被統一成什麼 Capability System，以及 NodeFF 從真實 Intent 與 Execution 中累積了什麼只有自己擁有的知識。**
 
 ---
 
-## 21. Moat 成立的條件
+# 19. NodeFF Moat Stack
 
-候選 moat 必須至少符合多項：
+~~~text
+                Capability Network
+                       ↑
+              Remix / Lineage Graph
+                       ↑
+            Trusted Blueprint Families
+                       ↑
+       Intent & Execution Learning Graph
+                       ↑
+          Composition Intelligence
+                       ↑
+        Capability Composition Graph
+                       ↑
+            Capability Fabric
+                       ↑
+          LegoSpec + Trusted Runtime
+~~~
 
-1. 會隨產品使用自然累積；
-2. 能實質提高 semantic correctness；
-3. 能降低 latency／cost；
-4. 能改善 safe capability coverage；
-5. 缺乏相同 interaction history 的競爭者難以重建；
-6. 能提高 creator／user switching cost；
-7. 能形成 Network Effect；
-8. 能改善 trusted retrieval／reuse；
-9. 相較 generation-from-scratch 有可量測優勢。
+底層讓 NodeFF **能做**。
 
----
+中層讓 NodeFF **知道怎麼做**。
 
-## 22. Data Governance Constraint
-
-Reliability／Composition Graph 只有在合法且可信地收集時才有價值。
-
-需要明確治理：
-
-- telemetry purpose；
-- data minimization；
-- 適當 pseudonymization；
-- private／public boundary；
-- retention；
-- deletion；
-- access control；
-- external-provider data policy；
-- 必要時的 user choice；
-- model training／research reuse 必須獨立規範。
-
-Anonymous interaction 不等於 unrestricted training consent。
+上層讓 NodeFF **越做越強**。
 
 ---
 
-## 23. Defensibility Priority
+# 20. 目前最重要的技術策略
 
-不要因為某項技術「看起來像護城河」就提前 over-engineer。
+現階段不需要一次實作 Game、3D、VR、AV 的全部能力。
 
-先證明：
+但今天的架構必須確保未來可以持續擴張，而不需要推翻 Runtime。
 
-```text
-Intent
- → Correct Interactive Blueprint
- → Meaningful Use
- → Share
- → Remix
-```
+因此應優先建立：
 
-然後再把自然產生的 evidence 結構化：
+1. **Capability Registry Contract**
+2. **統一 State / Action / Event / Rule Model**
+3. **Capability Composition Model**
+4. **Version / Compatibility Model**
+5. **Permission / Security / Resource Model**
+6. **Compiler 可理解的 Capability Semantic Metadata**
+7. **Execution / Failure / Correction Telemetry**
 
-- success；
-- failure；
-- assumptions；
-- repair；
-- reuse；
-- lineage；
-- capability composition。
+然後用真實 Use Case 決定下一個 Capability。
 
 ---
 
-## 24. 目前最強的 Moat Thesis
+# 21. Capability 選擇原則
 
-> **NodeFF 最有潛力的護城河，是一個專有的 Reliability + Composition Graph：持續累積「人類 Intent 如何映射成安全可執行能力、這些組合如何失敗、使用者如何修正，以及哪些 Blueprint Family 能經得起反覆執行、分享與 Remix」的證據。**
+每次新增 Base Capability，至少問：
 
-這個 Graph 結合：
+1. 是否能服務多種 Intent？
+2. 是否能與現有能力高度組合？
+3. 是否填補真實 Unsupported Intent？
+4. Compiler 能否清楚理解何時使用？
+5. Runtime 能否安全執行？
+6. 是否能跨 Blueprint 重用？
+7. 是否增加整體 Capability Density？
 
-- intent semantics；
-- capability ontology；
-- Rule AST pattern；
-- assumption correction；
-- Blueprint trust；
-- execution outcome；
-- failure／repair path；
-- lineage／remix；
-- reuse。
-
-如果它能實質改善 correctness、reuse、cost 與 creation speed，就比依賴任何單一 Model 或 Infrastructure Provider 更具 defensibility。
+這比追求「Primitive 越多越好」更重要。
 
 ---
 
-## 25. 必須被證明的問題
+# 22. 最終 Moat Thesis
 
-- Blueprint reuse 是否高到足以產生價值？
-- Semantic Retrieval 是否真的優於 clean generation？
-- Failure／Correction Data 是否能顯著提升 Compiler Quality？
-- 穩定 Blueprint Family 是否會自然形成？
-- Remix 是否能產生有意義的 lineage／network value？
-- 哪些 Intent Cluster 值得新增 Capability？
-- 哪些 user data 可以合法進入 Graph？
-- Graph 是否帶來可量測的 latency／cost／quality advantage？
-- Intent Commerce 是否有足夠供需形成 Network Effect？
-- 哪些 asset 最終真的形成 Switching Cost？
+NodeFF 最有潛力的護城河不是某一個 LLM，也不是某一批 UI Component。
+
+> **NodeFF 的核心護城河，是一套不斷擴張的 Executable Capability Fabric，加上從真實人類 Intent 中學會如何組合這些能力的 Composition Intelligence，以及由每一次執行、失敗、修正、Reuse 與 Remix 累積而成的 Intent-to-Software Learning Graph。**
+
+簡化成一句：
+
+> **別人擁有模型與元件；NodeFF 要累積的是「如何把任何意圖可靠地變成 App」的能力系統與經驗。**
+
+這才是「意圖就是 App」背後真正需要建立的技術護城河。
