@@ -820,3 +820,54 @@ Working split:
 `Universal Runtime → approved Capability Registry → optional domain capability function`
 
 This preserves the rule that Layer 4 core remains generic.
+
+
+### Additional Working Detail — Wiring Model / Hard Walls / Contract Semantics
+
+#### LLM as Wiring Blueprint Compiler
+The semantic compiler's job can be summarized as composing approved pieces:
+
+`Action → State → Rule/Capability → View → Effect`
+
+Example concept:
+`DiceRoller action → state.dice → CALCULATE_18_LA → StatCard → conditional Confetti effect`
+
+The compiler declares wiring; it does not generate executable JavaScript.
+
+#### Product Hard Walls
+Strong in-scope:
+- discrete/turn-based interactions;
+- dice/wheel/card/timer/voting/scoreboard;
+- arithmetic, weighted distribution, deterministic decision models;
+- composition of approved state/actions/rules/views/effects.
+
+Out-of-scope for the core declarative runtime unless a separately approved capability exists:
+- arbitrary continuous physics/game engines;
+- arbitrary canvas/custom rendering;
+- unrestricted user/model-authored code;
+- unbounded recursive/agentic RPG logic;
+- unsupported custom media/system behaviors.
+
+Important nuance: JSON itself is not the technical limitation. Declarative JSON can configure sophisticated engines. NFF's hard wall is the **approved runtime capability/trust boundary**: NFF intentionally does not expose arbitrary physics/rendering/script capabilities in the core.
+
+#### Fallback Rule
+For unsupported requests:
+1. preserve user intent;
+2. determine whether an approved capability can satisfy it;
+3. optionally offer a clearly labeled degraded approximation only when core semantics remain meaningful;
+4. otherwise return an unsupported-capability notice/refinement path.
+
+Do not silently turn “Angry Birds” into a numeric text game and claim the original request was fulfilled.
+
+#### Layer 2 / Layer 4 Effort
+The claim “70% Layer 4 / 30% Layer 2” is retained only as an implementation-planning hypothesis. The durable architectural distinction is:
+- Layer 4 manufactures/executes capabilities;
+- Layer 2 selects/configures/wires capabilities.
+
+#### JSON Contract Correction
+JSON is a strong portable data representation, but **JSON alone is not a security sandbox**. Strings inside JSON can still become dangerous if the runtime interprets them as HTML, URLs, expressions, paths or code.
+
+Safety comes from:
+`JSON data-only contract + strict schema + allowlisted capabilities + safe interpreters + sanitization + resource limits + no eval/new Function`
+
+Likewise, unchanged Blueprint JSON does not by itself guarantee identical visible results unless runtime/component versions, external inputs, randomness and environment are controlled.
