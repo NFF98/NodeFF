@@ -275,3 +275,76 @@ Benchmark on representative mobile/desktop devices and real network conditions b
 4. Which state changes are safe to broadcast to all room participants?
 5. What are the bandwidth and observability costs at 1M / 10M / 100M interactions?
 6. Which compiler latency and LLM cost targets are realistic for the chosen model/provider?
+
+
+## 15. Control Plane / Heavy Work Infrastructure — Working
+
+### 15.1 Control Plane Boundary
+NFF infrastructure should keep the core platform lightweight. The NFF runtime coordinates UI/state/sync and delegates heavy computation or durable large-scale storage to the appropriate execution plane.
+
+### 15.2 Heavy Work Execution Planes
+
+**Client plane**
+- WASM / Web Workers for browser-capable CPU-heavy tasks.
+- NFF supplies UI, parameters, progress and result presentation.
+- Compute cost is shifted to the user's device, but device capability and browser limits remain constraints.
+
+**External worker/API plane**
+- Async Action delegates server-required heavy work to approved cloud APIs or dedicated workers.
+- NFF receives status/result through polling or webhook-driven integration.
+- External provider/API cost is a real Tier 2 cost and must not be represented as NFF "$0" infrastructure.
+
+**External durable-data plane**
+- Large or long-lived datasets can remain in approved external storage/services.
+- NFF should hold controlled references/permissions rather than becoming the default large-data store.
+
+### 15.3 Room Chat Infrastructure
+Ephemeral room chat fits the realtime session architecture:
+- broadcast messages through the room channel;
+- room-scoped state may remain in ephemeral memory;
+- room destruction removes ephemeral state unless explicitly promoted to persistence.
+
+Long-lived chat requires durable message storage, identity, notification and retention infrastructure and is outside the lightweight room model.
+
+### 15.4 Async Action
+Working infrastructure flow:
+
+`Card UI → Async Action → External API/Worker → Webhook/Polling → Result State → Card UI`
+
+The card remains a status/result surface rather than becoming the heavy compute environment.
+
+### 15.5 Compilation Cost / Latency Boundary
+Separate infrastructure paths:
+
+**Cold Path**
+`Edge/API → Compiler → LLM Provider → Validation → Blueprint/WidgetSpec`
+
+**Warm Path**
+`CDN/Edge → Blueprint/Instance Payload → Client Validation/Hydration → Runtime`
+
+Warm-path opening of an already-valid artifact should bypass LLM inference.
+
+### 15.6 Cache / Spec Registry
+A verified Blueprint/WidgetSpec can be reused through edge/KV caching or a persistent registry.
+
+Infrastructure requirements:
+- version-aware cache keys/metadata;
+- policy/security status;
+- invalidation when schema/component/policy compatibility changes;
+- cache-hit path must still perform appropriate validation.
+
+### 15.7 Loading / Compilation UX Infrastructure
+Cold compilation may exceed the runtime-open target. The application should be able to return an immediate lightweight loading response/state while the compiler completes, then hydrate the final WidgetSpec without treating the generation process as a deployment.
+
+### 15.8 Cost Guardrail
+Do not collapse these into one "$0" claim:
+- client compute;
+- NFF platform compute;
+- LLM inference;
+- external API/worker;
+- bandwidth;
+- realtime connections/messages;
+- storage;
+- observability.
+
+They are separate cost dimensions and should be measured separately before formal pricing/SLO decisions.
