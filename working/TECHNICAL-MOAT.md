@@ -199,3 +199,12 @@ Potential defensibility can accumulate in:
 - which wiring patterns are frequently forked/reused.
 
 Again, the JSON format itself is not the moat. The validated composition/reliability graph may be.
+
+
+## 13. Generic Rule Grammar + Rich Primitive Ontology — Working Addition
+If NFF can represent many domain rules through a compact, safe generic Rule AST plus a carefully designed rich primitive ontology, the platform can gain breadth without shipping domain-specific frontend code for every new intent.
+
+Potential compounding asset:
+`Intent semantics → primitive selection → generic rule AST → execution outcome → correction/reuse`
+
+The defensible layer would be the quality of this ontology, safe grammar, compiler mappings and observed successful compositions—not Zod, React, JSON or an expression library themselves.
