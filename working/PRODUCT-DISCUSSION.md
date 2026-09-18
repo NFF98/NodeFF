@@ -713,3 +713,61 @@ API keys must not be shipped as `VITE_LLM_API_KEY` or other browser-exposed secr
 #### Accuracy Correction
 A real LLM does not make arbitrary Prompt compilation “100% correct.” The architecture should target:
 `LLM semantic candidate → structured output → validator → capability check → optional repair/refinement → trusted runtime`
+
+
+### Implementation Failure Case Study — Architecture Decisions Must Precede Cursor Execution
+
+#### Failure Lesson
+A high-level four-layer diagram is insufficient implementation instruction for an AI coding agent. If framework, state, contract, security and component-extension decisions are left open, the implementation agent can unintentionally create parallel systems, heuristic shortcuts, unsafe execution paths or incompatible abstractions.
+
+Working engineering principle:
+> **Architecture/spec owns design decisions; Cursor implements approved contracts.**
+
+This does not mean every implementation detail must be frozen forever. It means Cursor must not silently invent architecture that changes NFF's trust boundaries or SSOT.
+
+#### Candidate Implementation Stack — Not Yet Approved
+- Semantic compiler: Vercel AI SDK or provider SDK behind an NFF adapter.
+- Runtime schema: Zod.
+- Contract: TypeScript types derived from / aligned with the runtime schema.
+- UI: React; Tailwind/shadcn remain candidate UI implementation choices.
+- State: Zustand or a reducer-based store; exact choice unresolved.
+- Expression/rule engine: a restricted evaluator; `expr-eval` is a candidate, not yet assumed safe enough without threat-model testing.
+- Component Registry: explicit allowlisted map/factory.
+- Patch protocol: validated JSON Patch or an NFF-restricted patch subset.
+
+#### Important Zod Correction
+Zod can validate structure/types at runtime, but a basic schema alone does **not** automatically prove cross-field semantics such as:
+- every `bind` exists in state;
+- every formula reference is valid;
+- a preset patch targets an allowed path;
+- a formula is semantically correct;
+- the generated Micro-App matches the user's intent.
+
+Those require refinements/superRefine, AST/reference validation, capability validation and/or semantic checks beyond basic shape validation.
+
+Structured Outputs can greatly constrain model output shape, but must not be described as guaranteeing 100% correct JSON semantics.
+
+### Complex Intent Case — Weighted Social Distribution
+The “20-person company dinner by seniority” example demonstrates the intended value beyond simple calculators: compile a fuzzy human policy into an explicit, inspectable and adjustable model.
+
+Potential compiler output can include:
+- grouped entities/roles;
+- counts and weights;
+- explicit assumptions/defaults;
+- multiple presets/scenarios;
+- normalized distribution rules;
+- interactive controls;
+- result breakdown.
+
+Critical product guardrail:
+> **Social defaults are assumptions, not facts.**
+
+If the user did not provide role counts, total bill or weighting policy, generated defaults must be visibly labeled/editable. NFF must not present culturally/socially inferred weights as authoritative or objectively fair.
+
+A stronger UX may compile ambiguity into an editable scenario rather than silently deciding it.
+
+#### Runtime Principle
+Once the validated model exists:
+`Slider/Preset → State Patch → Deterministic Rule Evaluation → Local UI Update`
+
+No LLM is required for these deterministic interactions.
