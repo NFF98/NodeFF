@@ -377,3 +377,42 @@ Compilation and runtime distribution remain separate from application deployment
 **Compile Once → Reuse Many → Execute Locally**
 
 The platform should continue to represent new Micro-Apps primarily as declarative specs/data rather than newly deployed application code.
+
+
+## 16. Identity / Progressive Auth / Runtime-AI Boundary — Working
+
+### 16.1 Dual-Track Identity
+Working UX architecture:
+- Consumer opens/uses shared Micro-App with no mandatory account.
+- Creator may create/share an ephemeral Micro-App before registration.
+- Registration is triggered when durable account-bound value is requested: ownership, permanent editing, cross-device history, paid quota, publishing/monetization or other persistent capabilities.
+
+Anonymous continuity should use a random first-party `anonymous_id` where practical. Device fingerprinting should not be the default because of privacy/compliance implications.
+
+### 16.2 Identity Promotion
+Candidate flow:
+`anonymous_id → create/use/share → user requests durable value → authenticate → claim/migrate eligible anonymous artifacts → account identity`
+
+The claim/migration contract must prevent one user from claiming another person's shared artifact merely because they possess a URL.
+
+### 16.3 Cartridge Runtime Model
+Working mental model:
+- **WidgetSpec/Blueprint = cartridge / rules + UI contract**
+- **Universal Lego Player = trusted cartridge player**
+- **Instance State = current save/session state**
+
+A compiled card does not call the LLM for ordinary deterministic interaction.
+
+Example dice behavior must be represented declaratively:
+`Action: ROLL_DICE → Runtime approved RNG operation → State update → Rule evaluation → View/Effect`
+
+Do **not** embed arbitrary JavaScript such as `Math.random()` in WidgetSpec.
+
+### 16.4 When LLM Can Reappear
+“Compile once” means no LLM during normal deterministic runtime. LLM/compiler may legitimately reappear when:
+- user asks for semantic refinement/remix that changes the contract;
+- cache miss requires a new Blueprint;
+- invalid generation requires controlled retry;
+- the Micro-App explicitly uses an approved runtime-AI capability (Tier 2).
+
+This boundary should be explicit in the future LegoSpec capability model.
