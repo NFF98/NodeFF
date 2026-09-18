@@ -567,3 +567,54 @@ This reinforces:
 rather than:
 **Intent → generate a new application deployment for every user.**
 
+
+
+### Latest Working Input — Anonymous Growth / Progressive Auth / Cartridge Model
+
+#### Anonymous-first + Progressive Auth
+Working product direction:
+- **Consumers / participants:** open and use shared Micro-Apps without mandatory registration.
+- **Creators:** first creation and ephemeral room usage should also avoid an upfront registration wall where feasible.
+- **Progressive Auth:** request identity only when durable ownership/value is required, such as permanent editing rights, history/statistics, paid Tier 2 quota, publishing/monetization or other persistent account capabilities.
+
+This creates two distinct identities:
+1. **Ephemeral / anonymous visitor identity** for continuity and aggregate product measurement.
+2. **Registered creator/account identity** for durable ownership, billing and cross-device persistence.
+
+Privacy guardrail: prefer a random first-party anonymous identifier over device fingerprinting. Fingerprinting introduces privacy/compliance risk and should not be the default identity mechanism.
+
+#### Growth / Retention Measurement Without Forced Registration
+Candidate metrics:
+- Viral K-factor: creator sharing reach × recipient-to-creator conversion.
+- Device/browser-level WAU/MAU using privacy-conscious anonymous IDs.
+- Total Executed Intents / successful Micro-App sessions.
+- Share → Open → Use → Remix/Create funnel.
+- Anonymous → Registered Creator conversion.
+- Cohort retention for both anonymous and registered populations.
+
+Important measurement guardrail: anonymous browser IDs are not equivalent to people. Storage clearing, browser/device switching and privacy controls can under/over-count users. Report them explicitly as anonymous browser/device metrics rather than registered-user MAU.
+
+User-provided claims such as “80% registration drop-off,” specific CPUI values and example volume/K-factor figures are hypotheses/benchmarks, not validated NFF facts.
+
+#### LLM Cartridge Model
+Useful mental model:
+> **LLM = cartridge designer/compiler; NFF Runtime = cartridge player.**
+
+For a new uncached intent:
+`Intent → LLM compile once → validated WidgetSpec/Blueprint`
+
+For normal play:
+`WidgetSpec → local runtime → state/actions/rules → UI`
+
+Normal deterministic interactions such as dice, sliders and calculations should use **0 runtime LLM calls** unless the WidgetSpec explicitly invokes an approved runtime-AI capability.
+
+Important security correction: WidgetSpec must not contain arbitrary JavaScript such as raw `Math.random()` code. Randomness should be expressed through an approved declarative operation/primitive such as `RANDOM_INT(1,6)` or a DiceRoller action implemented by the trusted runtime.
+
+#### Cache / Save Semantics
+A generated Blueprint should be reusable without recompilation:
+- shared links resolve/decode an existing Blueprint/Instance;
+- cache/registry reuse can bypass LLM for sufficiently equivalent verified intents;
+- repeated local interactions do not invoke LLM;
+- refinement that changes the contract may invoke compiler/delta-patch flow again.
+
+Therefore “LLM only once” applies to a specific successful compilation/version, not necessarily the entire lifetime of a Micro-App if the user later requests semantic changes or runtime-AI capabilities.
