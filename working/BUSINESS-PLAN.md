@@ -1,26 +1,28 @@
-# NodeFF Business Plan — Working Brain
+# NodeFF Business Plan
 
-> Status: WORKING / NOT OFFICIAL SSOT
->
-> Purpose: Consolidated business thesis, product economics, growth model and commercialization hypotheses for NodeFF. Figures discussed in prior sessions remain hypotheses until validated.
-
----
+> Status: Working. Not authoritative until promoted through the NodeFF SSOT process.
 
 ## 1. Business Thesis
 
-NodeFF aims to replace a class of "app search/install/configure" behavior with:
+NodeFF challenges the traditional model in which users must discover, install, learn and switch among isolated applications.
 
-> **Express an intent → instantly get an interactive, shareable, remixable Micro-App.**
+The proposed interaction model is:
 
-The product is not "a better calculator" or "a collection of mini tools."
+> **Express intent → receive an interactive, shareable, remixable Micro-App immediately.**
 
-The larger thesis is:
+NodeFF is not a collection of calculators and not an AI code generator.
 
-> **Any user can turn a temporary intent, decision, social interaction or lightweight workflow into a disposable interactive product without installing software or writing code.**
+The larger product thesis is:
+
+> **A temporary human intent, decision, social interaction or lightweight workflow can become a disposable interactive product without installation, deployment or coding.**
+
+The strongest formulation developed in discussion is:
+
+> 「20 人怎麼分帳」不是產品本身；「任何人遇到一個複雜決策 → NodeFF 秒變成一個可互動、可分享、可交易的小 App」才可能是產品。
 
 ---
 
-## 2. Five Product Principles
+## 2. Product Principles
 
 1. **No install setup**
 2. **Everyone is the creator**
@@ -28,89 +30,152 @@ The larger thesis is:
 4. **Intent Commerce**
 5. **Fun and socialable**
 
-These principles should guide product and business choices.
+Product, architecture and monetization choices should preserve these properties unless deliberately changed through SSOT governance.
 
 ---
 
-## 3. Best-Fit Product Territory
+## 3. Customer Problem
 
-NodeFF is strongest where needs are:
-- immediate;
+Traditional apps impose friction when the need is:
 - temporary;
-- social/shareable;
-- interactive;
-- parameterized;
-- decision-oriented;
-- lightweight enough to execute locally or through bounded capabilities.
+- specific to the current group or context;
+- too small to justify installing/configuring software;
+- difficult to express through a fixed interface;
+- inherently collaborative or social;
+- different enough each time that a static template feels restrictive.
 
-Examples:
-- group bill negotiation;
-- dinner choice;
-- trip preference decisions;
-- event cost splitting;
-- gift decisions;
-- party games;
-- polls;
-- scoreboards;
-- weighted decisions;
-- simple ROI or scenario tools;
-- one-off timers/calculators;
-- temporary live group sessions.
+Chat can understand these needs but often returns text rather than an interactive shared object.
+
+NodeFF's opportunity is the space between:
+- a one-off chat answer;
+- a rigid fixed app;
+- and custom software development.
 
 ---
 
-## 4. What NodeFF Is Not Trying to Replace
+## 4. Core Value Proposition
 
-NodeFF is not naturally optimized for:
-- long-lived native applications;
-- deep background services;
-- OS-level integration;
-- durable social networks;
-- complex productivity suites;
-- high-frequency action games;
-- fully custom arbitrary software.
-
-Native apps remain stronger for:
-- long lifecycle;
-- deep identity;
-- background capabilities;
-- complex persistence;
-- mature notification systems;
-- deep hardware integration.
-
----
-
-## 5. Core Product Value
-
-The economic value is not just generation.
-
-It is the full loop:
+NodeFF converts intent into an **executable interaction object**.
 
 ```text
 Intent
- → Instant Interactive Model
+ → Interactive Model
  → Use
  → Share
- → Friend Opens
- → Friend Uses
- → Remix
- → New Intent / New Blueprint
+ → Other People Use
+ → Remix / Refine
+ → New Blueprint
 ```
 
-If this loop works, NodeFF can acquire users through the artifacts users create.
+The artifact itself becomes:
+- the product surface;
+- the sharing object;
+- the collaboration object;
+- the remix seed;
+- potentially the transaction surface.
 
 ---
 
-## 6. Creation UX Strategy
+## 5. Best-Fit Use Cases
 
-Blank prompt boxes create cognitive friction.
+The strongest near-term territory is:
 
-NodeFF should use:
-- Inspiration Capsules;
-- editable prompt templates;
-- Ghost Text;
-- Progressive Refinement;
-- Fork & Remix.
+### Social Decisions
+- dinner choice;
+- trip preference;
+- gift selection;
+- voting;
+- group coordination.
+
+### Shared Money / Allocation
+- bill splitting;
+- weighted contribution;
+- event cost allocation;
+- household allocation;
+- scenario comparison.
+
+### Party / Lightweight Games
+- dice;
+- wheel;
+- cards;
+- scoreboards;
+- timers;
+- turn-based interactions.
+
+### Disposable Tools
+- one-off calculators;
+- ROI/scenario models;
+- temporary trackers;
+- decision tables;
+- parameterized utilities.
+
+### Temporary Live Sessions
+- group interaction;
+- ephemeral room state;
+- short-lived collaboration.
+
+The common property is not the domain. It is the **short-lived, interactive, configurable, shareable intent**.
+
+---
+
+## 6. Product Boundary
+
+NodeFF should not market itself as an arbitrary replacement for all software.
+
+Native or dedicated applications remain superior when the product requires:
+- long lifecycle;
+- deep user identity;
+- background execution;
+- complex durable history;
+- sophisticated notifications;
+- hardware/OS integration;
+- high-frequency continuous graphics;
+- unrestricted custom behavior.
+
+NodeFF is strongest at **instant-intent, disposable and composable Micro-Apps**.
+
+This boundary protects both user expectations and cost/security architecture.
+
+---
+
+## 7. Product Creation Experience
+
+A blank prompt box alone creates too much thinking cost.
+
+NodeFF should teach creation through use.
+
+### Inspiration Capsules
+
+Capsules are not demo screenshots. They are editable creation seeds.
+
+Clicking a capsule should expose a complete editable request with variable parts that can be changed.
+
+### Implicit Intent Formula
+
+Users can gradually learn:
+
+```text
+[Situation / Topic]
++ [People / Data]
++ [Special Rules / Constraints]
+```
+
+without needing formal prompt-engineering education.
+
+### Ghost Examples
+
+Rotating examples show what ordinary natural language can become.
+
+### Progressive Refinement
+
+The first request can be rough.
+
+```text
+rough intent
+ → useful first Micro-App
+ → contextual suggestions
+ → incremental refinement
+```
 
 Learning progression:
 
@@ -120,435 +185,456 @@ UX principle:
 
 > **先完成，再學會；不是先學會，才能完成。**
 
-The user should experience an outcome before needing to learn "prompt engineering."
+The product should feel like creation, not a prompt-writing course.
 
 ---
 
-## 7. Anonymous-First Growth Strategy
+## 8. User Lifecycle
 
-Mandatory registration risks breaking the instant-use loop.
-
-Preferred:
-- consumer use with no login;
-- creator can create/share temporary Micro-App anonymously;
-- progressive auth only when durable value appears.
-
-Durable-value triggers:
-- permanent ownership;
-- history;
-- publishing;
-- paid quota;
-- monetization;
-- cross-device persistence.
-
-This supports low-friction viral sharing while still allowing durable account economics.
-
----
-
-## 8. Metrics
-
-Important metrics should reflect the actual product loop.
-
-### Activation
-- intent → first successful executable Blueprint;
-- time to first usable Micro-App;
-- generation success;
-- semantic correctness/refinement rate.
-
-### Usage
-- Total Executed Intents;
-- Blueprint opens;
-- Instance interactions;
-- repeat anonymous usage;
-- active creators.
-
-### Viral
-- share rate;
-- share → open conversion;
-- open → use conversion;
-- use → remix conversion;
-- remix descendants per Blueprint;
-- K-factor where measurable.
-
-### Retention
-- anonymous browser/device cohort retention;
-- registered creator retention;
-- repeat creation rate;
-- repeat share rate.
-
-### Monetization
-- free → paid conversion;
-- paid capability usage;
-- creator monetization;
-- transaction volume;
-- external capability GMV if marketplace emerges.
-
----
-
-## 9. Identity and Measurement
-
-Use random first-party anonymous IDs for continuity where practical.
-
-Do not equate anonymous browser/device IDs with exact humans.
-
-Do not default to fingerprinting.
-
-Anonymous usage can still support:
-- device/browser cohort analysis;
-- share funnel analysis;
-- intent execution metrics.
-
-Account registration becomes necessary for:
-- ownership;
-- durable history;
-- paid quota;
-- commerce;
-- payouts.
-
----
-
-## 10. Tier Model
-
-### Tier 1 — Free / Lightweight
-
-Target:
-- client-executed Micro-App;
-- approved primitives;
-- local deterministic logic;
-- small snapshot sharing;
-- ephemeral sessions;
-- limited compilation quota.
-
-### Tier 2 — Paid / Expensive Capability
-
-Triggers may include:
-- persistent AI runtime;
-- heavy external API;
-- durable storage;
-- larger/longer rooms;
-- expensive media generation;
-- premium ownership/history;
-- private/persistent collaboration;
-- specialized capabilities.
-
-### Tier 3 — Reject / Redirect
-
-Examples:
-- arbitrary code;
-- unsafe system access;
-- unsupported OS capability;
-- requests beyond safe Runtime/Capability boundary.
-
-Exact Tier rules remain to be approved.
-
----
-
-## 11. Cost Model
-
-NodeFF's architecture aims to make the normal interaction path cheap:
+Preferred progression:
 
 ```text
-One compilation
- → many local interactions
- → many opens
- → many shares
+Open
+ → Use
+ → Remix
+ → Create
+ → Share
+ → Save
+ → Publish
+ → Monetize
 ```
 
-Cost concentration:
-- first compilation;
-- occasional refinement/recompile;
-- realtime infrastructure;
-- durable storage;
-- heavy external capabilities;
-- observability;
-- bandwidth;
-- moderation/security.
+Not every user needs to reach every stage.
 
-The business model benefits if Blueprint reuse and cache hit rates rise over time.
-
----
-
-## 12. Compile-Once Economics
-
-Working model:
+The critical early loop is:
 
 ```text
 Intent
- → Compiler cost
- → Validated Blueprint
- → Reuse / Share / Run locally
+ → Correct Micro-App
+ → Immediate Use
+ → Share
+ → Recipient Uses
+ → Recipient Remixes / Creates
 ```
-
-A popular Blueprint can serve many users without paying LLM cost on every interaction.
-
-This is one of the central economic hypotheses behind NodeFF.
-
-However:
-- exact savings percentages remain unvalidated;
-- cache hit rate is unknown;
-- bandwidth/storage/runtime costs still exist.
 
 ---
 
-## 13. Sharing and Viral Distribution
+## 9. Anonymous-First Strategy
 
-Three distribution modes:
+Registration should not block first value.
+
+### Consumer
+- open shared Micro-App without account;
+- interact immediately.
+
+### Creator
+- create/share an ephemeral artifact without mandatory registration where feasible.
+
+### Progressive Authentication
+
+Ask for identity when the user requests durable value:
+- ownership;
+- permanent editing;
+- history;
+- publishing;
+- cross-device persistence;
+- paid quota;
+- monetization;
+- payouts.
+
+This aligns account friction with clear user benefit.
+
+Anonymous continuity should use privacy-conscious first-party identifiers rather than fingerprinting.
+
+---
+
+## 10. Share as Distribution
+
+NodeFF has three main distribution modes.
 
 ### Portable Snapshot
-User shares a self-contained URL for lightweight public state.
+A small public Instance can travel in a shareable URL.
 
-### Short Link / Durable Reference
-User shares a stable artifact reference.
+### Durable Reference
+A short link resolves to a persistent artifact/reference.
 
 ### Live Room
-User creates a temporary interactive social session.
+A group enters the same temporary interactive session.
 
-The artifact itself becomes the distribution object.
+The key growth property is:
 
-This is strategically important because the recipient does not need to install the creator's "app."
+> **Recipients can experience the artifact without installing the creator's app.**
+
+This gives every successful Micro-App potential distribution value.
 
 ---
 
-## 14. Creator Model
+## 11. Fork & Remix
 
-Everyone can be a creator.
-
-Creation does not initially require:
-- coding;
-- app-store submission;
-- deployment;
-- package installation.
-
-Creator progression:
+Remix should be easier than starting from a blank request.
 
 ```text
-Use
- → Remix
- → Create
- → Save
- → Publish
- → Potentially Monetize
+Shared Blueprint
+ → Open
+ → Change one assumption/rule/input
+ → Validate
+ → New Blueprint
 ```
 
-This is more important than turning users into traditional software developers.
+Remix provides:
+- lower creator friction;
+- viral continuation;
+- reusable structure;
+- observable preference/correction data;
+- potential Blueprint family formation.
 
 ---
 
-## 15. Intent Commerce
+## 12. Product Quality Definition
 
-Long-term commercial direction:
-
-```text
-User Intent
- → Capability Selection
- → Interactive Micro-App
- → Paid API / Tool / Service
- → Result
-```
-
-Possible future marketplace:
-- AI capabilities;
-- data sources;
-- specialized computation;
-- media generation;
-- booking/transaction APIs;
-- paid templates/Blueprints.
-
-NodeFF could become an orchestration/distribution layer for intent-driven capability consumption.
-
-This remains a strategic hypothesis, not yet a validated marketplace.
-
----
-
-## 16. Monetization Paths
-
-Potential monetization:
-
-1. paid compilation/runtime AI quota;
-2. premium durable storage/history;
-3. larger/longer realtime rooms;
-4. premium/paid capabilities;
-5. transaction fee on Intent Commerce;
-6. creator monetization/publishing;
-7. private/team environments;
-8. enterprise governance later if product fit emerges.
-
-Do not overbuild monetization before validating the core product loop.
-
----
-
-## 17. Business Wedge
-
-The strongest early wedge is likely not "all software."
+The most dangerous failure is not broken JSON.
 
 It is:
 
-> **Temporary interactive decisions, calculators, social games and group coordination that become dramatically better when they can be generated, adjusted and shared instantly.**
+> **A polished, functional Micro-App that solves the wrong problem.**
 
-This wedge can test:
-- intent compilation;
-- dynamic UI;
-- shareability;
-- remix;
-- local deterministic runtime;
-- social virality.
+Examples observed in prototype failure history included:
+- nutrition intent mapped to bill splitting;
+- lunch choice reduced to meaningless arithmetic;
+- ROI mapped to unrelated selection UI.
 
----
-
-## 18. Product Differentiation
-
-Potential differentiation:
-- no install;
-- no deployment per Micro-App;
-- instant interactive UI instead of chat answer;
-- user-adjustable assumptions;
-- shareable execution state;
-- remixable Blueprint;
-- low marginal runtime cost;
-- explicit capability boundaries;
-- social/fun primitives.
-
-NodeFF should not compete solely on "better prompting."
-
----
-
-## 19. Product Quality Requirement
-
-The biggest commercial risk is not malformed JSON.
-
-It is:
-
-> **A polished Micro-App that correctly renders the wrong interpretation.**
-
-Therefore product quality must track:
+Therefore product quality must measure:
 - semantic mismatch;
-- user correction;
 - unsupported semantics;
+- user correction/refinement;
 - successful repair;
-- repeat reuse.
+- repeat execution;
+- reuse of the same Blueprint family.
 
-Reliability is part of the business model because bad cached Blueprints can destroy trust and viral distribution.
+A beautiful render is not enough.
 
 ---
 
-## 20. Cache and Reuse as Economic Flywheel
+## 13. Assumptions as Product UX
 
-If NodeFF accumulates trusted reusable Blueprints:
+Many valuable intents are fuzzy.
+
+NodeFF can create value by converting ambiguity into an editable model.
+
+Example:
+
+```text
+"20-person company dinner split by seniority"
+ → visible role assumptions
+ → editable counts
+ → editable weights
+ → scenario presets
+ → result breakdown
+```
+
+The compiler must not present inferred social conventions as facts.
+
+This creates a distinctive product interaction:
+
+> **Fuzzy Intent → Explicit Assumptions → Interactive Model → User Adjustment**
+
+---
+
+## 14. Tier Model
+
+### Tier 1 — Lightweight / Free-Oriented
+
+Suitable for:
+- client-side deterministic execution;
+- approved primitives;
+- local rules;
+- portable snapshots;
+- modest ephemeral rooms;
+- bounded compilation quota.
+
+### Tier 2 — Paid / Cost-Bearing
+
+Triggered by durable or expensive value such as:
+- persistent runtime AI;
+- heavy external APIs;
+- media generation;
+- larger/longer realtime;
+- durable cloud state;
+- premium ownership/history;
+- specialized paid capabilities.
+
+### Tier 3 — Unsupported / Redirect
+
+Includes:
+- arbitrary code execution;
+- unsafe OS/system access;
+- unsupported runtime capabilities;
+- requests whose core semantics cannot be represented safely.
+
+Exact entitlement/limits remain open.
+
+---
+
+## 15. Compile-Once Economics
+
+The architecture deliberately separates expensive semantic compilation from cheap repeated execution.
+
+```text
+One successful compilation
+ → many local interactions
+ → many opens
+ → many shares
+ → many remixes/reuses
+```
+
+Cost concentrates in:
+- initial compilation;
+- semantic refinement;
+- runtime-AI requests;
+- realtime;
+- durable storage;
+- external APIs;
+- moderation/security;
+- observability;
+- bandwidth.
+
+The economic thesis improves if trusted Blueprint reuse grows.
+
+---
+
+## 16. Reuse Economics
+
+Potential flywheel:
 
 ```text
 More successful intents
- → more trusted Blueprints
- → higher reuse/cache hit
- → lower compiler cost
- → faster response
+ → more trusted Blueprint families
+ → more retrieval/reuse
+ → fewer cold compilations
+ → lower cost + faster response
  → better UX
  → more usage
- → more data
 ```
 
-This is a hypothesis to validate, not assumed inevitability.
+This is a hypothesis to validate.
+
+Exact cache-hit rate, cost reduction and latency must be measured rather than assumed.
 
 ---
 
-## 21. Community / Remix Flywheel
+## 17. Creator Economics
 
-Potential:
+"Everyone is the creator" means users can create useful interactive artifacts without:
+- source code;
+- deployment;
+- app-store review;
+- package management;
+- dedicated frontend development.
+
+Potential creator value:
+- save/publish useful Blueprints;
+- build reputation/discovery;
+- remix successful artifacts;
+- connect paid capabilities;
+- eventually monetize use or transactions.
+
+Creator monetization is downstream of product-market fit, not a Phase 1 prerequisite.
+
+---
+
+## 18. Intent Commerce
+
+Long-term direction:
 
 ```text
-Create
- → Share
- → Use
- → Fork
- → Remix
- → New Blueprint Family
- → More Discovery / Reuse
+Intent
+ → Capability Selection
+ → Micro-App
+ → API / Service / Transaction
+ → Outcome
 ```
 
-Important distinction:
-- direct copied content is not the moat;
-- lineage, successful composition and reuse data may become strategically valuable.
+Potential capability supply:
+- AI services;
+- data sources;
+- booking;
+- specialized calculation;
+- media generation;
+- commerce/transaction APIs;
+- paid Blueprint/capability packages.
+
+NodeFF could become the orchestration and interaction layer through which users consume capabilities without caring which traditional app owns them.
+
+This is a strategic hypothesis, not yet a validated marketplace.
 
 ---
 
-## 22. Trust and Privacy
+## 19. Monetization Paths
 
-Anonymous usage does not mean data can be freely used for training.
+Potential revenue mechanisms:
+1. compiler/runtime-AI quota;
+2. durable history/storage;
+3. larger or longer live rooms;
+4. premium capabilities;
+5. external API pass-through + margin;
+6. Intent Commerce transaction fee;
+7. creator monetization;
+8. private/team environments;
+9. enterprise governance later if demand appears.
 
-Need explicit policy for:
-- telemetry;
+Monetization must not destroy zero-friction first use.
+
+---
+
+## 20. Growth Model
+
+Growth should be artifact-driven rather than account-driven.
+
+```text
+Creator makes useful/fun artifact
+ → shares it
+ → recipient opens instantly
+ → recipient interacts
+ → recipient remixes/creates
+ → new artifact
+```
+
+Important metrics:
+- share rate;
+- share → open;
+- open → meaningful interaction;
+- interaction → remix/create;
+- remix descendants per Blueprint family;
+- repeat creation;
+- anonymous → registered creator conversion.
+
+K-factor is useful only after its components are measured.
+
+---
+
+## 21. Measurement Model
+
+### Activation
+- intent → executable Blueprint success;
+- time to first useful result;
+- semantic success/refinement rate.
+
+### Engagement
+- executed intents;
+- meaningful Instance interactions;
+- Blueprint opens;
+- repeat creation;
+- repeat sharing.
+
+### Viral
+- share/open/use/remix funnel;
+- descendants per shared artifact;
+- recipient-to-creator conversion.
+
+### Retention
+- anonymous browser/device cohorts;
+- registered creator cohorts;
+- repeat use and creation.
+
+### Monetization
+- free → paid;
+- premium capability usage;
+- paid creator activity;
+- transaction volume/GMV where applicable.
+
+Anonymous identifiers must not be reported as exact people.
+
+---
+
+## 22. Trust, Privacy and Ownership
+
+NodeFF may process private, temporary group data.
+
+Business viability requires trust around:
+- what enters share URLs;
+- telemetry collection;
 - retention;
-- opt-out;
-- private data;
-- content moderation;
+- deletion;
+- private/public Blueprint distinction;
+- moderation;
 - creator ownership;
-- training/research reuse;
-- external capability data sharing.
+- external-capability data transfer;
+- training/research reuse.
 
-Trust is critical because NodeFF may carry temporary social/private decision data.
+Anonymous usage does not imply permission for unrestricted model training.
 
----
-
-## 23. Key Business Hypotheses to Validate
-
-1. Users prefer an interactive Micro-App over a chat answer for certain intents.
-2. No-login sharing materially improves use/share conversion.
-3. Users will remix instead of only consume.
-4. Blueprint reuse produces meaningful cache hit rate.
-5. Social/party/decision categories generate organic sharing.
-6. Users understand and trust compiler assumptions when surfaced.
-7. Paid durable value appears naturally after anonymous creation/use.
-8. Capability marketplace demand exists.
-9. Runtime cost remains low enough for generous free usage.
-10. Semantic reliability reaches trust-worthy levels.
+Ownership of a durable artifact must be explicit and authenticated.
 
 ---
 
-## 24. Claims Still Unverified
+## 23. Product-Market Fit Hypotheses
 
-The following discussed values remain hypotheses/benchmarks:
-- forced registration causes ~80% drop-off;
-- anonymous cost per use is ~$0.0001;
-- registered monthly cost ~$0.01–$0.05;
+The business must validate:
+
+1. Users prefer an interactive Micro-App to a chat response for a meaningful class of intents.
+2. Instant no-login access materially improves sharing/use.
+3. Recipients actually interact rather than merely view.
+4. Remix occurs naturally.
+5. Social/decision/party tools are shared organically.
+6. Users understand and trust visible assumptions.
+7. Semantic reliability becomes high enough for repeated use.
+8. Blueprint families are reused often enough to matter.
+9. Progressive auth converts after value rather than before it.
+10. Users pay for durable or expensive capabilities.
+11. Intent Commerce has real provider/user demand.
+12. Runtime economics remain sustainable at generous free usage.
+
+---
+
+## 24. Metrics and Claims That Are Not Facts Yet
+
+Do not treat the following previously discussed figures as established:
+- 80% registration drop-off;
+- specific anonymous CPUI;
+- specific registered monthly cost;
 - K-factor > 1;
 - 5M monthly intents;
 - 90% cache/cost reduction;
-- exact room limits;
-- exact LLM cost per generation.
+- fixed room limits;
+- exact model cost;
+- zero marginal cost;
+- guaranteed millisecond latency.
 
-None should be used as fact until measured.
+They remain benchmarks/hypotheses until measured in NodeFF.
 
 ---
 
-## 25. Near-Term Business Priority
+## 25. Phase 1 Business Objective
 
-Do not optimize for a billion-dollar story before proving the primitive loop.
+Phase 1 should prove one thing before expanding the platform story:
 
-Priority:
+> **Can a person express a temporary intent, receive a correct useful Micro-App quickly, use it immediately, share it, and cause another person to use or remix it?**
+
+The minimum proof loop is:
 
 ```text
 Intent
  → Correct Interactive Blueprint
  → Immediate Value
  → Share
- → Receiver Uses
+ → Recipient Use
  → Remix
 ```
 
-If this loop is strong, monetization, marketplace and network effects have something real to build on.
+Marketplace, large creator economy and deeper platform effects should follow evidence from this loop.
 
 ---
 
-## 26. Business Non-Negotiables
+## 26. Business Guardrails
 
-1. No mandatory registration before first value.
-2. Artifact sharing must be first-class.
-3. Remix must be easier than starting from blank.
-4. Existing Blueprint execution should not repeatedly consume LLM.
-5. Semantic correctness matters more than pretty render success.
-6. Monetization must not destroy the instant-use loop.
-7. Numbers presented as targets/hypotheses remain labeled as such.
-8. Product boundaries must remain explicit; do not promise arbitrary software generation.
+1. First value should not require registration.
+2. Sharing is a core product action, not an export feature.
+3. Remix should reduce creation friction.
+4. Existing Blueprint execution should not repeatedly spend LLM cost.
+5. Semantic correctness matters more than visual polish.
+6. Assumptions must be visible rather than disguised as facts.
+7. Product boundaries must be honest.
+8. Pricing/cost/performance claims remain hypotheses until measured.
+9. Paid features should attach to durable or expensive value.
+10. The product must remain fun/social enough to generate organic distribution, not become only a form builder.
 
----
-
-**Status: WORKING / CONSOLIDATED**
