@@ -446,3 +446,41 @@ Required detailed design later:
 - moderation/takedown behavior.
 
 A content hash is not an access-control boundary: knowing a hash must not automatically grant access to private content.
+
+
+## 18. Semantic Compiler Service Boundary — Failure Case Learning
+
+### 18.1 Compiler Service
+The open-ended Prompt path should terminate at a controlled NFF compiler service rather than browser-side heuristic synthesis.
+
+Candidate path:
+`Browser → NFF Edge/API Compiler Endpoint → LLM Provider Adapter → Structured Candidate → Validation → CAS/Response`
+
+### 18.2 Secret Boundary
+Do not expose production LLM provider keys through browser-build environment variables such as `VITE_LLM_API_KEY`. Browser-visible variables are not secret storage.
+
+Compiler endpoint responsibilities should include:
+- provider credentials;
+- authentication/anonymous quota;
+- rate limiting/abuse controls;
+- model/provider routing;
+- schema version;
+- telemetry/cost measurement;
+- timeout/retry/circuit breaker;
+- validation before trusted-registry admission.
+
+### 18.3 Failure Telemetry Expansion
+Add candidate events/reasons:
+- `semantic_mismatch`;
+- `unsupported_semantics`;
+- `compiler_repair_attempted`;
+- `compiler_repair_failed`;
+- `wrong_archetype_detected`;
+- `fallback_semantic_blocked`.
+
+A render-success event must not be treated as task success.
+
+### 18.4 Cache Poisoning Guardrail
+A semantically wrong but schema-valid Blueprint must not become globally reusable merely because it has a valid hash.
+
+Trusted Common Pool admission should require the appropriate quality/validation status. Failure reports can quarantine/deprioritize a Blueprint and prevent a bad cached artifact from multiplying globally.
