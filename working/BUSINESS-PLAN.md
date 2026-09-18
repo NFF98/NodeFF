@@ -141,3 +141,42 @@ Intent Commerce / settlement
 - Marketplace trust / moderation 如何做？
 
 **Status：Working。**
+
+
+## 12. Anonymous Growth / Progressive Auth — Working
+
+### 12.1 Growth Thesis
+NFF's viral loop benefits from keeping recipients out of a mandatory registration funnel:
+`Creator → Share Link → Anonymous Open/Use → Remix/Create → Share Again`
+
+Registration should be treated as a **value-triggered conversion**, not necessarily the first product screen.
+
+Candidate registration triggers:
+- permanent ownership/editing;
+- cross-device history/statistics;
+- Tier 2 quota/payment;
+- publishing/monetization.
+
+### 12.2 VC / Growth Metrics
+Candidate investor-facing metrics should distinguish product usage from account counts:
+- Viral K-factor;
+- share-to-open and open-to-use conversion;
+- recipient-to-creator/remix conversion;
+- anonymous browser/device WAU/MAU;
+- authenticated creator WAU/MAU;
+- Total Executed Intents / successful sessions;
+- repeat creation and cohort retention;
+- anonymous-to-registered conversion;
+- LLM cost per successful compilation;
+- infrastructure cost per successful session.
+
+Do not equate anonymous browser IDs with unique people. Present measurement methodology and limitations alongside the metric.
+
+### 12.3 Claims Requiring Validation
+The following supplied figures remain hypotheses/benchmarks until measured or externally validated:
+- “forced registration causes 80% drop-off”;
+- anonymous CPUI ≈ $0.0001/use;
+- registered user cost ≈ $0.01–$0.05/month;
+- specific K-factor examples or monthly intent volumes.
+
+The business case should ultimately use NFF's observed cohorts, conversion, retention and unit economics rather than generic benchmark claims.
