@@ -466,3 +466,79 @@ Do not encode semantic version meaning directly into the cryptographic content h
 - `instance_id` = concrete current-use state/session.
 
 This separation will matter for publishing, rollback, moderation, cache invalidation and analytics.
+
+
+## 18. Failure Case Study — Compiler / Player Boundary — Working
+
+### 18.1 Failure Pattern
+A prototype client synthesizer used Regex/numeric extraction/heuristics to convert arbitrary prompts into UI and logic. This caused semantically unrelated Specs to render successfully while solving the wrong problem.
+
+This is a dangerous failure class because the runtime can appear healthy while the contract is semantically wrong.
+
+### 18.2 Correct Responsibility Split
+**Semantic Compiler**
+- interprets natural language;
+- identifies required state/actions/rules/views;
+- selects approved primitives/capabilities;
+- emits a structured LegoSpec candidate.
+
+**Contract/Validation Layer**
+- schema/type validation;
+- binding/expression validation;
+- primitive/capability allowlist;
+- security/policy checks;
+- compatibility/version checks;
+- semantic-confidence/refinement policy where defined.
+
+**Universal Lego Player**
+- render approved primitives;
+- hydrate/update state;
+- execute approved declarative actions/rules;
+- display effects/results;
+- isolate runtime failures.
+
+The Player does not classify free-form Prompt text.
+
+### 18.3 No Heuristic Semantic Router in Player
+Remove architectural dependence on:
+- `if prompt contains X`;
+- Regex domain detection;
+- numeric extraction followed by guessed arithmetic;
+- reuse of an unrelated existing Blueprint with a changed title.
+
+Small deterministic parsers remain acceptable only for explicitly bounded contracts after semantic compilation, not as a universal natural-language understanding layer.
+
+### 18.4 Archetypes
+Compiler-level archetypes may guide composition, e.g.:
+- decision/choice;
+- numeric calculation;
+- structured information/data entry.
+
+These are examples, not a fixed exhaustive set. The LegoSpec itself remains the executable contract.
+
+### 18.5 Dynamic Form Fallback
+Dynamic Form is the fallback **View strategy** when specialized components are unavailable but typed semantics are already known.
+
+It may map:
+- known number field → NumberInput;
+- known enum/options → SelectChoice/Tag-like selector;
+- known boolean → ToggleSwitch;
+- known computed output → Stat/Result component.
+
+It must not manufacture unknown domain rules or facts.
+
+### 18.6 Semantic Failure State
+Introduce a distinct failure category:
+**SEMANTIC_MISMATCH / UNSUPPORTED_SEMANTICS**
+
+A syntactically valid Spec can still be semantically invalid.
+
+Candidate recovery:
+`Candidate Spec → semantic/capability gate fails → controlled repair or targeted user refinement → recompile → validate`
+
+Never silently convert semantic uncertainty into fake calculations.
+
+### 18.7 Compiler API Boundary
+Production compiler credentials belong server/edge-side. Browser code calls an NFF compiler endpoint; the endpoint calls the selected LLM provider through an adapter.
+
+Provider/model remains replaceable and is not part of Player architecture.
