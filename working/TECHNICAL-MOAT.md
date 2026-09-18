@@ -135,3 +135,22 @@ Potential advantages:
 Important distinction:
 - CAS itself (hash-addressed storage) is commodity infrastructure and **not the moat**.
 - The defensible asset would be the accumulated, validated graph connecting intents, reusable Blueprint families, runtime outcomes, recovery history and remix behavior.
+
+
+## 9. Failure Data as a Reliability Moat — Working Addition
+This failure case suggests a potentially important compounding asset:
+
+`Intent → Candidate Blueprint → Validation → Runtime Outcome → User Correction/Failure → Repair/Fork → Better Blueprint`
+
+High-value failure labels include:
+- syntactically invalid;
+- schema-valid but semantic mismatch;
+- wrong archetype/composition;
+- unsupported capability;
+- runtime component/action failure;
+- user refinement after incorrect interpretation;
+- successful repair lineage.
+
+The moat is not “using an LLM.” It may emerge from a proprietary reliability graph showing which intent structures compile into which Blueprint families, where they fail, how users correct them, and which repaired descendants subsequently execute successfully.
+
+Guardrail: failure/telemetry collection must follow explicit privacy, retention and data-governance rules; anonymous usage does not mean unrestricted training-data rights.
