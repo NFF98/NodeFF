@@ -280,3 +280,107 @@ Intent
 - `OPEN-QUESTIONS.md`：只記錄需更多 Evidence 才能回答的問題。
 
 Workbench 中的「Anonymous-First ≠ No Usage Record」與「Idea / Need → App」已作為本輪 Architecture 輸入；Workbench 仍保留原討論脈絡，不作 SSOT。
+
+
+---
+
+## 待同步佇列 — ProjectManagement Review → Function Design
+
+> 管理規則：本區只記錄 **尚未同步到 `working/functions/` 的新結論**。已同步項目不重複記錄；等本輪 Review 完成後一次整理與更新 Function 文件。
+
+### PENDING-FUNC-001 — Capability Card Contract 擴充
+
+來源：
+- `working/ProjectManagement/CAPABILITY-FABRIC.md`
+- `working/ProjectManagement/BUSINESS-PLAN.md`
+
+後續 Function Design 必須反映：
+
+1. Capability 不只包含 Technical Contract，還要包含：
+   - Product Contract
+   - Reuse / Creator hooks
+   - Commerce / Network hooks
+   - Evidence / Maturity
+
+2. 五個產品原則要能從 Capability 原子層被支援：
+   - No install setup
+   - Everyone is the creator
+   - Sharable, linkable
+   - Intent Commerce
+   - Fun and socialable
+
+3. 中期能力不能到中期才重做底座；原子層需預留：
+   - Remix / Reuse
+   - Attribution
+   - Version / Compatibility
+   - Ownership / Creator configuration
+   - Paid / Entitlement metadata
+
+4. 長期 External / Paid Capability 應沿用同一套 Runtime / Registry，不另建第二套 Commerce Runtime。
+
+5. Capability 狀態採：
+   - PROPOSED
+   - POC
+   - BUILT
+   - TESTED
+   - VALIDATED
+   - RELEASED
+
+6. **待補強項**：Capability Contract 需明確加入 Identity / Ownership Hooks，例如：
+   - anonymous allowed
+   - account required
+   - ownership required
+   - creator attribution
+   - recipient permission
+   - entitlement scope
+
+主要影響 Function：
+- F03 Runtime Execution
+- F04 Capability Registry
+- F05 Share / Restore
+- F06 Remix / Refine
+- F07 Anonymous Identity & Evidence
+- F08 Durable Identity / Ownership
+- F10 Blueprint Reuse / Retrieval
+- F11 External Capability Execution
+
+### PENDING-FUNC-002 — Phase 1 Infrastructure Baseline
+
+來源：
+- `working/INFRA-ARCHITECTURE.md`
+
+後續 Function Design 採用目前基準：
+
+~~~text
+Client-First
++ Serverless
++ Edge
++ PostgreSQL / Supabase
+~~~
+
+Function 設計時需遵守：
+- Runtime interaction 優先 Browser-local；
+- Backend 以 Serverless / Edge API 為主；
+- LLM 僅經 Compiler API；
+- PostgreSQL 為 Phase 1 主要 durable data store；
+- Realtime / Object Storage / Queue / Vector Retrieval 不作 Phase 1 預設依賴；
+- 中長期付費或高成本 Infrastructure 以獨立 Function / Release 啟動。
+
+主要影響 Function：
+- F01 Intent Compilation
+- F05 Share / Restore
+- F07 Anonymous Identity & Evidence
+- F08 Durable Identity / Ownership
+- F09 Realtime Room
+- F10 Blueprint Reuse / Retrieval
+- F11 External Capability Execution
+
+### 同步時機
+
+本輪使用者仍在 Review 其他 Working 文件。
+
+在明確要求統一同步前：
+- 不逐項修改 `working/functions/`；
+- 不重複同步已記錄內容；
+- 新發現只追加「新的差異」到本待同步佇列；
+- Review 完成後一次整理 Function 總表、個別 Function Design 與 Release dependency。
