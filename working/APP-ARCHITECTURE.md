@@ -14,7 +14,8 @@ Intent
 → Select Capabilities
 → Validate Blueprint
 → Run in Browser
-→ Use / Share / Remix
+→ Inspect Result
+→ Use / Share / Remix / Correct
 → Learn from Evidence
 ~~~
 
@@ -96,7 +97,8 @@ flowchart LR
 | **Capability Fabric** | 定義 NFF 可執行能力 | Compiler、Validator、Runtime 共用同一能力真相 |
 | **L3 LegoSpec Validation** | schema、semantic boundary、security、compatibility | 只有可信任 Blueprint 可進 Runtime |
 | **L4 Universal Runtime** | state、rules、actions、views、effects | Browser 端低成本、可重播的互動 App |
-| **State / Identity / Evidence** | Blueprint、Instance、lineage、anonymous/account evidence | Share、Remix、Reuse、Ownership 與改善證據 |
+| **State / Identity / Evidence** | Blueprint、Instance、result、lineage、anonymous/account evidence | Share、Remix、Reuse、Ownership 與改善證據 |
+| **Result Quality Loop** | User 對執行結果提出「邏輯不對／結果差太多」的修正 | 保留舊版，只修相關語意，產生可比較、可回退的新 Blueprint |
 | **Recovery System** | error classification、context preservation、next action | 不 White Screen、不丟工程碼、不讓 User 全部重來 |
 | **External Capability Plane** | AI / API / payment / booking / heavy compute | 只有需要時才離開 local Runtime |
 
@@ -297,7 +299,7 @@ Capability Gap 是 Product / Capability Roadmap 的 Evidence。
 
 ---
 
-# 8. 五條核心產品流程
+# 8. 六條核心產品流程
 
 ## Create
 
@@ -347,6 +349,46 @@ Existing Blueprint
 ~~~
 
 結果：**每個 App 都能成為下一個創作起點。**
+
+## Result Feedback / Logic Correction
+
+這條路徑處理一種特別重要的情況：
+
+> **App 可以正常執行，但邏輯、假設或結果和 User 想要的差很多。**
+
+這不是 Runtime Error，也不能當成「既然有畫面就算成功」。
+
+~~~mermaid
+flowchart LR
+    A["Current Blueprint<br/>+ Current Result"]
+    B["User: 調整邏輯 / 結果不對"]
+    C["Preserve Current App<br/>+ Inputs + Result"]
+    D["Correction Intent"]
+    E["L2 Semantic Delta<br/>only affected logic"]
+    F["L3 Full Revalidation"]
+    G["New Immutable Blueprint"]
+    H["Re-run / Compare"]
+    I{"User satisfied?"}
+
+    A --> B --> C --> D --> E --> F --> G --> H --> I
+    I -->|Yes| J[Continue / Share / Remix]
+    I -->|No| D
+    H --> K[Return to Previous Version]
+~~~
+
+Architecture rules：
+
+1. **舊 Blueprint 不直接修改**；修正會產生新的 immutable revision。
+2. **保留目前輸入與結果**，User 不需要重新填一次。
+3. User feedback 先變成 **Correction Intent**，再由 L2 產生受控 Semantic Delta。
+4. 只修改相關邏輯，但新 Blueprint 仍必須完整經過 L3 Validation。
+5. 新舊結果要能比較，並保留返回舊版的能力。
+6. User 說「結果不對」屬於 Semantic / Product feedback，不應被誤分類成 500 error。
+7. Correction outcome 要成為 Evidence，用來改善 Compiler、Blueprint Family 與 Capability selection。
+
+結果：
+
+> **NFF 不只負責「App 能跑」，還要負責讓 User 能低摩擦地把 App 修到符合意圖。**
 
 ## Error / Recovery
 
@@ -420,6 +462,12 @@ Context
 Delta
 = controlled change
 
+Result Snapshot
+= 某個 Blueprint + Instance 在特定輸入下產生的結果快照
+
+Correction Intent
+= User 對「哪裡不對、希望怎麼改」的語意回饋
+
 Recovery Context
 = original Intent / input / partial progress
 ~~~
@@ -438,6 +486,22 @@ anonymous_id
 ~~~
 
 Blueprint content、ownership、Instance state 不混成一個 object。
+
+Result Correction 的關係：
+
+~~~text
+Blueprint Revision A
++ Instance Inputs
+→ Result Snapshot A
+→ User Correction Intent
+→ Semantic Delta
+→ Blueprint Revision B
+→ Same / Preserved Inputs
+→ Result Snapshot B
+→ Compare / Accept / Revert
+~~~
+
+因此「Runtime 算出的結果」與「User 認為結果正確」是兩件不同的事。
 
 ---
 
@@ -468,12 +532,13 @@ flowchart LR
 - Blueprint / Instance
 - Share / Restore
 - Remix
+- Result Feedback / Logic Correction
 - Anonymous Evidence
 - Humanized Recovery
 
 架構 Gate：
 
-> **能做的 Intent 做對；不能做的誠實處理；正常 Interaction 不依賴 LLM。**
+> **能做的 Intent 做對；結果不對時能低摩擦修正；不能做的誠實處理；正常 Interaction 不依賴 LLM。**
 
 不先做：
 - Marketplace
@@ -586,12 +651,13 @@ Commerce mechanics
 6. LLM Vendor 必須藏在 Model Gateway 後。
 7. Blueprint / Instance / Context / Delta / Recovery Context 分離。
 8. Existing Blueprint 正常 interaction 預設 0 LLM。
-9. Share / Remix 是核心產品路徑。
-10. Error code 不是 Consumer UX。
-11. Component failure 不得造成整頁 White Screen。
-12. Heavy / Paid / External Work 必須經 Capability Boundary。
-13. 中長期只能「擴張核心」，不能繞過核心另建第二套 Runtime。
-14. Product Evidence 決定何時解鎖下一階段。
+9. Share / Remix / Result Correction 都是核心產品路徑。
+10. Runtime Success 不等於 Semantic Success；User 必須能修正邏輯並比較／回退結果。
+11. Error code 不是 Consumer UX.
+12. Component failure 不得造成整頁 White Screen。
+13. Heavy / Paid / External Work 必須經 Capability Boundary。
+14. 中長期只能「擴張核心」，不能繞過核心另建第二套 Runtime。
+15. Product Evidence 決定何時解鎖下一階段。
 
 ---
 
@@ -627,6 +693,9 @@ NFF 有什麼？
 
 誰負責什麼？
 → Compiler 理解，Fabric 限制，Validator 信任，Runtime 執行
+
+結果不對怎麼辦？
+→ 保留舊版與輸入 → Correction Intent → Semantic Delta → 新版比較 / 回退
 
 出錯怎麼辦？
 → 誠實降級、保留 Context、人話 Recovery
