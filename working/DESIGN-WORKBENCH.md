@@ -488,3 +488,34 @@ Browser Runtime Plane
 - 本輪先不修改 `APP-DETAILED-DESIGN.md`；
 - 不逐項改 `working/functions/`；
 - 等使用者完成 APP Architecture / Working 文件 Review 後再一次同步。
+
+
+---
+
+## Sync Status — 1／3／6 個月 Design Baseline
+
+以下待同步項已於本輪吸收到新版 Working Design，後續不再重複處理：
+
+- PENDING-FUNC-001 — Capability Card Contract 擴充 → 已反映於 CAPABILITY-FABRIC.md 與 APP-DETAILED-DESIGN.md。
+- PENDING-FUNC-002 — Infrastructure Baseline → 已反映於 APP-DETAILED-DESIGN.md 的 Function boundary / phase dependency；Infra 細節仍以 INFRA-ARCHITECTURE.md 為準。
+- PENDING-FUNC-003 — Experience Shell / Model Gateway / Capability Gap / Humanized Recovery → 已反映於 APP-ARCHITECTURE.md 與 APP-DETAILED-DESIGN.md。
+
+統一時間基準：
+
+~~~text
+0–1 個月
+Core Proof
+
+2–3 個月
+Reuse / Identity / Creator Value
+
+4–6 個月
+Scale Readiness / External Paid Capability Pilot
+
+6 個月後
+Intent Commerce / Capability Network 持續擴張
+~~~
+
+管理規則：
+- 上述三項之後視為 SYNCED，不再重複進待同步佇列。
+- 新 Review 只記錄相對於目前 baseline 的新差異。
