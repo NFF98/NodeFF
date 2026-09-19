@@ -344,30 +344,43 @@ Workbench 中的「Anonymous-First ≠ No Usage Record」與「Idea / Need → A
 - F10 Blueprint Reuse / Retrieval
 - F11 External Capability Execution
 
-### PENDING-FUNC-002 — Phase 1 Infrastructure Baseline
+### PENDING-FUNC-002 — Infrastructure Baseline（已重新推導）
 
 來源：
 - `working/INFRA-ARCHITECTURE.md`
+- `working/ProjectManagement/PRODUCT-DISCUSSION.md`
+- `working/ProjectManagement/BUSINESS-PLAN.md`
+- `working/ProjectManagement/CAPABILITY-FABRIC.md`
+- `working/TECHNICAL-MOAT.md`
 
-後續 Function Design 採用目前基準：
+後續 Function Design 採用：
 
 ~~~text
-Client-First
-+ Serverless
-+ Edge
-+ PostgreSQL / Supabase
+Browser Runtime Plane
++ Cloudflare Edge / Serverless Control Plane
++ Supabase PostgreSQL Durable State Plane
++ Pluggable External Capability Plane
 ~~~
 
-Function 設計時需遵守：
-- Runtime interaction 優先 Browser-local；
-- Backend 以 Serverless / Edge API 為主；
+新的 Function Design 約束：
+- Phase 1 Runtime interaction 優先 Browser-local；
+- Cloudflare Static/CDN + Workers 為 Phase 1 Edge / Serverless baseline；
+- Supabase Postgres 為唯一 durable System of Record；
+- Capability Registry Phase 1 是 versioned code/build artifact，不先做動態 Registry service；
+- immutable Blueprint 使用 content hash + CDN immutable cache，不先依賴 Edge KV；
 - LLM 僅經 Compiler API；
-- PostgreSQL 為 Phase 1 主要 durable data store；
-- Realtime / Object Storage / Queue / Vector Retrieval 不作 Phase 1 預設依賴；
-- 中長期付費或高成本 Infrastructure 以獨立 Function / Release 啟動。
+- telemetry 只收 meaningful events 並 batch；
+- Supabase Auth / Realtime / Storage 在需要前不啟用；
+- semantic reuse 優先沿用 Postgres / pgvector，有證據後再啟用，不先建 dedicated Vector DB；
+- Queue / Background Worker 只為 Heavy Capability 啟動；
+- 中長期 Capability Gateway / Provider Registry / Entitlement / Metering / Transaction layer 必須沿用相同 Blueprint / Runtime model；
+- Cloudflare / Supabase / LLM / Realtime / Payment 等 Vendor 必須藏在 NFF-owned adapter 後面。
 
 主要影響 Function：
 - F01 Intent Compilation
+- F02 Blueprint Validation
+- F03 Runtime Execution
+- F04 Capability Registry
 - F05 Share / Restore
 - F07 Anonymous Identity & Evidence
 - F08 Durable Identity / Ownership
