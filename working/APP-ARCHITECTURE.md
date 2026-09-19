@@ -1,617 +1,326 @@
 # NodeFF App Architecture
 
-> 狀態：Working。本文定義 NodeFF App 的整體架構、使用者體驗邊界、四層 Engine、Capability Fabric 接點、LLM Provider 抽象與跨層 Recovery。具體 Function 實作留待 `APP-DETAILED-DESIGN.md` / `working/functions/`。
+> 狀態：Working。這份文件只回答三件事：**NFF 有什麼、各自負責什麼結果、短／中／長期怎麼長。**
+> Function 細節之後由 APP-DETAILED-DESIGN.md 與 working/functions/ 承接。
 
-# 1. 系統定位
+# 1. 一張圖看懂 NodeFF App
 
-NodeFF 是一個 **Intent-to-App Runtime Platform**。
-
-產品核心：
+NodeFF 是 **Intent-to-App Runtime Platform**。
 
 > **意圖就是 App。**
 
-使用者不必先找 App、安裝 App、學 App，而是描述需求，由 NodeFF 將 Intent 轉成可互動、可分享、可 Remix 的 Micro-App。
-
-NodeFF 部署的是：
-
-> **Experience Shell + Semantic Compiler + Trusted Contract + Universal Runtime + Capability Fabric**
-
-不是為每個使用者重新部署一個獨立 App。
-
----
-
-# 2. 整體架構
+使用者不用先找 App、安裝 App、學 App；只要說出需求，NodeFF 把它變成可互動、可分享、可 Remix 的 Micro-App。
 
 ~~~mermaid
-flowchart TB
+flowchart LR
     U[User]
 
-    subgraph UX["Experience Shell / 靈感精靈"]
-        INSPIRE[Inspiration Capsules / Ghost Text]
-        REFINE[Progressive Refinement]
-        RECOVERY[Humanized Recovery UX]
+    subgraph SHELL["① Experience Shell<br/>靈感精靈"]
+        I[Inspiration / Ghost Text]
+        R[Refine / Remix]
+        E[Humanized Recovery]
     end
 
-    subgraph ENGINE["NodeFF Engine"]
-        L1[Layer 1
-Ingestion & Routing]
-        L2[Layer 2
-Semantic Compiler]
-        L3[Layer 3
-LegoSpec Contract + Validation]
-        L4[Layer 4
-Universal Runtime]
+    subgraph ENGINE["② Intent-to-App Engine"]
+        L1[Route]
+        L2[Semantic Compiler]
+        L3[Validate Contract]
+        L4[Universal Runtime]
     end
 
-    FABRIC[Capability Fabric / Registry]
-    MODEL[Model Gateway / Provider Adapters]
-    APP[Interactive Micro-App]
+    F["③ Capability Fabric<br/>NFF 真正會做什麼"]
+    M["④ Model Gateway<br/>可切換 LLM"]
+    D["⑤ State / Identity / Evidence"]
+    APP["Interactive Micro-App"]
 
-    U --> UX
-    UX --> L1
-    L1 --> L2
-    L2 <--> MODEL
-    L2 <--> FABRIC
-    L2 --> L3
-    L3 <--> FABRIC
-    L3 --> L4
-    L4 <--> FABRIC
-    L4 --> APP
+    U --> SHELL
+    SHELL --> L1 --> L2 --> L3 --> L4 --> APP
+    L2 <--> M
+    L2 <--> F
+    L3 <--> F
+    L4 <--> F
 
-    L1 -. recovery state .-> RECOVERY
-    L2 -. recovery state .-> RECOVERY
-    L3 -. recovery state .-> RECOVERY
-    L4 -. recovery state .-> RECOVERY
+    APP --> D
+    SHELL --> D
+    D -. improve .-> L2
+    D -. capability gaps .-> F
 ~~~
 
-核心觀念：
+NodeFF 不為每個 App 生成一套新程式碼。
 
-- **Experience Shell**：負責讓人容易開始、容易修正、容易理解失敗。
-- **四層 Engine**：負責把 Intent 可靠地變成可執行 Blueprint。
-- **Capability Fabric**：決定 NFF 真正「會做什麼」。
-- **Model Gateway**：讓 Semantic Compiler 不綁死任何單一 LLM。
-- **Recovery UX**：確保錯誤最後都變成使用者可以理解與採取下一步的產品狀態。
+它真正部署的是：
+
+~~~text
+Experience Shell
++ Semantic Compiler
++ Trusted LegoSpec
++ Universal Runtime
++ Capability Fabric
+~~~
+
+然後用不同 Blueprint 組出不同 App。
 
 ---
 
-# 3. Experience Shell — 靈感精靈 / 創作引導系統
+# 2. NFF 有哪些東西？各自負責什麼結果？
 
-靈感精靈不是另一個 AI Engine，也不是展示 Demo。
+| 系統 | 說人話 | 最終要負責的結果 |
+|---|---|---|
+| **Experience Shell / 靈感精靈** | 幫使用者開始、修改、理解失敗 | 使用者不用學 Prompt，也知道下一步怎麼做 |
+| **Layer 1 — Routing** | 接住需求、先做安全與路由 | 合法需求進正確流程，錯誤不直接丟工程碼 |
+| **Layer 2 — Semantic Compiler** | 真正理解「你想做什麼」 | 把 Intent 變成正確 Capability 組合與 Blueprint |
+| **Model Gateway** | 管理不同 LLM | 可以依成本、速度、能力切換模型，不綁死 Vendor |
+| **Capability Fabric** | NFF 的 Lego 能力庫 | 決定 NFF 真正能做什麼、不能做什麼 |
+| **Layer 3 — LegoSpec / Validation** | App 的可信任藍圖規格 | 不合法、不安全、不相容的 Blueprint 不能進 Runtime |
+| **Layer 4 — Universal Runtime** | 把 Blueprint 真正跑起來 | 快速、本地、安全互動；一般操作不用再叫 LLM |
+| **State / Identity / Evidence** | 記住 App、使用與改善證據 | 支援 Share、Remix、Reuse、Identity 與未來 Creator Value |
+| **Recovery System** | 系統出錯時接住使用者 | 不 White Screen、不只顯示 404；保留資料並給下一步 |
 
-它是使用者進入 NodeFF 的 **Creation Experience Shell**，目標是降低「空白 Prompt」的思考成本。
+## 2.1 Experience Shell / 靈感精靈
 
-目前已確立的 UX 機制：
+它不是另一個 AI Engine，而是 NodeFF 的「創作入口 + Recovery UI」。
 
-## 3.1 Inspiration Capsules
-
-顯示「可以做什麼」的可編輯範例。
-
-點擊後不是只看 Demo，而是：
-
-~~~text
-Capsule
- → Fork Prompt
- → 修改關鍵變數
- → Generate
- → Use / Remix
-~~~
-
-原則：
-
-> **編輯一個好範例，要比從零想 Prompt 更容易。**
-
-## 3.2 Ghost Text
-
-空白輸入時，以自然語言範例持續示範：
-
-> 普通人的日常描述，就可以成為 App 的起點。
-
-## 3.3 Progressive Refinement
-
-第一次 Intent 不必完美。
+包含：
 
 ~~~text
-粗略 Intent
- → 先產生可用 App
- → 提供情境化 Refinement Suggestions
- → User 選擇修改
- → Semantic Delta
- → 新 Blueprint
+Inspiration Capsules
++ Ghost Text
++ Fork & Remix
++ Progressive Refinement
++ Humanized Recovery
 ~~~
 
-## 3.4 Fork & Remix Learning Loop
+核心學習循環：
 
 ~~~text
 Copy
  → Modify
- → Combine
+ → Generate
+ → Use
+ → Remix
  → Create
 ~~~
 
-產品原則：
+原則：
 
 > **先完成，再學會；不是先學會，才能完成。**
 
-Experience Shell 同時也是後述 Error / Capability Gap 的主要人性化呈現層。
-
 ---
 
-# 4. Layer 1 — Ingestion & Routing
+## 2.2 Intent-to-App Engine：四層
 
-責任：
-
-- 接收 Intent；
-- request normalization；
-- safety / policy / quota gate；
-- exact / trusted reuse lookup；
-- routing；
-- 保存原始 Intent 與 recovery context。
-
-Layer 1 不負責：
-- 自由文字業務語意理解；
-- 決定 Capability 組合；
-- 選擇 fallback App 意義。
-
-若 request 被阻擋，也不能只回傳 HTTP code；必須產生可由 Experience Shell 呈現的 Recovery State。
-
----
-
-# 5. Layer 2 — Semantic Compiler
-
-Layer 2 是 NodeFF 的語意大腦。
-
-責任：
-
-- 理解 Intent；
-- 拆解 requirements；
-- 查詢 Capability Fabric；
-- 判斷 Capability Coverage；
-- 選擇與組合 Capability；
-- 建立 State / Rule / Event / Action wiring；
-- 產生 Blueprint Candidate；
-- bounded repair / refinement。
-
-核心輸出：
-
-> **結構化 Blueprint，而不是 JavaScript。**
-
----
-
-# 6. LLM 自由切換放在哪裡？
-
-LLM Provider / Model 的自由切換屬於：
-
-> **Layer 2 Semantic Compiler 內的 Model Gateway / Provider Adapter**
-
-架構：
-
-~~~text
-Semantic Compiler
-      ↓
-Model Router
-      ↓
-NFF Model Interface
- ├─ Provider Adapter A
- ├─ Provider Adapter B
- ├─ Provider Adapter C
- └─ Future Model
+~~~mermaid
+flowchart LR
+    A["Layer 1<br/>接住需求"] -->
+    B["Layer 2<br/>理解需求"] -->
+    C["Layer 3<br/>確認安全可執行"] -->
+    D["Layer 4<br/>把 App 跑起來"]
 ~~~
 
-Model Router 可以依：
+### Layer 1 — Ingestion & Routing
 
-- task type；
+負責：
+
+~~~text
+Intent
+→ Safety / Policy / Quota
+→ Reuse Lookup
+→ Route
+~~~
+
+結果：
+
+> **把請求送到正確地方，並保存原始 Intent / Recovery Context。**
+
+它不負責猜業務語意。
+
+### Layer 2 — Semantic Compiler
+
+這是 NFF 的「語意大腦」。
+
+負責：
+
+~~~text
+Understand Intent
+→ Check Capability Coverage
+→ Select Capabilities
+→ Compose State / Rule / Action / Event
+→ Produce Blueprint Candidate
+~~~
+
+結果：
+
+> **正確的 Blueprint，不是 JavaScript。**
+
+### Layer 3 — LegoSpec Contract + Validation
+
+這是 Compiler 與 Runtime 的「信任門」。
+
+檢查：
+
+- Schema；
+- Capability 是否存在；
+- State / Binding / Rule 是否合法；
+- Permission / Resource；
+- Version / Compatibility；
+- Degradation 是否誠實；
+- Security boundary。
+
+結果：
+
+> **只有可信任 Blueprint 才能進 Runtime。**
+
+### Layer 4 — Universal Runtime
+
+負責：
+
+~~~text
+Hydrate
+→ State
+→ Action
+→ Rule / Capability
+→ View
+→ Effect
+~~~
+
+結果：
+
+> **Micro-App 在 Browser 裡快速、安全地跑。**
+
+一般 Button、Dice、Wheel、Timer、Calculation、Animation 等互動：
+
+> **預設 0 LLM call。**
+
+Runtime 不猜 Intent、不選模型、不發明 Capability、不執行任意 generated code。
+
+---
+
+## 2.3 Capability Fabric：NFF 真正「會什麼」
+
+Capability Fabric 不是第五層。
+
+它橫跨 Layer 2、3、4：
+
+~~~mermaid
+flowchart TB
+    F["Capability Fabric"]
+
+    F --> C["Layer 2<br/>知道何時該用"]
+    F --> V["Layer 3<br/>知道是否能合法組合"]
+    F --> R["Layer 4<br/>真正執行"]
+~~~
+
+同一份 Capability Source 應產生：
+
+~~~text
+Compiler Metadata
++ Validation Contract
++ Runtime Registration
++ Compatibility Metadata
+~~~
+
+避免 Compiler、Validator、Runtime 各自維護一套能力表。
+
+詳細 Card Contract 與 Maturity：
+
+- working/ProjectManagement/CAPABILITY-FABRIC.md
+
+### 如果 User 要的東西 NFF 不會怎麼辦？
+
+每個 Intent 必須得到四種明確結果之一：
+
+~~~text
+FULLY_SUPPORTED
+PARTIALLY_SUPPORTED
+EXTERNAL_OR_HEAVY_REQUIRED
+UNSUPPORTED
+~~~
+
+~~~mermaid
+flowchart TD
+    I[User Intent] --> C{Capability Coverage}
+
+    C -->|Full| A[直接生成 App]
+    C -->|Partial| B["保留核心語意<br/>明確告知降級"]
+    C -->|External / Heavy| X["說明時間 / 權限 / 費用<br/>讓 User 選"]
+    C -->|Unsupported| U["不亂做<br/>說明缺口 + Alternative / Refine"]
+
+    U --> G[Capability Gap Evidence]
+    G --> P[Future Capability POC]
+~~~
+
+核心規則：
+
+> **做不到可以承認；不能做錯還假裝成功。**
+
+---
+
+## 2.4 Model Gateway：LLM 可以自由切換
+
+LLM 切換屬於 **Layer 2 Semantic Compiler**。
+
+~~~mermaid
+flowchart LR
+    SC[Semantic Compiler] --> MR[Model Router]
+    MR --> NI[NFF Model Interface]
+    NI --> A[Provider A]
+    NI --> B[Provider B]
+    NI --> C[Provider C]
+~~~
+
+Router 可依：
+
 - model capability；
-- structured-output support；
+- structured output；
 - latency；
 - cost；
 - quota；
 - availability；
 - fallback policy；
 
-選擇模型。
-
-重要邊界：
-
-1. LegoSpec 不知道使用的是哪一家 LLM。
-2. Runtime 不知道使用的是哪一家 LLM。
-3. Provider SDK / response format 不能滲透進 Layer 3 Contract。
-4. Provider failure 可切換 Adapter，但所有輸出仍必須經同一套 Validation。
-5. 是否提供「使用者手動選模型」是 Product Feature，不是 Architecture 必要條件。
-
-因此 NFF 可以換模型而不改 Runtime / Blueprint。
-
----
-
-# 7. Capability Fabric 在整體架構中的位置
-
-Capability Fabric **不是四層中的第五層**。
-
-它是一個跨 Layer 2 / 3 / 4 共用的可信任能力系統：
-
-~~~text
-Capability Fabric
-      │
-      ├─ Layer 2：知道「有哪些能力、何時適合用」
-      ├─ Layer 3：驗證「這些能力能否合法組合」
-      └─ Layer 4：提供「真正可執行的 Runtime implementation」
-~~~
-
-Capability Fabric 詳細定義位於：
-
-- `working/ProjectManagement/CAPABILITY-FABRIC.md`
-
-Phase 1 Registry 應由同一份 versioned source 產生：
-
-- Compiler semantic metadata；
-- Validator contract；
-- Runtime registration；
-- compatibility metadata。
-
-禁止 Compiler、Validator、Runtime 各自維護不同能力清單。
-
----
-
-# 8. User Intent 無法對應 Capability 時怎麼辦？
-
-NodeFF 不允許 LLM「假裝會」。
-
-Layer 2 必須先做 **Capability Coverage Resolution**。
-
-每個 Intent 最終至少落入四種結果：
-
-## FULLY_SUPPORTED
-
-現有 Capability 足以保持核心 Intent。
-
-~~~text
-Intent
- → Compose
- → Validate
- → Execute
-~~~
-
-## PARTIALLY_SUPPORTED
-
-只有在「核心語意仍然成立」時，才能提供降級版本。
-
-例如：
-
-> 視覺效果較簡化，但遊戲規則仍完全成立。
-
-必須明確告知使用者差異，不可 silent downgrade。
-
-## EXTERNAL_OR_HEAVY_REQUIRED
-
-需求可由 approved external / heavy Capability 完成，但可能需要：
-
-- 額外時間；
-- permission；
-- login；
-- paid entitlement；
-- external cost。
-
-Experience Shell 應先給使用者清楚選擇，不偷偷執行付費或敏感行為。
-
-## UNSUPPORTED
-
-沒有合法 Capability 能保持核心 Intent 時：
-
-> **不要捏造一個看起來像 App、其實解錯問題的結果。**
-
-系統應：
-
-1. 保留原始 Intent；
-2. 用人話說明「目前哪一部分還做不到」；
-3. 如果存在合理替代方案，讓使用者選擇；
-4. 提供 Refinement；
-5. 記錄 Capability Gap Evidence。
-
-Capability Gap 會回饋：
-
-~~~text
-Unsupported Intent
- → Capability Gap Evidence
- → Product / Capability Review
- → POC
- → Future Capability
-~~~
-
-這讓真實需求反過來決定 Capability Fabric 應該長什麼。
-
----
-
-# 9. Layer 3 — LegoSpec Contract + Validation
-
-Layer 3 是 Compiler 與 Runtime 之間的信任邊界。
-
-主要定義：
-
-- State；
-- Capability references；
-- Actions / Events；
-- Rules；
-- Bindings；
-- Assumptions；
-- version / compatibility；
-- support / degradation metadata；
-- recovery / notice metadata。
-
-Validation 不只檢查 JSON shape。
-
-還必須確保：
-
-- Capability 存在；
-- references 合法；
-- wiring 合法；
-- resource bounded；
-- permissions 合法；
-- fallback 不冒充 full support；
-- unsupported semantics 不被 Runtime 猜測。
-
-原則：
-
-> **Schema Valid ≠ Semantic Correct。**
-
----
-
-# 10. Layer 4 — Universal Runtime
-
-責任：
-
-- Hydration；
-- State execution；
-- Rule evaluation；
-- Capability rendering / invocation；
-- Event handling；
-- Effect；
-- share / restore；
-- optional realtime binding；
-- local component isolation。
-
-Runtime 不負責：
-
-- 猜 Intent；
-- 選 LLM；
-- 發明不存在的 Capability；
-- 自己決定語意降級方案；
-- 執行 arbitrary generated code。
-
-核心路徑：
-
-~~~text
-Action
- → State
- → Rule / Capability
- → View
- → Effect
-~~~
-
----
-
-# 11. 三條核心產品路徑
-
-## Create
-
-~~~text
-Inspiration / Intent
- → Route
- → Compile
- → Capability Resolution
- → Validate
- → Blueprint
- → Execute
-~~~
-
-## Use / Share
-
-~~~text
-Existing Blueprint
- → Resolve / Restore
- → Compatibility + Trust Check
- → Execute Locally
-~~~
-
-既有有效 Blueprint 一般互動預設 0 次 LLM call。
-
-## Remix / Refine
-
-~~~text
-Existing Blueprint
- + User Change
- → Semantic Delta
- → Compile / Validate
- → New Immutable Blueprint Revision
-~~~
-
-Runtime state change 與 Blueprint semantic change 必須分開。
-
----
-
-# 12. 全域 Error Handling：技術錯誤不能直接丟給使用者
-
-NodeFF 內部可以有 HTTP 401 / 404 / 402 / 500、validation code、provider error。
-
-但：
-
-> **這些是工程訊號，不是產品文案。**
-
-所有 Layer 的 failure 最後都必須轉成統一的 **Recovery UX State**。
-
-建議架構：
-
-~~~text
-Technical Failure
- → Error Classification
- → Recovery Policy
- → Recovery UX State
- → Experience Shell
- → Human Message + Useful Next Action
-~~~
-
----
-
-# 13. Recovery UX State
-
-每個可預期錯誤至少應產生：
-
-- **Status**：retryable / needs_input / degraded / unsupported / blocked；
-- **Human Message**：使用者看得懂的說明；
-- **Preserved Context**：原始 Intent / 已輸入資料盡量保留；
-- **Next Actions**：Retry / Refine / Use Alternative / Sign In / Continue；
-- **Technical Code**：僅供 telemetry / debug，不直接顯示給一般使用者。
-
-例如：
-
-| Internal | User Experience |
-|---|---|
-| 401 | 「這個內容需要登入後才能繼續。」＋登入按鈕 |
-| 402 / entitlement | 「這項能力需要額外額度／付費能力。」＋選擇替代或繼續 |
-| 404 share | 「這個 App 連結目前找不到或已失效。」＋返回／重新建立 |
-| compiler timeout | 「這次還沒成功做出 App，你的需求已保留。」＋重試 |
-| capability gap | 「目前還不能完整做到這個效果。」＋可行替代／調整需求 |
-| runtime component error | 只隔離該區塊，其他 App 繼續運作 |
-
----
-
-# 14. Error Recovery Pipeline
-
-~~~mermaid
-flowchart TD
-    A[User Request / Interaction] --> B{哪一類問題?}
-
-    B -->|Routing / Network| R1[Retry / Restore Context]
-    B -->|Compilation| R2[Bounded Repair / Provider Fallback]
-    B -->|Validation| R3[Reject Candidate / Repair]
-    B -->|Semantic Mismatch| R4[User Refinement]
-    B -->|Capability Gap| R5[Explain + Alternative / Refine]
-    B -->|Runtime Component| R6[Local Isolation / Safe Fallback]
-    B -->|Permission / Entitlement| R7[Humanized Permission / Upgrade Choice]
-
-    R1 --> UX[Experience Shell Recovery UI]
-    R2 --> UX
-    R3 --> UX
-    R4 --> UX
-    R5 --> UX
-    R6 --> UX
-    R7 --> UX
-~~~
-
-核心原則：
-
-1. **不中斷流程，但不隱瞞錯誤。**
-2. **不丟 White Screen。**
-3. **不直接顯示工程碼作為答案。**
-4. **盡可能保留使用者已輸入內容。**
-5. **每次失敗至少提供一個有意義的下一步。**
-6. **Retry 有上限，不無限自動重試。**
-7. **降級不得改變核心語意後還假裝成功。**
-
----
-
-# 15. 錯誤責任分層
-
-## Layer 1
-處理：
-- invalid request；
-- rate / policy；
-- network / routing；
-- access prerequisite。
-
-產物：Recovery State，不是裸 HTTP error。
-
-## Layer 2
-處理：
-- provider failure；
-- malformed generation；
-- semantic uncertainty；
-- capability mismatch；
-- repair / refinement。
-
-## Layer 3
-處理：
-- schema；
-- reference；
-- capability；
-- rule；
-- permission；
-- resource；
-- compatibility validation。
-
-不安全 Candidate 不進 Runtime。
-
-## Layer 4
-處理：
-- runtime exception；
-- single Capability crash；
-- invalid local state；
-- rendering failure。
-
-採 component-level isolation，不讓整個 Micro-App 一起崩。
-
-## Experience Shell
-統一把所有錯誤翻譯成：
-
-> **發生什麼 + 我保留了什麼 + 現在可以做什麼**
-
----
-
-# 16. Failure Evidence 是產品輸入
-
-Error 不只是 logging。
-
-NodeFF 應區分：
-
-- generation failure；
-- validation failure；
-- semantic mismatch；
-- capability gap；
-- runtime failure；
-- degraded result；
-- recovery success / failure。
-
-這些 Evidence 未來會直接改善：
-
-- Composition Intelligence；
-- Capability Fabric；
-- Trusted Blueprint Reuse；
-- Reliability Knowledge。
+選模型。
 
 因此：
 
-> **一次失敗，至少要讓系統知道下一次應該改善什麼。**
+> **換 LLM 不應影響 LegoSpec、Capability Fabric、Runtime。**
+
+Provider SDK 不能進入核心 Contract。
 
 ---
 
-# 17. 核心狀態模型
+## 2.5 State / Identity / Evidence
 
-必須分清：
+NFF 需要分清：
 
-- **Blueprint**：不可變 App 定義。
-- **Instance**：某次執行的可變狀態。
-- **Context**：經允許跨 App 傳遞的資料。
-- **Delta**：受控變更。
-- **Recovery Context**：失敗時保留的 Intent / Input / Progress。
+~~~text
+Blueprint
+= App 的不可變定義
 
-原則：
+Instance
+= 這次執行中的狀態
 
-> Blueprint 定義能力；Instance 表示當前現實；Recovery Context 確保失敗不等於全部重來。
+Context
+= App 與 App 之間允許傳遞的資料
 
----
+Delta
+= 受控修改
 
-# 18. Identity 與 Evidence
+Recovery Context
+= 出錯時保留的 Intent / Input / Progress
+~~~
 
-Phase 1 採 Anonymous-First，但不是 No-Tracking。
+Phase 1 採 Anonymous-First：
 
 ~~~text
 anonymous_id
- → Intent
- → Blueprint
- → Use
- → Share
- → Remix
+→ Intent
+→ Blueprint
+→ Use
+→ Share
+→ Remix
 ~~~
 
-短期保存最小必要 Evidence，用於：
+目的不是監控所有操作，而是保留：
 
 - Semantic Reliability；
 - Share / Remix Funnel；
@@ -619,74 +328,314 @@ anonymous_id
 - Blueprint Reuse；
 - 未來 Anonymous → Account migration。
 
-Account / Ownership 不作為 First Value 的門檻。
+---
+
+# 3. NFF 整體怎麼跑？
+
+真正重要的不是 Layer 名稱，而是五條產品路徑。
+
+## 3.1 Create
+
+~~~mermaid
+flowchart LR
+    A[Inspiration / Intent]
+    B[Route]
+    C[Compile]
+    D[Capability Resolution]
+    E[Validate]
+    F[Blueprint]
+    G[Runtime]
+
+    A --> B --> C --> D --> E --> F --> G
+~~~
+
+結果：
+
+> **Intent → Correct App**
+
+## 3.2 Use
+
+~~~text
+Existing Blueprint
+→ Resolve
+→ Compatibility / Trust Check
+→ Browser Runtime
+→ Local Interaction
+~~~
+
+結果：
+
+> **已存在的 App 不需要重新 Compile。**
+
+## 3.3 Share
+
+~~~text
+Blueprint / Share Reference
+→ Recipient Opens Link
+→ Restore
+→ Execute
+~~~
+
+結果：
+
+> **接收者不用安裝、最好也不用先註冊，就能立即使用。**
+
+## 3.4 Remix / Refine
+
+~~~text
+Existing Blueprint
++ User Change
+→ Semantic Delta
+→ Compile / Validate
+→ New Immutable Blueprint
+~~~
+
+結果：
+
+> **每個 App 都可以成為下一個創作的起點。**
+
+## 3.5 Error / Recovery
+
+NodeFF 內部可以出現：
+
+~~~text
+401
+402
+404
+500
+timeout
+provider error
+validation error
+runtime exception
+~~~
+
+但一般 User 不應直接看到這些。
+
+~~~mermaid
+flowchart LR
+    T[Technical Failure]
+    C[Classify]
+    R[Recovery Policy]
+    S[Recovery UX State]
+    U["Human Message<br/>+ Next Action"]
+
+    T --> C --> R --> S --> U
+~~~
+
+使用者應看到：
+
+> **發生什麼 + 我們保留了什麼 + 你現在可以做什麼**
+
+| 系統內部 | User 看到 |
+|---|---|
+| 401 | 「這個內容需要登入後才能繼續。」＋登入 |
+| 402 | 「這項能力需要額外額度。」＋替代方案／繼續 |
+| 404 | 「這個 App 連結找不到或已失效。」＋返回／重建 |
+| Compiler timeout | 「這次還沒成功做出 App，你的需求已保留。」＋重試 |
+| Capability Gap | 「目前還不能完整做到這個效果。」＋替代／調整 |
+| Component crash | 只隔離壞掉區塊，其餘 App 繼續運作 |
+
+Error 原則：
+
+~~~text
+Never White Screen
+Never Raw Technical Error as UX
+Preserve User Input
+Always Give a Next Action
+No Infinite Retry
+No Fake Success
+~~~
+
+Failure 也必須形成 Evidence，讓 Compiler 與 Capability Fabric 變好。
 
 ---
 
-# 19. 文件分工
+# 4. 短、中、長期怎麼開發？
+
+核心不是每個階段換一套架構，而是：
+
+> **同一個 Intent → Blueprint → Runtime 核心，逐步增加能力。**
+
+~~~mermaid
+flowchart LR
+    P1["短期<br/>Prove Core Loop"]
+    P2["中期<br/>Reuse / Identity / Creator"]
+    P3["長期<br/>Intent Commerce / Capability Network"]
+
+    P1 --> P2 --> P3
+~~~
+
+## 4.1 短期 — 證明核心循環
+
+要證明：
+
+~~~text
+Intent
+→ Correct App
+→ Immediate Use
+→ Share
+→ Recipient Use
+→ Remix
+~~~
+
+必須做好的系統：
+
+- Experience Shell / 靈感精靈；
+- Layer 1–4；
+- Model Gateway 基本 Adapter；
+- Phase 1 Capability Fabric；
+- Blueprint / Instance；
+- Share / Restore；
+- Anonymous Evidence；
+- Humanized Recovery。
+
+Phase 1 **不追求所有 Intent 都支援**。
+
+成功標準是：
+
+> **能做的要做對；不能做的要講清楚，而且 User 還能繼續。**
+
+## 4.2 中期 — Reuse、Identity、Creator Value
+
+當核心循環有 PMF Evidence，再增加：
+
+~~~text
+Anonymous → Account
+Blueprint Reuse
+Trusted Blueprint Families
+Ownership
+Creator Attribution
+History / Save
+Realtime where proven
+Premium Capability
+Semantic Retrieval
+~~~
+
+架構重點：
+
+- 不重做 Runtime；
+- 不重做 Blueprint；
+- Capability Card 已保留 Remix / Ownership / Entitlement hooks；
+- Identity 加在既有 anonymous evidence 之上；
+- Reuse 使用既有 lineage / compatibility；
+- Semantic Retrieval 是增強 Compiler，不取代 Compiler。
+
+目標：
+
+> **把一次性的好 App，變成可重用、可擁有、可創作的資產。**
+
+## 4.3 長期 — Intent Commerce / Capability Network
+
+當供需成立，再增加：
+
+~~~text
+External Capability Providers
+Provider Registry
+Paid Capability
+Entitlement
+Metering
+Booking / Payment / Commerce
+Transaction Lifecycle
+Settlement
+Trust / Certification
+~~~
+
+整體仍然是：
+
+~~~mermaid
+flowchart LR
+    I[Intent]
+    C[Capability Selection]
+    B[Blueprint]
+    R[Runtime]
+    G[Capability Gateway]
+    P[External Provider]
+
+    I --> C --> B --> R
+    R -. only when required .-> G --> P
+~~~
+
+不是所有互動都送到 Commerce Server。
+
+目標：
+
+> **使用者只表達 Intent，NFF 可以組合內部與外部 Capability 完成事情。**
+
+## 4.4 發展地圖
+
+| 階段 | 主要產品結果 | 新增能力 | 不應現在先做 |
+|---|---|---|---|
+| **短期** | Intent → App → Share → Remix | Compiler、Runtime、Capability、Recovery、Anonymous Evidence | Marketplace、大型 Realtime、複雜 Vector Infra |
+| **中期** | Reuse + Identity + Creator Value | Ownership、Account、Trusted Reuse、Creator、必要 Realtime | 大型 Commerce Network |
+| **長期** | Intent Commerce + Capability Network | Provider、Metering、Entitlement、Transaction、Settlement | 不再另造第二套 Runtime |
+
+---
+
+# 5. 不可違反的架構規則
+
+這些規則保護 NodeFF 不會在開發過程越做越歪。
+
+1. **LLM 只能產生受控 Blueprint，不生成／執行任意 JavaScript。**
+2. **Runtime 不做 free-form Intent 推理。**
+3. **Capability Fabric 是 NFF 可執行能力的唯一邊界。**
+4. **Schema Valid ≠ Semantic Correct。**
+5. **Unsupported Intent 不得用錯誤語意假裝完成。**
+6. **LLM Vendor 必須藏在 Model Gateway 後。**
+7. **Blueprint / Instance / Context / Delta / Recovery Context 分離。**
+8. **Existing Blueprint 一般互動預設 0 LLM。**
+9. **Share / Remix 是核心路徑，不是附加 Export。**
+10. **Error code 是工程資訊，不是 Consumer UX。**
+11. **Component failure 不得造成整個 App White Screen。**
+12. **Heavy / Paid / External Work 必須經 Capability Boundary。**
+13. **短、中、長期增加能力，不推翻核心 Runtime / Blueprint 模型。**
+
+## 文件責任
 
 ~~~text
 APP-ARCHITECTURE.md
-= Experience Shell + 四層架構 + 跨層責任
+→ NFF 有什麼、各自負責什麼、整體怎麼跑、怎麼成長
 
 ProjectManagement/CAPABILITY-FABRIC.md
-= NFF 到底有哪些能力卡、Card Contract、Maturity
-
-APP-DETAILED-DESIGN.md
-= Function Design 總表與 Release 對應
-
-working/functions/
-= 各 Function 的 Frontend / Backend / API / Data / Recovery 詳細設計
+→ NFF 到底會什麼、Capability Card、Maturity
 
 INFRA-ARCHITECTURE.md
-= Browser / Edge / Serverless / DB / External Capability 的部署設計
+→ Browser / Edge / Serverless / DB / External Service 怎麼部署
+
+APP-DETAILED-DESIGN.md
+→ 每個 Function 如何真正設計與交付
+
+working/functions/
+→ Frontend / Backend / API / Data / Error / Acceptance 詳細實作規格
 ~~~
 
 ---
 
-# 20. Architecture Guardrails
+# 結論
 
-1. 不生成或執行任意 JavaScript。
-2. Runtime 不做 free-form Intent 推理。
-3. Schema Valid 不等於 Semantic Correct。
-4. Capability Fabric 是可執行能力唯一邊界。
-5. Unsupported Intent 不得以錯誤語意假裝成功。
-6. LLM Provider 必須藏在 Layer 2 Model Gateway 後。
-7. Blueprint / Instance / Context / Delta / Recovery Context 必須分離。
-8. Existing Blueprint 一般互動預設 0 LLM。
-9. Share / Remix 是核心產品路徑。
-10. Error code 不能直接成為 Consumer UX。
-11. Failure 必須轉換成 Humanized Recovery State。
-12. Component failure 不得擴散成整個 Micro-App White Screen。
-13. Heavy / Paid Capability 必須明確經 Capability Boundary。
-14. Architecture 決定邊界；Function Design 才決定實作細節。
-
----
-
-# 21. Phase 1 Architecture Focus
-
-Phase 1 要證明的不是「所有 Intent 都能做」。
-
-而是：
-
-> **NodeFF 能可靠地把可支援的 Intent 變成正確 App；遇到做不到或出錯時，也能給使用者清楚、友善、可繼續的交代。**
-
-因此 Phase 1 核心：
+NodeFF App Architecture 可以濃縮成：
 
 ~~~text
-Inspiration / Intent
+讓人容易表達 Intent
         ↓
-Reliable Compiler
+正確理解 Intent
         ↓
-Capability Resolution
+只使用可信任 Capability
         ↓
-Trusted Blueprint
+產生可驗證 Blueprint
         ↓
-Local Runtime
+Browser Runtime 低成本執行
         ↓
 Use / Share / Remix
         ↓
-Humanized Recovery + Evidence
+失敗也給人性化交代
+        ↓
+Evidence 讓下一次更準
 ~~~
 
-這才是 NodeFF 從 POC 走向可信任產品的完整核心循環。
+短期先證明這個循環。
+
+中期在同一個底座上加入 **Reuse / Identity / Creator Value**。
+
+長期再加入 **Intent Commerce / Capability Network**。
+
+> **不是每個階段重做一次 NFF，而是同一個核心逐步長大。**
