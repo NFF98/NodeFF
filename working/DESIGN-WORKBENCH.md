@@ -263,3 +263,20 @@ Intent
 它表達的是更高層的產品願景：
 
 > **使用者不再先尋找一個既有 App；使用者的意圖本身，就成為 App 的起點。**
+
+
+---
+
+## Sync 狀態 — Architecture 文件重構
+
+本輪已將成熟結論同步至 Working Design：
+
+- `APP-ARCHITECTURE.md`：只保留四層整體架構、核心流程與責任邊界。
+- `CAPABILITY-FABRIC.md`：獨立承接 NFF 引擎底座 Capability。
+- `APP-DETAILED-DESIGN.md`：採 Function-Oriented 詳細設計。
+- `working/functions/`：未來每個 Function 的 Frontend / Backend / Contract / Acceptance 詳細設計。
+- `INFRA-ARCHITECTURE.md`：收斂為 Infrastructure 設計結果。
+- `DECISION-CANDIDATES.md`：只記錄需要方案選擇的 Decision Gate。
+- `OPEN-QUESTIONS.md`：只記錄需更多 Evidence 才能回答的問題。
+
+Workbench 中的「Anonymous-First ≠ No Usage Record」與「Idea / Need → App」已作為本輪 Architecture 輸入；Workbench 仍保留原討論脈絡，不作 SSOT。
