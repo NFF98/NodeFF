@@ -67,6 +67,7 @@ Cursor 只能實作已經有明確 Contract 與 Acceptance 的 Function。
 | **F13** | Entitlement / Metering | Premium / Costly Capability 可控、可量測 | Cross-cutting | 2–6 月 |
 | **F14** | Provider Registry / Certification | External Capability 可被信任與版本化 | Platform | 6 月後 |
 | **F15** | Transaction / Settlement | Commerce Outcome 可追蹤、對帳、結算 | Platform | 6 月後 |
+| **F16** | Result Feedback / Logic Correction | 結果不符 Intent 時保留現況、精準修正、比較與回退 | UX / L2–L4 | 0–1 月 |
 
 ---
 
@@ -83,6 +84,7 @@ flowchart TD
     F06[F06 Remix / Refine]
     F07[F07 Anonymous Evidence]
     F12[F12 Recovery]
+    F16[F16 Result Correction]
 
     F08[F08 Identity / Ownership]
     F09[F09 Realtime]
@@ -107,6 +109,13 @@ flowchart TD
     F07 --> F01
     F07 --> F05
     F07 --> F06
+
+    F00 --> F16
+    F03 --> F16
+    F06 --> F16
+    F16 --> F01
+    F16 --> F02
+    F16 --> F07
 
     F12 --> F00
     F01 --> F12
@@ -160,6 +169,8 @@ flowchart TD
 - Progressive Refinement entry
 - Remix entry
 - Recovery presentation
+- Result feedback / 「調整結果」entry
+- previous vs new result comparison entry
 
 Acceptance：
 
@@ -167,6 +178,7 @@ Acceptance：
 - 從 Capsule 可以直接進 Create
 - failure 不清空輸入
 - recovery action 明確
+- User 可從執行結果直接進入「邏輯不對／調整結果」流程
 
 ### F01 — Intent Compilation + Model Gateway
 
@@ -275,6 +287,71 @@ Acceptance：
 - Remix lineage 可追蹤
 - refinement failure 保留原 App / Intent
 
+### F16 — Result Feedback / Logic Correction
+
+這個 Function 處理：
+
+> **App 技術上能跑，但 User 認為邏輯、假設或結果明顯不符合原 Intent。**
+
+主流程：
+
+~~~text
+Current Blueprint
++ Current Instance Inputs
++ Current Result
+→ User Correction Feedback
+→ Preserve Current Version
+→ Correction Intent
+→ Semantic Delta
+→ Full Validation
+→ New Immutable Blueprint Revision
+→ Re-run with preserved inputs
+→ Compare Old / New Result
+→ Accept / Continue Correcting / Revert
+~~~
+
+Frontend 最小行為：
+
+- Result 畫面提供「調整結果／邏輯不對」入口
+- User 可用自然語言指出問題
+- 原本 Inputs / Result 不消失
+- 新舊 Result 可比較
+- 可返回上一版
+- 不把 semantic mismatch 顯示成 technical error
+
+Backend / Compiler responsibility：
+
+- 將 feedback 正規化為 Correction Intent
+- 以 existing Blueprint 為 base
+- 優先產生最小 Semantic Delta
+- 不允許直接 mutation 原 Blueprint
+- 新 revision 必須完整走 F02 Validation
+- correction failure 時保留原 Blueprint 可繼續使用
+
+State / Data：
+
+~~~text
+base_blueprint_id
+base_revision
+instance_input_snapshot
+result_snapshot_before
+correction_intent
+semantic_delta
+new_blueprint_id
+result_snapshot_after
+correction_outcome
+~~~
+
+Acceptance：
+
+1. User 不需重新輸入原本資料即可修改邏輯。
+2. 原 Blueprint 永遠可回復。
+3. 修改只針對 User 指出的語意範圍，但新 Blueprint 仍完整驗證。
+4. 新舊 Result 可比較。
+5. correction 失敗不破壞目前可用版本。
+6. semantic mismatch / correction / accept / revert 都形成 Evidence。
+7. 「有結果」不得被當成「結果正確」的證明。
+
 ### F07 — Anonymous Identity & Evidence
 
 最小 identity：
@@ -286,6 +363,8 @@ Acceptance：
 
 - compile outcome
 - semantic mismatch
+- result correction requested
+- result correction accepted / rejected / reverted
 - capability gap
 - share
 - open
@@ -334,6 +413,8 @@ Create works
 + Share works
 + Recipient uses
 + Remix works
++ Wrong result / logic can be corrected without restarting
++ Old / new result can be compared or reverted
 + Failure recoverable
 + Evidence collected
 ~~~
@@ -546,6 +627,38 @@ Acceptance：
 - capability references
 - support / degradation metadata
 
+## Result Quality / Logic Correction Contract
+
+共同依賴：
+- F00
+- F01
+- F02
+- F03
+- F06
+- F07
+- F16
+
+要求：
+
+~~~text
+executed result
+→ user semantic feedback
+→ preserved inputs / old revision
+→ correction intent
+→ semantic delta
+→ full revalidation
+→ new immutable revision
+→ old/new result comparison
+→ accept / refine again / revert
+~~~
+
+原則：
+
+- Runtime success 不代表 semantic success。
+- correction 不直接修改 Runtime code。
+- original Blueprint / result 必須可保留。
+- correction outcome 必須成為 Compiler / Reuse / Capability Evidence。
+
 ## Recovery Contract
 
 共同依賴：
@@ -626,6 +739,9 @@ NodeFF 不允許只用「頁面可以 render」當完成。
 - outcome 符合 user intent
 - unsupported case 誠實
 - UX 可理解
+- User 能指出「結果／邏輯不對」
+- correction 後可比較新舊結果並回退
+- runtime success 不得被當成 semantic success
 
 ## D. Evidence / Economics
 - telemetry exists
@@ -646,12 +762,12 @@ Release 應以 User Outcome，而不是技術 layer 命名。
 ## Release 1 — Core Loop，0–1 月
 
 ~~~text
-F00 + F01 + F02 + F03 + F04 + F05 + F06 + F07 + F12
+F00 + F01 + F02 + F03 + F04 + F05 + F06 + F07 + F12 + F16
 ~~~
 
 Outcome：
 
-> Intent → Correct App → Use → Share → Remix → Recover
+> Intent → Correct App → Use → Share → Remix → Correct Result → Recover
 
 ## Release 2 — Durable Value，2–3 月
 
@@ -727,13 +843,15 @@ Architecture
 3. Architecture 決定邊界，Cursor 不發明新架構。
 4. 所有跨 Function Contract 只能有 canonical source。
 5. Error / Recovery 是功能本身，不是最後補上的例外。
-6. Capability Gap 是 Evidence，不是用 heuristic 假裝解決。
-7. Phase 1 優先完成完整 Core Loop，不追求大量 Capability。
-8. 第 2–3 個月才把 Anonymous Value 升成 Durable Identity。
-9. 第 4–6 個月才把 External / Paid Capability 提升為正式 execution path。
-10. 6 個月後才持續建 Provider / Transaction Network。
-11. 日期不自動解鎖功能；Evidence Gate 才解鎖。
-12. 所有新 Function 必須證明不破壞 Intent → Blueprint → Runtime 核心。
+6. Result Correction 是核心 UX，不是把錯誤 Prompt 叫 User 從頭重做。
+7. Runtime Success 不等於 Semantic / Product Success。
+8. Capability Gap 是 Evidence，不是用 heuristic 假裝解決。
+9. Phase 1 優先完成完整 Core Loop，不追求大量 Capability。
+10. 第 2–3 個月才把 Anonymous Value 升成 Durable Identity。
+11. 第 4–6 個月才把 External / Paid Capability 提升為正式 execution path。
+12. 6 個月後才持續建 Provider / Transaction Network。
+13. 日期不自動解鎖功能；Evidence Gate 才解鎖。
+14. 所有新 Function 必須證明不破壞 Intent → Blueprint → Runtime 核心。
 
 # 結論
 
