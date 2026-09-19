@@ -397,3 +397,94 @@ Browser Runtime Plane
 - 不重複同步已記錄內容；
 - 新發現只追加「新的差異」到本待同步佇列；
 - Review 完成後一次整理 Function 總表、個別 Function Design 與 Release dependency。
+
+
+---
+
+### PENDING-FUNC-003 — App Architecture Review：Experience Shell / Model Gateway / Capability Gap / Humanized Recovery
+
+來源：
+- `working/APP-ARCHITECTURE.md`
+- `working/ProjectManagement/PRODUCT-DISCUSSION.md`
+- `working/ProjectManagement/CAPABILITY-FABRIC.md`
+
+> 本項只記錄本輪新增差異；前面已同步／已記錄的 Architecture、Infra、Capability Contract 內容不重複。
+
+後續 Function Design 必須反映：
+
+1. **Experience Shell / 靈感精靈**
+   - Inspiration Capsules
+   - Ghost Text
+   - Fork & Remix
+   - Progressive Refinement
+   - Humanized Recovery UI
+   - 其定位是 Creation / Recovery Experience Shell，不是另一個 Semantic Engine。
+
+2. **LLM Provider Abstraction**
+   - 邏輯位置：Layer 2 Semantic Compiler。
+   - 使用 NFF-owned Model Gateway / Model Router / Provider Adapter。
+   - Provider / Model 可依 capability、cost、latency、quota、availability、fallback policy 切換。
+   - LegoSpec、Runtime、Layer 3 Contract 不得依賴特定 LLM vendor。
+   - 使用者手動選模型是否提供，屬未來 Product Feature，不是核心 Architecture 要求。
+
+3. **Capability Coverage Resolution**
+   - Intent 必須被分類為：
+     - FULLY_SUPPORTED
+     - PARTIALLY_SUPPORTED
+     - EXTERNAL_OR_HEAVY_REQUIRED
+     - UNSUPPORTED
+   - Layer 2 負責判斷語意上的 fallback；
+   - Layer 3 驗證 Capability / degradation metadata；
+   - Layer 4 只執行，不自行猜測替代語意。
+   - Unsupported Intent 不可生成「看起來正常但解錯問題」的假 App。
+   - Capability Gap 應形成 Evidence，回饋 Capability Fabric POC / backlog。
+
+4. **Recovery UX Contract**
+   - Internal HTTP / validation / provider code 不直接顯示給 Consumer。
+   - 各層 failure 統一轉為 Recovery UX State：
+     - status
+     - human message
+     - preserved context
+     - next actions
+     - internal technical code
+   - 例如 401 / 402 / 404 / timeout / runtime exception 都必須轉成人話與可操作下一步。
+
+5. **Recovery Context**
+   - App state model 後續需考慮 Recovery Context：
+     - original Intent
+     - user input
+     - partial progress
+   - 目標是 failure 不等於全部重來。
+
+6. **Error Responsibility**
+   - L1：routing / policy / access prerequisite
+   - L2：provider / generation / semantic uncertainty / capability mismatch
+   - L3：schema / reference / permission / resource / compatibility
+   - L4：runtime / component isolation
+   - Experience Shell：統一呈現「發生什麼、保留什麼、下一步做什麼」
+
+7. **Phase 1 Acceptance Direction**
+   - 不只測「成功生成 App」；
+   - 也要測：
+     - unsupported intent 是否誠實處理；
+     - provider failure 是否可 recovery；
+     - invalid blueprint 是否不進 Runtime；
+     - component crash 是否不造成整頁崩潰；
+     - user input 是否在失敗後保留；
+     - consumer 是否永遠看到 humanized next action。
+
+主要影響 Function：
+- F01 Intent Compilation
+- F02 Blueprint Validation
+- F03 Runtime Execution
+- F04 Capability Registry
+- F05 Share / Restore
+- F06 Remix / Refine
+- F07 Anonymous Identity & Evidence
+- F11 External Capability Execution
+- 未來需評估是否新增獨立 Experience Shell / Recovery Function，或由上述 Function 共同承接。
+
+同步規則維持不變：
+- 本輪先不修改 `APP-DETAILED-DESIGN.md`；
+- 不逐項改 `working/functions/`；
+- 等使用者完成 APP Architecture / Working 文件 Review 後再一次同步。
