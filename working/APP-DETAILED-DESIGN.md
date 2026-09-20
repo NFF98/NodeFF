@@ -68,6 +68,7 @@ Cursor 只能實作已經有明確 Contract 與 Acceptance 的 Function。
 | **F14** | Provider Registry / Certification | External Capability 可被信任與版本化 | Platform | 6 月後 |
 | **F15** | Transaction / Settlement | Commerce Outcome 可追蹤、對帳、結算 | Platform | 6 月後 |
 | **F16** | Result Feedback / Logic Correction | 結果不符 Intent 時保留現況、精準修正、比較與回退 | UX / L2–L4 | 0–1 月 |
+| **F17** | Heterogeneous Workflow Orchestration | 多個 Internal / External / Human Steps 能可靠完成同一 Outcome | Platform / External Capability Plane | 6 月後，Evidence-gated |
 
 ---
 
@@ -94,6 +95,7 @@ flowchart TD
     F11[F11 External Capability]
     F14[F14 Provider Registry]
     F15[F15 Transaction / Settlement]
+    F17[F17 Workflow Orchestration]
 
     F00 --> F01
     F04 --> F01
@@ -143,6 +145,10 @@ flowchart TD
     F11 --> F14
     F13 --> F14
     F14 --> F15
+    F11 --> F17
+    F13 --> F17
+    F14 --> F17
+    F17 --> F15
 ~~~
 
 設計含義：
@@ -805,6 +811,72 @@ Acceptance：
 - certification / revocation 可管理
 - provider version 可追蹤
 
+## F17 — Heterogeneous Workflow Orchestration
+
+目的：
+
+> **把一個需要多個異質 Capability 的 Intent，變成可追蹤、可恢復、可驗證的 Outcome。**
+
+適用場景：
+- 多個 External API 串接
+- 長時間 async job
+- 跨 Provider workflow
+- 需要 retry / timeout / compensation
+- 需要人工核准或 Human-in-the-loop
+- 部分步驟失敗後仍需安全復原
+
+Canonical flow：
+
+~~~text
+Resolved Intent
+→ Capability Graph
+→ Step Plan
+→ Execute Step
+→ Validate Result
+→ Persist Workflow State
+→ Next Step
+   ├─ success → continue
+   ├─ retryable failure → bounded retry
+   ├─ compensatable failure → compensation
+   ├─ approval required → human step
+   └─ terminal failure → Humanized Recovery
+→ Final Validated Outcome
+~~~
+
+NFF-owned Orchestration Contract 至少必須描述：
+
+~~~text
+workflow_id
+workflow_version
+steps[]
+dependencies
+input / output contract
+provider / capability reference
+timeout_policy
+retry_policy
+idempotency_key_policy
+compensation_action
+approval_requirement
+status
+evidence
+~~~
+
+架構規則：
+- Temporal、n8n、Queue/Worker 等只能是 execution backend / adapter。
+- Vendor workflow DSL 不得成為 Blueprint / Capability 核心語意。
+- 每一步 External Output 都視為 untrusted，必須重新驗證。
+- Workflow state 是 durable execution truth，不等於 Blueprint 或 Browser Instance。
+- 只有真實需求證明需要 multi-step / long-running execution 時才啟用 F17。
+
+Acceptance：
+- 任一步驟失敗可定位到 step / provider / attempt。
+- retry 有上限且具 idempotency。
+- 可補償步驟能安全 rollback / compensate。
+- User 可看到 meaningful progress，而不是裸 job state。
+- Workflow 失敗不得破壞已完成且不可逆的 durable truth。
+- provider / workflow reliability 可 telemetry。
+- orchestration backend 可替換，不改 Blueprint / Capability Contract。
+
 ## F15 — Transaction / Settlement
 
 負責：
@@ -821,7 +893,17 @@ Acceptance：
 
 > Money path 必須可追蹤、可重放、可對帳，不依賴前端 state 當真實來源。
 
-這些 Function 不改寫 F01–F06 的核心 Intent → Blueprint → Runtime 流程。
+F14 / F15 / F17 都不改寫 F01–F06 的核心 Intent → Blueprint → Runtime 流程。
+
+F17 只在 Blueprint / Capability Plan 明確需要外部多步執行時加入：
+
+~~~text
+Runtime / Capability Action
+→ F17 Orchestration
+→ External / Async Steps
+→ Validated Outcome
+→ Runtime / Durable State
+~~~
 
 ---
 
@@ -933,6 +1015,7 @@ technical failure
 - F11
 - F13
 - F14
+- F17
 
 詳細來源：
 
@@ -1019,13 +1102,13 @@ Outcome：
 ## Continuous Platform Releases，6 月後
 
 ~~~text
-F14 + F15
-+ provider / commerce expansion
+F14 + F15 + F17
++ provider / commerce / orchestration expansion
 ~~~
 
 Outcome：
 
-> Intent Commerce / Capability Network 持續擴張
+> Intent Commerce / Capability Network / Heterogeneous Orchestration 持續擴張
 
 ---
 
@@ -1071,9 +1154,11 @@ Architecture
 9. Phase 1 優先完成完整 Core Loop，不追求大量 Capability。
 10. 第 2–3 個月才把 Anonymous Value 升成 Durable Identity。
 11. 第 4–6 個月才把 External / Paid Capability 提升為正式 execution path。
-12. 6 個月後才持續建 Provider / Transaction Network。
-13. 日期不自動解鎖功能；Evidence Gate 才解鎖。
-14. 所有新 Function 必須證明不破壞 Intent → Blueprint → Runtime 核心。
+12. 6 個月後才持續建 Provider / Transaction / Orchestration Network。
+13. Workflow engine vendor 只能是 Adapter，不得成為 NFF semantic contract。
+14. Multi-step external workflow 必須有 timeout / retry / idempotency / compensation policy。
+15. 日期不自動解鎖功能；Evidence Gate 才解鎖。
+16. 所有新 Function 必須證明不破壞 Intent → Blueprint → Runtime 核心。
 
 # 結論
 
@@ -1100,7 +1185,7 @@ Reuse / Identity / Creator Value
 Scale Readiness / External Paid Capability
 
 6 月後
-Intent Commerce / Capability Network 持續擴張
+Intent Commerce / Capability Network / Orchestration 持續擴張
 ~~~
 
 > **先把核心循環做成可信任產品，再把它變成可累積資產，最後才把它擴張成平台。**
