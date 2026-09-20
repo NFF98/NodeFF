@@ -688,7 +688,7 @@ Capability Action
 
 ---
 
-# 15. 長期：Intent Commerce / Capability Network
+# 15. 長期：Intent Commerce / Capability Network / Orchestration
 
 長期新增的核心不是另一套 App Runtime，而是：
 
@@ -740,6 +740,27 @@ Intent
 ~~~
 
 否則會破壞 NodeFF 的成本模型與即時性。
+
+## Heterogeneous Orchestration Plane
+
+當真實需求出現多步、跨 Provider、長時間執行時，才新增獨立 Orchestration Plane：
+
+~~~text
+Capability Action
+→ Orchestration Contract
+→ Durable Workflow State
+→ Provider / Worker Steps
+→ Validate Each Result
+→ Retry / Recovery / Compensation
+→ Final Outcome
+~~~
+
+Infra 規則：
+- NFF 自己定義 workflow contract。
+- 外部 workflow engine 必須放在 Adapter 後，可替換。
+- workflow state 與 Browser Instance 分離。
+- 每個 step 必須可追蹤 provider、version、attempt、timeout、result。
+- Phase 1 不需要 workflow engine；只有 evidence 證明 multi-step durable work 成立才導入。
 
 ---
 
