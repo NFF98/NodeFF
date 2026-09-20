@@ -213,6 +213,12 @@ Card 應知道自己是否能參與：
 - Trust / Certification
 - Settlement / Revenue Share
 - Data Residency / Privacy
+- Orchestration Role / Step Type
+- Async / Long-running Support
+- Retry / Timeout Policy Class
+- Compensation / Rollback Support
+- Idempotency Requirement
+- Dependency / Precondition Metadata
 
 核心原則：
 
@@ -485,7 +491,7 @@ Recovery / Notice presentation
 
 ---
 
-# 14. 6 個月後：Capability Network
+# 14. 6 個月後：Capability Network + Orchestration
 
 只有供需證據成立後才逐步加入：
 
@@ -499,6 +505,25 @@ Recovery / Notice presentation
 - capability certification
 - marketplace discovery
 - creator / provider economics
+- multi-capability workflow composition
+- async step lifecycle
+- retry / timeout / idempotency metadata
+- compensation / rollback semantics
+- human-in-the-loop step when required
+
+長期 Fabric 不只描述「一個 Capability 能做什麼」，還要能描述「多個 Capability 如何可靠合作」。
+
+~~~text
+Resolved Intent
+→ Capability Graph
+→ Step A: Internal Capability
+→ Step B: External Provider
+→ Step C: Async Worker
+→ Step D: Human / Approval if required
+→ Validated Outcome
+~~~
+
+Orchestration metadata 必須仍然來自 Capability Contract；不能讓外部 workflow engine 自己發明 NFF semantics。
 
 長期 Fabric：
 
@@ -516,6 +541,8 @@ Same Capability Contract
 Same Blueprint Model
         ↓
 Same Runtime Boundary
+        +
+NFF Orchestration Contract
 ~~~
 
 ---
@@ -579,6 +606,8 @@ Compatibility Metadata
 Static Trusted Registry
 +
 Dynamic Certified Provider Registry
++
+Orchestration Metadata / Compatibility Graph
 ~~~
 
 ---
@@ -597,6 +626,9 @@ Dynamic Certified Provider Registry
 10. Capability Gap 是 roadmap input。
 11. Realtime / AI / Media / Commerce 都是 Capability，不是繞開 Runtime 的特例。
 12. Capability Network 只有 6 個月後、供需成立時才升級成主要平台能力。
+13. Multi-step workflow 必須由 NFF Orchestration Contract 描述，不能依賴某個 workflow vendor 的私有 DSL。
+14. n8n / Temporal / Queue / Worker 類工具只能是可替換 execution backend。
+15. Provider 數量不是護城河；可被 Compiler 發現、可驗證、可組合、可觀測、可結算才算有效供給。
 
 # 結論
 
@@ -613,7 +645,7 @@ Capability Fabric 的發展順序：
 證明 External / Paid Capability 可安全加入
 
 6 個月後
-逐步建立 Capability Network
+逐步建立 Capability Network + Heterogeneous Orchestration
 ~~~
 
-> **NodeFF 的能力壁壘不在「有多少元件」，而在「少量可靠原子能力能被 Compiler 正確組成多少有用 App」。**
+> **NodeFF 的能力壁壘不在「有多少元件」，而在「可靠能力能否被 Compiler 正確發現、組合、編排並交付可驗證 Outcome」。**
