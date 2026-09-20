@@ -825,6 +825,8 @@ RealtimeProvider
 ObjectStore
 CapabilityProvider
 PaymentProvider
+WorkflowEngineAdapter
+ProviderRegistry
 TelemetrySink
 ~~~
 
@@ -907,6 +909,12 @@ Entitlement / Metering
       +
 Transaction / Settlement
       +
+Heterogeneous Orchestration Plane
+      +
+WorkflowEngineAdapter
+      +
+Dynamic Certified Provider Registry
+      +
 specialized scaling only where proven
 ~~~
 
@@ -932,5 +940,6 @@ NodeFF 最成本有效的架構，不是找到一個「最便宜的 Cloud」。
 2. **Edge Control Plane** — 無狀態、按需、全球。
 3. **Durable State Plane** — PostgreSQL 為真實來源。
 4. **External Capability Plane** — Heavy / Paid / Commerce 可插拔。
+5. **Orchestration Plane** — 多步、非同步、跨 Provider 工作流可恢復、可替換、可治理。
 
-只要這四個邊界保持穩定，NodeFF 可以從 POC 走到 Reuse / Creator，再走到 Intent Commerce / Capability Network，而不需要中途推翻整套 Infrastructure。
+只要這四個邊界保持穩定，NodeFF 可以從 POC 走到 Reuse / Creator，再走到 Intent Commerce / Capability Network / Heterogeneous Orchestration，而不需要中途推翻整套 Infrastructure。
