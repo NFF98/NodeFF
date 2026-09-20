@@ -666,22 +666,22 @@ Commerce mechanics
 
 1. LLM 不得把模糊 Intent 直接腦補成 Blueprint。
 2. Clarification Policy 是 NFF-owned quality gate，LLM 不得 bypass。
-3. material assumption 必須可見、可修改、有 provenance。
+3. Material assumption 必須可見、可修改、有 provenance。
 4. LLM 只在 Resolved Intent 後產生受控 Blueprint。
 5. Runtime 不做 free-form Intent inference。
-3. Capability Fabric 是唯一可執行能力邊界。
-4. Schema Valid ≠ Semantic Correct。
-5. Unsupported Intent 不得 fake success。
-6. LLM Vendor 必須藏在 Model Gateway 後。
-7. Blueprint / Instance / Context / Delta / Recovery Context 分離。
-8. Existing Blueprint 正常 interaction 預設 0 LLM。
-9. Share / Remix / Result Correction 都是核心產品路徑。
-10. Runtime Success 不等於 Semantic Success；User 必須能修正邏輯並比較／回退結果。
-11. Error code 不是 Consumer UX.
-12. Component failure 不得造成整頁 White Screen。
-13. Heavy / Paid / External Work 必須經 Capability Boundary。
-14. 中長期只能「擴張核心」，不能繞過核心另建第二套 Runtime。
-15. Product Evidence 決定何時解鎖下一階段。
+6. Capability Fabric 是唯一可執行能力邊界。
+7. Schema Valid ≠ Semantic Correct。
+8. Unsupported Intent 不得 fake success。
+9. LLM Vendor 必須藏在 Model Gateway 後。
+10. Blueprint / Instance / Context / Delta / Recovery Context 分離。
+11. Existing Blueprint 正常 interaction 預設 0 LLM。
+12. Share / Remix / Result Correction 都是核心產品路徑。
+13. Runtime Success 不等於 Semantic Success；User 必須能修正邏輯並比較／回退結果。
+14. Error code 不是 Consumer UX。
+15. Component failure 不得造成整頁 White Screen。
+16. Heavy / Paid / External Work 必須經 Capability Boundary。
+17. 中長期只能擴張核心，不能繞過核心另建第二套 Runtime。
+18. Product Evidence 決定何時解鎖下一階段。
 
 ---
 
