@@ -308,7 +308,9 @@ Intent
 - 可識別的外部 capability supply
 - 使用者願意為 outcome / durable value 付費
 - provider execution 可被可靠控制
+- 跨 Provider workflow 的 retry / timeout / compensation 可治理
 - metering / entitlement 可被正確管理
+- 供需雙方有足夠密度，不是只有單邊 catalog
 - NFF 在交易鏈中提供不可取代的 orchestration value
 
 ---
@@ -346,6 +348,8 @@ User Intent
 - premium capability
 - creator revenue share
 - provider / marketplace commission
+- orchestration / workflow execution fee
+- enterprise capability access / governance
 - durable workspace / team value
 
 但 Network 只有在真實供需密度成立後才有價值。
@@ -423,6 +427,9 @@ NodeFF 不以 Vanity Metrics 管理。
 - transaction completion
 - creator / provider earnings
 - supply-demand coverage
+- multi-capability workflow completion rate
+- orchestration recovery / compensation success
+- active certified providers / creator capabilities
 
 ---
 
@@ -438,7 +445,10 @@ NodeFF 不以 Vanity Metrics 管理。
 8. Fun / Social 必須持續存在，避免退化成 Generic Tool Builder。
 9. 3 個月前不建 Marketplace。
 10. 6 個月前只做 Commerce Pilot，不把 Capability Network 當既定事實。
-11. 所有 Revenue / Growth / Cache / Latency 數字在實測前都是 Hypothesis。
+11. Orchestration Engine 是長期 execution plane；Phase 1 不引入 Temporal / n8n 類依賴。
+12. 雙邊市場必須由真實 demand + supply density 解鎖，不能先造 Marketplace。
+13. 第三方 Provider 必須經 Capability Contract / Certification / Evidence，不以「有 API」等同「可用」。
+14. 所有 Revenue / Growth / Cache / Latency 數字在實測前都是 Hypothesis。
 12. Roadmap 由 Evidence Gate 推進，不由日期推進。
 
 # 結論
