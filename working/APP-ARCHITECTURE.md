@@ -11,6 +11,8 @@ NodeFF 是一個 **Intent-to-App Runtime Platform**。
 ~~~text
 Intent
 → Understand
+→ Clarification / Assumption Gate
+→ Resolve Intent
 → Select Capabilities
 → Validate Blueprint
 → Run in Browser
@@ -92,7 +94,7 @@ flowchart LR
 |---|---|---|
 | **Experience Shell / 靈感精靈** | Inspiration、Ghost Text、Refine、Remix、Recovery | User 容易開始、容易修正、失敗也知道下一步 |
 | **L1 Ingestion & Routing** | safety、policy、quota、reuse lookup、routing | 合法請求進正確路徑，原始 Intent 被保存 |
-| **L2 Semantic Compiler** | 理解 Intent、Capability selection、composition | 正確 Blueprint Candidate |
+| **L2 Semantic Compiler** | 理解 Intent、列出不確定性、Clarification Policy、Capability selection、composition | 先得到 Resolved Intent，再產生正確 Blueprint Candidate |
 | **Model Gateway** | LLM routing / adapter / fallback | 可依能力、成本、速度切模型而不改核心 |
 | **Capability Fabric** | 定義 NFF 可執行能力 | Compiler、Validator、Runtime 共用同一能力真相 |
 | **L3 LegoSpec Validation** | schema、semantic boundary、security、compatibility | 只有可信任 Blueprint 可進 Runtime |
@@ -159,19 +161,35 @@ Intent
 
 ### L2 — Semantic Compiler
 
+L2 不允許直接把模糊 Prompt 一步生成 Blueprint。
+
+正式路徑：
+
 ~~~text
-Understand Intent
-→ Resolve Capability Coverage
-→ Select Capabilities
+Raw Intent
+→ Intent Analysis
+→ Structured Intent Envelope
+→ Clarification Policy
+   ├─ READY
+   ├─ READY_WITH_VISIBLE_ASSUMPTIONS
+   └─ NEEDS_CLARIFICATION
+→ Resolved Intent
+→ Capability Resolution
 → Compose State / Rule / Action / Event
 → Blueprint Candidate
 ~~~
 
-它是語意大腦，但只能組合允許的能力。
+分工：
+- LLM 負責理解 Intent、列出 missing / ambiguity / assumption。
+- NFF Clarification Policy 負責決定「直接做、顯示假設、還是必須追問」。
+- Experience Shell 負責把問題與 Visible Assumptions 用可修改 UI 呈現。
+- material assumption 必須有來源，不可把 LLM 建議冒充 User 事實。
 
 結果：
 
-> **Blueprint，不是 JavaScript。**
+> **先得到可信任的 Resolved Intent，再產生 Blueprint。**
+
+Clarification Gate 每次都執行，但只有關鍵資訊不足時才打斷 User。
 
 ### L3 — LegoSpec Contract + Validation
 
@@ -306,6 +324,9 @@ Capability Gap 是 Product / Capability Roadmap 的 Evidence。
 ~~~text
 Inspiration / Intent
 → Route
+→ Analyze Intent
+→ Clarification / Visible Assumptions if needed
+→ Resolve Intent
 → Compile
 → Capability Resolution
 → Validate
@@ -643,8 +664,11 @@ Commerce mechanics
 
 # 13. Architecture Guardrails
 
-1. LLM 只產生受控 Blueprint。
-2. Runtime 不做 free-form Intent inference。
+1. LLM 不得把模糊 Intent 直接腦補成 Blueprint。
+2. Clarification Policy 是 NFF-owned quality gate，LLM 不得 bypass。
+3. material assumption 必須可見、可修改、有 provenance。
+4. LLM 只在 Resolved Intent 後產生受控 Blueprint。
+5. Runtime 不做 free-form Intent inference。
 3. Capability Fabric 是唯一可執行能力邊界。
 4. Schema Valid ≠ Semantic Correct。
 5. Unsupported Intent 不得 fake success。
