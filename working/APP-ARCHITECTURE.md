@@ -615,6 +615,25 @@ flowchart LR
 - settlement
 - SLA / trust
 - broader creator / provider ecosystem
+- Heterogeneous Orchestration Plane
+- async workflow state / retry / timeout / compensation
+- evidence-based provider discovery / routing
+- human approval step when required
+
+長期新增的是「多 Capability 如何可靠完成一個 Outcome」，不是第二套 App Runtime。
+
+~~~text
+Intent
+→ Resolved Intent
+→ Capability Graph
+→ Runtime local steps
+→ External / Async steps when required
+→ Retry / Compensation / Approval
+→ Validated Outcome
+~~~
+
+Orchestration Engine 只負責執行已被 NFF Contract 描述的 workflow。
+Temporal、n8n 或其他 workflow engine 都只能位於 Adapter 後方，不可把 vendor DSL 寫進 Blueprint 核心。
 
 仍維持：
 
@@ -655,6 +674,8 @@ Storage provider
 Retrieval method
 Paid model
 External providers
+Orchestration backend
+Provider discovery / routing
 Commerce mechanics
 ~~~
 
@@ -681,7 +702,10 @@ Commerce mechanics
 15. Component failure 不得造成整頁 White Screen。
 16. Heavy / Paid / External Work 必須經 Capability Boundary。
 17. 中長期只能擴張核心，不能繞過核心另建第二套 Runtime。
-18. Product Evidence 決定何時解鎖下一階段。
+18. Multi-capability workflow 必須經 NFF-owned Orchestration Contract；workflow vendor 不得成為核心語意。
+19. Async / external step 必須有 timeout、retry、idempotency、compensation 或明確 failure policy。
+20. Provider Network 必須建立在 certification、compatibility、evidence 與可治理 routing 上，不以 API 數量當可用供給。
+21. Product Evidence 決定何時解鎖下一階段。
 
 ---
 
@@ -728,7 +752,7 @@ NFF 有什麼？
 → 1 月證明核心
 → 3 月建立 Reuse / Identity / Creator
 → 6 月證明 Scale / External Paid Capability
-→ 6 月後持續建立 Commerce / Network
+→ 6 月後持續建立 Commerce / Network / Orchestration
 ~~~
 
 > **核心架構穩定，能力與商業層逐步長大。**
