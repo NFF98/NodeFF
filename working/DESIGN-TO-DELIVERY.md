@@ -683,3 +683,37 @@ NodeFF 的 Delivery 原則只有一句：
 > **每個產品決策都能一路追到 Code / Test / Runtime Evidence；每個 Production 問題也能一路追回答案與設計。**
 
 這份文件是 Working 階段的共同 Delivery Contract。未來所有 Function 詳細設計、Spec 升格、Execution、Test、Debug、Release 都以此為共同規則。
+
+
+---
+
+## Temporary Gate — Pre-Cursor Formal Spec Refresh
+
+> User decision：2026-09-21。
+>
+> 本節是目前 NodeFF Phase 1 的 delivery sequencing rule。
+
+目前已存在的 Formal Spec 保持不動；新發現的 UI/UX / Runtime behavior delta先進 Working Design，不立即反覆 promotion。
+
+正式 Cursor implementation 前必須依序完成：
+
+~~~text
+Working Function Delta closure
+→ UI/UX Cross-Screen Review
+→ High-fi Design System / ④B High-fi
+→ Cursor Build / Operating Model Review
+→ Short-term Formal Spec Refresh
+→ Backlog / Sprint refresh
+→ Cursor Implementation
+~~~
+
+Rules：
+
+1. F00/F03 Runtime Loading + Timeout Delta目前只更新 Working，不改 Formal Spec。
+2. UI/UX visual / behavior review期間若發現 Material Function Delta，回對應 Fxx Working Design記錄並 Review。
+3. Formal Spec Refresh採「開發前一次性短期 refresh」策略，避免 UI/UX與 Cursor operating model尚未穩定時重複 promotion。
+4. Short-term Formal Spec Refresh仍需 User明確批准；不得自動 promotion。
+5. Refresh後重新檢查 Spec → Backlog / Sprint mapping，再解除 Cursor implementation HOLD。
+6. Cursor Build / Operating Model未討論完成前，不啟動正式 product implementation。
+
+此 Temporary Gate不取消既有 Design-to-Delivery Gate；只固定本階段的 promotion時機。

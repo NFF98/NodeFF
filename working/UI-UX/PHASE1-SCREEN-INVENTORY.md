@@ -1,6 +1,6 @@
 # Phase 1 Screen Inventory
 
-> 狀態：WORKING UI/UX BASELINE
+> 狀態：WORKING UI/UX — ALL ④A LOW-FI DIRECTIONS REVIEWED / FUNCTION DELTA PENDING
 >
 > 目的：管理 Phase 1 的 Screen / Surface 地圖、Screen-level UX Review 狀態與畫面之間的關係。
 >
@@ -29,7 +29,7 @@ Phase 1 目前採 **6 個主要 Screen / Surface + 5 類 Overlay / State**。
 | S05 | Refine / Remix Workspace | 修改既有 App、Preview child、決定是否採用 | F06 + F00 | **LOW_FI_DIRECTION_APPROVED** |
 | S06 | Correction Compare | 比較修正前後並 Accept / Keep / Adjust | F16 + F00 | **LOW_FI_DIRECTION_APPROVED** |
 
-目前 S01–S06 Main Screens 已全部完成 Low-fi 方向確認；下一階段進 O01–O05 Overlay / State Low-fi。
+目前 S01–S06 Main Screens 與 O01–O05 Overlay / State 的 ④A Low-fi direction均已完成 User Review；但 S03/O05 的 Runtime Global Loading + Timeout 尚有 F00/F03/F12 Function Delta待閉合，因此 Low-fi Gate尚未宣告完全閉合。
 
 # 3. Overlay / State Inventory
 
@@ -149,6 +149,19 @@ spec/ui-ux/
 需要改 product behavior 的 UI decision，仍必須同步回相關 Fxx Working → Review → Spec；UI/UX Spec不得成為第二份 Function behavior truth。
 
 未取得 User 明確批准前，不升格、不啟動 Cursor implementation。
+
+# 9.1 Formal Spec Freeze / Pre-Cursor Refresh
+
+User 已確認目前策略：
+
+- 現階段 **不更新 Formal Spec**。
+- 先完成：
+  1. F00/F03/F12 Runtime Loading + Timeout Working Function Delta Review；
+  2. Cross-Screen Consistency Review；
+  3. High-fi Design System / ④B High-fi；
+  4. Cursor Build / Operating Model討論。
+- **正式 Cursor 開發前**，再做一次短期 Formal Spec Refresh，把最後批准的 Working truth一次同步到 implementation contract。
+- 在該 refresh前，Cursor implementation維持 HOLD。
 
 # 9. Next
 

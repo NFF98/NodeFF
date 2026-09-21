@@ -25,7 +25,7 @@ S02 不是 AI chat room，也不是 engineering status console。
 1. **One Workspace, Changing State**：ANALYZING / CLARIFICATION / ASSUMPTION / BUILDING / HYDRATING 都留在同一 Create Workspace，不為每個 state 跳新頁。
 2. **Fast Path First**：Intent 已足夠時，ANALYZING 後直接進 BUILDING；不插入 clarification / assumption，也不增加固定「確認建立」步驟。
 3. **Interrupt Only for Material Decisions**：只有 material clarification / assumption 才停下來問 User。
-4. **Visible Progress, No Fake Precision**：採 stage-based progress，沒有可靠百分比就不顯示假數字。
+4. **Visible Progress, No Fake Precision**：採 stage-based progress；有可靠 work checkpoints 時顯示 checkpoint-derived Progress %，沒有可靠 checkpoints 就不假造百分比。
 5. **Preserve Context**：原始 Intent、回答、assumptions、draft 持續保留。
 6. **Human Language**：不顯示 Prompt A / Prompt B / validator / registry 等工程術語。
 
@@ -55,7 +55,7 @@ READY_TO_BUILD 是內部 transition。若 Intent 已足夠且沒有 material cla
     │                                                     │
     │                                                     │
     │ ● 理解想法   ○ 整理成 App   ○ 檢查互動   ○ 準備 App│
-    │ ███████────────────  stage-based / no fake %        │
+    │ ███████────────────  checkpoint-derived % when valid │
     │                                                     │
     │ ┌─────────────────────────────────────────────────┐ │
     │ │ Dynamic Workspace Body                          │ │
@@ -131,7 +131,7 @@ Proposed 4 stages：
 規則：
 - stage-based bar / stepper。
 - Active stage 有 bounded motion。
-- 不顯示假百分比。
+- 有可靠 work checkpoints時顯示 checkpoint-derived Progress %；沒有可靠 checkpoints時不顯示假百分比。
 - validation-driven recompose 保持在同一 BUILDING surface。
 - 若需要 User decision，才回 Clarification / Assumption。
 
@@ -224,7 +224,7 @@ User 已確認：
 4. Clarification / Assumption 留在同一 Workspace，不跳 modal / 新頁。
 5. Clear Intent Fast Path 不增加固定「確認建立」頁；直接 BUILDING。
 6. 「查看／修改需求」是 contextual secondary action，不是 Fast Path 常駐 UI。
-7. BUILDING / HYDRATING 不顯示假百分比。
+7. BUILDING / HYDRATING 採「有可靠 checkpoints就顯示 %；沒有就不假造」；百分比代表 work completion，不代表剩餘時間。
 
 # 20. Review Status
 

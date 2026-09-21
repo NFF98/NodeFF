@@ -1,6 +1,6 @@
 # F00 — Experience Shell / 靈感精靈
 
-> 狀態：SPEC_READY
+> 狀態：SPEC_READY + WORKING_DELTA_PENDING_REVIEW
 > Formal Spec：spec/functions/F00-EXPERIENCE-SHELL.md
 >
 > Canonical Role：Phase 1 Consumer Experience Shell、Creation UX、Clarification / Assumption UX、Runtime Frame、Result Feedback Entry、Share / Remix / Recovery Entry 的 Working Current Truth。
@@ -1170,3 +1170,55 @@ DISCOVER
 ~~~
 
 > F00 的工作不是替其他 Function 做決策，而是讓所有 Function 對 User 看起來像一個完整、連續、好懂的產品。
+
+
+---
+
+## Pending Material Delta — Runtime Global Loading + Timeout
+
+> 狀態：USER DIRECTION CONFIRMED / WORKING REVIEW PENDING
+>
+> Formal Spec：**暫不修改**。本節不是已 promotion 的 implementation contract。
+>
+> 來源：Phase 1 O05 Low-fi Review + DESIGN-WORKBENCH。
+
+User 已確認新的 UX 方向：
+
+1. S03 normal local Runtime interaction 也要顯示 global loading / processing feedback。
+2. Progress 統一採 Stage label + checkpoint-derived Progress %。
+3. % 代表已完成 work checkpoints，不代表剩餘時間。
+4. checkpoint 卡住時停在最後真實值，不人工灌高。
+5. Runtime operation 必須有 Timeout → Humanized Recovery → safe S03 return。
+
+這與目前已 promotion 的 F00-UX-022 / F00-AC-008「normal Runtime interaction不觸發 global shell loading」衝突，因此屬 **Material Function Delta**。
+
+### Proposed F00 Presentation Delta
+
+S03 committed Runtime interaction：
+
+~~~text
+User Action
+→ GLOBAL_PROCESSING
+→ COMMITTED → APP
+or
+→ TIMED_OUT / FAILED → F12 Recovery → safe APP / terminal safe-state
+~~~
+
+Presentation：
+- global processing feedback 必須可見。
+- 有可靠 checkpoints → 顯示 Progress %。
+- 沒有可靠 checkpoints → 顯示 stage / processing state，但不假造百分比。
+- 不為了讓 loading 可見而刻意延長完成時間。
+- timeout 後若 last-known-good Runtime integrity成立，回到安全 S03；否則進 O03 terminal safe-state。
+
+### Proposed F00 Acceptance Delta
+
+正式 Review 時至少需新增／修改：
+- normal local Runtime interaction會得到 global processing feedback。
+- processing成功後自動回 S03，不增加多餘確認頁。
+- soft timeout保留 current App/context。
+- hard timeout安全返回 last-known-good App when integrity holds。
+- stale late completion不得在 timeout後偷偷改變 active UI state。
+- F12 terminal判斷時不得強制返回不安全 Runtime。
+
+此節待下一輪 F00/F03/F12 Working Function Delta Review 後才能成為 Working Current Truth。

@@ -977,3 +977,30 @@ Active validated Blueprint
 ~~~
 
 > Share 分享的是 App definition，不是 Creator 當時的私有操作狀態。這讓 NodeFF 的連結既便宜、可快取、可重播，也不需要 Recipient 重新呼叫 LLM。
+
+
+---
+
+## Future Share Modes Boundary
+
+> Sync source：O01 Low-fi Review / DESIGN-WORKBENCH。
+>
+> 此節只固定 Phase boundary，不擴張 Phase 1 F05。
+
+Phase 1 F05只分享：
+
+~~~text
+App definition / immutable Blueprint reference
+~~~
+
+Phase 1 **不分享**：
+- current Runtime inputs
+- current Result
+- mutable game/session state
+
+Future directions：
+1. **Share Result / Runtime Snapshot**：需要獨立 explicit Function / contract；不得偷偷擴張既有 F05 share row。
+2. **Realtime shared game / shared mutable state**：由 F09 Realtime Room方向承接。
+3. Future UI可形成「分享 App / 分享結果 / 開啟共同遊玩 Room」三種意圖，但 Phase 1 O01只落地「分享 App」。
+
+此 boundary 不修改目前 SPEC_READY F05 semantics。

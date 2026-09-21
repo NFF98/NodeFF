@@ -1,6 +1,6 @@
 # F12 — Humanized Recovery Orchestration
 
-> 狀態：SPEC_READY
+> 狀態：SPEC_READY + WORKING_DELTA_PENDING_REVIEW
 > Formal Spec：spec/functions/F12-HUMANIZED-RECOVERY.md
 >
 > Canonical Role：Phase 1 Cross-Function Error Classification、Recovery Policy、Context Preservation、Humanized Message、Next Action、Recovery Episode Evidence 的 Working Current Truth。
@@ -1114,3 +1114,59 @@ Fxx-ERR technical truth
 ~~~
 
 > Humanized Recovery 不是把錯誤訊息寫得比較漂亮，而是讓 User 在失敗後仍有一條安全、可理解、真的走得下去的路。
+
+
+---
+
+## Pending Material Delta — Runtime Action Timeout Recovery
+
+> 狀態：USER DIRECTION CONFIRMED / WORKING REVIEW PENDING
+>
+> Formal Spec：**暫不修改**。
+
+F12 已有 common `TIMEOUT` recovery class，但 normal F03 Runtime action 尚缺完整 mapping。
+
+### Proposed Mapping
+
+~~~text
+F03 Runtime Action Hard Timeout
+→ recovery_class = TIMEOUT
+→ preserve = CURRENT_BLUEPRINT + CURRENT_RUNTIME_INSTANCE(last committed) + CURRENT_RESULT when safe
+→ severity = BLOCKING_RECOVERABLE when integrity holds
+→ retryability = IMMEDIATE_RETRY / RETRY_LATER by budget
+→ safe_surface = APP_CURRENT
+~~~
+
+Default consumer meaning：
+
+> 剛才這個操作處理太久，App 已回到上一個安全狀態。
+
+Next actions：
+- Primary：再試一次（retry budget仍可用）。
+- Secondary：回到 App / 保留目前狀態。
+- Budget exhausted：稍後再試。
+
+若 timeout伴隨 Runtime integrity uncertainty：
+
+~~~text
+TIMEOUT + integrity uncertainty
+→ INTEGRITY_FAILURE / CRITICAL precedence
+→ terminal safe-state
+→ no unsafe retry
+~~~
+
+### Retry Budget
+
+沿用 F12既有規則：
+- 同一 recovery episode immediate User Retry最多3次。
+- 第4次改 RETRY_LATER 或 alternate safe path。
+
+### Acceptance Seeds
+
+- timeout User看不到 raw timer / internal code。
+- timeout recovery明確說明哪些 context已保留。
+- last-known-good App完整時能回 APP_CURRENT。
+- integrity不確定時不得假裝 recover。
+- stale completion被 F03丟棄後不得改變 recovery outcome。
+
+此節待 F00/F03/F12 Working Delta Review 正式閉合。

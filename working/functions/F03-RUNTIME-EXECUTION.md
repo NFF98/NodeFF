@@ -1,6 +1,6 @@
 # F03 — Runtime Execution / Semantics
 
-> 狀態：SPEC_READY
+> 狀態：SPEC_READY + WORKING_DELTA_PENDING_REVIEW
 > Formal Spec：spec/functions/F03-RUNTIME-EXECUTION.md
 >
 > Canonical Role：Phase 1 Browser Runtime Semantics 的 Working Current Truth。
@@ -1438,3 +1438,99 @@ Validated immutable Blueprint
 ~~~
 
 > NodeFF Runtime 的工作不是再次「理解」App，而是忠實、安全、可重播地執行已經被理解與驗證過的 App。
+
+
+---
+
+## Pending Material Delta — Runtime Interaction Processing / Timeout
+
+> 狀態：USER DIRECTION CONFIRMED / WORKING REVIEW PENDING
+>
+> Formal Spec：**暫不修改**。
+>
+> 此節補足目前 F03 尚缺的 normal Runtime action timeout lifecycle。
+
+### Proposed Runtime Operation State
+
+每次 committed Runtime interaction建立本地 operation token：
+
+~~~text
+IDLE
+→ STARTED
+→ PROCESSING
+→ COMMITTED
+or TIMED_OUT
+or FAILED
+~~~
+
+Requirements：
+- operation token 唯一識別該次 interaction。
+- Action transaction仍維持 atomic commit。
+- 未 COMMITTED 前不得發布半套 state。
+- PROCESSING 期間提供可驗證 checkpoint 給 F00/O05 做 progress presentation。
+
+### Proposed Checkpoint Contract
+
+Checkpoint只表示已完成工作，不表示剩餘時間。
+
+~~~text
+operation_started
+→ action_steps_evaluated
+→ derived_rules_recomputed
+→ commit_ready
+→ committed
+~~~
+
+不是每個 action 都必須暴露相同 checkpoint；Runtime只可回報真實已完成 milestone。
+
+### Proposed Soft Timeout
+
+超過 policy-defined soft threshold：
+
+- operation仍可繼續。
+- last committed state保持。
+- progress停在最後真實 checkpoint。
+- 通知 F00/O05 顯示「還在處理，你的 App 和目前內容都還在。」
+
+### Proposed Hard Timeout
+
+超過 policy-defined hard threshold：
+
+~~~text
+PROCESSING
+→ TIMED_OUT
+→ discard uncommitted working state/effects
+→ preserve last committed state
+→ mark operation token closed
+→ F12 TIMEOUT
+~~~
+
+Rules：
+- safe時取消/abandon pending local effect。
+- late result / late callback若屬 closed operation token → STALE，禁止 commit。
+- timeout 不 mutation Blueprint。
+- 若 Instance integrity仍成立 → 可回 safe S03。
+- 若 integrity不確定 → F12 INTEGRITY / CRITICAL，停止 affected execution path。
+
+### Proposed Error / Evidence Seeds
+
+待 Review 決定正式 ID：
+- RUNTIME_ACTION_TIMEOUT
+- STALE_OPERATION_COMPLETION
+
+Evidence 至少需要：
+- operation_started
+- operation_timed_out
+- stale_completion_discarded
+- runtime_safe_state_restored
+
+### Proposed Acceptance / Test Seeds
+
+- action timeout不留下 partial state。
+- timeout後 late completion不能 commit。
+- last committed state可安全恢復。
+- retry建立新 operation token，不重用已 closed token。
+- global processing feedback不新增 server round trip或 LLM call。
+- timeout / recovery不破壞 Browser-first Runtime boundary。
+
+此節待 F00/F03/F12 Working Delta Review 正式閉合。

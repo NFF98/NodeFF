@@ -34,3 +34,26 @@ Acceptance：
 # Status Note
 
 此文件目前是從既有 Portfolio 文件搬出的 Working 內容，**不因搬家自動升格為完整 Function Spec / SPEC_READY**。後續 Detailed Design 仍需依 Design-to-Delivery Contract 補齊缺少的 UI / API / Data / Error / Security / Evidence / Acceptance 等部分。
+
+
+## Relationship To Future Share Modes
+
+> Sync source：O01 Low-fi Review / DESIGN-WORKBENCH。
+
+未來若 NodeFF支援「共享遊戲 / 多人共同操作 / 同步 mutable App state」，由 F09 Realtime Room 承接，不擴張 F05 static Share/Restore。
+
+Conceptual boundary：
+
+~~~text
+F05
+= share immutable App definition
+→ recipient gets fresh Runtime Instance
+
+F09
+= share/join Room
+→ presence + mutable shared instance state
+~~~
+
+Future result-only sharing不自動等於 F09；若只是分享一份 Result / Snapshot，仍需獨立 Function contract。
+
+F09目前維持 DEFERRED / Evidence-gated，不因此提前進 Phase 1。

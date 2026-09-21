@@ -609,6 +609,10 @@ UX 原則：
 
 ## Future Share Modes Boundary
 
+> Sync status：**SYNCED TO WORKING**。
+> Sync targets：`working/functions/F05-SHARE-RESTORE.md`、`working/functions/F09-REALTIME-ROOM.md`、`working/UI-UX/overlays/O01-SHARE.md`。
+> 狀態：WORKBENCH HISTORY — 後續以對應 Working 文件為 Current Truth。
+
 - Phase 1 O01 / F05：只分享 App definition / Blueprint reference，不分享 Runtime input 或 current result。
 - Future「分享結果」：需獨立 Function / contract，不能偷擴張 F05。
 - Future「共同遊玩 / 即時共享狀態」：由 F09 Realtime Room方向承接；目前 Deferred。
@@ -617,7 +621,9 @@ UX 原則：
 
 ## Runtime Global Loading + Timeout Function Delta
 
-> 狀態：WORKING GAP / MATERIAL FUNCTION DELTA — USER DIRECTION CONFIRMED
+> Sync status：**SYNCED TO WORKING — REVIEW PENDING**。
+> Sync targets：`working/functions/F00-EXPERIENCE-SHELL.md`、`F03-RUNTIME-EXECUTION.md`、`F12-HUMANIZED-RECOVERY.md`、`working/UI-UX/screens/S03-APP-RUNTIME.md`、`working/UI-UX/overlays/O05-LOADING-BUILDING-HYDRATION.md`。
+> 狀態：MATERIAL FUNCTION DELTA — USER DIRECTION CONFIRMED / FUNCTION REVIEW PENDING
 >
 > 來源：O05 Loading / Building / Hydration ④A Low-fi Review。
 >
@@ -739,3 +745,39 @@ Actions：
 3. F12補 Runtime-action TIMEOUT mapping與 safe return semantics（若現有 mapping不足）。
 4. Acceptance/Test：global loading、timeout rollback、late result discard、return-to-S03、retry budget。
 5. User 明確批准 Working Function Delta後，才可 promotion回 formal Spec。
+
+
+---
+
+## Session Closeout — 2026-09-21
+
+### Today closed
+
+- S04 Shared App Entry / Restore ④A Low-fi。
+- S05 Refine / Remix Workspace ④A Low-fi。
+- S06 Correction Compare ④A Low-fi。
+- O01 Share Overlay ④A Low-fi。
+- O02 Correction Composer ④A Low-fi。
+- O03 Recovery Overlay ④A Low-fi。
+- O04 Revert Confirmation ④A Low-fi。
+- O05 Loading / Building / Hydration direction reviewed。
+- Future Share Modes boundary同步到 F05/F09 Working。
+- Runtime Global Loading + Timeout gap同步到 F00/F03/F12 Working。
+
+### Next session first task
+
+> **F00/F03 Runtime Loading + Timeout Function Delta Review**
+
+Review目標：
+1. F00 global processing/loading presentation semantics。
+2. F03 operation token / checkpoints / soft timeout / hard timeout / stale completion。
+3. F12 TIMEOUT → safe S03 recovery mapping。
+4. Proposed Acceptance/Test seeds。
+5. User批准 Working Function Delta後，再做 Cross-Screen Consistency Review。
+
+### Formal Spec / Cursor rule
+
+- Formal Spec **暫不修改**。
+- Cursor implementation維持 HOLD。
+- 先完成 UI/UX與 Cursor Build / Operating Model討論。
+- 正式 Cursor development前，再執行一次短期 Formal Spec Refresh。
