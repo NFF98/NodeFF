@@ -80,14 +80,29 @@ working/API-CONVENTIONS.md
 working/EXECUTION-ADMISSION.md
 → fresh Blueprint trust / compatibility execution gate
 
+working/ACCEPTANCE-CONVENTIONS.md
+→ shared Acceptance → Test Contract conventions
+
+working/registries/recovery-registry.json
+→ exact source Error → F12 Recovery machine mapping
+
+working/registries/evidence-event-registry.json
+→ exact Event ID → F07 Evidence machine contract
+
+working/registries/acceptance-test-registry.json
+→ exact Acceptance → Test Contract mapping
+
 working/ProjectManagement/CAPABILITY-FABRIC.md
 → capability semantic contract
 
 working/functions/Fxx-*.md
 → single Function end-to-end detailed design
 
-spec/
-→ reviewed implementation contracts
+spec/functions/
+→ reviewed Function implementation contracts
+
+spec/shared/
+→ reviewed cross-Function shared contracts
 
 execution/
 → backlog / sprint / changelog generated from approved Spec

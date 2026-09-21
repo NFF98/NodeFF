@@ -1028,6 +1028,18 @@ F12-AC-025 → TEST-F12-025 no recovery API
 F12-AC-027 → TEST-F12-027 trust cannot bypass
 ~~~
 
+# 40.1 Machine-readable Recovery Registry
+
+Phase 1 Working registry：
+
+~~~text
+working/registries/recovery-registry.json
+~~~
+
+它是 exact source Error ID → recovery_class / policy_id / severity / retryability / message_key / next_actions / evidence_class 的 machine-readable mapping。
+
+Error meaning仍由各 source Fxx 擁有；F12擁有 shared Recovery semantics。Registry只把已批准 mapping結構化，不建立第二套 Error truth。
+
 # 41. Dependencies
 
 Upstream：
