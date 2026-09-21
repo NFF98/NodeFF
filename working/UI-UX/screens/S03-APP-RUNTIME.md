@@ -2,7 +2,7 @@
 
 > Screen ID：S03
 >
-> 狀態：**WORKING — LOW_FI_REVIEW_IN_PROGRESS**
+> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / HIGH_FI_PENDING**
 >
 > Phase：Phase 1
 >
@@ -75,19 +75,15 @@ Low-fi 原則：
     │ [調整結果]                          [Remix / 修改 App]     │
     └───────────────────────────────────────────────────────────┘
 
-Top shell建議只讓：
-- NodeFF / Home
-- App title
-- Share
-- More / overflow
+Top shell 原則：
+- Generated App 仍是主體，但 Shell Chrome 內的重要功能必須明顯、可快速操作。
+- App identity 可用 App Title、App Logo，或 Logo + Title，依 App metadata / available space決定。
+- Share 屬高優先功能，預設 visible。
+- Remix / Correct / Revert 等功能依重要性與當前 context決定是否 visible。
+- 空間不足時，低優先功能才收進 More / overflow（•••）。
 
-Overflow 可承接：
-- New / Home
-- Remix / Refine
-- Previous Version / Revert（eligible 時）
-- 其他非 primary shell actions
-
-理由：F00 要求這些 actions「可達」，不代表全部必須常駐在 header。
+原則不是「全部塞 Header」，也不是「全部藏起來」，而是：
+> 重要功能先顯示；顯示不了才收進 overflow。
 
 # 5. Proposed Mobile Low-fi
 
@@ -107,10 +103,11 @@ Overflow 可承接：
     └────────────────────────────┘
 
 Mobile 原則：
-- App 本體優先佔高度。
-- Shell 不做 permanent bottom nav。
-- Result actions 只有需要時出現。
-- 若 generated App 本身需要 bottom controls，NodeFF shell 不可搶同一區域造成衝突。
+- App 本體仍優先佔最大可用空間。
+- **採 NodeFF permanent bottom navigation**，承接最重要的 Shell actions。
+- Bottom navigation 必須精簡，只放高頻／高價值操作。
+- Result actions 仍只在需要時出現。
+- 若 Generated App 本身需要 bottom controls，必須在 layout 上避免與 NodeFF bottom navigation互相遮擋或搶操作區。
 
 # 6. Runtime App Area
 
@@ -134,10 +131,10 @@ User 應感覺：
 
 ## Always Accessible
 
-- App title。
-- Home / New。
+- App identity：Title / Logo / Logo + Title。
 - Share。
-- Remix / Refine。
+- 其他高優先功能依當前 screen width / device context保持 visible。
+- Mobile 由 bottom navigation承接核心 NodeFF actions。
 
 ## Contextual
 
@@ -147,9 +144,10 @@ User 應感覺：
 
 Low-fi 建議：
 - Share 作 visible action。
-- Remix 可在 result/action area或 overflow，依 screen width調整。
-- Correct 與 Result 放在一起，比放 header 更符合 User 心智。
-- Revert 放 overflow，避免一般 User 沒有 correction history 時看到無意義入口。
+- 重要功能能顯示就顯示；只有空間不足或低頻 action才收進 overflow。
+- Correct 與 Result 放在一起，避免與 Remix 混淆。
+- Remix 明確代表「修改 App 本身」。
+- Revert 為 contextual action，只在 eligible 時出現；位置可依空間與重要性決定。
 
 # 8. Result Surface
 
@@ -257,10 +255,11 @@ Desktop：
 - Result area可以在 Runtime下方或 contextually adjacent，但不得擠壓 App 核心操作。
 
 Mobile：
-- compact top chrome。
-- generated App 先於 NodeFF secondary actions。
+- compact top chrome + permanent bottom navigation。
+- Generated App 仍優先取得最大內容空間。
+- bottom navigation只放高頻／高價值 Shell actions。
 - overflow收納低頻 actions。
-- 不固定一排過多 shell buttons。
+- 若 Generated App 自己有 bottom controls，必須預留安全區與避免重疊。
 - shell overlay不能破壞 App current state。
 
 # 16. Accessibility Baseline
@@ -272,19 +271,22 @@ Mobile：
 - Result change / correction success使用非破壞性 live announcement when appropriate。
 - Mobile touch targets維持可操作尺寸。
 
-# 17. Proposed Low-fi Decisions To Confirm
+# 17. Confirmed S03 Low-fi Decisions
 
-本輪主要確認 4 件事：
+User 已確認：
 
-1. **Generated App 是否應佔 S03 絕對主體，NodeFF Shell只留極簡 top chrome？**
-2. **Header 是否採 App Title + Share + overflow；Remix / Correct / Revert依 context放在 result area或 overflow，而不是全部塞 Header？**
-3. **Correct 是否只在有 canonical Result 時出現，並靠近 Result；Remix 永遠是「改 App」的另一條路？**
-4. **Mobile 是否不做 NodeFF permanent bottom navigation，把最大空間留給 Generated App？**
+1. **Generated App 佔畫面絕對主體**；NodeFF Shell Chrome保持極簡，但 Share等重要功能必須明顯。
+2. App identity 可以是 **App Title、Logo，或 Logo + Title**。Header / Shell 的重要功能能顯示就顯示；空間不足時才收進 `•••`。
+3. **Correct 與 Remix 不混在一起**：
+   - Correct = 調整結果 / 邏輯。
+   - Remix = 修改 App 本身。
+4. **Mobile 採 permanent bottom navigation**，但仍要把最大可用空間留給 Generated App。
+5. Generated App若自己有 bottom controls，NodeFF bottom navigation必須避免遮擋與操作衝突。
 
 # 18. Review Status
 
-> **LOW_FI_REVIEW_IN_PROGRESS**
+> **LOW_FI_DIRECTION_APPROVED — HIGH_FI_PENDING**
 
-本文件僅做 S03 ④A Low-fi。
+S03 ④A Low-fi 已完成 User Review。
 
-依固定流程，S03 Low-fi確認後繼續 S04 / S05 / S06 與 O01–O05 Low-fi；所有 Low-fi完成後才統一進 High-fi Design System。
+依固定流程，下一步進 S04 ④A Low-fi；所有 S01–S06 / O01–O05 Low-fi完成後，再統一進 Cross-Screen Review → High-fi Design System → ④B High-fi。
