@@ -605,3 +605,11 @@ UX 原則：
 - Header 最終保留哪些 controls；
 - Capsule 卡片 High-fi visual language；
 - S01 Desktop / Mobile 的 final responsive composition。
+
+
+## Future Share Modes Boundary
+
+- Phase 1 O01 / F05：只分享 App definition / Blueprint reference，不分享 Runtime input 或 current result。
+- Future「分享結果」：需獨立 Function / contract，不能偷擴張 F05。
+- Future「共同遊玩 / 即時共享狀態」：由 F09 Realtime Room方向承接；目前 Deferred。
+- UI future direction可拆成：分享 App / 分享結果 / 開啟共同遊玩 Room，但 Phase 1 只落地「分享 App」。

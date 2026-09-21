@@ -2,7 +2,7 @@
 
 > Overlay ID：O01
 >
-> 狀態：**WORKING — LOW_FI_REVIEW_IN_PROGRESS**
+> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / HIGH_FI_PENDING**
 >
 > Phase：Phase 1
 >
@@ -119,17 +119,16 @@ Rules：
 - Native Share（supported時）。
 - Close。
 
-Primary action建議：
+READY 後保留兩種分享方式：
 
     複製連結
-
-Secondary：
-
     系統分享
 
-理由：
-- Copy是跨平台穩定能力。
-- Native Share有裝置/瀏覽器差異。
+差異：
+- **複製連結**：把同一個 public share URL 放入 clipboard，User自行貼到 LINE / Discord / Email / 社群等。
+- **系統分享**：呼叫 OS / Browser Share Sheet，少一步貼上，但依裝置 / Browser支援而定。
+
+兩者分享的是同一個 App Link；Copy Link是基本能力，System Share是快捷能力。
 
 # 9. Copy Success
 
@@ -182,9 +181,9 @@ Native Share cancel不是 error。
 
 # 13. Privacy Copy
 
-O01 可用簡短 consumer copy：
+O01 使用精準 consumer copy：
 
-> 分享的是這個 App，不會分享你目前輸入的內容或結果。
+> **目前這個分享只分享 App 本身，不包含你現在的輸入或結果。**
 
 這對 NodeFF 很重要，因為 F05 明確規定 Share只指向 Blueprint，不含 Runtime input / Result。
 
@@ -216,17 +215,24 @@ O01 可用簡短 consumer copy：
 - Native Share不可用時不留下不可操作控制。
 - Touch target至少44 CSS px。
 
-# 16. Proposed Low-fi Decisions To Confirm
+# 16. Confirmed O01 Low-fi Decisions
 
-本輪確認 4 件事：
+User 已確認：
 
-1. **Desktop 用 compact Share panel/dialog、Mobile 用 bottom sheet，不做 full-screen Share page？**
-2. READY 後是否以 **「複製連結」為 Primary CTA，「系統分享」為 Secondary CTA**？
-3. 是否顯示一句 privacy copy：**「分享的是 App，不會分享你目前輸入的內容或結果」**？
-4. Copy failure時是否保留有效 URL並提供手動複製 / Retry；Share create failure則顯示 Retry + Close，且兩者都不離開 S03？
+1. Desktop 使用 compact Share panel / lightweight dialog；Mobile 使用 bottom sheet，不做 full-screen Share page。
+2. READY 後同時保留 **複製連結** 與 **系統分享**：
+   - Copy Link = 基本、跨平台分享能力。
+   - System Share = 裝置支援時的快捷入口。
+3. Privacy copy 固定為：**「目前這個分享只分享 App 本身，不包含你現在的輸入或結果。」**
+4. Copy failure 保留有效 URL並允許手動複製 / Retry；Share creation failure提供 Retry + Close；兩者都不離開 S03。
+5. Future capability boundary：
+   - 分享目前結果 / Runtime snapshot：Phase 1 尚未有正式 Function。
+   - 即時共同遊玩 / 共享狀態：由 F09 Realtime Room方向承接，目前為 Deferred，不納入 O01 Phase 1。
 
 # 17. Review Status
 
-> **LOW_FI_REVIEW_IN_PROGRESS**
+> **LOW_FI_DIRECTION_APPROVED — HIGH_FI_PENDING**
 
-O01確認後進 O02 — Correction Composer ④A Low-fi。
+O01 ④A Low-fi 已完成 User Review。
+
+依固定流程，下一步進 O02 — Correction Composer ④A Low-fi。
