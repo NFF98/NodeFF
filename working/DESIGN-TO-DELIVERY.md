@@ -560,11 +560,11 @@ Revert
 | Canonical Data Model | ✅ WORKING_BASELINE | `working/DATA-MODEL.md` | Architecture + Infra + Delivery Contract |
 | Executable Blueprint | ✅ WORKING_BASELINE | `working/functions/F02-BLUEPRINT-VALIDATION.md` canonical Blueprint section | Data Model + F04 Registry |
 | Concrete Registry | ✅ WORKING_BASELINE | `working/functions/F04-CAPABILITY-REGISTRY.md` | Capability Fabric + Data Model |
-| API Contracts | 🟡 DRAFT | each `working/functions/Fxx-*.md`; F01 + F05 + F06 API baselines established, other Fxx pending | Data Model + Function flow |
+| API Contracts | 🟡 DRAFT | each `working/functions/Fxx-*.md`; F01 + F05 + F06 + F07 API baselines established, F12/F16 and other Fxx pending | Data Model + Function flow |
 | UX State Machines | 🟡 DRAFT | F00 shared shell + F05 Share/Restore + F06 Remix/Refine UX baselines established; F12/F16 UX pending | Function flow + Error / Recovery |
 | Runtime Semantics | ✅ WORKING_BASELINE | `working/functions/F03-RUNTIME-EXECUTION.md` | Blueprint + Registry |
 | Error Taxonomy | ❌ NOT_STARTED | F12 shared taxonomy + function-specific Fxx errors | Runtime / API / UX |
-| Evidence Schema | ❌ NOT_STARTED | F07 event contract + each Function event definitions | Data Model + Function Acceptance |
+| Evidence Schema | ✅ WORKING_BASELINE | `working/functions/F07-ANONYMOUS-IDENTITY-EVIDENCE.md` common envelope / ingestion / privacy / retention; each Fxx owns event meaning | Data Model + Function Acceptance |
 | Function Specs | 🟡 DRAFT | `working/functions/Fxx-*.md` | all required shared contracts |
 | Executable Acceptance | ❌ NOT_STARTED | each Fxx Acceptance + mapped tests | Function contracts + Delivery Contract |
 
