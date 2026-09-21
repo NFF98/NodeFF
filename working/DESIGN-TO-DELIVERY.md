@@ -220,8 +220,9 @@ Open Decisions = 無 blocker
 1. Working 是可修改 Current Truth。
 2. Spec 是批准後的 implementation contract。
 3. 升格不是重新改寫需求，而是固定已 Review 的 Working。
-4. Spec 變更必須留下可追蹤 change。
-5. Cursor 不得以 Chat 討論覆蓋 Spec。
+4. **任何 WORKING_BASELINE / REVIEW → SPEC_READY promotion，必須先取得 User 明確批准。沒有 User 明確答覆「同意」不得升格。**
+5. Spec 變更必須留下可追蹤 change。
+6. Cursor 不得以 Chat 討論覆蓋 Spec。
 
 ---
 

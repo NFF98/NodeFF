@@ -100,7 +100,7 @@ Repository governance authority：
 
 ## Working → Spec
 
-Working 只有通過 DESIGN-TO-DELIVERY 的 Spec Gate 才可升格。
+Working 只有通過 DESIGN-TO-DELIVERY 的 Spec Gate **且取得 User 明確批准** 才可升格。Gate 通過本身不等於自動 promotion。
 
 Spec promotion：
 
