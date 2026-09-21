@@ -2,7 +2,7 @@
 
 > Screen ID：S05
 >
-> 狀態：**WORKING — LOW_FI_REVIEW_IN_PROGRESS**
+> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / HIGH_FI_PENDING**
 >
 > Phase：Phase 1
 >
@@ -22,10 +22,11 @@ S05 的核心任務：
 
 Low-fi 建議共用同一個 S05 Workspace，不做兩套 UI。
 
-Difference只用 relation label說清楚：
+Difference 同時用 **relation label + version visual marker** 說清楚：
 
 - **Refine / 修改這個 App**：延續目前 App，做下一版。
 - **Remix / 改成我的版本**：以目前 App 為底稿，做衍生版本。
+- 原版 / 新版在 Low-fi 先保留不同的 border / accent token 作為版本識別；**實際顏色值屬 ④B High-fi Design System，不在 Low-fi 鎖定。**
 
 原因：
 - 兩者底層流程幾乎一致。
@@ -94,7 +95,7 @@ S04 Shared App restore完成後，也是先進 S03，再由 S03進 Remix。
 建議只放：
 - App identity。
 - 簡短 source summary。
-- 可選「查看原 App」。
+- **「查看原版」button**：User 可回原 App / 原結果確認，再返回 S05，修改草稿不得遺失。
 
 # 6. Proposed Mobile Low-fi — Change Composer
 
@@ -113,7 +114,7 @@ S04 Shared App restore完成後，也是先進 S03，再由 S03進 Remix。
     │ [      開始修改      ]    │
     └────────────────────────────┘
 
-Mobile 不做 split-pane。
+Mobile 不做 split-pane；保留明顯的「查看原版」入口，返回 S05 時保留 change draft。
 
 # 7. Change Composer Rules
 
@@ -189,6 +190,7 @@ Desktop：
     │                                                          │
     ├──────────────────────────────────────────────────────────┤
     │ 這是新版，原版仍保留                                    │
+    │ [查看原版]                                               │
     │                                                          │
     │ [保留原版]      [再調整]             [使用新版]          │
     └──────────────────────────────────────────────────────────┘
@@ -203,6 +205,7 @@ Mobile：
     │                            │
     ├────────────────────────────┤
     │ 原版仍保留                │
+    │ [查看原版]                │
     │ [保留原版]                │
     │ [再調整] [使用新版]        │
     └────────────────────────────┘
@@ -223,6 +226,25 @@ S05只需要：
 - 可以再調整。
 
 若未來 High-fi需要 side-by-side preview，再根據實際 screen size決定，不在 Low-fi先鎖。
+
+# 11.1 View Original
+
+S05 必須讓 User 隨時確認 source App / 原版結果。
+
+Flow：
+
+    S05
+    → 查看原版
+    → source App / source result
+    → 返回修改
+    → S05 current draft / preview context preserved
+
+Rules：
+- 「查看原版」不是「保留原版」決策。
+- 查看原版不改 active child / source selection。
+- 不清空 change draft。
+- Preview 已存在時，返回 S05 後仍回到同一 preview context。
+- Mobile / Desktop 都必須可達。
 
 # 12. Use New Version
 
@@ -334,19 +356,22 @@ Examples：
 - preview ready透過非破壞性 live announcement。
 - 返回原版 / 使用新版 wording明確，避免 ambiguous「Done」。
 
-# 19. Proposed Low-fi Decisions To Confirm
+# 19. Confirmed S05 Low-fi Decisions
 
-本輪主要確認 4 件事：
+User 已確認：
 
-1. **Refine / Remix 是否共用同一個 S05 Workspace，只用 relation label區分，不做兩套 UI？**
-2. **Change Composer 是否只顯示 App identity + change input +「原版會保留」，不把原 App整頁並排放旁邊？**
-3. **新版完成後是否直接進 Preview，三個明確 CTA：保留原版 / 再調整 / 使用新版？**
-4. **Adjust Again 預設基於「最新 Preview 版本」，但提供「從原版重新調整」secondary option？**
+1. **Refine / Remix 共用同一個 S05 Workspace**。
+2. Refine / Remix 必須同時用 **relation label + version visual marker** 區分。
+3. 原版 / 新版的 border / accent 需要可辨識；實際顏色留到 ④B High-fi Design System 決定。
+4. Change Composer 只顯示 App identity + 修改需求 +「原版會保留」，不把原 App整頁並排。
+5. 必須提供 **「查看原版」button**，讓 User 回原 App / 原結果確認後再回 S05，且 change draft / preview context 不遺失。
+6. 新版完成直接進 Preview，三個主要決策 CTA：**保留原版 / 再調整 / 使用新版**。
+7. 「再調整」預設基於最新 Preview child，並提供「從原版重新調整」secondary option。
 
 # 20. Review Status
 
-> **LOW_FI_REVIEW_IN_PROGRESS**
+> **LOW_FI_DIRECTION_APPROVED — HIGH_FI_PENDING**
 
-本文件僅做 S05 ④A Low-fi。
+S05 ④A Low-fi 已完成 User Review。
 
-S05確認後繼續 S06 與 O01–O05 Low-fi；所有 Low-fi完成後再進 Cross-Screen Review → High-fi Design System → ④B High-fi。
+依固定流程，下一步進 S06 ④A Low-fi；所有 S01–S06 / O01–O05 Low-fi完成後，再進 Cross-Screen Review → High-fi Design System → ④B High-fi。
