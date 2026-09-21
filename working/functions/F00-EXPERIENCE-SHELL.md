@@ -796,7 +796,19 @@ Phase 1 可以 local persistence：
 
 Browser persistence使用 versioned key + TTL。
 
-Exact sensitive-field policy由 F07/F12後續補齊；未定前採保守最小保存。
+Phase 1 canonical policy：
+
+~~~text
+prompt draft / clarification draft / correction draft / minimal recovery context
+→ TTL = 7 days
+~~~
+
+Rules：
+
+- SENSITIVE / DO_NOT_PERSIST values不進 local durable draft。
+- 每次成功 submit / cancel / expiry都清理不再需要的 draft。
+- version mismatch時丟棄不安全舊shape，不做 silent migration。
+- retention truth由 DATA-MODEL + F07 shared privacy matrix擁有；F00只實作。
 
 # 27. API / Function Integration
 
@@ -1076,9 +1088,9 @@ Prompt → Clarify only if needed → Build → Use
 
 1. F05 exact Share modal fields / default share mode。
 2. F06 exact Remix vs Refine wording / source context。
-3. F07 local draft TTL / Evidence envelope。
-4. F12 exact Recovery message catalog / action mapping。
-5. F16 exact correction composer / compare semantic explanation payload。
+3. Local draft TTL / privacy已由 DATA-MODEL + F07 closure固定為7 days；F00引用，不再自定。
+4. F12 Recovery message/action semantics已建立；copy可迭代但不改 action mapping。
+5. F16 correction/compare contract已建立；F00需在 Gate Closure補 accepted correction後的 Revert entry。
 6. Capsule content taxonomy / ranking屬 Product content layer，可迭代，不改 F00 state machine。
 
 # Conclusion

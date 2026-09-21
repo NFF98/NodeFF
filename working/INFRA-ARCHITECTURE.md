@@ -545,7 +545,8 @@ Phase 1 PostgreSQL 主要做：
 - lineage；
 - share reference；
 - compiler evidence；
-- product evidence。
+- product evidence；
+- API idempotency operations（24h bounded durable control record）。
 
 不做：
 - realtime game-state write on every click；
@@ -866,6 +867,8 @@ Postgres 已足以支援 POC、中期 identity/reuse 與早期 commerce metadata
 ## 一開始建 Edge KV as source of truth
 
 KV 適合 cache，不適合 ownership / lineage / commerce truth。
+
+Phase 1 mutation idempotency也不以 Edge KV作 canonical truth；使用 PostgreSQL bounded `idempotency_operation`，Edge未來只可作 acceleration。
 
 ## 一開始把所有 Capability 做成 Remote Service
 

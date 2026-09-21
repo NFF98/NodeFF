@@ -234,11 +234,12 @@ erDiagram
 | raw_intent | text | CONDITIONAL | User content；依 privacy / retention policy |
 | structured_intent | jsonb | NO | Prompt A output；schema owned by F01 |
 | resolved_intent | jsonb | NO | Clarification Gate 通過後的 semantic truth |
-| clarification_status | text | YES | ANALYZING / NEEDS_CLARIFICATION / READY_WITH_VISIBLE_ASSUMPTIONS / READY |
+| lifecycle_status | text | YES | RECEIVED / ANALYZING / NEEDS_CLARIFICATION / READY_WITH_VISIBLE_ASSUMPTIONS / READY / COMPOSING / VALIDATING / VALIDATED / ANALYSIS_FAILED / COMPOSITION_FAILED / VALIDATION_REJECTED / INCOMPATIBLE / CANCELLED |
+| intent_version | int | YES | optimistic concurrency token；starts at 1 |
 | source_blueprint_hash | text | NO | refine/remix/correct base |
 | created_at | timestamptz | YES | |
 | updated_at | timestamptz | YES | lifecycle metadata 可更新 |
-| expires_at | timestamptz | NO | raw / recovery retention policy |
+| expires_at | timestamptz | NO | raw_intent value retention deadline |
 
 規則：
 
@@ -247,6 +248,9 @@ erDiagram
 3. Resolved Intent 通過 F01 policy 後才能交給 Blueprint Composer。
 4. exact payload schema、provenance、assumption fields 由 F01 定義。
 5. correction / refine 使用新的 `intent_record`，不覆蓋原 Intent。
+6. `intent_version` 每次成功修改 lifecycle / structured intent / clarification answers / assumptions / resolved intent 時 +1；stale write 必須失敗，不以 `updated_at` 猜版本。
+7. `lifecycle_status` 是 Intent durable lifecycle truth；compiler_run / validation_run 保存 operation detail，不再建立第二個 clarification status truth。
+8. `expires_at` 只控制 `raw_intent` value retention；到期後將 `raw_intent` 設為 NULL，intent identity / structured / resolved semantic record仍可保留。
 
 ---
 
@@ -423,7 +427,8 @@ F08 / F10 若需要 Blueprint family / ownership，可新增 metadata layer，�
 | output_snapshot | jsonb | YES | user-visible / semantic result |
 | runtime_metadata | jsonb | NO | deterministic execution context |
 | created_at | timestamptz | YES | |
-| expires_at | timestamptz | NO | privacy / product policy |
+| expires_at | timestamptz | YES | value-bearing snapshot payload retention deadline；Phase 1 = created_at + 30 days |
+| redacted_at | timestamptz | NO | payload values redacted time |
 
 規則：
 
@@ -431,6 +436,8 @@ F08 / F10 若需要 Blueprint family / ownership，可新增 metadata layer，�
 - 不保存整個 React tree / component internals。
 - F03 / F16 定義 input/output snapshot 的正式 contract。
 - 敏感 fields 必須依 Capability / F07 policy redact 或禁止 durable persistence。
+- Snapshot value-bearing payload Phase 1 最長保存 30 days；到期後 input/output value 必須 redacted，只保留 correction chain 所需的 field identity / type / sensitivity / blueprint / comparison metadata。
+- `result_snapshot` row 可在 value redaction 後保留作 correction lineage evidence；不得以此 row 當可信 server execution proof。
 
 ---
 
@@ -494,6 +501,46 @@ F08 / F10 若需要 Blueprint family / ownership，可新增 metadata layer，�
 - `properties` 不得成為任意 user-content dump。
 - F07 定義 batching、retry、dedupe、event catalog、retention。
 - Function-specific evidence 必須用 stable Event ID / event_type。
+
+---
+
+## 6.11 idempotency_operation
+
+目的：
+
+> 為 Phase 1 mutation API 提供跨 retry / duplicate submit 的 durable logical-operation truth；不用 Edge KV 當 source of truth。
+
+| Field | Type | Required | Rule |
+|---|---|---:|---|
+| idempotency_operation_id | uuid | YES | PK |
+| anonymous_id | uuid | YES | request identity scope |
+| route_key | text | YES | normalized mutation route / operation class |
+| idempotency_key | text | YES | client-generated opaque key |
+| request_digest | text | YES | canonical request payload digest |
+| status | text | YES | IN_PROGRESS / SUCCEEDED / FAILED_TERMINAL |
+| result_ref_type | text | NO | INTENT / SHARE / CORRECTION / OTHER |
+| result_ref_id | text | NO | logical result identity |
+| http_status | int | NO | terminal response status |
+| error_code | text | NO | terminal stable error code |
+| created_at | timestamptz | YES | |
+| updated_at | timestamptz | YES | |
+| expires_at | timestamptz | YES | created_at + 24 hours |
+
+Constraints：
+
+~~~text
+unique(anonymous_id, route_key, idempotency_key)
+~~~
+
+Rules：
+
+1. same key + same request_digest + SUCCEEDED → return same logical result，不重做 side effect。
+2. same key + same request_digest + IN_PROGRESS → 409 IDEMPOTENCY_IN_PROGRESS，retryable=true。
+3. same key + different request_digest → 409 IDEMPOTENCY_CONFLICT。
+4. FAILED_TERMINAL 可重放同 terminal outcome；retryable transient failure不應先鎖成 FAILED_TERMINAL。
+5. cleanup 可在 expires_at 後刪除；24h idempotency window之外的 request視為新的 logical operation。
+6. 不保存完整 raw request / raw user content，只保存 digest與 bounded logical result reference。
+7. Phase 1 canonical persistence = PostgreSQL；Edge cache可以加速但不是 truth。
 
 ---
 
@@ -617,7 +664,7 @@ base blueprint
 | blueprint trust_status | YES | revoke / compatibility governance |
 | blueprint_lineage | NO | historical relation |
 | share status / last_opened_at | YES | lifecycle |
-| result_snapshot | NO | comparison evidence |
+| result_snapshot | VALUE-REDACTABLE | 30-day value retention後可 redact values；row可保留 lineage evidence |
 | correction_record outcome | LIMITED | workflow lifecycle |
 | product_event | NO | append-only evidence |
 | Browser Instance | YES | local runtime state |
@@ -767,7 +814,11 @@ OPERATIONAL_METADATA
 4. sensitive fields 不進 portable share URL。
 5. debug raw payload 若保存，必須有 bounded retention。
 6. provider secrets 不進 Browser / Blueprint / telemetry / DB product JSON。
-7. exact retention durations 由 F07 privacy / evidence policy 定義，不能 hardcode 在各 Function。
+7. Phase 1 retention durations以 F07 shared privacy matrix為 canonical policy；Function可引用但不得另寫不同數字。
+8. raw_intent value retention = 30 days after terminal Intent state；到期設 NULL。
+9. result_snapshot value-bearing payload retention = 30 days；到期 redact values。
+10. Browser local prompt / clarification / correction / recovery draft TTL = 7 days；SENSITIVE / DO_NOT_PERSIST不進 local durable draft。
+11. debug raw provider/request payload若明確啟用，maximum retention = 7 days，且 access-controlled。
 
 ---
 
@@ -787,6 +838,7 @@ LineageRepository
 ShareRepository
 CorrectionRepository
 EvidenceRepository
+IdempotencyRepository
 ~~~
 
 Phase 1 可由 Supabase/Postgres adapter 實作。
@@ -937,12 +989,18 @@ Function 可以增加自己的欄位 / table proposal，但若跨 Function 共�
 
 以下不是 Data Model blocker，由對應 Function 決定後回填：
 
-- F01：Structured Intent / Resolved Intent exact JSON schema、raw intent retention policy。
+- F01：Structured Intent / Resolved Intent exact JSON schema。
 - F02：canonical JSON serialization、content hash algorithm/version、trust compatibility details。
 - F03：Instance / Result serialization subset。
-- F05：Phase 1 default Share Mode、expiry/revocation UX。
-- F07：anonymous ID client/server issuance、event batching、exact retention duration。
-- F16：Result Snapshot exact semantic fields、Correction Delta schema。
+- F05：share expiry/revocation self-service UX after F08 ownership。
+- F07：anonymous ID issuance / event batching implementation details。
+- F16：Correction Delta implementation schema details。
+
+已閉合的 shared decisions：
+
+- Intent durable lifecycle + intent_version：本文 §6.2。
+- Mutation idempotency persistence：本文 §6.11，PostgreSQL，24h。
+- raw_intent / result_snapshot / Browser draft retention：本文 §13 + F07 privacy matrix。
 
 這些 decision 不應由 Cursor 自行發明。
 

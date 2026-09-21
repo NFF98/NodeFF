@@ -854,7 +854,7 @@ Use New Result / Accept New：
 - correction_record outcome → ACCEPTED。
 - active Browser App切到 child Blueprint / child Instance。
 - base Blueprint不刪除。
-- before / after snapshots保留依 retention policy。
+- before / after snapshot value-bearing payload依 F07 shared retention matrix最多30 days；之後redact values但保留 bounded correction metadata。
 - future Share使用當前 active child。
 - future Correction以 active child作 base。
 

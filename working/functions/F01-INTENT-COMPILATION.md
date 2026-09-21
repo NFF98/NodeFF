@@ -802,14 +802,18 @@ created_at
 expires_at
 ~~~
 
-Phase 1 TTL target：24h。
+Phase 1 TTL：24h。
+
+Canonical persistence：DATA-MODEL `idempotency_operation` / PostgreSQL。
 
 Rules：
 
 - retry 不 duplicate intent / compiler run。
-- compile retry 若 logical operation 已成功，直接回同結果。
+- compile retry 若 logical operation 已成功，直接回同 logical result。
 - key 不跨 anonymous identity reuse。
-- 若需 durable idempotency table，升 Spec 時先回 DATA-MODEL 補 shared contract；Cursor 不得自行新增。
+- same key + same body + IN_PROGRESS → 409 IDEMPOTENCY_IN_PROGRESS。
+- same key + different body → 409 IDEMPOTENCY_CONFLICT。
+- F01不得建立自己的 idempotency table / KV truth。
 
 # 23. API Timeout / Cancellation
 
@@ -1144,12 +1148,16 @@ api_version
 
 後續：
 
-1. F00 定 exact Clarification / assumption UI。
-2. F07 定 idempotency persistence / retention 與 event envelope。
-3. F12 定 F01 error → human recovery。
-4. F06/F16 定 REFINE / REMIX / CORRECT source context exact payload。
-5. Model provider selection 可 A/B，但不改 public contract。
-6. Shared API conventions 真正被多個 Fxx 重用後再抽共用文件，不提前製造新 SSOT。
+已閉合：
+
+- F00 Clarification / assumption UX已建立。
+- Idempotency persistence = DATA-MODEL idempotency_operation / PostgreSQL / 24h。
+- Retention = DATA-MODEL + F07 shared privacy matrix。
+- F12 recovery contract已建立。
+- F06/F16 source context已建立。
+- Shared API conventions已進 Gate Closure，F01不再作跨 Function owner。
+
+仍可迭代：Model provider selection可 A/B，但不改 public contract。
 
 # Conclusion
 

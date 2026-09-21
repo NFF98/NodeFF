@@ -753,7 +753,30 @@ Local unsent queue：
 24 hours
 ~~~
 
-Operational debug logs依 Infra policy；若含 raw request，應更短且 access-controlled。
+Operational debug logs若含 raw provider/request payload，Phase 1 maximum retention = 7 days，且 access-controlled。
+
+# 28.1 Shared User-Content Retention Matrix
+
+## F07-POL-009A
+
+F07與 DATA-MODEL共同固定 Phase 1 privacy retention：
+
+| Data | Value-bearing retention | Expiry action |
+|---|---:|---|
+| Browser prompt / clarification / correction / recovery draft | 7 days | delete local record |
+| raw_intent | 30 days after terminal intent state | set raw_intent = NULL |
+| result_snapshot input/output values | 30 days | redact values, keep bounded metadata row |
+| product_event raw row | 90 days | delete row; aggregate may remain |
+| local unsent event queue | 24 hours | delete unsent event |
+| idempotency_operation | 24 hours | delete expired operation row |
+| raw provider/request debug payload when explicitly enabled | max 7 days | delete payload |
+
+Rules：
+
+- SENSITIVE / DO_NOT_PERSIST可比表中更短，不能更長。
+- DO_NOT_PERSIST value永不進 durable snapshot / local durable draft。
+- retention change屬 Material privacy change，需要 Review。
+- Function文件只引用此 matrix，不建立不同 retention數字。
 
 # 29. Anonymous Identity Retention
 
