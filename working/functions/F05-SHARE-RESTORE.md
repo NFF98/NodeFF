@@ -369,7 +369,7 @@ Security revocation應能 purge / bypass cache。
 
 # 13. API Conventions
 
-F05沿用 F01 已建立的 Phase 1 API conventions：
+F05沿用 cross-Function canonical `working/API-CONVENTIONS.md`：
 
 ~~~text
 /api/v1
@@ -380,7 +380,7 @@ Idempotency-Key for mutation POST
 common success/error envelope
 ~~~
 
-若後續抽 shared API conventions，F05改引用 shared contract，不建立平行第二套。
+Shared API conventions已抽為唯一 cross-Function owner；F05只定 Share-specific endpoints / payload。
 
 # 14. API 1 — Create Share
 

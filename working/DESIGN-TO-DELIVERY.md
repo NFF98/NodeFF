@@ -74,6 +74,9 @@ working/APP-DETAILED-DESIGN.md
 working/DATA-MODEL.md
 → shared canonical data model
 
+working/API-CONVENTIONS.md
+→ shared public API transport / control contract
+
 working/ProjectManagement/CAPABILITY-FABRIC.md
 → capability semantic contract
 

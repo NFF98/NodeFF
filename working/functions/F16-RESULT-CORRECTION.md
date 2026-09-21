@@ -922,6 +922,8 @@ User選 Revert：
 
 # 33. Correction API Strategy
 
+Common transport / idempotency / concurrency / error envelope / versioning由 `working/API-CONVENTIONS.md` 擁有。
+
 F16新增 correction lifecycle API，但重用 F01 compiler lifecycle。
 
 Public：

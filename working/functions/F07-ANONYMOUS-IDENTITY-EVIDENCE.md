@@ -535,7 +535,7 @@ same event_id received again
 → no duplicate durable row
 ~~~
 
-Batch endpoint不需要額外 Idempotency-Key。
+Batch endpoint是 Shared API idempotency exception：不需要 Idempotency-Key；以每個 event_id作 dedupe identity。
 
 # 21. Semantic Dedupe
 
