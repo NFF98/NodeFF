@@ -27,9 +27,9 @@ Phase 1 目前採 **6 個主要 Screen / Surface + 5 類 Overlay / State**。
 | S03 | App / Runtime | 使用生成 App，進入 Share / Remix / Correct | F00 + F03 | **LOW_FI_DIRECTION_APPROVED** |
 | S04 | Shared App Entry / Restore | 從分享連結恢復並立即使用 App | F05 + F00 | **LOW_FI_DIRECTION_APPROVED** |
 | S05 | Refine / Remix Workspace | 修改既有 App、Preview child、決定是否採用 | F06 + F00 | **LOW_FI_DIRECTION_APPROVED** |
-| S06 | Correction Compare | 比較修正前後並 Accept / Keep / Adjust | F16 + F00 | **LOW_FI_REVIEW_IN_PROGRESS** |
+| S06 | Correction Compare | 比較修正前後並 Accept / Keep / Adjust | F16 + F00 | **LOW_FI_DIRECTION_APPROVED** |
 
-目前 S01–S05 已完成 Low-fi 方向確認；S06 與 O01–O05 尚待 Low-fi Review。
+目前 S01–S06 Main Screens 已全部完成 Low-fi 方向確認；下一階段進 O01–O05 Overlay / State Low-fi。
 
 # 3. Overlay / State Inventory
 
@@ -154,7 +154,7 @@ spec/ui-ux/
 
 下一個 Review：
 
-> **S06 — Correction Compare Low-fi**
+> **O01 — Share Overlay Low-fi**
 
 它將承接：
-Correction generated → compare previous/new result → Accept New / Keep Previous / Adjust Again。
+S03 Share CTA → create/reuse share link → Copy / Native Share → success / failure without leaving current App。

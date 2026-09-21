@@ -2,7 +2,7 @@
 
 > Screen ID：S06
 >
-> 狀態：**WORKING — LOW_FI_REVIEW_IN_PROGRESS**
+> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / HIGH_FI_PENDING**
 >
 > Phase：Phase 1
 >
@@ -318,19 +318,21 @@ S06 只放：
 - CTA wording明確，不使用模糊「Done」。
 - focus從 O02進 S06後落在 Compare heading。
 
-# 19. Proposed Low-fi Decisions To Confirm
+# 19. Confirmed S06 Low-fi Decisions
 
-本輪主要確認 4 件事：
+User 已確認：
 
-1. **Desktop 是否預設 side-by-side「修正前 / 修正後」，Mobile 改 stacked compare？**
-2. **S06 頂部是否保留「你剛剛說哪裡不對」摘要，下面才顯示 Before / After？**
-3. **三個主要 CTA 是否固定為：保留原版 / 再調整 / 使用修正版？**
-4. **LIMITED_COMPARISON 是否一定要明顯告訴 User「這次只能有限比較」，不能假裝修正前後完全可比？**
+1. Desktop 預設採 **side-by-side 修正前 / 修正後**；Mobile 採上下 stacked compare。
+2. S06 頂部保留 **「你剛剛說哪裡不對」** 摘要，下面再顯示 Before / After。
+3. 三個主要 CTA 固定為：**保留原版 / 再調整 / 使用修正版**。
+4. 若 comparison_mode = LIMITED_COMPARISON，必須明確告知 User「這次只能有限比較」，不可暗示兩邊完全 apples-to-apples。
 
 # 20. Review Status
 
-> **LOW_FI_REVIEW_IN_PROGRESS**
+> **LOW_FI_DIRECTION_APPROVED — HIGH_FI_PENDING**
 
-本文件僅做 S06 ④A Low-fi。
+S06 ④A Low-fi 已完成 User Review。
 
-S06確認後，Main Screens S01–S06 Low-fi完成；接著進 O01–O05 Overlay / State Low-fi。全部 Low-fi完成後，再做 Cross-Screen Review → High-fi Design System → ④B High-fi。
+Main Screens S01–S06 的 Low-fi 已全部完成。
+
+依固定流程，下一步進 O01–O05 Overlay / State ④A Low-fi；全部 Low-fi完成後，再做 Cross-Screen Review → High-fi Design System → ④B High-fi。
