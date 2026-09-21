@@ -2,7 +2,7 @@
 
 > Overlay ID：O02
 >
-> 狀態：**WORKING — LOW_FI_REVIEW_IN_PROGRESS**
+> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / HIGH_FI_PENDING**
 >
 > Phase：Phase 1
 >
@@ -193,6 +193,14 @@ Low-fi copy可用：
     正在理解你指出的問題…
     正在準備修正版…
 
+處理中固定顯示 **Progress %**。
+
+Rules：
+- 百分比必須對應已完成的 correction checkpoints / work，不假裝預測剩餘秒數。
+- clarification等待 User input時暫停進度，不假裝持續增加。
+- 進入 child compose / validation / replay時可持續更新。
+- 不為了動畫故意延長 operation。
+
 O02本身在 submit後可：
 - 保持 sheet/panel並轉 progress state，或
 - 收合為 bounded progress state。
@@ -243,17 +251,20 @@ Submit後若 operation仍在進行：
 - Close後 focus回 S03 correction trigger。
 - submit progress透過 aria-live適度通知。
 
-# 15. Proposed Low-fi Decisions To Confirm
+# 15. Confirmed O02 Low-fi Decisions
 
-本輪確認 4 件事：
+User 已確認：
 
-1. **Desktop 使用 lightweight dialog / side panel；Mobile 使用 bottom sheet / full-height sheet，而不是獨立頁面？**
-2. O02 是否固定顯示 **目前結果摘要 +「哪裡不對？」主輸入 +「預期結果或規則（選填）」**？
-3. Primary CTA 是否用 **「開始修正」**，Submit 後先進 progress / clarification，最後才去 S06 Compare？
-4. 若 User其實是在「加功能 / 改 UI / 改用途」，是否由系統引導轉 S05 Refine，而不是把 O02擴張成通用修改器？
+1. Desktop 使用 lightweight dialog / side panel；Mobile 使用 bottom sheet / full-height sheet，不做獨立頁。
+2. O02 固定顯示：**目前結果摘要 +「哪裡不對？」+「預期結果或規則（選填）」**。
+3. Primary CTA 固定為 **「開始修正」**；Submit 後先進 progress / clarification，最後才進 S06 Compare。
+4. Correction 處理中必須顯示 **Progress %**；百分比依真實已完成 work / checkpoints 推進，不做假時間預估。
+5. 若 User其實是在加功能 / 改 UI / 改用途，由系統引導轉 S05 Refine，不把 O02 擴張成通用修改器。
 
 # 16. Review Status
 
-> **LOW_FI_REVIEW_IN_PROGRESS**
+> **LOW_FI_DIRECTION_APPROVED — HIGH_FI_PENDING**
 
-O02確認後進 O03 — Recovery Overlay ④A Low-fi。
+O02 ④A Low-fi 已完成 User Review。
+
+依固定流程，下一步進 O03 — Recovery Overlay ④A Low-fi。
