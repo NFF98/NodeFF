@@ -63,7 +63,7 @@ working/DESIGN-TO-DELIVERY.md
 | F09 | Realtime Room | 多人共享 Instance State | 2–3 月 | DEFERRED_BASELINE | `functions/F09-REALTIME-ROOM.md` |
 | F10 | Blueprint Reuse / Retrieval | Trusted Blueprint reuse | 2–3 月 | DEFERRED_BASELINE | `functions/F10-BLUEPRINT-REUSE-RETRIEVAL.md` |
 | F11 | External Capability Execution | AI / API / Heavy Work 受控執行 | 4–6 月 | DEFERRED_BASELINE | `functions/F11-EXTERNAL-CAPABILITY-EXECUTION.md` |
-| F12 | Humanized Recovery Orchestration | 技術錯誤 → 可理解、可繼續 UX | 0–1 月 | DRAFT | `functions/F12-HUMANIZED-RECOVERY.md` |
+| F12 | Humanized Recovery Orchestration | 技術錯誤 → 可理解、可繼續 UX | 0–1 月 | WORKING_BASELINE | `functions/F12-HUMANIZED-RECOVERY.md` |
 | F13 | Entitlement / Metering | Premium / Costly Capability 可控可量測 | 2–6 月 | DEFERRED_BASELINE | `functions/F13-ENTITLEMENT-METERING.md` |
 | F14 | Provider Registry / Certification | External Capability 可被信任與版本化 | 6 月後 | DEFERRED_BASELINE | `functions/F14-PROVIDER-REGISTRY-CERTIFICATION.md` |
 | F15 | Transaction / Settlement | Commerce Outcome 可追蹤、對帳、結算 | 6 月後 | DEFERRED_BASELINE | `functions/F15-TRANSACTION-SETTLEMENT.md` |
