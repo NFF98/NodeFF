@@ -1,6 +1,7 @@
 # F12 — Humanized Recovery Orchestration
 
-> 狀態：WORKING_BASELINE
+> 狀態：SPEC_READY
+> Formal Spec：spec/functions/F12-HUMANIZED-RECOVERY.md
 >
 > Canonical Role：Phase 1 Cross-Function Error Classification、Recovery Policy、Context Preservation、Humanized Message、Next Action、Recovery Episode Evidence 的 Working Current Truth。
 >

@@ -1,6 +1,7 @@
 # F06 — Remix / Refine
 
-> 狀態：WORKING_BASELINE
+> 狀態：SPEC_READY
+> Formal Spec：spec/functions/F06-REMIX-REFINE.md
 >
 > Canonical Role：Phase 1 Existing Blueprint → Semantic Change → New Immutable Blueprint 的 Working Current Truth。
 >

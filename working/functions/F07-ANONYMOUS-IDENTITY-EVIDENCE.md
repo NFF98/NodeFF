@@ -1,6 +1,7 @@
 # F07 — Anonymous Identity & Evidence
 
-> 狀態：WORKING_BASELINE
+> 狀態：SPEC_READY
+> Formal Spec：spec/functions/F07-ANONYMOUS-IDENTITY-EVIDENCE.md
 >
 > Canonical Role：Phase 1 Anonymous Identity continuity、Session identity、Evidence Envelope、Event Ingestion、Batch / Retry / Dedupe、Privacy / Retention 與 Core Proof Metrics 的 Working Current Truth。
 >

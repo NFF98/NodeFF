@@ -1,6 +1,7 @@
 # F05 — Share / Restore
 
-> 狀態：WORKING_BASELINE
+> 狀態：SPEC_READY
+> Formal Spec：spec/functions/F05-SHARE-RESTORE.md
 >
 > Canonical Role：Phase 1 Share Creation、Public Share Resolution、Blueprint Restore、Recipient Entry UX 與 Share Reliability 的 Working Current Truth。
 >

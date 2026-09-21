@@ -1,6 +1,7 @@
 # F16 — Result Feedback / Logic Correction
 
-> 狀態：WORKING_BASELINE
+> 狀態：SPEC_READY
+> Formal Spec：spec/functions/F16-RESULT-CORRECTION.md
 >
 > Canonical Role：Phase 1 Semantic Mismatch Detection、Correction Intent、Input Replay、Before/After Result Comparison、CORRECT Lineage 與 Accept / Reject / Revert 的 Working Current Truth。
 >
