@@ -559,7 +559,7 @@ Revert
 |---|---|---|---|
 | Canonical Data Model | ✅ WORKING_BASELINE | `working/DATA-MODEL.md` | Architecture + Infra + Delivery Contract |
 | Executable Blueprint | ❌ NOT_STARTED | `working/functions/F02-BLUEPRINT-VALIDATION.md` canonical Blueprint section | Data Model + F04 Registry |
-| Concrete Registry | ❌ NOT_STARTED | `working/functions/F04-CAPABILITY-REGISTRY.md` | Capability Fabric + Data Model |
+| Concrete Registry | ✅ WORKING_BASELINE | `working/functions/F04-CAPABILITY-REGISTRY.md` | Capability Fabric + Data Model |
 | API Contracts | ❌ NOT_STARTED | each `working/functions/Fxx-*.md`; shared conventions only when truly cross-function | Data Model + Function flow |
 | UX State Machines | ❌ NOT_STARTED | F00 shared shell + function-specific Fxx | Function flow + Error / Recovery |
 | Runtime Semantics | ❌ NOT_STARTED | `working/functions/F03-RUNTIME-EXECUTION.md` | Blueprint + Registry |
