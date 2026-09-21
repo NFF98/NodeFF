@@ -2,13 +2,13 @@
 
 > 狀態：DEFERRED BASELINE — MIGRATED
 >
-> 本文件在 SSOT Cleanup 中由 `working/APP-DETAILED-DESIGN.md` 的既有 Function 級內容搬入。此次搬移 **不改產品架構、不新增功能決策**；只是把既有 Current Truth 放回單一 Function canonical home。
+> 本文件在 SSOT Cleanup 中由 `working/APP-DETAILED-DESIGN-OVERVIEW-OVERVIEW.md` 的既有 Function 級內容搬入。此次搬移 **不改產品架構、不新增功能決策**；只是把既有 Current Truth 放回單一 Function canonical home。
 >
 > Horizon：6 月後
 >
 > Delivery 規則：`working/DESIGN-TO-DELIVERY.md`
 >
-> Function Portfolio / Dependency / Release Scope：`working/APP-DETAILED-DESIGN.md`
+> Function Portfolio / Dependency / Release Scope：`working/APP-DETAILED-DESIGN-OVERVIEW-OVERVIEW.md`
 
 # 1. Migrated Current Truth
 

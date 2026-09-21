@@ -11,7 +11,7 @@
 >
 > Canonical Role：Phase 1 Concrete Capability Registry 的 Spec Implementation Truth。
 >
-> 上游：APP-ARCHITECTURE、APP-DETAILED-DESIGN、CAPABILITY-FABRIC、DATA-MODEL、INFRA-ARCHITECTURE、DESIGN-TO-DELIVERY。
+> 上游：APP-ARCHITECTURE、APP-DETAILED-DESIGN-OVERVIEW、CAPABILITY-FABRIC、DATA-MODEL、INFRA-ARCHITECTURE、DESIGN-TO-DELIVERY。
 >
 > 本文件把 Capability Fabric 的概念模型落成 Compiler / Validator / Runtime 共用的具體 Registry Contract。完整 LegoSpec / Blueprint executable contract 由 F02 承接。
 
