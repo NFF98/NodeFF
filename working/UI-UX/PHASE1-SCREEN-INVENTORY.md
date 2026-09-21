@@ -37,7 +37,7 @@ Phase 1 目前採 **6 個主要 Screen / Surface + 5 類 Overlay / State**。
 |---|---|---|---|---|
 | O01 | Share Overlay | S03 / restored App | 建立、複製、呼叫 native share | F05 | **LOW_FI_DIRECTION_APPROVED** |
 | O02 | Correction Composer | S03 | 收集自然語言 correction feedback | F16 | **LOW_FI_DIRECTION_APPROVED** |
-| O03 | Recovery Overlay | S02 / S03 / S05 / S06 | 保留 context，提供 humanized next action | F12 | **LOW_FI_REVIEW_IN_PROGRESS** |
+| O03 | Recovery Overlay | S02 / S03 / S05 / S06 | 保留 context，提供 humanized next action | F12 | **LOW_FI_DIRECTION_APPROVED** |
 | O04 | Revert Confirmation | S03 | 確認回到 previous/base version | F00 + F16 |
 | O05 | Loading / Building / Hydration States | S02 / S03 / S05 / S06 | 顯示非同步進度與 bounded waiting state | F00 + related Fxx |
 
@@ -154,7 +154,7 @@ spec/ui-ux/
 
 下一個 Review：
 
-> **O03 — Recovery Overlay Low-fi**
+> **O04 — Revert Confirmation Low-fi**
 
 它將承接：
-S02 / S03 / S05 / S06 中的 recoverable / terminal failure → preserve context → humanized next action。
+S03 Previous Version / Revert → confirm target / input restoration semantics → fresh previous Runtime or safe cancel。

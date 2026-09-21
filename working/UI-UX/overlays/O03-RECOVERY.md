@@ -2,7 +2,7 @@
 
 > Overlay ID：O03
 >
-> 狀態：**WORKING — LOW_FI_REVIEW_IN_PROGRESS**
+> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / HIGH_FI_PENDING**
 >
 > Phase：Phase 1
 >
@@ -293,17 +293,21 @@ Security / integrity問題：
 - keyboard可完整操作。
 - technical code不作 screen reader主要資訊。
 
-# 17. Proposed Low-fi Decisions To Confirm
+# 17. Confirmed O03 Low-fi Decisions
 
-本輪確認 4 件事：
+User 已確認並固定：
 
-1. **O03 是否採「依嚴重度變形」：INFO/DEGRADED 用 inline，BLOCKING_RECOVERABLE 用 Overlay，TERMINAL/CRITICAL 用 safe-state，而不是所有錯誤都跳同一個 Modal？**
-2. Recovery 是否固定先說 **「發生什麼」→「保留/遺失什麼」→「1個 Primary + 最多2個 Secondary CTA」**？
-3. **Node / component 局部錯誤是否只在該區塊顯示 Recovery，不鎖整個 App？**
-4. Retry 是否遵守 F12：**同一 episode 最多 3 次 immediate User Retry，第4次改成稍後再試或其他安全路徑，不無限 Retry？**
+1. **小問題**：使用 inline notice，User 可繼續使用 App。
+2. **局部元件壞掉**：只在該 component 顯示 Recovery，不鎖整個 App。
+3. **目前操作做不下去，但 App 還安全**：才使用 blocking Recovery Overlay。
+4. **真的不能安全繼續**：才進 terminal safe-state。
+5. Recovery 資訊順序固定為：**發生什麼 → 保留/遺失什麼 → 1 個 Primary + 最多 2 個 Secondary CTA**。
+6. 同一 recovery episode 最多 3 次 immediate User Retry；第 4 次改成稍後再試或其他安全路徑，不提供無限 Retry。
 
 # 18. Review Status
 
-> **LOW_FI_REVIEW_IN_PROGRESS**
+> **LOW_FI_DIRECTION_APPROVED — HIGH_FI_PENDING**
 
-O03確認後進 O04 — Revert Confirmation ④A Low-fi。
+O03 ④A Low-fi 已完成 User Review。
+
+依固定流程，下一步進 O04 — Revert Confirmation ④A Low-fi。
