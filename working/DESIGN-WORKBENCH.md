@@ -519,3 +519,86 @@ Intent Commerce / Capability Network 持續擴張
 管理規則：
 - 上述三項之後視為 SYNCED，不再重複進待同步佇列。
 - 新 Review 只記錄相對於目前 baseline 的新差異。
+
+
+---
+
+## Phase 1 UI/UX — S01 Discover / Start Review Notes
+
+> 狀態：WORKBENCH — 尚未升格 Working UI Contract / Spec。
+> 來源：Phase 1 Screen Inventory / S01 Low-fi Review。
+
+### S01 已確認方向
+
+1. **核心內容與資訊架構保留**：
+   - 「意圖就是 App」主訊息；
+   - Prompt-first、Inspiration Capsules supporting；
+   - Create CTA；
+   - Explore / Inspiration 作為降低空白輸入門檻的輔助；
+   - Desktop / Mobile 皆維持乾淨、低干擾的畫面。
+
+2. **Visual guardrail**：
+   - Must not resemble Google / Search UI；
+   - 避免「中央 Logo + 大搜尋框 + 大量空白」的搜尋首頁語言；
+   - 畫面以 Creator / App-making experience 為核心。
+
+3. **視覺簡化**：
+   - 右上角及 Header 不必要的圖示、裝飾、入口先移除；
+   - Phase 1 首屏只保留會直接幫助 Create / Explore 的元素；
+   - 整體畫面優先乾淨、清楚、低認知負擔。
+
+### Brand Color Direction — Tiffany Blue → Yellow
+
+主色方向採 **Tiffany Blue → Yellow** 的雙色／漸變視覺語言作為 High-fi 探索基準。
+
+參考：PR EDGE〈Tiffanyが期間限定でティファニーブルーからイエローに変更〉
+https://predge.jp/210039/
+
+使用原則：
+- 此處是色彩方向參考，不複製 Tiffany 品牌識別；
+- High-fi 階段再確認實際 HEX、gradient stop、contrast、dark/light surface、accessibility；
+- 黃色偏 accent / energy / completion，藍綠色偏 creation / calm / brand anchor；
+- 最終 palette 必須形成 NodeFF 自己的 brand system。
+
+### 新增 UX 候選 — Visible Generation Progress
+
+使用者在本次 UI 生成過程中特別確認：**可視化生成進度非常有價值，NodeFF 也應納入此體驗。**
+
+候選方向：
+
+~~~text
+User submit Intent
+→ Analyze
+→ Understand / Clarify if required
+→ Compose App
+→ Validate
+→ Prepare Runtime
+→ Ready
+~~~
+
+UX 原則：
+- 不只顯示 generic spinner；要讓 User 感覺「事情正在往前完成」。
+- 進度可使用 progress bar + human-readable stage label。
+- 不暴露 Prompt A / Prompt B / Validator 等內部工程術語。
+- 不假裝精確百分比；若 backend 無可靠 percentage，應以 stage-based progress / bounded animation 表達。
+- 若進入 Clarification / Recovery，progress 必須自然切換，不可讓 User誤以為仍在自動完成。
+- 此模式未來可延伸到 Refine / Remix / Correction，但需由各 Function UX contract確認。
+
+候選 Consumer copy：
+
+~~~text
+理解你的想法…
+整理成 App…
+確認可以安全執行…
+準備你的 App…
+完成
+~~~
+
+### 尚未升格事項
+
+以下仍待後續 Screen / High-fi Review：
+- Progress bar 的實際位置、動畫、stage 數量與 duration；
+- Tiffany Blue → Yellow 的正式 Design Token；
+- Header 最終保留哪些 controls；
+- Capsule 卡片 High-fi visual language；
+- S01 Desktop / Mobile 的 final responsive composition。
