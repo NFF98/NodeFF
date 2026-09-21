@@ -7,7 +7,9 @@ NodeFF 是一個 No-install、Everyone-is-creator、Sharable/Linkable、Intent C
 ### Governance
 - SSOT：SSOT.md
 - Design → Delivery：working/DESIGN-TO-DELIVERY.md
-- Phase 1 Gate Audit：working/ProjectManagement/PHASE1-CORE-SPEC-GATE-AUDIT.md
+- Phase 1 Gate Re-Audit：working/ProjectManagement/PHASE1-CORE-SPEC-GATE-REAUDIT.md
+- Gate Closure Sprint Report：working/ProjectManagement/PHASE1-GATE-CLOSURE-SPRINT-REPORT.md
+- Historical Pre-Closure Audit：working/ProjectManagement/PHASE1-CORE-SPEC-GATE-AUDIT.md
 
 ### Current Working Truth
 - Top Architecture：working/APP-ARCHITECTURE.md
