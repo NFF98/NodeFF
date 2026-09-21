@@ -25,11 +25,11 @@ Phase 1 目前採 **6 個主要 Screen / Surface + 5 類 Overlay / State**。
 | S01 | Discover / Start | 從想法或靈感開始 Create | F00 | **LOW_FI_DIRECTION_APPROVED** |
 | S02 | Create Workspace | 分析、補充必要資訊、確認假設並生成 App | F00 + F01 | **LOW_FI_DIRECTION_APPROVED** |
 | S03 | App / Runtime | 使用生成 App，進入 Share / Remix / Correct | F00 + F03 | **LOW_FI_DIRECTION_APPROVED** |
-| S04 | Shared App Entry / Restore | 從分享連結恢復並立即使用 App | F05 + F00 | **LOW_FI_REVIEW_IN_PROGRESS** |
+| S04 | Shared App Entry / Restore | 從分享連結恢復並立即使用 App | F05 + F00 | **LOW_FI_DIRECTION_APPROVED** |
 | S05 | Refine / Remix Workspace | 修改既有 App、Preview child、決定是否採用 | F06 + F00 | INVENTORIED — NOT REVIEWED |
 | S06 | Correction Compare | 比較修正前後並 Accept / Keep / Adjust | F16 + F00 | INVENTORIED — NOT REVIEWED |
 
-目前 S01、S02 已完成 Low-fi 方向確認；S03–S06 與 O01–O05 尚待 Low-fi Review。
+目前 S01–S04 已完成 Low-fi 方向確認；S05–S06 與 O01–O05 尚待 Low-fi Review。
 
 # 3. Overlay / State Inventory
 
@@ -154,7 +154,7 @@ spec/ui-ux/
 
 下一個 Review：
 
-> **S04 — Shared App Entry / Restore Low-fi**
+> **S05 — Refine / Remix Workspace Low-fi**
 
 它將承接：
-Share Link Entry → Restore / Validate → Fresh Runtime → S03 App / Runtime。
+Existing App → describe change → preview child version → use new / keep previous / adjust again。

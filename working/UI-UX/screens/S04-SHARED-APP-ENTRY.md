@@ -2,7 +2,7 @@
 
 > Screen ID：S04
 >
-> 狀態：**WORKING — LOW_FI_REVIEW_IN_PROGRESS**
+> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / HIGH_FI_PENDING**
 >
 > Phase：Phase 1
 >
@@ -65,6 +65,11 @@ F05 internal states：
 
 Consumer 不顯示這些工程狀態名稱。
 
+User-facing restore UI 固定顯示：
+- App Logo / App Title（可取得時）。
+- Loading progress %。
+- 簡短人話狀態。
+
 Proposed consumer stages：
 
     正在打開這個 App…
@@ -75,7 +80,7 @@ Proposed consumer stages：
     ↓
     S03
 
-如果實際 latency 很短，可以只顯示單一「正在打開 App…」，不強迫把每個 stage 都完整播放。
+Loading % 必須表示「已完成的 restore work」，不是預估剩餘時間。
 
 # 5. Proposed Desktop Low-fi
 
@@ -83,10 +88,12 @@ Proposed consumer stages：
     │ NodeFF                                       │
     │                                              │
     │                                              │
-    │            正在打開這個 App…                 │
+    │              [ App Logo ]                    │
+    │               App Title                      │
     │                                              │
-    │            ● ━ ○ ━ ○                        │
-    │          打開   確認   準備                  │
+    │            正在打開這個 App…                 │
+    │                  42%                         │
+    │            ████████────────                  │
     │                                              │
     │        不需要登入，也不需要安裝              │
     │                                              │
@@ -105,10 +112,12 @@ Proposed consumer stages：
     ┌──────────────────────────┐
     │ NodeFF                   │
     │                          │
-    │   正在打開這個 App…      │
+    │      [ App Logo ]        │
+    │       App Title          │
     │                          │
-    │      ● ━ ○ ━ ○          │
-    │    打開  確認  準備       │
+    │   正在打開這個 App…      │
+    │          42%             │
+    │     ███████──────        │
     │                          │
     │ 不需要登入，也不需要安裝 │
     └──────────────────────────┘
@@ -124,16 +133,18 @@ S04 progress 是 restore progress，不是 AI generation progress。
 Rules：
 - 不使用 S02 的「理解 / 組 App」copy。
 - 不顯示 LLM / Compile / Validation engineering terminology。
-- 不顯示假百分比。
+- **顯示 Loading %。**
+- 百分比只能根據已完成的 restore checkpoints / hydration work推進，不能假裝預測剩餘秒數。
 - 不為了動畫而故意延長 loading。
-- latency 很短時，可採 single state + subtle motion。
-- latency 變長時，才逐步 expose 3-stage restore progress。
+- 當 metadata 已取得時，同時顯示 App Logo / Title。
 
-建議 3 stages：
+Low-fi progress checkpoints：
 
-1. 打開分享
-2. 確認 App
-3. 準備使用
+1. Share resolved。
+2. Blueprint fetched / trust checked。
+3. Runtime hydration completed。
+
+UI 可以把這些 checkpoint 映射成連續 Loading %，但不把 internal technical names直接顯示給 User。
 
 # 8. No Login / No Install
 
@@ -151,9 +162,10 @@ First Value 前：
 
 若在 Blueprint fetch 後已取得安全 metadata：
 
-可以顯示：
+顯示：
 - App Logo。
 - App Title。
+- Loading progress %。
 
 不顯示：
 - Creator anonymous ID。
@@ -253,19 +265,20 @@ User 實際看到 / 使用 App後，再從 S03 進：
 - reduced-motion preference被尊重。
 - 進 S03後 focus移到 App主要內容，而不是留在消失的 loading UI。
 
-# 15. Proposed Low-fi Decisions To Confirm
+# 15. Confirmed S04 Low-fi Decisions
 
-本輪主要確認 4 件事：
+User 已確認：
 
-1. **S04 是否採「幾乎隱形的過渡層」：成功時自動進 S03，不做 Share Landing Page？**
-2. **Restore progress 是否最多 3 stages：打開分享 → 確認 App → 準備使用；很快時只顯示「正在打開 App…」？**
-3. **S04 不顯示登入、Creator資料、Prompt、結果 Preview；最多只顯示 App Logo / Title？**
-4. **任何 permanent failure 都不重新生成舊 App；temporary failure才 Retry，其他提供 Home / Create New 等安全出口？**
+1. **S04 採幾乎隱形的過渡層**；成功時自動進 S03，不建立 Share Landing Page。
+2. Restore 過程顯示 **Loading progress %**。
+3. S04 顯示 **App Logo / App Title + Loading %**；不顯示 Login、Creator資料、Prompt、Result Preview。
+4. 永久失效的 Share 不重新生成舊 App；只有暫時性錯誤才提供 Retry，其餘提供 Home / Create New 等安全出口。
+5. Loading % 必須由已完成 restore work推進，不代表預估剩餘時間。
 
 # 16. Review Status
 
-> **LOW_FI_REVIEW_IN_PROGRESS**
+> **LOW_FI_DIRECTION_APPROVED — HIGH_FI_PENDING**
 
-本文件僅做 S04 ④A Low-fi。
+S04 ④A Low-fi 已完成 User Review。
 
-S04 Low-fi確認後繼續 S05 / S06 與 O01–O05 Low-fi；所有 Low-fi完成後再進 Cross-Screen Review → High-fi Design System → ④B High-fi。
+依固定流程，下一步進 S05 ④A Low-fi；所有 S01–S06 / O01–O05 Low-fi完成後，再進 Cross-Screen Review → High-fi Design System → ④B High-fi。
