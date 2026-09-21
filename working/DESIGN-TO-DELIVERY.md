@@ -561,7 +561,7 @@ Revert
 | Executable Blueprint | ✅ WORKING_BASELINE | `working/functions/F02-BLUEPRINT-VALIDATION.md` canonical Blueprint section | Data Model + F04 Registry |
 | Concrete Registry | ✅ WORKING_BASELINE | `working/functions/F04-CAPABILITY-REGISTRY.md` | Capability Fabric + Data Model |
 | API Contracts | 🟡 DRAFT | each `working/functions/Fxx-*.md`; F01 API baseline established, other Fxx pending | Data Model + Function flow |
-| UX State Machines | ❌ NOT_STARTED | F00 shared shell + function-specific Fxx | Function flow + Error / Recovery |
+| UX State Machines | 🟡 DRAFT | F00 shared shell baseline established; function-specific F05/F06/F12/F16 UX pending | Function flow + Error / Recovery |
 | Runtime Semantics | ✅ WORKING_BASELINE | `working/functions/F03-RUNTIME-EXECUTION.md` | Blueprint + Registry |
 | Error Taxonomy | ❌ NOT_STARTED | F12 shared taxonomy + function-specific Fxx errors | Runtime / API / UX |
 | Evidence Schema | ❌ NOT_STARTED | F07 event contract + each Function event definitions | Data Model + Function Acceptance |

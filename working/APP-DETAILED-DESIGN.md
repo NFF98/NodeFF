@@ -51,7 +51,7 @@ working/DESIGN-TO-DELIVERY.md
 
 | ID | Function | 核心結果 | Phase | Working Status | Canonical Detail |
 |---|---|---|---|---|---|
-| F00 | Experience Shell / 靈感精靈 | User 能容易開始、Refine、Remix、Recovery | 0–1 月 | DRAFT | `functions/F00-EXPERIENCE-SHELL.md` |
+| F00 | Experience Shell / 靈感精靈 | User 能容易開始、Refine、Remix、Recovery | 0–1 月 | WORKING_BASELINE | `functions/F00-EXPERIENCE-SHELL.md` |
 | F01 | Intent Compilation + Model Gateway | Intent → Blueprint Candidate | 0–1 月 | WORKING_BASELINE | `functions/F01-INTENT-COMPILATION.md` |
 | F02 | Blueprint Validation / Trust Admission | 不可信 Blueprint 不進 Runtime | 0–1 月 | WORKING_BASELINE | `functions/F02-BLUEPRINT-VALIDATION.md` |
 | F03 | Runtime Execution | Blueprint → Interactive App | 0–1 月 | WORKING_BASELINE | `functions/F03-RUNTIME-EXECUTION.md` |
