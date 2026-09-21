@@ -1,21 +1,23 @@
 # 06 — System
 
-## Status
+> Status：LEGACY INDEX — NON-CANONICAL
+>
+> 此檔案是早期橫向 Spec 模板，已不再作 implementation truth。
 
-Draft — to be defined.
+NodeFF 正式 Spec 結構：
 
-## Architecture
+~~~text
+spec/functions/Fxx-*.md
+→ Function end-to-end canonical Spec
 
-TBD.
+spec/shared/*.md
+→ Cross-Function shared canonical Spec
+~~~
 
-## Components
+System/runtime細節由 Function Spec + approved shared runtime/architecture contracts承接。
 
-TBD.
+規則：
 
-## Runtime Behavior
-
-TBD.
-
-## External Dependencies
-
-TBD.
+- 不在此檔新增 Function-level API / UI / Data / Error / Acceptance 詳細內容。
+- 若需要查目前 Working Current Truth，使用 working/functions/Fxx-*.md 與對應 shared Working文件。
+- 若需要正式實作 Contract，使用已批准的 spec/functions 或 spec/shared。

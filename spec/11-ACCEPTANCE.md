@@ -1,17 +1,23 @@
 # 11 — Acceptance
 
-## Status
+> Status：LEGACY INDEX — NON-CANONICAL
+>
+> 此檔案是早期橫向 Spec 模板，已不再作 implementation truth。
 
-Draft — to be defined.
+NodeFF 正式 Spec 結構：
 
-## Acceptance Criteria
+~~~text
+spec/functions/Fxx-*.md
+→ Function end-to-end canonical Spec
 
-TBD.
+spec/shared/*.md
+→ Cross-Function shared canonical Spec
+~~~
 
-## Verification Method
+Acceptance truth屬於各 Fxx Spec + shared Acceptance conventions；不得另建平行總表當主規格。
 
-Each criterion must have an observable verification method.
+規則：
 
-## Release Gate
-
-No feature is considered accepted until its approved acceptance criteria are satisfied and recorded.
+- 不在此檔新增 Function-level API / UI / Data / Error / Acceptance 詳細內容。
+- 若需要查目前 Working Current Truth，使用 working/functions/Fxx-*.md 與對應 shared Working文件。
+- 若需要正式實作 Contract，使用已批准的 spec/functions 或 spec/shared。
