@@ -24,7 +24,7 @@ Phase 1 目前採 **6 個主要 Screen / Surface + 5 類 Overlay / State**。
 |---|---|---|---|---|
 | S01 | Discover / Start | 從想法或靈感開始 Create | F00 | **LOW_FI_DIRECTION_APPROVED** |
 | S02 | Create Workspace | 分析、補充必要資訊、確認假設並生成 App | F00 + F01 | **LOW_FI_DIRECTION_APPROVED** |
-| S03 | App / Runtime | 使用生成 App，進入 Share / Remix / Correct | F00 + F03 | INVENTORIED — NOT REVIEWED |
+| S03 | App / Runtime | 使用生成 App，進入 Share / Remix / Correct | F00 + F03 | **LOW_FI_REVIEW_IN_PROGRESS** |
 | S04 | Shared App Entry / Restore | 從分享連結恢復並立即使用 App | F05 + F00 | INVENTORIED — NOT REVIEWED |
 | S05 | Refine / Remix Workspace | 修改既有 App、Preview child、決定是否採用 | F06 + F00 | INVENTORIED — NOT REVIEWED |
 | S06 | Correction Compare | 比較修正前後並 Accept / Keep / Adjust | F16 + F00 | INVENTORIED — NOT REVIEWED |
