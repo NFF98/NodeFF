@@ -2,7 +2,7 @@
   "registry_version": "1.0.0",
   "owner": "working/registries/acceptance-test-registry.json",
   "conventions": "working/ACCEPTANCE-CONVENTIONS.md",
-  "total_acceptance": 254,
+  "total_acceptance": 257,
   "entries": [
     {
       "acceptance_id": "F00-AC-001",
@@ -1877,6 +1877,18 @@
       "required_for_spec": true
     },
     {
+      "acceptance_id": "F06-AC-014",
+      "function_id": "F06",
+      "criterion": "一般 Refine/Remix 不自動 carry Runtime input。",
+      "test_id": "TEST-F06-014",
+      "verification_type": "AUTOMATED_CONTRACT",
+      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
+      "expected_observable": "一般 Refine/Remix 不自動 carry Runtime input。",
+      "implementation_location": "tests/contracts/f06/test-f06-014.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
       "acceptance_id": "F06-AC-015",
       "function_id": "F06",
       "criterion": "F06重用 F01 lifecycle，不建立第二套 compiler endpoint。",
@@ -2477,6 +2489,18 @@
       "required_for_spec": true
     },
     {
+      "acceptance_id": "F12-AC-013",
+      "function_id": "F12",
+      "criterion": "每個 blocking recoverable failure 至少有 1 個有效 next action。",
+      "test_id": "TEST-F12-013",
+      "verification_type": "AUTOMATED_CONTRACT",
+      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
+      "expected_observable": "每個 blocking recoverable failure 至少有 1 個有效 next action。",
+      "implementation_location": "tests/contracts/f12/test-f12-013.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
       "acceptance_id": "F12-AC-014",
       "function_id": "F12",
       "criterion": "visible next actions通常不超過3個。",
@@ -2545,6 +2569,18 @@
       "fixture_strategy": "browser fixture with deterministic Function state and user actions",
       "expected_observable": "blocking recovery keyboard可操作。",
       "implementation_location": "tests/e2e/f12/test-f12-ac-019.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F12-AC-020",
+      "function_id": "F12",
+      "criterion": "每個 User-visible recovery episode 有 episode ID。",
+      "test_id": "TEST-F12-020",
+      "verification_type": "AUTOMATED_CONTRACT",
+      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
+      "expected_observable": "每個 User-visible recovery episode 有 episode ID。",
+      "implementation_location": "tests/contracts/f12/test-f12-020.spec.ts",
       "contract_status": "READY_FOR_IMPLEMENTATION",
       "required_for_spec": true
     },
