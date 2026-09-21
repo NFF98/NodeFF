@@ -44,9 +44,20 @@ spec/01–11 是早期橫向模板，現在只保留 navigation / legacy compati
 
 ## Current Phase 1 Gate
 
-Latest audit：
+Latest re-audit：
+
+- working/ProjectManagement/PHASE1-CORE-SPEC-GATE-REAUDIT.md
+- Completion report：working/ProjectManagement/PHASE1-GATE-CLOSURE-SPRINT-REPORT.md
+- Verdict：PASS — SPEC_READY
+- Phase 1 Core Function Specs：10 / 10 promoted
+
+Implementation authority：
+
+~~~text
+spec/functions/
+spec/shared/
+~~~
+
+Historical pre-closure HOLD audit：
 
 - working/ProjectManagement/PHASE1-CORE-SPEC-GATE-AUDIT.md
-- Verdict：HOLD — NOT SPEC_READY
-
-在 Gate 關閉前，spec/functions 不放假裝批准的 Function Spec。
