@@ -124,11 +124,25 @@ S01–S06 Low-fi
 
 # 8. Spec Promotion Note
 
-目前 **不建立新的 UI/UX Formal Spec 結構**。
+舊 `spec/08-UI.md` 已淘汰，不再作 UI/UX 正式入口。
 
-等 S01–S06 Low-fi + High-fi + Cross-Screen Review 完成後，再由 User 明確決定：
-- 哪些 UI decisions 回寫既有 `spec/functions/Fxx-*.md`；
-- 是否真的需要獨立 reviewed visual spec artifact。
+目前已記錄未來 UI/UX formal promotion target：
+
+~~~text
+spec/ui-ux/
+├─ PHASE1-SCREEN-INVENTORY.md
+├─ DESIGN-SYSTEM.md
+├─ screens/
+│  └─ Sxx-*.md
+└─ overlays/
+   └─ Oxx-*.md
+~~~
+
+**注意：以上 formal structure 現在尚未建立。**
+
+只有在 S01–S06 / O01–O05 Low-fi + High-fi + Cross-Screen Review 完成，且 User 明確答覆「同意升格」後，才建立 / promotion。
+
+需要改 product behavior 的 UI decision，仍必須同步回相關 Fxx Working → Review → Spec；UI/UX Spec不得成為第二份 Function behavior truth。
 
 未取得 User 明確批准前，不升格、不啟動 Cursor implementation。
 

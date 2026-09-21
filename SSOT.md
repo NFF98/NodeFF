@@ -74,7 +74,7 @@ execution/
 
 ## Legacy Spec Files
 
-spec/01-PRODUCT.md 到 spec/11-ACCEPTANCE.md 為早期橫向模板，現在只保留 index / navigation / legacy context。
+spec/ 仍保留的早期橫向根目錄模板（01–07、09–11）只作 index / navigation / legacy context；`spec/08-UI.md` 已刪除，由新的 Screen-based UI/UX Working 流程取代。
 
 它們：
 

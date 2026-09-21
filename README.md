@@ -27,7 +27,7 @@ NodeFF 是一個 No-install、Everyone-is-creator、Sharable/Linkable、Intent C
 - Function Specs：spec/functions/
 - Shared Specs：spec/shared/
 
-spec/01-PRODUCT.md 到 spec/11-ACCEPTANCE.md 為 legacy index / navigation，不再承載 Function-level implementation truth。
+spec/ 根目錄仍保留的 legacy templates（01–07、09–11）只作 index / navigation；舊 `spec/08-UI.md` 已刪除。
 
 ## Execution
 - Backlog：execution/BACKLOG.md

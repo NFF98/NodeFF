@@ -38,7 +38,9 @@ working/DESIGN-TO-DELIVERY.md
 
 ## Legacy Root Files
 
-spec/01–11 是早期橫向模板，現在只保留 navigation / legacy compatibility。
+spec/ 根目錄仍保留的早期橫向模板（01–07、09–11）只作 navigation / legacy compatibility。
+
+`spec/08-UI.md` 已刪除；UI/UX 不再回到舊橫向單檔模式。
 
 它們不得承載 Function-level 詳細 implementation truth。
 
