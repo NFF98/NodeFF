@@ -24,7 +24,7 @@ Phase 1 目前採 **6 個主要 Screen / Surface + 5 類 Overlay / State**。
 |---|---|---|---|---|
 | S01 | Discover / Start | 從想法或靈感開始 Create | F00 | **LOW_FI_DIRECTION_APPROVED** |
 | S02 | Create Workspace | 分析、補充必要資訊、確認假設並生成 App | F00 + F01 | **LOW_FI_DIRECTION_APPROVED** |
-| S03 | App / Runtime | 使用生成 App，進入 Share / Remix / Correct | F00 + F03 | **LOW_FI_DIRECTION_APPROVED** |
+| S03 | App / Runtime | 使用生成 App，進入 Share / Remix / Correct | F00 + F03 | **LOW_FI_DIRECTION_APPROVED — FUNCTION_DELTA_PENDING** |
 | S04 | Shared App Entry / Restore | 從分享連結恢復並立即使用 App | F05 + F00 | **LOW_FI_DIRECTION_APPROVED** |
 | S05 | Refine / Remix Workspace | 修改既有 App、Preview child、決定是否採用 | F06 + F00 | **LOW_FI_DIRECTION_APPROVED** |
 | S06 | Correction Compare | 比較修正前後並 Accept / Keep / Adjust | F16 + F00 | **LOW_FI_DIRECTION_APPROVED** |
@@ -39,7 +39,7 @@ Phase 1 目前採 **6 個主要 Screen / Surface + 5 類 Overlay / State**。
 | O02 | Correction Composer | S03 | 收集自然語言 correction feedback | F16 | **LOW_FI_DIRECTION_APPROVED** |
 | O03 | Recovery Overlay | S02 / S03 / S05 / S06 | 保留 context，提供 humanized next action | F12 | **LOW_FI_DIRECTION_APPROVED** |
 | O04 | Revert Confirmation | S03 | 確認回到 previous/base version | F00 + F16 | **LOW_FI_DIRECTION_APPROVED** |
-| O05 | Loading / Building / Hydration States | S02 / S03 / S04 / S05 / S06 / O02 / O03 / O04 | 顯示非同步進度與 bounded waiting state | F00 + related Fxx | **LOW_FI_REVIEW_IN_PROGRESS** |
+| O05 | Loading / Building / Hydration States | S02 / S03 / S04 / S05 / S06 / O02 / O03 / O04 | 顯示非同步進度與 bounded waiting state | F00 + related Fxx | **LOW_FI_DIRECTION_APPROVED — FUNCTION_DELTA_PENDING** |
 
 Overlay / State 預設不建立獨立 route，也不應讓 User 無故失去目前 App / draft / comparison context。
 
@@ -154,7 +154,6 @@ spec/ui-ux/
 
 下一個 Review：
 
-> **O05 — Loading / Building / Hydration States Low-fi**
+> **F00/F03 Runtime Loading + Timeout Function Delta Review**
 
-它將承接：
-S02 / S03 / S04 / S05 / S06 / O02 / O03 / O04 的 async work → consistent progress / loading / hydration presentation。
+原因：O05 已確認 S03 normal local Runtime interaction也顯示 global loading，且要求完整 Timeout → Recovery → safe S03 return；目前 formal F00/F03 尚未完全支援。

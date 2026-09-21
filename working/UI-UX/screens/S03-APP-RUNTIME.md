@@ -2,7 +2,7 @@
 
 > Screen ID：S03
 >
-> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / HIGH_FI_PENDING**
+> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / FUNCTION_DELTA_PENDING / HIGH_FI_PENDING**
 >
 > Phase：Phase 1
 >
@@ -246,6 +246,21 @@ S03 可有：
 - result pending state（若 Blueprint contract本身定義）。
 
 但不能重新顯示「正在理解你的需求」。
+
+## O05 Runtime Loading Function Delta
+
+User 已在 O05 Low-fi 明確要求：
+
+> **S03 normal local Runtime interaction 也要顯示 global loading。**
+
+這與目前 formal F00 contract「normal Runtime interaction不觸發 global shell loading」衝突，因此目前標記為 **FUNCTION_DELTA_PENDING**。
+
+Low-fi presentation direction：
+- 每次 committed Runtime interaction都進入 global processing/loading state。
+- 若有可驗證 checkpoints，使用 Stage + checkpoint-derived Progress %。
+- 不用時間預估製造假百分比。
+- 不為了動畫故意延遲操作完成。
+- Function truth需回 F00/F03 Working Design Review後才能升格。
 
 # 15. Desktop / Mobile Responsive Rules
 

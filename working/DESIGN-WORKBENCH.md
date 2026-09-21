@@ -613,3 +613,129 @@ UX 原則：
 - Future「分享結果」：需獨立 Function / contract，不能偷擴張 F05。
 - Future「共同遊玩 / 即時共享狀態」：由 F09 Realtime Room方向承接；目前 Deferred。
 - UI future direction可拆成：分享 App / 分享結果 / 開啟共同遊玩 Room，但 Phase 1 只落地「分享 App」。
+
+
+## Runtime Global Loading + Timeout Function Delta
+
+> 狀態：WORKING GAP / MATERIAL FUNCTION DELTA — USER DIRECTION CONFIRMED
+>
+> 來源：O05 Loading / Building / Hydration ④A Low-fi Review。
+>
+> 影響 Function：F00 Experience Shell + F03 Runtime Execution + F12 Humanized Recovery。
+>
+> 注意：此節是 Working Design，不直接改寫 formal Spec。
+
+### 1. User-confirmed UX direction
+
+User 明確要求：
+
+- S03 normal local Runtime interaction **也要顯示 global loading / processing state**。
+- 全站 progress採 Stage label + checkpoint-derived Progress %。
+- checkpoint卡住時，%停在真實值，不可慢慢灌高。
+- 長時間卡住必須進 Timeout UX，之後要能安全回到正常 App UX。
+
+### 2. Existing contract conflict
+
+目前 formal F00：
+
+- loading只用在真的 asynchronous work。
+- local Runtime action不顯示 global loading。
+- F00-AC-008要求 normal Runtime interaction不觸發 global shell loading。
+
+因此 User 新方向是 **Material Function Delta**，不能只靠 UI 文件覆寫。
+
+### 3. Existing timeout support
+
+目前已有：
+
+- F12 recovery_class = TIMEOUT。
+- F12 bounded Retry / Retry Later / safe surface。
+- F00 creation / analysis operation timeout，且保留 Intent。
+- F03 atomic Action transaction：failure時 discard uncommitted working changes。
+
+目前缺少：
+
+> **F03 normal Runtime action timeout → stale-operation handling → F12 recovery → return-to-safe-S03** 的完整 lifecycle contract。
+
+### 4. Proposed Runtime Interaction Processing Contract
+
+每次 S03 committed interaction建立 operation token：
+
+    IDLE
+    → STARTED
+    → PROCESSING
+    → COMMITTED
+    or TIMED_OUT
+    or FAILED
+
+UI：
+
+    STARTED / PROCESSING
+    → global loading / processing state
+    → Stage label
+    → checkpoint-derived Progress %
+
+Progress：
+- 只依真實 checkpoints。
+- 不表示剩餘時間。
+- 不允許 artificial progress inflation。
+- 不為了動畫故意延長 operation。
+
+### 5. Proposed Timeout Contract
+
+Timeout thresholds由 F03/F12 policy擁有；UI不硬編秒數。
+
+    PROCESSING
+    → SOFT_TIMEOUT
+    → HARD_TIMEOUT
+
+SOFT_TIMEOUT：
+- progress停在最後完成 checkpoint。
+- Human copy：「還在處理，你的 App 和目前內容都還在。」
+- 不 mutation current committed state。
+
+HARD_TIMEOUT：
+- affected operation標記 TIMED_OUT。
+- safe時停止 / abandon pending work。
+- discard uncommitted Action transaction。
+- last committed Runtime state保持。
+- late completion必須以 operation token判斷為 stale，不得在 timeout後偷偷 commit。
+- 導入 F12 TIMEOUT Recovery。
+
+### 6. Normal UX Return
+
+若 Runtime integrity仍成立：
+
+    TIMED_OUT
+    → rollback / keep last committed state
+    → remove blocking processing state
+    → O03 humanized notice / recoverable state
+    → S03 safe Runtime
+
+Consumer copy候選：
+
+    剛才這個操作處理太久，
+    App 已回到上一個安全狀態。
+
+Actions：
+- 再試一次：仍有 retry budget時。
+- 回到 App / 保留目前狀態。
+- 稍後再試：immediate retry budget耗盡時。
+
+若 integrity不確定：
+
+    TIMED_OUT
+    → F12 INTEGRITY / CRITICAL policy
+    → terminal safe-state
+
+不得強行回正常 Runtime。
+
+### 7. Function Review Required
+
+正式閉合需要至少：
+
+1. F00 修改 loading presentation rule與 F00-AC-008。
+2. F03 新增 Runtime interaction processing / timeout / stale completion contract。
+3. F12補 Runtime-action TIMEOUT mapping與 safe return semantics（若現有 mapping不足）。
+4. Acceptance/Test：global loading、timeout rollback、late result discard、return-to-S03、retry budget。
+5. User 明確批准 Working Function Delta後，才可 promotion回 formal Spec。
