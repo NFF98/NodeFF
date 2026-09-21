@@ -1,6 +1,7 @@
 # F04 — Capability Registry / Resolution
 
-> 狀態：WORKING_BASELINE
+> 狀態：SPEC_READY
+> Formal Spec：spec/functions/F04-CAPABILITY-REGISTRY.md
 >
 > Canonical Role：Phase 1 Concrete Capability Registry 的 Working Current Truth。
 >

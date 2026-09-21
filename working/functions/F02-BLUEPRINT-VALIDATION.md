@@ -1,6 +1,7 @@
 # F02 — Blueprint Validation / Trust Admission
 
-> 狀態：WORKING_BASELINE
+> 狀態：SPEC_READY
+> Formal Spec：spec/functions/F02-BLUEPRINT-VALIDATION.md
 >
 > Canonical Role：Phase 1 Executable Blueprint + L3 Validation 的 Working Current Truth。
 >

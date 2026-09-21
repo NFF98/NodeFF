@@ -1,6 +1,7 @@
 # F01 — Intent Compilation + Model Gateway
 
-> 狀態：WORKING_BASELINE
+> 狀態：SPEC_READY
+> Formal Spec：spec/functions/F01-INTENT-COMPILATION.md
 >
 > Canonical Role：Phase 1 Intent Analysis、Clarification Policy、Resolved Intent、Capability Coverage coordination、Blueprint Composition 與 Model Gateway 的 Working Current Truth。
 >

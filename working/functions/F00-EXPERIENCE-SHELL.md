@@ -1,6 +1,7 @@
 # F00 — Experience Shell / 靈感精靈
 
-> 狀態：WORKING_BASELINE
+> 狀態：SPEC_READY
+> Formal Spec：spec/functions/F00-EXPERIENCE-SHELL.md
 >
 > Canonical Role：Phase 1 Consumer Experience Shell、Creation UX、Clarification / Assumption UX、Runtime Frame、Result Feedback Entry、Share / Remix / Recovery Entry 的 Working Current Truth。
 >

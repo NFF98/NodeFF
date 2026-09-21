@@ -1,6 +1,7 @@
 # F03 — Runtime Execution / Semantics
 
-> 狀態：WORKING_BASELINE
+> 狀態：SPEC_READY
+> Formal Spec：spec/functions/F03-RUNTIME-EXECUTION.md
 >
 > Canonical Role：Phase 1 Browser Runtime Semantics 的 Working Current Truth。
 >
