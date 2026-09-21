@@ -562,7 +562,7 @@ Revert
 | Concrete Registry | ✅ WORKING_BASELINE | `working/functions/F04-CAPABILITY-REGISTRY.md` | Capability Fabric + Data Model |
 | API Contracts | ❌ NOT_STARTED | each `working/functions/Fxx-*.md`; shared conventions only when truly cross-function | Data Model + Function flow |
 | UX State Machines | ❌ NOT_STARTED | F00 shared shell + function-specific Fxx | Function flow + Error / Recovery |
-| Runtime Semantics | ❌ NOT_STARTED | `working/functions/F03-RUNTIME-EXECUTION.md` | Blueprint + Registry |
+| Runtime Semantics | ✅ WORKING_BASELINE | `working/functions/F03-RUNTIME-EXECUTION.md` | Blueprint + Registry |
 | Error Taxonomy | ❌ NOT_STARTED | F12 shared taxonomy + function-specific Fxx errors | Runtime / API / UX |
 | Evidence Schema | ❌ NOT_STARTED | F07 event contract + each Function event definitions | Data Model + Function Acceptance |
 | Function Specs | ❌ NOT_STARTED | `working/functions/Fxx-*.md` | all required shared contracts |
