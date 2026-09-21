@@ -503,6 +503,117 @@ Spec approved
 >
 > Release ≠ Learning Complete。
 
+# 21. CT Commit / Revert Rule
+
+每一次會改變 GitHub Current Truth 的更新，都必須有一個可辨識、可回退的 commit point。
+
+每次更新後，對 User 的說明至少包含：
+
+~~~text
+Commit
+→ 哪個 commit
+
+Changed
+→ 改了什麼
+
+Why
+→ 為什麼改
+
+Impact
+→ 影響哪些 Current Truth / Function / downstream work
+
+Revert
+→ 如果方向不對，要回到哪個 commit / 哪個變更前狀態
+~~~
+
+規則：
+
+1. commit message 必須是人可以理解的 change summary，不使用無意義訊息。
+2. 一個 commit 優先只承載一個 coherent design change。
+3. Material / Architecture-impacting change 不與無關 cleanup 混在同一 commit。
+4. User Review 後若方向不對，可依 commit boundary revert / forward-fix。
+5. Revert 不代表刪除討論歷史；只代表 Current Truth 回到先前 approved state。
+6. 每次 GitHub Working 更新後，ChatGPT 必須提供白話 commit 說明與 rollback point。
+
+---
+
+# 22. Detailed Design All-Picture Completion Matrix
+
+此 Matrix 是 0–1 月 Detailed Design 的進度總覽。它追蹤「Current Working Baseline 是否已建立」，不等於已升格 Spec / Implemented / Released。
+
+## 22.1 Established Baselines
+
+| Area | Status | Canonical Location | Role |
+|---|---|---|---|
+| Top Architecture | ✅ STABLE_BASELINE | `working/APP-ARCHITECTURE.md` | system boundary |
+| Product Boundary | ✅ STABLE_BASELINE | `working/ProjectManagement/BUSINESS-PLAN.md` + Architecture | product / evidence boundary |
+| Function Portfolio | ✅ STABLE_BASELINE | `working/APP-DETAILED-DESIGN.md` | Fxx scope / dependency |
+| Release Scope | ✅ STABLE_BASELINE | `working/APP-DETAILED-DESIGN.md` | 0–1 / 3 / 6 month scope |
+| Infra Boundary | ✅ STABLE_BASELINE | `working/INFRA-ARCHITECTURE.md` | Browser / Edge / Postgres / External |
+| Capability Philosophy | ✅ STABLE_BASELINE | `working/ProjectManagement/CAPABILITY-FABRIC.md` | capability boundary / maturity |
+| Design-to-Delivery | ✅ STABLE_BASELINE | `working/DESIGN-TO-DELIVERY.md` | Working → Spec → Test → Release rules |
+
+## 22.2 Detailed Design Gaps
+
+| Area | Status | Canonical Location | Main Dependency |
+|---|---|---|---|
+| Canonical Data Model | ✅ WORKING_BASELINE | `working/DATA-MODEL.md` | Architecture + Infra + Delivery Contract |
+| Executable Blueprint | ❌ NOT_STARTED | `working/functions/F02-BLUEPRINT-VALIDATION.md` canonical Blueprint section | Data Model + F04 Registry |
+| Concrete Registry | ❌ NOT_STARTED | `working/functions/F04-CAPABILITY-REGISTRY.md` | Capability Fabric + Data Model |
+| API Contracts | ❌ NOT_STARTED | each `working/functions/Fxx-*.md`; shared conventions only when truly cross-function | Data Model + Function flow |
+| UX State Machines | ❌ NOT_STARTED | F00 shared shell + function-specific Fxx | Function flow + Error / Recovery |
+| Runtime Semantics | ❌ NOT_STARTED | `working/functions/F03-RUNTIME-EXECUTION.md` | Blueprint + Registry |
+| Error Taxonomy | ❌ NOT_STARTED | F12 shared taxonomy + function-specific Fxx errors | Runtime / API / UX |
+| Evidence Schema | ❌ NOT_STARTED | F07 event contract + each Function event definitions | Data Model + Function Acceptance |
+| Function Specs | ❌ NOT_STARTED | `working/functions/Fxx-*.md` | all required shared contracts |
+| Executable Acceptance | ❌ NOT_STARTED | each Fxx Acceptance + mapped tests | Function contracts + Delivery Contract |
+
+## 22.3 Dependency Order
+
+~~~text
+Canonical Data Model
+        ↓
+Concrete Registry
+        ↓
+Executable Blueprint
+        ↓
+Runtime Semantics
+        ↓
+F01 Compilation / API
+        ↓
+F00 UX State Machine
+        ↓
+Share / Remix / Identity-Evidence / Recovery / Correction
+        ↓
+Complete Function Specs
+        ↓
+Executable Acceptance
+        ↓
+Working → Spec Gate
+~~~
+
+這不是禁止平行設計；而是避免 downstream 文件自行發明 upstream contract。
+
+## 22.4 Status Meaning
+
+~~~text
+❌ NOT_STARTED
+= 尚未建立 canonical Working design
+
+🟡 DRAFT
+= 已開始，但仍有 blocker / major open decision
+
+✅ WORKING_BASELINE
+= 已建立目前 Current Truth，可供 downstream design 引用，但尚未代表 Spec
+
+✅ SPEC_READY
+= Function / shared contract 已完成 Review，可升格正式 Spec
+~~~
+
+任何 status change 都必須伴隨對應 GitHub commit，並依 §21 提供白話 change / impact / revert 說明。
+
+---
+
 # Conclusion
 
 NodeFF 的 Delivery 原則只有一句：
