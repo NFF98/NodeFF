@@ -192,7 +192,7 @@ answers / shares / correction comparison / decisions
 = 60 operations / minute / anonymous_id
 
 PUBLIC_READ
-share resolve / Blueprint metadata gates
+share resolve / execution admission / Blueprint metadata gates
 = 180 requests / minute / coarse edge source
 
 EVENT_INGEST
@@ -225,6 +225,16 @@ Prompt / Policy version
 ~~~
 
 Breaking route/request/response semantics需要新 API major或明確 migration。
+
+# 12.1 Execution Admission Read
+
+Fresh Blueprint execution permission由 `working/EXECUTION-ADMISSION.md` 擁有：
+
+~~~text
+GET /api/v1/blueprints/{content_hash}/execution-admission
+~~~
+
+它是 PUBLIC_READ，不是 immutable Blueprint body endpoint。
 
 # 13. Canonical Shared API Errors
 

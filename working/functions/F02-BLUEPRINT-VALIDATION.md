@@ -973,6 +973,7 @@ hashBlueprint(canonicalBytes)
 admitBlueprint(validationResult)
 getBlueprintTrust(contentHash)
 assertExecutable(contentHash, runtimeContext)
+issueExecutionAdmission(contentHash, runtimeContext)
 ~~~
 
 F02 不呼叫 LLM。
@@ -1014,6 +1015,8 @@ canonical_blueprint?  // trusted internal path
 ~~~
 
 Client 不可傳 trust_status=VALIDATED 自我宣告可信。
+
+Browser / F03 fresh execution gate由 `working/EXECUTION-ADMISSION.md` 擁有；F02提供current trust assertion，不讓 immutable CDN body本身充當執行授權。
 
 # 38. Data / DB Read-Write
 

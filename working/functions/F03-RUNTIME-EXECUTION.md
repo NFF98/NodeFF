@@ -19,7 +19,8 @@ User Outcome：
 Canonical flow：
 
 ~~~text
-Admitted Blueprint
+Admitted Blueprint Body
++ Fresh ExecutionAdmission
 → Trust / Compatibility Check
 → Hydrate Instance
 → Evaluate Derived State / Rules
@@ -114,9 +115,12 @@ registry_version
 registry_digest
 ~~~
 
-Hydration 前確認：
+Hydration 前依 `working/EXECUTION-ADMISSION.md` 確認：
 
 ~~~text
+fresh ExecutionAdmission exists
+admission content_hash = Blueprint hash
+admission not expired
 Blueprint trust = VALIDATED
 Blueprint schema supported
 Registry snapshot compatible
@@ -188,7 +192,7 @@ UNINITIALIZED
 ~~~text
 H01 Load admitted Blueprint
 ↓
-H02 Assert trust / schema / registry / runtime compatibility
+H02 Assert fresh ExecutionAdmission / trust / schema / registry / runtime compatibility
 ↓
 H03 Build immutable execution indexes
 ↓

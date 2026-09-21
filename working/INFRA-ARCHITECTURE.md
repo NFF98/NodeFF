@@ -394,10 +394,16 @@ Phase 1 不建議把 Edge KV 當必要基礎設施。
 
 ~~~text
 GET /b/{content_hash}
- → Edge Resolver
+ → immutable Blueprint body
  → Postgres on cache miss
  → Cache-Control: immutable
  → CDN caches response
+
+GET /api/v1/blueprints/{content_hash}/execution-admission
+ → Edge Resolver
+ → current trust / compatibility metadata
+ → short internal metadata cache <= 15s
+ → Browser hydration gate
 ~~~
 
 結果：
@@ -411,6 +417,8 @@ CDN hit → Browser
 ~~~
 
 因為 content hash 改變就代表新 Blueprint，所以 immutable CDN cache 很自然。
+
+但 Blueprint body cache不代表現在可執行；fresh ExecutionAdmission由獨立 mutable metadata path決定。
 
 這比一開始維護：
 

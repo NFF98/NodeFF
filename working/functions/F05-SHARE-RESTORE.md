@@ -310,7 +310,8 @@ GET /share/{share_id}
 → verify share status
 → obtain content_hash
 → fetch /b/{content_hash}
-→ verify Blueprint trust / compatibility
+→ fetch fresh ExecutionAdmission for content_hash
+→ verify current trust / compatibility
 → F03 hydrate
 ~~~
 
@@ -332,8 +333,8 @@ Rules：
 2. response body = canonical Blueprint JSON。
 3. cache immutable Blueprint aggressively。
 4. same hash永遠不得返回不同 body。
-5. F03仍在 hydrate前 assert trust / compatibility。
-6. trust status本身不是 immutable，resolver/metadata必須能阻止已 REVOKED artifact execute。
+5. F03在 hydrate前必須取得 `working/EXECUTION-ADMISSION.md` 定義的 fresh ExecutionAdmission。
+6. trust status本身不是 immutable；cached body不能當 execution permission。
 
 因此：
 
@@ -614,7 +615,7 @@ F05不靠 DB last_opened_at做精準 analytics。
 
 ## F05-RQ-006
 
-Recipient restore時必須重新檢查：
+Recipient restore時必須透過 fresh ExecutionAdmission重新檢查：
 
 ~~~text
 share status

@@ -77,6 +77,9 @@ working/DATA-MODEL.md
 working/API-CONVENTIONS.md
 → shared public API transport / control contract
 
+working/EXECUTION-ADMISSION.md
+→ fresh Blueprint trust / compatibility execution gate
+
 working/ProjectManagement/CAPABILITY-FABRIC.md
 → capability semantic contract
 
