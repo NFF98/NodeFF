@@ -565,7 +565,7 @@ Revert
 | Runtime Semantics | ✅ WORKING_BASELINE | `working/functions/F03-RUNTIME-EXECUTION.md` | Blueprint + Registry |
 | Error Taxonomy | ❌ NOT_STARTED | F12 shared taxonomy + function-specific Fxx errors | Runtime / API / UX |
 | Evidence Schema | ❌ NOT_STARTED | F07 event contract + each Function event definitions | Data Model + Function Acceptance |
-| Function Specs | ❌ NOT_STARTED | `working/functions/Fxx-*.md` | all required shared contracts |
+| Function Specs | 🟡 DRAFT | `working/functions/Fxx-*.md` | all required shared contracts |
 | Executable Acceptance | ❌ NOT_STARTED | each Fxx Acceptance + mapped tests | Function contracts + Delivery Contract |
 
 ## 22.3 Dependency Order

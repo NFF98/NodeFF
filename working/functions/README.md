@@ -1,20 +1,25 @@
 # NodeFF Function Designs
 
-此目錄存放 NodeFF 的具體 Function 詳細設計。
-
-每份文件必須以可驗收的功能為中心，同時描述必要的 Frontend、Backend、Contract、Data、Security、Telemetry 與 Acceptance Criteria。
-
-命名：
+此目錄是 NodeFF **單一 Function 詳細設計的 canonical home**。
 
 ~~~text
-F01-INTENT-COMPILATION.md
-F02-BLUEPRINT-VALIDATION.md
-F03-RUNTIME-EXECUTION.md
-...
+APP-DETAILED-DESIGN.md
+→ Portfolio / Dependency / Release / Status Index
+
+working/functions/Fxx-*.md
+→ 該 Function 唯一的 end-to-end detailed design
 ~~~
 
-Function 總表與共同模板見：
+每份 Fxx 最終應完整描述 User Outcome、Flow、UI/UX、Frontend State、Data/DB、API、Backend/Runtime、Capability Dependencies、Error/Recovery、Security/Permission、Telemetry/Evidence、Acceptance/Test、Dependency/Compatibility、Release/Migration。
 
-- `../APP-DETAILED-DESIGN.md`
+規則：
 
-這裡不是會議紀錄，也不是 Brain Dump；只保留已整理成可實作設計的內容。
+1. APP-DETAILED-DESIGN 不再複製 Function 級詳細內容。
+2. Fxx 若改 shared Data / Architecture / Capability boundary，必須回 shared canonical contract Review。
+3. DRAFT / DEFERRED_BASELINE 只是已搬入 Current Truth，不代表 SPEC_READY。
+4. F02 / F03 / F04 已有 WORKING_BASELINE；其他 Function 後續逐步深化。
+5. Cursor 只能依 approved Spec 實作，不以 Portfolio 摘要取代 Fxx contract。
+
+共同 Delivery 規則：`../DESIGN-TO-DELIVERY.md`
+
+Portfolio / Dependency / Release Scope：`../APP-DETAILED-DESIGN.md`
