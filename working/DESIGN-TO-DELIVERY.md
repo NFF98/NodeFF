@@ -614,6 +614,27 @@ Working → Spec Gate
 
 ---
 
+# 23. Phase 1 Core Working → Spec Gate Audit
+
+Latest audit：
+
+- working/ProjectManagement/PHASE1-CORE-SPEC-GATE-AUDIT.md
+- Audited baseline：bd74d9f244ab63218bad78f60381ccb0f48fb9b6
+- Verdict：HOLD — NOT SPEC_READY
+- Core Function SPEC_READY：0 / 10
+- Acceptance：257 total / 149 seed-mapped / 108 seed-unmapped
+
+重要區分：
+
+~~~text
+✅ WORKING_BASELINE = 已有 Current Working Truth
+SPEC_READY = 還必須通過 Cross-Function consistency + exact contracts + executable acceptance
+~~~
+
+主要 Gate blockers：intent concurrency、idempotency、fresh trust assertion、F03↔F16 replay、Revert UX、retention、shared API conventions、exact Event Registry、exact Recovery Registry、Executable Acceptance、以及 Function-centric Working 與舊 horizontal /spec template 的 promotion structure conflict。
+
+在 blocker 關閉並 re-audit以前，不將任何 Phase 1 Core Fxx 標成 SPEC_READY。
+
 # Conclusion
 
 NodeFF 的 Delivery 原則只有一句：
