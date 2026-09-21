@@ -49,7 +49,7 @@ stable link
 Phase 1 production default：
 
 ~~~text
-DURABLE_BLUEPRINT_REFERENCE
+DURABLE_REFERENCE
 ~~~
 
 User-facing route：
@@ -917,7 +917,7 @@ Downstream：
 Release 1 production mode：
 
 ~~~text
-DURABLE_BLUEPRINT_REFERENCE
+DURABLE_REFERENCE
 /share/{share_id}
 ~~~
 

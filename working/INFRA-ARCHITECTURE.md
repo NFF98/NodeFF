@@ -433,6 +433,15 @@ DB + KV + CDN
 
 NodeFF 保留三種分享模式，但按需求啟動。
 
+Phase 1 啟用策略由 F05 定義：
+
+~~~text
+Production default = Mode B / DURABLE_REFERENCE
+Mode A = optional experiment, not Release 1 blocker
+Mode C = deferred to F09
+~~~
+
+
 ## Mode A — Portable Snapshot
 
 適合：

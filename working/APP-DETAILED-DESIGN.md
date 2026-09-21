@@ -56,7 +56,7 @@ working/DESIGN-TO-DELIVERY.md
 | F02 | Blueprint Validation / Trust Admission | 不可信 Blueprint 不進 Runtime | 0–1 月 | WORKING_BASELINE | `functions/F02-BLUEPRINT-VALIDATION.md` |
 | F03 | Runtime Execution | Blueprint → Interactive App | 0–1 月 | WORKING_BASELINE | `functions/F03-RUNTIME-EXECUTION.md` |
 | F04 | Capability Registry / Resolution | Compiler / Validator / Runtime 共用能力真相 | 0–1 月 | WORKING_BASELINE | `functions/F04-CAPABILITY-REGISTRY.md` |
-| F05 | Share / Restore | Link → Recipient 可立即使用 | 0–1 月 | DRAFT | `functions/F05-SHARE-RESTORE.md` |
+| F05 | Share / Restore | Link → Recipient 可立即使用 | 0–1 月 | WORKING_BASELINE | `functions/F05-SHARE-RESTORE.md` |
 | F06 | Remix / Refine | Existing App → Semantic Delta → New Blueprint | 0–1 月 | DRAFT | `functions/F06-REMIX-REFINE.md` |
 | F07 | Anonymous Identity & Evidence | No-login continuity + PMF evidence | 0–1 月 | DRAFT | `functions/F07-ANONYMOUS-IDENTITY-EVIDENCE.md` |
 | F08 | Durable Identity / Ownership | Anonymous → Account → Ownership | 2–3 月 | DEFERRED_BASELINE | `functions/F08-DURABLE-IDENTITY-OWNERSHIP.md` |
