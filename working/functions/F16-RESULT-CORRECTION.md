@@ -400,14 +400,14 @@ DETERMINISTIC_REPLAY：
 SEEDED_REPLAY：
 
 - result涉及 SEEDED Capability。
-- F03提供足夠 RNG replay metadata。
-- child rerun使用相同 replay anchor。
+- 只有 F03-RQ-012 判定所有 result-affecting SEEDED context可安全重建時成立。
+- seed + counter本身不等於可重建完整歷史；不足時必須降級 LIMITED_COMPARISON。
 
 TIME_CONTEXT_REPLAY：
 
 - result依賴 timer/time-dependent local semantics。
-- F03提供可重建的 timer context。
-- comparison顯示「依相同計時狀態重跑」。
+- 只有 F03-RQ-012 能用 duration/elapsed等bounded monotonic context重建且不重放歷史event時成立。
+- 不可重建歷史 timing sequence時必須降級 LIMITED_COMPARISON。
 
 LIMITED_COMPARISON：
 
@@ -764,23 +764,21 @@ Fail：
 
 Replay不是一般 User Action，也不是直接亂寫 Runtime store。
 
-Conceptual internal interface：
+Canonical Runtime interface由 F03-RQ-012 擁有：
 
 ~~~text
-createCorrectionReplayInstance(
-  childBlueprint,
-  replayInputs,
-  replayContext
-)
+createCorrectionReplayInstance(request)
+→ CorrectionReplayResult
 ~~~
 
 Requirements：
 
-- child已 F02 VALIDATED。
+- child已 F02 VALIDATED，且有 fresh ExecutionAdmission。
 - replay inputs先 type/constraint validation。
 - only replay-eligible state keys。
 - protected MEMORY_ONLY values只留 Browser memory。
 - apply完成後依 F03重新計算 derived/rules。
+- requested comparison mode可被 F03降級為 LIMITED_COMPARISON；F16不得自行升級。
 - Runtime normal semantics不被繞過。
 
 # 26. After Snapshot
@@ -1651,8 +1649,11 @@ Phase 1不做：
 
 後續：
 
-1. F03 Spec階段固定 correction replay internal interface exact TypeScript signature。
-2. F07 Product Evidence Review可定「accepted後多久沒有再次 mismatch」算 stronger correction success。
+已閉合：F03-RQ-012 已固定 correction replay internal contract與 comparison downgrade rules。
+
+後續：
+
+1. F07 Product Evidence Review可定「accepted後多久沒有再次 mismatch」算 stronger correction success。
 3. F10 future reuse ranking可使用 aggregated correction evidence，但不能把個別 User sensitive snapshot當 retrieval corpus。
 4. F08 future account history可顯示 accepted/reverted versions，但不改 immutable lineage。
 5. Future external capability加入後，需要 effect-safe replay contract才可進 F16 exact comparison。

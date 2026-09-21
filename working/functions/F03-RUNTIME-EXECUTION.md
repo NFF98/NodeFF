@@ -846,6 +846,161 @@ Persistence：
 - input durable subset 由 F16/F07 決定
 - capability-local state 預設不 durable
 
+# 29.1 Exact Correction Replay Interface
+
+## F03-RQ-012 — createCorrectionReplayInstance
+
+Canonical internal interface：
+
+~~~text
+createCorrectionReplayInstance(request)
+→ CorrectionReplayResult
+~~~
+
+Request：
+
+~~~text
+CorrectionReplayRequest
+├─ admitted_blueprint
+├─ execution_admission
+├─ replay_inputs[]
+├─ requested_comparison_mode
+└─ replay_context
+~~~
+
+ReplayInput：
+
+~~~text
+state_key
+value
+value_type
+sensitivity
+~~~
+
+ReplayContext：
+
+~~~text
+source_blueprint_hash
+source_runtime_version
+source_registry_version
+rng_metadata?
+timer_metadata?
+limitations[]
+~~~
+
+Result：
+
+~~~text
+CorrectionReplayResult
+├─ instance_id
+├─ effective_comparison_mode
+├─ result_outputs
+├─ runtime_snapshot
+└─ limitations[]
+~~~
+
+### Replay algorithm
+
+~~~text
+R01 assert fresh ExecutionAdmission
+R02 create fresh child Runtime Instance
+R03 initialize Blueprint mutable initial state
+R04 validate every replay_input against child MUTABLE state type/constraints
+R05 write only replay-eligible state keys into pre-ready working state
+R06 recompute all affected derived state / rules
+R07 evaluate replay context support
+R08 initialize supported RNG / timer replay context without historical side effects
+R09 build capability/render state
+R10 enter READY
+R11 evaluate canonical result.outputs
+R12 return snapshot + effective comparison mode
+~~~
+
+Failure before R10：
+
+- Instance不進 READY。
+- 不留下 partial committed replay state。
+- dispose failed child Instance。
+- 回 typed F03/F16 error。
+
+### Comparison mode truth
+
+DETERMINISTIC_REPLAY：
+
+~~~text
+allowed when result dependency graph is deterministic
+and all replayed values are available
+~~~
+
+SEEDED_REPLAY：
+
+~~~text
+allowed only when all result-affecting SEEDED capabilities provide enough replay-safe context
+to reproduce the comparison point without replaying irreversible/history-dependent effects
+~~~
+
+Phase 1只有 seed + counter 並不自動保證 exact historical replay。
+若缺 event/action history或 capability replay state：
+
+~~~text
+effective mode = LIMITED_COMPARISON
+~~~
+
+TIME_CONTEXT_REPLAY：
+
+~~~text
+allowed only when all result-affecting timer state can be reconstructed from bounded monotonic metadata
+without re-emitting historical events
+~~~
+
+Timer replay metadata minimum：
+
+~~~text
+node_id
+timer_state: IDLE | RUNNING | PAUSED | COMPLETE
+duration_ms
+elapsed_ms
+~~~
+
+Replay建立新的 monotonic anchor：
+
+~~~text
+remaining_ms = max(duration_ms - elapsed_ms, 0)
+~~~
+
+Rules：
+
+- 不 replay historical timer ticks/events。
+- COMPLETE不重新emit completion。
+- RUNNING只排未來 remaining duration。
+- 若 result依賴無法重建的歷史 timing sequence → LIMITED_COMPARISON。
+
+LIMITED_COMPARISON：
+
+- child仍可hydrate / evaluate。
+- Runtime回 limitations[]。
+- F16 UI必須揭露不是 apples-to-apples exact replay。
+
+### Replay input safety
+
+只接受 F16依 F04 editable-input binding規則選出的 MUTABLE keys。
+
+禁止：
+
+- DERIVED state write
+- undeclared state
+- capability-local arbitrary state injection
+- silent coercion
+- replay external/irreversible effect
+- replay permission grant
+- replay arbitrary Action/Event history
+
+### Snapshot output
+
+captureRuntimeSnapshot與CorrectionReplayResult使用同一 Runtime value semantics。
+
+F03不負責 durable persistence；F16/F07決定 redact / retention。
+
 # 30. Local Recovery / Reload
 
 Phase 1 Runtime 本身不自動保存完整 Instance 到 localStorage。
@@ -992,6 +1147,7 @@ dispatchRuntimeEvent(instanceId, event)
 evaluateValue(instanceId, valueSource, scope?)
 evaluateResult(instanceId)
 captureRuntimeSnapshot(instanceId)
+createCorrectionReplayInstance(request)
 resetRuntimeInstance(instanceId, mode)
 disposeRuntimeInstance(instanceId)
 ~~~
