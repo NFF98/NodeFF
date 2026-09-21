@@ -23,6 +23,7 @@
 5. 同一層級同一語意只能有一個 canonical owner。
 6. Function detailed truth 以 Fxx 為單位，不拆成平行 FE/BE/API/DB 主規格。
 7. Shared contract 只有真正跨 Function 時才進 shared owner。
+7A. `working/UI-UX/` 只擁有 Screen composition / visual hierarchy / responsive / presentation；Function behavior semantics 仍由 `working/functions/Fxx-*.md` 擁有，禁止形成第二份產品行為真相。
 8. 程式碼與測試不得覆蓋 Spec。
 9. 產品行為 / public contract / data / security 變更必須先更新對應 Working/Spec。
 10. decisions/ 記錄 architecture/product-impacting decisions。
@@ -44,6 +45,10 @@ working/
   ACCEPTANCE-CONVENTIONS.md
   functions/
     Fxx-*.md
+  UI-UX/
+    PHASE1-SCREEN-INVENTORY.md
+    screens/
+      Sxx-*.md
   registries/
     recovery-registry.json
     evidence-event-registry.json

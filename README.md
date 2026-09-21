@@ -19,6 +19,8 @@ NodeFF 是一個 No-install、Everyone-is-creator、Sharable/Linkable、Intent C
 - Execution Admission：working/EXECUTION-ADMISSION.md
 - Acceptance/Test Conventions：working/ACCEPTANCE-CONVENTIONS.md
 - Function Details：working/functions/Fxx-*.md
+- Phase 1 Screen Inventory：working/UI-UX/PHASE1-SCREEN-INVENTORY.md
+- Screen-level UI/UX：working/UI-UX/screens/
 - Machine-readable Registries：working/registries/
 
 ### Formal Spec

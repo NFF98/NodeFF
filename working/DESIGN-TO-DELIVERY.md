@@ -96,7 +96,13 @@ working/ProjectManagement/CAPABILITY-FABRIC.md
 → capability semantic contract
 
 working/functions/Fxx-*.md
-→ single Function end-to-end detailed design
+→ single Function end-to-end detailed behavior / contract design
+
+working/UI-UX/PHASE1-SCREEN-INVENTORY.md
+→ Phase 1 Screen / Surface map + Screen review status
+
+working/UI-UX/screens/Sxx-*.md
+→ screen composition / visual hierarchy / responsive / Low-fi / High-fi Working design;不得自行改寫 Function behavior semantics
 
 spec/functions/
 → reviewed Function implementation contracts
@@ -109,6 +115,8 @@ execution/
 ~~~
 
 不得為 Frontend / Backend / DB 再建立彼此割裂的平行主規格。
+
+UI/UX Screen 文件是 visual / screen composition owner，不是第二份 Function behavior owner。若 Screen design 需要改 product behavior / state semantics / API / Data / Runtime，必須回到對應 Fxx Working Design 並重新 Review。
 
 ---
 

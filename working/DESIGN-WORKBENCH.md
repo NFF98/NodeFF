@@ -525,7 +525,10 @@ Intent Commerce / Capability Network 持續擴張
 
 ## Phase 1 UI/UX — S01 Discover / Start Review Notes
 
-> 狀態：WORKBENCH — 尚未升格 Working UI Contract / Spec。
+> Sync status：已同步到 Screen Working Design。
+> Sync target：`working/UI-UX/screens/S01-DISCOVER-START.md`
+>
+> 狀態：WORKBENCH HISTORY — 保留討論脈絡，不再作 Screen Current Truth。
 > 來源：Phase 1 Screen Inventory / S01 Low-fi Review。
 
 ### S01 已確認方向
