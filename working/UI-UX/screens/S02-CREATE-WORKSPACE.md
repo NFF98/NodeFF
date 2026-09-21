@@ -23,7 +23,7 @@ S02 不是 AI chat room，也不是 engineering status console。
 # 2. Core UX Principles — Proposed
 
 1. **One Workspace, Changing State**：ANALYZING / CLARIFICATION / ASSUMPTION / BUILDING / HYDRATING 都留在同一 Create Workspace，不為每個 state 跳新頁。
-2. **Fast Path First**：Intent 已足夠時，不插入多餘確認頁。
+2. **Fast Path First**：Intent 已足夠時，不插入多餘 clarification / assumption；但進入 BUILDING 前仍需要 User 明確按一次「確認建立」。
 3. **Interrupt Only for Material Decisions**：只有 material clarification / assumption 才停下來問 User。
 4. **Visible Progress, No Fake Precision**：採 stage-based progress，沒有可靠百分比就不顯示假數字。
 5. **Preserve Context**：原始 Intent、回答、assumptions、draft 持續保留。
@@ -49,7 +49,7 @@ S02 不是 AI chat room，也不是 engineering status console。
 
 任何適用 state 都可進 O03 Recovery Overlay。
 
-READY_TO_BUILD 是內部 transition；若不需要 User decision，不額外插一頁「Ready」。
+READY_TO_BUILD 是可見決策點：若 Intent 已足夠且沒有 material clarification / assumption，S02 顯示最小確認區，User 明確按一次「確認建立」後才進 BUILDING。
 
 # 5. Proposed Desktop Low-fi
 
@@ -173,7 +173,7 @@ Recoverable failure 使用 O03，不離開 S02：
 | HYDRATING | none |
 | RECOVERABLE_FAILURE | Retry / context-specific action |
 
-Fast Path 不要求 User 再按一次 Build。
+Fast Path 仍要求 User 明確按一次「確認建立」，作為開始實際生成前的最後確認。
 
 # 14. Visual Guardrails
 
@@ -206,3 +206,77 @@ Fast Path 不要求 User 再按一次 Build。
 > **LOW_FI_REVIEW_IN_PROGRESS**
 
 尚未 User approve；批准後才更新 Screen Inventory 為 LOW_FI_DIRECTION_APPROVED。
+
+# 18. Edit Intent UI / Function Contract — Proposed
+
+此項尚未 User approve。
+
+「你的想法 [編輯]」不是單純把原句改字，而是讓 User 在 S02 建立前，能修正 creation intent。
+
+## 18.1 Proposed UI
+
+Compact mode：
+
+    你的想法
+    幫我做一個今晚聚餐投票 App，大家可以選餐廳。
+    [編輯]
+
+按「編輯」後，不跳頁，原區塊展開成 editable composer：
+
+    ┌────────────────────────────────────┐
+    │ 幫我做一個今晚聚餐投票 App，       │
+    │ 每人最多選三家，晚上九點截止。     │
+    └────────────────────────────────────┘
+    [取消]                    [套用修改]
+
+目的：
+- 保留 S02 creation context。
+- 不把 User 送回 S01。
+- 讓 User 在真正 BUILDING 前修正需求。
+- 不把 Clarification / Assumption 與 raw intent edit 混成同一種 UI。
+
+## 18.2 Function Behavior
+
+按「編輯」只改 raw creation intent，不直接修改 Blueprint。
+
+Canonical behavior：
+
+    current intent context
+    → User edits raw intent
+    → Apply
+    → create semantic re-analysis on same creation flow
+    → invalidate stale clarification / assumptions when affected
+    → re-run F01 clarification policy
+    → return one of:
+       CLARIFICATION_REQUIRED
+       ASSUMPTION_REVIEW
+       READY_TO_BUILD
+
+Rules：
+1. Edit 後不沿用已失效的分析結果。
+2. 與新 intent 無衝突的回答可保留；有衝突的答案 / assumption 必須失效或重新確認。
+3. 不允許 UI 直接 patch Blueprint。
+4. 若已進 BUILDING，是否允許 Edit 需依 cancel semantics；Phase 1 baseline 建議 BUILDING 中不直接 hot-edit。
+5. 套用修改後，progress 回到「理解想法」階段。
+
+## 18.3 Proposed Boundary
+
+S02 的「編輯」是 **修改這次要建立的 App 意圖**。
+
+不是：
+- 修改已生成 App（那是 F06 Refine / Remix）。
+- 修正結果錯誤（那是 F16 Correction）。
+- 修改 Runtime input（那是 F03 App Runtime interaction）。
+
+# 19. Confirmed S02 Decisions
+
+目前 User 已確認：
+
+1. 4-stage visible progress：理解 → 整理 App → 檢查互動 → 準備 App。
+2. Clarification / Assumption 直接嵌在同一 Workspace，不跳 Modal / 新頁。
+3. Fast Path 在進入 BUILDING 前，必須有一次明確「確認建立」。
+
+尚未確認：
+
+- S02 是否採 single focused workspace 作為整體 layout。
+- 「你的想法 [編輯]」的 exact UI / edit behavior。
