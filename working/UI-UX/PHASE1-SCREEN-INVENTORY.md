@@ -64,23 +64,27 @@ S03 App / Runtime
 可進 S05 Remix
 ~~~
 
-# 5. Screen Review Method
+# 5. UI/UX Design Process — Mandatory
 
-每個 Screen 依序確認：
+Phase 1 UI/UX 必須固定走以下 6 步，不得跳步、混步或提前升格：
 
-~~~text
-Inventory
-→ Low-fi
-→ User Review
-→ Responsive / State Review
-→ High-fi
-→ User Review
-→ Working UI Baseline
-→ Cross-check against Function contracts
-→ User explicit approval before any Spec promotion/change
-~~~
+1. **抽出現有 UX**：從 F00 / F05 / F06 / F12 / F16 等既有 Function contracts 整理所有畫面、狀態與互動。
+2. **建 Screen Inventory**：列出 S01、S02…每個 Screen / Overlay 的目的、入口、出口與主要 Function source。
+3. **補缺口**：找出 Spec / Function 已有 behavior，但尚未有具體畫面承接的位置。
+4. **逐頁確認**：每個 Screen 依序做 Low-fi → High-fi。
+   - **④A Low-fi**：只確認版面、資訊層級、CTA、流程、states、Desktop / Mobile；**不討論顏色與品牌視覺**。
+   - **④B High-fi**：確認顏色、字體、間距、圓角、陰影、動畫、Hover / Loading 效果、品牌風格、Desktop / Mobile 視覺一致性。
+5. **User 批准後**：才整理成 UI/UX Working Design baseline。
+6. **最後再問 User 是否升 Spec**：沒有 User 明確批准，不得 promotion 到 formal Spec。
 
-每個 Screen 至少確認：
+硬規則：
+- Low-fi 未確認，不得進 High-fi。
+- High-fi 未確認，不得標記完整 UI/UX Working Baseline。
+- Working UI/UX 未完成 Cross-Screen Review，不得詢問 Spec promotion。
+- 顏色 / 效果 / 風格屬於 **④B High-fi**，不得在 ④A Low-fi 當成 approval blocker。
+- Screen-level visual design 不得自行改寫 Function behavior semantics。
+
+每個 Screen 的 Low-fi 至少確認：
 
 1. User 到這裡要完成什麼。
 2. 主要資訊區塊與 visual hierarchy。
@@ -90,7 +94,6 @@ Inventory
 6. Overlay / modal / navigation relationship。
 7. Accessibility baseline。
 8. 與 Fxx Contract 是否一致。
-9. High-fi visual system 套用方式。
 
 # 6. Visual Design Sequence
 
