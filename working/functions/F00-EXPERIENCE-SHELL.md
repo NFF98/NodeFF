@@ -517,6 +517,7 @@ Shell Chrome Phase 1 minimum：
 - Share
 - Remix / Refine
 - Correct result entry when result exists
+- Previous Version / Revert entry when current-session accepted correction is revert-eligible
 - recovery notice area when needed
 
 Generated App area：
@@ -615,6 +616,53 @@ Rules：
 4. Keep Previous → 回 old APP。
 5. Adjust Again →保留 correction context。
 6. Technical diff不是 consumer default；顯示 semantic/user-visible差異。
+
+# 19.1 Post-Accept Previous Version / Revert UX
+
+## F00-UX-016A
+
+F16 correction ACCEPTED 後，F00回 APP surface，並在 current Browser session保留最小 correction_history。
+
+Revert entry：
+
+~~~text
+APP
+→ Previous Version / 回到修正前版本
+→ Revert Confirmation
+→ F16 decision REVERT_TO_BASE
+→ fresh ExecutionAdmission for base
+→ fresh F03 Runtime Instance
+→ APP on base Blueprint
+~~~
+
+Visibility：
+
+- 只有 current active Blueprint來自同一 session中 ACCEPTED correction時顯示。
+- Phase 1沒有 account history，因此不承諾跨裝置 / 永久版本列表。
+- Reload後若 correction_id與safe base reference仍可從approved local recovery context恢復，可繼續顯示；local record TTL = 7 days。
+- base已 REVOKED / INCOMPATIBLE時，不顯示可執行Revert CTA，改由 F12說明 unavailable。
+
+Confirmation：
+
+~~~text
+回到修正前版本？
+修正版不會被刪除。
+~~~
+
+Input restoration：
+
+1. same-session before snapshot仍在 memory且 compatible → default使用 correction前 replay inputs。
+2. before snapshot不存在，但 current inputs可安全映射 → 顯示 optional「保留目前輸入」；預設 OFF。
+3. 無安全 input snapshot → 使用 base Blueprint initial state，並在確認畫面說明輸入不會恢復。
+4. SENSITIVE / DO_NOT_PERSIST資料不因 Revert寫入 local durable storage。
+
+Successful Revert：
+
+- correction_record outcome = REVERTED。
+- active App = base Blueprint fresh Instance。
+- F00回 APP，不回 COMPARE。
+- child Blueprint / CORRECT lineage保留，不刪除。
+- 不自動提供「redo corrected version」；未來版本歷史由 F08承接。
 
 # 20. Share Entry
 
@@ -764,7 +812,13 @@ ShellState
 ├─ app
 │  ├─ active_blueprint_hash?
 │  ├─ runtime_instance_id?
-│  └─ result_summary?
+│  ├─ result_summary?
+│  └─ correction_history?
+│     ├─ correction_id
+│     ├─ base_blueprint_hash
+│     ├─ accepted_blueprint_hash
+│     ├─ revert_available
+│     └─ before_snapshot_available
 ├─ compare
 │  ├─ previous_blueprint_hash?
 │  ├─ new_blueprint_hash?
@@ -1090,7 +1144,7 @@ Prompt → Clarify only if needed → Build → Use
 2. F06 exact Remix vs Refine wording / source context。
 3. Local draft TTL / privacy已由 DATA-MODEL + F07 closure固定為7 days；F00引用，不再自定。
 4. F12 Recovery message/action semantics已建立；copy可迭代但不改 action mapping。
-5. F16 correction/compare contract已建立；F00需在 Gate Closure補 accepted correction後的 Revert entry。
+5. F16 correction/compare與 accepted correction後的 current-session Revert entry已閉合；durable cross-device history留給 F08。
 6. Capsule content taxonomy / ranking屬 Product content layer，可迭代，不改 F00 state machine。
 
 # Conclusion

@@ -904,11 +904,11 @@ a correction was previously ACCEPTED
 AND previous/base Blueprint still trusted/compatible
 ~~~
 
-User選 Revert：
+User從 F00 current-session Previous Version / Revert entry選 Revert：
 
 - active Browser App切回 base / chosen previous correction ancestor。
 - target建立 fresh Runtime Instance。
-- replay current eligible inputs only if compatible and User chooses；預設可使用 original before snapshot within same session。
+- same-session original before snapshot存在且compatible時，F00預設使用該 correction前 inputs；若只有current compatible inputs，必須 User explicit opt-in；否則用 base initial state。
 - correction_record outcome → REVERTED。
 - child Blueprint不刪除。
 - lineage不刪除。
