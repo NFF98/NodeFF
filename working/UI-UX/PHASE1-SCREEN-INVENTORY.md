@@ -36,7 +36,7 @@ Phase 1 目前採 **6 個主要 Screen / Surface + 5 類 Overlay / State**。
 | ID | Overlay / State | Host Screen(s) | Purpose | Main Function |
 |---|---|---|---|---|
 | O01 | Share Overlay | S03 / restored App | 建立、複製、呼叫 native share | F05 | **LOW_FI_DIRECTION_APPROVED** |
-| O02 | Correction Composer | S03 | 收集自然語言 correction feedback | F16 |
+| O02 | Correction Composer | S03 | 收集自然語言 correction feedback | F16 | **LOW_FI_REVIEW_IN_PROGRESS** |
 | O03 | Recovery Overlay | S02 / S03 / S05 / S06 | 保留 context，提供 humanized next action | F12 |
 | O04 | Revert Confirmation | S03 | 確認回到 previous/base version | F00 + F16 |
 | O05 | Loading / Building / Hydration States | S02 / S03 / S05 / S06 | 顯示非同步進度與 bounded waiting state | F00 + related Fxx |
