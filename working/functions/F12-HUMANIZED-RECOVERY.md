@@ -627,21 +627,35 @@ anonymous identity invalid/disabled
 
 只有 identity issue同時影響產品 server request時，才需要 Consumer recovery。
 
-# 24. F16 Boundary
+# 24. F16 Recovery Integration
 
-F16自己的 detailed recovery mapping在 F16 baseline完成後加入。
+F16 已建立完整 correction technical error taxonomy 與 F12 mapping。
 
-現在先固定：
+Canonical source mapping：
+
+> F16-RESULT-CORRECTION.md 的 F16 Error Taxonomy + F12 Recovery Mapping。
+
+F12在這裡不複製第二份逐項表格，避免雙 SSOT。
+
+固定跨 Function 規則：
 
 ~~~text
-technical failure during correction
-→ F12 recovery
-→ preserve base Blueprint + before result + correction draft
-
 semantic mismatch itself
 → not F12 error
 → F16 product flow
+
+technical failure during correction
+→ source identity = F16-ERR-*
+→ F12 recovery class / policy
+→ preserve base Blueprint + before result + correction draft where safe
 ~~~
+
+Critical examples：
+
+- correction integrity mismatch → INTEGRITY_FAILURE / fail closed
+- replay input incompatible → USER_DECISION_REQUIRED
+- child replay failure → preserve base App
+- revert target unsafe → INCOMPATIBLE / keep current App
 
 # 25. Recovery State Machine
 
@@ -1058,15 +1072,18 @@ Future F11/F13/F14/F15/F17接入時，只新增 source error mappings與必要 p
 
 # 43. Open Decisions
 
-目前沒有阻擋 F16 Detailed Design 的 architecture-level open decision。
+目前沒有阻擋 Phase 1 Core Working Design 的 architecture-level open decision。
+
+已閉合：
+
+- F16 correction technical errors已有 canonical F12 mapping。
+- F07 common Evidence Contract已有 recovery episode / outcome承接位置。
 
 後續：
 
-1. F16 baseline完成後補 exact correction error mapping。
-2. F07 Event Registry生成時納入 F12 recovery property allowlist。
-3. Product copy可持續 A/B，但 message meaning / action mapping不能被文案實驗改變。
-4. 未來 account/support system可加入 CONTACT_SUPPORT durable case；Phase 1不是 blocker。
-5. background async job recovery需未來擴充 policy state，不偷偷塞進 Phase 1。
+1. Product copy可持續 A/B，但 message meaning / action mapping不能被文案實驗改變。
+2. 未來 account/support system可加入 CONTACT_SUPPORT durable case；Phase 1不是 blocker。
+3. background async job recovery需未來擴充 policy state，不偷偷塞進 Phase 1。
 
 # Conclusion
 

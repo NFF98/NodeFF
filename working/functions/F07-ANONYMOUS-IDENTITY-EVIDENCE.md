@@ -815,8 +815,8 @@ F07不重新定義每個 Fxx event meaning；Release 1 必須有 evidence覆蓋�
 | Intent validated | F01 + F02 lifecycle |
 | Runtime ready | F00 / F03 |
 | Meaningful use | F03 + F07 milestone rule |
-| Semantic mismatch raised | F16 |
-| Correction accepted / rejected / reverted | F16 + correction_record |
+| Semantic mismatch raised | F16 / F16-EVT-001 |
+| Correction generated / accepted / rejected / reverted | F16 event set + correction_record |
 | Share created | F05 |
 | Share opened | F05 |
 | Share restore ready | F05 |
@@ -1242,15 +1242,18 @@ Browser random anonymous ID
 
 # 53. Open Decisions
 
-目前沒有阻擋 F12 / F16 Detailed Design 的 architecture-level open decision。
+目前沒有阻擋 Phase 1 Core Evidence 的 architecture-level open decision。
+
+已閉合：
+
+- F12 已定 recovery_episode_id 與 recovered / abandoned / terminated semantics。
+- F16 已定 semantic mismatch、correction generated / accepted / rejected / reverted events與 Result privacy。
 
 後續：
 
-1. F12定 recovery episode ID與 recovered / abandoned exact event。
-2. F16定 semantic mismatch、correction accept/reject/revert event與 Result privacy。
-3. F08定 anonymous → account explicit claim，不回頭用 telemetry推斷 ownership。
-4. Product Evidence Review可調 PRODUCT_SAMPLE sampling rate，但 CORE_OUTCOME meaning不能隨意改。
-5. 若90日 raw retention因法規/市場需要變更，屬 Material privacy change，需 Review。
+1. F08定 anonymous → account explicit claim，不回頭用 telemetry推斷 ownership。
+2. Product Evidence Review可調 PRODUCT_SAMPLE sampling rate，但 CORE_OUTCOME meaning不能隨意改。
+3. 若90日 raw retention因法規/市場需要變更，屬 Material privacy change，需 Review。
 
 # Conclusion
 

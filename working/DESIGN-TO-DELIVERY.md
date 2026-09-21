@@ -560,10 +560,10 @@ Revert
 | Canonical Data Model | ✅ WORKING_BASELINE | `working/DATA-MODEL.md` | Architecture + Infra + Delivery Contract |
 | Executable Blueprint | ✅ WORKING_BASELINE | `working/functions/F02-BLUEPRINT-VALIDATION.md` canonical Blueprint section | Data Model + F04 Registry |
 | Concrete Registry | ✅ WORKING_BASELINE | `working/functions/F04-CAPABILITY-REGISTRY.md` | Capability Fabric + Data Model |
-| API Contracts | 🟡 DRAFT | each `working/functions/Fxx-*.md`; F01 + F05 + F06 + F07 API baselines established; F12 intentionally uses internal recovery interfaces, F16 and other Fxx pending | Data Model + Function flow |
-| UX State Machines | 🟡 DRAFT | F00 shared shell + F05 Share/Restore + F06 Remix/Refine + F12 Recovery UX baselines established; F16 UX pending | Function flow + Error / Recovery |
+| API Contracts | 🟡 DRAFT | Phase 1 core public/API boundaries established in F01 + F05 + F06 + F07 + F16; F12 uses internal recovery interfaces; deferred Fxx pending | Data Model + Function flow |
+| UX State Machines | 🟡 DRAFT | Phase 1 core UX baselines established across F00 + F05 + F06 + F12 + F16; deferred Fxx UX pending | Function flow + Error / Recovery |
 | Runtime Semantics | ✅ WORKING_BASELINE | `working/functions/F03-RUNTIME-EXECUTION.md` | Blueprint + Registry |
-| Error Taxonomy | 🟡 DRAFT | F12 shared recovery taxonomy established + F00–F07 function-specific errors; F16 mapping pending | Runtime / API / UX |
+| Error Taxonomy | ✅ WORKING_BASELINE | F12 shared recovery taxonomy + Phase 1 core F00–F07/F16 source error mappings | Runtime / API / UX |
 | Evidence Schema | ✅ WORKING_BASELINE | `working/functions/F07-ANONYMOUS-IDENTITY-EVIDENCE.md` common envelope / ingestion / privacy / retention; each Fxx owns event meaning | Data Model + Function Acceptance |
 | Function Specs | 🟡 DRAFT | `working/functions/Fxx-*.md` | all required shared contracts |
 | Executable Acceptance | ❌ NOT_STARTED | each Fxx Acceptance + mapped tests | Function contracts + Delivery Contract |

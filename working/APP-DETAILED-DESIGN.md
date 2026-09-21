@@ -67,7 +67,7 @@ working/DESIGN-TO-DELIVERY.md
 | F13 | Entitlement / Metering | Premium / Costly Capability 可控可量測 | 2–6 月 | DEFERRED_BASELINE | `functions/F13-ENTITLEMENT-METERING.md` |
 | F14 | Provider Registry / Certification | External Capability 可被信任與版本化 | 6 月後 | DEFERRED_BASELINE | `functions/F14-PROVIDER-REGISTRY-CERTIFICATION.md` |
 | F15 | Transaction / Settlement | Commerce Outcome 可追蹤、對帳、結算 | 6 月後 | DEFERRED_BASELINE | `functions/F15-TRANSACTION-SETTLEMENT.md` |
-| F16 | Result Feedback / Logic Correction | 錯誤結果可修正、比較、回退 | 0–1 月 | DRAFT | `functions/F16-RESULT-CORRECTION.md` |
+| F16 | Result Feedback / Logic Correction | 錯誤結果可修正、比較、回退 | 0–1 月 | WORKING_BASELINE | `functions/F16-RESULT-CORRECTION.md` |
 | F17 | Heterogeneous Workflow Orchestration | 多異質 steps 完成同一 Outcome | 6 月後 | DEFERRED_BASELINE | `functions/F17-WORKFLOW-ORCHESTRATION.md` |
 
 搬家本身不代表 Function 已完成 Detailed Design。
