@@ -232,4 +232,11 @@ User 已確認：
 
 S02 ④A Low-fi 已完成 User Review。
 
-依 Phase 1 UI/UX 流程，下一步不是立即做 S02 High-fi；先完成 S03–S06 與 O01–O05 的 Low-fi，再做 Cross-Screen consistency review，之後統一進 ④B High-fi。
+依 Phase 1 UI/UX 固定流程，S02 ④A Low-fi 已完成；**下一步必須進 S02 ④B High-fi**。S02 High-fi 完成並經 User 確認後，才可進 S03。
+
+
+## 20.1 Next Step
+
+> **S02 ④B High-fi**：確認顏色、字體、間距、圓角、陰影、動畫、Hover / Loading 效果、品牌風格，以及 Desktop / Mobile 視覺一致性。
+
+S02 High-fi 未經 User 確認前，不進 S03。

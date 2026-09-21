@@ -71,14 +71,15 @@ Phase 1 UI/UX 必須固定走以下 6 步，不得跳步、混步或提前升格
 1. **抽出現有 UX**：從 F00 / F05 / F06 / F12 / F16 等既有 Function contracts 整理所有畫面、狀態與互動。
 2. **建 Screen Inventory**：列出 S01、S02…每個 Screen / Overlay 的目的、入口、出口與主要 Function source。
 3. **補缺口**：找出 Spec / Function 已有 behavior，但尚未有具體畫面承接的位置。
-4. **逐頁確認**：先逐頁完成全部 ④A Low-fi；Cross-Screen consistency review 後，再逐頁完成 ④B High-fi。
+4. **逐頁確認**：每個 Screen 必須依序完成 ④A Low-fi → ④B High-fi，完成該 Screen 後才進下一個 Screen。
    - **④A Low-fi**：只確認版面、資訊層級、CTA、流程、states、Desktop / Mobile；**不討論顏色與品牌視覺**。
-   - **④B High-fi**：在所有核心 Low-fi 完成後，統一確認顏色、字體、間距、圓角、陰影、動畫、Hover / Loading 效果、品牌風格、Desktop / Mobile 視覺一致性。
+   - **④B High-fi**：接著確認顏色、字體、間距、圓角、陰影、動畫、Hover / Loading 效果、品牌風格、Desktop / Mobile 視覺一致性。
 5. **User 批准後**：才整理成 UI/UX Working Design baseline。
 6. **最後再問 User 是否升 Spec**：沒有 User 明確批准，不得 promotion 到 formal Spec。
 
 硬規則：
 - Low-fi 未確認，不得進 High-fi。
+- ④B High-fi 未確認完成，不得跳到下一個 Screen。
 - High-fi 未確認，不得標記完整 UI/UX Working Baseline。
 - Working UI/UX 未完成 Cross-Screen Review，不得詢問 Spec promotion。
 - 顏色 / 效果 / 風格屬於 **④B High-fi**，不得在 ④A Low-fi 當成 approval blocker。
@@ -97,14 +98,14 @@ Phase 1 UI/UX 必須固定走以下 6 步，不得跳步、混步或提前升格
 
 # 6. Visual Design Sequence
 
-Phase 1 先完成所有 Screen 的 Low-fi，再統一做 High-fi，以避免每頁各自形成不同視覺語言。
+Phase 1 採逐頁完成制：每個 Screen 先完成 Low-fi，再完成 High-fi；該 Screen 完成後才進下一頁。全局 Design System 一致性由每次 High-fi Review 共用同一套 Working rules，並在全部 Screen 完成後再做一次 Cross-Screen consistency review。
 
 ~~~text
-S01–S06 Low-fi
-→ cross-screen consistency review
-→ Design System / High-fi direction
-→ S01–S06 High-fi
-→ final responsive/state review
+S01 ④A Low-fi → S01 ④B High-fi
+→ S02 ④A Low-fi → S02 ④B High-fi
+→ S03 ...
+→ S06 / Oxx ...
+→ final cross-screen consistency review
 ~~~
 
 目前 High-fi 方向已有 Working note：
