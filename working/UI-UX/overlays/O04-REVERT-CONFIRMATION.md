@@ -2,7 +2,7 @@
 
 > Overlay ID：O04
 >
-> 狀態：**WORKING — LOW_FI_REVIEW_IN_PROGRESS**
+> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / HIGH_FI_PENDING**
 >
 > Phase：Phase 1
 >
@@ -215,17 +215,20 @@ Cancel / Close：
 - Mobile touch target至少44 CSS px。
 - Confirm後進度由 O05共用 loading規則承接。
 
-# 14. Proposed Low-fi Decisions To Confirm
+# 14. Confirmed O04 Low-fi Decisions
 
-本輪確認 4 件事：
+User 已確認：
 
-1. **O04 是否固定先說「回到修正前版本？」並明確補一句「目前修正版不會被刪除」？**
-2. 是否在 Confirm 前明確顯示 **輸入恢復狀態**：可恢復 / 可選擇保留目前輸入 / 無法恢復？
-3. CTA 是否固定為 **取消 + 回到原版**，不使用 Delete / Undo Forever 這類容易誤解的字？
-4. 如果 previous/base 已不安全或 incompatible，是否直接不提供 Revert，改由 O03 說明並保留目前修正版？
+1. O04 固定先說 **「回到修正前版本？」**，並明確補一句 **「目前修正版不會被刪除」**。
+2. Confirm 前明確顯示輸入恢復狀態：可恢復 / 可選擇保留目前輸入 / 無法恢復。
+3. CTA 固定為 **取消 + 回到原版**，不使用 Delete / Undo Forever 等容易誤解的 wording。
+4. 若 previous/base 已不安全或 incompatible，不提供可執行 Revert；改由 O03 / F12 說明並保留目前修正版。
+5. 「目前修正版不會被刪除」對應 F16 既有 Function truth：成功 Revert 後 child Blueprint 與 CORRECT lineage 都保留，只是 active App 切回 previous/base。
 
 # 15. Review Status
 
-> **LOW_FI_REVIEW_IN_PROGRESS**
+> **LOW_FI_DIRECTION_APPROVED — HIGH_FI_PENDING**
 
-O04確認後進 O05 — Loading / Building / Hydration States ④A Low-fi。
+O04 ④A Low-fi 已完成 User Review。
+
+依固定流程，下一步進 O05 — Loading / Building / Hydration States ④A Low-fi。
