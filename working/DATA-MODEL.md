@@ -1,6 +1,7 @@
 # NodeFF Canonical Data Model
 
-> 狀態：Working Baseline / Phase 1。本文是 NodeFF 共享資料模型的 Current Truth。它定義跨 Function 共用的 entity、identity、durability、relation、DB responsibility、privacy boundary 與未來 migration hooks。Function 專屬的 request/response payload、UI state、processing logic 仍由各 Fxx 文件定義。
+> 狀態：SPEC_READY / Phase 1。本文是 NodeFF 共享資料模型的 Current Truth。它定義跨 Function 共用的 entity、identity、durability、relation、DB responsibility、privacy boundary 與未來 migration hooks。Function 專屬的 request/response payload、UI state、processing logic 仍由各 Fxx 文件定義。
+> Formal Spec：spec/shared/DATA-MODEL.md
 >
 > Delivery / Traceability 規則以 `working/DESIGN-TO-DELIVERY.md` 為準；Infrastructure boundary 以 `working/INFRA-ARCHITECTURE.md` 為準。
 

@@ -48,26 +48,28 @@ working/DESIGN-TO-DELIVERY.md
 ---
 
 # 3. Function Portfolio / Canonical Index
+> Formal Spec authority for SPEC_READY Core Functions：spec/functions/Fxx-*.md。Working files保留為下一輪設計修改入口；Implementation只能讀 approved Spec。
 
-| ID | Function | 核心結果 | Phase | Working Status | Canonical Detail |
+
+| ID | Function | 核心結果 | Phase | Lifecycle Status | Canonical Detail |
 |---|---|---|---|---|---|
-| F00 | Experience Shell / 靈感精靈 | User 能容易開始、Refine、Remix、Recovery | 0–1 月 | WORKING_BASELINE | `functions/F00-EXPERIENCE-SHELL.md` |
-| F01 | Intent Compilation + Model Gateway | Intent → Blueprint Candidate | 0–1 月 | WORKING_BASELINE | `functions/F01-INTENT-COMPILATION.md` |
-| F02 | Blueprint Validation / Trust Admission | 不可信 Blueprint 不進 Runtime | 0–1 月 | WORKING_BASELINE | `functions/F02-BLUEPRINT-VALIDATION.md` |
-| F03 | Runtime Execution | Blueprint → Interactive App | 0–1 月 | WORKING_BASELINE | `functions/F03-RUNTIME-EXECUTION.md` |
-| F04 | Capability Registry / Resolution | Compiler / Validator / Runtime 共用能力真相 | 0–1 月 | WORKING_BASELINE | `functions/F04-CAPABILITY-REGISTRY.md` |
-| F05 | Share / Restore | Link → Recipient 可立即使用 | 0–1 月 | WORKING_BASELINE | `functions/F05-SHARE-RESTORE.md` |
-| F06 | Remix / Refine | Existing App → Semantic Delta → New Blueprint | 0–1 月 | WORKING_BASELINE | `functions/F06-REMIX-REFINE.md` |
-| F07 | Anonymous Identity & Evidence | No-login continuity + PMF evidence | 0–1 月 | WORKING_BASELINE | `functions/F07-ANONYMOUS-IDENTITY-EVIDENCE.md` |
+| F00 | Experience Shell / 靈感精靈 | User 能容易開始、Refine、Remix、Recovery | 0–1 月 | SPEC_READY | `functions/F00-EXPERIENCE-SHELL.md` |
+| F01 | Intent Compilation + Model Gateway | Intent → Blueprint Candidate | 0–1 月 | SPEC_READY | `functions/F01-INTENT-COMPILATION.md` |
+| F02 | Blueprint Validation / Trust Admission | 不可信 Blueprint 不進 Runtime | 0–1 月 | SPEC_READY | `functions/F02-BLUEPRINT-VALIDATION.md` |
+| F03 | Runtime Execution | Blueprint → Interactive App | 0–1 月 | SPEC_READY | `functions/F03-RUNTIME-EXECUTION.md` |
+| F04 | Capability Registry / Resolution | Compiler / Validator / Runtime 共用能力真相 | 0–1 月 | SPEC_READY | `functions/F04-CAPABILITY-REGISTRY.md` |
+| F05 | Share / Restore | Link → Recipient 可立即使用 | 0–1 月 | SPEC_READY | `functions/F05-SHARE-RESTORE.md` |
+| F06 | Remix / Refine | Existing App → Semantic Delta → New Blueprint | 0–1 月 | SPEC_READY | `functions/F06-REMIX-REFINE.md` |
+| F07 | Anonymous Identity & Evidence | No-login continuity + PMF evidence | 0–1 月 | SPEC_READY | `functions/F07-ANONYMOUS-IDENTITY-EVIDENCE.md` |
 | F08 | Durable Identity / Ownership | Anonymous → Account → Ownership | 2–3 月 | DEFERRED_BASELINE | `functions/F08-DURABLE-IDENTITY-OWNERSHIP.md` |
 | F09 | Realtime Room | 多人共享 Instance State | 2–3 月 | DEFERRED_BASELINE | `functions/F09-REALTIME-ROOM.md` |
 | F10 | Blueprint Reuse / Retrieval | Trusted Blueprint reuse | 2–3 月 | DEFERRED_BASELINE | `functions/F10-BLUEPRINT-REUSE-RETRIEVAL.md` |
 | F11 | External Capability Execution | AI / API / Heavy Work 受控執行 | 4–6 月 | DEFERRED_BASELINE | `functions/F11-EXTERNAL-CAPABILITY-EXECUTION.md` |
-| F12 | Humanized Recovery Orchestration | 技術錯誤 → 可理解、可繼續 UX | 0–1 月 | WORKING_BASELINE | `functions/F12-HUMANIZED-RECOVERY.md` |
+| F12 | Humanized Recovery Orchestration | 技術錯誤 → 可理解、可繼續 UX | 0–1 月 | SPEC_READY | `functions/F12-HUMANIZED-RECOVERY.md` |
 | F13 | Entitlement / Metering | Premium / Costly Capability 可控可量測 | 2–6 月 | DEFERRED_BASELINE | `functions/F13-ENTITLEMENT-METERING.md` |
 | F14 | Provider Registry / Certification | External Capability 可被信任與版本化 | 6 月後 | DEFERRED_BASELINE | `functions/F14-PROVIDER-REGISTRY-CERTIFICATION.md` |
 | F15 | Transaction / Settlement | Commerce Outcome 可追蹤、對帳、結算 | 6 月後 | DEFERRED_BASELINE | `functions/F15-TRANSACTION-SETTLEMENT.md` |
-| F16 | Result Feedback / Logic Correction | 錯誤結果可修正、比較、回退 | 0–1 月 | WORKING_BASELINE | `functions/F16-RESULT-CORRECTION.md` |
+| F16 | Result Feedback / Logic Correction | 錯誤結果可修正、比較、回退 | 0–1 月 | SPEC_READY | `functions/F16-RESULT-CORRECTION.md` |
 | F17 | Heterogeneous Workflow Orchestration | 多異質 steps 完成同一 Outcome | 6 月後 | DEFERRED_BASELINE | `functions/F17-WORKFLOW-ORCHESTRATION.md` |
 
 搬家本身不代表 Function 已完成 Detailed Design。

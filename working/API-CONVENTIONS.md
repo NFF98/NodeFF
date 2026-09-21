@@ -1,6 +1,7 @@
 # NodeFF Shared API Conventions
 
-> 狀態：WORKING_BASELINE / Phase 1。
+> 狀態：SPEC_READY / Phase 1。
+> Formal Spec：spec/shared/API-CONVENTIONS.md
 > Canonical Role：所有 Phase 1 public HTTP APIs 的共同 transport、identity、idempotency、concurrency、error、rate-limit、timeout 與 versioning contract。
 > Function-specific endpoint payload / semantics 仍由各 Fxx 擁有。
 

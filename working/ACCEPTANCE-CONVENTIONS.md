@@ -1,6 +1,7 @@
 # NodeFF Acceptance / Test Contract Conventions
 
-> 狀態：WORKING_BASELINE / Phase 1。
+> 狀態：SPEC_READY / Phase 1。
+> Formal Spec：spec/shared/ACCEPTANCE-CONVENTIONS.md
 > Canonical Role：把 Fxx Acceptance Criteria 轉成可實作、可測試、可追蹤的 Test Contract。
 
 # 1. Core Rule

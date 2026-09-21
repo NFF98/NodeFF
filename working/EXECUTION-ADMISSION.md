@@ -1,6 +1,7 @@
 # NodeFF Execution Admission Contract
 
-> 狀態：WORKING_BASELINE / Phase 1。
+> 狀態：SPEC_READY / Phase 1。
+> Formal Spec：spec/shared/EXECUTION-ADMISSION.md
 > Canonical Role：把 immutable Blueprint content delivery 與 mutable current trust / compatibility decision分開，確保 CDN舊body不能繞過 revoke / incompatibility。
 
 # 1. Problem
@@ -153,7 +154,7 @@ F02-EVT-012 execution_admission_denied
 F02-EVT-013 execution_admission_failed
 ~~~
 
-正式event ID在 F07 Registry closure中固定。
+正式 event ID 已固定於 spec/shared/EVIDENCE-EVENT-REGISTRY.json。
 
 # 11. Acceptance
 

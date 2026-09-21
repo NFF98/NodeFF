@@ -578,16 +578,16 @@ Revert
 
 | Area | Status | Canonical Location | Main Dependency |
 |---|---|---|---|
-| Canonical Data Model | ✅ WORKING_BASELINE | `working/DATA-MODEL.md` | Architecture + Infra + Delivery Contract |
-| Executable Blueprint | ✅ WORKING_BASELINE | `working/functions/F02-BLUEPRINT-VALIDATION.md` canonical Blueprint section | Data Model + F04 Registry |
-| Concrete Registry | ✅ WORKING_BASELINE | `working/functions/F04-CAPABILITY-REGISTRY.md` | Capability Fabric + Data Model |
-| API Contracts | 🟡 DRAFT | Phase 1 core public/API boundaries established in F01 + F05 + F06 + F07 + F16; F12 uses internal recovery interfaces; deferred Fxx pending | Data Model + Function flow |
-| UX State Machines | 🟡 DRAFT | Phase 1 core UX baselines established across F00 + F05 + F06 + F12 + F16; deferred Fxx UX pending | Function flow + Error / Recovery |
-| Runtime Semantics | ✅ WORKING_BASELINE | `working/functions/F03-RUNTIME-EXECUTION.md` | Blueprint + Registry |
-| Error Taxonomy | ✅ WORKING_BASELINE | F12 shared recovery taxonomy + Phase 1 core F00–F07/F16 source error mappings | Runtime / API / UX |
-| Evidence Schema | ✅ WORKING_BASELINE | `working/functions/F07-ANONYMOUS-IDENTITY-EVIDENCE.md` common envelope / ingestion / privacy / retention; each Fxx owns event meaning | Data Model + Function Acceptance |
-| Function Specs | 🟡 DRAFT | `working/functions/Fxx-*.md` | all required shared contracts |
-| Executable Acceptance | ❌ NOT_STARTED | each Fxx Acceptance + mapped tests | Function contracts + Delivery Contract |
+| Canonical Data Model | ✅ SPEC_READY | `spec/shared/DATA-MODEL.md` | reviewed shared data contract |
+| Executable Blueprint | ✅ SPEC_READY | `spec/functions/F02-BLUEPRINT-VALIDATION.md` | reviewed executable Blueprint / trust contract |
+| Concrete Registry | ✅ SPEC_READY | `spec/functions/F04-CAPABILITY-REGISTRY.md` + `spec/shared/CAPABILITY-FABRIC.md` | reviewed capability contract |
+| API Contracts | ✅ SPEC_READY | `spec/shared/API-CONVENTIONS.md` + Function Specs | shared transport/control + Function endpoint contracts |
+| UX State Machines | ✅ SPEC_READY | F00 + F05 + F06 + F12 + F16 Function Specs | reviewed Phase 1 Core UX flows |
+| Runtime Semantics | ✅ SPEC_READY | `spec/functions/F03-RUNTIME-EXECUTION.md` + `spec/shared/EXECUTION-ADMISSION.md` | reviewed runtime + fresh admission contract |
+| Error Taxonomy | ✅ SPEC_READY | F12 Spec + `spec/shared/RECOVERY-REGISTRY.json` | 121 / 121 exact machine mappings |
+| Evidence Schema | ✅ SPEC_READY | F07 Spec + `spec/shared/EVIDENCE-EVENT-REGISTRY.json` | 106 / 106 exact event contracts |
+| Function Specs | ✅ SPEC_READY | `spec/functions/` | 10 / 10 Phase 1 Core Functions promoted |
+| Executable Acceptance | ✅ SPEC_READY | `spec/shared/ACCEPTANCE-TEST-REGISTRY.json` + `spec/shared/ACCEPTANCE-CONVENTIONS.md` | 257 / 257 Test Contracts ready; execution occurs during implementation/test |
 
 ## 22.3 Dependency Order
 
@@ -635,26 +635,37 @@ Working → Spec Gate
 
 ---
 
-# 23. Phase 1 Core Working → Spec Gate Audit
+# 23. Phase 1 Core Working → Spec Gate Re-Audit
 
-Latest audit：
+Latest re-audit：
 
-- working/ProjectManagement/PHASE1-CORE-SPEC-GATE-AUDIT.md
-- Audited baseline：bd74d9f244ab63218bad78f60381ccb0f48fb9b6
-- Verdict：HOLD — NOT SPEC_READY
-- Core Function SPEC_READY：0 / 10
-- Acceptance：257 total / 149 seed-mapped / 108 seed-unmapped
+- working/ProjectManagement/PHASE1-CORE-SPEC-GATE-REAUDIT.md
+- Audited baseline：c206a2590bfd8ebd0a2bb2b6a4922354956cff11
+- Verdict：PASS — ELIGIBLE FOR SPEC PROMOTION
+- Original blockers closed：10 / 10
+- Core Function SPEC_READY：10 / 10
+- Recovery Registry：121 / 121
+- Evidence Event Registry：106 / 106
+- Acceptance/Test Contract：257 / 257
+- Blocking Open Decisions：0
 
-重要區分：
+Formal Spec promotion completed under：
 
 ~~~text
-✅ WORKING_BASELINE = 已有 Current Working Truth
-SPEC_READY = 還必須通過 Cross-Function consistency + exact contracts + executable acceptance
+spec/functions/
+spec/shared/
 ~~~
 
-主要 Gate blockers：intent concurrency、idempotency、fresh trust assertion、F03↔F16 replay、Revert UX、retention、shared API conventions、exact Event Registry、exact Recovery Registry、Executable Acceptance、以及 Function-centric Working 與舊 horizontal /spec template 的 promotion structure conflict。
+Lifecycle reminder：
 
-在 blocker 關閉並 re-audit以前，不將任何 Phase 1 Core Fxx 標成 SPEC_READY。
+~~~text
+SPEC_READY
+≠ IMPLEMENTED
+≠ TESTED
+≠ RELEASE_READY
+~~~
+
+Cursor may now implement only from approved Spec, not mutable Working files。
 
 # Conclusion
 
