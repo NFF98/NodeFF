@@ -2,7 +2,7 @@
 
 > Screen ID：S02
 >
-> 狀態：**WORKING — LOW_FI_REVIEW_IN_PROGRESS**
+> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / HIGH_FI_PENDING**
 >
 > Phase：Phase 1
 >
@@ -23,7 +23,7 @@ S02 不是 AI chat room，也不是 engineering status console。
 # 2. Core UX Principles — Proposed
 
 1. **One Workspace, Changing State**：ANALYZING / CLARIFICATION / ASSUMPTION / BUILDING / HYDRATING 都留在同一 Create Workspace，不為每個 state 跳新頁。
-2. **Fast Path First**：Intent 已足夠時，不插入多餘 clarification / assumption；但進入 BUILDING 前仍需要 User 明確按一次「確認建立」。
+2. **Fast Path First**：Intent 已足夠時，ANALYZING 後直接進 BUILDING；不插入 clarification / assumption，也不增加固定「確認建立」步驟。
 3. **Interrupt Only for Material Decisions**：只有 material clarification / assumption 才停下來問 User。
 4. **Visible Progress, No Fake Precision**：採 stage-based progress，沒有可靠百分比就不顯示假數字。
 5. **Preserve Context**：原始 Intent、回答、assumptions、draft 持續保留。
@@ -33,10 +33,7 @@ S02 不是 AI chat room，也不是 engineering status console。
 
 流程：S01 Prompt Composer → 建立 App → S02。
 
-進入 S02 後，不顯示新的空白 prompt，而是把原始需求轉成 compact context，例如：
-
-    你的想法
-    幫我做一個今晚聚餐投票 App，大家可以選餐廳。   [編輯]
+進入 S02 後不顯示新的空白 prompt。Fast Path 預設只呈現 creation progress；原始需求不作為常駐主區塊。只有 Clarification / Assumption / Recovery 需要 context 時，才顯示可展開的「查看／修改需求」。
 
 # 4. S02 State Model
 
@@ -49,17 +46,13 @@ S02 不是 AI chat room，也不是 engineering status console。
 
 任何適用 state 都可進 O03 Recovery Overlay。
 
-READY_TO_BUILD 是可見決策點：若 Intent 已足夠且沒有 material clarification / assumption，S02 顯示最小確認區，User 明確按一次「確認建立」後才進 BUILDING。
+READY_TO_BUILD 是內部 transition。若 Intent 已足夠且沒有 material clarification / assumption，S02 直接進 BUILDING，不建立額外確認頁。
 
 # 5. Proposed Desktop Low-fi
 
     ┌─────────────────────────────────────────────────────┐
     │ NodeFF                                  [取消/返回] │
     │                                                     │
-    │ 你的想法                                             │
-    │ ┌─────────────────────────────────────────────────┐ │
-    │ │ 今晚聚餐投票 App…                        [編輯] │ │
-    │ └─────────────────────────────────────────────────┘ │
     │                                                     │
     │ ● 理解想法   ○ 整理成 App   ○ 檢查互動   ○ 準備 App│
     │ ███████────────────  stage-based / no fake %        │
@@ -78,10 +71,7 @@ Desktop 預設採 single-focus workspace，不做 permanent sidebar / dashboard�
 
     ┌────────────────────────────┐
     │ NodeFF              [返回] │
-    │ 你的想法            [編輯] │
-    │ ┌────────────────────────┐ │
-    │ │ 今晚聚餐投票 App…      │ │
-    │ └────────────────────────┘ │
+    │                            │
     │ ● ━ ○ ━ ○ ━ ○            │
     │ 理解  組合  檢查  準備     │
     │ ┌────────────────────────┐ │
@@ -173,7 +163,7 @@ Recoverable failure 使用 O03，不離開 S02：
 | HYDRATING | none |
 | RECOVERABLE_FAILURE | Retry / context-specific action |
 
-Fast Path 仍要求 User 明確按一次「確認建立」，作為開始實際生成前的最後確認。
+Fast Path 不要求額外確認；只有 Clarification / Assumption 需要 User decision。
 
 # 14. Visual Guardrails
 
@@ -192,91 +182,54 @@ Fast Path 仍要求 User 明確按一次「確認建立」，作為開始實際�
 - Keyboard可完成 clarification / assumption。
 - Mobile CTA不可遮住最後一題。
 
-# 16. Low-fi Review Questions
+# 16. Low-fi Review Result
 
-本輪請確認四件事：
-
-1. S02 維持單一 focused workspace，而不是 chat conversation / dashboard？
-2. Progress 採 4 stages：理解 → 整理成 App → 檢查互動 → 準備 App？
-3. Clarification / Assumption 都嵌在同一 Workspace，不跳 modal / 新頁？
-4. Fast Path 資訊足夠時自動繼續，不多一個「確認建立」按鈕？
+四個核心 Low-fi 問題已完成 User Review；最終方向見第 19 節。
 
 # 17. Review Status
 
-> **LOW_FI_REVIEW_IN_PROGRESS**
+> **LOW_FI_DIRECTION_APPROVED — HIGH_FI_PENDING**
 
-尚未 User approve；批准後才更新 Screen Inventory 為 LOW_FI_DIRECTION_APPROVED。
+# 18. Contextual Intent Edit — Approved Low-fi Direction
 
-# 18. Edit Intent UI / Function Contract — Proposed
+「修改需求」保留，但**不作為 Fast Path 常駐 UI**。
 
-此項尚未 User approve。
+顯示時機：
+- CLARIFICATION_REQUIRED：User 需要回看原始需求時。
+- ASSUMPTION_REVIEW：User 發現前提本身要改時。
+- RECOVERABLE_FAILURE：User 想修改需求再重試時。
 
-「你的想法 [編輯]」不是單純把原句改字，而是讓 User 在 S02 建立前，能修正 creation intent。
+Presentation：
+- 預設是一個輕量「查看／修改需求」secondary action。
+- 展開後在同一 S02 Workspace 編輯，不跳回 S01。
+- Apply 後重新進 F01 semantic analysis。
+- 受新 intent 影響的 clarification / assumptions 失效並重新判斷。
+- UI 不直接 patch Blueprint。
 
-## 18.1 Proposed UI
+邊界：
+- S02 修改需求 = 生成前修改 creation intent。
+- F06 Refine = 已生成 App 後修改。
+- F16 Correction = 修正結果／邏輯。
+- F03 Runtime input = 操作 App。
 
-Compact mode：
+# 19. Confirmed S02 Low-fi Decisions
 
-    你的想法
-    幫我做一個今晚聚餐投票 App，大家可以選餐廳。
-    [編輯]
+User 已確認：
 
-按「編輯」後，不跳頁，原區塊展開成 editable composer：
+1. S02 預設是低干擾、近乎隱形的 creation layer；不是 Chat conversation / dashboard。
+2. 4-stage visible progress：理解 → 整理 App → 檢查互動 → 準備 App。
+3. 只有兩類情況打斷 Fast Path：
+   - 缺 material information → 1–3 clarification questions。
+   - material assumption → 顯示必要 assumptions 供確認。
+4. Clarification / Assumption 留在同一 Workspace，不跳 modal / 新頁。
+5. Clear Intent Fast Path 不增加固定「確認建立」頁；直接 BUILDING。
+6. 「查看／修改需求」是 contextual secondary action，不是 Fast Path 常駐 UI。
+7. BUILDING / HYDRATING 不顯示假百分比。
 
-    ┌────────────────────────────────────┐
-    │ 幫我做一個今晚聚餐投票 App，       │
-    │ 每人最多選三家，晚上九點截止。     │
-    └────────────────────────────────────┘
-    [取消]                    [套用修改]
+# 20. Review Status
 
-目的：
-- 保留 S02 creation context。
-- 不把 User 送回 S01。
-- 讓 User 在真正 BUILDING 前修正需求。
-- 不把 Clarification / Assumption 與 raw intent edit 混成同一種 UI。
+> **LOW_FI_DIRECTION_APPROVED — HIGH_FI_PENDING**
 
-## 18.2 Function Behavior
+S02 ④A Low-fi 已完成 User Review。
 
-按「編輯」只改 raw creation intent，不直接修改 Blueprint。
-
-Canonical behavior：
-
-    current intent context
-    → User edits raw intent
-    → Apply
-    → create semantic re-analysis on same creation flow
-    → invalidate stale clarification / assumptions when affected
-    → re-run F01 clarification policy
-    → return one of:
-       CLARIFICATION_REQUIRED
-       ASSUMPTION_REVIEW
-       READY_TO_BUILD
-
-Rules：
-1. Edit 後不沿用已失效的分析結果。
-2. 與新 intent 無衝突的回答可保留；有衝突的答案 / assumption 必須失效或重新確認。
-3. 不允許 UI 直接 patch Blueprint。
-4. 若已進 BUILDING，是否允許 Edit 需依 cancel semantics；Phase 1 baseline 建議 BUILDING 中不直接 hot-edit。
-5. 套用修改後，progress 回到「理解想法」階段。
-
-## 18.3 Proposed Boundary
-
-S02 的「編輯」是 **修改這次要建立的 App 意圖**。
-
-不是：
-- 修改已生成 App（那是 F06 Refine / Remix）。
-- 修正結果錯誤（那是 F16 Correction）。
-- 修改 Runtime input（那是 F03 App Runtime interaction）。
-
-# 19. Confirmed S02 Decisions
-
-目前 User 已確認：
-
-1. 4-stage visible progress：理解 → 整理 App → 檢查互動 → 準備 App。
-2. Clarification / Assumption 直接嵌在同一 Workspace，不跳 Modal / 新頁。
-3. Fast Path 在進入 BUILDING 前，必須有一次明確「確認建立」。
-
-尚未確認：
-
-- S02 是否採 single focused workspace 作為整體 layout。
-- 「你的想法 [編輯]」的 exact UI / edit behavior。
+依 Phase 1 UI/UX 流程，下一步不是立即做 S02 High-fi；先完成 S03–S06 與 O01–O05 的 Low-fi，再做 Cross-Screen consistency review，之後統一進 ④B High-fi。

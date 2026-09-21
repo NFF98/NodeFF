@@ -23,7 +23,7 @@ Phase 1 目前採 **6 個主要 Screen / Surface + 5 類 Overlay / State**。
 | ID | Screen / Surface | Primary User Outcome | Main Function Sources | Screen Design Status |
 |---|---|---|---|---|
 | S01 | Discover / Start | 從想法或靈感開始 Create | F00 | **LOW_FI_DIRECTION_APPROVED** |
-| S02 | Create Workspace | 分析、補充必要資訊、確認假設並生成 App | F00 + F01 | **LOW_FI_REVIEW_IN_PROGRESS** |
+| S02 | Create Workspace | 分析、補充必要資訊、確認假設並生成 App | F00 + F01 | **LOW_FI_DIRECTION_APPROVED** |
 | S03 | App / Runtime | 使用生成 App，進入 Share / Remix / Correct | F00 + F03 | INVENTORIED — NOT REVIEWED |
 | S04 | Shared App Entry / Restore | 從分享連結恢復並立即使用 App | F05 + F00 | INVENTORIED — NOT REVIEWED |
 | S05 | Refine / Remix Workspace | 修改既有 App、Preview child、決定是否採用 | F06 + F00 | INVENTORIED — NOT REVIEWED |
@@ -71,9 +71,9 @@ Phase 1 UI/UX 必須固定走以下 6 步，不得跳步、混步或提前升格
 1. **抽出現有 UX**：從 F00 / F05 / F06 / F12 / F16 等既有 Function contracts 整理所有畫面、狀態與互動。
 2. **建 Screen Inventory**：列出 S01、S02…每個 Screen / Overlay 的目的、入口、出口與主要 Function source。
 3. **補缺口**：找出 Spec / Function 已有 behavior，但尚未有具體畫面承接的位置。
-4. **逐頁確認**：每個 Screen 依序做 Low-fi → High-fi。
+4. **逐頁確認**：先逐頁完成全部 ④A Low-fi；Cross-Screen consistency review 後，再逐頁完成 ④B High-fi。
    - **④A Low-fi**：只確認版面、資訊層級、CTA、流程、states、Desktop / Mobile；**不討論顏色與品牌視覺**。
-   - **④B High-fi**：確認顏色、字體、間距、圓角、陰影、動畫、Hover / Loading 效果、品牌風格、Desktop / Mobile 視覺一致性。
+   - **④B High-fi**：在所有核心 Low-fi 完成後，統一確認顏色、字體、間距、圓角、陰影、動畫、Hover / Loading 效果、品牌風格、Desktop / Mobile 視覺一致性。
 5. **User 批准後**：才整理成 UI/UX Working Design baseline。
 6. **最後再問 User 是否升 Spec**：沒有 User 明確批准，不得 promotion 到 formal Spec。
 
