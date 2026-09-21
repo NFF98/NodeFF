@@ -1089,6 +1089,10 @@ F02-EVT-006 security_rejected
 F02-EVT-007 blueprint_admitted
 F02-EVT-008 trust_revoked
 F02-EVT-009 hash_integrity_failure
+F02-EVT-010 execution_admission_requested
+F02-EVT-011 execution_admission_allowed
+F02-EVT-012 execution_admission_denied
+F02-EVT-013 execution_admission_failed
 ~~~
 
 Minimum dimensions：

@@ -1263,6 +1263,16 @@ Browser random anonymous ID
 
 > Provider只能是 sink / adapter；F07 Event Contract仍是 NFF-owned。
 
+# 52.1 Machine-readable Event Registry
+
+Phase 1 Working registry：
+
+~~~text
+working/registries/evidence-event-registry.json
+~~~
+
+它把各 Fxx stable Event ID 轉成可供 CI / instrumentation 使用的 event_type、function_id、collection_class、required_context、allowed_properties、retention_class 與 metric_tags。Event meaning仍由各 Fxx擁有；F07擁有 shared envelope / privacy / ingestion policy。
+
 # 53. Open Decisions
 
 目前沒有阻擋 Phase 1 Core Evidence 的 architecture-level open decision。

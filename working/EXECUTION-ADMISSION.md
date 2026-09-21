@@ -147,10 +147,10 @@ Temporary admission failure不得 fallback成 allow。
 至少：
 
 ~~~text
-execution_admission_requested
-execution_admission_allowed
-execution_admission_denied
-execution_admission_failed
+F02-EVT-010 execution_admission_requested
+F02-EVT-011 execution_admission_allowed
+F02-EVT-012 execution_admission_denied
+F02-EVT-013 execution_admission_failed
 ~~~
 
 正式event ID在 F07 Registry closure中固定。
