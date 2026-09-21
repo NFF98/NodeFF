@@ -1114,6 +1114,13 @@ Outcome：
 
 # 13. Design → Development Flow
 
+Canonical lifecycle、Traceability ID、Working → Spec Gate、Acceptance → Test、Runtime Debug 與 Release Gate 的共同規則，以：
+
+- `working/DESIGN-TO-DELIVERY.md`
+
+為唯一 Working Contract。本文件只保留 Function Portfolio、Dependency、Acceptance 層級與 Release Scope，不重複定義 Delivery 規則。
+
+
 ~~~text
 Architecture
 → Function Scope
