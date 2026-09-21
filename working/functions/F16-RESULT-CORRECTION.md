@@ -1645,18 +1645,21 @@ Phase 1不做：
 
 # 55. Open Decisions
 
-目前沒有阻擋 0–1 月 Core Working Design 的 architecture-level open decision。
+目前沒有阻擋 Phase 1 Core Spec Gate 的 open decision。
 
-後續：
+已閉合：
 
-已閉合：F03-RQ-012 已固定 correction replay internal contract與 comparison downgrade rules。
+- F03-RQ-012 correction replay exact interface與comparison downgrade rules。
+- F00 accepted correction後的 current-session Revert entry。
+- F07 correction evidence / Result privacy / retention。
+- F12 exact technical recovery ownership。
 
-後續：
+非 blocker、可後續迭代：
 
-1. F07 Product Evidence Review可定「accepted後多久沒有再次 mismatch」算 stronger correction success。
-3. F10 future reuse ranking可使用 aggregated correction evidence，但不能把個別 User sensitive snapshot當 retrieval corpus。
-4. F08 future account history可顯示 accepted/reverted versions，但不改 immutable lineage。
-5. Future external capability加入後，需要 effect-safe replay contract才可進 F16 exact comparison。
+1. Product Evidence Review可定 accepted後多久未再次 mismatch算 stronger correction success。
+2. F10 future reuse ranking可用 aggregated correction evidence，但不得使用個別 sensitive snapshot作 retrieval corpus。
+3. F08 future account history可顯示 accepted/reverted versions。
+4. Future external capability需 effect-safe replay contract後才可做 exact comparison。
 
 # Conclusion
 

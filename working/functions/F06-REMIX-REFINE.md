@@ -976,16 +976,20 @@ Future F08/F10可在 lineage上加 attribution / family / retrieval metadata，�
 
 # 40. Open Decisions
 
-目前沒有阻擋 F07 / F12 / F16 Detailed Design 的 architecture-level open decision。
+目前沒有阻擋 Phase 1 Core Spec Gate 的 open decision。
 
-後續可迭代：
+已閉合：
 
-1. F00 exact wording of Refine vs Remix可做產品測試。
-2. F07定 generated vs accepted child的 Evidence envelope / dedupe。
-3. F12定 F06 errors對應 human recovery。
-4. F16保留自己的 input-preserving correction semantics，不由 F06泛化。
-5. F08加入 durable creator attribution後，再定 Remix attribution display。
-6. F10 future family/reuse metadata不得改 immutable lineage truth。
+- F00 Refine / Remix entry與preview UX。
+- F07 generated / accepted child evidence contract。
+- F12 F06 recovery mapping與machine-readable registry。
+- F16 input-preserving Correction與F06 general semantic change邊界。
+
+非 blocker、可後續迭代：
+
+1. Refine vs Remix wording A/B。
+2. F08 durable creator attribution。
+3. F10 family/reuse metadata，不得改 immutable lineage truth。
 
 # Conclusion
 

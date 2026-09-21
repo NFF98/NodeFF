@@ -1205,17 +1205,17 @@ Compatibility：
 
 # 46. Open Decisions
 
-目前沒有阻擋 F03 Runtime Semantics 的 architecture-level open decision。
+目前沒有阻擋 Phase 1 Core Spec Gate 的 open decision。
 
-下游具體化：
+已閉合：
 
-1. F03：operator exact typed signatures / evaluation errors。
-2. F03：Action transaction / partial failure semantics。
-3. F03：Timer / seeded RNG implementation。
-4. F01：Composer 如何輸出 exact schema。
-5. F12：F02 error → human message / next action。
-6. F16：Result Snapshot 如何讀 result.outputs / sensitivity。
-7. 未來 Date/Time、Map、Media input 等新增 state/operator 必須走 versioned extension。
+- F03 operator/evaluation/runtime transaction semantics已建立。
+- F01 Composer / Candidate boundary已建立。
+- F12 recovery mapping已建立並由 machine-readable Recovery Registry承接。
+- F16 Result Snapshot / sensitivity / correction flow已建立。
+- Fresh Execution Admission已由 working/EXECUTION-ADMISSION.md 固定。
+
+未來擴充 Date/Time、Map、Media input、async/external Action時，必須走 versioned extension，不回寫 Phase 1 contract。
 
 # Conclusion
 

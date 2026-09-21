@@ -938,15 +938,16 @@ Registry update：
 
 # 30. Open Decisions
 
-目前沒有阻擋 F02 的 architecture-level open decision。
+目前沒有阻擋 Phase 1 Core Spec Gate 的 open decision。
 
-由 downstream 定義：
+已閉合：
 
-1. F02：exact SchemaRef representation、Blueprint node syntax、global resource ceilings。
-2. F03：TrustedRuntimeHandler interface、Rule VM、seed service。
-3. F07：capability evidence batching / retention。
-4. F12：F04 error → human recovery mapping。
-5. Optional capability 是否升 CORE，由 evidence / release review 決定。
+- F02 exact Blueprint schema / resource ceilings。
+- F03 Trusted Runtime / Rule VM / seed semantics。
+- F07 capability evidence / retention。
+- F12 F04 error recovery mapping與machine-readable Recovery Registry。
+
+Optional capability是否升 CORE仍由 future evidence / release review決定，不影響 Phase 1 contract。
 
 # Conclusion
 

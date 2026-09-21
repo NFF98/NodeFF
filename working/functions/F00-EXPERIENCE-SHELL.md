@@ -1136,16 +1136,21 @@ Prompt → Clarify only if needed → Build → Use
 
 # 41. Open Decisions
 
-目前沒有阻擋 F05/F06/F07/F12/F16 Detailed Design 的 architecture-level open decision。
+目前沒有阻擋 Phase 1 Core Spec Gate 的 open decision。
 
-後續各 Function仍需決定：
+已閉合：
 
-1. F05 exact Share modal fields / default share mode。
-2. F06 exact Remix vs Refine wording / source context。
-3. Local draft TTL / privacy已由 DATA-MODEL + F07 closure固定為7 days；F00引用，不再自定。
-4. F12 Recovery message/action semantics已建立；copy可迭代但不改 action mapping。
-5. F16 correction/compare與 accepted correction後的 current-session Revert entry已閉合；durable cross-device history留給 F08。
-6. Capsule content taxonomy / ranking屬 Product content layer，可迭代，不改 F00 state machine。
+- F05 Share / Restore semantics與default mode已固定。
+- F06 Remix / Refine source context與UX entry已固定。
+- Local draft TTL / privacy由 DATA-MODEL + F07 shared privacy matrix固定。
+- F12 Recovery message/action semantics已建立。
+- F16 correction / compare / current-session Revert UX已建立。
+
+非 blocker、可後續迭代：
+
+1. Capsule content taxonomy / ranking。
+2. Visual copy / layout A/B，不得改 semantic action mapping。
+3. Durable cross-device version history留給 F08。
 
 # Conclusion
 

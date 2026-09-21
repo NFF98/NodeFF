@@ -946,15 +946,19 @@ Future F08：
 
 # 36. Open Decisions
 
-目前沒有阻擋 F06 / F07 / F12 Detailed Design 的 architecture-level open decision。
+目前沒有阻擋 Phase 1 Core Spec Gate 的 open decision。
 
-後續可迭代：
+已閉合：
 
-1. F07定 exact recipient session dedupe。
-2. F08定 authenticated share management/revocation。
-3. Product可決定 share default expiry；Phase 1 Working default = no automatic expiry unless security/product policy requires。
-4. Portable Snapshot若實驗成功，再建立明確 privacy / size / compatibility gate，不影響 Durable Reference SSOT。
-5. F00最終 visual share sheet wording可迭代，不改 F05 semantics。
+- F07 recipient/share evidence dedupe與retention policy。
+- F00 Share presentation / entry semantics。
+- Fresh Execution Admission已固定 Share ACTIVE與Blueprint executable為兩個獨立 gate。
+
+非 blocker、可後續迭代：
+
+1. F08 authenticated share management / creator-authorized revoke。
+2. Phase 1 default無自動 expiry；未來若改需 Material Review。
+3. Portable Snapshot仍是experiment，不影響 DURABLE_REFERENCE SSOT。
 
 # Conclusion
 

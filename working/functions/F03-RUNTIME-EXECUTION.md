@@ -1407,17 +1407,17 @@ INCOMPATIBLE
 
 # 47. Open Decisions
 
-目前沒有阻擋 F01 / F00 後續 Detailed Design 的 architecture-level open decision。
+目前沒有阻擋 Phase 1 Core Spec Gate 的 open decision。
 
-後續需具體化：
+已閉合：
 
-1. F00：Runtime loading / recoverable / fatal UX。
-2. F05：是否存在 explicit shareable Instance snapshot；Phase 1 default 仍是 Blueprint restore。
-3. F07：runtime evidence batching / privacy / retention。
-4. F12：F03 error → human message / retry policy。
-5. F16：durable input snapshot field selection / sensitive handling。
-6. Optional media capability 的 autoplay / browser-policy mapping。
-7. 若未來 Action 支援 async / external step，必須新增新的 transaction / pending semantics，不能直接把 Promise 塞進 Phase 1 Action。
+- F00 Runtime loading / recoverable / fatal UX。
+- F05 Phase 1分享為 immutable Blueprint restore，不分享完整 Runtime Instance。
+- F07 runtime evidence / privacy / retention。
+- F12 Runtime recovery semantics。
+- F16 correction replay exact interface與sensitive snapshot handling。
+
+未來 Optional media autoplay/browser policy與 async/external Action transaction semantics需另行 versioned design。
 
 # Conclusion
 
