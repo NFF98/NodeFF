@@ -68,7 +68,7 @@ Chat / Discussion 不是 implementation source。
 working/APP-ARCHITECTURE.md
 → system boundary / top architecture
 
-working/APP-DETAILED-DESIGN.md
+working/APP-DETAILED-DESIGN-OVERVIEW.md
 → Function Portfolio / dependency / release scope
 
 working/DATA-MODEL.md
@@ -388,7 +388,7 @@ Required Spec approved
 + known blockers = 0
 ~~~
 
-Release Scope 由 APP-DETAILED-DESIGN.md 定義，不以「Code 已完成」取代 Release Gate。
+Release Scope 由 APP-DETAILED-DESIGN-OVERVIEW.md 定義，不以「Code 已完成」取代 Release Gate。
 
 ---
 
@@ -568,8 +568,8 @@ Revert
 |---|---|---|---|
 | Top Architecture | ✅ STABLE_BASELINE | `working/APP-ARCHITECTURE.md` | system boundary |
 | Product Boundary | ✅ STABLE_BASELINE | `working/ProjectManagement/BUSINESS-PLAN.md` + Architecture | product / evidence boundary |
-| Function Portfolio | ✅ STABLE_BASELINE | `working/APP-DETAILED-DESIGN.md` | Fxx scope / dependency |
-| Release Scope | ✅ STABLE_BASELINE | `working/APP-DETAILED-DESIGN.md` | 0–1 / 3 / 6 month scope |
+| Function Portfolio | ✅ STABLE_BASELINE | `working/APP-DETAILED-DESIGN-OVERVIEW.md` | Fxx scope / dependency |
+| Release Scope | ✅ STABLE_BASELINE | `working/APP-DETAILED-DESIGN-OVERVIEW.md` | 0–1 / 3 / 6 month scope |
 | Infra Boundary | ✅ STABLE_BASELINE | `working/INFRA-ARCHITECTURE.md` | Browser / Edge / Postgres / External |
 | Capability Philosophy | ✅ STABLE_BASELINE | `working/ProjectManagement/CAPABILITY-FABRIC.md` | capability boundary / maturity |
 | Design-to-Delivery | ✅ STABLE_BASELINE | `working/DESIGN-TO-DELIVERY.md` | Working → Spec → Test → Release rules |

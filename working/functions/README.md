@@ -3,7 +3,7 @@
 此目錄是 NodeFF **單一 Function 詳細設計的 canonical home**。
 
 ~~~text
-APP-DETAILED-DESIGN.md
+APP-DETAILED-DESIGN-OVERVIEW.md
 → Portfolio / Dependency / Release / Status Index
 
 working/functions/Fxx-*.md
@@ -22,4 +22,4 @@ working/functions/Fxx-*.md
 
 共同 Delivery 規則：`../DESIGN-TO-DELIVERY.md`
 
-Portfolio / Dependency / Release Scope：`../APP-DETAILED-DESIGN.md`
+Portfolio / Dependency / Release Scope：`../APP-DETAILED-DESIGN-OVERVIEW.md`

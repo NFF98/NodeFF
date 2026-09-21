@@ -273,7 +273,7 @@ Intent
 
 - `APP-ARCHITECTURE.md`：只保留四層整體架構、核心流程與責任邊界。
 - `CAPABILITY-FABRIC.md`：獨立承接 NFF 引擎底座 Capability。
-- `APP-DETAILED-DESIGN.md`：採 Function-Oriented 詳細設計。
+- `APP-DETAILED-DESIGN-OVERVIEW.md`：採 Function-Oriented 詳細設計。
 - `working/functions/`：未來每個 Function 的 Frontend / Backend / Contract / Acceptance 詳細設計。
 - `INFRA-ARCHITECTURE.md`：收斂為 Infrastructure 設計結果。
 - `DECISION-CANDIDATES.md`：只記錄需要方案選擇的 Decision Gate。
@@ -485,7 +485,7 @@ Browser Runtime Plane
 - 未來需評估是否新增獨立 Experience Shell / Recovery Function，或由上述 Function 共同承接。
 
 同步規則維持不變：
-- 本輪先不修改 `APP-DETAILED-DESIGN.md`；
+- 本輪先不修改 `APP-DETAILED-DESIGN-OVERVIEW.md`；
 - 不逐項改 `working/functions/`；
 - 等使用者完成 APP Architecture / Working 文件 Review 後再一次同步。
 
@@ -496,9 +496,9 @@ Browser Runtime Plane
 
 以下待同步項已於本輪吸收到新版 Working Design，後續不再重複處理：
 
-- PENDING-FUNC-001 — Capability Card Contract 擴充 → 已反映於 CAPABILITY-FABRIC.md 與 APP-DETAILED-DESIGN.md。
-- PENDING-FUNC-002 — Infrastructure Baseline → 已反映於 APP-DETAILED-DESIGN.md 的 Function boundary / phase dependency；Infra 細節仍以 INFRA-ARCHITECTURE.md 為準。
-- PENDING-FUNC-003 — Experience Shell / Model Gateway / Capability Gap / Humanized Recovery → 已反映於 APP-ARCHITECTURE.md 與 APP-DETAILED-DESIGN.md。
+- PENDING-FUNC-001 — Capability Card Contract 擴充 → 已反映於 CAPABILITY-FABRIC.md 與 APP-DETAILED-DESIGN-OVERVIEW.md。
+- PENDING-FUNC-002 — Infrastructure Baseline → 已反映於 APP-DETAILED-DESIGN-OVERVIEW.md 的 Function boundary / phase dependency；Infra 細節仍以 INFRA-ARCHITECTURE.md 為準。
+- PENDING-FUNC-003 — Experience Shell / Model Gateway / Capability Gap / Humanized Recovery → 已反映於 APP-ARCHITECTURE.md 與 APP-DETAILED-DESIGN-OVERVIEW.md。
 
 統一時間基準：
 

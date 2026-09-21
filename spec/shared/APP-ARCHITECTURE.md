@@ -7,7 +7,7 @@
 > Promotion Source Commit：3e3439b9b526ce94b590c1b491ae721e6b8bd6eb
 >
 
-> 狀態：Working Architecture Baseline。本文只回答四件事：**NFF 有哪些系統、每個系統負責什麼結果、核心流程怎麼跑、1／3／6 個月怎麼長。** Function 實作細節由 APP-DETAILED-DESIGN.md 與 working/functions/ 承接。
+> 狀態：Working Architecture Baseline。本文只回答四件事：**NFF 有哪些系統、每個系統負責什麼結果、核心流程怎麼跑、1／3／6 個月怎麼長。** Function 實作細節由 APP-DETAILED-DESIGN-OVERVIEW.md 與 working/functions/ 承接。
 
 # 1. Architecture Thesis
 
@@ -731,7 +731,7 @@ ProjectManagement/CAPABILITY-FABRIC.md
 INFRA-ARCHITECTURE.md
 → Browser / Edge / Serverless / DB / External Service
 
-APP-DETAILED-DESIGN.md
+APP-DETAILED-DESIGN-OVERVIEW.md
 → Function Map、依賴、Acceptance、Release Plan
 
 working/functions/

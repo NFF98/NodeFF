@@ -13,7 +13,7 @@ NodeFF 是一個 No-install、Everyone-is-creator、Sharable/Linkable、Intent C
 
 ### Current Working Truth
 - Top Architecture：working/APP-ARCHITECTURE.md
-- Function Portfolio：working/APP-DETAILED-DESIGN.md
+- Function Portfolio：working/APP-DETAILED-DESIGN-OVERVIEW.md
 - Shared Data：working/DATA-MODEL.md
 - Shared API：working/API-CONVENTIONS.md
 - Execution Admission：working/EXECUTION-ADMISSION.md

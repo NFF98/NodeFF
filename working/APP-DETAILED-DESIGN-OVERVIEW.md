@@ -1,4 +1,4 @@
-# NodeFF App Detailed Design
+# NodeFF App Detailed Design Overview
 
 > 狀態：Working Design Baseline。
 >
@@ -27,7 +27,7 @@ Function 詳細設計回答：
 working/APP-ARCHITECTURE.md
 → Top Architecture / system boundary
 
-working/APP-DETAILED-DESIGN.md
+working/APP-DETAILED-DESIGN-OVERVIEW.md
 → Function Portfolio / Dependency / Release / Status Index
 
 working/DATA-MODEL.md
