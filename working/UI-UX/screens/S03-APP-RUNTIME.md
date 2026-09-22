@@ -2,7 +2,7 @@
 
 > Screen ID：S03
 >
-> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / FUNCTION_DELTA_PENDING / HIGH_FI_PENDING**
+> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_PENDING / HIGH_FI_PENDING**
 >
 > Phase：Phase 1
 >
@@ -10,7 +10,7 @@
 >
 > Function behavior sources：F00 Experience Shell + F03 Runtime Execution。
 >
-> 本文件是 ④A Low-fi review draft，不代表 User 已批准，也不代表 Cursor 可實作。
+> 本文件的 ④A Low-fi direction與 Runtime Loading / Timeout Function Delta已完成 User Review；仍不是 Formal Spec或 Cursor implementation authority。
 
 # 1. User Outcome
 
@@ -247,20 +247,22 @@ S03 可有：
 
 但不能重新顯示「正在理解你的需求」。
 
-## O05 Runtime Loading Function Delta
+## O05 Runtime Loading Function Contract
 
 User 已在 O05 Low-fi 明確要求：
 
 > **S03 normal local Runtime interaction 也要顯示 global loading。**
 
-這與目前 formal F00 contract「normal Runtime interaction不觸發 global shell loading」衝突，因此目前標記為 **FUNCTION_DELTA_PENDING**。
+Working F00/F03/F12已閉合此 Material Delta；既有 Formal Spec暫時保留舊語意，待 pre-Cursor Formal Spec Refresh一次同步。
 
-Low-fi presentation direction：
-- 每次 committed Runtime interaction都進入 global processing/loading state。
+Low-fi presentation contract：
+- 每次被 F03 accepted / admitted 的 Runtime interaction都建立 operation token並進入 logical global processing state；不是等到 commit後才開始。
 - 若有可驗證 checkpoints，使用 Stage + checkpoint-derived Progress %。
 - 不用時間預估製造假百分比。
+- 只有 commit成立後才可顯示100%。
 - 不為了動畫故意延遲操作完成。
-- Function truth需回 F00/F03 Working Design Review後才能升格。
+- 極快、同一 render frame內完成的 interaction可能看不到完整 loading frame，這不算 violation。
+- Soft Timeout停在最後真實 checkpoint；Hard Timeout由 F03 discard未提交 transaction並交 F12回 safe S03或 terminal safe-state。
 
 # 15. Desktop / Mobile Responsive Rules
 
@@ -302,6 +304,6 @@ User 已確認：
 
 > **LOW_FI_DIRECTION_APPROVED — HIGH_FI_PENDING**
 
-S03 ④A Low-fi 已完成 User Review。
+S03 ④A Low-fi與 Runtime Function Delta已完成 User Review。
 
-依固定流程，下一步進 S04 ④A Low-fi；所有 S01–S06 / O01–O05 Low-fi完成後，再統一進 Cross-Screen Review → High-fi Design System → ④B High-fi。
+依固定流程，下一步進 `Cross-Screen Consistency Review → High-fi Design System → ④B High-fi`。Formal Spec與 Cursor implementation仍維持 HOLD。

@@ -1,5 +1,5 @@
 {
-  "registry_version": "1.0.0",
+  "registry_version": "1.1.0",
   "owner": "working/registries/recovery-registry.json",
   "source_of_truth": "Fxx source errors + F12 recovery policy",
   "entries": [
@@ -917,6 +917,31 @@
       "next_actions": [
         "RETRY",
         "KEEP_CURRENT_APP"
+      ],
+      "evidence_class": "RELIABILITY",
+      "deprecated": false
+    },
+    {
+      "error_id": "F03-ERR-021",
+      "error_name": "RUNTIME_ACTION_TIMEOUT",
+      "function_id": "F03",
+      "recovery_class": "TIMEOUT",
+      "policy_id": "F12-POL-011",
+      "severity": "BLOCKING_RECOVERABLE",
+      "retryability": "IMMEDIATE_RETRY",
+      "message_key": "recovery.runtime.action_timeout",
+      "preserved_context": [
+        "CURRENT_BLUEPRINT",
+        "CURRENT_RUNTIME_INSTANCE_LAST_COMMITTED",
+        "CURRENT_RESULT_WHEN_VALID"
+      ],
+      "safe_surface": "APP_CURRENT",
+      "integrity_precondition": "PROVEN",
+      "integrity_failure_error_id": "F03-ERR-018",
+      "next_actions": [
+        "RETRY",
+        "KEEP_CURRENT_APP",
+        "RETRY_LATER"
       ],
       "evidence_class": "RELIABILITY",
       "deprecated": false

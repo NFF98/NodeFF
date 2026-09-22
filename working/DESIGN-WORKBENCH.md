@@ -621,130 +621,69 @@ UX 原則：
 
 ## Runtime Global Loading + Timeout Function Delta
 
-> Sync status：**SYNCED TO WORKING — REVIEW PENDING**。
-> Sync targets：`working/functions/F00-EXPERIENCE-SHELL.md`、`F03-RUNTIME-EXECUTION.md`、`F12-HUMANIZED-RECOVERY.md`、`working/UI-UX/screens/S03-APP-RUNTIME.md`、`working/UI-UX/overlays/O05-LOADING-BUILDING-HYDRATION.md`。
-> 狀態：MATERIAL FUNCTION DELTA — USER DIRECTION CONFIRMED / FUNCTION REVIEW PENDING
+> Sync status：**WORKING DELTA CLOSED — MACHINE REGISTRIES SYNCED**。
+> Sync targets：F00、F03、F12、S03、O05、Phase 1 Screen Inventory、recovery / evidence / acceptance registries。
+> 狀態：MATERIAL FUNCTION DELTA — CLOSED 2026-09-22 / FORMAL REFRESH PENDING
 >
 > 來源：O05 Loading / Building / Hydration ④A Low-fi Review。
 >
 > 影響 Function：F00 Experience Shell + F03 Runtime Execution + F12 Humanized Recovery。
 >
-> 注意：此節是 Working Design，不直接改寫 formal Spec。
+> 注意：此節已成為 Working Current Truth，但未改寫 Formal Spec；待 pre-Cursor Formal Spec Refresh一次同步。
 
-### 1. User-confirmed UX direction
+### 1. Closed UX Contract
 
-User 明確要求：
-
-- S03 normal local Runtime interaction **也要顯示 global loading / processing state**。
+- 每個被 F03接受執行的 S03 Runtime interaction都建立唯一 operation token，並進 logical global processing state。
+- 極快、同一 render frame完成的 interaction可以不 paint完整 loading frame；不得為了動畫人工延遲。
 - 全站 progress採 Stage label + checkpoint-derived Progress %。
-- checkpoint卡住時，%停在真實值，不可慢慢灌高。
-- 長時間卡住必須進 Timeout UX，之後要能安全回到正常 App UX。
+- checkpoint plan在 operation開始時固定；%只表示 completed / planned work checkpoints。
+- 沒有可靠 checkpoints就只顯示 stage；只有 commit成立後才可顯示100%。
 
-### 2. Existing contract conflict
+### 2. Operation / Timeout Contract
 
-目前 formal F00：
+~~~text
+STARTED → PROCESSING → COMMITTED
+                     → TIMED_OUT
+                     → FAILED
+                     → CANCELLED
+~~~
 
-- loading只用在真的 asynchronous work。
-- local Runtime action不顯示 global loading。
-- F00-AC-008要求 normal Runtime interaction不觸發 global shell loading。
+Soft Timeout：
+- 是 `PROCESSING` 上的 non-terminal wait condition。
+- committed store不動；progress停在最後真實 checkpoint。
+- 顯示「還在處理，你的 App 和目前內容都還在。」
 
-因此 User 新方向是 **Material Function Delta**，不能只靠 UI 文件覆寫。
+Hard Timeout：
+- close token as `TIMED_OUT`。
+- discard working transaction、staged effects與未 enqueue events。
+- committed store保持原樣；不是把 state rollback回去。
+- late / stale completion永遠不得 commit。
+- integrity成立 → `F03-ERR-021 → F12-POL-011 → APP_CURRENT`。
+- integrity無法證明 → `F03-ERR-018 → F12-POL-001 → terminal safe-state`。
 
-### 3. Existing timeout support
+### 3. Browser-first Enforcement
 
-目前已有：
+Phase 1不假設 `setTimeout()`可強制中斷卡住的 main thread。F03使用 monotonic deadline，並在 action-step、derived/rule recompute、capability return與 pre-commit guard point檢查。
 
-- F12 recovery_class = TIMEOUT。
-- F12 bounded Retry / Retry Later / safe surface。
-- F00 creation / analysis operation timeout，且保留 Intent。
-- F03 atomic Action transaction：failure時 discard uncommitted working changes。
+若 trusted synchronous handler在 deadline後才返回，pre-commit仍拒絕 commit。真正無法返回的 trusted code由 Capability CI、code review與 resource guard防守；此 Delta不改變 Browser-first、0 LLM / 0 server normal Runtime path或 synchronous Action architecture。
 
-目前缺少：
+### 4. Retry / Recovery Episode
 
-> **F03 normal Runtime action timeout → stale-operation handling → F12 recovery → return-to-safe-S03** 的完整 lifecycle contract。
+- 同一 F12 recovery episode可以多次 Retry，但每次 Retry建立新的 F03 operation token。
+- closed token永不復用。
+- Retry click不等於 recovered；新 operation成功回 safe continuation後才標 `RECOVERED`。
 
-### 4. Proposed Runtime Interaction Processing Contract
+### 5. Stable ID / Formal Refresh Handling
 
-每次 S03 committed interaction建立 operation token：
+- 既有 `F00-AC-008`已進 Formal Spec，因此保留原 ID與原語意，不重寫。
+- Working將它標為 superseded；pre-Cursor Formal Spec Refresh時 deprecated。
+- 新增 F00-AC-029–032、F03-AC-030–036、F12-AC-029–031與對應 Test Contracts。
+- 新增 `F03-ERR-021 RUNTIME_ACTION_TIMEOUT`與 `F12-POL-011 Runtime Timeout Preserve Last Known Good`。
+- recovery / evidence / acceptance machine registries與 Markdown同 commit同步。
 
-    IDLE
-    → STARTED
-    → PROCESSING
-    → COMMITTED
-    or TIMED_OUT
-    or FAILED
+### 6. Next Gate
 
-UI：
-
-    STARTED / PROCESSING
-    → global loading / processing state
-    → Stage label
-    → checkpoint-derived Progress %
-
-Progress：
-- 只依真實 checkpoints。
-- 不表示剩餘時間。
-- 不允許 artificial progress inflation。
-- 不為了動畫故意延長 operation。
-
-### 5. Proposed Timeout Contract
-
-Timeout thresholds由 F03/F12 policy擁有；UI不硬編秒數。
-
-    PROCESSING
-    → SOFT_TIMEOUT
-    → HARD_TIMEOUT
-
-SOFT_TIMEOUT：
-- progress停在最後完成 checkpoint。
-- Human copy：「還在處理，你的 App 和目前內容都還在。」
-- 不 mutation current committed state。
-
-HARD_TIMEOUT：
-- affected operation標記 TIMED_OUT。
-- safe時停止 / abandon pending work。
-- discard uncommitted Action transaction。
-- last committed Runtime state保持。
-- late completion必須以 operation token判斷為 stale，不得在 timeout後偷偷 commit。
-- 導入 F12 TIMEOUT Recovery。
-
-### 6. Normal UX Return
-
-若 Runtime integrity仍成立：
-
-    TIMED_OUT
-    → rollback / keep last committed state
-    → remove blocking processing state
-    → O03 humanized notice / recoverable state
-    → S03 safe Runtime
-
-Consumer copy候選：
-
-    剛才這個操作處理太久，
-    App 已回到上一個安全狀態。
-
-Actions：
-- 再試一次：仍有 retry budget時。
-- 回到 App / 保留目前狀態。
-- 稍後再試：immediate retry budget耗盡時。
-
-若 integrity不確定：
-
-    TIMED_OUT
-    → F12 INTEGRITY / CRITICAL policy
-    → terminal safe-state
-
-不得強行回正常 Runtime。
-
-### 7. Function Review Required
-
-正式閉合需要至少：
-
-1. F00 修改 loading presentation rule與 F00-AC-008。
-2. F03 新增 Runtime interaction processing / timeout / stale completion contract。
-3. F12補 Runtime-action TIMEOUT mapping與 safe return semantics（若現有 mapping不足）。
-4. Acceptance/Test：global loading、timeout rollback、late result discard、return-to-S03、retry budget。
-5. User 明確批准 Working Function Delta後，才可 promotion回 formal Spec。
+Function Delta已閉合。下一步是 Cross-Screen Consistency Review；Formal Spec與 Cursor implementation維持 HOLD。
 
 
 ---
@@ -781,3 +720,22 @@ Review目標：
 - Cursor implementation維持 HOLD。
 - 先完成 UI/UX與 Cursor Build / Operating Model討論。
 - 正式 Cursor development前，再執行一次短期 Formal Spec Refresh。
+
+---
+
+## Session Progress — 2026-09-22
+
+### Closed
+
+- F00 / F03 / F12 Runtime Loading + Timeout Function Delta完成 User Review並閉合為 Working Current Truth。
+- S03 / O05移除 `FUNCTION_DELTA_PENDING`，改為 `FUNCTION_DELTA_CLOSED`。
+- `F00-AC-008`保留 stable ID與原語意，Working標記 superseded；未來 Formal Refresh時 deprecated。
+- 新增 F00 4項、F03 7項、F12 3項 Acceptance / Test Contracts。
+- 新增 `F03-ERR-021`、`F12-POL-011`及 F03 operation / timeout evidence events。
+- recovery / evidence / acceptance Working registries已同步。
+
+### Next
+
+> **Cross-Screen Consistency Review**
+
+Formal Spec、Backlog / Sprint、Cursor implementation仍維持 HOLD；待 High-fi與 Cursor Build / Operating Model完成後，才執行 pre-Cursor Formal Spec Refresh。

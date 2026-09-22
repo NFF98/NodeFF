@@ -1,5 +1,5 @@
 {
-  "registry_version": "1.0.0",
+  "registry_version": "1.1.0",
   "owner": "working/registries/evidence-event-registry.json",
   "source_of_truth": "Fxx event contracts + F07 evidence policy",
   "entries": [
@@ -1350,6 +1350,162 @@
       "metric_tags": [
         "f03",
         "runtime"
+      ],
+      "deprecated": false
+    },
+    {
+      "event_type": "F03-EVT-011",
+      "event_name": "runtime_operation_started",
+      "function_id": "F03",
+      "schema_version": "1.0.0",
+      "collection_class": "PRODUCT_SAMPLE",
+      "required_context": [
+        "function_id"
+      ],
+      "allowed_properties": [
+        "operation_token",
+        "instance_session_id",
+        "instance_epoch",
+        "runtime_stage",
+        "planned_checkpoint_count",
+        "trace_id"
+      ],
+      "retention_class": "RAW_90D",
+      "metric_tags": [
+        "f03",
+        "runtime",
+        "operation"
+      ],
+      "deprecated": false
+    },
+    {
+      "event_type": "F03-EVT-012",
+      "event_name": "runtime_checkpoint_completed",
+      "function_id": "F03",
+      "schema_version": "1.0.0",
+      "collection_class": "PRODUCT_SAMPLE",
+      "required_context": [
+        "function_id"
+      ],
+      "allowed_properties": [
+        "operation_token",
+        "instance_session_id",
+        "instance_epoch",
+        "checkpoint_id",
+        "completed_checkpoint_count",
+        "planned_checkpoint_count",
+        "progress_percent",
+        "runtime_stage",
+        "trace_id"
+      ],
+      "retention_class": "RAW_90D",
+      "metric_tags": [
+        "f03",
+        "runtime",
+        "operation"
+      ],
+      "deprecated": false
+    },
+    {
+      "event_type": "F03-EVT-013",
+      "event_name": "runtime_soft_timeout_observed",
+      "function_id": "F03",
+      "schema_version": "1.0.0",
+      "collection_class": "RELIABILITY",
+      "required_context": [
+        "function_id"
+      ],
+      "allowed_properties": [
+        "operation_token",
+        "instance_session_id",
+        "instance_epoch",
+        "last_completed_checkpoint_id",
+        "progress_percent",
+        "runtime_stage",
+        "trace_id"
+      ],
+      "retention_class": "RAW_90D",
+      "metric_tags": [
+        "f03",
+        "runtime",
+        "timeout"
+      ],
+      "deprecated": false
+    },
+    {
+      "event_type": "F03-EVT-014",
+      "event_name": "runtime_action_timed_out",
+      "function_id": "F03",
+      "schema_version": "1.0.0",
+      "collection_class": "RELIABILITY",
+      "required_context": [
+        "function_id"
+      ],
+      "allowed_properties": [
+        "operation_token",
+        "instance_session_id",
+        "instance_epoch",
+        "runtime_stage",
+        "error_code",
+        "integrity_status",
+        "trace_id"
+      ],
+      "retention_class": "RAW_90D",
+      "metric_tags": [
+        "f03",
+        "runtime",
+        "timeout"
+      ],
+      "deprecated": false
+    },
+    {
+      "event_type": "F03-EVT-015",
+      "event_name": "stale_completion_discarded",
+      "function_id": "F03",
+      "schema_version": "1.0.0",
+      "collection_class": "RELIABILITY",
+      "required_context": [
+        "function_id"
+      ],
+      "allowed_properties": [
+        "operation_token",
+        "instance_session_id",
+        "instance_epoch",
+        "discard_reason",
+        "runtime_stage",
+        "trace_id"
+      ],
+      "retention_class": "RAW_90D",
+      "metric_tags": [
+        "f03",
+        "runtime",
+        "operation"
+      ],
+      "deprecated": false
+    },
+    {
+      "event_type": "F03-EVT-016",
+      "event_name": "runtime_safe_state_restored",
+      "function_id": "F03",
+      "schema_version": "1.0.0",
+      "collection_class": "CORE_OUTCOME",
+      "required_context": [
+        "function_id"
+      ],
+      "allowed_properties": [
+        "operation_token",
+        "instance_session_id",
+        "instance_epoch",
+        "safe_surface",
+        "recovery_episode_id",
+        "runtime_stage",
+        "trace_id"
+      ],
+      "retention_class": "RAW_90D",
+      "metric_tags": [
+        "f03",
+        "runtime",
+        "recovery"
       ],
       "deprecated": false
     },

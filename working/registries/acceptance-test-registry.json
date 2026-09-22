@@ -1,8 +1,8 @@
 {
-  "registry_version": "1.0.0",
+  "registry_version": "1.1.0",
   "owner": "working/registries/acceptance-test-registry.json",
   "conventions": "working/ACCEPTANCE-CONVENTIONS.md",
-  "total_acceptance": 257,
+  "total_acceptance": 271,
   "entries": [
     {
       "acceptance_id": "F00-AC-001",
@@ -97,8 +97,15 @@
       "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "normal Runtime interaction不觸發 global shell loading。",
       "implementation_location": "tests/contracts/f00/test-f00-008.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "SUPERSEDED_PENDING_FORMAL_REFRESH",
+      "working_disposition": "SUPERSEDED",
+      "superseded_by": [
+        "F00-AC-029",
+        "F00-AC-030",
+        "F00-AC-031",
+        "F00-AC-032"
+      ],
+      "required_for_spec": false
     },
     {
       "acceptance_id": "F00-AC-009",
@@ -337,6 +344,54 @@
       "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "App Ready不被 telemetry命名為 semantic success。",
       "implementation_location": "tests/evidence/f00/test-f00-ac-028.md",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F00-AC-029",
+      "function_id": "F00",
+      "criterion": "每個被F03 accepted/admitted的Runtime interaction都進入logical global processing presentation；同一render frame內完成而未paint完整loading frame不算failure。",
+      "test_id": "TEST-F00-029",
+      "verification_type": "AUTOMATED_E2E",
+      "fixture_strategy": "browser fixture covering normal and same-frame Runtime interactions",
+      "expected_observable": "admitted interaction建立processing presentation state，且不為極快操作強迫額外paint。",
+      "implementation_location": "tests/e2e/f00/test-f00-029.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F00-AC-030",
+      "function_id": "F00",
+      "criterion": "checkpoint-derived Progress %只反映已完成planned checkpoints，且只有commit成立後才可呈現100%。",
+      "test_id": "TEST-F00-030",
+      "verification_type": "AUTOMATED_CONTRACT",
+      "fixture_strategy": "operation progress fixture with finite plans, missing plans, soft timeout, commit-ready and committed states",
+      "expected_observable": "progress單調且truthful；無可靠plan不顯示百分比；commit-ready不顯示100%。",
+      "implementation_location": "tests/contracts/f00/test-f00-030.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F00-AC-031",
+      "function_id": "F00",
+      "criterion": "Runtime processing不得為了讓loading可見而人工延長action。",
+      "test_id": "TEST-F00-031",
+      "verification_type": "AUTOMATED_BEHAVIOR",
+      "fixture_strategy": "deterministic same-frame Runtime action with presentation scheduler instrumentation",
+      "expected_observable": "action完成後立即離開processing，沒有minimum-display delay阻擋commit outcome。",
+      "implementation_location": "tests/behavior/f00/test-f00-031.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F00-AC-032",
+      "function_id": "F00",
+      "criterion": "Runtime Hard Timeout轉交F12；integrity成立時回安全S03 last-known-good App，無法證明integrity時進terminal safe-state。",
+      "test_id": "TEST-F00-032",
+      "verification_type": "AUTOMATED_E2E",
+      "fixture_strategy": "browser timeout fixtures covering proven-safe and integrity-uncertain F03 outcomes",
+      "expected_observable": "safe timeout回APP_CURRENT；integrity uncertainty不render正常Runtime並進terminal safe-state。",
+      "implementation_location": "tests/e2e/f00/test-f00-032.spec.ts",
       "contract_status": "READY_FOR_IMPLEMENTATION",
       "required_for_spec": true
     },
@@ -1237,6 +1292,90 @@
       "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "evidence 不要求 raw Runtime state。",
       "implementation_location": "tests/evidence/f03/test-f03-ac-029.md",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F03-AC-030",
+      "function_id": "F03",
+      "criterion": "每個admitted Runtime interaction建立唯一operation token，terminal token永不重用或reopen。",
+      "test_id": "TEST-F03-030",
+      "verification_type": "AUTOMATED_CONTRACT",
+      "fixture_strategy": "dispatcher fixture admitting multiple interactions and terminal outcomes",
+      "expected_observable": "每次admission取得不同token，terminal transition後token不可再次active。",
+      "implementation_location": "tests/contracts/f03/test-f03-030.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F03-AC-031",
+      "function_id": "F03",
+      "criterion": "checkpoint progress保持單調、truthful、operation-scoped；無可靠checkpoint plan時不造假百分比。",
+      "test_id": "TEST-F03-031",
+      "verification_type": "AUTOMATED_CONTRACT",
+      "fixture_strategy": "operation checkpoint fixtures covering reordered, duplicate, cross-token and absent-plan updates",
+      "expected_observable": "只接受當前token plan內的單調完成checkpoint，無plan只回stage。",
+      "implementation_location": "tests/contracts/f03/test-f03-031.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F03-AC-032",
+      "function_id": "F03",
+      "criterion": "Hard Timeout不留下partial state、staged effect或未提交event；committed store保持原樣。",
+      "test_id": "TEST-F03-032",
+      "verification_type": "AUTOMATED_BEHAVIOR",
+      "fixture_strategy": "fake monotonic clock crosses hard deadline after staged state, effect and emitted event",
+      "expected_observable": "working transaction、effects與events全部discard，last committed store byte-for-byte unchanged。",
+      "implementation_location": "tests/behavior/f03/test-f03-032.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F03-AC-033",
+      "function_id": "F03",
+      "criterion": "closed/stale token與late completion永遠不得commit。",
+      "test_id": "TEST-F03-033",
+      "verification_type": "AUTOMATED_BEHAVIOR",
+      "fixture_strategy": "late handler/callback fixtures for timed-out, cancelled, failed and stale-epoch tokens",
+      "expected_observable": "所有late/stale completion被discard且不改變store、UI或recovery outcome。",
+      "implementation_location": "tests/behavior/f03/test-f03-033.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F03-AC-034",
+      "function_id": "F03",
+      "criterion": "同一recovery episode的每次Retry都建立新operation token。",
+      "test_id": "TEST-F03-034",
+      "verification_type": "AUTOMATED_CONTRACT",
+      "fixture_strategy": "recovery retry fixture with repeated attempts in one episode",
+      "expected_observable": "episode ID保持，operation token每次更新且舊token維持closed。",
+      "implementation_location": "tests/contracts/f03/test-f03-034.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F03-AC-035",
+      "function_id": "F03",
+      "criterion": "hard deadline跨越後，即使synchronous handler稍後返回，pre-commit guard仍拒絕commit。",
+      "test_id": "TEST-F03-035",
+      "verification_type": "AUTOMATED_BEHAVIOR",
+      "fixture_strategy": "fake monotonic clock advances past deadline during trusted synchronous handler",
+      "expected_observable": "handler return後pre-commit產生F03-ERR-021並discard transaction。",
+      "implementation_location": "tests/behavior/f03/test-f03-035.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F03-AC-036",
+      "function_id": "F03",
+      "criterion": "Runtime integrity無法證明時產生F03-ERR-018並停止affected execution path，不得回正常Runtime。",
+      "test_id": "TEST-F03-036",
+      "verification_type": "AUTOMATED_BEHAVIOR",
+      "fixture_strategy": "post-timeout invariant fixture with unknown store/epoch integrity",
+      "expected_observable": "F03-ERR-018取代recoverable timeout path並停止affected execution。",
+      "implementation_location": "tests/behavior/f03/test-f03-036.spec.ts",
       "contract_status": "READY_FOR_IMPLEMENTATION",
       "required_for_spec": true
     },
@@ -2677,6 +2816,42 @@
       "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "telemetry failure本身不阻斷產品 recovery。",
       "implementation_location": "tests/evidence/f12/test-f12-ac-028.md",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F12-AC-029",
+      "function_id": "F12",
+      "criterion": "F03-ERR-021在integrity成立時依F12-POL-011保留last-known-good App並回APP_CURRENT。",
+      "test_id": "TEST-F12-029",
+      "verification_type": "AUTOMATED_BEHAVIOR",
+      "fixture_strategy": "deterministic recovery fixture for F03-ERR-021 with proven Runtime integrity",
+      "expected_observable": "RecoveryState保留approved context、safe_surface為APP_CURRENT且提供budget-aware actions。",
+      "implementation_location": "tests/behavior/f12/test-f12-029.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F12-AC-030",
+      "function_id": "F12",
+      "criterion": "integrity/critical precedence高於TIMEOUT convenience recovery；無法證明安全時不得回正常Runtime。",
+      "test_id": "TEST-F12-030",
+      "verification_type": "AUTOMATED_BEHAVIOR",
+      "fixture_strategy": "paired F03-ERR-021 and F03-ERR-018 recovery contexts",
+      "expected_observable": "F03-ERR-018由F12-POL-001產生CRITICAL terminal state，沒有unsafe Retry或APP_CURRENT return。",
+      "implementation_location": "tests/behavior/f12/test-f12-030.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F12-AC-031",
+      "function_id": "F12",
+      "criterion": "同一recovery episode每次Retry都建立新的F03 operation token，且只有safe continuation成立才標RECOVERED。",
+      "test_id": "TEST-F12-031",
+      "verification_type": "AUTOMATED_CONTRACT",
+      "fixture_strategy": "recovery episode fixture with failed retry, successful retry and exhausted budget",
+      "expected_observable": "episode identity與operation identity分離；retry click不等於RECOVERED。",
+      "implementation_location": "tests/contracts/f12/test-f12-031.spec.ts",
       "contract_status": "READY_FOR_IMPLEMENTATION",
       "required_for_spec": true
     },

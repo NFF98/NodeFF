@@ -1,6 +1,6 @@
 # F03 — Runtime Execution / Semantics
 
-> 狀態：SPEC_READY + WORKING_DELTA_PENDING_REVIEW
+> 狀態：SPEC_READY + WORKING_DELTA_CLOSED / FORMAL_REFRESH_PENDING
 > Formal Spec：spec/functions/F03-RUNTIME-EXECUTION.md
 >
 > Canonical Role：Phase 1 Browser Runtime Semantics 的 Working Current Truth。
@@ -139,6 +139,7 @@ Runtime Instance 是 Browser-only mutable execution state。
 ~~~text
 RuntimeInstance
 ├─ instance_id
+├─ instance_epoch
 ├─ blueprint_hash
 ├─ runtime_version
 ├─ registry_version
@@ -153,6 +154,7 @@ RuntimeInstance
 │  └─ counter
 ├─ timers
 ├─ event_queue
+├─ active_operation?
 ├─ action_sequence
 ├─ runtime_errors
 └─ local_started_at
@@ -164,6 +166,14 @@ instance_id：
 - 不等於 Blueprint hash
 - 不等於 DB durable identity
 - reload 預設建立新 Instance，除非未來 explicit restore contract 指定 approved snapshot
+
+instance_epoch：
+
+- local monotonic generation，用於拒絕舊 operation對已 reset / reinitialized / disposed execution context commit。
+- reset、reinitialize或其他會 invalidate in-flight operation的 lifecycle transition先 increment epoch並關閉舊 token。
+- 不等於 durable revision或 Blueprint version。
+
+同一 Instance因 FIFO single-writer同時最多一個 `active_operation`。
 
 Runtime Instance 永遠不直接 mutation Blueprint。
 
@@ -532,6 +542,122 @@ Committed Instance State
 因此：
 
 > Action state mutation 要嘛全部成功，要嘛不留下半套 state。
+
+## 16.1 F03-RQ-013 — Runtime Operation Identity
+
+每個被 dispatcher接受執行的 Runtime interaction，在執行 Action前建立唯一、不可復用的本地 operation token。token scope只涵蓋該次 admitted interaction，不等於 event ID、recovery episode ID或 network idempotency key。
+
+~~~text
+RuntimeOperation
+├─ operation_token
+├─ instance_id
+├─ instance_epoch
+├─ admitted_monotonic_ms
+├─ soft_deadline_monotonic_ms
+├─ hard_deadline_monotonic_ms
+├─ checkpoint_plan[]
+├─ completed_checkpoints[]
+└─ status
+~~~
+
+Lifecycle：
+
+~~~text
+STARTED → PROCESSING → COMMITTED
+                     → TIMED_OUT
+                     → FAILED
+                     → CANCELLED
+~~~
+
+Rules：
+
+1. token在 interaction被接受執行時建立；不能等到 commit後才建立。
+2. 每個 admitted interaction恰好一個 token；Retry必須建立新 token，closed token永不 reopen / reuse。
+3. `COMMITTED / TIMED_OUT / FAILED / CANCELLED`全部是 terminal closed status。
+4. Soft Timeout只是 `PROCESSING` 上的 non-terminal wait condition，不是 lifecycle terminal status。
+5. operation token只授權該 operation嘗試 commit；不授權繞過 FIFO、type、constraint、trust或resource rules。
+6. F00可訂閱 lifecycle / checkpoint presentation，但不能以 UI state決定 commit。
+
+## 16.2 F03-RQ-014 — Checkpoint / Progress Truth
+
+operation開始時建立 finite、ordered checkpoint plan。checkpoint只代表已完成的真實 work milestone；不代表剩餘時間。
+
+~~~text
+progress_percent = completed_checkpoints / planned_checkpoints × 100
+~~~
+
+Rules：
+
+- checkpoint completion必須 monotonic、operation-scoped且不可撤回。
+- 不同 action可有不同 plan；沒有可靠 plan時只回報 stage，不回報百分比。
+- `commit_ready`最多表示 pre-commit validation已完成，不得回報100%。
+- 只有 atomic commit已成立、token轉 `COMMITTED`後才可回報100%。
+- 不為了讓 progress/loading肉眼可見而延長 action。
+- 極快 action可能在同一 browser render frame內完成；logical lifecycle仍存在。
+
+Minimum guard boundaries：
+
+~~~text
+operation admission
+→ action-step boundary
+→ derived/rule recompute boundary
+→ pre-commit
+→ committed
+~~~
+
+不是每個 boundary都必須成為 User-visible checkpoint；只有事先列入 plan且真正完成者才可計數。
+
+## 16.3 F03-POL-001 — Monotonic Deadline + Guard Points
+
+Phase 1維持 Browser main-thread、synchronous Action transaction、no async external Action step。Hard Timeout不宣稱可用 `setTimeout()`強制中斷正在佔用 main thread的 trusted synchronous code。
+
+F03使用 monotonic deadline，並在以下 guard points強制檢查：
+
+1. 每個 action-step boundary前後。
+2. 每次 affected derived/rule recompute boundary前後。
+3. capability handler返回後。
+4. **pre-commit（必查）**。
+
+Soft deadline跨越：
+
+- operation仍是 `PROCESSING`。
+- committed store完全不動。
+- progress停在最後完成 checkpoint。
+- 通知 F00/O05顯示 long-wait copy。
+
+Hard deadline跨越：
+
+~~~text
+close token as TIMED_OUT
+→ discard working transaction
+→ discard staged effects / emitted events
+→ preserve committed store unchanged
+→ emit F03-ERR-021
+→ F12 timeout recovery
+~~~
+
+若 trusted synchronous handler在 hard deadline後才返回，後續 guard與 pre-commit guard仍必須拒絕 commit。真正永不返回的 trusted code無法由同一 main thread preempt；由 Capability CI、code review與既有 resource guard防守。需要 hard preemption時才升級至 Worker architecture，不在本 Delta改變 Browser-first Runtime。
+
+## 16.4 F03-RQ-015 — Commit Eligibility / Stale Completion
+
+每次 commit前必須同時證明：
+
+~~~text
+token is active + open
+AND token is current for the admitted operation
+AND instance_epoch matches
+AND hard deadline has not elapsed
+AND Runtime / Store integrity holds
+~~~
+
+任一條不成立：
+
+- 禁止 commit。
+- discard working transaction、staged effects與尚未 enqueue的 emitted events。
+- closed / stale token永遠不可 reopen。
+- late callback / completion只記錄 `stale_completion_discarded` evidence，不可改變 committed store或目前 recovery outcome。
+
+Timeout不是 rollback committed state。因 atomic transaction從未修改 committed store，safe recovery只是丟棄 working copy並重新露出一直存在的 last committed state。
 
 # 17. SET_STATE
 
@@ -1044,6 +1170,7 @@ Phase 1：
 - timers/UI callbacks only enqueue
 - no async external Action step
 - future Worker 可算 heavy pure compute，但 state commit 回 single-writer dispatcher
+- 每個 admitted interaction有獨立 operation token；token與deadline guard不改變 FIFO single-writer ordering
 
 因此 normal interaction 不需要 DB lock / distributed transaction。
 
@@ -1139,12 +1266,15 @@ diagnostic / recovery if > 250 ms
 
 JS 無法可靠 preempt infinite trusted code；因此 trusted Capability code 必須 CI test / code review。Blueprint DSL 自身無 loop。
 
+Timeout enforcement使用 monotonic deadline + §16.3 guard points；不得把 browser timer callback描述成 main-thread hard preemption。
+
 # 38. Internal Module Contract
 
 ~~~text
 createRuntimeInstance(admittedBlueprint, runtimeContext)
 hydrateInstance(instance)
-dispatchRuntimeEvent(instanceId, event)
+dispatchRuntimeEvent(instanceId, event) → RuntimeOperationHandle
+subscribeRuntimeOperation(operationToken, listener)
 evaluateValue(instanceId, valueSource, scope?)
 evaluateResult(instanceId)
 captureRuntimeSnapshot(instanceId)
@@ -1162,6 +1292,8 @@ disposeCapability(nodeId)
 ~~~
 
 NFF-owned interfaces，不把 React / vendor API 當核心 protocol。
+
+`RuntimeOperationHandle`只暴露 operation token與只讀 lifecycle / checkpoint projection；consumer不能透過 handle強制 commit、reopen token或修改 Runtime store。
 
 # 39. Backend / Network Behavior
 
@@ -1212,6 +1344,7 @@ Telemetry failure 不阻斷 Runtime。
 | F03-ERR-018 | RUNTIME_INVARIANT_BROKEN | Instance | NO |
 | F03-ERR-019 | RESULT_EVALUATION_FAILED | Result | CONDITIONAL |
 | F03-ERR-020 | INSTANCE_DISPOSED | Instance | NO |
+| F03-ERR-021 | RUNTIME_ACTION_TIMEOUT | Action | CONDITIONAL |
 
 F12 負責 humanized message / next action。
 
@@ -1251,6 +1384,16 @@ stop Instance
 
 Recovery 不 mutation Blueprint。
 
+Runtime action timeout：
+
+~~~text
+discard uncommitted transaction + staged effects
+→ keep last committed state
+→ close operation token
+→ F12-POL-011 when integrity holds
+or F03-ERR-018 → F12-POL-001 when integrity cannot be proven
+~~~
+
 # 42. Evidence Contract Seed
 
 正式 envelope 由 F07 定義。
@@ -1266,6 +1409,12 @@ F03-EVT-007 node_isolated
 F03-EVT-008 loop_guard_triggered
 F03-EVT-009 result_evaluated
 F03-EVT-010 runtime_fatal
+F03-EVT-011 runtime_operation_started
+F03-EVT-012 runtime_checkpoint_completed
+F03-EVT-013 runtime_soft_timeout_observed
+F03-EVT-014 runtime_action_timed_out
+F03-EVT-015 stale_completion_discarded
+F03-EVT-016 runtime_safe_state_restored
 ~~~
 
 不要記：
@@ -1336,6 +1485,16 @@ Evidence：
 - F03-AC-028 telemetry failure 不阻斷 Runtime。
 - F03-AC-029 evidence 不要求 raw Runtime state。
 
+Runtime Operation / Timeout：
+
+- F03-AC-030 每個 admitted Runtime interaction建立唯一 operation token，terminal token永不重用或 reopen。
+- F03-AC-031 checkpoint progress保持單調、truthful、operation-scoped；無可靠 checkpoint plan時不造假百分比。
+- F03-AC-032 Hard Timeout不留下 partial state、staged effect或未提交 event；committed store保持原樣。
+- F03-AC-033 closed / stale token與 late completion永遠不得 commit。
+- F03-AC-034同一 recovery episode的每次 Retry都建立新 operation token。
+- F03-AC-035 hard deadline跨越後，即使 synchronous handler稍後返回，pre-commit guard仍拒絕 commit。
+- F03-AC-036 Runtime integrity無法證明時，必須產生 F03-ERR-018並停止 affected execution path，不得回正常 Runtime。
+
 # 44. Test Mapping Seed
 
 ~~~text
@@ -1354,6 +1513,13 @@ F03-AC-018 → TEST-F03-018 trust gate
 F03-AC-019 → TEST-F03-019 disposal cleanup
 F03-AC-021 → TEST-F03-021 Blueprint immutability
 F03-AC-022 → TEST-F03-022 no server-per-interaction
+F03-AC-030 → TEST-F03-030 unique operation token per admitted interaction
+F03-AC-031 → TEST-F03-031 monotonic truthful operation-scoped checkpoints
+F03-AC-032 → TEST-F03-032 timeout leaves no partial state or effect commit
+F03-AC-033 → TEST-F03-033 closed or stale token cannot commit
+F03-AC-034 → TEST-F03-034 retry creates a fresh token
+F03-AC-035 → TEST-F03-035 pre-commit rejects post-deadline completion
+F03-AC-036 → TEST-F03-036 integrity uncertainty fails closed
 ~~~
 
 完整 Executable Acceptance 待 Function contracts 完成後統一升級。
@@ -1442,95 +1608,24 @@ Validated immutable Blueprint
 
 ---
 
-## Pending Material Delta — Runtime Interaction Processing / Timeout
+## Closed Working Delta — Runtime Interaction Processing / Timeout
 
-> 狀態：USER DIRECTION CONFIRMED / WORKING REVIEW PENDING
+> 狀態：WORKING_DELTA_CLOSED（2026-09-22）/ FORMAL_REFRESH_PENDING
 >
-> Formal Spec：**暫不修改**。
+> Formal Spec：**暫不修改**；本 Working contract待 pre-Cursor Formal Spec Refresh一次同步。
 >
-> 此節補足目前 F03 尚缺的 normal Runtime action timeout lifecycle。
+> Canonical detail已整合至 §16.1–§16.4、Error / Evidence、Acceptance / Test sections。
 
-### Proposed Runtime Operation State
+### Closure Summary
 
-每次 committed Runtime interaction建立本地 operation token：
-
-~~~text
-IDLE
-→ STARTED
-→ PROCESSING
-→ COMMITTED
-or TIMED_OUT
-or FAILED
-~~~
-
-Requirements：
-- operation token 唯一識別該次 interaction。
-- Action transaction仍維持 atomic commit。
-- 未 COMMITTED 前不得發布半套 state。
-- PROCESSING 期間提供可驗證 checkpoint 給 F00/O05 做 progress presentation。
-
-### Proposed Checkpoint Contract
-
-Checkpoint只表示已完成工作，不表示剩餘時間。
+每次 admitted Runtime interaction建立本地 operation token：
 
 ~~~text
-operation_started
-→ action_steps_evaluated
-→ derived_rules_recomputed
-→ commit_ready
-→ committed
+STARTED → PROCESSING → COMMITTED | TIMED_OUT | FAILED | CANCELLED
 ~~~
 
-不是每個 action 都必須暴露相同 checkpoint；Runtime只可回報真實已完成 milestone。
+Closure invariant：
 
-### Proposed Soft Timeout
+> 只有 open + current + same instance epoch + within hard deadline + integrity-valid 的 token才有資格 commit。
 
-超過 policy-defined soft threshold：
-
-- operation仍可繼續。
-- last committed state保持。
-- progress停在最後真實 checkpoint。
-- 通知 F00/O05 顯示「還在處理，你的 App 和目前內容都還在。」
-
-### Proposed Hard Timeout
-
-超過 policy-defined hard threshold：
-
-~~~text
-PROCESSING
-→ TIMED_OUT
-→ discard uncommitted working state/effects
-→ preserve last committed state
-→ mark operation token closed
-→ F12 TIMEOUT
-~~~
-
-Rules：
-- safe時取消/abandon pending local effect。
-- late result / late callback若屬 closed operation token → STALE，禁止 commit。
-- timeout 不 mutation Blueprint。
-- 若 Instance integrity仍成立 → 可回 safe S03。
-- 若 integrity不確定 → F12 INTEGRITY / CRITICAL，停止 affected execution path。
-
-### Proposed Error / Evidence Seeds
-
-待 Review 決定正式 ID：
-- RUNTIME_ACTION_TIMEOUT
-- STALE_OPERATION_COMPLETION
-
-Evidence 至少需要：
-- operation_started
-- operation_timed_out
-- stale_completion_discarded
-- runtime_safe_state_restored
-
-### Proposed Acceptance / Test Seeds
-
-- action timeout不留下 partial state。
-- timeout後 late completion不能 commit。
-- last committed state可安全恢復。
-- retry建立新 operation token，不重用已 closed token。
-- global processing feedback不新增 server round trip或 LLM call。
-- timeout / recovery不破壞 Browser-first Runtime boundary。
-
-此節待 F00/F03/F12 Working Delta Review 正式閉合。
+Hard Timeout使用 monotonic deadline與 guard points拒絕晚到 commit；不宣稱 main-thread timer可強制中斷卡死的 trusted code。Atomic transaction確保 last committed state從未被本次未完成 operation改變；integrity成立時由 F12安全露出該 state，否則以 F03-ERR-018 fail closed。

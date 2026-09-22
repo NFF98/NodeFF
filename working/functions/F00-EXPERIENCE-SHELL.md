@@ -1,6 +1,6 @@
 # F00 — Experience Shell / 靈感精靈
 
-> 狀態：SPEC_READY + WORKING_DELTA_PENDING_REVIEW
+> 狀態：SPEC_READY + WORKING_DELTA_CLOSED / FORMAL_REFRESH_PENDING
 > Formal Spec：spec/functions/F00-EXPERIENCE-SHELL.md
 >
 > Canonical Role：Phase 1 Consumer Experience Shell、Creation UX、Clarification / Assumption UX、Runtime Frame、Result Feedback Entry、Share / Remix / Recovery Entry 的 Working Current Truth。
@@ -814,6 +814,14 @@ ShellState
 │  ├─ active_blueprint_hash?
 │  ├─ runtime_instance_id?
 │  ├─ result_summary?
+│  ├─ runtime_processing?
+│  │  ├─ operation_token
+│  │  ├─ status
+│  │  ├─ stage_label_key
+│  │  ├─ completed_checkpoints
+│  │  ├─ planned_checkpoints?
+│  │  ├─ progress_percent?
+│  │  └─ soft_timeout_observed
 │  └─ correction_history?
 │     ├─ correction_id
 │     ├─ base_blueprint_hash
@@ -831,6 +839,8 @@ ShellState
 ~~~
 
 F00 local state不是 durable product truth。
+
+`runtime_processing`只是 F03 lifecycle的presentation projection；F00不得自行推進 checkpoint、關閉 token、判斷 deadline或授權 commit。
 
 # 26. Browser Persistence
 
@@ -880,6 +890,8 @@ F00與 F03使用 local Runtime interfaces：
 ~~~text
 createRuntimeInstance
 hydrateInstance
+dispatchRuntimeEvent → RuntimeOperationHandle
+subscribeRuntimeOperation
 evaluateResult
 disposeRuntimeInstance
 ~~~
@@ -914,12 +926,16 @@ Browser Back / in-app Back：
 
 ## F00-UX-022
 
-Loading只用在真的 asynchronous work：
+Loading / processing presentation只反映真的 operation work：
 
 - ANALYZING：composer保留，顯示 operation state。
 - BUILDING：可顯示 shell skeleton，不 fake generated content。
 - HYDRATING：shell先顯示，Runtime ready後才互動。
-- local Runtime action不顯示 global loading。
+- 每個被 F03 accepted / admitted 的 S03 Runtime interaction，都建立 operation token並進入 logical `GLOBAL_PROCESSING`。
+- Runtime interaction極快且在同一 render frame內完成時，完整 loading frame可能不會實際 paint；這不構成 violation，也不得為了讓動畫可見而人工延長 operation。
+- 有可靠 finite checkpoint plan時顯示 Stage label + checkpoint-derived Progress %；沒有可靠 checkpoints時只顯示 stage，不假造百分比。
+- `100%` 只可在 F03 commit已成立後呈現；`commit ready` 不等於 `100%`。
+- Soft Timeout維持 processing presentation與最後真實 checkpoint；Hard Timeout由 F03關閉 operation，再交 F12呈現 recovery。
 
 避免 spinner覆蓋整個產品。
 
@@ -1041,7 +1057,7 @@ Core Flow：
 
 Runtime / Product Loop：
 
-- F00-AC-008 normal Runtime interaction不觸發 global shell loading。
+- F00-AC-008 normal Runtime interaction不觸發 global shell loading。**Working disposition：SUPERSEDED；保留原 stable ID / 原語意，待 pre-Cursor Formal Spec Refresh標記 deprecated，不重用或改寫。**
 - F00-AC-009 APP surface可到 Share / Remix / Correction入口。
 - F00-AC-010 correction failure不破壞 current App。
 - F00-AC-011 Compare可 Accept New / Keep Previous / Adjust Again。
@@ -1075,6 +1091,13 @@ Evidence：
 - F00-AC-027 telemetry不記 every keystroke。
 - F00-AC-028 App Ready不被 telemetry命名為 semantic success。
 
+Runtime Processing Delta：
+
+- F00-AC-029 每個被 F03 accepted / admitted 的 Runtime interaction都進入 logical global processing presentation；同一 render frame內完成而未 paint完整 loading frame不算 failure。
+- F00-AC-030 checkpoint-derived Progress %只反映已完成的 planned checkpoints，且只有 commit成立後才可呈現100%。
+- F00-AC-031 Runtime processing不得為了讓 loading可見而人工延長 action。
+- F00-AC-032 Runtime Hard Timeout必須轉交 F12；integrity成立時回到安全 S03 last-known-good App，無法證明 integrity時進 terminal safe-state。
+
 # 38. Test Mapping Seed
 
 ~~~text
@@ -1093,6 +1116,10 @@ F00-AC-019 → TEST-F00-019 duplicate submit guard
 F00-AC-020 → TEST-F00-020 shell/runtime boundary
 F00-AC-022 → TEST-F00-A11Y-001 keyboard create flow
 F00-AC-024 → TEST-F00-RWD-001 mobile clarification/compare
+F00-AC-029 → TEST-F00-029 runtime interaction global processing presentation
+F00-AC-030 → TEST-F00-030 truthful checkpoint progress and 100% after commit
+F00-AC-031 → TEST-F00-031 no artificial processing delay
+F00-AC-032 → TEST-F00-032 timeout to F12 safe S03 or terminal state
 ~~~
 
 # 39. Dependencies
@@ -1174,15 +1201,15 @@ DISCOVER
 
 ---
 
-## Pending Material Delta — Runtime Global Loading + Timeout
+## Closed Working Delta — Runtime Global Loading + Timeout
 
-> 狀態：USER DIRECTION CONFIRMED / WORKING REVIEW PENDING
+> 狀態：WORKING_DELTA_CLOSED（2026-09-22）/ FORMAL_REFRESH_PENDING
 >
-> Formal Spec：**暫不修改**。本節不是已 promotion 的 implementation contract。
+> Formal Spec：**暫不修改**。既有 Formal F00-UX-022 / F00-AC-008仍保持原文；待 pre-Cursor Formal Spec Refresh一次同步。
 >
 > 來源：Phase 1 O05 Low-fi Review + DESIGN-WORKBENCH。
 
-User 已確認新的 UX 方向：
+已批准的 Working Current Truth：
 
 1. S03 normal local Runtime interaction 也要顯示 global loading / processing feedback。
 2. Progress 統一採 Stage label + checkpoint-derived Progress %。
@@ -1190,35 +1217,32 @@ User 已確認新的 UX 方向：
 4. checkpoint 卡住時停在最後真實值，不人工灌高。
 5. Runtime operation 必須有 Timeout → Humanized Recovery → safe S03 return。
 
-這與目前已 promotion 的 F00-UX-022 / F00-AC-008「normal Runtime interaction不觸發 global shell loading」衝突，因此屬 **Material Function Delta**。
+這取代 Working 層的舊方向；既有 stable `F00-AC-008` 不改寫，標為 Working superseded，未來 Formal Refresh時 deprecated。
 
-### Proposed F00 Presentation Delta
+### F00 Presentation Contract
 
-S03 committed Runtime interaction：
+S03 interaction被 F03接受執行時：
 
 ~~~text
 User Action
+→ F03 ADMITTED + operation token created
 → GLOBAL_PROCESSING
 → COMMITTED → APP
-or
-→ TIMED_OUT / FAILED → F12 Recovery → safe APP / terminal safe-state
+or → TIMED_OUT / FAILED → F12 Recovery → safe APP / terminal safe-state
 ~~~
 
 Presentation：
-- global processing feedback 必須可見。
+- 每個 admitted interaction必須進 logical global processing state；極快操作可以在 browser paint前完成，不要求人工延遲以強迫 loading frame可見。
 - 有可靠 checkpoints → 顯示 Progress %。
 - 沒有可靠 checkpoints → 顯示 stage / processing state，但不假造百分比。
+- progress plan在 operation開始時固定為 finite ordered checkpoints；% = completed / planned。
+- checkpoint必須單調且 operation-scoped；Soft Timeout時停在最後真實完成值。
+- 只有 COMMITTED後可顯示100%；commit-ready仍不是100%。
 - 不為了讓 loading 可見而刻意延長完成時間。
-- timeout 後若 last-known-good Runtime integrity成立，回到安全 S03；否則進 O03 terminal safe-state。
+- Hard Timeout後若 last-known-good Runtime integrity成立，F12回到安全 S03；否則進 O03 terminal safe-state。
 
-### Proposed F00 Acceptance Delta
+### F00 Acceptance Delta
 
-正式 Review 時至少需新增／修改：
-- normal local Runtime interaction會得到 global processing feedback。
-- processing成功後自動回 S03，不增加多餘確認頁。
-- soft timeout保留 current App/context。
-- hard timeout安全返回 last-known-good App when integrity holds。
-- stale late completion不得在 timeout後偷偷改變 active UI state。
-- F12 terminal判斷時不得強制返回不安全 Runtime。
+新增 `F00-AC-029`–`F00-AC-032` 與 `TEST-F00-029`–`TEST-F00-032`；machine-readable mapping同步在 `working/registries/acceptance-test-registry.json`。
 
-此節待下一輪 F00/F03/F12 Working Function Delta Review 後才能成為 Working Current Truth。
+F03 operation truth與 F12 recovery truth分別由其 Working文件擁有；F00只呈現，不自行判斷 commit / integrity。

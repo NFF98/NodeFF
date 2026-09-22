@@ -1,6 +1,6 @@
 # F12 — Humanized Recovery Orchestration
 
-> 狀態：SPEC_READY + WORKING_DELTA_PENDING_REVIEW
+> 狀態：SPEC_READY + WORKING_DELTA_CLOSED / FORMAL_REFRESH_PENDING
 > Formal Spec：spec/functions/F12-HUMANIZED-RECOVERY.md
 >
 > Canonical Role：Phase 1 Cross-Function Error Classification、Recovery Policy、Context Preservation、Humanized Message、Next Action、Recovery Episode Evidence 的 Working Current Truth。
@@ -502,6 +502,13 @@ Phase 1 max user-triggered immediate retries in同一 episode：
 - transient依賴 → RETRY_LATER / Edit / Keep current
 - terminal error → 本來就不提供 Retry
 
+Runtime action timeout Retry補充：
+
+- 同一 User-visible F12 recovery episode可以有多次 Retry，但每次 Retry都是新的 F03 operation。
+- 每次 Retry必須建立新 operation token；舊 token保持 closed，永不復用。
+- Retry click只使 episode進 `ACTION_SELECTED / RECOVERING`，不等於成功。
+- 只有新 operation成功 commit並回到 safe continuation，episode才標 `RECOVERED`。
+
 # 16. F00 Presentation Mapping
 
 ~~~text
@@ -556,9 +563,16 @@ F02 internal validation report不直接顯示 Consumer。
 | node render failure | PARTIAL_COMPONENT_FAILURE | DEGRADED | App + other nodes | RETRY / CONTINUE |
 | runtime version incompatible | INCOMPATIBLE | TERMINAL | Blueprint ref | RELOAD / RETURN_HOME |
 | loop guard | STATE_OR_ACTION_FAILURE | BLOCKING_RECOVERABLE | last committed state | KEEP_CURRENT_APP / RELOAD |
+| F03-ERR-021 RUNTIME_ACTION_TIMEOUT | TIMEOUT | BLOCKING_RECOVERABLE | CURRENT_BLUEPRINT + last committed CURRENT_RUNTIME_INSTANCE + CURRENT_RESULT when valid | RETRY + KEEP_CURRENT_APP；budget exhausted時 KEEP_CURRENT_APP + RETRY_LATER |
 | invariant broken | INTERNAL_INVARIANT | CRITICAL | safe Blueprint ref | RELOAD / RETURN_HOME |
 
 F03 atomic rollback / node isolation仍是 source truth。
+
+Runtime timeout precedence：
+
+- F03可以證明 atomic transaction未 commit且 Instance integrity成立 → `F12-POL-011`。
+- F03無法證明 integrity → 不把 F03-ERR-021「升級」成另一種 timeout；直接產生既有 `F03-ERR-018 RUNTIME_INVARIANT_BROKEN`，由 `F12-POL-001`接管。
+- F12不自行推測 Runtime integrity。
 
 # 20. F04 Recovery Mapping
 
@@ -888,6 +902,29 @@ same source operation
 
 如果 error class、safe context改變，或 User開新 semantic operation，才建新 episode。
 
+## F12-POL-011 — Runtime Timeout Preserve Last Known Good
+
+適用 source：`F03-ERR-021 RUNTIME_ACTION_TIMEOUT`，且 F03已證明 Instance integrity成立。
+
+~~~text
+recovery_class = TIMEOUT
+severity = BLOCKING_RECOVERABLE
+preserve = CURRENT_BLUEPRINT
+         + last committed CURRENT_RUNTIME_INSTANCE
+         + CURRENT_RESULT when still valid
+safe_surface = APP_CURRENT
+message_key = recovery.runtime.action_timeout
+~~~
+
+Next actions：
+
+- retry budget可用 → Primary `RETRY` + Secondary `KEEP_CURRENT_APP`。
+- budget exhausted → `KEEP_CURRENT_APP` + `RETRY_LATER`。
+
+Recovery不是把 state rollback回去：F03 atomic transaction從未修改 committed store；F12只是移除 processing/recovery阻擋並重新露出一直存在的 last committed Runtime state。
+
+若 F03回報 integrity無法證明，F12-POL-011不得套用；`F03-ERR-018 → F12-POL-001`具有優先權，affected execution path停止並進 terminal safe-state。
+
 # 36. Diagnostics Contract
 
 internal diagnostic context可包括：
@@ -1006,6 +1043,12 @@ Architecture：
 - F12-AC-027 Recovery不繞過 F02/F04 trust / compatibility。
 - F12-AC-028 telemetry failure本身不阻斷產品 recovery。
 
+Runtime Timeout Delta：
+
+- F12-AC-029 F03-ERR-021在 integrity成立時依 F12-POL-011保留 last-known-good App並回 `APP_CURRENT`。
+- F12-AC-030 integrity / critical precedence高於 TIMEOUT convenience recovery；無法證明安全時不得回正常 Runtime。
+- F12-AC-031同一 recovery episode每次 Retry都建立新的 F03 operation token，且只有 safe continuation成立才標 `RECOVERED`。
+
 # 40. Test Mapping Seed
 
 ~~~text
@@ -1027,6 +1070,9 @@ F12-AC-021 → TEST-F12-021 retry not success
 F12-AC-023 → TEST-F12-023 evidence privacy
 F12-AC-025 → TEST-F12-025 no recovery API
 F12-AC-027 → TEST-F12-027 trust cannot bypass
+F12-AC-029 → TEST-F12-029 timeout preserves last-known-good APP_CURRENT
+F12-AC-030 → TEST-F12-030 integrity precedence over timeout recovery
+F12-AC-031 → TEST-F12-031 recovery episode and fresh token separation
 ~~~
 
 # 40.1 Machine-readable Recovery Registry
@@ -1118,19 +1164,20 @@ Fxx-ERR technical truth
 
 ---
 
-## Pending Material Delta — Runtime Action Timeout Recovery
+## Closed Working Delta — Runtime Action Timeout Recovery
 
-> 狀態：USER DIRECTION CONFIRMED / WORKING REVIEW PENDING
+> 狀態：WORKING_DELTA_CLOSED（2026-09-22）/ FORMAL_REFRESH_PENDING
 >
-> Formal Spec：**暫不修改**。
+> Formal Spec：**暫不修改**；本 Working policy待 pre-Cursor Formal Spec Refresh一次同步。
 
-F12 已有 common `TIMEOUT` recovery class，但 normal F03 Runtime action 尚缺完整 mapping。
+normal F03 Runtime action timeout已由 `F12-POL-011`形成完整 mapping。
 
-### Proposed Mapping
+### Closed Mapping
 
 ~~~text
-F03 Runtime Action Hard Timeout
+F03-ERR-021 RUNTIME_ACTION_TIMEOUT
 → recovery_class = TIMEOUT
+→ policy_id = F12-POL-011
 → preserve = CURRENT_BLUEPRINT + CURRENT_RUNTIME_INSTANCE(last committed) + CURRENT_RESULT when safe
 → severity = BLOCKING_RECOVERABLE when integrity holds
 → retryability = IMMEDIATE_RETRY / RETRY_LATER by budget
@@ -1149,8 +1196,9 @@ Next actions：
 若 timeout伴隨 Runtime integrity uncertainty：
 
 ~~~text
-TIMEOUT + integrity uncertainty
-→ INTEGRITY_FAILURE / CRITICAL precedence
+F03 cannot prove integrity
+→ F03-ERR-018 RUNTIME_INVARIANT_BROKEN
+→ F12-POL-001 / CRITICAL precedence
 → terminal safe-state
 → no unsafe retry
 ~~~
@@ -1160,13 +1208,9 @@ TIMEOUT + integrity uncertainty
 沿用 F12既有規則：
 - 同一 recovery episode immediate User Retry最多3次。
 - 第4次改 RETRY_LATER 或 alternate safe path。
+- 每次 Retry建立新 F03 operation token；old token永不復用。
+- Retry click不等於 recovered；新 operation成功回 safe continuation才標 `RECOVERED`。
 
-### Acceptance Seeds
+### Acceptance Closure
 
-- timeout User看不到 raw timer / internal code。
-- timeout recovery明確說明哪些 context已保留。
-- last-known-good App完整時能回 APP_CURRENT。
-- integrity不確定時不得假裝 recover。
-- stale completion被 F03丟棄後不得改變 recovery outcome。
-
-此節待 F00/F03/F12 Working Delta Review 正式閉合。
+新增 `F12-AC-029`–`F12-AC-031` 與 `TEST-F12-029`–`TEST-F12-031`；machine mapping同步在 Working registries。F03負責 stale completion discard與 integrity判斷，F12不重做 Runtime transaction logic。

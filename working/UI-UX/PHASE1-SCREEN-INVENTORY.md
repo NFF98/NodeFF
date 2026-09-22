@@ -1,6 +1,6 @@
 # Phase 1 Screen Inventory
 
-> 狀態：WORKING UI/UX — ALL ④A LOW-FI DIRECTIONS REVIEWED / FUNCTION DELTA PENDING
+> 狀態：WORKING UI/UX — ALL ④A LOW-FI DIRECTIONS REVIEWED / FUNCTION DELTA CLOSED / CROSS-SCREEN REVIEW PENDING
 >
 > 目的：管理 Phase 1 的 Screen / Surface 地圖、Screen-level UX Review 狀態與畫面之間的關係。
 >
@@ -24,12 +24,12 @@ Phase 1 目前採 **6 個主要 Screen / Surface + 5 類 Overlay / State**。
 |---|---|---|---|---|
 | S01 | Discover / Start | 從想法或靈感開始 Create | F00 | **LOW_FI_DIRECTION_APPROVED** |
 | S02 | Create Workspace | 分析、補充必要資訊、確認假設並生成 App | F00 + F01 | **LOW_FI_DIRECTION_APPROVED** |
-| S03 | App / Runtime | 使用生成 App，進入 Share / Remix / Correct | F00 + F03 | **LOW_FI_DIRECTION_APPROVED — FUNCTION_DELTA_PENDING** |
+| S03 | App / Runtime | 使用生成 App，進入 Share / Remix / Correct | F00 + F03 | **LOW_FI_DIRECTION_APPROVED — FUNCTION_DELTA_CLOSED** |
 | S04 | Shared App Entry / Restore | 從分享連結恢復並立即使用 App | F05 + F00 | **LOW_FI_DIRECTION_APPROVED** |
 | S05 | Refine / Remix Workspace | 修改既有 App、Preview child、決定是否採用 | F06 + F00 | **LOW_FI_DIRECTION_APPROVED** |
 | S06 | Correction Compare | 比較修正前後並 Accept / Keep / Adjust | F16 + F00 | **LOW_FI_DIRECTION_APPROVED** |
 
-目前 S01–S06 Main Screens 與 O01–O05 Overlay / State 的 ④A Low-fi direction均已完成 User Review；但 S03/O05 的 Runtime Global Loading + Timeout 尚有 F00/F03/F12 Function Delta待閉合，因此 Low-fi Gate尚未宣告完全閉合。
+目前 S01–S06 Main Screens 與 O01–O05 Overlay / State 的 ④A Low-fi direction均已完成 User Review；S03/O05 的 Runtime Global Loading + Timeout F00/F03/F12 Function Delta也已閉合。下一個 gate是 Cross-Screen Consistency Review；完成前不進 High-fi。
 
 # 3. Overlay / State Inventory
 
@@ -39,7 +39,7 @@ Phase 1 目前採 **6 個主要 Screen / Surface + 5 類 Overlay / State**。
 | O02 | Correction Composer | S03 | 收集自然語言 correction feedback | F16 | **LOW_FI_DIRECTION_APPROVED** |
 | O03 | Recovery Overlay | S02 / S03 / S05 / S06 | 保留 context，提供 humanized next action | F12 | **LOW_FI_DIRECTION_APPROVED** |
 | O04 | Revert Confirmation | S03 | 確認回到 previous/base version | F00 + F16 | **LOW_FI_DIRECTION_APPROVED** |
-| O05 | Loading / Building / Hydration States | S02 / S03 / S04 / S05 / S06 / O02 / O03 / O04 | 顯示非同步進度與 bounded waiting state | F00 + related Fxx | **LOW_FI_DIRECTION_APPROVED — FUNCTION_DELTA_PENDING** |
+| O05 | Loading / Building / Hydration States | S02 / S03 / S04 / S05 / S06 / O02 / O03 / O04 | 顯示非同步進度與 bounded waiting state | F00 + related Fxx | **LOW_FI_DIRECTION_APPROVED — FUNCTION_DELTA_CLOSED** |
 
 Overlay / State 預設不建立獨立 route，也不應讓 User 無故失去目前 App / draft / comparison context。
 
@@ -156,7 +156,7 @@ User 已確認目前策略：
 
 - 現階段 **不更新 Formal Spec**。
 - 先完成：
-  1. F00/F03/F12 Runtime Loading + Timeout Working Function Delta Review；
+  1. F00/F03/F12 Runtime Loading + Timeout Working Function Delta Review（**完成：2026-09-22**）；
   2. Cross-Screen Consistency Review；
   3. High-fi Design System / ④B High-fi；
   4. Cursor Build / Operating Model討論。
@@ -167,6 +167,6 @@ User 已確認目前策略：
 
 下一個 Review：
 
-> **F00/F03 Runtime Loading + Timeout Function Delta Review**
+> **Cross-Screen Consistency Review**
 
-原因：O05 已確認 S03 normal local Runtime interaction也顯示 global loading，且要求完整 Timeout → Recovery → safe S03 return；目前 formal F00/F03 尚未完全支援。
+原因：所有 ④A Low-fi direction與唯一 pending Function Delta均已完成；依 sequencing下一步先檢查跨畫面的 navigation、CTA、loading/recovery、responsive與 terminology一致性，再進 High-fi Design System。Formal Spec與 Cursor implementation仍維持 HOLD。

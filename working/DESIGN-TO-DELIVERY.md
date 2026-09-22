@@ -717,3 +717,15 @@ Rules：
 6. Cursor Build / Operating Model未討論完成前，不啟動正式 product implementation。
 
 此 Temporary Gate不取消既有 Design-to-Delivery Gate；只固定本階段的 promotion時機。
+
+### Current Progress — 2026-09-22
+
+~~~text
+✅ Working Function Delta closure
+   F00 / F03 / F12 Runtime Loading + Timeout closed
+
+→ NEXT: UI/UX Cross-Screen Consistency Review
+→ HOLD: High-fi、Formal Spec Refresh、Backlog/Sprint refresh、Cursor implementation
+~~~
+
+本次 closure只更新 `working/` Current Truth與 machine-readable Working registries；`spec/`仍維持既有 frozen baseline。既有 Formal stable ID `F00-AC-008`不重寫，待 pre-Cursor Formal Spec Refresh標記 deprecated並由新 Acceptance IDs取代。

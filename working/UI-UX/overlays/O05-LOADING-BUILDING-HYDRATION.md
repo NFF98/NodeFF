@@ -2,7 +2,7 @@
 
 > Overlay / State ID：O05
 >
-> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / FUNCTION_DELTA_PENDING / HIGH_FI_PENDING**
+> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_PENDING / HIGH_FI_PENDING**
 >
 > Phase：Phase 1
 >
@@ -10,13 +10,13 @@
 >
 > Function behavior sources：F00 Experience Shell + F01 + F03 + F05 + F06 + F12 + F16。
 >
-> 本文件是 ④A Low-fi review draft，不代表 User 已批准，也不代表 Cursor 可實作。
+> 本文件的 ④A Low-fi direction與 Runtime Loading / Timeout Function Delta已完成 User Review；仍不是 Formal Spec或 Cursor implementation authority。
 
 # 1. User Outcome
 
 O05 的核心任務：
 
-> **任何真正需要等待的 asynchronous work，都要讓 User知道「現在在做什麼、做到哪裡、能不能取消、完成後會去哪裡」，但不能用假進度欺騙 User。**
+> **任何需要等待的 operation，以及每個被 F03接受的 S03 Runtime interaction，都要有真實 processing state；User看到的 stage / %不能假造，也不能為了動畫而拖慢完成。**
 
 O05 是跨畫面的共用 loading / progress presentation，不是獨立 route。
 
@@ -25,7 +25,7 @@ O05 是跨畫面的共用 loading / progress presentation，不是獨立 route�
 O05 可被以下畫面 / Overlay使用：
 
 - S02 Create Workspace。
-- S03 App / Runtime（只在真的 async shell/runtime transition；一般 local interaction不用 global loading）。
+- S03 App / Runtime（每個被 F03 admitted 的 interaction都有 logical global processing state；極快完成時不強迫 paint loading frame）。
 - S04 Shared App Restore。
 - S05 Refine / Remix。
 - S06 Correction Compare preparation / replay。
@@ -33,17 +33,17 @@ O05 可被以下畫面 / Overlay使用：
 - O03 Recovery Retry。
 - O04 Revert confirm → previous version hydration。
 
-# 3. Core Rule — Loading Only For Real Async Work
+# 3. Core Rule — Processing Only For Real Work
 
 沿用 F00：
 
 - ANALYZING → 顯示 operation progress。
 - BUILDING → 顯示 creation/build progress。
 - HYDRATING → 顯示 App準備進度。
-- **User-approved UI delta：normal local Runtime action 也進入 global loading state。此點目前與 formal F00/F03 contract衝突，待 Function Delta Review。**
+- normal local Runtime action被 F03接受後也進入 logical global processing state；Working F00/F03/F12已閉合此 contract。
 
 禁止：
-- 每按一個 local button就整頁 spinner。
+- 把每次 local interaction都強制畫成整頁 spinner；presentation應依 host surface穩定承接。
 - spinner蓋掉整個產品。
 - fake generated content skeleton。
 - 為了讓動畫好看而故意延遲完成。
@@ -210,7 +210,7 @@ Example：
 
 完成後直接回 S03 previous/base App。
 
-# 13. S03 Local Runtime Rule — User-approved Delta
+# 13. S03 Local Runtime Rule — Closed Working Contract
 
 User 已確認：
 
@@ -218,13 +218,14 @@ User 已確認：
     → global loading / processing state
 
 Presentation rules：
-- Runtime action開始時進 global processing state。
+- Runtime interaction被 F03 accepted / admitted、token建立時進 logical global processing state；不是等 commit後才進。
 - 有可靠 checkpoints時顯示 Stage + Progress %。
 - 無可靠細分時至少顯示 operation stage；不得用時間估算亂灌 %。
-- action成功 commit後立即回正常 S03。
+- 只有 action成功 commit後才可顯示100%，並立即回正常 S03。
 - 不為了讓 loading「看得到」而人工增加不必要等待。
+- action在同一 render frame內完成時，完整 loading frame可能不 paint；logical state仍需存在，且不算 UX violation。
 
-**Important：此決策與目前 formal F00「normal Runtime interaction不觸發 global shell loading」衝突，因此需要 F00/F03 Material Function Delta；O05 不得單獨改寫正式 Function truth。**
+**Formal sync note：** 既有 Formal F00仍是舊語意；此 Working Current Truth待 pre-Cursor Formal Spec Refresh一次同步。O05不擁有 operation / commit semantics，仍以 F03為 owner。
 
 Node/component單獨 async仍可有 component-local detail，但不取消全域 processing feedback。
 
@@ -262,7 +263,7 @@ Primary content保持穩定，不讓 layout不停跳。
 
 # 16. Progress Completion
 
-100% 只在 actual ready condition成立時顯示。
+100% 只在 actual ready / Runtime commit condition成立後顯示。
 
 Rules：
 - 不先跑到100%再等 backend。
@@ -286,22 +287,21 @@ Rules：
 
 # 18. Runtime Timeout → Normal UX Return
 
-現有 Function 狀態：
-- F12 已有 TIMEOUT recovery class、bounded Retry / Retry Later / safe surface。
-- F00 已有 Create / Analyze 類 operation timeout。
-- **F03 尚未有完整的 normal Runtime action timeout → recovery → return-to-normal-S03 UX contract。**
-
-因此新增 Working Design requirement：
+Working Function contract已閉合：
+- F03擁有 operation token、deadline guard、atomic discard、stale completion與 integrity判斷。
+- F12-POL-011擁有 `F03-ERR-021 → TIMEOUT → APP_CURRENT` recovery。
+- F00/O05只呈現 lifecycle與 recovery outcome。
 
 ## Runtime interaction watchdog
 
-每次 S03 Runtime interaction建立 operation token：
+每次被接受執行的 S03 Runtime interaction建立 operation token：
 
     STARTED
     → PROCESSING
     → COMMITTED
     or TIMED_OUT
     or FAILED
+    or CANCELLED
 
 Timeout分兩層：
 
@@ -315,17 +315,19 @@ Timeout分兩層：
 
 不亂灌 %。
 
+Soft Timeout是 `PROCESSING` 上的 non-terminal wait condition，不是 operation terminal state。
+
 ### Hard Timeout
 
 超過 policy-defined hard threshold：
 
-    mark operation timed out
-    → stop / abandon affected processing where safe
-    → discard uncommitted transaction
-    → preserve last committed Runtime state
-    → ignore stale late completion for that operation token
-    → F12 TIMEOUT recovery
-    → return to safe S03 UX
+    close operation token as TIMED_OUT
+    → discard uncommitted transaction + staged effects/events
+    → keep committed store unchanged
+    → late/stale completion cannot commit
+    → F03-ERR-021
+    → F12-POL-011 TIMEOUT recovery
+    → return to safe S03 UX when integrity holds
 
 Default humanized outcome：
 
@@ -338,7 +340,16 @@ Actions依 F12：
 
 如果 timeout造成 integrity uncertainty：
 - 不自動回正常 Runtime。
-- 升級 O03 terminal / critical safe-state。
+- F03直接產生既有 F03-ERR-018，由 F12-POL-001進 O03 terminal / critical safe-state；不把不安全狀況當成可恢復 TIMEOUT。
+
+Retry：
+- 同一 F12 recovery episode可 Retry，但每次 Retry建立新的 F03 operation token。
+- closed token永不復用；成功回到 safe continuation後 episode才標 `RECOVERED`。
+
+Browser limitation：
+- Phase 1以 monotonic deadline + action-step / recompute / pre-commit guard檢查超時。
+- main thread被 trusted synchronous code佔用時，`setTimeout()`不能強制中斷；handler晚回仍會在 pre-commit被拒絕。
+- 真正無法返回的 trusted code由 Capability CI / review / resource guard防守；本 Delta不改成 Worker architecture。
 
 Exact soft/hard timeout數值由 F03/F12 Function policy決定，不在 UI Low-fi硬編秒數。
 
@@ -370,16 +381,14 @@ User 已確認：
 
 1. O05 統一採 **Stage label + checkpoint-derived Progress %**；%代表工作完成度，不代表剩餘時間。
 2. S02「no fake %」細化為：**有可靠 checkpoints就顯示 %；沒有就不假造**，與 S04 / O02一致。
-3. **S03 normal local Runtime interaction也要顯示 global loading / processing state。** 此點為 F00/F03 Material Function Delta，尚待 Function Review。
+3. **S03每個被 F03 admitted 的 Runtime interaction都有 logical global processing state。** F00/F03/F12 Material Function Delta已閉合；極快完成不強迫 paint loading frame。
 4. 某 checkpoint卡住時，%停在最後真實完成值，不用動畫灌高。
-5. 必須有 Timeout → Recovery → 正常 UX return設計；F12已有 TIMEOUT骨架，但 F03 normal Runtime action缺完整 contract，已記錄為 Function Gap。
+5. Timeout → Recovery → safe S03 / terminal safe-state contract已由 F03 + F12閉合。
 
 # 22. Review Status
 
-> **LOW_FI_DIRECTION_APPROVED — FUNCTION_DELTA_PENDING — HIGH_FI_PENDING**
+> **LOW_FI_DIRECTION_APPROVED — FUNCTION_DELTA_CLOSED — CROSS_SCREEN_REVIEW_PENDING — HIGH_FI_PENDING**
 
-O05 的 Low-fi presentation direction已由 User確認。
+O05 的 Low-fi presentation direction與 Runtime Function Delta已由 User確認。
 
-但因 S03 global loading + Runtime action timeout涉及正式 F00/F03 behavior change，在 Function Delta閉合前，Phase 1 UI/UX Low-fi Gate **不得宣告完全閉合**，也不得進 High-fi。
-
-下一步應先完成 F00/F03 Working Function Delta Review，再做 Cross-Screen Consistency Review。
+下一步是 Cross-Screen Consistency Review；其完成前仍不得進 High-fi。Formal Spec與 Cursor implementation維持 HOLD。
