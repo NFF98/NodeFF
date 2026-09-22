@@ -1,6 +1,6 @@
 # Phase 1 Screen Inventory
 
-> 狀態：WORKING UI/UX — LOW-FI + CROSS-SCREEN APPROVED / HIGH-FI DIRECTION A VISUALLY APPROVED / S01 ④B IN PROGRESS
+> 狀態：WORKING UI/UX — LOW-FI + CROSS-SCREEN APPROVED / HIGH-FI DIRECTION A VISUALLY APPROVED / S01 ④B HIGH-FI APPROVED / S02 ④B NEXT
 >
 > 目的：管理 Phase 1 的 Screen / Surface 地圖、Screen-level UX Review 狀態與畫面之間的關係。
 >
@@ -22,7 +22,7 @@ Phase 1 目前採 **6 個主要 Screen / Surface + 5 類 Overlay / State**。
 
 | ID | Screen / Surface | Primary User Outcome | Main Function Sources | Screen Design Status |
 |---|---|---|---|---|
-| S01 | Discover / Start | 從想法或靈感開始 Create | F00 | **LOW_FI_DIRECTION_APPROVED** |
+| S01 | Discover / Start | 從想法或靈感開始 Create | F00 | **④A LOW_FI_APPROVED / ④B HIGH_FI_APPROVED** |
 | S02 | Create Workspace | 分析、補充必要資訊、確認假設並生成 App | F00 + F01 | **LOW_FI_DIRECTION_APPROVED** |
 | S03 | App / Runtime | 使用生成 App，進入 Share / Remix / Correct | F00 + F03 | **LOW_FI_DIRECTION_APPROVED — FUNCTION_DELTA_CLOSED** |
 | S04 | Shared App Entry / Restore | 從分享連結恢復並立即使用 App | F05 + F00 | **LOW_FI_DIRECTION_APPROVED** |
@@ -132,7 +132,9 @@ S01–S06 + O01–O05 ④A Low-fi
 
 ## Navigation Scope
 
-- **S03 App / Runtime 是 Phase 1 唯一使用 NodeFF permanent bottom navigation 的主 Screen。**
+- **S01 Discover / Start 與 S03 App / Runtime 都可使用 NodeFF permanent bottom navigation，但 navigation scope 不同。**
+- S01 Mobile bottom navigation固定為：`首頁 / 探索靈感 / 我的 App · Soon`，不放 Create / Profile；Create只由 S01 Creator Composer提供。
+- S03 App / Runtime bottom navigation仍依 Runtime scope管理，不因 S01 navigation而新增重複 Create入口。
 - S04 Restore 尚未進入 Runtime，不顯示 permanent bottom navigation；READY 後才由 S03 接管。
 - S05 Refine / Remix 與 S06 Correction Compare 是 focused decision workspace，不繼承 S03 permanent bottom navigation。
 - S05 / S06 使用自己的 Back / View / Decision CTA，不把 S03 shell navigation 帶進決策流程。
@@ -235,8 +237,8 @@ User 已確認目前策略：
 
 下一個 Review：
 
-> **S01 — Discover / Start ④B High-fi Review — IN PROGRESS**
+> **S02 — Create Workspace ④B High-fi — NEXT**
 
-High-fi Direction A Foundations 與整體 visual effect 已由 User 確認；canonical Working 文件為 `working/UI-UX/DESIGN-SYSTEM.md`。現在依共同 color / typography / spacing / radius / elevation / motion / component-state rules，進行 S01 Desktop / Mobile ④B High-fi 定稿。
+S01 Desktop / Mobile ④B High-fi 已由 User 確認並記錄，包含 approved visual reference：`working/UI-UX/references/S01-Discover-Start-Highfi-v1.webp`。下一步依固定合作流程進 S02：**先鎖結構 → 再鎖視覺 → 最後才出完整圖**。
 
 Formal Spec、Backlog / Sprint 與 Cursor implementation 仍維持 HOLD。
