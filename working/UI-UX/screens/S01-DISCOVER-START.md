@@ -324,3 +324,135 @@ S01 ④B High-fi 必須套用 `working/UI-UX/DESIGN-SYSTEM.md` Direction A：
 > **LOW_FI_DIRECTION_APPROVED — HIGH_FI DIRECTION A APPLIED — ④B REVIEW IN PROGRESS**
 
 不代表 Spec change approved，也不代表 Cursor 可開始 implementation。
+
+
+---
+
+# 15. ④B High-fi Structure v2 — Approved
+
+User approved on 2026-09-22.
+
+## 15.1 Desktop Header
+
+Approved structure：
+
+~~~text
+NodeFF Logo | 首頁 | 探索靈感 | 我的 App
+~~~
+
+Rules：
+
+- 必須包含「首頁」。
+- Profile 暫不出現。
+- 「我的 App」Phase 1 先保留 placeholder，不假裝已有完整功能。
+- 不放 Search / Login / Notification / Docs / Community / Model Picker。
+- 首頁 active state採文字 + Teal indicator，不用大色塊。
+
+## 15.2 Hero
+
+- 主標：**意圖就是 App**。
+- 副標暫不放文字，保留空間 / breathing room。
+- Hero保持 compact，不浪費首屏。
+- Teal為主視覺；Yellow只作小面積 energy accent。
+
+## 15.3 Creator Composer
+
+Creator Composer 是 S01 唯一 Primary Create entry。
+
+Approved geometry：
+
+- Desktop initial height：約 180–220px。
+- Mobile initial height：約 160–180px。
+- 支援 multi-line long-form intent。
+- auto-grow 到約 320–360px 後才內部 scroll。
+- Primary CTA只有一顆：**建立 App**。
+- 不在 Header / Mobile bottom nav 重複 Create。
+- suggestion chips只作 supporting prefill，不搶 CTA。
+
+## 15.4 Inspiration Display
+
+「靈感膠囊」High-fi display改採 **作品展示卡 / App Preview Card**：
+
+~~~text
+App 使用畫面預覽
+↓
+App 名稱
+↓
+一句 outcome
+↓
+試試看 →
+~~~
+
+Desktop：
+
+- 3 cards / row。
+- Preview約佔 card視覺面積 60%。
+- 不放 author / like / comment / rating / overflow menu。
+
+Mobile：
+
+- 單欄。
+- Preview保持足夠高度，不縮成小 thumbnail。
+
+## 15.5 Inspiration Category Navigation
+
+放在「靈感精靈」作品區上方：
+
+~~~text
+全部 | 生產力 | 生活 | 學習 | 工具
+~~~
+
+Rules：
+
+- 純文字 Navigation Bar。
+- 不使用 category icon grid。
+- active category = Teal text + underline。
+- Mobile可水平文字 tabs scroll。
+
+## 15.6 Explore
+
+- 「探索更多 →」為 secondary / ghost action。
+- 放在靈感區，不進 Header。
+- 不搶 Creator Composer Primary CTA。
+
+## 15.7 Footer
+
+- 可放 NodeFF 官方 social icons。
+- 不放 App Share button。
+- Share App仍只屬 S03 Runtime / O01 Share。
+- Footer保持低視覺權重。
+
+## 15.8 Mobile Bottom Navigation
+
+Approved：
+
+~~~text
+首頁 | 探索靈感 | 我的 App
+~~~
+
+Rules：
+
+- 不放 Create。
+- 不放 Profile。
+- 「我的 App」Phase 1 placeholder顯示 **Soon**，並採 disabled / unavailable visual state。
+- Create仍只由 S01 Creator Composer提供。
+
+## 15.9 High-fi Layout Rule
+
+後續 S01 High-fi圖不得自行新增未批准元素。
+
+若圖中出現：
+
+- 額外 Create button
+- Profile
+- hamburger
+- category icon grid
+- App Store-like metadata
+- 額外 promotional banner
+- Key UI Elements / design-system展示區
+
+皆視為 mockup錯誤，不構成 Working Current Truth。
+
+Next：
+
+> **S01 Desktop + Mobile Layout Wireframe High-fi Review**
