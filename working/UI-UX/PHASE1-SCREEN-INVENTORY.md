@@ -169,6 +169,20 @@ Rules：
 - 若涉及 Function behavior，回相關 Fxx Working Delta Review。
 - Step 4.5同樣必須 User批准 + Git commit。
 
+### Single-Source High-fi Rule
+
+每一個 Screen / Overlay 的 High-fi Current Truth **只能有一份 canonical Step 1–4 contract**。
+
+Rules：
+- Step 1 / 2 / 3 / 4 的有效內容只能各出現一次。
+- 舊 discussion、intermediate review、summary 若內容已被 canonical Step吸收，必須刪除或留在 Git history，不得在 Current Truth保留第二份 shadow copy。
+- 不建立「原始 High-fi section + detailed contract + canonical summary」三份並存的結構。
+- 通用 Design System規則只引用 `DESIGN-SYSTEM.md`；Screen文件只記該 Screen-specific application / override，避免 copy drift。
+- final image只存在 Step 4；不得另外再建立重複 image summary section。
+- Review Status / Change Control只保留一處。
+- 每次 reopen Step後，要修改原 canonical Step，而不是在檔尾再追加第二套規則。
+- Git history是歷史追溯來源；Current Working文件只保留當下唯一有效 truth。
+
 ### Hard Gate
 
 > **沒有 Step 1–4（以及需要時的 Step 4.5）GitHub Current Truth，不得把該 Screen / Overlay交給 Cursor實作。**
