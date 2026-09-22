@@ -321,6 +321,16 @@ User 已確認：
 
 ## Step 1 — Structure Lock ✅
 
+> **Step 1 Reopen Record — 2026-09-22**
+>
+> User reopened Step 1 only for Mobile permanent navigation consumer wording.
+>
+> Change：`App | 修改 | 分享` → `目前 App | 修改 | 分享`。
+>
+> Semantics unchanged：`目前 App`仍指 current S03 Runtime destination；不是 S01。
+>
+> Related Working UI references synced in the same commit。Step 1：**RE-CLOSED / APPROVED**。
+
 ### Desktop Shell
 
 Header：
@@ -364,13 +374,13 @@ Header：
 Permanent bottom navigation：
 
 ~~~text
-App | 修改 | 分享
+目前 App | 修改 | 分享
 ~~~
 
-- `App = current S03 Runtime destination, not S01.`
-- `App`只代表目前正在使用的 S03 App / Runtime destination，不自行加入 reset / scroll-top行為，也不是 S01 首頁、App 清單或「建立 App」。
-- Consumer label readability 已於進入 S04 Step 2 前重新檢查；`使用` / `目前 App` 可作未來候選，但目前**不改動已批准的 `App` wording**。
-- 若未來要把 `App` 改成 `使用`、`目前 App` 或其他 consumer label，必須先 reopen S03 Step 1 — Structure Lock，再同步所有引用此 Mobile nav wording 的 Working UI 文件。
+- `目前 App = current S03 Runtime destination, not S01.`
+- `目前 App`只代表目前正在使用的 S03 App / Runtime destination，不自行加入 reset / scroll-top行為，也不是 S01 首頁、App 清單或「建立 App」。
+- 2026-09-22：S03 Step 1 依 User 指示 **reopen**，將原 consumer label `App` 改為更明確的 `目前 App`；相關 Working UI引用同步更新後，Step 1重新 CLOSED。
+- `目前 App` 是 consumer-facing navigation label；internal destination仍是 S03 App / Runtime。
 - `修改` → S05。
 - `分享` → O01。
 - `調整結果`不進 permanent nav。
@@ -513,7 +523,7 @@ Visible presentation：
 
 ### Mobile Bottom Navigation
 
-- active `App` = Teal icon + text / indicator。
+- active `目前 App` = Teal icon + text / indicator。
 - `修改` / `分享` = neutral default。
 - 不做中央大 FAB。
 - 不用大面積 Yellow。
@@ -604,6 +614,7 @@ Repository PNG blob SHA：
 Reference boundary：
 - 圖片鎖定 layout / visual hierarchy / component language / color use / Desktop-Mobile relationship。
 - sample restaurant content / imagery / labels / annotation examples不自動成為 Function requirements。
+- Mobile nav wording若圖片仍顯示舊 `App`，視為已被 Step 1 的 `目前 App` textual contract supersede；不構成重新批准舊 wording。
 - Step 1–3文字 contract + Fxx Function truth優先於圖片生成誤差。
 
 # 19. Review Status / Change Control

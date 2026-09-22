@@ -239,6 +239,9 @@ S01–S06 + O01–O05 ④A Low-fi
 - **S01 Discover / Start 與 S03 App / Runtime 都可使用 NodeFF permanent bottom navigation，但 navigation scope 不同。**
 - S01 Mobile bottom navigation固定為：`首頁 / 探索靈感 / 我的 App · Soon`，不放 Create / Profile；Create只由 S01 Creator Composer提供。
 - S03 App / Runtime bottom navigation仍依 Runtime scope管理，不因 S01 navigation而新增重複 Create入口。
+- S03 App / Runtime bottom navigation固定為：`目前 App / 修改 / 分享`。
+- `目前 App` = current S03 Runtime destination，**not S01**；不代表 reset、scroll-top、App清單或建立 App。
+- 2026-09-22：S03 Step 1為此 consumer wording reopen，`App` → `目前 App`；語意不變，完成相關 Working UI同步後重新 CLOSED。
 - S04 Restore 尚未進入 Runtime，不顯示 permanent bottom navigation；READY 後才由 S03 接管。
 - S05 Refine / Remix 與 S06 Correction Compare 是 focused decision workspace，不繼承 S03 permanent bottom navigation。
 - S05 / S06 使用自己的 Back / View / Decision CTA，不把 S03 shell navigation 帶進決策流程。

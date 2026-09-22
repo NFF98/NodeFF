@@ -463,13 +463,13 @@ Mobile restore期間沒有 permanent bottom navigation。
 只有進入 S03後才出現：
 
 ~~~text
-App | 修改 | 分享
+目前 App | 修改 | 分享
 ~~~
 
 Clarification：
-- `App = current S03 Runtime destination, not S01.`
-- 此處引用 S03 已批准的 Mobile nav wording；S04 不另外定義或改名。
-- 若未來 S03 將 `App` 改成 `使用` / `目前 App` 或其他更直覺 consumer label，必須先 reopen S03 Step 1，再同步回 S04。
+- `目前 App = current S03 Runtime destination, not S01.`
+- 此處引用 S03 重新批准後的 Mobile nav wording；S04 不另外定義或改名。
+- S03 Step 1 已於 2026-09-22 reopen並把原 `App` 改為 `目前 App`；本文件已同步。
 
 ### 9. Function Handoff Boundary
 
