@@ -306,9 +306,20 @@ Category navigation位於作品卡上方：
 - 「我的 App」顯示 `Soon` / unavailable state。
 - Create仍只由 Creator Composer提供。
 
+### Creation Progress Handoff Boundary
+
+- S01只負責 Create submit entry；真正的 ANALYZING / CLARIFICATION / ASSUMPTION / BUILDING / HYDRATING主要由 S02承接。
+- 可視化生成進度是重要 UX，但 S01不承載整個 creation lifecycle。
+- S01不得顯示 Prompt A / Validator / Blueprint等工程語言。
+- 不用 generic spinner假裝整個 creation progress；progress presentation依 S02 / O05 truth。
+
 ### Explicitly Not Present
 
 Cursor不得自行新增：
+- 強制 Sign in / Sign up作為取得 First Value的前置條件；
+- Dashboard / 複雜 Sidebar / 完整 My Apps workspace；
+- Blueprint / Registry / Runtime technical controls；
+- 大型 App Store-like catalog；
 - 第二個 Create入口；
 - Profile / hamburger / Search / Notification；
 - promo banner；
