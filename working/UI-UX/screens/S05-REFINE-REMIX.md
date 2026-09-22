@@ -2,7 +2,7 @@
 
 > Screen ID：S05
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1_APPROVED / STEP 2–4 PENDING**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED / STEP 3–4 PENDING**
 >
 > Phase：Phase 1
 >
@@ -613,8 +613,262 @@ S05A / S05B 都是 focused creation-change workspace：
 > Step 1：**APPROVED / LOCKED**。下一步：Step 2 — Geometry + Visual Hierarchy Lock。
 
 
+## Step 2 — Geometry + Visual Hierarchy Lock ✅
+
+> Approved by User：2026-09-22
+>
+> Step 2：**APPROVED / LOCKED**
+>
+> Scope：鎖定 Desktop / Mobile 的畫面寬度、主要區塊排列、Preview geometry、CTA order 與 visual hierarchy。Detailed color / shadow / motion / hover 留給 Step 3。
+
+### 1. Shared Geometry Principle
+
+S05A「修改這個 App」與 S05B「改成我的版本」可共用同一套 geometry skeleton；consumer title / supporting copy / relation meaning 必須分開，但不因此建立兩套版型。
+
+S05 是 focused modification workspace，不做 builder-style split pane，也不做 persistent right sidebar。
+
+### 2. Desktop Composer Geometry
+
+- Screen container：約 `960–1080px`。
+- 真正 Composer column：約 `640–720px`。
+- 水平置中。
+- Header：約 `64–72px`。
+- viewport左右 breathing room：約 `24–40px`。
+- workspace major section gap依 Design System使用 `32–64px`。
+- Composer / supporting row / CTA 不拉到 S03 Runtime 的 1200px 等級寬度。
+
+Reason：
+
+> Composer 是「描述修改需求」的 focused task，不是 dashboard / builder / runtime canvas。
+
+### 3. Desktop Composer Visual Hierarchy
+
+Attention hierarchy：
+
+~~~text
+Current path title
+「修改這個 App」 / 「改成我的版本」
+>
+Natural-language change input
+>
+Primary continue action
+>
+App identity
+>
+「原版會保留」 / 「查看原版」
+>
+NodeFF chrome
+~~~
+
+Rules：
+
+- App identity 用來確認「現在改哪個 App」，不是主視覺。
+- NodeFF chrome 不可比 task title / input 更搶眼。
+- 不顯示左側 inspector、右側 properties、雙欄 old/new editor。
+
+### 4. Change Input Geometry
+
+Desktop change input：
+
+- width：填滿 Composer column。
+- visual height：約 `140–200px`。
+- 不做 full-screen textarea。
+- 不做 chat bubbles。
+- 不在旁邊放 conversation history。
+- Clarification / Assumption 若出現，在同一 column 依 normal document flow 往下接，不改成另一套 layout。
+
+### 5. Source / Original Supporting Row
+
+`原版會保留` 與 `查看原版` 位於同一 supporting region。
+
+Recommended geometry：
+
+~~~text
+原版會保留                         查看原版 →
+~~~
+
+Rules：
+
+- `查看原版` 不做 Primary CTA。
+- Visual weight 必須低於 `開始修改` / Continue。
+- 不把 source App runtime縮成小 preview card塞在 Composer旁邊。
+
+### 6. Processing Geometry
+
+Submit後不切換成另一個 loading page。
+
+原 Composer主區域轉成 processing state：
+
+~~~text
+Path title
+↓
+Human-readable stage
+↓
+Progress presentation
+↓
+「原版仍安全保留」
+~~~
+
+Rules：
+
+- O05 presentation hosted inside current S05 path。
+- 不開 full-screen spinner page。
+- 不為 processing 新增 persistent sidebar。
+- 真正 READY 後直接進 Preview geometry。
+
+### 7. Desktop Preview Geometry
+
+Preview Ready後，S05從窄 Composer geometry切換成寬 Runtime preview geometry。
+
+- Preview container：約 `1100–1200px`。
+- Runtime preview盡可能取得主內容寬度。
+- Decision area 位於 Runtime 下方。
+- **Desktop 固定採單欄 Runtime + 底部 decisions。**
+- **不做右側 decision sidebar。**
+- 不預設做 old/new side-by-side comparison。
+
+Canonical desktop composition：
+
+~~~text
+┌──────────────────────────────────────────────┐
+│ NodeFF   App Title — 新版預覽    查看原版    │
+├──────────────────────────────────────────────┤
+│                                              │
+│            NEW APP RUNTIME                   │
+│            primary content                   │
+│                                              │
+├──────────────────────────────────────────────┤
+│ 新版預覽                                      │
+│ 原版仍保留                                    │
+│                                              │
+│ [保留原版]      [再調整]       [使用新版]     │
+└──────────────────────────────────────────────┘
+~~~
+
+### 8. Desktop Preview Visual Hierarchy
+
+Attention hierarchy：
+
+~~~text
+New Version Runtime
+>
+新版預覽 identity
+>
+使用新版
+>
+再調整
+>
+保留原版 / 查看原版
+>
+NodeFF chrome
+~~~
+
+Generated App Runtime應取得約 `75–85%` 的視覺注意力。
+
+Rules：
+
+- Runtime本身必須是主角。
+- Decision controls清楚但不能壓過 App。
+- `查看原版` 是 supporting inspection action，不和 `使用新版` 同級。
+- S05不是 S06，因此不把 compare chrome做成主畫面。
+
+### 9. Preview CTA Hierarchy
+
+Desktop：
+
+- `使用新版` = Primary。
+- `再調整` = Secondary。
+- `保留原版` = Tertiary / secondary-low。
+- `從原版重新調整` 不進三大 CTA 同一層；只作 `再調整` 的 secondary option。
+
+此 visual hierarchy只描述 UI emphasis，不改 Function capability。
+
+### 10. Mobile Composer Geometry
+
+- Header：約 `56–64px`。
+- horizontal padding：約 `16–20px`。
+- 單欄。
+- change input near full-width。
+- 不顯示 S03 permanent bottom nav。
+- Primary action可使用 near full-width / full-width。
+- Back由 top navigation承接時，不必再重複一顆底部 Cancel。
+
+Recommended composition：
+
+~~~text
+‹ 原 App
+
+App Title
+
+修改這個 App
+或
+改成我的版本
+
+你想怎麼改？
+[ change input ]
+
+原版會保留
+查看原版 →
+
+[開始修改]
+~~~
+
+### 11. Mobile Preview Geometry
+
+順序固定：
+
+~~~text
+新版預覽
+↓
+Runtime
+↓
+原版仍保留 / 查看原版
+↓
+使用新版
+↓
+再調整
+↓
+保留原版
+~~~
+
+Rules：
+
+- Runtime優先。
+- CTA採直向堆疊，不硬塞三顆橫排。
+- **Mobile CTA order鎖定為：`使用新版 → 再調整 → 保留原版`。**
+- CTA不得以 sticky方式遮住 Generated App controls。
+- 若 Generated App本身有 bottom controls，S05需保留足夠下方 spacing / safe area。
+
+### 12. Responsive / Cross-state Consistency
+
+- S05A / S05B 使用相同 geometry system。
+- Composer state偏窄、focused。
+- Preview state偏寬、Runtime-first。
+- Desktop / Mobile capability一致，只改排列，不刪除主要 decision。
+- `查看原版` 從 Composer返回時叫 **`返回修改畫面`**。
+- `查看原版` 從 Preview返回時叫 **`返回新版預覽`**。
+- 返回後原 S05 draft / state / preview context保持不變。
+
+### 13. Step 2 Locked Decisions
+
+1. Desktop Composer container `960–1080px`；Composer column `640–720px`。
+2. Desktop Composer不做 split pane / sidebar。
+3. Composer input約 `140–200px` high，Clarification在同一 column往下接。
+4. `查看原版` 為 supporting action，不與 primary submit同權重。
+5. Processing留在同一 S05 path，不切換 loading page。
+6. Desktop Preview切換至約 `1100–1200px` wide Runtime-first layout。
+7. **Desktop Preview固定：單欄 Runtime + 底部 decisions；不做右 Sidebar。**
+8. Desktop Preview visual hierarchy：Runtime > 新版 identity > 使用新版 > 再調整 > 保留原版 / 查看原版。
+9. Mobile Composer單欄，padding `16–20px`，不繼承 S03 bottom nav。
+10. Mobile Preview Runtime優先，CTA直向堆疊。
+11. **Mobile CTA order固定：使用新版 → 再調整 → 保留原版。**
+12. S05A / S05B geometry共用，但 consumer meaning與 wording維持分離。
+
+> Step 2：**APPROVED / LOCKED**。下一步：Step 3 — Detailed High-fi Visual Rules Lock。
+
+
 # 21. Review Status
 
-> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1_APPROVED / STEP 2–4 PENDING**
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED / STEP 3–4 PENDING**
 
-S05 ④B Step 1 Structure Lock 已完成 User Review 並鎖定。下一步：**Step 2 — Geometry + Visual Hierarchy Lock**。
+S05 ④B Step 1–2 已完成 User Review 並鎖定。下一步：**Step 3 — Detailed High-fi Visual Rules Lock**。
