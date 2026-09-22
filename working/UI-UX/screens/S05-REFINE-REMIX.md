@@ -2,7 +2,7 @@
 
 > Screen ID：S05
 >
-> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / HIGH_FI_PENDING**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1_APPROVED / STEP 2–4 PENDING**
 >
 > Phase：Phase 1
 >
@@ -18,9 +18,11 @@ S05 的核心任務：
 
 > **User 不用從頭重做，就能以目前 App 為基礎描述想改什麼；原版始終安全，新版先 Preview，再由 User 決定採用、保留舊版或繼續調整。**
 
-# 2. Refine vs Remix — Same Workspace, Different Meaning
+# 2. Refine vs Remix — Low-fi Historical Direction
 
-Low-fi 建議共用同一個 S05 Workspace，不做兩套 UI。
+> **④B Step 1 已 supersede 此 Low-fi 合併方向。Current Truth：S05A「修改這個 App」與 S05B「改成我的版本」必須拆成兩條明確 consumer path；技術元件可以共用，但 UI 不得再以模糊的 Refine / Remix 合併入口呈現。**
+
+Low-fi 原先建議共用同一個 S05 Workspace；此點已被 ④B Step 1 更新。
 
 Difference 同時用 **relation label + version visual marker** 說清楚：
 
@@ -242,8 +244,9 @@ Flow：
     S05
     → 查看原版
     → source App / source result
-    → 返回修改
-    → S05 current draft / preview context preserved
+    → 若從 Composer 進入：返回修改畫面
+    → 若從 Preview 進入：返回新版預覽
+    → 原 S05 current draft / preview context preserved
 
 Rules：
 - 「查看原版」不是「保留原版」決策。
@@ -366,7 +369,7 @@ Examples：
 
 User 已確認：
 
-1. **Refine / Remix 共用同一個 S05 Workspace**。
+1. **Low-fi 原決定：Refine / Remix 共用同一個 S05 Workspace；此點已由 ④B Step 1 supersede，Current Truth 改為 S05A / S05B 兩條明確 consumer path。**
 2. Refine / Remix 必須同時用 **relation label + version visual marker** 區分。
 3. 原版 / 新版的 border / accent 需要可辨識；實際顏色留到 ④B High-fi Design System 決定。
 4. Change Composer 只顯示 App identity + 修改需求 +「原版會保留」，不把原 App整頁並排。
@@ -378,7 +381,7 @@ User 已確認：
 
 User confirmed during ④B review：
 
-- **Refine / Remix 共用同一個 S05 Workspace**；不做兩套 UI。
+- **④B Step 1 Current Truth：Refine / Remix 不再合併成單一 consumer path。拆為 S05A「修改這個 App」與 S05B「改成我的版本」；可共用底層 layout / components，但入口、標題、語意與返回文案必須明確分開。**
 - relation semantics 必須透過 **relation label** 明確顯示，不能只靠顏色。
 - version visual marker 同時採 **border / accent color management**：
   - **Source / Original / Before**：Neutral treatment；使用 neutral border / surface，代表原版與來源。
@@ -391,10 +394,227 @@ User confirmed during ④B review：
 - Accessibility：版本關係不得只靠顏色辨識。
 - 這套 version color language 與 `working/UI-UX/DESIGN-SYSTEM.md` 的 Version / Compare Visual Language 一致。
 
-# 20. Review Status
 
-> **LOW_FI_DIRECTION_APPROVED — HIGH_FI_PENDING**
 
-S05 ④A Low-fi 已完成 User Review。
+# 20. ④B High-fi Contract — Step 1 Structure Lock ✅
 
-依固定流程，下一步進 S06 ④A Low-fi；所有 S01–S06 / O01–O05 Low-fi完成後，再進 Cross-Screen Review → High-fi Design System → ④B High-fi。
+> Approved by User：2026-09-22
+>
+> Step 1：**APPROVED / LOCKED**
+>
+> Scope：只鎖 Screen structure、consumer wording、state composition、CTA / handoff 邊界；Geometry、spacing、visual hierarchy、detailed color / motion 留給 Step 2–3。
+>
+> Canonical precedence：本節若與前述 ④A Low-fi direction 衝突，**以本節 ④B Step 1 Current Truth 為準**。
+
+## 20.1 S05 分成兩條明確 Consumer Path
+
+S05 不再把 Refine / Remix 當成一個模糊的 user-facing Workspace。
+
+### S05A — 修改這個 App
+
+來源：
+
+~~~text
+S03 Current App
+→ 修改這個 App
+→ S05A
+~~~
+
+User 意義：
+
+> 現在這個 App 基本方向沒錯；User 想加功能、改功能、改規則、改 UI 或其他需求。
+
+Consumer wording：
+
+~~~text
+修改這個 App
+你想怎麼改？
+~~~
+
+Internal relation 可仍為 `REFINE`，但一般 User 不需要看到 `REFINE` 這個工程字。
+
+### S05B — 改成我的版本
+
+來源：
+
+~~~text
+S03 Current App
+→ 改成我的版本
+→ S05B
+~~~
+
+User 意義：
+
+> User 以目前看到的 App 為來源，建立一個自己的獨立衍生版本；起始功能可以與來源 App 相同，之後可自行修改、分享與繼續演化，不影響來源 App。
+
+Consumer wording：
+
+~~~text
+改成我的版本
+~~~
+
+Internal relation 可仍為 `REMIX`，但一般 User 不需要看到 `REMIX` 這個工程字。
+
+### Split Rule
+
+- S05A / S05B 是兩條不同 consumer intent path。
+- **不得**以單一 `Refine / Remix` button、title 或混合 wording 取代。
+- 底層 technical implementation、layout primitives、progress shell、preview shell可以共用。
+- 共用 technical component **不代表** consumer semantics可以合併。
+
+## 20.2 Shared Structural Skeleton
+
+S05A / S05B 可共用以下結構骨架：
+
+~~~text
+Entry from S03
+↓
+App Identity + Current Path Meaning
+↓
+Composer / Required Decision
+↓
+Clarification / Assumption only if needed
+↓
+Processing in same S05 path
+↓
+New Version Preview
+↓
+Decision
+├─ 保留原版
+├─ 再調整
+└─ 使用新版
+~~~
+
+S05 不建立另一個 Preview route；Preview 是同一條 S05 path 的後半段 state。
+
+## 20.3 Change Composer Structure
+
+Composer 只承載必要內容：
+
+~~~text
+App identity
+Path title：
+  S05A → 修改這個 App
+  S05B → 改成我的版本
+Natural-language input / required decision
+原版會保留
+查看原版
+Cancel / Continue
+~~~
+
+Rules：
+
+- 不把 source App 整頁並排在 Composer。
+- 不顯示 source hash / lineage / semantic delta / JSON / model/provider。
+- Clarification / Assumption 若真的需要，留在同一條 S05 path，不跳另一頁。
+- 原 change request / working context 必須保留。
+
+## 20.4 Processing Structure
+
+Submit 後不另開 processing page：
+
+~~~text
+S05A / S05B
+→ O05 processing presentation hosted in current S05 path
+→ PREVIEW_READY
+~~~
+
+- 原 App 始終安全。
+- Progress truth由 O05 Current Truth承接。
+- S05 Step 1 不自行發明另一套 progress model。
+
+## 20.5 New Version Preview Structure
+
+Preview Ready 後，新版是主要內容：
+
+~~~text
+新版預覽
+[Fresh Runtime Preview]
+
+原版仍保留
+[查看原版]
+
+[保留原版] [再調整] [使用新版]
+~~~
+
+Rules：
+
+- 不預設把原版 / 新版做 S06-style side-by-side compare。
+- S05 不是 Correction Compare。
+- `使用新版` → child becomes active → S03。
+- `保留原版` → source remains active → S03 source App。
+- `再調整` → 留在 S05，預設基於 latest preview child。
+- secondary option：`從原版重新調整`。
+
+## 20.6 查看原版 — Temporary S03 Source Runtime
+
+`查看原版` 的作用只是暫時查看 / 操作 source App；**不是另一個修改入口，也不是採用 / 保留決策**。
+
+Flow：
+
+~~~text
+S05 current state
+→ 查看原版
+→ S03 Source App Runtime
+→ 明確返回原 S05 state
+~~~
+
+返回 wording 必須依來源 state：
+
+~~~text
+從 Composer 查看原版
+→ 返回修改畫面
+
+從 Preview 查看原版
+→ 返回新版預覽
+~~~
+
+返回後必須保留：
+
+- S05A / S05B path identity。
+- change draft。
+- clarification / assumption context（若存在）。
+- processing / recoverable context（若適用）。
+- current preview context（若已存在）。
+
+查看原版不得：
+
+- 清空 draft。
+- 自動採用新版。
+- 改變 source / child selection。
+- 把 User 丟回新的 S05 session。
+
+## 20.7 Navigation Boundary
+
+S05A / S05B 都是 focused creation-change workspace：
+
+- 不繼承 S03 permanent bottom navigation。
+- Desktop 不帶完整 S03 action cluster。
+- Mobile 不顯示 S03 `目前 App | 修改 | 分享` permanent bottom nav。
+- S05 自己承接 Back / 查看原版 / Continue / Preview decision。
+
+只有暫時進入 S03 查看原版時，才顯示 S03 Runtime；並且必須有明確的 context return action 回原 S05 state。
+
+## 20.8 Step 1 Locked Decisions
+
+1. S05A `修改這個 App` 與 S05B `改成我的版本` **拆開**；不得再以 user-facing Refine / Remix 合併入口呈現。
+2. 兩條 path 可共用 technical component，但 consumer intent、entry、title 與 wording必須分開。
+3. S05A / S05B 都使用同一類結構：Composer → only-if-needed clarification → processing → Preview → decision。
+4. Composer 不整頁重複 render原 App。
+5. `查看原版` 暫時進 S03 Source App Runtime。
+6. Composer 回程 wording = **`返回修改畫面`**。
+7. Preview 回程 wording = **`返回新版預覽`**。
+8. 返回後原 S05 draft / state / preview context全部保留。
+9. Preview 三個主要決策仍為：**保留原版 / 再調整 / 使用新版**。
+10. S05 不做 S06-style correction comparison；不把 correction semantics混入 S05。
+11. S05 不承擔「建立全新 App」；全新 App creation仍走 S01 → S02 → S03。
+12. S05 不繼承 S03 permanent navigation。
+
+> Step 1：**APPROVED / LOCKED**。下一步：Step 2 — Geometry + Visual Hierarchy Lock。
+
+
+# 21. Review Status
+
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1_APPROVED / STEP 2–4 PENDING**
+
+S05 ④B Step 1 Structure Lock 已完成 User Review 並鎖定。下一步：**Step 2 — Geometry + Visual Hierarchy Lock**。
