@@ -649,3 +649,92 @@ S02 implementation authority順序：
 4. 其他示意圖。
 
 S02 High-fi細節視為 Working Current Truth；Formal Spec仍待 pre-Cursor refresh。
+
+
+---
+
+# 24. ④B High-fi Step 1–4 Canonical Lock — Approved
+
+Approved by User：2026-09-22
+
+本節是 S02 High-fi 的 **Step 1 → Step 4 canonical index**。Cursor不得只從 final mockup反推 behavior。
+
+## Step 1 — Structure Lock ✅
+
+鎖定內容：
+- Focused Header：NodeFF + `← 回到建立 App`。
+- 不繼承 S01 general navigation / bottom nav。
+- Original Intent以 `查看需求`輕量 disclosure保留；需要時可變 `查看／修改需求`。
+- Creation Progress是 S02主視覺。
+- 4 stages：`理解想法 → 整理 App → 檢查互動 → 準備 App`。
+- Clarification / Assumption / Recovery共用同一 Dynamic Workspace body family。
+- Clarification每輪最多 3 個當下最高優先 material questions；回答後重新分析，不累積 chat transcript。
+- Assumption Review與 Clarification共用 surface language。
+- Completion不開新 Success page；同一 Progress surface轉為 `你的 App 已完成 / 開啟 App`。
+- Mobile垂直化，不做另一套產品。
+
+## Step 2 — Geometry + Visual Hierarchy Lock ✅
+
+Desktop：
+- Header約 `64–72px`。
+- main progress content max-width約 `760–840px`。
+- progress %約 `36–44px`。
+- progress rail約 `8px`。
+- Creation Progress > Current Dynamic Workspace > Intent access > Shell chrome。
+
+Mobile：
+- Header約 `60px`。
+- compact stage indicator，不硬塞四個完整長標。
+- question surface單欄。
+- contextual primary CTA可 full-width。
+- keyboard / viewport變化不得遮最後一題或 primary action。
+- 無 S01 permanent bottom navigation。
+
+## Step 3 — Detailed High-fi Visual Rules Lock ✅
+
+Progress：
+- completed = Teal check。
+- current = Teal active + restrained bounded motion。
+- future = neutral。
+- reliable checkpoints → Stage + checkpoint-derived %。
+- no reliable checkpoints → Stage only；不顯示 fake numeric progress。
+- 100%只在 actual ready condition成立後。
+- Yellow只在 completion / energy moment小面積使用。
+
+Dynamic Workspace：
+- normal processing近乎隱形，不做 Dashboard / chat / technical console。
+- Clarification用 selectable rows / pills；selected有 border / icon / label，不只靠顏色。
+- previous answers收進 `已提供的資訊` summary，不保留聊天流水帳。
+- Assumption tags neutral；Yellow不當 warning。
+- Primary `用這些設定繼續`；Secondary `修改需求`。
+
+Completion：
+- Teal → Aqua → 少量 Yellow。
+- completion motion約 `180–240ms`。
+- reduced-motion直接 state change。
+
+Accessibility：
+- touch target ≥44 CSS px。
+- focus visible。
+- progress不可只靠 motion。
+- aria-live適度通知。
+- disabled / loading / selected必須有 programmatic state。
+
+Cursor不得新增 general nav / Share / Profile / chat transcript / fake % / technical logs / extra Create / independent Success page。
+
+## Step 4 — Final Visual Reference Lock ✅
+
+Approved reference：
+
+![S02 Create Workspace High-fi v1](../references/S02-Create-Workspace-Highfi-v1.png)
+
+Canonical path：
+
+`working/UI-UX/references/S02-Create-Workspace-Highfi-v1.png`
+
+Rules：
+- final image鎖定 composition / density / High-fi impression。
+- Step 1–3文字 contract優先於 mockup generation誤差。
+- image sample question / choices / values不自動成為 F01 semantics。
+
+S02 High-fi Step 1–4：**CLOSED / WORKING BASELINE**。
