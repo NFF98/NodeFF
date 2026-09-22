@@ -2,7 +2,7 @@
 
 > Screen ID：S05
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED / STEP 4 PENDING**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
 >
 > Phase：Phase 1
 >
@@ -1257,8 +1257,53 @@ Cursor不得：
 > Step 3：**APPROVED / LOCKED**。下一步：Step 4 — Final Visual Reference Lock。
 
 
+## Step 4 — Final Visual Reference Lock ✅
+
+> Approved by User：2026-09-23
+>
+> Step 4：**APPROVED / LOCKED**
+>
+> Approved visual：
+>
+> ![S05 Refine / Remix High-fi v1](../references/S05-Refine-Remix-Highfi-v1.png)
+>
+> Canonical path：
+>
+> `working/UI-UX/references/S05-Refine-Remix-Highfi-v1.png`
+>
+> Repository PNG blob SHA：
+>
+> `d090661e769b51280a3a2c6b43d20fdb731b74d9`
+
+### Reference Boundary
+
+- 圖片鎖定 layout、visual hierarchy、component language、color use、Desktop / Mobile relationship。
+- 圖中的 Travel Planner / Recipe Generator 等 sample content 只作視覺示意，不自動成為 Function requirement。
+- **S05A Primary = `使用新版`。**
+- **S05B Primary = `使用我的版本`。**
+- S05B 必須至少包含一個有效修改需求；圖片不得被解讀為 zero-change copy / ownership flow。
+- 圖中的 Processing stage / % 只作 presentation example；truthful checkpoint contract 仍由 O05 擁有。
+- 圖中的 Recovery copy / action 只作 visual reference；retry eligibility / recovery semantics 仍由 O03 / F12 擁有。
+- 若圖片文字因 rendering 產生 typo / sample discrepancy，**Step 1–3 textual contract + Fxx Function truth 優先於圖片**。
+- S05 不是 S06；圖片不得被解讀為要求 old/new side-by-side correction compare。
+- Desktop Preview 維持 Step 2 已鎖定的 **single-column Runtime + bottom decisions**。
+- Mobile CTA order 維持 Step 2 已鎖定的 S05A / S05B 各自 wording。
+
+### Step 4 Locked Decision
+
+> 此 PNG 為 S05 唯一 canonical High-fi visual reference。任何後續 visual artifact 若要取代它，必須 reopen Step 4；不得另建 shadow reference 與本圖競爭 Current Truth。
+
+> Step 4：**APPROVED / LOCKED**。
+
+
 # 21. Review Status
 
-> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED / STEP 4 PENDING**
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
 
-S05 ④B Step 1–3 已完成 User Review 並鎖定。下一步：**Step 4 — Final Visual Reference Lock**。
+S05 ④B Step 1–4 已完成 User Review並鎖定。
+
+- S05 High-fi：**CLOSED / WORKING BASELINE**。
+- Canonical PNG：`working/UI-UX/references/S05-Refine-Remix-Highfi-v1.png`。
+- Structure / Geometry / Visual Rules / Visual Reference 的 material change 必須 reopen 對應 Step。
+- Cross-screen follow-up：S03 對 S05A「修改這個 App」與 S05B「改成我的版本」的入口 presentation 仍待 S03 Step 1 reopen決定；此 pending 不改變 S05 本身 Current Truth。
+- Formal Spec仍維持 freeze，待 pre-Cursor Formal Spec Refresh。

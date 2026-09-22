@@ -10,7 +10,7 @@
 >
 > Function behavior sources：F05 Share / Restore + F00 Experience Shell + F03 Runtime。
 >
-> 本文件的 ④A Low-fi 與 ④B High-fi Step 1 已完成 User Review；Step 2–4 尚未完成，因此仍不可交付 Cursor 實作。
+> 本文件的 ④A Low-fi 與 ④B High-fi Step 1–4 已完成 User Review；Formal Spec仍維持 freeze，待 pre-Cursor Formal Spec Refresh。
 
 # 1. User Outcome
 
@@ -852,6 +852,16 @@ Next：
 > **S04 Step 3 — Detailed High-fi Visual Rules Lock**
 
 ## Step 4 — Final Visual Reference Lock ✅
+
+
+> **PNG Repair Record — 2026-09-23**
+>
+> Previous PNG blob `4615eecef225fd22cdb8c3265a461976dafc481a` had a valid PNG signature but malformed PNG chunk structure and could not render reliably on GitHub.
+>
+> It has been replaced **in-place at the same canonical path** with valid PNG blob `28a2b6cd3d787e6db1af05c7f96ffcc36ebb79ee`.
+>
+> This is **artifact-integrity repair only**：S04 Step 1–4 semantics / layout contract remain unchanged and Step 4 is not reopened.
+
 
 > User approved：2026-09-22
 >
