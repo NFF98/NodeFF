@@ -2,7 +2,7 @@
 
 > Screen ID：S01
 >
-> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / HIGH_FI_PENDING**
+> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / HIGH_FI_DIRECTION_A_APPLIED / ④B HIGH_FI_REVIEW_IN_PROGRESS**
 >
 > Phase：Phase 1
 >
@@ -272,6 +272,19 @@ Low-fi baseline：
 
 這些若未來有 Evidence，需要重新 Review，不因長期可能性提前加入。
 
+# 12.1 High-fi Direction A Input — Approved
+
+S01 ④B High-fi 必須套用 `working/UI-UX/DESIGN-SYSTEM.md` Direction A：
+
+- Teal為主品牌 anchor。
+- Yellow只作 energy accent。
+- Teal → Aqua → Yellow gradient只用於 brand / creation moments，不整頁鋪滿。
+- 保持大量 neutral / white space。
+- Hero / Prompt Composer為首屏視覺主角。
+- Inspiration Capsules為 supporting creation path，不得壓過 Create。
+- Header維持極簡，不因效果圖示意新增 Phase 1 Low-fi未批准的 navigation。
+- High-fi visual reference已由 User確認「可以」；但效果圖不是 pixel-spec，個別 S01 composition仍以本文件既有 Low-fi為基準。
+
 # 13. Open High-fi Decisions
 
 仍待後續：
@@ -308,6 +321,6 @@ Low-fi baseline：
 
 因此 S01 目前狀態：
 
-> **LOW_FI_DIRECTION_APPROVED — HIGH_FI_PENDING**
+> **LOW_FI_DIRECTION_APPROVED — HIGH_FI DIRECTION A APPLIED — ④B REVIEW IN PROGRESS**
 
 不代表 Spec change approved，也不代表 Cursor 可開始 implementation。
