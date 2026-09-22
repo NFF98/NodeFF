@@ -436,11 +436,11 @@ Approved by User：2026-09-22
 
 Repository reference：
 
-![S02 Create Workspace High-fi v1](../references/S02-Create-Workspace-Highfi-v1.webp)
+![S02 Create Workspace High-fi v1](../references/S02-Create-Workspace-Highfi-v1.png)
 
 Canonical image path：
 
-`working/UI-UX/references/S02-Create-Workspace-Highfi-v1.webp`
+`working/UI-UX/references/S02-Create-Workspace-Highfi-v1.png`
 
 ## 22.1 Approved Screen Rules Represented by the Reference
 
