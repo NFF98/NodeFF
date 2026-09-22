@@ -1273,13 +1273,7 @@ Cursor不得：
 >
 > Repository PNG blob SHA：
 >
-> `8a9b5ea3534a61ab57c0979e7e8d54b0fe2e3129`
-
-> **PNG Integrity Repair — 2026-09-23**
->
-> Step 4 approval後的 initial repository PNG payload被驗證為 chunk structure不完整；已在同一 canonical path 原位替換為可正常 render 的 **true PNG** blob `8a9b5ea3534a61ab57c0979e7e8d54b0fe2e3129`。
->
-> 此為 artifact-integrity repair only；Step 1–4 semantics / visual contract不變。
+> `d090661e769b51280a3a2c6b43d20fdb731b74d9`
 
 ### Reference Boundary
 

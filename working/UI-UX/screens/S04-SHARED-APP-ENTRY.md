@@ -858,9 +858,9 @@ Next：
 >
 > GitHub 上的 previous canonical PNG blob `28a2b6cd3d787e6db1af05c7f96ffcc36ebb79ee` 顯示異常。
 >
-> 已以可正常 render 的 **true PNG** 在同一 canonical path 原位替換；new repository blob：
+> 已再次以本次驗證可正常 render 的 **true PNG** 在同一 canonical path 原位替換；new repository blob：
 >
-> `0c95569dae311e514325055ba98d24b59911034d`
+> `48c9a59e8ca024c6b73bacb695cf9665fd418a97`
 >
 > 此次只修復 visual artifact display / integrity；**S04 Step 1–4 semantics、layout、interaction contract 完全不變，Step 4 不 reopen**。
 >
