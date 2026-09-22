@@ -489,3 +489,163 @@ S02 ④B 已完成。
 Next：
 
 > **S03 — App / Runtime ④B High-fi：先鎖結構 → 再鎖視覺 → 最後出完整圖。**
+
+
+---
+
+# 23. ④B Detailed High-fi Implementation Contract — Approved
+
+Approved by User：2026-09-22
+
+本節把 S02 已批准的 ④B 討論補成 Cursor 可執行的 visual / state contract；Function semantics仍由 F00 / F01 / O05擁有。
+
+## 23.1 Screen Attention Hierarchy
+
+固定順序：
+
+~~~text
+Creation Progress
+> Current Dynamic Workspace task
+> Contextual intent access
+> Shell chrome
+~~~
+
+- S02不是聊天介面、Dashboard、deployment console或 technical builder。
+- 正常 Fast Path需安靜；只有 Clarification / Assumption / Recovery 才提高 surface prominence。
+- 大量 white / neutral space保持 focused creation感。
+
+## 23.2 Header Geometry / Treatment
+
+- Desktop約 `64–72px`；Mobile約 `60px`。
+- 內容：NodeFF + `← 回到建立 App`。
+- Header使用 white / soft neutral、subtle divider；不使用大面積 gradient或重陰影。
+- 不顯示首頁 / 探索 / 我的 App / Share / Profile / permanent bottom nav。
+- Back control是 secondary chrome，不得比 Creation Progress更醒目。
+
+## 23.3 Progress Component
+
+Desktop主內容 max-width約 `760–840px`。
+
+4 stages：
+
+~~~text
+理解想法 → 整理 App → 檢查互動 → 準備 App
+~~~
+
+Visual states：
+- completed：Teal check + completed label。
+- current：Teal active marker；可使用 restrained bounded pulse / flow。
+- future：neutral gray。
+- %約 `36–44px`。
+- progress rail約 `8px`。
+- reliable checkpoints → Stage + checkpoint-derived %。
+- no reliable checkpoints → Stage only；numeric %與 numeric bar均省略。
+- Yellow只在接近 completion / ready作小面積 energy accent，不作 warning。
+- 100%只在 actual ready condition成立後。
+
+## 23.4 Dynamic Workspace Surface
+
+正常 processing：
+- surface可近乎隱形；Progress是主要視覺。
+- 不用 chat bubble、avatar、assistant transcript。
+
+Clarification：
+- 使用同一 Dynamic Workspace surface。
+- heading方向：`還差一點資訊`。
+- 當前每輪最多 3 個 material questions。
+- choice優先用大面積 selectable row / pill；單欄優先，避免密集 grid。
+- selected state使用 Teal border / light soft surface + icon/label，不只靠色彩。
+- 回答送出後上一輪收起 / 替換，只留下可展開 `已提供的資訊`摘要。
+- 不顯示「第1輪」「第2輪」等 engine language。
+
+Assumption Review：
+- 與 Clarification共用 surface family。
+- 每項呈現 `設定名稱 | 目前值 | 已提供/預設/建議/尚未決定`。
+- metadata tag使用 neutral treatment；Yellow不是 warning。
+- Primary：`用這些設定繼續`。
+- Secondary：`修改需求`。
+
+## 23.5 Original Intent Access
+
+- Fast Path不常駐巨大 Prompt card。
+- 預設使用輕量 `查看需求` disclosure。
+- Clarification / Assumption / Recovery時可升為 `查看／修改需求`。
+- 展開後可讀完整 long-form intent。
+- 編輯仍在 S02內完成；Apply後由 Function重新分析。
+- disclosure open/close不應造成大幅 layout jump。
+
+## 23.6 Processing / Waiting
+
+- 不用 full-screen spinner覆蓋 S02。
+- stage / progress只能反映真實 operation。
+- checkpoint停住時視覺停在最後真實值，不做 fake smooth percentage。
+- bounded animation只表示「仍在工作」，不代表進度。
+- Soft/Hard timeout semantics依 O05 / F00 / source Function，不由視覺自行判斷。
+
+## 23.7 Completion Transition
+
+完成後，同一 Progress surface自然轉為：
+
+~~~text
+100%
+你的 App 已完成
+[開啟 App →]
+~~~
+
+- 不建立額外 Success Page。
+- completion accent可使用 Teal → Aqua → 少量 Yellow。
+- check / completion motion約 `180–240ms`。
+- reduced-motion時改為直接 state change。
+- Primary CTA只有 `開啟 App`。
+- User-facing UI不顯示 internal `S03`。
+
+## 23.8 Mobile Composition
+
+順序固定：
+
+~~~text
+Header
+→ compact stage indicator
+→ current stage
+→ % / Stage-only
+→ Dynamic Workspace
+→ contextual CTA
+~~~
+
+- compact indicator方向：`✓ 理解   ● 整理   ○ 檢查   ○ 準備`。
+- 不硬塞四個完整長標籤。
+- Clarification單欄；Primary CTA可 full-width。
+- keyboard / viewport resize時，Primary CTA不得遮最後一題。
+- 不顯示 S01 bottom navigation。
+- 唯一離開入口為 `回到建立 App`。
+
+## 23.9 Component States / Accessibility
+
+- Button、choice、disclosure、progress、input皆需 Default / Hover / Focus / Pressed / Disabled / Loading where applicable。
+- touch target ≥44 CSS px。
+- focus ring visible且不造成 layout shift。
+- progress不只靠 motion；current/completed需文字 / icon / semantics。
+- loading status使用適度 aria-live，不連續洗屏。
+- clarification question / error與 control做 programmatic association。
+
+## 23.10 Cursor Guardrails
+
+Cursor不得自行：
+- 加 chat transcript / AI avatar；
+- 加 technical validation logs；
+- 加 fake percentage；
+- 加 general navigation；
+- 加 Share / Profile；
+- 加 permanent bottom nav；
+- 加第二個 Create CTA；
+- 把 Clarification固定成一次問完所有問題；
+- 把 Completion改成獨立頁。
+
+S02 implementation authority順序：
+
+1. 本文件文字 contract；
+2. `working/UI-UX/DESIGN-SYSTEM.md`；
+3. approved visual reference；
+4. 其他示意圖。
+
+S02 High-fi細節視為 Working Current Truth；Formal Spec仍待 pre-Cursor refresh。
