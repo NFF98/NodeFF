@@ -1,0 +1,181 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1370" viewBox="0 0 1500 1370">
+<defs>
+  <style>
+    .title{font:700 30px Inter,"Noto Sans TC",sans-serif;fill:#102124}
+    .subtitle{font:500 17px Inter,"Noto Sans TC",sans-serif;fill:#586865}
+    .brand{font:700 17px Inter,"Noto Sans TC",sans-serif;fill:#102124}
+    .paneltitle{font:700 17px Inter,"Noto Sans TC",sans-serif;fill:#102124}
+    .panelsub{font:400 14px Inter,"Noto Sans TC",sans-serif;fill:#586865}
+    .apptitle{font:500 16px Inter,"Noto Sans TC",sans-serif;fill:#25383A}
+    .stage{font:700 23px Inter,"Noto Sans TC",sans-serif;fill:#102124}
+    .sub{font:400 14px Inter,"Noto Sans TC",sans-serif;fill:#667875}
+    .pct{font:700 14px Inter,sans-serif;fill:#102124}
+    .reassure{font:500 13px Inter,"Noto Sans TC",sans-serif;fill:#43716C}
+    .btnwhite{font:700 15px Inter,"Noto Sans TC",sans-serif;fill:#fff}
+    .btnteal{font:700 15px Inter,"Noto Sans TC",sans-serif;fill:#0F8C84}
+    .ruleh{font:700 17px Inter,"Noto Sans TC",sans-serif;fill:#102124}
+    .ruleb{font:400 14px Inter,"Noto Sans TC",sans-serif;fill:#586865}
+    .num{font:700 14px Inter,sans-serif;fill:#fff}
+  </style>
+</defs>
+<rect width="1500" height="1370" fill="#FFFFFF"/>
+<!-- header -->
+<g transform="translate(34,30)">
+  <path d="M0 34 L13 0 Q16 -6 22 0 L34 18 L25 39 Q22 45 17 39 L9 28 L5 40 Q3 45 0 41Z" fill="#18AFA8"/>
+  <path d="M32 34 L45 1 Q48 -5 54 1 L66 19 L57 40 Q54 46 49 40 L41 29 L37 41 Q35 46 32 42Z" fill="#0F766E"/>
+  <text x="82" y="34" class="title" font-size="28">NodeFF</text>
+</g>
+<line x1="245" y1="25" x2="245" y2="74" stroke="#DDE8E6"/>
+<text x="270" y="48" class="title">S04 · Shared App Entry (Restore)</text>
+<text x="270" y="72" class="subtitle">Step 4 — High-fidelity Visual Reference (Desktop / Mobile)</text>
+<text x="1460" y="48" text-anchor="end" class="subtitle">Open. Instantly. No Install.</text>
+
+<g>
+    <text x="24" y="156" class="paneltitle">1  Desktop — Restore (Stage + %)</text>
+    <text x="24" y="176" class="panelsub">With reliable checkpoints</text>
+    <rect x="24" y="190" width="350" height="400" rx="10" fill="#fff" stroke="#DDE8E6"/>
+  <rect x="24" y="190" width="350" height="46" rx="10" fill="#F7FAF9"/>
+  <text x="42" y="219" class="brand">◢ NodeFF</text>
+    <rect x="165" y="272" width="68" height="68" rx="16" fill="#ECFEFA"/>
+    <text x="199" y="315" text-anchor="middle" font-size="34">🌱</text>
+    <text x="199" y="364" text-anchor="middle" class="apptitle">My Plant Coach</text>
+    <text x="199" y="418" text-anchor="middle" class="stage">正在打開這個 App…</text>
+    <text x="199" y="446" text-anchor="middle" class="sub">稍等一下，馬上就好</text>
+      <rect x="56" y="480" width="262" height="8" rx="4" fill="#EAF2F1"/>
+      <rect x="56" y="480" width="157" height="8" rx="4" fill="#20B7AD"/>
+      <text x="332" y="489" text-anchor="end" class="pct">60%</text>
+      <text x="199" y="518" text-anchor="middle" class="sub">正在載入 App 資源…</text>
+    <rect x="94" y="528" width="210" height="36" rx="10" fill="#F0FDFA"/>
+    <text x="199" y="551" text-anchor="middle" class="reassure">⚡ 不需要登入，也不需要安裝</text>
+  </g>
+<g>
+    <text x="404" y="156" class="paneltitle">2  Desktop — Restore (Stage only)</text>
+    <text x="404" y="176" class="panelsub">Without reliable checkpoints</text>
+    <rect x="404" y="190" width="350" height="400" rx="10" fill="#fff" stroke="#DDE8E6"/>
+  <rect x="404" y="190" width="350" height="46" rx="10" fill="#F7FAF9"/>
+  <text x="422" y="219" class="brand">◢ NodeFF</text>
+    <rect x="545" y="272" width="68" height="68" rx="16" fill="#ECFEFA"/>
+    <text x="579" y="315" text-anchor="middle" font-size="34">🌱</text>
+    <text x="579" y="364" text-anchor="middle" class="apptitle">My Plant Coach</text>
+    <text x="579" y="418" text-anchor="middle" class="stage">正在打開這個 App…</text>
+    <text x="579" y="446" text-anchor="middle" class="sub">稍等一下，馬上就好</text>
+      <g transform="translate(493,480)">
+        <rect x="0" y="0" width="42" height="8" rx="4" fill="#20B7AD"/>
+        <rect x="52" y="0" width="52" height="8" rx="4" fill="#EAF2F1"/>
+        <rect x="114" y="0" width="44" height="8" rx="4" fill="#EAF2F1"/>
+      </g>
+      <text x="579" y="518" text-anchor="middle" class="sub">正在初始化應用程式…</text>
+    <rect x="474" y="528" width="210" height="36" rx="10" fill="#F0FDFA"/>
+    <text x="579" y="551" text-anchor="middle" class="reassure">⚡ 不需要登入，也不需要安裝</text>
+  </g>
+<g>
+    <text x="784" y="156" class="paneltitle">3  Desktop — Recovery (Error)</text>
+    <text x="784" y="176" class="panelsub">Retryable example; Home always visible</text>
+    <rect x="784" y="190" width="350" height="400" rx="10" fill="#fff" stroke="#DDE8E6"/>
+  <rect x="784" y="190" width="350" height="46" rx="10" fill="#F7FAF9"/>
+  <text x="802" y="219" class="brand">◢ NodeFF</text>
+    <circle cx="959" cy="318" r="30" fill="#FDECEC"/>
+    <text x="959" y="330" text-anchor="middle" font-size="34" font-weight="700" fill="#D44A4A">!</text>
+    <text x="959" y="386" text-anchor="middle" class="stage">無法打開這個 App</text>
+    <text x="959" y="418" text-anchor="middle" class="sub">發生暫時性的問題，請稍後再試一次。</text>
+    <text x="959" y="441" text-anchor="middle" class="sub">如果持續發生，請回到首頁重新開始。</text>
+    <rect x="816" y="482" width="286" height="44" rx="12" fill="#0F766E"/>
+    <text x="959" y="510" text-anchor="middle" class="btnwhite">再試一次</text>
+    <rect x="816" y="538" width="286" height="44" rx="12" fill="#fff" stroke="#0F9F98"/>
+    <text x="959" y="566" text-anchor="middle" class="btnteal">回到首頁</text>
+  </g>
+
+<g>
+    <text x="62" y="726" class="paneltitle">1  Mobile — Restore (Stage + %)</text>
+    <text x="62" y="746" class="panelsub">With reliable checkpoints</text>
+    <rect x="62" y="760" width="270" height="500" rx="24" fill="#fff" stroke="#DDE8E6"/>
+  <rect x="62" y="760" width="270" height="54" rx="24" fill="#F7FAF9"/>
+  <text x="80" y="789" class="brand">◢ NodeFF</text>
+    <rect x="163" y="850" width="68" height="68" rx="16" fill="#ECFEFA"/>
+    <text x="197" y="893" text-anchor="middle" font-size="34">🌱</text>
+    <text x="197" y="942" text-anchor="middle" class="apptitle">My Plant Coach</text>
+    <text x="197" y="996" text-anchor="middle" class="stage">正在打開這個 App…</text>
+    <text x="197" y="1024" text-anchor="middle" class="sub">稍等一下，馬上就好</text>
+      <rect x="94" y="1058" width="182" height="8" rx="4" fill="#EAF2F1"/>
+      <rect x="94" y="1058" width="109" height="8" rx="4" fill="#20B7AD"/>
+      <text x="290" y="1067" text-anchor="end" class="pct">60%</text>
+      <text x="197" y="1096" text-anchor="middle" class="sub">正在載入 App 資源…</text>
+    <rect x="92" y="1198" width="210" height="36" rx="10" fill="#F0FDFA"/>
+    <text x="197" y="1221" text-anchor="middle" class="reassure">⚡ 不需要登入，也不需要安裝</text>
+  </g>
+<g>
+    <text x="402" y="726" class="paneltitle">2  Mobile — Restore (Stage only)</text>
+    <text x="402" y="746" class="panelsub">Without reliable checkpoints</text>
+    <rect x="402" y="760" width="270" height="500" rx="24" fill="#fff" stroke="#DDE8E6"/>
+  <rect x="402" y="760" width="270" height="54" rx="24" fill="#F7FAF9"/>
+  <text x="420" y="789" class="brand">◢ NodeFF</text>
+    <rect x="503" y="850" width="68" height="68" rx="16" fill="#ECFEFA"/>
+    <text x="537" y="893" text-anchor="middle" font-size="34">🌱</text>
+    <text x="537" y="942" text-anchor="middle" class="apptitle">My Plant Coach</text>
+    <text x="537" y="996" text-anchor="middle" class="stage">正在打開這個 App…</text>
+    <text x="537" y="1024" text-anchor="middle" class="sub">稍等一下，馬上就好</text>
+      <g transform="translate(451,1058)">
+        <rect x="0" y="0" width="42" height="8" rx="4" fill="#20B7AD"/>
+        <rect x="52" y="0" width="52" height="8" rx="4" fill="#EAF2F1"/>
+        <rect x="114" y="0" width="44" height="8" rx="4" fill="#EAF2F1"/>
+      </g>
+      <text x="537" y="1096" text-anchor="middle" class="sub">正在初始化應用程式…</text>
+    <rect x="432" y="1198" width="210" height="36" rx="10" fill="#F0FDFA"/>
+    <text x="537" y="1221" text-anchor="middle" class="reassure">⚡ 不需要登入，也不需要安裝</text>
+  </g>
+<g>
+    <text x="742" y="726" class="paneltitle">3  Mobile — Recovery (Error)</text>
+    <text x="742" y="746" class="panelsub">Same capability, vertical actions</text>
+    <rect x="742" y="760" width="270" height="500" rx="24" fill="#fff" stroke="#DDE8E6"/>
+  <rect x="742" y="760" width="270" height="54" rx="24" fill="#F7FAF9"/>
+  <text x="760" y="789" class="brand">◢ NodeFF</text>
+    <circle cx="877" cy="896" r="30" fill="#FDECEC"/>
+    <text x="877" y="908" text-anchor="middle" font-size="34" font-weight="700" fill="#D44A4A">!</text>
+    <text x="877" y="964" text-anchor="middle" class="stage">無法打開這個 App</text>
+    <text x="877" y="996" text-anchor="middle" class="sub">發生暫時性的問題，請稍後再試一次。</text>
+    <text x="877" y="1019" text-anchor="middle" class="sub">如果持續發生，請回到首頁重新開始。</text>
+    <rect x="774" y="1060" width="206" height="44" rx="12" fill="#0F766E"/>
+    <text x="877" y="1088" text-anchor="middle" class="btnwhite">再試一次</text>
+    <rect x="774" y="1116" width="206" height="44" rx="12" fill="#fff" stroke="#0F9F98"/>
+    <text x="877" y="1144" text-anchor="middle" class="btnteal">回到首頁</text>
+  </g>
+
+<!-- Rules card -->
+<rect x="1170" y="112" width="300" height="1110" rx="16" fill="#FBFDFC" stroke="#DDE8E6"/>
+<text x="1200" y="155" class="ruleh" font-size="22">Visual Rules (Step 3)</text>
+
+<circle cx="1200" cy="205" r="16" fill="#10998F"/><text x="1200" y="210" text-anchor="middle" class="num">1</text>
+ <text x="1230" y="203" class="ruleh">整體風格</text>
+ <text x="1230" y="229" class="ruleb">白 / 極淡灰為主，安靜、可信</text>
+ <text x="1230" y="251" class="ruleb">不使用大面積漸層或浮誇效果</text><circle cx="1200" cy="317" r="16" fill="#10998F"/><text x="1200" y="322" text-anchor="middle" class="num">2</text>
+ <text x="1230" y="315" class="ruleh">App Logo / Title</text>
+ <text x="1230" y="341" class="ruleb">Logo 清楚但低調；Title 20–24px</text>
+ <text x="1230" y="363" class="ruleb">不因等待 Logo 而延遲畫面</text><circle cx="1200" cy="429" r="16" fill="#10998F"/><text x="1200" y="434" text-anchor="middle" class="num">3</text>
+ <text x="1230" y="427" class="ruleh">狀態文字</text>
+ <text x="1230" y="453" class="ruleb">目前狀態是視覺第一主角</text>
+ <text x="1230" y="475" class="ruleb">18–20px / semibold；輔助字 14px</text><circle cx="1200" cy="541" r="16" fill="#10998F"/><text x="1200" y="546" text-anchor="middle" class="num">4</text>
+ <text x="1230" y="539" class="ruleh">Progress</text>
+ <text x="1230" y="565" class="ruleb">Stage + % 或 Stage only</text>
+ <text x="1230" y="587" class="ruleb">Track neutral；Fill Teal → Aqua</text><circle cx="1200" cy="653" r="16" fill="#10998F"/><text x="1200" y="658" text-anchor="middle" class="num">5</text>
+ <text x="1230" y="651" class="ruleh">成功轉場</text>
+ <text x="1230" y="677" class="ruleb">READY 後直接進 S03</text>
+ <text x="1230" y="699" class="ruleb">不顯示 Success Card / Continue</text><circle cx="1200" cy="765" r="16" fill="#10998F"/><text x="1200" y="770" text-anchor="middle" class="num">6</text>
+ <text x="1230" y="763" class="ruleh">Recovery</text>
+ <text x="1230" y="789" class="ruleb">原地顯示錯誤訊息與操作</text>
+ <text x="1230" y="811" class="ruleb">Retry Primary；Home 永遠可見</text><circle cx="1200" cy="877" r="16" fill="#10998F"/><text x="1200" y="882" text-anchor="middle" class="num">7</text>
+ <text x="1230" y="875" class="ruleh">按鈕 / 互動</text>
+ <text x="1230" y="901" class="ruleb">min-height ≥ 44px；radius 12px</text>
+ <text x="1230" y="923" class="ruleb">Hover / Pressed / Focus / Disabled</text><circle cx="1200" cy="989" r="16" fill="#10998F"/><text x="1200" y="994" text-anchor="middle" class="num">8</text>
+ <text x="1230" y="987" class="ruleh">Motion / Accessibility</text>
+ <text x="1230" y="1013" class="ruleb">一般 180ms；progress ≤ 240ms</text>
+ <text x="1230" y="1035" class="ruleb">reduced-motion；aria-live；focus handoff</text>
+
+<rect x="1185" y="1040" width="270" height="150" rx="14" fill="#FFF9DE"/>
+<text x="1210" y="1076" class="ruleh" fill="#805C13">💡 Design Intent</text>
+<text x="1210" y="1106" class="ruleb">S04 像一個「非常短、很安心的開門畫面」：</text>
+<text x="1210" y="1130" class="ruleb">讓 User 知道是哪個 App、現在在做什麼；</text>
+<text x="1210" y="1154" class="ruleb">成功立即消失進 S03，失敗就在原位置給出口。</text>
+
+<text x="34" y="1332" class="panelsub">NodeFF · No install · Everyone is the creator · Sharable · Intent Commerce · Fun and sociable.</text>
+<text x="1460" y="1332" text-anchor="end" class="panelsub">S04 · High-fidelity Visual Reference · Step 4</text>
+</svg>

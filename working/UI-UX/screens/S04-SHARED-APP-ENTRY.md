@@ -2,7 +2,7 @@
 
 > Screen ID：S04
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED / STEP 4 PENDING**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED**
 >
 > Phase：Phase 1
 >
@@ -281,9 +281,9 @@ User 已確認：
 
 # 16. Review Status
 
-> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED / STEP 4 PENDING**
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED**
 
-S04 ④A Low-fi 已完成 User Review；④B High-fi Step 1–3 已完成。下一步為 S04 Step 4 — Final Visual Reference Lock。
+S04 ④A Low-fi 與 ④B High-fi Step 1–4 已完成 User Review。S04 High-fi Current Truth 已閉合；任何 material change 必須依 Change Control reopen 對應 Step。
 
 
 ---
@@ -298,7 +298,7 @@ S04 ④A Low-fi 已完成 User Review；④B High-fi Step 1–3 已完成。下�
 > - Step 1 — Structure Lock ✅
 > - Step 2 — Geometry + Visual Hierarchy Lock ✅
 > - Step 3 — Detailed High-fi Visual Rules Lock ✅
-> - Step 4 — Final Visual Reference Lock ⏳
+> - Step 4 — Final Visual Reference Lock ✅
 
 ## Step 1 — Structure Lock ✅
 
@@ -850,3 +850,61 @@ Step 1：**APPROVED / CLOSED**。
 Next：
 
 > **S04 Step 3 — Detailed High-fi Visual Rules Lock**
+
+## Step 4 — Final Visual Reference Lock ✅
+
+> User approved：2026-09-22
+>
+> Approved visual reference：
+> \`working/UI-UX/references/S04-Shared-App-Entry-Highfi-v1.svg\`
+
+![S04 Shared App Entry High-fi v1](../references/S04-Shared-App-Entry-Highfi-v1.svg)
+
+### 1. Reference Coverage
+
+Final Visual Reference覆蓋 Desktop / Mobile三種代表狀態：
+
+1. Restore — reliable checkpoints → **Stage + checkpoint-derived %**。
+2. Restore — no reliable checkpoints → **Stage only**。
+3. Recovery — restore failure於同一 S04 surface提供 recovery actions。
+
+### 2. Authority / Precedence
+
+若圖片與文字 contract有任何衝突：
+
+~~~text
+S04 Text Contract
+> NodeFF Design System
+> Approved Visual Reference
+~~~
+
+Cursor不得用圖片細節反向改寫 Step 1–3。
+
+### 3. Illustrative Content Boundary
+
+圖片中的 sample App \`My Plant Coach\`、plant logo、\`60%\`、示例 copy、error icon與 exact error hue皆為 illustrative reference，不自動形成 Function requirement。
+
+尤其：
+- exact Error / Warning semantic color仍由 O03 Recovery High-fi統一鎖定；
+- S04不建立第二套 status palette。
+
+### 4. Non-overridable Current Truth
+
+- READY → **立即進 S03**；無 Success Page / Open / Continue。
+- Failure → Desktop / Mobile都必須保留可見的 **\`回到首頁\`**。
+- Retry只在 source Function truth判定 retryable時顯示。
+- reliable checkpoints → Stage + checkpoint-derived %。
+- no reliable checkpoints → Stage only。
+- 不 fake progress、不以 elapsed time推算、不為動畫延遲 READY。
+- S04 restore期間沒有 S03 permanent bottom navigation。
+- 進 S03後 Mobile nav = \`目前 App | 修改 | 分享\`。
+- Recipient = same immutable Blueprint + fresh Runtime Instance；不承接 Creator inputs / results / Runtime state。
+
+### 5. Step 4 Lock
+
+> **S04 Step 4 visual reference 已由 User批准，作為 Desktop / Mobile High-fi implementation reference；文字 contract仍為最高 authority。**
+
+Step 4：**APPROVED / CLOSED**。
+
+S04 ④B High-fi：**STEP 1–4 COMPLETE / CLOSED**。
+
