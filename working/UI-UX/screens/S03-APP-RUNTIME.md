@@ -2,7 +2,7 @@
 
 > Screen ID：S03
 >
-> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_PENDING / HIGH_FI_PENDING**
+> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / HIGH_FI_PENDING**
 >
 > Phase：Phase 1
 >
@@ -42,7 +42,7 @@ Low-fi 原則：
     S02 APP_READY
     → S03
 
-未來另一入口：
+另一入口：
 
     S04 Shared App Entry / Restore
     → S03
@@ -135,6 +135,9 @@ User 應感覺：
 - Share。
 - 其他高優先功能依當前 screen width / device context保持 visible。
 - Mobile 由 bottom navigation承接核心 NodeFF actions。
+- **S03 是 Phase 1 唯一 permanent NodeFF bottom navigation host。**
+- 進入 S05 Refine / Remix 或 S06 Correction Compare 時，不把 S03 bottom navigation 帶入 focused workspace。
+- O01 / O02 / blocking O03 / O04 active 時，underlying S03 Shell controls與 bottom navigation 必須 inert；Overlay close後再恢復。
 
 ## Contextual
 
@@ -177,7 +180,7 @@ Share 不離開 S03 主 context。
 
 Share pending / success / failure 都保留 App。
 
-O01 詳細畫面之後獨立做 Low-fi。
+O01 詳細 presentation 見 `working/UI-UX/overlays/O01-SHARE.md`。
 
 # 10. Remix / Refine Entry — S05
 
