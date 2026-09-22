@@ -745,7 +745,7 @@ Formal Spec、Backlog / Sprint、Cursor implementation仍維持 HOLD；待 High-
 
 ## PENDING-FUNC-004 — F01 Creation Progress Checkpoint Contract
 
-> Sync status：**WORKBENCH PENDING — USER APPROVED DIRECTION / FUNCTION DELTA NOT YET PROMOTED**
+> Sync status：**OPEN / DEFERRED TO O05 HIGH-FI / PROCESSING REVIEW — NO WORKING FUNCTION CHANGE YET**
 >
 > 來源：S02 Create Workspace ④B High-fi Review。
 >
@@ -916,4 +916,16 @@ Review至少確認：
 在此 Delta閉合前：
 - S02 High-fi可以設計 presentation位置與 hierarchy；
 - 但不得把未定義的 exact backend progress payload當成已完成 implementation contract。
+
+
+### 7. Deferred Decision — 2026-09-22
+
+User confirmed：
+
+- F01 Creation Progress Delta remains **OPEN**。
+- Do **not** update `working/functions/F01-INTENT-COMPILATION.md` yet。
+- Do **not** add F01 Acceptance / Test / Evidence contract yet。
+- First perform **O05 High-fi / Processing Review** to define the cross-flow progress model for Create / Refine / Remix / Correction / Restore / Share / Retry / Revert。
+- After O05 review, return to each semantic owner (F01 / F05 / F06 / F16 / F03 etc.) to add only the Function-specific checkpoint contract actually needed。
+- Formal Spec remains frozen。
 
