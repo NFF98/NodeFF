@@ -456,11 +456,11 @@ Next：
 
 Approved by User：2026-09-22
 
-![S01 Discover Start High-fi v1](../references/S01-Discover-Start-Highfi-v1.webp)
+![S01 Discover Start High-fi v1](../references/S01-Discover-Start-Highfi-v1.png)
 
 Canonical image path：
 
-`working/UI-UX/references/S01-Discover-Start-Highfi-v1.webp`
+`working/UI-UX/references/S01-Discover-Start-Highfi-v1.png`
 
 Desktop：
 - Header = NodeFF Logo / 首頁 / 探索靈感 / 我的 App · Soon。
