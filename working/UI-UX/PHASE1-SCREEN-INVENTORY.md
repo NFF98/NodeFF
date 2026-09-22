@@ -1,6 +1,6 @@
 # Phase 1 Screen Inventory
 
-> 狀態：WORKING UI/UX — ALL ④A LOW-FI DIRECTIONS REVIEWED / FUNCTION DELTA CLOSED / CROSS-SCREEN CONSISTENCY REVIEW APPROVED / HIGH-FI DESIGN SYSTEM NEXT
+> 狀態：WORKING UI/UX — LOW-FI + CROSS-SCREEN APPROVED / HIGH-FI DIRECTION A FOUNDATIONS APPROVED / S01 ④B NEXT
 >
 > 目的：管理 Phase 1 的 Screen / Surface 地圖、Screen-level UX Review 狀態與畫面之間的關係。
 >
@@ -103,7 +103,7 @@ Phase 1 採 **Low-fi 全貌優先**：先把所有 Screen / Overlay 的骨架與
 ~~~text
 S01–S06 + O01–O05 ④A Low-fi
 → Cross-Screen consistency review
-→ High-fi Design System
+→ High-fi Design System — Direction A Foundations APPROVED
 → S01–S06 + O01–O05 ④B High-fi
 → Final Review
 ~~~
@@ -235,8 +235,8 @@ User 已確認目前策略：
 
 下一個 Review：
 
-> **High-fi Design System → ④B High-fi**
+> **S01 — Discover / Start ④B High-fi Review**
 
-Cross-Screen Consistency Review 已完成並批准。下一步先建立跨 S01–S06 / O01–O05 的 Design System，再依共同 token / component / interaction rules 進逐頁 ④B High-fi。
+High-fi Direction A Foundations 已完成並批准，canonical Working 文件為 `working/UI-UX/DESIGN-SYSTEM.md`。下一步依共同 color / typography / spacing / radius / elevation / motion / component-state rules 進 S01 ④B High-fi。
 
 Formal Spec、Backlog / Sprint 與 Cursor implementation 仍維持 HOLD。
