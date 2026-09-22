@@ -239,6 +239,6 @@ User 已確認目前策略：
 
 > **S03 — App / Runtime ④B High-fi — NEXT**
 
-S01–S02 Desktop / Mobile ④B High-fi 已由 User 確認並記錄；S02 approved visual reference：`working/UI-UX/references/S02-Create-Workspace-Highfi-v1.webp`。下一步依固定合作流程進 S03：**先鎖結構 → 再鎖視覺 → 最後才出完整圖**。
+S01–S02 Desktop / Mobile ④B High-fi 已由 User 確認並記錄；S02 approved visual reference：`working/UI-UX/references/S02-Create-Workspace-Highfi-v1.png`。下一步依固定合作流程進 S03：**先鎖結構 → 再鎖視覺 → 最後才出完整圖**。
 
 Formal Spec、Backlog / Sprint 與 Cursor implementation 仍維持 HOLD。
