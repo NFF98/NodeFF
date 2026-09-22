@@ -126,6 +126,10 @@ Mobile 不顯示 navigation / bottom navigation，因為還沒有進入真正 S0
 
 READY 後再由 S03 接管 Header / Bottom Navigation。
 
+Cross-screen rule：
+- permanent NodeFF bottom navigation只屬於 S03 Runtime。
+- S04 restore期間不預先顯示 S03 Shell navigation，也不讓 User在 restore中誤進其他 Shell flow。
+
 # 7. Progress Behavior
 
 S04 progress 是 restore progress，不是 AI generation progress。
