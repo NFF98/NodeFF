@@ -608,3 +608,87 @@ S01 implementation authority順序：
 4. 其他示意圖。
 
 S01 的 High-fi細節視為 Working Current Truth；Formal Spec仍待 pre-Cursor refresh。
+
+
+---
+
+# 18. ④B High-fi Step 1–4 Canonical Lock — Approved
+
+Approved by User：2026-09-22
+
+本節是 S01 High-fi 的 **Step 1 → Step 4 canonical index**。Cursor / pre-Cursor refresh 不得只看最終圖片；必須同時讀取每一層已鎖定的文字 contract。
+
+## Step 1 — Structure Lock ✅
+
+鎖定內容：
+- Desktop Header：`NodeFF Logo | 首頁 | 探索靈感 | 我的 App`。
+- Hero主訊息：**意圖就是 App**；副標暫不顯示，但保留 breathing room。
+- Creator Composer = S01 唯一 Primary Create entry。
+- Inspiration採 **App Preview / 作品展示卡**，不是 Prompt card / social feed / App Store listing。
+- Inspiration上方使用文字 category navigation。
+- Explore保持 supporting path，不進 Header。
+- Footer可放 NodeFF官方 social icons，但不放 App Share。
+- Mobile bottom navigation固定：`首頁 | 探索靈感 | 我的 App · Soon`。
+- Mobile不放 Create / Profile / hamburger。
+- 「我的 App」Phase 1是明確 Soon / unavailable placeholder。
+
+Structure authority：
+- 第 15 節 approved structure；
+- 第 17 節 detailed implementation contract。
+
+## Step 2 — Geometry + Visual Hierarchy Lock ✅
+
+Desktop：
+- Creator Composer initial height：約 `180–220px`。
+- Composer auto-grow到約 `320–360px`後才 internal scroll。
+- Inspiration = 3 cards / row。
+- Preview visual約佔 card面積 60%。
+- Hero compact；Composer是首屏視覺主角。
+- attention hierarchy：
+  `Creator Composer > Hero > Inspiration > Explore / Footer`。
+
+Mobile：
+- Composer initial height：約 `160–180px`。
+- Inspiration單欄。
+- category文字 tabs可水平 scroll。
+- bottom nav fixed + safe-area aware。
+- 內容不得被 bottom nav遮住。
+
+Geometry不得因 mockup自行新增 sidebar、promo strip、第二個 Create入口或 App Store metadata。
+
+## Step 3 — Detailed High-fi Visual Rules Lock ✅
+
+- Direction A：**Clean Creator Canvas + Playful Energy**。
+- brand balance：約 `70% Neutral / 20% Teal / ≤10% Yellow`。
+- Teal = brand / creation / active anchor。
+- Yellow = small energy accent，不作大面積背景。
+- Composer focus = visible Teal focus treatment。
+- Inspiration cards採 restrained elevation / border emphasis；不做 neon glow。
+- active category = Teal text + underline / indicator。
+- Hover約 120ms；一般 transition約 180ms。
+- prefers-reduced-motion移除不必要 motion。
+- touch target ≥44 CSS px。
+- active / disabled / selected不可只靠顏色。
+- keyboard focus順序依 visual hierarchy。
+- Cursor不得新增 Profile / Search / Notification / extra Create / promo banner / social metrics / category icon grid。
+
+Detailed visual authority：
+- 第 17 節；
+- `working/UI-UX/DESIGN-SYSTEM.md`。
+
+## Step 4 — Final Visual Reference Lock ✅
+
+Approved reference：
+
+![S01 Discover Start High-fi v1](../references/S01-Discover-Start-Highfi-v1.png)
+
+Canonical path：
+
+`working/UI-UX/references/S01-Discover-Start-Highfi-v1.png`
+
+Rules：
+- final image只用來鎖定 composition / density / visual impression。
+- 圖片若與 Step 1–3文字 contract衝突，**文字 contract優先**。
+- sample content / decorative props不自動成為 Function requirement。
+
+S01 High-fi Step 1–4：**CLOSED / WORKING BASELINE**。
