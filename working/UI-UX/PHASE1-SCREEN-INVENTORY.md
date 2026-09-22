@@ -1,6 +1,6 @@
 # Phase 1 Screen Inventory
 
-> 狀態：WORKING UI/UX — LOW-FI + CROSS-SCREEN APPROVED / HIGH-FI DIRECTION A VISUALLY APPROVED / S01 ④B HIGH-FI APPROVED / S02 ④B HIGH-FI REVIEW IN PROGRESS
+> 狀態：WORKING UI/UX — LOW-FI + CROSS-SCREEN APPROVED / HIGH-FI DIRECTION A VISUALLY APPROVED / S01–S02 ④B HIGH-FI APPROVED / S03 ④B NEXT
 >
 > 目的：管理 Phase 1 的 Screen / Surface 地圖、Screen-level UX Review 狀態與畫面之間的關係。
 >
@@ -23,7 +23,7 @@ Phase 1 目前採 **6 個主要 Screen / Surface + 5 類 Overlay / State**。
 | ID | Screen / Surface | Primary User Outcome | Main Function Sources | Screen Design Status |
 |---|---|---|---|---|
 | S01 | Discover / Start | 從想法或靈感開始 Create | F00 | **④A LOW_FI_APPROVED / ④B HIGH_FI_APPROVED** |
-| S02 | Create Workspace | 分析、補充必要資訊、確認假設並生成 App | F00 + F01 | **④A LOW_FI_APPROVED / ④B HIGH_FI_REVIEW_IN_PROGRESS** |
+| S02 | Create Workspace | 分析、補充必要資訊、確認假設並生成 App | F00 + F01 | **④A LOW_FI_APPROVED / ④B HIGH_FI_APPROVED** |
 | S03 | App / Runtime | 使用生成 App，進入 Share / Remix / Correct | F00 + F03 | **LOW_FI_DIRECTION_APPROVED — FUNCTION_DELTA_CLOSED** |
 | S04 | Shared App Entry / Restore | 從分享連結恢復並立即使用 App | F05 + F00 | **LOW_FI_DIRECTION_APPROVED** |
 | S05 | Refine / Remix Workspace | 修改既有 App、Preview child、決定是否採用 | F06 + F00 | **LOW_FI_DIRECTION_APPROVED** |
@@ -237,8 +237,8 @@ User 已確認目前策略：
 
 下一個 Review：
 
-> **S02 — Create Workspace ④B High-fi — FINAL MOCKUP REVIEW NEXT**
+> **S03 — App / Runtime ④B High-fi — NEXT**
 
-S01 Desktop / Mobile ④B High-fi 已由 User 確認並記錄，包含 approved visual reference：`working/UI-UX/references/S01-Discover-Start-Highfi-v1.webp`。下一步依固定合作流程進 S02：**先鎖結構 → 再鎖視覺 → 最後才出完整圖**。
+S01–S02 Desktop / Mobile ④B High-fi 已由 User 確認並記錄；S02 approved visual reference：`working/UI-UX/references/S02-Create-Workspace-Highfi-v1.webp`。下一步依固定合作流程進 S03：**先鎖結構 → 再鎖視覺 → 最後才出完整圖**。
 
 Formal Spec、Backlog / Sprint 與 Cursor implementation 仍維持 HOLD。
