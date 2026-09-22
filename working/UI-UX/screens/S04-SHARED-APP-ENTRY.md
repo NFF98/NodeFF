@@ -2,7 +2,7 @@
 
 > Screen ID：S04
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED / STEP 3–4 PENDING**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED / STEP 4 PENDING**
 >
 > Phase：Phase 1
 >
@@ -137,8 +137,8 @@ S04 progress 是 restore progress，不是 AI generation progress。
 Rules：
 - 不使用 S02 的「理解 / 組 App」copy。
 - 不顯示 LLM / Compile / Validation engineering terminology。
-- **顯示 Loading %。**
-- 百分比只能根據已完成的 restore checkpoints / hydration work推進，不能假裝預測剩餘秒數。
+- **有 reliable restore checkpoints 時顯示 Stage + checkpoint-derived %；沒有 reliable checkpoints 時顯示 Stage only。**
+- 若顯示百分比，只能根據已完成的 restore checkpoints / hydration work推進，不能假裝預測剩餘秒數。
 - 不為了動畫而故意延長 loading。
 - 當 metadata 已取得時，同時顯示 App Logo / Title。
 
@@ -274,16 +274,16 @@ User 實際看到 / 使用 App後，再從 S03 進：
 User 已確認：
 
 1. **S04 採幾乎隱形的過渡層**；成功時自動進 S03，不建立 Share Landing Page。
-2. Restore 過程顯示 **Loading progress %**。
-3. S04 顯示 **App Logo / App Title + Loading %**；不顯示 Login、Creator資料、Prompt、Result Preview。
+2. Restore 過程遵循 **reliable checkpoints → Stage + checkpoint-derived %；no reliable checkpoints → Stage only**。
+3. S04 顯示 **App Logo / App Title + truthful restore status**；有 reliable checkpoints 才加 checkpoint-derived %；不顯示 Login、Creator資料、Prompt、Result Preview。
 4. 永久失效的 Share 不重新生成舊 App；只有暫時性錯誤才提供 Retry，其餘提供 Home / Create New 等安全出口。
-5. Loading % 必須由已完成 restore work推進，不代表預估剩餘時間。
+5. 若顯示 Loading %，必須由已完成 restore work推進，不代表預估剩餘時間；沒有 reliable checkpoints 時不顯示 %。
 
 # 16. Review Status
 
-> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED / STEP 3–4 PENDING**
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED / STEP 4 PENDING**
 
-S04 ④A Low-fi 已完成 User Review；④B High-fi Step 1–2 已完成。下一步為 S04 Step 3 — Detailed High-fi Visual Rules Lock。
+S04 ④A Low-fi 已完成 User Review；④B High-fi Step 1–3 已完成。下一步為 S04 Step 4 — Final Visual Reference Lock。
 
 
 ---
@@ -297,7 +297,7 @@ S04 ④A Low-fi 已完成 User Review；④B High-fi Step 1–2 已完成。下�
 > Current status：
 > - Step 1 — Structure Lock ✅
 > - Step 2 — Geometry + Visual Hierarchy Lock ✅
-> - Step 3 — Detailed High-fi Visual Rules Lock ⏳
+> - Step 3 — Detailed High-fi Visual Rules Lock ✅
 > - Step 4 — Final Visual Reference Lock ⏳
 
 ## Step 1 — Structure Lock ✅
@@ -664,6 +664,168 @@ READY後才切換到 S03，並由 S03顯示：
 目前 App | 修改 | 分享
 ~~~
 
+
+## Step 3 — Detailed High-fi Visual Rules Lock ✅
+
+### 1. Screen Character / Color Usage
+
+S04沿用 NodeFF Design System Direction A：
+
+> **Clean Creator Canvas + Playful Energy**
+
+但 S04屬短暫 restore transitional surface，因此視覺必須比 S01 / S02 更安靜。
+
+Rules：
+- Background以 White / Soft Neutral為主。
+- Teal用於主要狀態、progress、focus與 recovery primary action。
+- Aqua只作 progress / restore supporting accent。
+- Yellow只允許小面積 completion / energy accent。
+- 不使用大面積 gradient。
+- 不使用 neon / rainbow / glassmorphism。
+- 不使用重 shadow把 restore body做成大型浮島卡片。
+- Brand Yellow不得代表 warning / error / unsafe。
+
+Exact Error / Warning semantic color不由 S04自行發明；留待 O03 Recovery High-fi統一鎖定。
+
+### 2. App Identity Visual Treatment
+
+App Logo / App Title清楚但低調，不可搶過 restore status。
+
+Rules：
+- metadata已取得時直接顯示 App Logo / Title。
+- metadata尚未取得時先顯示 truthful restore status，不做 shimmer skeleton等候。
+- App Logo可使用乾淨 neutral container，但不做 decorative glow。
+- App Title沿用 Step 2約 20–24px / semibold。
+- 不以 heavy shadow、glow、gradient frame把 App identity做成 hero。
+- 不為了 identity完整而延遲 READY。
+
+### 3. Restore Status Typography
+
+Restore status是 S04正常狀態的最高視覺優先。
+
+Recommended treatment：
+- Current human-readable stage：Ink primary，約 18–20px / semibold。
+- Supporting copy：約 14px，Secondary text。
+- 「不需要登入，也不需要安裝」是 reassurance，視覺權重低於 stage / progress。
+- 不顯示工程狀態名稱、provider、LLM、Compiler、Validator、Blueprint technical labels。
+
+### 4. Progress Visual Contract
+
+S04沿用 Design System / O05 presentation rule：
+
+~~~text
+reliable restore checkpoints
+→ Stage + checkpoint-derived %
+
+no reliable restore checkpoints
+→ Stage only
+~~~
+
+Progress visual：
+- Track = neutral border / soft surface。
+- Fill = Teal → Aqua direction。
+- Rail約 8px，高度沿用 Step 2 geometry。
+- Pill-like radius。
+- Yellow不得表示「等待中」。
+- 100%只在 source Function truth達成 actual READY。
+- 真實 checkpoint前進時，visual fill可在約 180–240ms內移到新真值。
+- 不使用 elapsed time、timer interpolation、fake smooth growth。
+- 不為了讓 100% 看得到而延遲 S03 handoff。
+
+### 5. Success Transition
+
+S04成功不是一個獨立 Success Screen。
+
+READY後：
+
+~~~text
+S04
+→ S03 immediately
+~~~
+
+Visual rules：
+- 可有很短的自然 state/route transition。
+- 不停留在 100% 等動畫完成。
+- 不顯示「完成！」Success Card。
+- 不顯示 confetti / fireworks。
+- 不增加「開啟 App / 繼續」CTA。
+- READY非常快時 User可能看不到完整 100% frame，視為正常。
+
+### 6. Recovery Visual Family
+
+Failure時同位置 Restore body切換為 Recovery body，不跳 modal /另一頁。
+
+Recommended order：
+
+~~~text
+Error / recovery icon
+→ Humanized title
+→ Short explanation
+→ Recovery actions
+~~~
+
+Temporary / retryable：
+- \`再試一次\` = Primary Teal。
+- \`回到首頁\` = Secondary。
+
+Permanent / non-retryable：
+- \`回到首頁\` = Primary。
+
+Rules：
+- \`回到首頁\`永遠可見，不得藏進 overflow。
+- Brand Yellow不得當 warning / error色。
+- Exact danger / warning semantic color由 O03統一。
+- 不用大面積紅色背景 /警報式 visual作預設。
+- 不用 bounce / playful motion表達 serious recovery。
+
+### 7. Button / Interaction States
+
+S04 action controls沿用 Design System Button System。
+
+Baseline：
+- min-height ≥ 44 CSS px。
+- radius = 12px。
+- Primary = Teal 600 + White text。
+- Hover = Teal 500。
+- Secondary = neutral / white surface + default border。
+- Focus Visible必須清楚，不只靠顏色。
+- Pressed不得造成 layout shift。
+- Disabled保持可讀，不只降低 opacity。
+- Loading保留原 label geometry；spinner不得成為唯一狀態資訊。
+- Mobile recovery buttons接近 full-width。
+- Desktop / Mobile capability一致，只允許排列不同。
+
+### 8. Motion / Accessibility
+
+Motion：
+- control feedback約 120ms。
+- general state transition約 180ms。
+- progress / restore transition最長約 240ms。
+- 不做持續 pulse假裝 progress。
+- operation完成不得為 motion故意延遲。
+- prefers-reduced-motion移除非必要 pulse / slide，直接切換真實狀態。
+
+Accessibility：
+- restore status使用適當 aria-live。
+- progress不能只靠顏色。
+- failure state變更可被 assistive technology感知。
+- recovery actions完整支援 keyboard / assistive tech。
+- focus ring清楚可見。
+- READY進 S03後，focus移交 S03主要 App content / heading，不留在已消失的 S04 node。
+
+### Step 3 Lock Summary
+
+S04 High-fi Detailed Visual Rules：
+
+> **安靜、可信、低干擾；restore stage是主角，progress只反映真實工作；READY不演成功頁，failure則在同一位置提供清楚、可操作的 recovery與首頁出口。**
+
+Step 3：**APPROVED / CLOSED**。
+
+Next：
+
+> **S04 Step 4 — Final Visual Reference Lock**
+
+
 ### Step 2 Lock Summary
 
 S04 High-fi Geometry + Visual Hierarchy：
@@ -674,7 +836,7 @@ Step 2：**APPROVED / CLOSED**。
 
 Next：
 
-> **S04 Step 3 — Detailed High-fi Visual Rules Lock**
+> **S04 Step 4 — Final Visual Reference Lock**
 
 
 ### Step 1 Lock Summary
