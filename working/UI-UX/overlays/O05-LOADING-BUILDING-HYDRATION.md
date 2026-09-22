@@ -2,7 +2,7 @@
 
 > Overlay / State ID：O05
 >
-> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_PENDING / HIGH_FI_PENDING**
+> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / HIGH_FI_PENDING**
 >
 > Phase：Phase 1
 >
@@ -29,6 +29,7 @@ O05 可被以下畫面 / Overlay使用：
 - S04 Shared App Restore。
 - S05 Refine / Remix。
 - S06 Correction Compare preparation / replay。
+- O01 Share creation。
 - O02 Correction Composer submit。
 - O03 Recovery Retry。
 - O04 Revert confirm → previous version hydration。
@@ -104,7 +105,7 @@ Example：
 
 O05 建議統一後：
 
-    S02 / S04 / S05 / S06 / O02 / O03 retry / O04 revert
+    S02 / S04 / S05 / S06 / O01 / O02 / O03 retry / O04 revert
     → 能定義可靠 checkpoints時
     → Stage + %
 
@@ -147,6 +148,15 @@ Example：
     正在準備 App…
 
 不為了 animation拖慢 entry。
+
+# 8.1 O01 — Share Creation
+
+O01 Share creation也使用同一 processing presentation：
+
+- 有可靠 Share creation checkpoints → Stage + checkpoint-derived %。
+- 沒有可靠 checkpoints → 顯示「正在準備分享連結…」等 truthful stage，不顯示 fake %。
+- READY立即轉 O01 READY，不為了動畫停留。
+- Share failure仍由 F05 / F12 → O03 recovery semantics承接；O05只負責 processing presentation。
 
 # 9. S05 — Refine / Remix
 
@@ -387,7 +397,7 @@ User 已確認：
 
 # 22. Review Status
 
-> **LOW_FI_DIRECTION_APPROVED — FUNCTION_DELTA_CLOSED — CROSS_SCREEN_REVIEW_PENDING — HIGH_FI_PENDING**
+> **LOW_FI_DIRECTION_APPROVED — FUNCTION_DELTA_CLOSED — CROSS_SCREEN_REVIEW_APPROVED — HIGH_FI_PENDING**
 
 O05 的 Low-fi presentation direction與 Runtime Function Delta已由 User確認。
 
