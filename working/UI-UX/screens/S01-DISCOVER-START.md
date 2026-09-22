@@ -2,7 +2,7 @@
 
 > Screen ID：S01
 >
-> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / HIGH_FI_DIRECTION_A_APPLIED / ④B HIGH_FI_REVIEW_IN_PROGRESS**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_APPROVED (DIRECTION A)**
 >
 > Phase：Phase 1
 >
@@ -262,7 +262,7 @@ Low-fi baseline：
 
 - 強制 Sign in / Sign up。
 - Dashboard。
-- My Apps。
+- 完整 My Apps workspace / Dashboard（但 S01 navigation 可顯示「我的 App · Soon」placeholder；見第 15 節）。
 - 複雜分類 Sidebar。
 - Model picker。
 - Blueprint / Registry / Runtime technical controls。
@@ -285,48 +285,40 @@ S01 ④B High-fi 必須套用 `working/UI-UX/DESIGN-SYSTEM.md` Direction A：
 - Header維持極簡，不因效果圖示意新增 Phase 1 Low-fi未批准的 navigation。
 - High-fi visual reference已由 User確認「可以」；但效果圖不是 pixel-spec，個別 S01 composition仍以本文件既有 Low-fi為基準。
 
-# 13. Open High-fi Decisions
+# 13. ④B High-fi Decisions — Resolved
 
-仍待後續：
+S01 的 ④B High-fi 已於 2026-09-22 完成 User Review。
 
-1. 正式 NodeFF color tokens / HEX。
-2. Gradient 是否為大面積 background、CTA accent 或動態生成效果。
-3. Typography system。
-4. Radius / shadow / elevation。
-5. Capsule High-fi visual language。
-6. Composer 的 final geometry / motion。
-7. Header 最終保留 controls。
-8. Ghost Text 的正式 copy / rotation rules。
-9. Explore 最終 presentation。
-10. Desktop / Mobile breakpoint 與 exact spacing token。
+本 Screen 使用：
+- `working/UI-UX/DESIGN-SYSTEM.md` 的 Direction A tokens / visual language；
+- 第 15 節 approved structure / geometry；
+- 第 16 節 approved visual reference。
+
+未來若需改動已批准 layout / navigation / component presentation，必須重新進 S01 Working Review。
 
 # 14. Review Status
 
 已由 User 確認：
 
-- S01 核心內容方向。
-- Prompt-first + Capsules supporting。
-- Must not resemble Google/Search UI。
-- 畫面乾淨。
-- 移除右上不必要圖案／控制。
-- Tiffany Blue → Yellow 作 High-fi color direction input。
-- visible generation progress 應納入 NodeFF，但主要在 S02 設計。
+- S01 ④A Low-fi direction。
+- High-fi Direction A。
+- Desktop / Mobile structure。
+- Header navigation。
+- Hero presentation。
+- long-form Creator Composer geometry / auto-grow rule。
+- single Create CTA。
+- Inspiration text category navigation。
+- 作品展示卡 presentation。
+- Footer social icons。
+- Mobile bottom navigation。
+- 「我的 App」Soon placeholder。
+- S01 Desktop + Mobile final visual reference。
 
-尚未確認：
+因此 S01 現在狀態：
 
-- High-fi visual design。
-- Design tokens。
-- exact component styling。
-- final responsive pixel-level layout。
+> **④B HIGH_FI_APPROVED — WORKING BASELINE**
 
-因此 S01 目前狀態：
-
-> **LOW_FI_DIRECTION_APPROVED — HIGH_FI DIRECTION A APPLIED — ④B REVIEW IN PROGRESS**
-
-不代表 Spec change approved，也不代表 Cursor 可開始 implementation。
-
-
----
+此 approval 是 UI/UX Working approval；不代表 Formal Spec promotion，也不代表 Cursor implementation 可開始。
 
 # 15. ④B High-fi Structure v2 — Approved
 
@@ -456,3 +448,44 @@ Rules：
 Next：
 
 > **S01 Desktop + Mobile Layout Wireframe High-fi Review**
+
+
+---
+
+# 16. ④B Final High-fi Visual Reference — Approved
+
+Approved by User：2026-09-22
+
+![S01 Discover Start High-fi v1](../references/S01-Discover-Start-Highfi-v1.webp)
+
+Canonical image path：
+
+`working/UI-UX/references/S01-Discover-Start-Highfi-v1.webp`
+
+Desktop：
+- Header = NodeFF Logo / 首頁 / 探索靈感 / 我的 App · Soon。
+- Profile 暫不出現。
+- Hero 只保留「意圖就是 App」；副標位置保留 breathing room。
+- Creator Composer 為唯一 Create entry。
+- Composer 支援大量 multi-line 輸入與 auto-grow。
+- 靈感精靈使用文字 category navigation。
+- Inspiration 採 3 cards / row 的作品展示卡。
+- Footer 可使用 NodeFF 官方 social icons。
+
+Mobile：
+- Header 不放 hamburger / Profile。
+- Creator Composer 仍是唯一 Create entry。
+- Inspiration cards 單欄。
+- Bottom Navigation = 首頁 / 探索靈感 / 我的 App · Soon。
+- Bottom Navigation 不放 Create。
+- 「我的 App」為 Soon placeholder。
+
+Reference boundary：
+
+此圖片是 approved S01 High-fi visual reference，但 implementation 時仍以本文件文字規則 + `DESIGN-SYSTEM.md` tokens 為準。若圖片生成誤差與文字 contract 衝突，文字 contract 優先。
+
+S01 ④B 已完成。
+
+Next：
+
+> **S02 — Create Workspace ④B High-fi：先鎖結構 → 再鎖視覺 → 最後出完整圖。**
