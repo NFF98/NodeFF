@@ -2,7 +2,7 @@
 
 > Screen ID：S03
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B HIGH_FI_REVIEW_IN_PROGRESS**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B HIGH_FI_APPROVED — WORKING BASELINE**
 >
 > Phase：Phase 1
 >
@@ -436,3 +436,329 @@ High-fi presentation：
 - Modify / Remix semantic flow：F06。
 
 S03 Screen只擁有 presentation，不成為第二份 Function truth。
+
+
+---
+
+# 20. ④B Detailed High-fi Visual Rules — Approved
+
+Approved by User：2026-09-22
+
+本節是 S03 的 Detailed High-fi contract。它與第 19 節 UI ↔ Function handoff共同構成 Cursor 未來實作時的 Working visual authority；不得只依 mockup猜 behavior。
+
+## 20.1 Core Visual Principle
+
+S03 是 User 真正「使用 App」的關鍵 surface。
+
+固定 attention hierarchy：
+
+~~~text
+Generated App
+> App Identity
+> Primary NodeFF actions
+> Result-specific correction action
+> NodeFF brand chrome
+> Overflow actions
+~~~
+
+目標：
+- Generated App取得約 80–90% attention。
+- NodeFF存在但退到背景。
+- User感覺是「我正在用 App」，不是「我在 NodeFF Dashboard裡操作一個 widget」。
+
+禁止：
+- sidebar / inspector。
+- dashboard card sea。
+- technical console / JSON / Blueprint badges。
+- 把 Generated App包成一個小 preview card。
+- 讓 NodeFF shell比 App內 primary action更搶眼。
+
+## 20.2 Shell vs Generated App Boundary
+
+NodeFF Shell：
+- 使用固定 Direction A system tokens。
+- white / very-soft neutral surface。
+- subtle divider；不使用厚陰影、glassmorphism或大面積 brand gradient。
+- Shell controls與 Generated App controls要視覺可區分。
+
+Generated App：
+- 可以有自己的 app presentation / visual personality。
+- 不強制重畫成 NodeFF元件。
+- Runtime Canvas不預設再包一層巨大 white card。
+- F00只擁有 shell；F03 render tree擁有 App area。
+
+Design System principle：
+
+> **NodeFF owns the shell; creators own the App presentation.**
+
+## 20.3 Desktop Header
+
+Geometry：
+- 約 `64–72px`高。
+- single row。
+- left = `NodeFF Logo → App Identity`。
+- right = `修改這個 App / 分享 / •••`。
+
+Left：
+- NodeFF Logo低視覺重量，但明確可點。
+- Logo → F00 → S01 / New App。
+- App Logo + App Title為主要 identity。
+- App Title約 `18–20px semibold`。
+- title過長使用 single-line ellipsis，不撐高 Header。
+- NodeFF與App identity之間可用 subtle divider / spacing區隔。
+
+Right actions：
+- `分享`：compact Teal primary shell action。
+- `修改這個 App`：secondary / outline / ghost treatment。
+- `•••`：icon-only overflow，touch/click target仍 ≥44px。
+- `修改這個 App`與`分享`需 visible；Revert等低頻 contextual action進 overflow。
+- Shell action visual weight不得高於 Generated App真正的 primary CTA。
+
+NodeFF Logo hover / focus可提供 accessible tooltip：`回到首頁`。
+
+## 20.4 Runtime Canvas Geometry
+
+Desktop：
+- max-width約 `1200–1280px`。
+- viewport左右 breathing room約 `24–40px`。
+- initial usable App area至少約 `70vh`，但不是固定高度。
+- 內容長時自然 document scroll。
+- full-width Capability可依 contract突破一般內容欄，但仍受 viewport safe-area / overflow control。
+- 不做中央窄欄 SaaS form版型。
+
+Mobile：
+- Runtime全寬。
+- content horizontal padding約 `16px`，但 Generated App可依 component contract使用 edge-to-edge presentation。
+- 需預留 permanent bottom nav + safe area。
+- Generated App若自己有 bottom controls，必須再加入足夠 spacing，兩層 controls不可互相遮擋。
+
+## 20.5 Result Surface / Correct Placement
+
+Result Surface不是常駐空白區。
+
+Visibility：
+- 只有 F03 canonical `evaluateResult()` / `result.outputs`存在 `AVAILABLE` output且需要 NodeFF-level result action時出現。
+- UI不能從 DOM、screen text或視覺 pattern猜 result。
+
+Placement：
+- 與 Runtime Frame同寬。
+- 位於 normal content flow。
+- 不做右側 sidebar。
+- 不 floating覆蓋 App。
+
+Duplication rule：
+- Generated App已清楚呈現 result → NodeFF不重複抄一次 result value。
+- Result Surface只提供必要 result-specific action。
+
+**Approved semantic / visual separation：**
+- `修改這個 App`固定在 Header / Mobile bottom navigation → F06。
+- `調整結果`只在 canonical result附近 → F16。
+- Result Surface **不再重複放「修改這個 App」**。
+
+因此「改 App」與「改結果」在語意與視覺位置都天然分流。
+
+## 20.6 Runtime Processing / Global Loading
+
+F03 accepted / admitted interaction建立 operation token後，S03進 logical `GLOBAL_PROCESSING`；但 High-fi presentation必須克制。
+
+Presentation：
+- 極快、同一 browser render frame完成 → 不強迫 paint loading。
+- 肉眼可見 processing優先使用 **Runtime Canvas頂部 subtle progress rail + stage copy**。
+- rail約 `3–4px`。
+- reliable checkpoints → Stage + checkpoint-derived %。
+- no reliable checkpoints → Stage only。
+- 不 fake %。
+- 不以 elapsed time平滑灌進度。
+- 不為 animation故意延遲 completion。
+- operation commit成立後才可到100%。
+
+Interaction rule：
+- normal processing不 blanket-disable整個 App。
+- 只有 Function truth要求不可重入/受影響的 control才 disabled / pending。
+- F03仍維持 single-writer / FIFO / atomic commit；presentation state不能決定 Runtime commit。
+
+Soft Timeout：
+- 保留 last true checkpoint。
+- processing presence可提高一級。
+- human copy例如：`還在處理，內容會保留`。
+- 不跳 fake error。
+
+Hard Timeout：
+- F03 discard uncommitted transaction。
+- 交 F12 / O03 humanized recovery。
+
+## 20.7 Mobile Header
+
+約 `56–64px`。
+
+固定：
+- NodeFF Logo。
+- App Identity / Title。
+- `•••`。
+
+Rules：
+- 不塞 `分享` / `修改`到 top header；由 bottom navigation承接。
+- NodeFF Logo → S01 / New App。
+- `•••`提供 contextual低頻 action。
+- `•••`可包含文字備援：`回到首頁 / 建立新的 App`。
+- 不搬入 S01的首頁 / 探索 / 我的 App完整 navigation。
+- title過長 ellipsis。
+
+## 20.8 Mobile Permanent Bottom Navigation
+
+固定三項：
+
+~~~text
+App | 修改 | 分享
+~~~
+
+Geometry：
+- 約 `64–72px + safe area`。
+- fixed bottom。
+- icon + text。
+- touch target ≥44px。
+
+State：
+- `App` = current active destination。
+- active `App`使用 Teal icon + text / active indicator。
+- `修改`、`分享`預設 neutral。
+- 不做中央大 FAB。
+- 不用大面積 Yellow fill。
+- `App`不得自行發明 tap-to-reset / scroll-to-top等未定義 behavior。
+
+Function mapping：
+- `修改` → F06 → S05。
+- `分享` → F05 → O01。
+- `調整結果`不放 permanent nav，因為它是 result-conditional。
+
+## 20.9 Contextual Overlay Visual Family
+
+原則：
+> Overlay是在目前 App上完成一件事，不是跳去另一個產品。
+
+O01 Share：
+- Desktop約 `420–480px` lightweight dialog / anchored panel。
+- Mobile bottom sheet。
+- Runtime context仍可辨識。
+- Share pending不變成 full-screen loading。
+
+O02 Correction：
+- 使用同一 overlay family，但內容聚焦「哪裡需要調整」。
+- 由 canonical result context進入。
+
+O04 Revert：
+- 使用 confirmation family。
+- destructive / consequential action不能用品牌 Yellow當 danger。
+
+O03 Recovery：
+- INFO / DEGRADED → inline / node-level。
+- BLOCKING_RECOVERABLE → dialog / sheet。
+- TERMINAL → safe-state presentation。
+
+Layering：
+- O01 / O02 / blocking O03 / O04 active時，underlying Shell + bottom nav inert。
+- close後 focus回 trigger / safe surface。
+- inline node-level recovery不鎖整頁。
+
+## 20.10 Brand / Color Management
+
+S03沿用 Direction A，但比 S01/S02更克制：
+
+~~~text
+Neutral / White ≈ 70%+
+Teal family      ≈ 20%
+Yellow           ≤ 10%
+~~~
+
+實際 S03 Yellow可低於10%。
+
+用途：
+- Neutral：canvas、shell、secondary UI。
+- Teal：Share、active bottom nav、focus、processing rail、interactive active states。
+- Aqua：Teal過渡 / restrained progress support。
+- Yellow：small new / completion / energy marker。
+
+Yellow不得：
+- 當一般 warning。
+- 鋪滿 Header / bottom nav / Runtime。
+- 取代 danger semantic color。
+
+不能只靠顏色表達 status / current / error。
+
+## 20.11 Motion
+
+- Hover：約 `120ms`。
+- 一般 UI transition：約 `180ms`。
+- completion / recovery transition：約 `240ms`內。
+- Runtime operation完成不做煙火 / confetti。
+- 可使用 progress rail收束 + content update。
+- 不使用持續 pulse吸走 App注意力。
+- prefers-reduced-motion：移除不必要 slide / pulse / animated progress flourish，保留狀態改變。
+
+## 20.12 Interaction / Component States
+
+S03 Shell components至少需：
+
+~~~text
+DEFAULT
+HOVER
+FOCUS_VISIBLE
+PRESSED
+DISABLED where applicable
+LOADING where applicable
+ACTIVE / SELECTED where applicable
+~~~
+
+- focus ring visible。
+- disabled仍需可讀。
+- icon-only overflow有 accessible name。
+- loading不能只靠 spinner。
+- selected / active不能只靠顏色。
+
+Generated App component states由 Capability / F03 contract擁有，不由 S03 Shell覆寫。
+
+## 20.13 Accessibility
+
+- Shell / Runtime focus order符合 visual hierarchy。
+- initial focus進 App主要 heading/content，不先跳 bottom nav。
+- overlay focus trap / restore明確。
+- aria-live只適度通知 operation / result change，不連續洗屏。
+- mobile touch target ≥44 CSS px。
+- bottom nav safe-area aware。
+- color不是唯一 state indicator。
+- node failure fallback可被 assistive technology感知。
+- Runtime content不能被 fixed nav遮住。
+
+## 20.14 Cursor Guardrails
+
+Cursor不得自行：
+- 把 Runtime變 Dashboard。
+- 新增 sidebar / inspector。
+- 從 DOM猜 canonical result。
+- 在 Result Surface重複放「修改這個 App」。
+- 把 `調整結果`常駐在沒有 canonical result的 App。
+- 把每個 local click變 full-screen spinner。
+- 為了 loading animation故意延遲 operation。
+- 把 Header塞入 S01完整 navigation。
+- 在 mobile top header重複 Share / Modify。
+- 讓 bottom nav遮住 Generated App controls。
+- 讓 mockup sample content變成 Function requirement。
+
+S03 implementation authority順序：
+
+1. 本文件第 19–20 節文字 contract；
+2. `working/UI-UX/DESIGN-SYSTEM.md`；
+3. approved S03 visual reference；
+4. 其他示意圖。
+
+若 visual reference與文字 contract衝突，文字 contract優先。
+
+# 21. S03 ④B Approval Status
+
+User 已於 2026-09-22 確認 S03 Desktop + Mobile final High-fi visual。
+
+因此 S03 現在狀態：
+
+> **④B HIGH_FI_APPROVED — WORKING BASELINE**
+
+Formal Spec、Backlog / Sprint與 Cursor implementation仍維持 HOLD，直到 pre-Cursor Formal Spec Refresh。
