@@ -854,15 +854,16 @@ Next：
 ## Step 4 — Final Visual Reference Lock ✅
 
 
-> **PNG Repair Record — 2026-09-23**
+> **PNG Display Repair Record — 2026-09-23**
 >
-> Previous PNG blob `4615eecef225fd22cdb8c3265a461976dafc481a` had a valid PNG signature but malformed PNG chunk structure and could not render reliably on GitHub.
+> GitHub 上的 previous canonical PNG blob `28a2b6cd3d787e6db1af05c7f96ffcc36ebb79ee` 顯示異常。
 >
-> It has been replaced **in-place at the same canonical path** with valid PNG blob `28a2b6cd3d787e6db1af05c7f96ffcc36ebb79ee`.
+> 已以可正常 render 的 **true PNG** 在同一 canonical path 原位替換；new repository blob：
 >
-> This is **artifact-integrity repair only**：S04 Step 1–4 semantics / layout contract remain unchanged and Step 4 is not reopened.
-
-
+> `0c95569dae311e514325055ba98d24b59911034d`
+>
+> 此次只修復 visual artifact display / integrity；**S04 Step 1–4 semantics、layout、interaction contract 完全不變，Step 4 不 reopen**。
+>
 > User approved：2026-09-22
 >
 > Approved visual reference：
