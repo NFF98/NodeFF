@@ -24,8 +24,8 @@ Low-fi 建議共用同一個 S05 Workspace，不做兩套 UI。
 
 Difference 同時用 **relation label + version visual marker** 說清楚：
 
-- **Refine / 修改這個 App**：延續目前 App，做下一版。
-- **Remix / 改成我的版本**：以目前 App 為底稿，做衍生版本。
+- **Refine**（internal relation）→ Consumer UI：**修改這個 App**；延續目前 App，做下一版。
+- **Remix**（internal relation）→ Consumer UI：**改成我的版本**；以目前 App 為底稿，做衍生版本。
 - 原版 / 新版在 Low-fi 先保留不同的 border / accent token 作為版本識別；**實際顏色值屬 ④B High-fi Design System，不在 Low-fi 鎖定。**
 
 原因：
@@ -116,6 +116,10 @@ S04 Shared App restore完成後，也是先進 S03，再由 S03進 Remix。
 
 Mobile 不做 split-pane；保留明顯的「查看原版」入口，返回 S05 時保留 change draft。
 
+Cross-screen navigation rule：
+- S05 是 focused modification workspace，不繼承 S03 permanent bottom navigation。
+- 返回 / 查看原版 / decision CTA由 S05自身承接，避免修改中誤觸 S03 Shell actions。
+
 # 7. Change Composer Rules
 
 Minimum UI：
@@ -164,8 +168,10 @@ Low-fi proposed stages：
 4. 準備新版
 
 Rules：
-- stage-based。
-- 不 fake percentage unless later High-fi有可靠 work metric。
+- 共用 O05：有可靠 checkpoints時顯示 **Stage label + checkpoint-derived Progress %**。
+- 沒有可靠 checkpoints時只顯示 Stage label，不 fake %。
+- % 代表 work completion，不代表剩餘時間。
+- 不為了讓 progress看得到而延遲真正完成。
 - 不顯示 Prompt / Validation engineering terminology。
 - source App始終保持安全。
 
