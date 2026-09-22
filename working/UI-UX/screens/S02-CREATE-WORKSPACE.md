@@ -2,7 +2,7 @@
 
 > Screen ID：S02
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_REVIEW_IN_PROGRESS**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_APPROVED (DIRECTION A)**
 >
 > Phase：Phase 1
 >
@@ -188,7 +188,7 @@ Fast Path 不要求額外確認；只有 Clarification / Assumption 需要 User 
 
 # 17. Review Status
 
-> **LOW_FI_DIRECTION_APPROVED — HIGH_FI_PENDING**
+> **④A LOW_FI_APPROVED — ④B HIGH_FI_APPROVED**
 
 # 18. Contextual Intent Edit — Approved Low-fi Direction
 
@@ -230,16 +230,14 @@ User 已確認：
 
 > **LOW_FI_DIRECTION_APPROVED — HIGH_FI_PENDING**
 
-S02 ④A Low-fi 已完成 User Review。
-
-依 Phase 1 UI/UX 固定流程，S02 ④A Low-fi 已完成。**下一步進 S03 ④A Low-fi**；等 S01–S06 / O01–O05 全部 Low-fi 完成並 Cross-Screen Review 後，才統一進 ④B High-fi。
+S02 ④A Low-fi 與 ④B High-fi 均已完成 User Review。
 
 
 ## 20.1 Next Step
 
-> **S03 ④A Low-fi**。
+> **S03 — App / Runtime ④B High-fi**。
 
-S02 的 High-fi 方向先保留於 `working/DESIGN-WORKBENCH.md`，待全部 Low-fi 與 Cross-Screen Review 完成後統一進 Design System / ④B High-fi。
+S02 High-fi 已定稿並進入 Working baseline。
 
 
 ---
@@ -428,3 +426,66 @@ User確認 final mockup後，需像 S01一樣：
 3. 將 S02標成 `④B HIGH_FI_APPROVED`；
 4. 更新 Phase 1 Screen Inventory；
 5. 最終 pre-Cursor Formal Spec Refresh時，文字規格 + approved visual reference一起升格給 Cursor。
+
+
+---
+
+# 22. ④B Final High-fi Visual Reference — Approved
+
+Approved by User：2026-09-22
+
+Repository reference：
+
+![S02 Create Workspace High-fi v1](../references/S02-Create-Workspace-Highfi-v1.webp)
+
+Canonical image path：
+
+`working/UI-UX/references/S02-Create-Workspace-Highfi-v1.webp`
+
+## 22.1 Approved Screen Rules Represented by the Reference
+
+Desktop：
+- Header = NodeFF + `← 回到建立 App`。
+- 不顯示一般 navigation / Share / Profile。
+- Creation Progress 為主視覺。
+- 4-stage stepper = 理解想法 / 整理 App / 檢查互動 / 準備 App。
+- 有 reliable checkpoints 時顯示 checkpoint-derived Progress %。
+- `查看需求` 為 secondary expandable action。
+- Clarification 顯示在同一 Dynamic Workspace Body。
+- 每輪最多 3 個最高優先 material questions。
+- Continue 後重新分析；若仍需要，再進下一輪。
+- 不顯示 round number。
+- Completion 在同一 Workspace transition 為 `你的 App 已完成` + `開啟 App`。
+
+Mobile：
+- 無 permanent bottom navigation。
+- Header保留 NodeFF + `回到建立 App`。
+- compact 4-stage indicator。
+- progress / stage 與 Dynamic Workspace 垂直排列。
+- Clarification choices 單欄。
+- Primary CTA full-width。
+- 不顯示 S01 / S02 / S03 等 internal ID。
+
+## 22.2 Reference Boundary
+
+此圖片是 **approved S02 High-fi visual reference**。
+
+實作優先順序：
+
+1. 本文件文字 contract；
+2. `working/UI-UX/DESIGN-SYSTEM.md`；
+3. approved visual reference。
+
+若圖片生成細節與文字 contract衝突，以文字 contract為準。圖片中的示例 question copy / choice content 只代表 presentation pattern，不自動成為 F01 product semantics。
+
+F01 Creation Progress checkpoint backend gap仍由：
+
+`working/DESIGN-WORKBENCH.md → PENDING-FUNC-004`
+
+追蹤，待獨立 Function Delta Review閉合後再升 Formal Spec。
+
+S02 ④B 已完成。
+
+Next：
+
+> **S03 — App / Runtime ④B High-fi：先鎖結構 → 再鎖視覺 → 最後出完整圖。**
