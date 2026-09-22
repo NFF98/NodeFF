@@ -335,10 +335,10 @@ User 已確認目前策略：
   - reference：`working/UI-UX/references/S01-Discover-Start-Highfi-v1.png`
 - S02 — Create Workspace：**Step 1–4 CLOSED**
   - reference：`working/UI-UX/references/S02-Create-Workspace-Highfi-v1.png`
-- S03 — App / Runtime：**Step 1–4 USER APPROVED**
-  - text contract已落入 `working/UI-UX/screens/S03-APP-RUNTIME.md`
-  - intended reference path：`working/UI-UX/references/S03-App-Runtime-Highfi-v1.png`
-  - repository binary packaging verification仍需完成，才可標 artifact packaging VERIFIED。
+- S03 — App / Runtime：**Step 1–4 CLOSED / ARTIFACT VERIFIED**
+  - text contract：`working/UI-UX/screens/S03-APP-RUNTIME.md`
+  - approved reference：`working/UI-UX/references/S03-App-Runtime-Highfi-v1.png`
+  - PNG blob SHA：`bfc2f2a3e8f7baa8539685cf681ab088e90c4082`。
 
 後續 S04–S06、O01–O05 全部固定使用第 5.1 節流程：
 
