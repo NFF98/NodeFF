@@ -1,6 +1,6 @@
 # Phase 1 Screen Inventory
 
-> 狀態：WORKING UI/UX — ALL ④A LOW-FI DIRECTIONS REVIEWED / FUNCTION DELTA CLOSED / CROSS-SCREEN REVIEW PENDING
+> 狀態：WORKING UI/UX — ALL ④A LOW-FI DIRECTIONS REVIEWED / FUNCTION DELTA CLOSED / CROSS-SCREEN CONSISTENCY REVIEW APPROVED / HIGH-FI DESIGN SYSTEM NEXT
 >
 > 目的：管理 Phase 1 的 Screen / Surface 地圖、Screen-level UX Review 狀態與畫面之間的關係。
 >
@@ -29,7 +29,7 @@ Phase 1 目前採 **6 個主要 Screen / Surface + 5 類 Overlay / State**。
 | S05 | Refine / Remix Workspace | 修改既有 App、Preview child、決定是否採用 | F06 + F00 | **LOW_FI_DIRECTION_APPROVED** |
 | S06 | Correction Compare | 比較修正前後並 Accept / Keep / Adjust | F16 + F00 | **LOW_FI_DIRECTION_APPROVED** |
 
-目前 S01–S06 Main Screens 與 O01–O05 Overlay / State 的 ④A Low-fi direction均已完成 User Review；S03/O05 的 Runtime Global Loading + Timeout F00/F03/F12 Function Delta也已閉合。下一個 gate是 Cross-Screen Consistency Review；完成前不進 High-fi。
+目前 S01–S06 Main Screens 與 O01–O05 Overlay / State 的 ④A Low-fi direction均已完成 User Review；S03/O05 的 Runtime Global Loading + Timeout F00/F03/F12 Function Delta也已閉合。Cross-Screen Consistency Review 已於 2026-09-22 完成；下一個 gate 是 High-fi Design System → ④B High-fi。
 
 # 3. Overlay / State Inventory
 
@@ -126,6 +126,74 @@ S01–S06 + O01–O05 ④A Low-fi
 - Product behavior / state semantics / API / Data / Runtime / Error / Security → Fxx 文件為 owner。
 - 若 visual decision 需要新增或改變 behavior，必須先建立 Fxx delta 並 Review，不能只靠 Screen 文件偷改產品行為。
 
+# 7.1 Cross-Screen Consistency Baseline — Approved
+
+2026-09-22 Cross-Screen Consistency Review 已確認以下共用 Low-fi 規則：
+
+## Navigation Scope
+
+- **S03 App / Runtime 是 Phase 1 唯一使用 NodeFF permanent bottom navigation 的主 Screen。**
+- S04 Restore 尚未進入 Runtime，不顯示 permanent bottom navigation；READY 後才由 S03 接管。
+- S05 Refine / Remix 與 S06 Correction Compare 是 focused decision workspace，不繼承 S03 permanent bottom navigation。
+- S05 / S06 使用自己的 Back / View / Decision CTA，不把 S03 shell navigation 帶進決策流程。
+
+## Overlay Layering
+
+- O01 / O02 / blocking O03 / O04 active 時，underlying S03 Shell controls 與 bottom navigation 必須 inert / unavailable。
+- Overlay close 後 focus 回合理 trigger / safe surface。
+- O03 inline / node-level Recovery 不是 blocking overlay，不需停用整個 S03。
+- Overlay 不得清掉 App、draft、inputs、comparison 等 host context。
+
+## Shared Processing Presentation
+
+所有真實 async / bounded waiting presentation 共用 O05：
+
+~~~text
+reliable checkpoints
+→ Stage label + checkpoint-derived Progress %
+
+no reliable checkpoints
+→ Stage label only
+~~~
+
+Rules：
+
+- % 代表完成工作比例，不代表剩餘時間。
+- 不 fake %。
+- 不為了讓 loading 看得到而延遲真正完成。
+- O01 Share creation 也納入 O05 共用 presentation。
+- failure transition 仍交 source Function + O03 / F12，不由 O05 自創 recovery semantics。
+
+## Consumer-facing Terminology
+
+Consumer UI 優先使用：
+
+~~~text
+建立 App
+修改這個 App
+改成我的版本
+調整結果
+使用新版
+使用修正版
+查看原版
+保留原版
+~~~
+
+Refine / Remix / Correction 可繼續作內部 Function / Working 文件術語，但一般 Consumer 不需要先理解這些英文概念。
+
+## S06 Exit Semantics
+
+S06 Compare 不提供模糊的「回目前 App」獨立決策出口。
+
+- 查看原版 App / 查看修正版 App = Preview，不是 Accept / Reject。
+- 保留原版 = Reject correction。
+- 使用修正版 = Accept correction。
+- 再調整 = 繼續 correction lifecycle。
+
+因此不新增新的 F16 outcome / Function behavior。
+
+---
+
 # 8. Spec Promotion Note
 
 舊 `spec/08-UI.md` 已淘汰，不再作 UI/UX 正式入口。
@@ -157,8 +225,8 @@ User 已確認目前策略：
 - 現階段 **不更新 Formal Spec**。
 - 先完成：
   1. F00/F03/F12 Runtime Loading + Timeout Working Function Delta Review（**完成：2026-09-22**）；
-  2. Cross-Screen Consistency Review；
-  3. High-fi Design System / ④B High-fi；
+  2. Cross-Screen Consistency Review（**完成：2026-09-22**）；
+  3. High-fi Design System / ④B High-fi（**NEXT**）；
   4. Cursor Build / Operating Model討論。
 - **正式 Cursor 開發前**，再做一次短期 Formal Spec Refresh，把最後批准的 Working truth一次同步到 implementation contract。
 - 在該 refresh前，Cursor implementation維持 HOLD。
@@ -167,6 +235,8 @@ User 已確認目前策略：
 
 下一個 Review：
 
-> **Cross-Screen Consistency Review**
+> **High-fi Design System → ④B High-fi**
 
-原因：所有 ④A Low-fi direction與唯一 pending Function Delta均已完成；依 sequencing下一步先檢查跨畫面的 navigation、CTA、loading/recovery、responsive與 terminology一致性，再進 High-fi Design System。Formal Spec與 Cursor implementation仍維持 HOLD。
+Cross-Screen Consistency Review 已完成並批准。下一步先建立跨 S01–S06 / O01–O05 的 Design System，再依共同 token / component / interaction rules 進逐頁 ④B High-fi。
+
+Formal Spec、Backlog / Sprint 與 Cursor implementation 仍維持 HOLD。
