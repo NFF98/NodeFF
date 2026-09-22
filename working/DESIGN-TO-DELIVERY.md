@@ -721,14 +721,32 @@ Rules：
 ### Current Progress — 2026-09-22
 
 ~~~text
-✅ Working Function Delta closure
-   F00 / F03 / F12 Runtime Loading + Timeout closed
+✅ Runtime Loading + Timeout Working Function Delta closed
+✅ UI/UX Cross-Screen Consistency Review complete
+✅ High-fi Direction A Design System approved
+✅ S01 High-fi Step 1–4 closed
+✅ S02 High-fi Step 1–4 closed
+✅ S03 High-fi Step 1–4 closed + PNG artifact verified
 
-→ NEXT: UI/UX Cross-Screen Consistency Review
-→ HOLD: High-fi、Formal Spec Refresh、Backlog/Sprint refresh、Cursor implementation
+→ NEXT UI/UX: S04 ④B High-fi
+→ OPEN FUNCTION DELTA: F01 Creation Progress Checkpoint Contract (SD-20260922-002)
+→ HOLD: remaining High-fi、Cursor Build / Operating Model Review、
+        Formal Spec Refresh、Backlog/Sprint refresh、Cursor implementation
 ~~~
 
-本次 closure只更新 `working/` Current Truth與 machine-readable Working registries；`spec/`仍維持既有 frozen baseline。既有 Formal stable ID `F00-AC-008`不重寫，待 pre-Cursor Formal Spec Refresh標記 deprecated並由新 Acceptance IDs取代。
+High-fi gate規則現由 `working/UI-UX/PHASE1-SCREEN-INVENTORY.md §5.1` 擁有：
+
+~~~text
+Step 1 Structure
+→ Step 2 Geometry + Visual Hierarchy
+→ Step 3 Detailed High-fi Visual Rules
+→ Step 4 Final Visual Reference
+→ optional Step 4.5 additional layer detail
+~~~
+
+每一 Step都必須 User批准後立即寫回對應 Working文件並 commit；不得只留在 Chat。
+
+Formal `spec/`仍維持 frozen baseline。Runtime Delta `SD-20260922-001`仍為 APPROVED / promotion pending；新增 `SD-20260922-002` 為 OPEN，必須完成 F01 Function Delta Review。兩筆 Delta最終都必須在 pre-Cursor refresh完成 promotion + verification，Gate才可解除。
 
 
 ---
