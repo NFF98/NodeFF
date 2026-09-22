@@ -2,7 +2,7 @@
 
 > Screen ID：S04
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1_APPROVED / STEP 2–4 PENDING**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED / STEP 3–4 PENDING**
 >
 > Phase：Phase 1
 >
@@ -281,9 +281,9 @@ User 已確認：
 
 # 16. Review Status
 
-> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1_APPROVED / STEP 2–4 PENDING**
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED / STEP 3–4 PENDING**
 
-S04 ④A Low-fi 已完成 User Review；④B High-fi Step 1 Structure Lock 已完成。下一步為 S04 Step 2 — Geometry + Visual Hierarchy Lock。
+S04 ④A Low-fi 已完成 User Review；④B High-fi Step 1–2 已完成。下一步為 S04 Step 3 — Detailed High-fi Visual Rules Lock。
 
 
 ---
@@ -296,7 +296,7 @@ S04 ④A Low-fi 已完成 User Review；④B High-fi Step 1 Structure Lock 已�
 >
 > Current status：
 > - Step 1 — Structure Lock ✅
-> - Step 2 — Geometry + Visual Hierarchy Lock ⏳
+> - Step 2 — Geometry + Visual Hierarchy Lock ✅
 > - Step 3 — Detailed High-fi Visual Rules Lock ⏳
 > - Step 4 — Final Visual Reference Lock ⏳
 
@@ -494,6 +494,189 @@ S04 presentation不得：
 - 自己推進 progress；
 - silently reinterpret incompatible content。
 
+
+## Step 2 — Geometry + Visual Hierarchy Lock ✅
+
+### 1. Full-screen Transitional Canvas
+
+Desktop / Mobile皆採 full-viewport transitional canvas：
+
+~~~text
+min-height: 100dvh
+~~~
+
+S04不是 Dashboard / Landing Page，因此不建立多欄、sidebar、hero marketing section或大面積資訊卡。
+
+主要 restore / recovery content：
+- 置於 viewport中央區域；
+- 視覺上略微偏上；
+- 保留足夠 breathing room；
+- 不讓 User誤以為進入另一個正式產品頁。
+
+### 2. Desktop Main Content Width
+
+Desktop restore / recovery主內容：
+
+~~~text
+max-width：約 480–560px
+~~~
+
+不做寬版 content panel。
+
+Normal restore order：
+
+~~~text
+App Logo
+→ App Title
+→ Human-readable restore stage
+→ Progress presentation
+→ 「不需要登入，也不需要安裝」
+~~~
+
+此 single-column content stack是 S04 Desktop主要視覺焦點。
+
+### 3. App Identity Scale
+
+App Identity必須清楚可見，但不是 Hero。
+
+Recommended geometry：
+
+~~~text
+Desktop App Logo：約 64–72px
+Mobile App Logo：約 56–64px
+App Title：約 20–24px
+~~~
+
+App Identity只回答：
+
+> 「現在正在開哪個 App？」
+
+不得在尺寸或位置上壓過 restore status / recovery decision。
+
+### 4. Visual Hierarchy
+
+Normal restore attention hierarchy固定為：
+
+~~~text
+Current Restore Status
+> Progress Presentation
+> App Identity
+> No-login / No-install reassurance
+> NodeFF entry chrome
+~~~
+
+User第一眼應理解：
+
+> 「現在正在打開這個 App，而且系統仍在真實處理。」
+
+若 O05最終判定該 operation只有 Stage、沒有可靠 %，同一 geometry仍成立，不另建另一套 layout。
+
+### 5. Progress Geometry
+
+Progress presentation預留穩定位置，但不強迫一定存在百分比。
+
+Desktop：
+
+~~~text
+progress visual width：約 320–400px
+~~~
+
+Mobile：
+- 主要 progress visual接近可用內容寬度；
+- 仍保留左右 safe padding。
+
+同一 geometry必須支援：
+
+~~~text
+Stage + checkpoint-derived %
+~~~
+
+以及：
+
+~~~text
+Stage only
+~~~
+
+S04不得因是否有 \`%\` 而切換成不同 information architecture。
+
+### 6. Recovery Replaces Restore In-place
+
+Failure / Recovery不開 modal、不另跳 recovery page。
+
+原本中央 Restore content直接被同位置 Recovery content取代。
+
+Desktop recommended order：
+
+~~~text
+Error title
+→ Humanized explanation
+→ Primary / secondary recovery actions
+~~~
+
+若 source Function truth允許 Retry：
+
+~~~text
+[再試一次] [回到首頁]
+~~~
+
+Desktop可橫向排列。
+
+若不可 Retry：
+
+~~~text
+[回到首頁]
+~~~
+
+\`回到首頁\`必須保持可見，不得收進 overflow / menu。
+
+Mobile：
+- recovery actions改為 vertical stack；
+- 接近 full-width；
+- 保持 \`回到首頁\`明顯可操作；
+- Desktop / Mobile只允許排列方式不同，不允許 recovery capability不同。
+
+### 7. Mobile Geometry
+
+Mobile採單欄 transitional layout：
+
+~~~text
+Top NodeFF chrome
+→ App Identity
+→ Restore Status / Recovery
+~~~
+
+Recommended geometry：
+
+~~~text
+Top chrome：約 56–64px
+Horizontal padding：約 16–20px
+~~~
+
+Mobile restore期間：
+- 不顯示 permanent bottom navigation；
+- 不顯示 floating CTA；
+- recovery CTA留在主要內容 flow內；
+- 不使用 sticky bottom action，避免與 S03 permanent bottom navigation語意混淆。
+
+READY後才切換到 S03，並由 S03顯示：
+
+~~~text
+目前 App | 修改 | 分享
+~~~
+
+### Step 2 Lock Summary
+
+S04 High-fi Geometry + Visual Hierarchy：
+
+> **S04是一個短暫、安靜、中央聚焦的開門畫面：User先看懂目前 restore狀態，再看到 App identity；成功立即消失進 S03，失敗就在相同位置取得清楚的 Recovery與首頁出口。**
+
+Step 2：**APPROVED / CLOSED**。
+
+Next：
+
+> **S04 Step 3 — Detailed High-fi Visual Rules Lock**
+
+
 ### Step 1 Lock Summary
 
 S04 High-fi Structure Lock：
@@ -504,4 +687,4 @@ Step 1：**APPROVED / CLOSED**。
 
 Next：
 
-> **S04 Step 2 — Geometry + Visual Hierarchy Lock**
+> **S04 Step 3 — Detailed High-fi Visual Rules Lock**
