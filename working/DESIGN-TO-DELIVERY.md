@@ -729,3 +729,193 @@ Rules：
 ~~~
 
 本次 closure只更新 `working/` Current Truth與 machine-readable Working registries；`spec/`仍維持既有 frozen baseline。既有 Formal stable ID `F00-AC-008`不重寫，待 pre-Cursor Formal Spec Refresh標記 deprecated並由新 Acceptance IDs取代。
+
+
+---
+
+## Spec Delta Register / Spec Refresh Gate
+
+> User decision：2026-09-22。
+>
+> Canonical ledger：working/ProjectManagement/SPEC-DELTA-REGISTER.md
+>
+> Purpose：在 Formal Spec freeze 期間，確保所有已批准 Working Delta 最終都能完整 promotion 回 Formal Spec，且能一路追到 Acceptance / Test 與 Backlog，不漏同步、不產生 orphan contract / task。
+
+### 1. Single Ledger Rule
+
+所有會造成 frozen Formal Spec 與 Working Current Truth 不一致的 Material / Architecture-impacting Delta，都必須登記到唯一總帳：
+
+~~~text
+working/ProjectManagement/SPEC-DELTA-REGISTER.md
+~~~
+
+不得另外建立平行 Delta ledger。
+
+Screen / UX 文件若只是 visual / composition / copy change，且不改 semantic contract，可以不建立 Spec Delta。
+
+若改變 Function / Shared Contract 的 UX behavior、API、Data、Runtime semantics、Error / Recovery、Security、Compatibility、Evidence 或 Acceptance，必須建立或更新對應 SD-*。
+
+### 2. Canonical Delta Lifecycle
+
+~~~text
+OPEN
+→ REVIEWED
+→ APPROVED
+→ PROMOTED
+→ VERIFIED
+~~~
+
+Meaning：
+
+- OPEN：已識別 Delta，但 Working review尚未完成。
+- REVIEWED：Working review完成，等待 User批准。
+- APPROVED：User已批准 Working Current Truth，但 Formal尚未同步。
+- PROMOTED：該 Delta列出的所有 Formal targets全部完成同步。
+- VERIFIED：完成正向與反向 traceability核對，確認沒有漏同步或 orphan。
+
+APPROVED 不等於 PROMOTED。
+
+PROMOTED 不等於 VERIFIED。
+
+Working文件寫 CLOSED，也不代表 Formal debt已清。
+
+### 3. Pre-Cursor Status Gate
+
+正式 Cursor implementation 前，本 Register 必須滿足：
+
+~~~text
+OPEN = 0
+REVIEWED = 0
+APPROVED but not PROMOTED = 0
+PROMOTED but not VERIFIED = 0
+~~~
+
+等價規則：
+
+> 所有 active Spec Delta 必須 VERIFIED。
+
+只要任一項非 0：
+
+~~~text
+SPEC REFRESH GATE = HOLD
+CURSOR IMPLEMENTATION = HOLD
+~~~
+
+不得以「大部分已同步」解除 Gate。
+
+### 4. Forward Traceability Check
+
+每筆 Delta在 Spec Refresh後都必須能完整追蹤：
+
+~~~text
+Working Current Truth
+→ Formal Function / Shared Spec
+→ Acceptance / Test Contract
+→ Backlog
+~~~
+
+Required checks：
+
+1. 每個 canonical Working change都有對應 Formal owner。
+2. 所有 affected Formal targets均已同步。
+3. human-readable Spec與 machine-readable Registry都必須同步。
+4. Required Acceptance均有 Test Contract。
+5. Backlog item只從已 promotion的 Formal Spec / Acceptance派生。
+
+若 Delta同時改 Function Markdown與 machine-readable registry，只同步其中一邊不算 PROMOTED。
+
+### 5. Reverse Traceability Check
+
+從 execution反向核對：
+
+~~~text
+Backlog
+→ Acceptance / Test
+→ Formal Spec
+→ Working Delta / approved baseline
+~~~
+
+所有因本輪 Refresh新增 / 修改的 Backlog item、Acceptance / Test、Formal contract、Registry entry，都必須能回到：
+
+- 一筆 SPEC-DELTA-REGISTER 的 SD-*；或
+- 既有、未變更的 approved Formal baseline。
+
+Gate要求：
+
+~~~text
+orphan backlog = 0
+orphan acceptance = 0
+orphan formal contract = 0
+unregistered working delta = 0
+~~~
+
+### 6. Formal Promotion Completeness
+
+每筆 Delta必須列明 affected Formal targets。
+
+只有 listed targets 全部同步，才可：
+
+~~~text
+APPROVED
+→ PROMOTED
+~~~
+
+每次 promotion須記 Promotion commit。
+
+之後完成 verification時須記 verification evidence；只有這時才可：
+
+~~~text
+PROMOTED
+→ VERIFIED
+~~~
+
+### 7. Discovery Check
+
+Pre-Cursor Formal Spec Refresh開始前，必須掃描 canonical Working owners，確認以下訊號都能追到一筆 SD-*：
+
+- FORMAL_REFRESH_PENDING
+- WORKING_DELTA_*
+- superseded Formal stable ID
+- new / changed Acceptance
+- new / changed Error / Policy / Event
+- API / Data / Runtime / Security / Compatibility semantic change
+
+這一步用來防止「Working已經改了，但根本沒有被登記」。
+
+### 8. Current Gate State — 2026-09-22
+
+目前唯一已登記 Delta：
+
+~~~text
+SD-20260922-001
+Runtime Global Loading + Timeout
+Status = APPROVED
+Working closure = 96800388424929c616f803976d4630561762b923
+Promotion = PENDING
+Verification = PENDING
+~~~
+
+Current query：
+
+~~~text
+OPEN = 0
+REVIEWED = 0
+APPROVED but not PROMOTED = 1
+PROMOTED but not VERIFIED = 0
+
+SPEC REFRESH GATE = HOLD
+CURSOR IMPLEMENTATION = HOLD
+~~~
+
+這是目前預期狀態，不是 blocker anomaly。
+
+原因是 Formal Spec依 sequencing rule仍 frozen；先繼續：
+
+~~~text
+UI/UX Cross-Screen Consistency Review
+→ High-fi Design System / ④B High-fi
+→ Cursor Build / Operating Model Review
+→ pre-Cursor Formal Spec Refresh
+~~~
+
+到 Formal Refresh 時，再把 Register內所有 APPROVED Delta一次 promotion並 verification；Gate全清後，才進 Backlog / Sprint refresh與 Cursor implementation。
