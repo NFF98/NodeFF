@@ -2,7 +2,7 @@
 
 > Screen ID：S02
 >
-> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / HIGH_FI_PENDING**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_REVIEW_IN_PROGRESS**
 >
 > Phase：Phase 1
 >
@@ -240,3 +240,191 @@ S02 ④A Low-fi 已完成 User Review。
 > **S03 ④A Low-fi**。
 
 S02 的 High-fi 方向先保留於 `working/DESIGN-WORKBENCH.md`，待全部 Low-fi 與 Cross-Screen Review 完成後統一進 Design System / ④B High-fi。
+
+
+---
+
+# 21. ④B High-fi Structure / Geometry / Visual Rules — Approved for Final Mockup
+
+Approved by User：2026-09-22
+
+本節是 S02 final High-fi mockup 的文字 contract。完整圖不得自行新增未批准元素；若圖片與本文衝突，以本文為準。
+
+## 21.1 Workspace Header
+
+User-facing：
+
+~~~text
+NodeFF
+← 回到建立 App
+~~~
+
+Rules：
+- 不顯示 S01 / S02 / S03 等 internal Screen ID。
+- 不放 Share / Profile / 首頁 / 探索靈感 / 我的 App 等一般 navigation。
+- S02 是 focused creation workspace。
+- Desktop header約 64–72px；Mobile約 60px。
+- Mobile同樣不顯示 permanent bottom navigation。
+
+## 21.2 Original Intent / Draft
+
+- 原始 Intent 必須被保留。
+- Fast Path不以大型 Prompt card常駐。
+- 預設只顯示輕量 secondary action：`查看需求`。
+- Clarification / Assumption / Recovery 時可變為：`查看／修改需求`。
+- 展開後可完整閱讀 long-form intent。
+- 需要修改時留在同一 S02 Workspace，不返回首頁重填。
+
+## 21.3 Creation Progress — Primary Visual
+
+4-stage consumer progression：
+
+~~~text
+理解想法
+→ 整理 App
+→ 檢查互動
+→ 準備 App
+~~~
+
+Presentation rules：
+
+~~~text
+reliable checkpoints
+→ Stage + checkpoint-derived Progress %
+
+no reliable checkpoints
+→ Stage only
+~~~
+
+- 不存在「沒有 reliable checkpoints但顯示 %」的模式。
+- %代表 work completion，不代表 time remaining。
+- checkpoint停住時，%停在最後真實完成值。
+- 不以 elapsed time / animation timer灌高百分比。
+- 100%只在 target ready condition成立後。
+- F01 creation checkpoint backend contract另記於 `working/DESIGN-WORKBENCH.md` 的 `PENDING-FUNC-004`。
+
+Desktop：
+- primary content max-width約 760–840px。
+- 4-stage stepper置於主要內容上方。
+- %約 36–44px。
+- progress bar約 8px高。
+
+Visual：
+- completed = Teal check。
+- active = Teal + restrained bounded pulse / flow。
+- pending = neutral gray。
+- Yellow只在 approaching completion / ready作小面積 energy accent。
+
+## 21.4 Clarification / Assumption Dynamic Workspace
+
+S02只保留一個 Dynamic Workspace Body。
+
+Clarification：
+- 標題方向：`還差一點資訊`。
+- 每輪最多 3 個最高優先 material questions。
+- User回答後：
+  `merge answers → re-analyze → 若仍需要則下一輪最多3題`。
+- 持續多輪直到所有 required / material unknowns resolved。
+- 不是把初始問題機械切成 3 題一組全部問完；每輪重算 priority / necessity。
+- 上一輪完成後收起 / 替換，只留下可展開的「已提供的資訊」摘要。
+- 畫面永遠只顯示當前最多 3 題。
+- 不顯示「第1輪 / 第2輪」等系統批次語言。
+- 能用 direct choices時優先使用 selectable rows / pills；不做密集表單。
+
+Assumption：
+- 與 Clarification共用同一 surface language。
+- 每項顯示：
+  `設定名稱 | 目前值 | 已提供/預設/建議/尚未決定`。
+- neutral tags，不把 Yellow當 warning。
+- Primary CTA：`用這些設定繼續`。
+- Secondary：`修改需求`。
+
+## 21.5 Processing State
+
+正常 processing 時保持低干擾：
+- 不做 Dashboard。
+- 不做 AI chat bubbles。
+- 不堆 technical badges / logs。
+- Dynamic Workspace Body可以近乎隱形；Progress是視覺主角。
+- Clarification / Assumption / Recovery出現時，才形成較明確的 card/surface。
+
+## 21.6 Completion / Handoff
+
+當完成條件成立：
+
+~~~text
+100%
+你的 App 已完成
+[開啟 App →]
+~~~
+
+Rules：
+- User不看到 S03。
+- Completion不建立額外 Success Page。
+- 原本 S02 Progress surface自然 transition到 completion state。
+- completion可使用 Teal → Aqua → 少量 Yellow accent。
+- check animation約 180–240ms。
+- Primary CTA只有：`開啟 App`。
+
+## 21.7 Mobile High-fi
+
+Mobile不做另一套產品，只垂直化：
+
+~~~text
+Header
+→ compact 4-stage indicator
+→ current stage label
+→ checkpoint-derived % / Stage-only presentation
+→ Dynamic Workspace Body
+→ contextual primary CTA
+~~~
+
+Compact stage example：
+
+~~~text
+✓ 理解   ● 整理   ○ 檢查   ○ 準備
+正在整理成 App…
+~~~
+
+Rules：
+- 不硬塞四個完整長標籤。
+- Clarification questions單欄。
+- Primary CTA full-width且不遮住最後一題。
+- 無 S01 bottom nav。
+- 唯一離開入口是「回到建立 App」。
+
+## 21.8 Direction A Application
+
+- white / neutral background為主。
+- Teal是 creation / progress主色。
+- Aqua作過渡。
+- Yellow只作 completion / energy accent。
+- 不鋪大面積 gradient。
+- 保持大量 breathing room。
+- 整體感受：quiet, focused, creator-oriented。
+
+## 21.9 Final Mockup Gate
+
+以上結構、geometry、visual hierarchy已由 User確認。
+
+下一步只做：
+
+> **S02 Desktop + Mobile Final High-fi Mockup**
+
+Mockup不得自行新增：
+- general navigation
+- Share
+- Profile
+- bottom navigation
+- extra Create CTA
+- chat transcript
+- technical status console
+- fake percentage
+- unrelated promo / dashboard card
+
+User確認 final mockup後，需像 S01一樣：
+1. 把圖片存入 `working/UI-UX/references/`；
+2. 在本文件 embed approved image；
+3. 將 S02標成 `④B HIGH_FI_APPROVED`；
+4. 更新 Phase 1 Screen Inventory；
+5. 最終 pre-Cursor Formal Spec Refresh時，文字規格 + approved visual reference一起升格給 Cursor。
