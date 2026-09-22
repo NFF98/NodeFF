@@ -303,600 +303,294 @@ User 已確認：
 4. **Mobile 採 permanent bottom navigation**，但仍要把最大可用空間留給 Generated App。
 5. Generated App若自己有 bottom controls，NodeFF bottom navigation必須避免遮擋與操作衝突。
 
-# 18. Review Status
+# 18. ④B High-fi Contract — Approved
 
-> **LOW_FI_DIRECTION_APPROVED — HIGH_FI_PENDING**
+> Approved by User：2026-09-22
+>
+> 狀態：**Step 1–4 CLOSED / WORKING BASELINE**
+>
+> Canonical rule：本節是 S03 唯一有效的 High-fi Current Truth。舊的 Structure Contract / Detailed Visual Rules / Approval Summary / Canonical Summary已合併至此。
+>
+> Implementation precedence：
+> 1. 本節 Step 1–4；
+> 2. `working/UI-UX/DESIGN-SYSTEM.md`；
+> 3. approved visual reference；
+> 4. 其他示意圖。
+>
+> Product / Runtime semantics仍由 F00 / F03 / F05 / F06 / F12 / F16擁有；S03只能呈現，不得成為第二份 Function truth。
 
-S03 ④A Low-fi與 Runtime Function Delta已完成 User Review。
+## Step 1 — Structure Lock ✅
 
-依固定流程，下一步進 `Cross-Screen Consistency Review → High-fi Design System → ④B High-fi`。Formal Spec與 Cursor implementation仍維持 HOLD。
+### Desktop Shell
 
-
----
-
-# 19. ④B High-fi Structure + Function Handoff Contract
-
-Approved by User：2026-09-22
-
-本節鎖定 S03 ④B High-fi 的結構、geometry 與 UI ↔ Function handoff。後續視覺與完整圖不得自行改寫 Function semantics。
-
-## 19.1 Desktop / Mobile Structure
-
-Desktop：
-- Header約 64–72px。
-- 左：NodeFF Logo + App Identity。
-- 右：`修改這個 App`、`分享`、`•••`。
-- NodeFF Logo = explicit Home / New App escape hatch，回 S01 Discover / Start。
-- 不搬入 S01 的完整 navigation。
-- Generated App Runtime Frame為絕對主角。
-- Runtime max-width約 1200–1280px；頁面左右保留 24–40px breathing room。
-- Generated App內容區至少佔首屏約 70vh；內容更長時自然延伸。
-- Result / NodeFF Action Surface僅在有 canonical result且需要 NodeFF-level action時出現。
-- Result Surface與 Runtime Frame同寬，在內容流內，不做右側 sidebar。
-
-Mobile：
-- Header約 56–64px。
-- Header只保留 NodeFF Logo / App Identity / `•••`。
-- Share / Modify不塞入 header。
-- permanent bottom navigation固定：
-  `App / 修改 / 分享`。
-- `App`只代表 current active destination，不自行加入 reset / scroll-to-top 等未定義行為。
-- Runtime內容左右 padding約 16px。
-- bottom navigation約 64–72px + safe area。
-- Generated App如有自己的 bottom controls，Runtime必須預留安全區避免重疊。
-- Result Surface在內容流中，不 floating於 bottom nav上方。
-
-## 19.2 Visual Hierarchy
-
-固定優先順序：
+Header：
 
 ~~~text
-Generated App
-> App Title / Identity
-> Primary NodeFF actions
-> Result correction actions
-> NodeFF brand chrome
-> Overflow actions
+NodeFF Logo + App Identity        修改這個 App | 分享 | •••
 ~~~
-
-S03 不採中央窄欄 SaaS Dashboard版型；Runtime需有較大橫向自由度。
-
-## 19.3 UI ↔ Function Handoff — Mandatory
-
-### 1. Generated App Interaction → F03
-
-- Generated App內 click / input / toggle / local calculate皆由 F03 Runtime處理。
-- S03 Shell不得直接 mutation Runtime state。
-- Shell只訂閱 F03 operation lifecycle / checkpoint projection。
-- 同一 Instance遵循 F03 single-writer / FIFO / atomic commit。
-- UI不得以 presentation state決定 commit。
-
-### 2. Share → F05 → O01
-
-- `分享`呼叫 F05 Share flow並呈現在 O01。
-- Share不離開 S03主 context。
-- current Runtime Instance保留。
-- Share只分享 Blueprint durable reference，不包含目前 Runtime inputs / result。
-- Share failure不得破壞 current App。
-
-### 3. 修改 → F06 → S05
-
-- `修改` / `修改這個 App`進 F06 Refine / Remix flow。
-- 不得原地 mutation既有 immutable Blueprint。
-- 變更完成後產生 new immutable Blueprint + lineage + fresh Runtime Instance。
-- original App必須可返回。
-- Runtime input change不等於 Refine。
-
-### 4. 調整結果 → F16 → O02 → S06
-
-- `調整結果`只在 F03 canonical `evaluateResult()` / `result.outputs`存在 `AVAILABLE` output時可顯示。
-- UI不得從 DOM或畫面文字猜 result。
-- Entry → O02 Correction Composer → F16 correcting → S06 Compare。
-- Correct = outcome / logic correction；不得和 Modify App混為同一 semantic action。
-
-### 5. 回到修正前版本 → F16 / F00 → O04
-
-- 只有 current active Blueprint為 same-session accepted correction child，且 previous/base仍 trusted + compatible時才提供。
-- 預設放 `•••` contextual menu，不常駐 primary。
-- O04負責確認 target與 input restoration truth。
-- UI不得自行推定版本可 revert。
-
-### 6. NodeFF Logo → F00 → S01 / New App
-
-- NodeFF Logo是明確 global escape hatch。
-- 進 S01 Discover / Start，讓 User建立新的 App。
-- 不依賴 Browser Back，避免 accidental Back丟 active App。
-- Mobile `•••`可提供文字備援 `回到首頁 / 建立新的 App`，但不搬入整套 S01 navigation。
-
-## 19.4 Runtime Processing Presentation
-
-F03 每個 accepted / admitted Runtime interaction都建立 operation token並進 logical `GLOBAL_PROCESSING`。
-
-High-fi presentation：
-- 極快、同一 render frame完成 → 不強迫 paint loading frame。
-- 可見 processing優先使用 Runtime Frame頂部的 subtle progress rail + stage label。
-- reliable checkpoints → Stage + checkpoint-derived %。
-- no reliable checkpoints → Stage only。
-- 不 fake %。
-- 不用 elapsed time灌進度。
-- 不為了動畫延遲真正完成。
-- normal processing不 blanket-disable整個 App；只依 Function truth限制受影響 interaction。
-- Soft Timeout提升 processing presence但保留 last true checkpoint。
-- Hard Timeout → F03 discard uncommitted transaction → F12 / O03 recovery。
-
-## 19.5 Function-driven Eligibility
-
-以下 UI visibility必須由 Function truth驅動，不由 Screen猜測：
-
-- `調整結果`：canonical AVAILABLE result。
-- `回到修正前版本`：revert eligibility。
-- Share state：F05 state。
-- Processing stage / %：F03 / O05 lifecycle projection。
-- Recovery severity / next actions：F12 / O03。
-- Modify / Remix semantic flow：F06。
-
-S03 Screen只擁有 presentation，不成為第二份 Function truth。
-
-
----
-
-# 20. ④B Detailed High-fi Visual Rules — Approved
-
-Approved by User：2026-09-22
-
-本節是 S03 的 Detailed High-fi contract。它與第 19 節 UI ↔ Function handoff共同構成 Cursor 未來實作時的 Working visual authority；不得只依 mockup猜 behavior。
-
-## 20.1 Core Visual Principle
-
-S03 是 User 真正「使用 App」的關鍵 surface。
-
-固定 attention hierarchy：
-
-~~~text
-Generated App
-> App Identity
-> Primary NodeFF actions
-> Result-specific correction action
-> NodeFF brand chrome
-> Overflow actions
-~~~
-
-目標：
-- Generated App取得約 80–90% attention。
-- NodeFF存在但退到背景。
-- User感覺是「我正在用 App」，不是「我在 NodeFF Dashboard裡操作一個 widget」。
-
-禁止：
-- sidebar / inspector。
-- dashboard card sea。
-- technical console / JSON / Blueprint badges。
-- 把 Generated App包成一個小 preview card。
-- 讓 NodeFF shell比 App內 primary action更搶眼。
-
-## 20.2 Shell vs Generated App Boundary
-
-NodeFF Shell：
-- 使用固定 Direction A system tokens。
-- white / very-soft neutral surface。
-- subtle divider；不使用厚陰影、glassmorphism或大面積 brand gradient。
-- Shell controls與 Generated App controls要視覺可區分。
-
-Generated App：
-- 可以有自己的 app presentation / visual personality。
-- 不強制重畫成 NodeFF元件。
-- Runtime Canvas不預設再包一層巨大 white card。
-- F00只擁有 shell；F03 render tree擁有 App area。
-
-Design System principle：
-
-> **NodeFF owns the shell; creators own the App presentation.**
-
-## 20.3 Desktop Header
-
-Geometry：
-- 約 `64–72px`高。
-- single row。
-- left = `NodeFF Logo → App Identity`。
-- right = `修改這個 App / 分享 / •••`。
-
-Left：
-- NodeFF Logo低視覺重量，但明確可點。
-- Logo → F00 → S01 / New App。
-- App Logo + App Title為主要 identity。
-- App Title約 `18–20px semibold`。
-- title過長使用 single-line ellipsis，不撐高 Header。
-- NodeFF與App identity之間可用 subtle divider / spacing區隔。
-
-Right actions：
-- `分享`：compact Teal primary shell action。
-- `修改這個 App`：secondary / outline / ghost treatment。
-- `•••`：icon-only overflow，touch/click target仍 ≥44px。
-- `修改這個 App`與`分享`需 visible；Revert等低頻 contextual action進 overflow。
-- Shell action visual weight不得高於 Generated App真正的 primary CTA。
-
-NodeFF Logo hover / focus可提供 accessible tooltip：`回到首頁`。
-
-## 20.4 Runtime Canvas Geometry
-
-Desktop：
-- max-width約 `1200–1280px`。
-- viewport左右 breathing room約 `24–40px`。
-- initial usable App area至少約 `70vh`，但不是固定高度。
-- 內容長時自然 document scroll。
-- full-width Capability可依 contract突破一般內容欄，但仍受 viewport safe-area / overflow control。
-- 不做中央窄欄 SaaS form版型。
-
-Mobile：
-- Runtime全寬。
-- content horizontal padding約 `16px`，但 Generated App可依 component contract使用 edge-to-edge presentation。
-- 需預留 permanent bottom nav + safe area。
-- Generated App若自己有 bottom controls，必須再加入足夠 spacing，兩層 controls不可互相遮擋。
-
-## 20.5 Result Surface / Correct Placement
-
-Result Surface不是常駐空白區。
-
-Visibility：
-- 只有 F03 canonical `evaluateResult()` / `result.outputs`存在 `AVAILABLE` output且需要 NodeFF-level result action時出現。
-- UI不能從 DOM、screen text或視覺 pattern猜 result。
-
-Placement：
-- 與 Runtime Frame同寬。
-- 位於 normal content flow。
-- 不做右側 sidebar。
-- 不 floating覆蓋 App。
-
-Duplication rule：
-- Generated App已清楚呈現 result → NodeFF不重複抄一次 result value。
-- Result Surface只提供必要 result-specific action。
-
-**Approved semantic / visual separation：**
-- `修改這個 App`固定在 Header / Mobile bottom navigation → F06。
-- `調整結果`只在 canonical result附近 → F16。
-- Result Surface **不再重複放「修改這個 App」**。
-
-因此「改 App」與「改結果」在語意與視覺位置都天然分流。
-
-## 20.6 Runtime Processing / Global Loading
-
-F03 accepted / admitted interaction建立 operation token後，S03進 logical `GLOBAL_PROCESSING`；但 High-fi presentation必須克制。
-
-Presentation：
-- 極快、同一 browser render frame完成 → 不強迫 paint loading。
-- 肉眼可見 processing優先使用 **Runtime Canvas頂部 subtle progress rail + stage copy**。
-- rail約 `3–4px`。
-- reliable checkpoints → Stage + checkpoint-derived %。
-- no reliable checkpoints → Stage only。
-- 不 fake %。
-- 不以 elapsed time平滑灌進度。
-- 不為 animation故意延遲 completion。
-- operation commit成立後才可到100%。
-
-Interaction rule：
-- normal processing不 blanket-disable整個 App。
-- 只有 Function truth要求不可重入/受影響的 control才 disabled / pending。
-- F03仍維持 single-writer / FIFO / atomic commit；presentation state不能決定 Runtime commit。
-
-Soft Timeout：
-- 保留 last true checkpoint。
-- processing presence可提高一級。
-- human copy例如：`還在處理，內容會保留`。
-- 不跳 fake error。
-
-Hard Timeout：
-- F03 discard uncommitted transaction。
-- 交 F12 / O03 humanized recovery。
-
-## 20.7 Mobile Header
-
-約 `56–64px`。
-
-固定：
-- NodeFF Logo。
-- App Identity / Title。
-- `•••`。
 
 Rules：
-- 不塞 `分享` / `修改`到 top header；由 bottom navigation承接。
-- NodeFF Logo → S01 / New App。
-- `•••`提供 contextual低頻 action。
-- `•••`可包含文字備援：`回到首頁 / 建立新的 App`。
-- 不搬入 S01的首頁 / 探索 / 我的 App完整 navigation。
-- title過長 ellipsis。
+- NodeFF Logo = explicit Home / New App escape hatch → S01。
+- App identity可為 Logo / Title / Logo + Title。
+- 不搬入 S01完整 navigation。
+- `修改這個 App` visible。
+- `分享` visible。
+- Revert等低頻 contextual action進 `•••`。
+- `•••`可包含安全的 Home/New備援入口。
 
-## 20.8 Mobile Permanent Bottom Navigation
+### Generated App Runtime Frame
 
-固定三項：
+- Generated App = 畫面絕對主角。
+- Shell不直接 mutation App state。
+- Shell不把 Generated App controls包成 NodeFF controls。
+- Shell不從 DOM猜 result。
+- Shell不攔截正常 local interaction。
+- Runtime可保有自己的 App presentation / visual personality。
+
+### Result Surface
+
+- 只有 canonical `result.outputs`存在 AVAILABLE output且需要 NodeFF-level result action時才出現。
+- Generated App若已自然呈現 result，不重複抄寫 value。
+- Result區只保留必要 `調整結果`。
+- `修改這個 App`固定由 Header承接。
+- 「改 App」與「改結果」在 visual placement與 Function semantics天然分流。
+
+### Mobile Shell
+
+Header：
+- NodeFF Logo / App Identity / `•••`。
+- Share / Modify不塞 Header。
+
+Permanent bottom navigation：
 
 ~~~text
 App | 修改 | 分享
 ~~~
 
-Geometry：
-- 約 `64–72px + safe area`。
-- fixed bottom。
-- icon + text。
-- touch target ≥44px。
-
-State：
-- `App` = current active destination。
-- active `App`使用 Teal icon + text / active indicator。
-- `修改`、`分享`預設 neutral。
-- 不做中央大 FAB。
-- 不用大面積 Yellow fill。
-- `App`不得自行發明 tap-to-reset / scroll-to-top等未定義 behavior。
-
-Function mapping：
-- `修改` → F06 → S05。
-- `分享` → F05 → O01。
-- `調整結果`不放 permanent nav，因為它是 result-conditional。
-
-## 20.9 Contextual Overlay Visual Family
-
-原則：
-> Overlay是在目前 App上完成一件事，不是跳去另一個產品。
-
-O01 Share：
-- Desktop約 `420–480px` lightweight dialog / anchored panel。
-- Mobile bottom sheet。
-- Runtime context仍可辨識。
-- Share pending不變成 full-screen loading。
-
-O02 Correction：
-- 使用同一 overlay family，但內容聚焦「哪裡需要調整」。
-- 由 canonical result context進入。
-
-O04 Revert：
-- 使用 confirmation family。
-- destructive / consequential action不能用品牌 Yellow當 danger。
-
-O03 Recovery：
-- INFO / DEGRADED → inline / node-level。
-- BLOCKING_RECOVERABLE → dialog / sheet。
-- TERMINAL → safe-state presentation。
-
-Layering：
-- O01 / O02 / blocking O03 / O04 active時，underlying Shell + bottom nav inert。
-- close後 focus回 trigger / safe surface。
-- inline node-level recovery不鎖整頁。
-
-## 20.10 Brand / Color Management
-
-S03沿用 Direction A，但比 S01/S02更克制：
-
-~~~text
-Neutral / White ≈ 70%+
-Teal family      ≈ 20%
-Yellow           ≤ 10%
-~~~
-
-實際 S03 Yellow可低於10%。
-
-用途：
-- Neutral：canvas、shell、secondary UI。
-- Teal：Share、active bottom nav、focus、processing rail、interactive active states。
-- Aqua：Teal過渡 / restrained progress support。
-- Yellow：small new / completion / energy marker。
-
-Yellow不得：
-- 當一般 warning。
-- 鋪滿 Header / bottom nav / Runtime。
-- 取代 danger semantic color。
-
-不能只靠顏色表達 status / current / error。
-
-## 20.11 Motion
-
-- Hover：約 `120ms`。
-- 一般 UI transition：約 `180ms`。
-- completion / recovery transition：約 `240ms`內。
-- Runtime operation完成不做煙火 / confetti。
-- 可使用 progress rail收束 + content update。
-- 不使用持續 pulse吸走 App注意力。
-- prefers-reduced-motion：移除不必要 slide / pulse / animated progress flourish，保留狀態改變。
-
-## 20.12 Interaction / Component States
-
-S03 Shell components至少需：
-
-~~~text
-DEFAULT
-HOVER
-FOCUS_VISIBLE
-PRESSED
-DISABLED where applicable
-LOADING where applicable
-ACTIVE / SELECTED where applicable
-~~~
-
-- focus ring visible。
-- disabled仍需可讀。
-- icon-only overflow有 accessible name。
-- loading不能只靠 spinner。
-- selected / active不能只靠顏色。
-
-Generated App component states由 Capability / F03 contract擁有，不由 S03 Shell覆寫。
-
-## 20.13 Accessibility
-
-- Shell / Runtime focus order符合 visual hierarchy。
-- initial focus進 App主要 heading/content，不先跳 bottom nav。
-- overlay focus trap / restore明確。
-- aria-live只適度通知 operation / result change，不連續洗屏。
-- mobile touch target ≥44 CSS px。
-- bottom nav safe-area aware。
-- color不是唯一 state indicator。
-- node failure fallback可被 assistive technology感知。
-- Runtime content不能被 fixed nav遮住。
-
-## 20.14 Cursor Guardrails
-
-Cursor不得自行：
-- 把 Runtime變 Dashboard。
-- 新增 sidebar / inspector。
-- 從 DOM猜 canonical result。
-- 在 Result Surface重複放「修改這個 App」。
-- 把 `調整結果`常駐在沒有 canonical result的 App。
-- 把每個 local click變 full-screen spinner。
-- 為了 loading animation故意延遲 operation。
-- 把 Header塞入 S01完整 navigation。
-- 在 mobile top header重複 Share / Modify。
-- 讓 bottom nav遮住 Generated App controls。
-- 讓 mockup sample content變成 Function requirement。
-
-S03 implementation authority順序：
-
-1. 本文件第 19–20 節文字 contract；
-2. `working/UI-UX/DESIGN-SYSTEM.md`；
-3. approved S03 visual reference；
-4. 其他示意圖。
-
-若 visual reference與文字 contract衝突，文字 contract優先。
-
-# 21. S03 ④B Approval Status
-
-User 已於 2026-09-22 確認 S03 Desktop + Mobile final High-fi visual。
-
-因此 S03 現在狀態：
-
-> **④B HIGH_FI_APPROVED — WORKING BASELINE**
-
-Formal Spec、Backlog / Sprint與 Cursor implementation仍維持 HOLD，直到 pre-Cursor Formal Spec Refresh。
-
-
----
-
-# 22. ④B High-fi Step 1–4 Canonical Lock — Approved
-
-Approved by User：2026-09-22
-
-本節是 S03 High-fi 的 **Step 1 → Step 4 canonical index**。S03是 User 真正使用 App 的關鍵 surface，因此 UI contract必須與 F00 / F03 / F05 / F06 / F12 / F16 handoff一起讀取。
-
-## Step 1 — Structure Lock ✅
-
-Desktop：
-- Header左：NodeFF Logo + App Identity。
-- Header右：`修改這個 App / 分享 / •••`。
-- NodeFF Logo = explicit Home / New App escape hatch → S01。
-- 不搬入 S01完整 navigation。
-- Generated App Runtime Frame = 絕對主角。
-- Result Surface只在 canonical result存在且需要 NodeFF-level result action時出現。
-- `修改這個 App`固定由 Header承接。
-- `調整結果`只在 result附近出現。
-- Revert等低頻 contextual action進 `•••`。
-
-Mobile：
-- Header：NodeFF Logo / App Identity / `•••`。
-- permanent bottom navigation：`App | 修改 | 分享`。
-- `App`只代表 current destination，不自行新增 reset / scroll-top behavior。
+- `App`只代表 current destination，不自行加入 reset / scroll-top行為。
+- `修改` → S05。
+- `分享` → O01。
 - `調整結果`不進 permanent nav。
 - `•••`可提供 `回到首頁 / 建立新的 App`文字備援。
 
-Function handoff：
-- Runtime interaction → F03。
-- Share → F05 → O01。
-- Modify → F06 → S05。
-- Correct Result → F16 → O02 → S06。
-- Revert → F16/F00 → O04。
-- Home/New → F00 → S01。
+### UI ↔ Function Handoff — Mandatory
+
+1. Generated App interaction → **F03**
+   - click / input / toggle / local calculate由 F03處理。
+   - S03只訂閱 operation lifecycle / checkpoint projection。
+   - 同一 Instance遵循 F03 single-writer / FIFO / atomic commit。
+   - UI state不得決定 commit。
+
+2. Share → **F05 → O01**
+   - 不離開 S03 context。
+   - current Runtime Instance保留。
+   - Share只分享 Blueprint durable reference，不包含目前 inputs / result。
+   - Share failure不得破壞 current App。
+
+3. Modify → **F06 → S05**
+   - 不原地 mutation immutable Blueprint。
+   - 產生 new immutable Blueprint + lineage + fresh Runtime Instance。
+   - original App可返回。
+   - Runtime input change不等於 Refine。
+
+4. Adjust Result → **F16 → O02 → S06**
+   - 只有 canonical AVAILABLE result時可顯示。
+   - UI不得從 DOM /畫面文字猜 result。
+   - Correction ≠ Modify App。
+
+5. Revert → **F16 / F00 → O04**
+   - 只有 same-session accepted correction child + trusted/compatible base時可提供。
+   - 預設在 overflow。
+   - UI不得自行推定 revert eligibility。
+
+6. Home/New → **F00 → S01**
+   - NodeFF Logo是 global escape hatch。
+   - 不依賴 Browser Back。
+
+### Explicitly Not Present
+
+S03不做：
+- Dashboard sidebar；
+- builder / editor chrome；
+- Blueprint / JSON / capability / technical status；
+- S01完整 navigation；
+- duplicated Modify entry in Result；
+- permanent Adjust Result nav item；
+- full-screen processing spinner for normal interaction。
 
 ## Step 2 — Geometry + Visual Hierarchy Lock ✅
 
-Desktop：
-- Header約 `64–72px`。
-- Runtime max-width約 `1200–1280px`。
-- viewport左右 breathing room約 `24–40px`。
-- initial usable Runtime area至少約 `70vh`，但不是固定 height。
-- content長時自然 scroll。
-- Result Surface與 Runtime同寬、在 normal flow，不做右 sidebar。
+### Desktop
 
-Mobile：
-- Header約 `56–64px`。
-- Runtime horizontal padding約 `16px`，Capability可依 contract edge-to-edge。
-- bottom nav約 `64–72px + safe area`。
-- Generated App若有自己的 bottom controls，需額外預留 spacing。
+- Header：約 `64–72px`。
+- Runtime max-width：約 `1200–1280px`。
+- viewport左右 breathing room：約 `24–40px`。
+- initial usable Runtime area至少約 `70vh`，但不是 fixed height。
+- content更長時自然 scroll。
+- Result Surface與 Runtime同寬、在 normal document flow。
+- 不做右側 sidebar。
 
-固定 attention hierarchy：
+Attention hierarchy：
 
 ~~~text
 Generated App
-> App Identity
+> App Title / Identity
 > Primary NodeFF actions
 > Result-specific correction
 > NodeFF brand chrome
 > Overflow
 ~~~
 
-Generated App取得約 80–90% attention；S03不做中央窄欄 SaaS Dashboard。
+Generated App取得約 80–90% attention。
+
+### Mobile
+
+- Header：約 `56–64px`。
+- Runtime horizontal padding：約 `16px`，Capability可依 contract edge-to-edge。
+- bottom nav：約 `64–72px + safe area`。
+- Generated App若有自己的 bottom controls，需額外預留 spacing，不能互相遮擋。
+- Result Surface位於內容流，不 floating在 bottom nav上。
+- fixed bottom nav不得遮 Runtime內容。
+
+### App Identity
+
+- App Title：約 `18–20px semibold`。
+- 過長單行 ellipsis，不撐高 Header。
+- NodeFF brand visual weight低於 App identity / Runtime。
 
 ## Step 3 — Detailed High-fi Visual Rules Lock ✅
 
-Shell：
-- white / very-soft neutral。
-- subtle divider；不做 glassmorphism、重陰影、大面積 gradient。
-- NodeFF Shell與 Generated App controls視覺可辨，但 Shell不得搶 App。
+### Core Visual Principle
 
-Header：
-- App Title約 `18–20px semibold`；過長 ellipsis。
+> **NodeFF owns the shell; creators own the App presentation.**
+
+- Shell存在但退到背景。
+- Generated App可有自己的 UI style；NodeFF不強制重畫成同一套 App內 controls。
+- S03不能看起來像 SaaS admin / builder / editor。
+
+### Shell / Header
+
+- white / very-soft neutral。
+- subtle 1px divider。
+- 不做 glassmorphism、重陰影、大面積 gradient。
 - Share = compact Teal primary shell action。
 - Modify = secondary / outline / ghost。
-- overflow icon target ≥44px。
+- overflow = icon control，target ≥44px。
 - Shell action視覺權重不得高於 App內 primary CTA。
+- NodeFF Logo hover / accessible label可表達「回到首頁」。
 
-Result：
-- 不從 DOM猜 result。
-- App已清楚呈現 result時，NodeFF不重複抄 value。
-- Result Surface只保留必要 `調整結果`。
-- 「改 App」與「改結果」在 visual placement與 Function semantics都分流。
+### Runtime Canvas
 
-Runtime processing：
-- accepted/admitted interaction建立 operation token後有 logical processing state。
-- 肉眼可見時用 Runtime頂部約 `3–4px` subtle progress rail + stage。
-- reliable checkpoints → Stage + %；否則 Stage only。
-- 極快 operation不強迫 paint loading。
-- 不 full-screen spinner、不 fake smooth %、不為動畫拖慢 operation。
-- 不 blanket-disable整個 App；只依 Function truth限制 affected controls。
-- Soft Timeout保留 last true checkpoint；Hard Timeout → F12/O03 recovery。
+- 不強制再包巨大 card-in-card。
+- Runtime canvas可由 Generated App自己決定內部卡片 / imagery / layout。
+- NodeFF不插 sidebar / inspector / debug badges。
 
-Mobile bottom nav：
-- active App = Teal icon + text / indicator。
-- Modify / Share neutral。
+### Result / Correction
+
+- Result availability由 F03 truth驅動。
+- `調整結果`使用 secondary / outlined treatment，靠近 result context。
+- 不讓 Adjust Result比 App本身的 result更搶眼。
+- Result ERROR不得顯示 fake value。
+
+### Runtime Processing / Global Loading
+
+每個 F03 accepted / admitted interaction都有 logical processing state。
+
+Visible presentation：
+- 極快、同一 render frame完成 → 不強迫 paint loading。
+- 看得到的 processing優先使用 Runtime頂部約 `3–4px` subtle progress rail + stage label。
+- reliable checkpoints → Stage + checkpoint-derived %。
+- no reliable checkpoints → Stage only。
+- 不 fake smooth %。
+- 不用 elapsed time灌進度。
+- 不為動畫拖慢 operation。
+- normal processing不 blanket-disable整個 App；只依 Function truth限制 affected interaction。
+- Soft Timeout提升 processing presence並保留 last true checkpoint。
+- Hard Timeout → F03 discard uncommitted transaction → F12 / O03 Recovery。
+
+### Mobile Bottom Navigation
+
+- active `App` = Teal icon + text / indicator。
+- `修改` / `分享` = neutral default。
 - 不做中央大 FAB。
 - 不用大面積 Yellow。
-
-Color：
-- S03約 `70%+ Neutral / ~20% Teal / ≤10% Yellow`，實際 Yellow可更少。
-- Teal = action / active / focus / processing。
-- Yellow只作 small energy / completion marker，不當 warning或 danger。
-
-Motion：
-- Hover ~120ms。
-- general transition ~180ms。
-- completion / recovery ≤240ms。
-- 不做 confetti / fireworks。
-- reduced-motion移除 pulse / slide等非必要效果。
-
-Overlay：
-- O01 Desktop約 `420–480px` lightweight dialog / anchored panel；Mobile bottom sheet。
-- O01 / O02 / blocking O03 / O04 active時 underlying Shell + bottom nav inert。
-- close後 focus restore。
-- inline node recovery不鎖整頁。
-
-Accessibility：
-- initial focus進 App主要內容，不先落 bottom nav。
 - touch target ≥44 CSS px。
-- fixed nav不得遮 Runtime。
-- state不能只靠顏色。
+- active state不能只靠顏色。
+
+### Overlay Visual Family
+
+O01：
+- Desktop約 `420–480px` lightweight dialog / anchored panel。
+- Mobile bottom sheet。
+- App context仍可辨識。
+
+O01 / O02 / blocking O03 / O04：
+- underlying Shell + bottom nav inert。
+- close後 focus回 trigger / safe surface。
+
+O03 inline / node-level：
+- 留在 affected subtree。
+- 不把整頁變 error page。
+
+### Color Management
+
+S03方向：
+- Neutral / White：70%+。
+- Teal：約20%，用於 primary action / active / focus / processing。
+- Yellow：≤10%，實際可更少；只作 small energy / completion / new marker。
+- Yellow不是 warning / danger。
+- 不靠顏色單獨表達 state。
+
+### Motion
+
+- Hover約 `120ms`。
+- general transition約 `180ms`。
+- completion / recovery state ≤ `240ms`。
+- operation完成不做 confetti / fireworks。
+- prefers-reduced-motion移除 pulse / slide等非必要效果。
+
+### Interaction / Component States
+
+Shell controls至少：
+- Default
+- Hover
+- Focus Visible
+- Pressed
+- Disabled
+- Loading where applicable
+
+- Overlay trigger duplicate taps需依 source Function去重 / disable。
+- Shell不得因 UI loading state自行改 F03 commit semantics。
+
+### Accessibility
+
+- initial focus優先進 App主要內容 / heading，不先落 bottom nav。
+- overlay focus trap / restore。
+- touch target ≥44 CSS px。
+- node failure fallback可被 assistive technology感知。
+- Result change / correction success用非破壞性 live announcement when appropriate。
+- status / version / active state不能只靠顏色。
+
+### Cursor Guardrails
+
+Cursor不得：
+- 從 DOM猜 canonical result；
+- 把 Runtime input mutation當 Refine；
+- 把 Correction和 Modify合成同一 CTA；
+- 每次 Runtime interaction都畫整頁 spinner；
+- 為了 loading動畫延遲 operation；
+- blanket-disable整個 Runtime除非 Function truth要求；
+- 把 S01 nav搬進 S03；
+- 把 Generated App重畫成 NodeFF dashboard；
+- 把 sample mockup內容當 Function requirement。
 
 ## Step 4 — Final Visual Reference Lock ✅
 
-User 已確認 S03 Desktop + Mobile final High-fi review board。
-
-Approved reference：
+Approved visual：
 
 ![S03 App Runtime High-fi v1](../references/S03-App-Runtime-Highfi-v1.png)
 
-Canonical repository path：
+Canonical path：
 
 `working/UI-UX/references/S03-App-Runtime-Highfi-v1.png`
 
@@ -904,11 +598,18 @@ Repository PNG blob SHA：
 
 `bfc2f2a3e8f7baa8539685cf681ab088e90c4082`
 
-Approved-image boundary：
+Reference boundary：
 - 圖片鎖定 layout / visual hierarchy / component language / color use / Desktop-Mobile relationship。
-- mockup sample restaurant content、sample labels、sample imagery與 annotation examples不自動成為 Function requirements。
-- Step 1–3文字 contract + Fxx Function truth永遠優先於圖片生成誤差。
+- sample restaurant content / imagery / labels / annotation examples不自動成為 Function requirements。
+- Step 1–3文字 contract + Fxx Function truth優先於圖片生成誤差。
 
-S03 High-fi Step 1–4：**CLOSED / WORKING BASELINE**。
+# 19. Review Status / Change Control
 
-Repository binary reference已存在於 canonical path；S03 High-fi artifact packaging：**VERIFIED**。
+> **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / ④B HIGH_FI_APPROVED — WORKING BASELINE**
+
+- S03 High-fi Step 1–4已 CLOSED。
+- approved PNG artifact已存在並驗證。
+- 任何 Structure / Geometry / Visual Rule / image reference改動，必須 reopen對應 Step。
+- 若後續需要 component anatomy / overlay stacking / operation-state mapping等額外細節，可新增 `Step 4.5 — <Layer Name> Lock`。
+- Step 4.5不得偷改 Step 1–4；涉及 Function behavior必須回相關 Fxx Working Delta Review。
+- Formal Spec仍待 pre-Cursor refresh。
