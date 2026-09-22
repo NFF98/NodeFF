@@ -97,11 +97,23 @@ Low-fi 建議：
 
 Bottom sheet不遮掉整個 Runtime；關閉後回到原位置。
 
+Cross-screen layering rule：
+- O01 active時，underlying S03 Shell controls與 permanent bottom navigation必須 inert / unavailable。
+- Runtime context仍保留，但不能穿透 Overlay操作。
+- Close後 focus回 Share trigger或合理 safe surface。
+
 # 7. CREATING State
 
 若 Share 尚未建立：
 
     正在準備分享連結…
+
+Processing presentation統一交 O05：
+
+- 有可靠 checkpoints → Stage label + checkpoint-derived Progress %。
+- 沒有可靠 checkpoints → Stage label only。
+- 不 fake %，不以時間估算灌高進度。
+- 不為了 animation故意拖慢 Share ready。
 
 Rules：
 - Create CTA duplicate tap disabled / coalesced。
