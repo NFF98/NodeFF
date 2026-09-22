@@ -762,3 +762,145 @@ User 已於 2026-09-22 確認 S03 Desktop + Mobile final High-fi visual。
 > **④B HIGH_FI_APPROVED — WORKING BASELINE**
 
 Formal Spec、Backlog / Sprint與 Cursor implementation仍維持 HOLD，直到 pre-Cursor Formal Spec Refresh。
+
+
+---
+
+# 22. ④B High-fi Step 1–4 Canonical Lock — Approved
+
+Approved by User：2026-09-22
+
+本節是 S03 High-fi 的 **Step 1 → Step 4 canonical index**。S03是 User 真正使用 App 的關鍵 surface，因此 UI contract必須與 F00 / F03 / F05 / F06 / F12 / F16 handoff一起讀取。
+
+## Step 1 — Structure Lock ✅
+
+Desktop：
+- Header左：NodeFF Logo + App Identity。
+- Header右：`修改這個 App / 分享 / •••`。
+- NodeFF Logo = explicit Home / New App escape hatch → S01。
+- 不搬入 S01完整 navigation。
+- Generated App Runtime Frame = 絕對主角。
+- Result Surface只在 canonical result存在且需要 NodeFF-level result action時出現。
+- `修改這個 App`固定由 Header承接。
+- `調整結果`只在 result附近出現。
+- Revert等低頻 contextual action進 `•••`。
+
+Mobile：
+- Header：NodeFF Logo / App Identity / `•••`。
+- permanent bottom navigation：`App | 修改 | 分享`。
+- `App`只代表 current destination，不自行新增 reset / scroll-top behavior。
+- `調整結果`不進 permanent nav。
+- `•••`可提供 `回到首頁 / 建立新的 App`文字備援。
+
+Function handoff：
+- Runtime interaction → F03。
+- Share → F05 → O01。
+- Modify → F06 → S05。
+- Correct Result → F16 → O02 → S06。
+- Revert → F16/F00 → O04。
+- Home/New → F00 → S01。
+
+## Step 2 — Geometry + Visual Hierarchy Lock ✅
+
+Desktop：
+- Header約 `64–72px`。
+- Runtime max-width約 `1200–1280px`。
+- viewport左右 breathing room約 `24–40px`。
+- initial usable Runtime area至少約 `70vh`，但不是固定 height。
+- content長時自然 scroll。
+- Result Surface與 Runtime同寬、在 normal flow，不做右 sidebar。
+
+Mobile：
+- Header約 `56–64px`。
+- Runtime horizontal padding約 `16px`，Capability可依 contract edge-to-edge。
+- bottom nav約 `64–72px + safe area`。
+- Generated App若有自己的 bottom controls，需額外預留 spacing。
+
+固定 attention hierarchy：
+
+~~~text
+Generated App
+> App Identity
+> Primary NodeFF actions
+> Result-specific correction
+> NodeFF brand chrome
+> Overflow
+~~~
+
+Generated App取得約 80–90% attention；S03不做中央窄欄 SaaS Dashboard。
+
+## Step 3 — Detailed High-fi Visual Rules Lock ✅
+
+Shell：
+- white / very-soft neutral。
+- subtle divider；不做 glassmorphism、重陰影、大面積 gradient。
+- NodeFF Shell與 Generated App controls視覺可辨，但 Shell不得搶 App。
+
+Header：
+- App Title約 `18–20px semibold`；過長 ellipsis。
+- Share = compact Teal primary shell action。
+- Modify = secondary / outline / ghost。
+- overflow icon target ≥44px。
+- Shell action視覺權重不得高於 App內 primary CTA。
+
+Result：
+- 不從 DOM猜 result。
+- App已清楚呈現 result時，NodeFF不重複抄 value。
+- Result Surface只保留必要 `調整結果`。
+- 「改 App」與「改結果」在 visual placement與 Function semantics都分流。
+
+Runtime processing：
+- accepted/admitted interaction建立 operation token後有 logical processing state。
+- 肉眼可見時用 Runtime頂部約 `3–4px` subtle progress rail + stage。
+- reliable checkpoints → Stage + %；否則 Stage only。
+- 極快 operation不強迫 paint loading。
+- 不 full-screen spinner、不 fake smooth %、不為動畫拖慢 operation。
+- 不 blanket-disable整個 App；只依 Function truth限制 affected controls。
+- Soft Timeout保留 last true checkpoint；Hard Timeout → F12/O03 recovery。
+
+Mobile bottom nav：
+- active App = Teal icon + text / indicator。
+- Modify / Share neutral。
+- 不做中央大 FAB。
+- 不用大面積 Yellow。
+
+Color：
+- S03約 `70%+ Neutral / ~20% Teal / ≤10% Yellow`，實際 Yellow可更少。
+- Teal = action / active / focus / processing。
+- Yellow只作 small energy / completion marker，不當 warning或 danger。
+
+Motion：
+- Hover ~120ms。
+- general transition ~180ms。
+- completion / recovery ≤240ms。
+- 不做 confetti / fireworks。
+- reduced-motion移除 pulse / slide等非必要效果。
+
+Overlay：
+- O01 Desktop約 `420–480px` lightweight dialog / anchored panel；Mobile bottom sheet。
+- O01 / O02 / blocking O03 / O04 active時 underlying Shell + bottom nav inert。
+- close後 focus restore。
+- inline node recovery不鎖整頁。
+
+Accessibility：
+- initial focus進 App主要內容，不先落 bottom nav。
+- touch target ≥44 CSS px。
+- fixed nav不得遮 Runtime。
+- state不能只靠顏色。
+
+## Step 4 — Final Visual Reference Lock ✅
+
+User 已確認 S03 Desktop + Mobile final High-fi review board。
+
+Canonical intended repository path：
+
+`working/UI-UX/references/S03-App-Runtime-Highfi-v1.png`
+
+Approved-image boundary：
+- 圖片鎖定 layout / visual hierarchy / component language / color use / Desktop-Mobile relationship。
+- mockup sample restaurant content、sample labels、sample imagery與 annotation examples不自動成為 Function requirements。
+- Step 1–3文字 contract + Fxx Function truth永遠優先於圖片生成誤差。
+
+S03 High-fi Step 1–4：**CLOSED / WORKING BASELINE**。
+
+> Repository binary reference must exist at the canonical path before the pre-Cursor Formal Spec Refresh can mark UI artifact packaging as VERIFIED.
