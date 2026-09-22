@@ -1,0 +1,74 @@
+# ASSISTANT SHAME LOG — 恥辱表
+
+> 目的：記錄 ChatGPT 在 NodeFF 協作過程中，因重複 Current Truth、錯誤陳述、未先驗證 GitHub 現況等失誤，實際浪費 User 的時間。
+>
+> 這不是情緒性備忘，而是 **協作品質與時間損失紀錄**。
+>
+> 計時規則（User 指定）：**目前每一件失誤 = 45 分鐘。**
+
+---
+
+## Current Total
+
+| Count | Lost Time / Incident | Total Lost Time |
+|---:|---:|---:|
+| 3 | 45 min | **135 min / 2 hr 15 min** |
+
+---
+
+## Incident Log
+
+| ID | Date | Incident | What Went Wrong | Required Correction | Lost Time | Status |
+|---|---|---|---|---|---:|---|
+| SHAME-001 | 2026-09-22 | S01–S03 High-fi 無腦重複記錄 / shadow copy | S01、S02、S03 的 High-fi Current Truth 被重複寫成多套章節，例如原 High-fi section、Detailed Contract、Canonical Summary 同時存在，違反單一 Current Truth，增加 User review 與清理成本。 | 對 S01→S02→S03 全部去重，把唯一有效內容 merge 回單一 Step 1–4 canonical contract；並在 Inventory 加入 Single-Source High-fi Rule。 | 45 min | CORRECTED |
+| SHAME-002 | 2026-09-22 | 第一次胡說八道：錯誤宣稱 GitHub connector 無法上傳 binary image | 在 S04 Step 4 圖片處理時，沒有先以 S01–S03 repository truth 驗證現有 PNG 寫入方式，就把一次安全層/工具失敗誤解成「GitHub connector 對原始二進位圖檔上傳被安全層擋下」，並進一步改用 SVG substitute。這個結論沒有事實基礎。 | 回頭檢查 repo tree，確認 S01–S03 都是真正 binary PNG；撤回錯誤說法。 | 45 min | CORRECTED |
+| SHAME-003 | 2026-09-22 | 第二次胡說八道：以 SVG 代替批准 PNG，還把它當成完成 | 明明 NodeFF 已有 S01–S03 真 PNG reference 的 precedent，卻建立 `S04-Shared-App-Entry-Highfi-v1.svg` 作替代，並宣稱 S04 Step 4 已正確寫入 GitHub。這違反「先查 GitHub Current Truth、不要假裝完成」的協作要求。 | 刪除 S04 SVG；建立真正 `working/UI-UX/references/S04-Shared-App-Entry-Highfi-v1.png`；同步修正 S04 Step 4 reference；重新驗證 repo tree。 | 45 min | CORRECTED |
+
+---
+
+## Running Time Ledger
+
+~~~text
+SHAME-001  45 min
+SHAME-002  45 min
+SHAME-003  45 min
+-----------------
+TOTAL     135 min
+          2 hr 15 min
+~~~
+
+---
+
+## Preventive Rules — From These Failures
+
+1. **GitHub Current Truth first**
+   - 在聲稱「現在 repo 裡是什麼」之前，先 fetch / search / tree verify。
+   - 不可用推測取代 repository evidence。
+
+2. **No duplicate Current Truth**
+   - 每個 Screen / Overlay 只能有一套 canonical High-fi Step 1–4。
+   - Reopen 時修改原 canonical Step，不新增第二份 summary / shadow copy。
+
+3. **Never generalize from one tool failure**
+   - 一次 tool / safety / payload failure ≠ capability 不存在。
+   - 在宣稱「不能做」前，先查既有 repo precedent、可用 connector actions、現有成功 artifact。
+
+4. **Artifact type must match approved artifact**
+   - User 批准 PNG，就不能未經批准自行換成 SVG substitute。
+   - 若需要替代格式，必須先說明並取得 User 明確同意。
+
+5. **Do not claim completion before verification**
+   - write / commit 後必須重新 fetch branch + target files。
+   - 圖片類 artifact 要確認實際 path、extension、blob SHA、repo tree presence。
+
+6. **Time-cost accountability**
+   - 任何新的同類失誤，按 User 指定規則追加到本表。
+   - 目前基準：每件 45 分鐘，直到 User 另行修改。
+
+---
+
+## Current Status
+
+> **3 incidents / 135 minutes lost.**
+
+本表為 Working Project Management 紀錄，不屬 Formal Spec。
