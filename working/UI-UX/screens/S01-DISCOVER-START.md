@@ -489,3 +489,122 @@ S01 ④B 已完成。
 Next：
 
 > **S02 — Create Workspace ④B High-fi：先鎖結構 → 再鎖視覺 → 最後出完整圖。**
+
+
+---
+
+# 17. ④B Detailed High-fi Implementation Contract — Approved
+
+Approved by User：2026-09-22
+
+本節把 S01 已批准的 High-fi 討論收斂成 Cursor 可執行的 visual / responsive contract；不新增 Function behavior。若本節與 approved image 的生成誤差衝突，以本節 + 第 15 節 + `DESIGN-SYSTEM.md` 為準。
+
+## 17.1 Canvas / Brand Balance
+
+- 整體採 Direction A：**Clean Creator Canvas + Playful Energy**。
+- Neutral / White 為主要 canvas；Teal 是主品牌與 active / creation anchor；Yellow只作小面積 energy accent。
+- 預設視覺平衡遵循 Design System 約 `70% Neutral / 20% Teal / ≤10% Yellow`，不是機械 pixel quota。
+- 不使用大面積 gradient、霓虹 glow、重陰影或高飽和彩虹分類。
+- S01 首屏的 attention hierarchy：
+  `Creator Composer > Hero message > Inspiration previews > Explore / Footer chrome`。
+
+## 17.2 Header
+
+Desktop：
+- Header保持單列、低密度、低視覺重量。
+- 內容固定：`NodeFF Logo | 首頁 | 探索靈感 | 我的 App`。
+- active item使用 Teal text / indicator；不使用大型 filled tab。
+- `我的 App`若仍為 Phase 1 placeholder，必須以 `Soon` / unavailable treatment 明示，不可假裝可操作。
+- 不加入 Profile / Search / Notification / Login / hamburger / Docs / model selector。
+
+Mobile：
+- 不使用 hamburger。
+- Header只保留必要 brand / page chrome；主要 navigation由底部 nav承接。
+- 任何 icon/control touch target需 ≥44 CSS px。
+
+## 17.3 Hero
+
+- 主標固定：**意圖就是 App**。
+- 目前不顯示副標，但保留 breathing room，不把 Composer緊貼標題。
+- Hero不做大型 marketing banner，不放插畫牆或 promotion。
+- Teal可作文字 / small accent；Yellow不得成為整塊 Hero背景。
+
+## 17.4 Creator Composer
+
+- S01唯一 Primary Create entry。
+- Desktop initial height：約 `180–220px`。
+- Mobile initial height：約 `160–180px`。
+- multi-line + auto-grow；約 `320–360px` 後才進 internal scroll。
+- Composer surface使用 white / soft neutral、12–16px radius family、subtle border / elevation。
+- Focus使用 Teal focus treatment；不能只靠 shadow。
+- Placeholder / ghost text 必須明顯弱於真實 user input，但仍可讀。
+- suggestion chips是 supporting prefill；不可比 `建立 App`更搶眼。
+- Primary CTA只有 `建立 App`；不在 Header或 bottom nav複製另一個 Create。
+- Disabled / loading / invalid 狀態沿用 Design System component state contract，不用 opacity-only 表達。
+
+## 17.5 Inspiration Preview Cards
+
+- High-fi採 **App Preview / 作品展示卡**，不是 Prompt card、social feed或 App Store listing。
+- Desktop固定以 3 cards / row 作主要組合。
+- preview visual約佔 card視覺面積 60%。
+- card資訊順序：Preview → App 名稱 → 一句 outcome → `試試看 →`。
+- 不顯示 author / likes / comments / ratings / featured badge / overflow noise。
+- hover可小幅提升 elevation或 border emphasis；不得用大型 glow / scale跳動。
+- Mobile單欄，preview不可縮成小 thumbnail。
+
+## 17.6 Category Navigation / Explore
+
+- Category navigation位於 Inspiration cards上方。
+- 使用文字 tabs：`全部 | 生產力 | 生活 | 學習 | 工具`。
+- active = Teal text + underline / indicator。
+- Mobile可水平 scroll，但不改成 icon grid。
+- `探索更多 →`為 secondary / ghost action，只存在 Inspiration區，不進 Header。
+
+## 17.7 Footer
+
+- Footer保持低視覺重量。
+- 可放 NodeFF官方 social icons。
+- Footer不是 App Share surface，不放「分享這個 App」。
+- footer controls需使用同一 icon family與 visible focus。
+
+## 17.8 Mobile Bottom Navigation
+
+固定三項：
+
+~~~text
+首頁 | 探索靈感 | 我的 App
+~~~
+
+- `首頁`為 current active destination。
+- `我的 App`以 `Soon` + unavailable/disabled visual state呈現。
+- 不放 Create / Profile。
+- 固定在底部時需 safe-area aware，不遮內容。
+- active / disabled不能只靠顏色；文字 / icon / status需同時可辨識。
+
+## 17.9 Motion / Accessibility
+
+- Hover約 120ms、一般 transition約 180ms；不用持續 decorative motion搶 Composer注意力。
+- prefers-reduced-motion時，移除不必要 slide / pulse，保留 state change。
+- keyboard focus順序依：Header → Composer → Create → Inspiration → Explore → Footer。
+- body / control contrast、focus、touch target、disabled semantics需通過 Design System accessibility gate。
+
+## 17.10 Cursor Guardrails
+
+Cursor不得自行新增：
+- 第二個 Create入口；
+- Profile / hamburger / Search；
+- promo banner；
+- category icon grid；
+- social metrics；
+- App Store metadata；
+- 大型 design-system說明區；
+- 未批准的 secondary hero copy。
+
+S01 implementation authority順序：
+
+1. 本文件文字 contract；
+2. `working/UI-UX/DESIGN-SYSTEM.md`；
+3. approved visual reference；
+4. 其他示意圖。
+
+S01 的 High-fi細節視為 Working Current Truth；Formal Spec仍待 pre-Cursor refresh。
