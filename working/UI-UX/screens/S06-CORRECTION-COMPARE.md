@@ -56,7 +56,7 @@ Default 不顯示：
 # 4. Proposed Desktop Low-fi
 
     ┌──────────────────────────────────────────────────────────────┐
-    │ NodeFF   App Title                         [回目前 App]     │
+    │ NodeFF   App Title                                            │
     ├──────────────────────────────────────────────────────────────┤
     │ 你說：主管應該付兩倍，但現在沒有                            │
     │                                                              │
@@ -83,7 +83,7 @@ Desktop 預設 side-by-side，因為核心任務就是比較。
 Mobile 不強迫左右並排。
 
     ┌────────────────────────────┐
-    │ ‹ App Title               │
+    │ App Title                 │
     │                            │
     │ 你說：主管應該付兩倍…      │
     │                            │
@@ -237,17 +237,22 @@ Secondary option：
 
 # 14. Return / View App
 
+S06 不提供獨立的「回目前 App」Decision CTA，避免 User無法判斷這代表暫時離開、Reject correction，或 Accept目前版本。
+
 S06 可提供：
 
     查看原版 App
     查看修正版 App
 
-但兩者不是決策。
+但兩者只是 Preview，不是決策。
 
 Rules：
 - 查看不等於 Accept / Reject。
-- 返回 S06後 compare context必須保留。
+- Preview結束後回 S06，compare context必須保留。
 - 若開 full Runtime preview，應明確標示目前查看哪一版。
+- 真正離開 Compare 的產品決策只使用：**保留原版 / 再調整 / 使用修正版**。
+- S06 是 focused decision workspace，不繼承 S03 permanent bottom navigation。
+- 此規則不新增 F16 outcome；完全沿用既有 ACCEPT / KEEP_PREVIOUS / ADJUST_AGAIN semantics。
 
 # 15. Loading / Replay State
 
