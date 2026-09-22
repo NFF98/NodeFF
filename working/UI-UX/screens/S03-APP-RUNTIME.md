@@ -2,7 +2,7 @@
 
 > Screen ID：S03
 >
-> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / HIGH_FI_PENDING**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B HIGH_FI_REVIEW_IN_PROGRESS**
 >
 > Phase：Phase 1
 >
@@ -310,3 +310,129 @@ User 已確認：
 S03 ④A Low-fi與 Runtime Function Delta已完成 User Review。
 
 依固定流程，下一步進 `Cross-Screen Consistency Review → High-fi Design System → ④B High-fi`。Formal Spec與 Cursor implementation仍維持 HOLD。
+
+
+---
+
+# 19. ④B High-fi Structure + Function Handoff Contract
+
+Approved by User：2026-09-22
+
+本節鎖定 S03 ④B High-fi 的結構、geometry 與 UI ↔ Function handoff。後續視覺與完整圖不得自行改寫 Function semantics。
+
+## 19.1 Desktop / Mobile Structure
+
+Desktop：
+- Header約 64–72px。
+- 左：NodeFF Logo + App Identity。
+- 右：`修改這個 App`、`分享`、`•••`。
+- NodeFF Logo = explicit Home / New App escape hatch，回 S01 Discover / Start。
+- 不搬入 S01 的完整 navigation。
+- Generated App Runtime Frame為絕對主角。
+- Runtime max-width約 1200–1280px；頁面左右保留 24–40px breathing room。
+- Generated App內容區至少佔首屏約 70vh；內容更長時自然延伸。
+- Result / NodeFF Action Surface僅在有 canonical result且需要 NodeFF-level action時出現。
+- Result Surface與 Runtime Frame同寬，在內容流內，不做右側 sidebar。
+
+Mobile：
+- Header約 56–64px。
+- Header只保留 NodeFF Logo / App Identity / `•••`。
+- Share / Modify不塞入 header。
+- permanent bottom navigation固定：
+  `App / 修改 / 分享`。
+- `App`只代表 current active destination，不自行加入 reset / scroll-to-top 等未定義行為。
+- Runtime內容左右 padding約 16px。
+- bottom navigation約 64–72px + safe area。
+- Generated App如有自己的 bottom controls，Runtime必須預留安全區避免重疊。
+- Result Surface在內容流中，不 floating於 bottom nav上方。
+
+## 19.2 Visual Hierarchy
+
+固定優先順序：
+
+~~~text
+Generated App
+> App Title / Identity
+> Primary NodeFF actions
+> Result correction actions
+> NodeFF brand chrome
+> Overflow actions
+~~~
+
+S03 不採中央窄欄 SaaS Dashboard版型；Runtime需有較大橫向自由度。
+
+## 19.3 UI ↔ Function Handoff — Mandatory
+
+### 1. Generated App Interaction → F03
+
+- Generated App內 click / input / toggle / local calculate皆由 F03 Runtime處理。
+- S03 Shell不得直接 mutation Runtime state。
+- Shell只訂閱 F03 operation lifecycle / checkpoint projection。
+- 同一 Instance遵循 F03 single-writer / FIFO / atomic commit。
+- UI不得以 presentation state決定 commit。
+
+### 2. Share → F05 → O01
+
+- `分享`呼叫 F05 Share flow並呈現在 O01。
+- Share不離開 S03主 context。
+- current Runtime Instance保留。
+- Share只分享 Blueprint durable reference，不包含目前 Runtime inputs / result。
+- Share failure不得破壞 current App。
+
+### 3. 修改 → F06 → S05
+
+- `修改` / `修改這個 App`進 F06 Refine / Remix flow。
+- 不得原地 mutation既有 immutable Blueprint。
+- 變更完成後產生 new immutable Blueprint + lineage + fresh Runtime Instance。
+- original App必須可返回。
+- Runtime input change不等於 Refine。
+
+### 4. 調整結果 → F16 → O02 → S06
+
+- `調整結果`只在 F03 canonical `evaluateResult()` / `result.outputs`存在 `AVAILABLE` output時可顯示。
+- UI不得從 DOM或畫面文字猜 result。
+- Entry → O02 Correction Composer → F16 correcting → S06 Compare。
+- Correct = outcome / logic correction；不得和 Modify App混為同一 semantic action。
+
+### 5. 回到修正前版本 → F16 / F00 → O04
+
+- 只有 current active Blueprint為 same-session accepted correction child，且 previous/base仍 trusted + compatible時才提供。
+- 預設放 `•••` contextual menu，不常駐 primary。
+- O04負責確認 target與 input restoration truth。
+- UI不得自行推定版本可 revert。
+
+### 6. NodeFF Logo → F00 → S01 / New App
+
+- NodeFF Logo是明確 global escape hatch。
+- 進 S01 Discover / Start，讓 User建立新的 App。
+- 不依賴 Browser Back，避免 accidental Back丟 active App。
+- Mobile `•••`可提供文字備援 `回到首頁 / 建立新的 App`，但不搬入整套 S01 navigation。
+
+## 19.4 Runtime Processing Presentation
+
+F03 每個 accepted / admitted Runtime interaction都建立 operation token並進 logical `GLOBAL_PROCESSING`。
+
+High-fi presentation：
+- 極快、同一 render frame完成 → 不強迫 paint loading frame。
+- 可見 processing優先使用 Runtime Frame頂部的 subtle progress rail + stage label。
+- reliable checkpoints → Stage + checkpoint-derived %。
+- no reliable checkpoints → Stage only。
+- 不 fake %。
+- 不用 elapsed time灌進度。
+- 不為了動畫延遲真正完成。
+- normal processing不 blanket-disable整個 App；只依 Function truth限制受影響 interaction。
+- Soft Timeout提升 processing presence但保留 last true checkpoint。
+- Hard Timeout → F03 discard uncommitted transaction → F12 / O03 recovery。
+
+## 19.5 Function-driven Eligibility
+
+以下 UI visibility必須由 Function truth驅動，不由 Screen猜測：
+
+- `調整結果`：canonical AVAILABLE result。
+- `回到修正前版本`：revert eligibility。
+- Share state：F05 state。
+- Processing stage / %：F03 / O05 lifecycle projection。
+- Recovery severity / next actions：F12 / O03。
+- Modify / Remix semantic flow：F06。
+
+S03 Screen只擁有 presentation，不成為第二份 Function truth。
