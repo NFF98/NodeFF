@@ -186,7 +186,7 @@ Fast Path 不要求額外確認；只有 Clarification / Assumption 需要 User 
 
 四個核心 Low-fi 問題已完成 User Review；最終方向見第 19 節。
 
-# 17. Review Status
+# 17. Low-fi Review Status
 
 > **④A LOW_FI_APPROVED — ④B HIGH_FI_APPROVED**
 
