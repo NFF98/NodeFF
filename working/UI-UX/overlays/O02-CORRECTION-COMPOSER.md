@@ -125,6 +125,11 @@ Desktop 建議 lightweight dialog / side panel，不跳全頁。
 
 Mobile 建議 bottom sheet / full-height sheet，但仍保留目前 App context，不另開獨立 route。
 
+Cross-screen layering rule：
+- O02 active時，underlying S03 Shell controls與 permanent bottom navigation必須 inert / unavailable。
+- 不允許 tap-through到 Runtime或 Shell action。
+- Close / Cancel後 focus回「調整結果」trigger或合理 safe surface。
+
 # 7. Current Result Summary
 
 O02 顯示的是 F03 / F16 canonical result summary。
