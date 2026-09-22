@@ -892,9 +892,17 @@ Accessibility：
 
 User 已確認 S03 Desktop + Mobile final High-fi review board。
 
-Canonical intended repository path：
+Approved reference：
+
+![S03 App Runtime High-fi v1](../references/S03-App-Runtime-Highfi-v1.png)
+
+Canonical repository path：
 
 `working/UI-UX/references/S03-App-Runtime-Highfi-v1.png`
+
+Repository PNG blob SHA：
+
+`bfc2f2a3e8f7baa8539685cf681ab088e90c4082`
 
 Approved-image boundary：
 - 圖片鎖定 layout / visual hierarchy / component language / color use / Desktop-Mobile relationship。
@@ -903,4 +911,4 @@ Approved-image boundary：
 
 S03 High-fi Step 1–4：**CLOSED / WORKING BASELINE**。
 
-> Repository binary reference must exist at the canonical path before the pre-Cursor Formal Spec Refresh can mark UI artifact packaging as VERIFIED.
+Repository binary reference已存在於 canonical path；S03 High-fi artifact packaging：**VERIFIED**。
