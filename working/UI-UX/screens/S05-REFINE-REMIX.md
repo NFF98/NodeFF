@@ -2,7 +2,7 @@
 
 > Screen ID：S05
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED / STEP 3–4 PENDING**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED / STEP 4 PENDING**
 >
 > Phase：Phase 1
 >
@@ -377,24 +377,13 @@ User 已確認：
 6. 新版完成直接進 Preview，三個主要決策 CTA：**保留原版 / 再調整 / 使用新版**。
 7. 「再調整」預設基於最新 Preview child，並提供「從原版重新調整」secondary option。
 
-# 19.1 ④B Version Color Management
+# 19.1 ④B Version Color Management — SUPERSEDED
 
-User confirmed during ④B review：
-
-- **④B Step 1 Current Truth：Refine / Remix 不再合併成單一 consumer path。拆為 S05A「修改這個 App」與 S05B「改成我的版本」；可共用底層 layout / components，但入口、標題、語意與返回文案必須明確分開。**
-- relation semantics 必須透過 **relation label** 明確顯示，不能只靠顏色。
-- version visual marker 同時採 **border / accent color management**：
-  - **Source / Original / Before**：Neutral treatment；使用 neutral border / surface，代表原版與來源。
-  - **Candidate / New / After**：Teal / Aqua treatment；使用 Teal / Aqua border / accent，代表新版／目前候選版本。
-  - **Yellow**：只作 small `NEW` / changed / energy marker；不得作整個新版 surface 的主色或把新版誤表達成 warning。
-- 原版與新版的區分必須同時依賴：
-  1. relation label；
-  2. version label（原版／新版等 consumer copy）；
-  3. border / accent visual marker。
-- Accessibility：版本關係不得只靠顏色辨識。
-- 這套 version color language 與 `working/UI-UX/DESIGN-SYSTEM.md` 的 Version / Compare Visual Language 一致。
-
-
+> **Historical note only.**
+>
+> 本節原本在 ④B review 中暫存 version color direction；自 S05 High-fi Step 3 核准後，**所有仍有效的 Version / Color / Marker 規則已合併進 Step 3 canonical contract**。
+>
+> Current Truth 不再以本節為實作依據，避免形成第二份 High-fi visual truth。
 
 # 20. ④B High-fi Contract — Step 1 Structure Lock ✅
 
@@ -537,14 +526,15 @@ Preview Ready 後，新版是主要內容：
 原版仍保留
 [查看原版]
 
-[保留原版] [再調整] [使用新版]
+[保留原版] [再調整] [S05A：使用新版 / S05B：使用我的版本]
 ~~~
 
 Rules：
 
 - 不預設把原版 / 新版做 S06-style side-by-side compare。
 - S05 不是 Correction Compare。
-- `使用新版` → child becomes active → S03。
+- S05A：`使用新版` → child becomes active → S03。
+- S05B：`使用我的版本` → child becomes active → S03。
 - `保留原版` → source remains active → S03 source App。
 - `再調整` → 留在 S05，預設基於 latest preview child。
 - secondary option：`從原版重新調整`。
@@ -631,7 +621,7 @@ S05A / S05B 都是 focused creation-change workspace：
 6. Composer 回程 wording = **`返回修改畫面`**。
 7. Preview 回程 wording = **`返回新版預覽`**。
 8. 返回後原 S05 draft / state / preview context全部保留。
-9. Preview 三個主要決策仍為：**保留原版 / 再調整 / 使用新版**。
+9. Preview 三個主要決策仍為：**保留原版 / 再調整 / Primary adopt**；S05A Primary = `使用新版`，S05B Primary = `使用我的版本`。
 10. S05 不做 S06-style correction comparison；不把 correction semantics混入 S05。
 11. S05 不承擔「建立全新 App」；全新 App creation仍走 S01 → S02 → S03。
 12. S05 不繼承 S03 permanent navigation。
@@ -769,7 +759,7 @@ Canonical desktop composition：
 │ 新版預覽                                      │
 │ 原版仍保留                                    │
 │                                              │
-│ [保留原版]      [再調整]       [使用新版]     │
+│ [保留原版]      [再調整]   [使用新版／使用我的版本] │
 └──────────────────────────────────────────────┘
 ~~~
 
@@ -782,7 +772,7 @@ New Version Runtime
 >
 新版預覽 identity
 >
-使用新版
+S05A：使用新版 / S05B：使用我的版本
 >
 再調整
 >
@@ -804,7 +794,7 @@ Rules：
 
 Desktop：
 
-- `使用新版` = Primary。
+- S05A `使用新版` / S05B `使用我的版本` = Primary。
 - `再調整` = Secondary。
 - `保留原版` = Tertiary / secondary-low。
 - `從原版重新調整` 不進三大 CTA 同一層；只作 `再調整` 的 secondary option。
@@ -852,7 +842,7 @@ Runtime
 ↓
 原版仍保留 / 查看原版
 ↓
-使用新版
+S05A：使用新版 / S05B：使用我的版本
 ↓
 再調整
 ↓
@@ -863,7 +853,7 @@ Rules：
 
 - Runtime優先。
 - CTA採直向堆疊，不硬塞三顆橫排。
-- **Mobile CTA order鎖定為：`使用新版 → 再調整 → 保留原版`。**
+- **Mobile CTA order鎖定為：S05A `使用新版 → 再調整 → 保留原版`；S05B `使用我的版本 → 再調整 → 保留原版`。**
 - CTA不得以 sticky方式遮住 Generated App controls。
 - 若 Generated App本身有 bottom controls，S05需保留足夠下方 spacing / safe area。
 
@@ -926,10 +916,10 @@ Recovery geometry只決定呈現位置，不改寫 O03 / F12的 retry eligibilit
 5. Processing留在同一 S05 path，不切換 loading page。
 6. Desktop Preview切換至約 `1100–1200px` wide Runtime-first layout。
 7. **Desktop Preview固定：單欄 Runtime + 底部 decisions；不做右 Sidebar。**
-8. Desktop Preview visual hierarchy：Runtime > 新版 identity > 使用新版 > 再調整 > 保留原版 / 查看原版。
+8. Desktop Preview visual hierarchy：Runtime > 新版 identity > S05A `使用新版` / S05B `使用我的版本` > 再調整 > 保留原版 / 查看原版。
 9. Mobile Composer單欄，padding `16–20px`，不繼承 S03 bottom nav。
 10. Mobile Preview Runtime優先，CTA直向堆疊。
-11. **Mobile CTA order固定：使用新版 → 再調整 → 保留原版。**
+11. **Mobile CTA order固定：S05A = 使用新版 → 再調整 → 保留原版；S05B = 使用我的版本 → 再調整 → 保留原版。**
 12. S05A / S05B geometry共用，但 consumer meaning與 wording維持分離。
 13. Composer / processing failure在原 `640–720px` 中央工作區承接 Recovery，不換頁。
 14. Preview hydration failure以 Recovery取代 Runtime preview region，不把整個 S05變 error page。
@@ -939,8 +929,336 @@ Recovery geometry只決定呈現位置，不改寫 O03 / F12的 retry eligibilit
 > Step 2：**APPROVED / LOCKED**。下一步：Step 3 — Detailed High-fi Visual Rules Lock。
 
 
+## Step 3 — Detailed High-fi Visual Rules Lock ✅
+
+> Approved by User：2026-09-22
+>
+> Step 3：**APPROVED / LOCKED**
+>
+> Scope：鎖定 S05A / S05B 的 color usage、typography、component visual treatment、version markers、CTA emphasis、processing / recovery presentation、motion 與 accessibility。不得改寫 Step 1 Function / state structure 或 Step 2 geometry。
+>
+> Canonical precedence：本節為 S05 High-fi visual Current Truth；若與舊 `#19.1 ④B Version Color Management` 衝突，以本節為準。
+
+### 1. Core Visual Principle — Focused Creator Workspace
+
+S05 是 **Focused Creator Workspace**，不是 Builder / Admin / IDE。
+
+Visual direction：
+
+- White / Soft Neutral為主。
+- NodeFF chrome低干擾。
+- 不做 sidebar / inspector / properties rail。
+- 不做大面積 gradient。
+- 不做 glassmorphism。
+- 不做 neon / rainbow「AI感」。
+- Normal surface維持低 elevation / mostly flat。
+
+Brand balance direction沿 Design System：
+
+~~~text
+Neutral / White   ≈ 70%+
+Teal family       ≈ 20%
+Yellow energy     ≤ 10%
+~~~
+
+比例不是 pixel quota；原則是「乾淨 creator canvas + 少量 playful energy」。
+
+### 2. Header / App Identity / Task Title
+
+Header：
+
+- White / very-soft neutral。
+- subtle `1px` divider。
+- 不用重 shadow。
+- Header visual weight低於 S05 task title / Composer / Preview Runtime。
+
+App Identity：
+
+- App Logo / Title只是 context：告訴 User「目前正在改哪個 App」。
+- App Title建議採 `heading-md 20/28 semibold`。
+- 過長單行 ellipsis，不撐高 header。
+- 不加入 hash / lineage / provider / technical status。
+
+Task Title：
+
+- Desktop：`heading-xl 32/40`。
+- Mobile：`heading-lg 24/32`。
+- S05A：`修改這個 App`。
+- S05B：`改成我的版本`。
+
+第一視覺焦點必須先回答「現在要做什麼」，而不是先看到 NodeFF品牌或 source metadata。
+
+### 3. Composer Visual Treatment
+
+Change Composer沿 Design System Input / Composer：
+
+- White / Soft surface。
+- default neutral border。
+- radius = `12px`。
+- Natural-language input text：`body-lg 16/26`。
+- helper / preservation copy：`body-md 14/22`。
+- placeholder對比可讀，但不得與已輸入文字混淆。
+- Focus採 Teal visible treatment。
+- Error / Invalid必須同時有文字與 programmatic association，不只紅框 / 顏色。
+- 不做大型 glowing prompt box。
+- 不做聊天泡泡或 conversation-feed visual。
+
+`原版會保留` 使用 supporting copy。
+`查看原版` 使用 Ghost action，不與 Primary Continue競爭。
+
+### 4. S05A / S05B Path Identity
+
+S05A / S05B **不靠不同主色區分**。
+
+共同使用相同 NodeFF system palette與 geometry。
+
+區分方式固定為：
+
+1. consumer title；
+2. supporting copy；
+3. relation / version label where relevant。
+
+不得：
+
+- S05A整體做成一種品牌色、S05B整體做成另一種品牌色；
+- 只靠 icon或顏色讓 User猜現在是哪條 path；
+- 把 internal `REFINE / REMIX` 當主要 consumer heading。
+
+### 5. S05B Consumer Wording
+
+S05B明確表達：
+
+~~~text
+改成我的版本
+拿這個 App 當底稿，改成你要的版本
+~~~
+
+S05B不是「零修改複製」。
+
+Preview Primary CTA正式鎖定：
+
+~~~text
+S05A → 使用新版
+S05B → 使用我的版本
+~~~
+
+S05B的「我的版本」只代表此次 derivative product semantics，不建立 Phase 1 durable account ownership claim。
+
+### 6. Original / Candidate Version Visual Language
+
+舊 `#19.1 Version Color Management` 的有效內容全部收斂至此。
+
+#### Source / Original
+
+- neutral surface。
+- neutral border。
+- 必須有 consumer文字：`原版` / `來源`。
+- 不使用 Teal selected treatment假裝目前候選版本。
+- 不靠灰色 alone 表達 semantic relation。
+
+#### Candidate / New
+
+- Teal / Aqua border或accent。
+- 必須有 consumer文字：`新版`；S05B可搭配「我的版本」語意。
+- 可使用 very small Yellow `NEW / 新版` energy marker。
+- Yellow不可鋪滿候選 surface。
+- Yellow不可作 warning / error語意。
+
+Version distinction至少同時依賴：
+
+1. version / relation label；
+2. border / accent treatment。
+
+不得只靠 color。
+
+### 7. Button Visual Hierarchy
+
+沿 Design System Button System。
+
+Primary：
+
+- Teal 600 background。
+- White text。
+- radius `12px`。
+- min-height `44px`。
+- Hover → Teal 500。
+- Focus必須 visible。
+- Loading保留原 button geometry與可理解狀態。
+
+S05 Preview：
+
+~~~text
+S05A
+使用新版      = Primary
+再調整        = Secondary
+保留原版      = Tertiary / secondary-low
+
+S05B
+使用我的版本  = Primary
+再調整        = Secondary
+保留原版      = Tertiary / secondary-low
+~~~
+
+`查看原版` / `取消` = Ghost / low emphasis。
+
+`從原版重新調整` 不與三大決策同層，維持 secondary text / nested option。
+
+UI emphasis不得改變 Function capability；Secondary / Tertiary action仍必須清楚可操作。
+
+### 8. Preview Runtime Visual Boundary
+
+> **NodeFF owns preview context; creator App owns its own presentation.**
+
+S05 Preview可以提供克制的 outer context：
+
+- Version label。
+- Neutral container boundary when needed。
+- Candidate Teal / Aqua accent。
+- Decision region。
+
+但不得：
+
+- 強迫 Generated App內部元件改成 NodeFF visual style；
+- 用巨大 NodeFF card-in-card壓縮 Runtime；
+- 插入 inspector / debug / blueprint badge；
+- 讓 NodeFF版本 chrome比 Generated App更搶眼。
+
+Runtime仍是 Preview主要視覺。
+
+### 9. Processing Visual Rules
+
+S05 processing完全沿 O05與 Design System Progress：
+
+- Track：neutral border / soft surface。
+- Fill：Teal → Aqua。
+- completion端可極少量 Yellow energy accent。
+- 有 reliable checkpoints → Stage + checkpoint-derived %。
+- 無 reliable checkpoints → Stage only。
+- 100%只有 actual READY後。
+- %卡住時停在最後真實 checkpoint。
+- 不 fake smooth movement。
+- 不用 elapsed time推估。
+- 不用持續 pulse假裝有進度。
+- 不用巨大 spinner蓋住整頁。
+
+Motion：
+
+- progress / preview transition ≤ `240ms`。
+- READY後立即進 Preview，不為 motion故意延遲。
+
+### 10. Recovery Visual Rules
+
+S05不自行建立第二套 Error / Warning semantic palette。
+
+Semantic recovery palette最終由 O03 / shared Recovery component truth擁有。
+
+S05只鎖以下 visual boundary：
+
+- Brand Yellow不是 Warning / Danger。
+- Composer / processing recovery留在原 host panel geometry。
+- Preview hydration recovery留在 Runtime preview region。
+- Desktop blocking recovery可使用 `radius 20 / elevation 2` lightweight panel / dialog。
+- Mobile依 O03使用 bottom sheet / full-height sheet，safe-area aware。
+- Preservation copy（原 App / draft仍在）視覺優先於 technical code。
+- technical code預設不顯示 consumer UI。
+- severity不得只靠顏色。
+
+### 11. Motion
+
+沿 Design System：
+
+- Hover / control feedback：約 `120ms`。
+- General transition：約 `180ms`。
+- Preview / recovery / completion transition：≤ `240ms`。
+- easing沿 shared system token。
+
+禁止：
+
+- confetti / fireworks。
+- serious recovery bounce。
+- long-running decorative pulse。
+- 為 motion延遲 operation completion。
+
+`prefers-reduced-motion` 必須移除非必要 slide / pulse / flourish；Function state transition不受影響。
+
+### 12. Interaction / Component States
+
+S05共用元件至少需支援：
+
+~~~text
+DEFAULT
+HOVER
+FOCUS_VISIBLE
+PRESSED
+DISABLED
+LOADING where applicable
+ERROR / INVALID where applicable
+SELECTED where applicable
+~~~
+
+Rules：
+
+- Disabled不能只用極低 opacity造成不可讀。
+- Loading不能只靠 spinner。
+- duplicate submit / duplicate decision click依 source Function truth去重 / disable。
+- UI visual state不得自行改 F06 operation semantics。
+
+### 13. Accessibility
+
+High-fi必須滿足：
+
+- touch target ≥ `44 CSS px`。
+- visible focus ring。
+- focus不能造成 layout shift。
+- keyboard order跟 visual hierarchy一致。
+- Composer有明確 accessible label。
+- version / path / selected state不能只靠顏色。
+- Preview READY使用非破壞性 live announcement when appropriate。
+- Recovery blocking surface需正確 focus move / restore。
+- reduced-motion有 fallback。
+- Mobile keyboard不得遮主要 CTA。
+- bottom sheet / full-height sheet尊重 safe-area inset。
+- text / control contrast達 shared Design System accessibility gate。
+
+### 14. Cursor Guardrails
+
+Cursor不得：
+
+- 把 S05A / S05B用不同整頁品牌色當作唯一區分。
+- 把 `REFINE / REMIX`工程字當 Consumer主標題。
+- 把 S05B做成 zero-change copy / ownership flow。
+- 把 S05B Primary CTA改回模糊的 `使用新版`。
+- 把 Source / Candidate只用顏色區分。
+- 把 Yellow當 warning / danger。
+- 把 Preview變成 S06-style side-by-side Compare。
+- 把 Generated App內部重畫成 NodeFF UI。
+- 用 fake progress / smooth time-based %。
+- 為 animation延遲 READY。
+- Recovery時清空可安全保留的 draft / preview context。
+- 產生新的 High-fi visual shadow section與本 Step 3競爭 Current Truth。
+
+### 15. Step 3 Locked Decisions
+
+1. S05採 Focused Creator Workspace visual direction，不做 Builder / IDE視覺。
+2. Neutral / White主導；Teal作 Primary / Focus / Candidate accent；Yellow只作 small energy marker。
+3. Task title visual weight高於 App identity / NodeFF chrome。
+4. Composer沿 shared radius / focus / error / typography tokens，不做 glowing AI prompt box。
+5. S05A / S05B不靠不同主色區分。
+6. Source = Neutral +明確文字；Candidate = Teal / Aqua accent +明確文字。
+7. S05A Primary CTA = **`使用新版`**。
+8. S05B Primary CTA = **`使用我的版本`**。
+9. Preview Runtime保有 Generated App自己的 presentation。
+10. Processing完全沿 O05 truthful checkpoint presentation。
+11. Recovery visual遵守 O03/shared semantic palette，不自行定義第二套 Error / Warning color。
+12. Motion採 `120 / 180 / ≤240ms` restrained system。
+13. Touch / focus / keyboard / live announcement / reduced-motion全部列為 High-fi acceptance gate。
+14. 舊 `#19.1 Version Color Management` 已 superseded；有效規則全部收斂至本 Step 3。
+
+> Step 3：**APPROVED / LOCKED**。下一步：Step 4 — Final Visual Reference Lock。
+
+
 # 21. Review Status
 
-> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED / STEP 3–4 PENDING**
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED / STEP 4 PENDING**
 
-S05 ④B Step 1–2 已完成 User Review 並鎖定。下一步：**Step 3 — Detailed High-fi Visual Rules Lock**。
+S05 ④B Step 1–3 已完成 User Review 並鎖定。下一步：**Step 4 — Final Visual Reference Lock**。
