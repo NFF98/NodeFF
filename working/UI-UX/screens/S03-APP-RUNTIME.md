@@ -367,7 +367,10 @@ Permanent bottom navigation：
 App | 修改 | 分享
 ~~~
 
-- `App`只代表 current destination，不自行加入 reset / scroll-top行為。
+- `App = current S03 Runtime destination, not S01.`
+- `App`只代表目前正在使用的 S03 App / Runtime destination，不自行加入 reset / scroll-top行為，也不是 S01 首頁、App 清單或「建立 App」。
+- Consumer label readability 已於進入 S04 Step 2 前重新檢查；`使用` / `目前 App` 可作未來候選，但目前**不改動已批准的 `App` wording**。
+- 若未來要把 `App` 改成 `使用`、`目前 App` 或其他 consumer label，必須先 reopen S03 Step 1 — Structure Lock，再同步所有引用此 Mobile nav wording 的 Working UI 文件。
 - `修改` → S05。
 - `分享` → O01。
 - `調整結果`不進 permanent nav。

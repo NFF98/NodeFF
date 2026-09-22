@@ -466,6 +466,11 @@ Mobile restore期間沒有 permanent bottom navigation。
 App | 修改 | 分享
 ~~~
 
+Clarification：
+- `App = current S03 Runtime destination, not S01.`
+- 此處引用 S03 已批准的 Mobile nav wording；S04 不另外定義或改名。
+- 若未來 S03 將 `App` 改成 `使用` / `目前 App` 或其他更直覺 consumer label，必須先 reopen S03 Step 1，再同步回 S04。
+
 ### 9. Function Handoff Boundary
 
 Canonical handoff：
