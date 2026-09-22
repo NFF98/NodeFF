@@ -856,9 +856,9 @@ Next：
 > User approved：2026-09-22
 >
 > Approved visual reference：
-> \`working/UI-UX/references/S04-Shared-App-Entry-Highfi-v1.svg\`
+> \`working/UI-UX/references/S04-Shared-App-Entry-Highfi-v1.png\`
 
-![S04 Shared App Entry High-fi v1](../references/S04-Shared-App-Entry-Highfi-v1.svg)
+![S04 Shared App Entry High-fi v1](../references/S04-Shared-App-Entry-Highfi-v1.png)
 
 ### 1. Reference Coverage
 
