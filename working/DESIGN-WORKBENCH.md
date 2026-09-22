@@ -739,3 +739,181 @@ Review目標：
 > **Cross-Screen Consistency Review**
 
 Formal Spec、Backlog / Sprint、Cursor implementation仍維持 HOLD；待 High-fi與 Cursor Build / Operating Model完成後，才執行 pre-Cursor Formal Spec Refresh。
+
+
+---
+
+## PENDING-FUNC-004 — F01 Creation Progress Checkpoint Contract
+
+> Sync status：**WORKBENCH PENDING — USER APPROVED DIRECTION / FUNCTION DELTA NOT YET PROMOTED**
+>
+> 來源：S02 Create Workspace ④B High-fi Review。
+>
+> 影響 Function：F01 Intent Compilation + F00 Experience Shell + O05 Loading / Building / Hydration presentation。
+>
+> Formal Spec：不動；待 Working Function Delta Review閉合後，於 pre-Cursor Formal Spec Refresh一次同步。
+
+### 1. Problem
+
+目前 S02 / O05 已批准：
+
+- 有 reliable checkpoints → `Stage + checkpoint-derived Progress %`
+- 沒有 reliable checkpoints → `Stage only`
+
+但目前 F01 雖已有完整 lifecycle：
+
+~~~text
+ANALYZING
+→ NEEDS_CLARIFICATION / READY_WITH_VISIBLE_ASSUMPTIONS / READY
+→ COMPOSING
+→ VALIDATING
+→ VALIDATED
+~~~
+
+以及 API status / questions / assumptions / validated result，
+
+**尚未正式定義 creation operation 的 canonical checkpoint plan、completed checkpoints、planned checkpoints，以及供 S02 計算 progress_percent 的 Function contract。**
+
+因此 UI 已具備顯示 truthful % 的 presentation rule，但 F01 backend contract 尚未保證每次 creation operation都能提供可量測 work checkpoints。
+
+### 2. Approved Direction
+
+F01 Creation Progress 應補一層 NFF-owned checkpoint contract。
+
+Candidate logical checkpoints：
+
+~~~text
+Intent analyzed
+→ Policy evaluated
+→ Clarification resolved
+→ Capability checked
+→ Blueprint composed
+→ Blueprint validated
+→ Runtime prepared
+~~~
+
+Consumer-facing stage仍使用人話，不暴露上述 internal checkpoint名稱。
+
+實際 operation只納入該次流程真正需要的 checkpoints。
+
+Example：
+
+~~~text
+Fast Path
+planned:
+- Intent analyzed
+- Policy evaluated
+- Capability checked
+- Blueprint composed
+- Blueprint validated
+- Runtime prepared
+
+Clarification Path
+planned:
+- Intent analyzed
+- Policy evaluated
+- Clarification resolved
+- Capability checked
+- Blueprint composed
+- Blueprint validated
+- Runtime prepared
+~~~
+
+### 3. Progress Calculation
+
+Canonical rule：
+
+~~~text
+progress_percent
+= completed_checkpoints / planned_checkpoints * 100
+~~~
+
+Rules：
+
+- % 代表 **work completion**，不是 time remaining。
+- checkpoint plan必須由 Function truth建立，不由 UI自行估算。
+- UI不得使用 elapsed time、animation timer或provider latency推算 %。
+- 已完成 checkpoint才能推進 numerator。
+- 某 checkpoint等待時，%停在最後真實完成值。
+- 100%只在 target ready condition成立後。
+- operation若沒有 reliable checkpoint plan，presentation退回 Stage only。
+
+最終 presentation只有兩條：
+
+~~~text
+reliable checkpoints
+→ Stage + checkpoint-derived Progress %
+
+no reliable checkpoints
+→ Stage only
+~~~
+
+不存在「沒有 reliable checkpoints但仍顯示 %」的第三條規則。
+
+### 4. Ownership Boundary
+
+F01應擁有 creation semantic/compiler lifecycle checkpoints。
+
+F03應繼續擁有 Runtime / hydration execution lifecycle checkpoints。
+
+F00 / O05只負責：
+
+- 將 Function checkpoint projection成 consumer stage。
+- 顯示 completed / planned計算出的 %。
+- 不自行推進 checkpoint。
+- 不自行猜 planned work。
+- 不把 provider等待時間當 work completion。
+
+### 5. Clarification Batching — Confirmed
+
+Clarification UX / Function既有方向確認如下：
+
+~~~text
+每輪最多 3 個最高優先 material questions
+→ User回答
+→ merge answers
+→ re-run Clarification Policy
+→ 若仍有必要問題，再出下一輪最多 3 題
+→ 持續直到所有 required / material unknowns resolved
+~~~
+
+Question priority沿用 F01既有 ranking：
+
+~~~text
+Safety / Money / Permission
+> Execution Blocker
+> High Outcome Divergence
+> Core Business Rule
+> Secondary Preference
+> Cosmetic
+~~~
+
+Important：
+
+- 不是把所有問題固定切成 3 題一組後機械式問完。
+- 每輪答案都可能讓後續 ambiguity消失、產生新問題，或改變 priority。
+- answered question不重問，除非 upstream fact changed。
+- Clarification完成條件不是「問完原始 question list」，而是重新 evaluation後不再有 blocking / material unknown。
+
+此項是對既有 F01 contract的 UX interpretation確認，**目前不需要新增 Function Delta**。
+
+### 6. Next Function Review
+
+後續需獨立執行：
+
+> **F01 Creation Progress Checkpoint Function Delta Review**
+
+Review至少確認：
+
+1. canonical checkpoint schema。
+2. operation開始時 planned checkpoint plan何時凍結／何時可合法重算。
+3. clarification新增 round時 checkpoint plan如何處理。
+4. F01 → F00/S02 的 progress projection interface。
+5. F01 / F03 handoff時 Runtime prepared checkpoint ownership。
+6. cancellation / retry / failure時 checkpoint lifecycle。
+7. Acceptance / Test seeds。
+
+在此 Delta閉合前：
+- S02 High-fi可以設計 presentation位置與 hierarchy；
+- 但不得把未定義的 exact backend progress payload當成已完成 implementation contract。
+
