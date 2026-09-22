@@ -163,7 +163,7 @@ F03 Runtime semantics changed
 | Delta ID | Title | Status | Working Closure | Promotion | Verification |
 |---|---|---|---|---|---|
 | SD-20260922-001 | Runtime Global Loading + Timeout | **APPROVED** | 96800388424929c616f803976d4630561762b923 | PENDING | PENDING |
-| SD-20260922-002 | F01 Creation Progress Checkpoint Contract | **OPEN** | PENDING | PENDING | PENDING |
+| SD-20260922-002 | F01 Creation Progress Checkpoint Contract | **OPEN — DEFERRED TO O05 REVIEW** | PENDING | PENDING | PENDING |
 
 Current counts：
 
@@ -597,3 +597,15 @@ HOLD
 → Backlog / Sprint refresh
 → Cursor implementation
 ~~~
+
+
+---
+
+## SD-20260922-002 — Deferred Review Note
+
+Status：**OPEN — DEFERRED TO O05 HIGH-FI / PROCESSING REVIEW**
+
+- No Working Function contract change yet。
+- No Formal Spec promotion。
+- O05 will first define the cross-flow progress model；after that, each Function owner receives only its own required checkpoint delta。
+- Promotion / Verification remain PENDING。
