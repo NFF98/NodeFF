@@ -661,3 +661,38 @@ Direction A Foundations — APPROVED
 6. Desktop / Mobile final composition。
 7. Ghost Text / suggestion chip visual。
 8. Explore presentation。
+
+
+---
+
+# 25. Visual Direction Validation — Approved 2026-09-22
+
+User 已透過 High-fi Direction A 效果圖確認整體視覺方向可接受。
+
+Approved visual impression：
+
+- **Teal / Green family = 主品牌 anchor。**
+- **Yellow = energy / completion / playful accent。**
+- Gradient方向維持 **Teal → Aqua → Yellow**。
+- 整體仍採 **70% Neutral + 20% Teal + 10% Yellow** 的視覺平衡。
+- 感覺應是 **Clean Creator Canvas + Playful Energy**。
+- UI要乾淨、明亮、有創作感，但不變成高飽和玩具感或 generic AI SaaS。
+- Generated App仍是主角；NodeFF brand chrome不得壓過 App內容。
+
+Visual reference status：
+
+> **APPROVED AS DESIGN DIRECTION REFERENCE — NOT PIXEL-SPEC**
+
+效果圖用來確認品牌氣質、色彩比例、component language、density與整體視覺感受；其中示意 screen / navigation / sample content 不自動成為產品行為或 screen composition Current Truth。
+
+個別 Screen仍必須以：
+- 已批准 Low-fi composition；
+- Cross-Screen Consistency Baseline；
+- 本 Design System；
+- 對應 Fxx Function truth
+
+共同進行 ④B High-fi Review。
+
+Next：
+
+> **S01 — Discover / Start ④B High-fi**
