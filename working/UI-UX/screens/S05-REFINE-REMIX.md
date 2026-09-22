@@ -445,13 +445,16 @@ S03 Current App
 
 User 意義：
 
-> User 以目前看到的 App 為來源，建立一個自己的獨立衍生版本；起始功能可以與來源 App 相同，之後可自行修改、分享與繼續演化，不影響來源 App。
+> User 以目前看到的 App 為底稿，**至少提出一個實際修改需求**，產生自己的衍生版本；不是「零修改複製」。來源 App 不受影響。
 
 Consumer wording：
 
 ~~~text
 改成我的版本
+拿這個 App 當底稿，改成你要的版本
 ~~~
+
+S05B 必須要求 User 至少描述一個實際改動；若沒有任何有效修改，不建立 identical fork / self-lineage，也不把「零修改複製」包裝成 Remix 成功。
 
 Internal relation 可仍為 `REMIX`，但一般 User 不需要看到 `REMIX` 這個工程字。
 
@@ -584,6 +587,29 @@ S05 current state
 - 改變 source / child selection。
 - 把 User 丟回新的 S05 session。
 
+### Returnable Inspection Context — Mandatory
+
+User 從 S05 暫時進 S03 查看原版時，S03 必須視為 **returnable inspection context**，不是新的正常 S03 session。
+
+Canonical rule：
+
+~~~text
+S05 current session
+→ 查看原版
+→ S03 source App inspection context
+→ 返回修改畫面 / 返回新版預覽
+→ 回到原本同一個 S05 session
+~~~
+
+在此 inspection context 中：
+
+- 必須明確顯示返回既有 S05 session 的 action：
+  - Composer來源 → `返回修改畫面`
+  - Preview來源 → `返回新版預覽`
+- S03 正常的 Modify / Remix entry **不得建立第二個 S05 session**。
+- 正常 Modify / Remix entry 要採隱藏、disabled、或導回既有 session，**實際 presentation 留到 S03 reopen 時決定**。
+- 此處只鎖 behavior：不得 duplication session，不得丟失 draft / preview context。
+
 ## 20.7 Navigation Boundary
 
 S05A / S05B 都是 focused creation-change workspace：
@@ -609,6 +635,8 @@ S05A / S05B 都是 focused creation-change workspace：
 10. S05 不做 S06-style correction comparison；不把 correction semantics混入 S05。
 11. S05 不承擔「建立全新 App」；全新 App creation仍走 S01 → S02 → S03。
 12. S05 不繼承 S03 permanent navigation。
+13. S05B「改成我的版本」必須包含至少一個有效修改需求；Phase 1 不支援「零修改複製成我的版本」。
+14. 從 S05 查看原版時，S03 進入 returnable inspection context；不得由正常 Modify / Remix entry建立第二個 S05 session。
 
 > Step 1：**APPROVED / LOCKED**。下一步：Step 2 — Geometry + Visual Hierarchy Lock。
 
@@ -839,7 +867,47 @@ Rules：
 - CTA不得以 sticky方式遮住 Generated App controls。
 - 若 Generated App本身有 bottom controls，S05需保留足夠下方 spacing / safe area。
 
-### 12. Responsive / Cross-state Consistency
+### 12. Recovery Geometry
+
+S05 failure 必須在目前 host geometry內承接，不建立新的 error route。
+
+#### Composer / Processing Failure
+
+Desktop：
+
+- Recovery直接承接原本約 `640–720px` 的中央 Composer / processing工作區。
+- 可使用 host panel內 blocking state，或 O03允許的 centered lightweight blocking panel。
+- 不切換成獨立 error page。
+- 原 change draft / clarification / assumption context保留。
+- 原 App仍可安全返回。
+
+Mobile：
+
+- 依 O03 severity使用 bottom sheet / full-height recovery sheet。
+- 不把 User送到另一個 route。
+- 保留目前 S05A / S05B path identity與 draft。
+
+#### Preview Hydration Failure
+
+- Recovery取代 **Runtime preview region**，不是把整個 S05變成 error page。
+- Preview decision context仍保留可恢復資訊。
+- 原版仍安全存在。
+- Retry / Keep Previous / Return Original等 action只依 O03 / F12 truth顯示。
+
+#### Preservation Rule
+
+Recovery前後都必須保留：
+
+- source App reference。
+- S05A / S05B path identity。
+- change draft。
+- resolved clarification / assumption context（可安全保留者）。
+- preview child reference（若已生成且可安全保留）。
+- return target。
+
+Recovery geometry只決定呈現位置，不改寫 O03 / F12的 retry eligibility與 recovery semantics。
+
+### 13. Responsive / Cross-state Consistency
 
 - S05A / S05B 使用相同 geometry system。
 - Composer state偏窄、focused。
@@ -849,7 +917,7 @@ Rules：
 - `查看原版` 從 Preview返回時叫 **`返回新版預覽`**。
 - 返回後原 S05 draft / state / preview context保持不變。
 
-### 13. Step 2 Locked Decisions
+### 14. Step 2 Locked Decisions
 
 1. Desktop Composer container `960–1080px`；Composer column `640–720px`。
 2. Desktop Composer不做 split pane / sidebar。
@@ -863,6 +931,10 @@ Rules：
 10. Mobile Preview Runtime優先，CTA直向堆疊。
 11. **Mobile CTA order固定：使用新版 → 再調整 → 保留原版。**
 12. S05A / S05B geometry共用，但 consumer meaning與 wording維持分離。
+13. Composer / processing failure在原 `640–720px` 中央工作區承接 Recovery，不換頁。
+14. Preview hydration failure以 Recovery取代 Runtime preview region，不把整個 S05變 error page。
+15. Desktop Recovery可用 centered lightweight blocking panel / host panel state；Mobile依 O03使用 bottom sheet / full-height recovery sheet。
+16. Recovery期間原版與可安全保留的 draft / preview context必須保留。
 
 > Step 2：**APPROVED / LOCKED**。下一步：Step 3 — Detailed High-fi Visual Rules Lock。
 
