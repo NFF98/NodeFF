@@ -163,11 +163,12 @@ F03 Runtime semantics changed
 | Delta ID | Title | Status | Working Closure | Promotion | Verification |
 |---|---|---|---|---|---|
 | SD-20260922-001 | Runtime Global Loading + Timeout | **APPROVED** | 96800388424929c616f803976d4630561762b923 | PENDING | PENDING |
+| SD-20260922-002 | F01 Creation Progress Checkpoint Contract | **OPEN** | PENDING | PENDING | PENDING |
 
 Current counts：
 
 ~~~text
-OPEN = 0
+OPEN = 1
 REVIEWED = 0
 APPROVED but not PROMOTED = 1
 PROMOTED but not VERIFIED = 0
@@ -349,6 +350,105 @@ PENDING
 
 ---
 
+# 7.1 SD-20260922-002 — F01 Creation Progress Checkpoint Contract
+
+## Delta ID
+
+SD-20260922-002
+
+## Title
+
+F01 Creation Progress Checkpoint Contract
+
+## Change Class
+
+MATERIAL
+
+## Origin / Reason
+
+來源為 S02 Create Workspace ④B High-fi Review，以及：
+
+- `working/DESIGN-WORKBENCH.md`
+- `PENDING-FUNC-004 — F01 Creation Progress Checkpoint Contract`
+
+S02 / O05 已批准 consumer presentation：
+
+~~~text
+reliable checkpoints
+→ Stage + checkpoint-derived Progress %
+
+no reliable checkpoints
+→ Stage only
+~~~
+
+但目前 F01 Working contract尚未正式閉合 creation operation 的：
+
+- canonical checkpoint schema；
+- planned / completed checkpoints；
+- checkpoint plan freeze / legal recalculation；
+- clarification round對 checkpoint plan的影響；
+- F01 → F00/S02 progress projection interface；
+- F01 / F03 Runtime-prepared handoff ownership；
+- cancel / retry / failure lifecycle；
+- Acceptance / Test。
+
+因此 UI presentation已鎖定，但 backend / Function contract仍有 Material gap；不得讓 Cursor自行發明 payload或 checkpoint semantics。
+
+## Canonical Working Source
+
+- `working/DESIGN-WORKBENCH.md` — PENDING-FUNC-004
+- future reviewed owner：`working/functions/F01-INTENT-COMPILATION.md`
+- collaborators：F00 + O05 / S02 presentation
+
+## Provisional Formal Targets
+
+最終 targets待 Function Delta Review確認；目前至少預期影響：
+
+1. `spec/functions/F01-INTENT-COMPILATION.md`
+2. `spec/functions/F00-EXPERIENCE-SHELL.md`（若 projection interface需 formalize）
+3. `spec/shared/ACCEPTANCE-TEST-REGISTRY.json`
+
+若 Review發現 Data / API / Evidence registry也需變更，必須補入本筆 Delta後才能 promotion。
+
+## Status
+
+**OPEN**
+
+Reason：
+
+- User已批准產品 / UX direction。
+- Function Delta Review尚未執行。
+- 尚未形成 closed F01 Working Current Truth。
+- Formal Spec維持 frozen。
+
+## Working Approval / Closure Commit
+
+PENDING
+
+## Promotion Commit
+
+PENDING
+
+## Verification Evidence
+
+PENDING
+
+## Pre-Cursor Requirement
+
+本 Delta必須完成：
+
+~~~text
+OPEN
+→ REVIEWED
+→ APPROVED
+→ PROMOTED
+→ VERIFIED
+~~~
+
+Cursor implementation不得以 S02 High-fi mockup自行推導 backend progress checkpoint contract。
+
+---
+
 # 8. Pre-Cursor Gate Query
 
 正式 Cursor implementation 前，必須以本 Register 執行：
@@ -476,12 +576,24 @@ Runtime Global Loading + Timeout
 = Formal promotion pending
 = Verification pending
 
-NEXT
-→ UI/UX Cross-Screen Consistency Review
+SD-20260922-002
+F01 Creation Progress Checkpoint Contract
+= OPEN
+= Function Delta Review pending
+= Formal promotion pending
+= Verification pending
+
+CURRENT UI/UX
+→ Cross-Screen Review complete
+→ High-fi Direction A approved
+→ S01–S03 ④B Step 1–4 closed
+→ S04 ④B next
 
 HOLD
-→ High-fi until Cross-Screen gate allows
-→ Formal Spec Refresh until planned pre-Cursor refresh
+→ F01 Creation Progress Function Delta closure
+→ remaining S04–S06 / O01–O05 ④B High-fi
+→ Cursor Build / Operating Model Review
+→ Formal Spec Refresh
 → Backlog / Sprint refresh
 → Cursor implementation
 ~~~
