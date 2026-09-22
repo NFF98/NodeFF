@@ -374,6 +374,23 @@ User 已確認：
 6. 新版完成直接進 Preview，三個主要決策 CTA：**保留原版 / 再調整 / 使用新版**。
 7. 「再調整」預設基於最新 Preview child，並提供「從原版重新調整」secondary option。
 
+# 19.1 ④B Version Color Management
+
+User confirmed during ④B review：
+
+- **Refine / Remix 共用同一個 S05 Workspace**；不做兩套 UI。
+- relation semantics 必須透過 **relation label** 明確顯示，不能只靠顏色。
+- version visual marker 同時採 **border / accent color management**：
+  - **Source / Original / Before**：Neutral treatment；使用 neutral border / surface，代表原版與來源。
+  - **Candidate / New / After**：Teal / Aqua treatment；使用 Teal / Aqua border / accent，代表新版／目前候選版本。
+  - **Yellow**：只作 small `NEW` / changed / energy marker；不得作整個新版 surface 的主色或把新版誤表達成 warning。
+- 原版與新版的區分必須同時依賴：
+  1. relation label；
+  2. version label（原版／新版等 consumer copy）；
+  3. border / accent visual marker。
+- Accessibility：版本關係不得只靠顏色辨識。
+- 這套 version color language 與 `working/UI-UX/DESIGN-SYSTEM.md` 的 Version / Compare Visual Language 一致。
+
 # 20. Review Status
 
 > **LOW_FI_DIRECTION_APPROVED — HIGH_FI_PENDING**
