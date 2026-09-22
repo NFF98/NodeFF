@@ -1,6 +1,6 @@
 # Phase 1 Screen Inventory
 
-> 狀態：WORKING UI/UX — LOW-FI + CROSS-SCREEN APPROVED / HIGH-FI DIRECTION A VISUALLY APPROVED / S01–S02 ④B HIGH-FI APPROVED / S03 ④B NEXT
+> 狀態：WORKING UI/UX — LOW-FI + CROSS-SCREEN APPROVED / HIGH-FI DIRECTION A APPROVED / S01–S03 ④B HIGH-FI APPROVED / S04 ④B NEXT
 >
 > 目的：管理 Phase 1 的 Screen / Surface 地圖、Screen-level UX Review 狀態與畫面之間的關係。
 >
@@ -24,7 +24,7 @@ Phase 1 目前採 **6 個主要 Screen / Surface + 5 類 Overlay / State**。
 |---|---|---|---|---|
 | S01 | Discover / Start | 從想法或靈感開始 Create | F00 | **④A LOW_FI_APPROVED / ④B HIGH_FI_APPROVED** |
 | S02 | Create Workspace | 分析、補充必要資訊、確認假設並生成 App | F00 + F01 | **④A LOW_FI_APPROVED / ④B HIGH_FI_APPROVED** |
-| S03 | App / Runtime | 使用生成 App，進入 Share / Remix / Correct | F00 + F03 | **LOW_FI_DIRECTION_APPROVED — FUNCTION_DELTA_CLOSED** |
+| S03 | App / Runtime | 使用生成 App，進入 Share / Remix / Correct | F00 + F03 | **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / ④B HIGH_FI_APPROVED** |
 | S04 | Shared App Entry / Restore | 從分享連結恢復並立即使用 App | F05 + F00 | **LOW_FI_DIRECTION_APPROVED** |
 | S05 | Refine / Remix Workspace | 修改既有 App、Preview child、決定是否採用 | F06 + F00 | **LOW_FI_DIRECTION_APPROVED** |
 | S06 | Correction Compare | 比較修正前後並 Accept / Keep / Adjust | F16 + F00 | **LOW_FI_DIRECTION_APPROVED** |
@@ -84,6 +84,96 @@ Phase 1 UI/UX 必須固定走以下 6 步，不得跳步、混步或提前升格
 - Working UI/UX 未完成 Cross-Screen Review，不得詢問 Spec promotion。
 - 顏色 / 效果 / 風格屬於 **④B High-fi**，不得在 ④A Low-fi 當成 approval blocker。
 - Screen-level visual design 不得自行改寫 Function behavior semantics。
+
+## 5.1 ④B High-fi Mandatory Step Gates
+
+每一個 Screen / Overlay 的 ④B High-fi 必須逐層鎖定並**當下寫回對應 Working 文件 + Git commit**；只在 Chat 中口頭確認不算完成。
+
+固定流程：
+
+~~~text
+Step 1 — Structure Lock
+→ Step 2 — Geometry + Visual Hierarchy Lock
+→ Step 3 — Detailed High-fi Visual Rules Lock
+→ Step 4 — Final Visual Reference Lock
+→ Working Baseline
+~~~
+
+### Step 1 — Structure Lock
+
+至少鎖定：
+- screen regions / sections；
+- navigation / header / footer / bottom nav；
+- primary / secondary CTA placement；
+- conditional surfaces；
+- overlay relationship；
+- Function handoff入口；
+- 哪些 element 明確不存在。
+
+### Step 2 — Geometry + Visual Hierarchy Lock
+
+至少鎖定：
+- Header / nav / panel / content主要尺寸範圍；
+- max-width / padding / gap / content flow；
+- Desktop / Mobile composition；
+- attention hierarchy；
+- fixed / sticky / scroll behavior；
+- safe-area / keyboard / bottom-control collision rule；
+- responsive collapse / stacking。
+
+### Step 3 — Detailed High-fi Visual Rules Lock
+
+至少鎖定：
+- Design System token套用；
+- color / border / accent / surface usage；
+- typography hierarchy；
+- radius / elevation；
+- component states；
+- hover / focus / pressed / disabled / loading；
+- progress / motion / reduced-motion；
+- overlay visual family；
+- accessibility；
+- Cursor visual guardrails；
+- UI ↔ Function eligibility / state truth不得由 Screen猜測。
+
+### Step 4 — Final Visual Reference Lock
+
+必須：
+1. User明確批准 final Desktop / Mobile visual；
+2. Approved PNG存入 `working/UI-UX/references/`；
+3. Screen / Overlay文件 embed canonical image path；
+4. 明文記錄 image boundary：圖片不覆蓋文字 contract / Fxx Function truth；
+5. 更新 Screen Inventory status；
+6. 有 commit可追溯。
+
+### Optional Step 4.5 — Additional Layer Detail
+
+若 Step 4後發現 Cursor仍需要額外一層細節，例如：
+- component anatomy；
+- complex state matrix；
+- interaction timeline；
+- overlay stacking；
+- animation frame / timing；
+- data-to-UI mapping；
+- capability-specific responsive contract；
+
+則新增：
+
+~~~text
+Step 4.5 — <Layer Name> Lock
+~~~
+
+Rules：
+- Step 4.5不是偷改已批准 Step 1–4。
+- 若它改變既有 Structure / Geometry / Visual Rule / Function semantics，必須 reopen對應 Step，而不是只追加 4.5。
+- 若涉及 Function behavior，回相關 Fxx Working Delta Review。
+- Step 4.5同樣必須 User批准 + Git commit。
+
+### Hard Gate
+
+> **沒有 Step 1–4（以及需要時的 Step 4.5）GitHub Current Truth，不得把該 Screen / Overlay交給 Cursor實作。**
+
+每一 Step 的 approved內容必須落在該 Screen / Overlay canonical Working文件；不能只依 chat history或只依 final mockup。
 
 每個 Screen 的 Low-fi 至少確認：
 
@@ -228,7 +318,7 @@ User 已確認目前策略：
 - 先完成：
   1. F00/F03/F12 Runtime Loading + Timeout Working Function Delta Review（**完成：2026-09-22**）；
   2. Cross-Screen Consistency Review（**完成：2026-09-22**）；
-  3. High-fi Design System / ④B High-fi（**NEXT**）；
+  3. High-fi Design System / ④B High-fi（**IN PROGRESS — S01–S03 APPROVED / S04 NEXT**）；
   4. Cursor Build / Operating Model討論。
 - **正式 Cursor 開發前**，再做一次短期 Formal Spec Refresh，把最後批准的 Working truth一次同步到 implementation contract。
 - 在該 refresh前，Cursor implementation維持 HOLD。
@@ -237,8 +327,23 @@ User 已確認目前策略：
 
 下一個 Review：
 
-> **S03 — App / Runtime ④B High-fi — NEXT**
+> **S04 — Shared App Entry / Restore ④B High-fi — NEXT**
 
-S01–S02 Desktop / Mobile ④B High-fi 已由 User 確認並記錄；S02 approved visual reference：`working/UI-UX/references/S02-Create-Workspace-Highfi-v1.png`。下一步依固定合作流程進 S03：**先鎖結構 → 再鎖視覺 → 最後才出完整圖**。
+已完成 ④B High-fi Working baseline：
 
-Formal Spec、Backlog / Sprint 與 Cursor implementation 仍維持 HOLD。
+- S01 — Discover / Start：**Step 1–4 CLOSED**
+  - reference：`working/UI-UX/references/S01-Discover-Start-Highfi-v1.png`
+- S02 — Create Workspace：**Step 1–4 CLOSED**
+  - reference：`working/UI-UX/references/S02-Create-Workspace-Highfi-v1.png`
+- S03 — App / Runtime：**Step 1–4 USER APPROVED**
+  - text contract已落入 `working/UI-UX/screens/S03-APP-RUNTIME.md`
+  - intended reference path：`working/UI-UX/references/S03-App-Runtime-Highfi-v1.png`
+  - repository binary packaging verification仍需完成，才可標 artifact packaging VERIFIED。
+
+後續 S04–S06、O01–O05 全部固定使用第 5.1 節流程：
+
+> **Step 1 鎖結構 → Step 2 鎖 Geometry + Visual Hierarchy → Step 3 鎖 Detailed High-fi Visual Rules → Step 4 鎖圖 → 必要時 Step 4.5 鎖其他 Layer Detail。**
+
+每一步都必須在 User批准後**立即更新對應 Working文件並 commit**，不得等整頁做完才補，也不得只留在 Chat。
+
+Formal Spec、Backlog / Sprint 與 Cursor implementation仍維持 HOLD；待全部 ④B完成、Cursor Build / Operating Model Review完成後，再執行 pre-Cursor Formal Spec Refresh。
