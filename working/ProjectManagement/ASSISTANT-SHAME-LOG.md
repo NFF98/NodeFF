@@ -12,7 +12,7 @@
 
 | Count | Lost Time / Incident | Total Lost Time |
 |---:|---:|---:|
-| 3 | 45 min | **135 min / 2 hr 15 min** |
+| 4 | 45 min | **180 min / 3 hr** |
 
 ---
 
@@ -23,6 +23,7 @@
 | SHAME-001 | 2026-09-22 | S01–S03 High-fi 無腦重複記錄 / shadow copy | S01、S02、S03 的 High-fi Current Truth 被重複寫成多套章節，例如原 High-fi section、Detailed Contract、Canonical Summary 同時存在，違反單一 Current Truth，增加 User review 與清理成本。 | 對 S01→S02→S03 全部去重，把唯一有效內容 merge 回單一 Step 1–4 canonical contract；並在 Inventory 加入 Single-Source High-fi Rule。 | 45 min | CORRECTED |
 | SHAME-002 | 2026-09-22 | 第一次胡說八道：錯誤宣稱 GitHub connector 無法上傳 binary image | 在 S04 Step 4 圖片處理時，沒有先以 S01–S03 repository truth 驗證現有 PNG 寫入方式，就把一次安全層/工具失敗誤解成「GitHub connector 對原始二進位圖檔上傳被安全層擋下」，並進一步改用 SVG substitute。這個結論沒有事實基礎。 | 回頭檢查 repo tree，確認 S01–S03 都是真正 binary PNG；撤回錯誤說法。 | 45 min | CORRECTED |
 | SHAME-003 | 2026-09-22 | 第二次胡說八道：以 SVG 代替批准 PNG，還把它當成完成 | 明明 NodeFF 已有 S01–S03 真 PNG reference 的 precedent，卻建立 `S04-Shared-App-Entry-Highfi-v1.svg` 作替代，並宣稱 S04 Step 4 已正確寫入 GitHub。這違反「先查 GitHub Current Truth、不要假裝完成」的協作要求。 | 刪除 S04 SVG；建立真正 `working/UI-UX/references/S04-Shared-App-Entry-Highfi-v1.png`；同步修正 S04 Step 4 reference；重新驗證 repo tree。 | 45 min | CORRECTED |
+| SHAME-004 | 2026-09-23 | S05 寫入 + S04 PNG 修復指令卡住超過 10 小時仍未完成 | 將「寫入 S05 Step 4」與「修復 S04 PNG」混成長鏈工具嘗試，反覆轉檔／檢查／搬運，沒有在明確時間上限內停止失敗路徑，造成實際 wall-clock 延遲超過 10 小時。 | 之後 artifact 寫入採短鏈：先單獨完成文字 commit，再單獨處理每張 binary；每條工具鏈失敗 2 次即停止換路徑；任何單一工作若 10 分鐘內未收斂，立即回報阻塞點，不再無限試。 | 45 min | OPEN / PROCESS FIX |
 
 ---
 
@@ -32,9 +33,10 @@
 SHAME-001  45 min
 SHAME-002  45 min
 SHAME-003  45 min
+SHAME-004  45 min
 -----------------
-TOTAL     135 min
-          2 hr 15 min
+TOTAL     180 min
+          3 hr
 ~~~
 
 ---
@@ -65,10 +67,15 @@ TOTAL     135 min
    - 任何新的同類失誤，按 User 指定規則追加到本表。
    - 目前基準：每件 45 分鐘，直到 User 另行修改。
 
+7. **Hard stop for stuck tool chains**
+   - Artifact 與文字更新拆開執行，不混成一條長鏈。
+   - 同一路徑失敗 2 次即換方法，不重複盲試。
+   - 單一工作 10 分鐘內未收斂就停止並明確回報阻塞點。
+
 ---
 
 ## Current Status
 
-> **3 incidents / 135 minutes lost.**
+> **4 incidents / 180 minutes lost.**
 
 本表為 Working Project Management 紀錄，不屬 Formal Spec。
