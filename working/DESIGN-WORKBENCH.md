@@ -929,3 +929,123 @@ User confirmed：
 - After O05 review, return to each semantic owner (F01 / F05 / F06 / F16 / F03 etc.) to add only the Function-specific checkpoint contract actually needed。
 - Formal Spec remains frozen。
 
+
+
+---
+
+## 新主題：LLM-generated App Reliability — Model Proposal ≠ READY Truth
+
+> 來源：2026-09-23 S04 / S05 artifact pipeline 事故檢討。
+>
+> 狀態：WORKING DESIGN INPUT。Formal Spec 維持 freeze；優先帶入後續 **F00 / F03 Runtime Loading + Timeout Function Delta Review**。
+
+### 核心問題
+
+本次 artifact pipeline 暴露一個對 NodeFF Runtime 同樣重要的風險：
+
+> **「模型說完成」不等於「系統真的完成」。**
+
+LLM 可以產生合理-looking output，也可能在工具失敗、validation 不完整、artifact 不可用時仍誤判為 success。
+
+因此 NodeFF 不可把 LLM 自己的 completion / confidence 當成 App READY truth。
+
+### 核心原則
+
+> **LLM = Proposal Engine，不是 Truth Engine。**
+
+LLM 的責任是：
+
+- 理解 Intent；
+- 提出 LegoSpec / Blueprint；
+- 在允許範圍內做 semantic refinement；
+- 必要時提出 recovery / clarification 建議。
+
+LLM 不得單方面宣告：
+
+- Blueprint 合法；
+- Runtime 可執行；
+- Capability 可用；
+- App 已 READY；
+- 使用者要求已真正完成。
+
+### 建議 Runtime Gate
+
+~~~text
+Prompt / Intent
+→ LLM proposes Blueprint
+→ Schema Validate
+→ Semantic / Reference Validate
+→ Policy / Capability Validate
+→ Dry-run / Runtime Validate
+→ Acceptance / Health Check
+→ READY
+~~~
+
+只有 deterministic / independently verifiable gate 全部通過，才可進 READY。
+
+### 五個不可妥協 Guardrails
+
+1. **Bounded Retry**
+   - 相同 failure path 只允許有限次 retry。
+   - 不允許 LLM 無限自我修正／無限工具重試。
+
+2. **Hard Timeout**
+   - Compiler / Hydration / Runtime / External capability 必須有 timeout budget。
+   - Timeout 後進 Recovery State，不繼續「再等等」。
+
+3. **Deterministic Validation**
+   - JSON Schema / Zod。
+   - Component Registry reference。
+   - state / binding / action reference。
+   - capability / permission / compatibility。
+   - resource / cost / loop guard。
+   - 以上由可重現程式規則判定，不由 LLM 自評。
+
+4. **Independent READY Gate**
+   - Model output complete ≠ App READY。
+   - 至少需通過 Contract + Runtime mount / hydration + required health checks。
+
+5. **Observable Failure Reason**
+   - Internal system保留可診斷 failure reason / checkpoint。
+   - Consumer只看到 humanized recovery message + preserved context + next action。
+   - 不因錯誤而假裝成功。
+
+### Success Truth
+
+~~~text
+LLM: "完成"
+      ↓
+不算 READY
+
+Schema PASS
++ Contract PASS
++ Capability PASS
++ Runtime / Hydration PASS
++ Required Interaction / Health PASS
+      ↓
+READY
+~~~
+
+### 對現有四層的暫時影響
+
+此項先不重構 Layers，但後續 Review 必須確認：
+
+- Layer 2 Semantic Compiler：只提出 Blueprint / semantic proposal。
+- Layer 3 Contract：負責 deterministic contract validation / enforceable truth。
+- Layer 4 Runtime：負責真正 execution / hydration / runtime health。
+- Experience Shell / O03 / O05：負責 timeout、checkpoint、recovery presentation。
+
+### 待 Review
+
+後續 **F00 / F03 Runtime Loading + Timeout Function Delta Review** 至少要明確決定：
+
+- retry count / retry eligibility；
+- compiler timeout；
+- hydration timeout；
+- runtime health check；
+- READY gate；
+- failure checkpoint；
+- preserved context；
+- consumer recovery action。
+
+> Working principle：**Never trust model-declared success. Trust independently verified state.**
