@@ -2,7 +2,7 @@
 
 > Overlay ID：O02
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED / STEP4 NEXT**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
 >
 > Phase：Phase 1
 >
@@ -278,7 +278,7 @@ User 已確認：
 > - Step 1 — Structure Lock ✅
 > - Step 2 — Geometry + Visual Hierarchy Lock ✅
 > - Step 3 — Detailed High-fi Visual Rules Lock ✅
-> - Step 4 — Final Visual Reference Lock — NEXT
+> - Step 4 — Final Visual Reference Lock ✅
 
 ## Step 1 — Structure Lock ✅
 
@@ -851,12 +851,41 @@ Rules：
 
 > Step 3：**APPROVED / LOCKED**。下一步：Step 4 — Final Visual Reference Lock。
 
+## Step 4 — Final Visual Reference Lock ✅
+
+> Approved by User：2026-09-23
+>
+> Step 4：**APPROVED / LOCKED**
+>
+> Approved visual：
+>
+> ![O02 Correction Composer High-fi v1](../references/O02-Hi-FI-v1.png)
+>
+> Canonical path：
+>
+> `working/UI-UX/references/O02-Hi-FI-v1.png`
+>
+> Repository PNG blob SHA：
+>
+> `6101290c686673e192af583805c6fdde70599bf0`
+
+### Reference Boundary
+
+- 圖片鎖定 Correction Composer 的 Desktop / Mobile composition、input hierarchy、validation / submit presentation。
+- sample correction text只作 visual example，不自動成為 F16 requirement。
+- Correction semantics、required fields、submit lifecycle與 processing truth仍以 Step 1–3 + F16 / O05為 authority。
+- 圖片不得新增 technical metadata或另一套 processing model。
+- Step 1–3 textual contract + Design System + Fxx Function truth優先於圖片生成 / rendering誤差。
+- 此 PNG 為本 Screen / Overlay 唯一 canonical High-fi visual reference；後續若要取代，必須 reopen Step 4。
+
+> Step 4：**APPROVED / LOCKED**。
+
 # 17. Review Status
 
-> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED — STEP4 NEXT**
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
 
-O02 ④A Low-fi與④B Step 1–3已完成 User Review。
+O02 ④A Low-fi與④B Step 1–4已完成 User Review並鎖定。
 
-下一步：**O02 ④B Step 4 — Final Visual Reference Lock**。
+下一步：**Final Cross-Screen High-fi Review**。
 
 Formal Spec、Backlog / Sprint、Cursor implementation維持 HOLD。

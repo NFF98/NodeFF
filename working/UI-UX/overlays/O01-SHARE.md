@@ -2,7 +2,7 @@
 
 > Overlay ID：O01
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED / STEP4 NEXT**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
 >
 > Phase：Phase 1
 >
@@ -251,7 +251,7 @@ User 已確認：
 > - Step 1 — Structure Lock ✅
 > - Step 2 — Geometry + Visual Hierarchy Lock ✅
 > - Step 3 — Detailed High-fi Visual Rules Lock ✅
-> - Step 4 — Final Visual Reference Lock — NEXT
+> - Step 4 — Final Visual Reference Lock ✅
 
 ## Step 1 — Structure Lock ✅
 
@@ -901,12 +901,41 @@ Rules：
 
 > Step 3：**APPROVED / LOCKED**。下一步：Step 4 — Final Visual Reference Lock。
 
+## Step 4 — Final Visual Reference Lock ✅
+
+> Approved by User：2026-09-23
+>
+> Step 4：**APPROVED / LOCKED**
+>
+> Approved visual：
+>
+> ![O01 Share High-fi v1](../references/O01-Hi-FI-v1.png)
+>
+> Canonical path：
+>
+> `working/UI-UX/references/O01-Hi-FI-v1.png`
+>
+> Repository PNG blob SHA：
+>
+> `c7776fb726674bf43afbb25f8d8eb3a246a816aa`
+
+### Reference Boundary
+
+- 圖片鎖定 Desktop dialog / Mobile bottom sheet、CREATING / READY / action hierarchy與 privacy-copy visual placement。
+- sample URL / App identity只作 presentation example。
+- Share semantics、retryability、Copy/System Share capability仍由 F05 / F12與 Step 1–3文字 contract擁有。
+- 圖片不得被解讀為分享 Runtime inputs / results / mutable state。
+- Step 1–3 textual contract + Design System + Fxx Function truth優先於圖片生成 / rendering誤差。
+- 此 PNG 為本 Screen / Overlay 唯一 canonical High-fi visual reference；後續若要取代，必須 reopen Step 4。
+
+> Step 4：**APPROVED / LOCKED**。
+
 # 18. Review Status
 
-> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED — STEP4 NEXT**
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
 
-O01 ④A Low-fi與④B Step 1–3已完成 User Review。
+O01 ④A Low-fi與④B Step 1–4已完成 User Review並鎖定。
 
-下一步：**O01 ④B Step 4 — Final Visual Reference Lock**。
+下一步：**Final Cross-Screen High-fi Review**。
 
 Formal Spec、Backlog / Sprint、Cursor implementation維持 HOLD。

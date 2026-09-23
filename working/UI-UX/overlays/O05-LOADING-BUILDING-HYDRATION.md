@@ -2,7 +2,7 @@
 
 > Overlay / State ID：O05
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED / STEP4 NEXT**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
 >
 > Phase：Phase 1
 >
@@ -405,7 +405,7 @@ User 已確認：
 > - Step 1 — Structure Lock ✅
 > - Step 2 — Geometry + Visual Hierarchy Lock ✅
 > - Step 3 — Detailed High-fi Visual Rules Lock ✅
-> - Step 4 — Final Visual Reference Lock — NEXT
+> - Step 4 — Final Visual Reference Lock ✅
 
 ## Step 1 — Structure Lock ✅
 
@@ -1154,13 +1154,43 @@ Required：
 
 > Step 3：**APPROVED / LOCKED**。下一步：Step 4 — Final Visual Reference Lock。
 
+## Step 4 — Final Visual Reference Lock ✅
+
+> Approved by User：2026-09-23
+>
+> Step 4：**APPROVED / LOCKED**
+>
+> Approved visual：
+>
+> ![O05 Processing / Loading System High-fi v1](../references/O05-Hi-FI-v1.png)
+>
+> Canonical path：
+>
+> `working/UI-UX/references/O05-Hi-FI-v1.png`
+>
+> Repository PNG blob SHA：
+>
+> `9c1476154f4f0d0d12f1b80d907b78e137731494`
+
+### Reference Boundary
+
+- 圖片鎖定 Workspace / Restore / Runtime / Overlay四種 processing host family與 representative states。
+- Determinate / Indeterminate / Long Wait / Completion truth仍以 Step 1–3 + Source Function contract為 authority。
+- 正常0–99% = Teal → Aqua；Yellow只在 actual 100% / ready / committed後作小面積 completion accent。
+- 圖片中的 sample % / stage只作 presentation example，不自動成為 checkpoint semantics。
+- S03 processing仍是 App可見的 in-place Runtime layer；不得反向解讀為 full-screen Loading。
+- Step 1–3 textual contract + Design System + Fxx Function truth優先於圖片生成 / rendering誤差。
+- 此 PNG 為本 Screen / Overlay 唯一 canonical High-fi visual reference；後續若要取代，必須 reopen Step 4。
+
+> Step 4：**APPROVED / LOCKED**。
+
 # 23. Review Status
 
-> **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED — STEP4 NEXT**
+> **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
 
-O05 的 Low-fi presentation direction、Runtime Function Delta、Cross-Screen Review與④B Step 1–3已由 User確認。
+O05 的 Low-fi presentation direction、Runtime Function Delta、Cross-Screen Review與④B Step 1–4已由 User確認。
 
-下一步：**O05 ④B Step 4 — Final Visual Reference Lock**。
+下一步：**Final Cross-Screen High-fi Review**。
 
 `SD-20260922-002 — F01 Creation Progress Checkpoint Contract` 已完成獨立 Function Delta closure；O05仍只承接 presentation，不成為 Function semantic owner。
 

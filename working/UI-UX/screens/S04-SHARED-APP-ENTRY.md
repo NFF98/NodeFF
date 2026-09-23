@@ -854,13 +854,13 @@ Next：
 ## Step 4 — Final Visual Reference Lock ✅
 
 
-> **PNG Reference Repair Record — 2026-09-23**
+> **PNG Re-upload Reference Repair — 2026-09-23**
 >
-> 先前由 ChatGPT binary pipeline 建立的 S04 reference 已移除／不可用；User 已直接上傳可用 PNG 至新的 canonical path。
+> User 已刪除舊 reference 並重新上傳同一批准 visual；本次只更新 canonical file path / reference integrity。
 >
 > Canonical path：
 >
-> `working/UI-UX/references/S04 アプリ起動画面デザイン仕様.png`
+> `working/UI-UX/references/S04-Highfi-v1.png`
 >
 > Repository PNG blob SHA：
 >
@@ -871,9 +871,9 @@ Next：
 > User approved：2026-09-22
 >
 > Approved visual reference：
-> \`working/UI-UX/references/S04 アプリ起動画面デザイン仕様.png\`
+> \`working/UI-UX/references/S04-Highfi-v1.png\`
 
-![S04 Shared App Entry High-fi v1](../references/S04 アプリ起動画面デザイン仕様.png)
+![S04 Shared App Entry High-fi v1](../references/S04-Highfi-v1.png)
 
 ### 1. Reference Coverage
 
