@@ -2,7 +2,7 @@
 
 > Overlay ID：O03
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1 APPROVED / STEP2 NEXT**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED / STEP3 NEXT**
 >
 > Phase：Phase 1
 >
@@ -312,8 +312,8 @@ User 已確認並固定：
 >
 > Current status：
 > - Step 1 — Structure Lock ✅
-> - Step 2 — Geometry + Visual Hierarchy Lock — NEXT
-> - Step 3 — Detailed High-fi Visual Rules Lock — PENDING
+> - Step 2 — Geometry + Visual Hierarchy Lock ✅
+> - Step 3 — Detailed High-fi Visual Rules Lock — NEXT
 > - Step 4 — Final Visual Reference Lock — PENDING
 
 ## Step 1 — Structure Lock ✅
@@ -561,12 +561,218 @@ NONE_FATAL
 
 > Step 1：**APPROVED / LOCKED**。下一步：Step 2 — Geometry + Visual Hierarchy Lock。
 
+## Step 2 — Geometry + Visual Hierarchy Lock ✅
+
+> Approved by User：2026-09-23
+>
+> Step 2：**APPROVED / LOCKED**
+>
+> Scope：鎖定 O03 各 severity presentation 的尺寸、位置、資訊層級、CTA排列、Desktop / Mobile adaptation、Retry-in-progress與 long-copy版面穩定性。不得改寫 Step 1 recovery semantics；semantic color / warning-danger palette留給 Step 3。
+
+### 1. INFO Geometry
+
+INFO固定為 host-local inline notice。
+
+Rules：
+- 不建立 dialog。
+- 不 dim background。
+- 寬度跟隨所在 content container。
+- 內容順序 = message → optional action。
+- 不得比 host content更搶視覺。
+
+### 2. DEGRADED Geometry
+
+DEGRADED固定為 affected-area recovery surface。
+
+Rules：
+- Recovery card只取代或附著在失敗 component / node範圍內。
+- 不因單一 node failure擴張成整個 screen banner。
+- 其他 App geometry保持不動或只做最小必要 reflow。
+- 其他 Runtime區域持續可用。
+
+### 3. Desktop BLOCKING_RECOVERABLE
+
+Desktop採 centered lightweight dialog。
+
+Recommended width：
+~~~text
+480–560px
+max-width：約 560px
+~~~
+
+固定結構：
+~~~text
+Heading
+→ What happened
+→ Preserved / Lost Context
+→ Actions
+→ optional Close
+~~~
+
+不建立 sidebar，不做 full-page。
+
+### 4. Preserved / Lost Context Placement
+
+Preserved / Lost Context是獨立正式區塊。
+
+固定放在 problem explanation之後、Actions之前。
+
+不得藏在：
+- footer。
+- tooltip。
+- technical details。
+
+### 5. Desktop Action Geometry
+
+Desktop BLOCKING_RECOVERABLE固定採：
+~~~text
+[Primary Safe Action]   ← full-row / dominant
+
+[Secondary 1] [Secondary 2]
+~~~
+
+**Primary Action full-row = YES.**
+
+Rules：
+- Primary最多1個。
+- Secondary最多2個。
+- 不做三個等權三欄 button。
+- User必須一眼看懂最安全 next action。
+
+### 6. Retry-in-progress Stability
+
+User按 `再試一次` 後，不開新 Modal。
+
+同一 blocking dialog保留 geometry；原 Action region原地切換成 O05 processing presentation。
+
+Flow：
+~~~text
+Recovery
+→ Retry selected
+→ same Recovery surface + O05 processing
+→ success → host safe surface
+→ fail again → same recovery episode presentation
+~~~
+
+不得用視覺跳頁假裝新 operation。
+
+### 7. Terminal / Critical Safe-State Geometry
+
+TERMINAL / CRITICAL不使用普通 blocking dialog。
+
+改用 **Safe-State Surface**：
+- 保留產品 Shell。
+- 主要內容區使用 centered bounded content column。
+- recommended max-width約 `560–720px`。
+- 可佔據主要內容區。
+- 不呈現可誤認為仍能正常操作的 Runtime surface。
+
+### 8. Terminal / Critical Actions
+
+TERMINAL / CRITICAL不提供普通 `×`。
+
+Safe exit actions直接放在內容下方，例如：
+- 回到安全版本。
+- 回首頁。
+
+Action hierarchy高於 surrounding Shell / brand chrome。
+
+### 9. Mobile INFO / DEGRADED
+
+Mobile仍維持 inline / local presentation。
+
+不得因 viewport較窄就把 INFO / DEGRADED自動升級成 bottom sheet。
+
+### 10. Mobile BLOCKING_RECOVERABLE
+
+Mobile採 bottom sheet。
+
+Recommended：
+- horizontal padding約 `16–20px`。
+- Primary full-width。
+- Secondary actions直向排列。
+- safe-area aware。
+
+若 preserved/lost copy或 actions內容較多，可升 full-height sheet，但維持同一 information hierarchy。
+
+### 11. Mobile TERMINAL / CRITICAL
+
+Mobile採 full-height safe-state。
+
+不使用一般短 bottom sheet，避免 User誤以為可直接 dismiss回 unsafe content。
+
+Safe exit CTA必須在 bottom safe area內可達。
+
+### 12. Visual Hierarchy
+
+Recovery固定 hierarchy：
+~~~text
+What happened
+> Preserved / Lost Context
+> Primary Safe Action
+> Secondary Actions
+> surrounding Shell / chrome
+~~~
+
+Severity不靠任意放大標題或增加更多 UI元件表達；semantic emphasis留 Step 3。
+
+### 13. Close Geometry
+
+Close只有在語意安全時存在。
+
+若可 Close：
+- Desktop放右上角，hit area ≥ 44px。
+- Mobile放 sheet / header可達位置。
+
+若不可 Close：
+- control直接不存在。
+- 不留下 disabled `×`。
+
+### 14. Long Recovery Copy
+
+BLOCKING_RECOVERABLE以簡短 consumer copy為主。
+
+若內容超出合理高度：
+- body region可 scroll。
+- Primary safe action仍保持可達。
+- technical details仍不進主 flow。
+
+### 15. Responsive Semantics
+
+Responsive adaptation不得改變 recovery severity semantics。
+
+Desktop dialog ↔ Mobile sheet只是 presentation adaptation。
+
+不得因 breakpoint：
+- 把 BLOCKING變 INFO。
+- 把 DEGRADED變 full-screen。
+- 改變 Retry / safe-surface semantics。
+
+### 16. Step 2 Locked Decisions
+
+1. INFO = host-local inline notice。
+2. DEGRADED = affected-area recovery surface。
+3. Desktop BLOCKING_RECOVERABLE = centered lightweight dialog，約480–560px。
+4. Preserved / Lost Context固定在 explanation之後、Actions之前。
+5. **Desktop Primary Safe Action固定獨立一整列；Secondary Actions再放下一列。**
+6. Retry-in-progress沿同一 Recovery surface原地切換 O05 processing。
+7. TERMINAL / CRITICAL = Safe-State Surface，不用普通 blocking dialog。
+8. Terminal / Critical不放普通 Close `×`。
+9. Mobile INFO / DEGRADED仍維持 inline / local。
+10. Mobile BLOCKING_RECOVERABLE = bottom sheet；Primary full-width，Secondary直向。
+11. Mobile TERMINAL / CRITICAL = full-height safe-state。
+12. Close只有在安全語意成立時存在；不可 Close時 control完全不存在。
+13. Long copy允許 body scroll，但 Primary safe action保持可達。
+14. Responsive只改 presentation，不改 severity semantics。
+
+> Step 2：**APPROVED / LOCKED**。下一步：Step 3 — Detailed High-fi Visual Rules Lock。
+
 # 19. Review Status
 
-> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1 APPROVED — STEP2 NEXT**
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED — STEP3 NEXT**
 
-O03 ④A Low-fi與④B Step 1已完成 User Review。
+O03 ④A Low-fi與④B Step 1–2已完成 User Review。
 
-下一步：**O03 ④B Step 2 — Geometry + Visual Hierarchy Lock**。
+下一步：**O03 ④B Step 3 — Detailed High-fi Visual Rules Lock**。
 
 Formal Spec、Backlog / Sprint、Cursor implementation維持 HOLD。
