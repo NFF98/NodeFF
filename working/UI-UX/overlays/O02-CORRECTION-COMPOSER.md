@@ -2,7 +2,7 @@
 
 > Overlay ID：O02
 >
-> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / HIGH_FI_PENDING**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1 APPROVED / STEP2 NEXT**
 >
 > Phase：Phase 1
 >
@@ -10,7 +10,7 @@
 >
 > Function behavior source：F16 Result Correction + F00 Experience Shell。
 >
-> 本文件是 ④A Low-fi review draft，不代表 User 已批准，也不代表 Cursor 可實作。
+> ④A Low-fi 已完成 User Review；④B High-fi Step 1 已批准。Formal Spec 與 Cursor implementation 仍維持 HOLD。
 
 # 1. User Outcome
 
@@ -198,13 +198,15 @@ Low-fi copy可用：
     正在理解你指出的問題…
     正在準備修正版…
 
-處理中固定顯示 **Progress %**。
+處理中 presentation 統一遵循 **O05 Current Truth**：
 
-Rules：
-- 百分比必須對應已完成的 correction checkpoints / work，不假裝預測剩餘秒數。
-- clarification等待 User input時暫停進度，不假裝持續增加。
-- 進入 child compose / validation / replay時可持續更新。
+- 有可靠 checkpoints → Stage label + checkpoint-derived Progress %。
+- 沒有可靠 checkpoints → Stage label only。
+- 百分比只代表已完成 work，不是 ETA。
+- clarification等待 User input時暫停，不假裝持續增加。
+- 進入 child compose / validation / replay時，只在真實 checkpoint完成時更新。
 - 不為了動畫故意延長 operation。
+- 不允許 fake smooth / fake %。
 
 O02本身在 submit後可：
 - 保持 sheet/panel並轉 progress state，或
@@ -263,13 +265,218 @@ User 已確認：
 1. Desktop 使用 lightweight dialog / side panel；Mobile 使用 bottom sheet / full-height sheet，不做獨立頁。
 2. O02 固定顯示：**目前結果摘要 +「哪裡不對？」+「預期結果或規則（選填）」**。
 3. Primary CTA 固定為 **「開始修正」**；Submit 後先進 progress / clarification，最後才進 S06 Compare。
-4. Correction 處理中必須顯示 **Progress %**；百分比依真實已完成 work / checkpoints 推進，不做假時間預估。
+4. Correction 處理中遵循 **O05 Current Truth**：有可靠 checkpoints 才顯示 checkpoint-derived Progress %；沒有可靠 checkpoints 則 Stage only，不做 fake % / ETA。
 5. 若 User其實是在加功能 / 改 UI / 改用途，由系統引導轉 S05 Refine，不把 O02 擴張成通用修改器。
 
-# 16. Review Status
+# 16. ④B High-fi Contract
 
-> **LOW_FI_DIRECTION_APPROVED — HIGH_FI_PENDING**
+> Step 1 approved by User：2026-09-23
+>
+> Canonical rule：本節是 O02 High-fi 的唯一 canonical contract。後續 Step 2–4 必須在本節續寫，不得另建重複 High-fi summary / shadow copy。
+>
+> Current status：
+> - Step 1 — Structure Lock ✅
+> - Step 2 — Geometry + Visual Hierarchy Lock — NEXT
+> - Step 3 — Detailed High-fi Visual Rules Lock — PENDING
+> - Step 4 — Final Visual Reference Lock — PENDING
 
-O02 ④A Low-fi 已完成 User Review。
+## Step 1 — Structure Lock ✅
 
-依固定流程，下一步進 O03 — Recovery Overlay ④A Low-fi。
+### 1. O02 Role / Correction Boundary
+
+O02只處理 **結果 / 規則 / 假設 / 邏輯不符合原本意圖**。
+
+O02不是一般 Refine Composer，也不是 S05的替代入口。
+
+不屬 O02：
+- 加新功能；
+- 大幅改 UI；
+- 新增 / 刪除 input；
+- 改成不同用途；
+- 一般 derivative / remix。
+
+若 User feedback其實屬上述需求，必須明確 handoff到 S05 / F06，不得在 O02背後偷偷改 intent kind。
+
+### 2. Canonical Flow
+
+~~~text
+S03 Result
+→ O02 Correction Composer
+→ F16 correction lifecycle
+→ capture / analyze / compose / validate / replay
+→ S06 Correction Compare
+~~~
+
+Cancel / Close：
+~~~text
+O02
+→ 原本 S03
+~~~
+
+原 App、current inputs、current result必須保留。
+
+### 3. Overlay Boundary
+
+O02是 Overlay，不是獨立 Screen / route。
+
+- Active時 underlying S03仍存在但 inert。
+- 不允許 tap / click-through到 Runtime或 Shell controls。
+- Close / Cancel後 focus回 S03 correction trigger或合理 safe surface。
+- O02不得自行複製一套 S03 Runtime shell。
+
+### 4. EDITING Information Order
+
+固定順序：
+~~~text
+Title / Close
+→ 目前結果摘要
+→ 哪裡不對？
+→ 預期結果或規則（選填）
+→ Cancel / 開始修正
+~~~
+
+不得把 technical metadata插進上述 consumer hierarchy。
+
+### 5. Current Result Summary
+
+`目前結果摘要`必須存在，目的只為確認「我正在修哪個結果」。
+
+來源必須是 F03 / F16 canonical result，不得從 DOM猜。
+
+Rules：
+- 多個 outputs只顯示主要 / material result，其他可展開。
+- output ERROR不得 fake value。
+- protected / sensitive result依 F16 privacy policy。
+- 不把 summary做成第二個 Runtime。
+
+### 6. Primary Semantic Input
+
+Primary field固定為：
+
+> **哪裡不對？**
+
+這是 Correction Intent的主要 semantic source，使用自然語言。
+
+### 7. Optional Expected Result / Rule Hint
+
+Secondary field固定為：
+
+> **預期結果或規則（選填）**
+
+可提供：
+- expected value；
+- correct rule；
+- correct assumption；
+- judgment method。
+
+Rules：
+- 不填也能 Continue。
+- correction feedback已清楚時不得強迫重複輸入。
+- System / LLM不得自行把猜測填成 User fact。
+
+### 8. Primary CTA / Submit Boundary
+
+Primary CTA固定為：
+
+~~~text
+開始修正
+~~~
+
+Submit後不得直接跳 S06。
+
+必須先完成 F16必要 lifecycle：capture before → analyze → compose → validate → replay / comparison preparation。
+
+只有 child validated且 comparison truth已建立到可進 Compare的狀態，才進 S06。
+
+不得先展示「修正版」再補 validation。
+
+### 9. Clarification
+
+若 correction仍有 material ambiguity，可在 correction lifecycle中進 clarification presentation；不新增獨立 Screen。
+
+Rules：
+- 沿用既有 clarification component language。
+- 只問 material questions，通常 1–3題。
+- 保留 correction draft。
+- 不要求 User重打目前結果。
+
+### 10. Refine Handoff
+
+若 User其實在要求加功能 / 改 UI / 改用途：
+- UI需明確告知這較像 Refine。
+- handoff到 S05 / F06。
+- 不得在 O02內靜默完成 feature change。
+
+### 11. Processing Ownership — O05 Current Truth
+
+O02 processing presentation完全交 **O05**。
+
+Canonical rule：
+~~~text
+Reliable checkpoints
+→ Stage label + checkpoint-derived Progress %
+
+No reliable checkpoints
+→ Stage label only
+~~~
+
+Rules：
+- `%`代表已完成 work，不是 ETA。
+- 不 fake smooth / fake %。
+- clarification等待 User時進度不得假裝前進。
+- 只有真實 checkpoint完成才更新。
+- 不為了 animation故意拖慢 operation。
+
+**Progress rule = O05 Current Truth.**
+
+因此舊 Low-fi「處理中固定顯示 Progress %」不再作為 High-fi contract。
+
+### 12. Technical Failure / Recovery Ownership
+
+Technical failure不在 O02自行建立 recovery system。
+
+Canonical ownership：
+~~~text
+O03 + F12
+~~~
+
+原 App / inputs / result / correction draft應依既有 recovery semantics保留。
+
+### 13. Consumer Technical Boundary
+
+O02不得顯示：
+- Blueprint hash；
+- Runtime state keys；
+- Correction Delta；
+- JSON；
+- model / provider；
+- technical error code。
+
+### 14. Step 1 Locked Decisions
+
+1. O02只處理 semantic correction，不是一般 Refine。
+2. Canonical flow = S03 → O02 → F16 lifecycle → S06。
+3. O02是 Overlay；underlying S03 inert但 context保留。
+4. EDITING順序固定為 Title/Close → Current Result → 哪裡不對 → Optional Expected Result/Rule → actions。
+5. Current Result Summary必須來自 F03 / F16 canonical result，不從 DOM猜。
+6. `哪裡不對？`是 Primary semantic input。
+7. `預期結果或規則（選填）`保持 optional，System不得自行填成 User fact。
+8. Primary CTA = `開始修正`。
+9. Submit後必須先完成必要 capture / analyze / compose / validate / replay truth，Compare Ready才進 S06。
+10. Clarification保留在 correction lifecycle，不新增 Screen。
+11. Feature/UI/use-case change明確 handoff到 S05 / F06，不在 O02偷偷處理。
+12. **Progress rule = O05 Current Truth：有可靠 checkpoints才顯示 %；否則 Stage only。**
+13. Technical failure / recovery交 O03 + F12。
+14. Consumer UI不顯示 internal technical metadata。
+
+> Step 1：**APPROVED / LOCKED**。下一步：Step 2 — Geometry + Visual Hierarchy Lock。
+
+# 17. Review Status
+
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1 APPROVED — STEP2 NEXT**
+
+O02 ④A Low-fi與④B Step 1已完成 User Review。
+
+下一步：**O02 ④B Step 2 — Geometry + Visual Hierarchy Lock**。
+
+Formal Spec、Backlog / Sprint、Cursor implementation維持 HOLD。
