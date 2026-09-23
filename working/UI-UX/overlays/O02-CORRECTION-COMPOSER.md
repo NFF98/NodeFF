@@ -2,7 +2,7 @@
 
 > Overlay ID：O02
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1 APPROVED / STEP2 NEXT**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED / STEP3 NEXT**
 >
 > Phase：Phase 1
 >
@@ -276,8 +276,8 @@ User 已確認：
 >
 > Current status：
 > - Step 1 — Structure Lock ✅
-> - Step 2 — Geometry + Visual Hierarchy Lock — NEXT
-> - Step 3 — Detailed High-fi Visual Rules Lock — PENDING
+> - Step 2 — Geometry + Visual Hierarchy Lock ✅
+> - Step 3 — Detailed High-fi Visual Rules Lock — NEXT
 > - Step 4 — Final Visual Reference Lock — PENDING
 
 ## Step 1 — Structure Lock ✅
@@ -471,12 +471,183 @@ O02不得顯示：
 
 > Step 1：**APPROVED / LOCKED**。下一步：Step 2 — Geometry + Visual Hierarchy Lock。
 
+## Step 2 — Geometry + Visual Hierarchy Lock ✅
+
+> Approved by User：2026-09-23
+>
+> Step 2：**APPROVED / LOCKED**
+>
+> Scope：鎖定 O02 Desktop / Mobile overlay geometry、Current Result份量、Primary / Optional input比例、actions位置、processing / clarification / refine handoff時的版面穩定性。不得改寫 Step 1 Function / state semantics；color / border / shadow / motion留給 Step 3。
+
+### 1. Desktop Overlay Geometry
+
+Desktop baseline採 **centered lightweight dialog**，不採 side panel。
+
+Recommended width：
+~~~text
+560–640px
+max-width：約 640px
+~~~
+
+O02比 O01需要更多輸入空間，但仍保持 focused correction task，不做 full page。
+
+### 2. Desktop Vertical Structure
+
+固定順序：
+~~~text
+Title + Close
+→ Current Result Summary
+→ 哪裡不對？
+→ 預期結果或規則（選填）
+→ Actions
+~~~
+
+### 3. Current Result Summary Scale
+
+Current Result Summary只作 context，不是第二個 S03 Runtime。
+
+Recommended：
+- 高度自適應。
+- 常態約 `72–120px`。
+- 多 outputs時顯示 material summary + expandable details。
+- 不得讓 Result區壓過 Composer主體。
+
+### 4. Primary Feedback Field
+
+`哪裡不對？`是 O02最大輸入區，也是主要 visual / semantic focus。
+
+Recommended：
+~~~text
+textarea min-height：約 120–160px
+~~~
+
+它必須明顯大於 optional field。
+
+### 5. Optional Expected Result / Rule Field
+
+`預期結果或規則（選填）`是 Secondary input。
+
+Recommended：
+~~~text
+height：約 72–96px
+~~~
+
+不得與 Primary feedback field做成等量，避免 User誤以為兩欄都必填。
+
+### 6. Desktop Actions
+
+Desktop actions固定在內容底部：
+~~~text
+[取消]                              [開始修正]
+Ghost / low emphasis               Primary
+~~~
+
+Rules：
+- Primary靠右。
+- Step 2 baseline不採 sticky footer。
+- actions不得壓縮主要輸入區。
+
+### 7. Submit → Processing / Clarification Stability
+
+Submit後同一 O02 Overlay轉為 Processing / Clarification presentation。
+
+Rules：
+- 外框位置與寬度保持穩定。
+- State Body原地替換。
+- 不讓 User感覺跳到另一個產品流程。
+- Processing presentation仍由 O05 owner。
+
+### 8. Clarification Geometry
+
+Clarification不新增第二層 modal。
+
+在 O02原 overlay中顯示必要 material questions，保留 correction summary / draft context。
+
+若有 1–3題：
+- 採單欄 stacked。
+- 不做多欄 questionnaire。
+- 不要求重輸 current result。
+
+### 9. Refine Handoff Geometry
+
+若判定應轉 S05 / F06，handoff在 O02原位置完成。
+
+Recommended structure：
+~~~text
+簡短說明
+→ 前往修改（Primary）
+→ 返回 / 繼續修正（僅 semantics 允許時）
+~~~
+
+不得從 O02再打開第三個 overlay。
+
+### 10. Mobile Sheet Geometry
+
+Mobile採 bottom sheet；必要時可升 full-height sheet。
+
+Canonical order：
+~~~text
+Title
+→ Current Result
+→ 哪裡不對？
+→ 預期結果或規則（選填）
+→ 開始修正
+→ 取消
+~~~
+
+Rules：
+- horizontal padding沿 Design System約 16–20px。
+- keyboard開啟時可擴張到 full-height。
+- content region可 scroll。
+- Primary CTA不可被 keyboard / safe area遮住。
+
+### 11. Mobile Action Order
+
+Mobile固定：
+~~~text
+[開始修正]
+[取消]
+~~~
+
+`開始修正`接近 full-width，min-height ≥ 44px。
+
+### 12. Visual Hierarchy
+
+O02預設 hierarchy：
+~~~text
+哪裡不對？
+> Current Result context
+> Primary CTA
+> Optional expected-result field
+> secondary chrome / helper copy
+~~~
+
+第一眼應該是「告訴我哪裡不對」，不是「再看一次結果」。
+
+### 13. Step 2 Locked Decisions
+
+1. Desktop baseline = centered lightweight dialog，不用 side panel。
+2. Desktop width約 560–640px，max-width約 640px。
+3. 固定結構 = Title + Close → Current Result → Primary feedback → Optional hint → Actions。
+4. Current Result Summary保持 compact，常態約72–120px。
+5. `哪裡不對？`是最大輸入區，textarea min-height約120–160px。
+6. Optional expected-result field約72–96px，明顯小於 Primary feedback field。
+7. Desktop actions = 取消（Ghost）+ 開始修正（Primary），不預設 sticky。
+8. Processing / Clarification在同一 Overlay原地切換，保持 geometry穩定。
+9. Clarification採單欄 stacked，不新增第二層 modal。
+10. Refine handoff在原 O02位置完成，不新增第三個 overlay。
+11. Mobile = bottom sheet，必要時可升 full-height sheet。
+12. Mobile action order = 開始修正 → 取消。
+13. **Main feedback field 明顯大於 Optional expected-result field = YES。**
+
+> Step 2：**APPROVED / LOCKED**。下一步：Step 3 — Detailed High-fi Visual Rules Lock。
+
 # 17. Review Status
 
-> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1 APPROVED — STEP2 NEXT**
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED — STEP3 NEXT**
 
-O02 ④A Low-fi與④B Step 1已完成 User Review。
+O02 ④A Low-fi與④B Step 1–2已完成 User Review。
 
-下一步：**O02 ④B Step 2 — Geometry + Visual Hierarchy Lock**。
+下一步：**O02 ④B Step 3 — Detailed High-fi Visual Rules Lock**。
 
 Formal Spec、Backlog / Sprint、Cursor implementation維持 HOLD。
