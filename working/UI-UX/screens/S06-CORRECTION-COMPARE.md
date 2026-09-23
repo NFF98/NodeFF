@@ -2,7 +2,7 @@
 
 > Screen ID：S06
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED / STEP3 NEXT**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED / STEP4 NEXT**
 >
 > Phase：Phase 1
 >
@@ -10,7 +10,7 @@
 >
 > Function behavior sources：F16 Result Correction + F00 Experience Shell + F03 Runtime。
 >
-> ④A Low-fi 已完成 User Review；④B High-fi Step 1 已批准。Formal Spec 與 Cursor implementation 仍維持 HOLD。
+> ④A Low-fi 已完成 User Review；④B High-fi Step 1–3 已批准。Formal Spec 與 Cursor implementation 仍維持 HOLD。
 
 # 1. User Outcome
 
@@ -341,8 +341,8 @@ User 已確認：
 > Current status：
 > - Step 1 — Structure Lock ✅
 > - Step 2 — Geometry + Visual Hierarchy Lock ✅
-> - Step 3 — Detailed High-fi Visual Rules Lock — NEXT
-> - Step 4 — Final Visual Reference Lock — PENDING
+> - Step 3 — Detailed High-fi Visual Rules Lock ✅
+> - Step 4 — Final Visual Reference Lock — NEXT
 
 ## Step 1 — Structure Lock ✅
 
@@ -670,12 +670,240 @@ NodeFF chrome不得壓過 Compare本身。
 
 > Step 2：**APPROVED / LOCKED**。下一步：Step 3 — Detailed High-fi Visual Rules Lock。
 
+## Step 3 — Detailed High-fi Visual Rules Lock ✅
+
+> Approved by User：2026-09-23
+>
+> Step 3：**APPROVED / LOCKED**
+>
+> Scope：鎖定 S06 color usage、typography、Compare Card、Before / After版本辨識、CTA emphasis、LIMITED_COMPARISON presentation、motion、interaction states、accessibility與 Cursor guardrails。不得改寫 Step 1 Function / state semantics或 Step 2 geometry。
+
+### 1. Core Visual Character
+
+S06採 **Compare Decision Workspace** visual direction，沿用 NodeFF Design System：**Clean Creator Canvas + Playful Energy**，但比 S05更理性、克制。
+
+Rules：
+- White / Soft Neutral為主。
+- Teal作 Primary / focus / corrected-version accent。
+- Aqua作 supporting accent。
+- Yellow只允許 very small changed / new energy marker。
+- 不做 neon / rainbow / glassmorphism。
+- 不做 heavy shadow。
+- 不做 IDE / Git diff viewer視覺。
+
+### 2. Before / After Visual Language
+
+#### Before — 修正前
+- 使用 Neutral treatment。
+- White / Soft surface。
+- Neutral border。
+- 明確文字 `修正前`。
+- 不做 disabled / faded-out treatment。
+- 必須讓 User明確理解原版仍是合法、可保留的版本。
+
+#### After — 修正後
+- 使用 Teal / Aqua border或局部 accent。
+- 明確文字 `修正後`。
+- 可有很小的 `新版 / 修正版` marker。
+- Yellow只能作 small energy accent，不可鋪滿 card。
+- **After slight emphasis = YES**：修正後可比修正前稍強，但只靠 Teal / Aqua border / accent；不得放大、不得加重 shadow、不得加「推薦」標籤。
+
+Before / After差異至少同時依賴文字 label + border / accent；不得只靠顏色。
+
+### 3. Compare Card
+
+Compare Card是 NodeFF comparison context，不重畫 Generated App。
+
+Recommended treatment：
+- radius = `16px`。
+- border = `1px`。
+- elevation = `0–1`。
+- padding = `16–24px`。
+- label / heading約 `14–16px semibold`。
+
+Canonical principle：
+
+> **NodeFF owns the comparison frame; the App owns result presentation.**
+
+不得強迫 Generated App內部 Result改成 NodeFF component visual language。
+
+### 4. Correction Statement
+
+`你剛剛說哪裡不對`採 supporting context，不搶過 Compare。
+
+- label約 `body-md / semibold`。
+- feedback內容約 `body-lg`。
+- Ink primary。
+- 可使用 Soft Neutral container。
+- 不使用 Yellow warning treatment。
+- 長內容的「查看完整內容」使用 Ghost action。
+
+### 5. What Changed
+
+`這次改了什麼`必須容易掃讀，但不是 technical diff。
+
+Rules：
+- heading沿 `heading-md 20/28`。
+- change item使用 clean row / bullet。
+- material changed value可用 Teal emphasis。
+- 不用 red / green diff。
+- 不使用 Git-style `- / +`。
+- 不顯示 JSON path。
+
+### 6. Comparison Quality / LIMITED_COMPARISON
+
+正常可直接比較時，使用低干擾 informational line，例如：
+
+~~~text
+使用相同輸入重新計算 · 可以直接比較
+~~~
+
+`LIMITED_COMPARISON`時，升級成 clearly visible Inline Notice：
+- icon + title + explanation。
+- title明確使用「這次只能有限比較」。
+- 不只靠顏色。
+- 不畫成 catastrophic error。
+- 不使用 Brand Yellow冒充 Warning semantic color。
+- exact caution / warning semantic palette留給 O03 / shared semantic palette統一，不由 S06自行發明。
+
+`LIMITED_COMPARISON`代表比較有限，不代表 App壞掉。
+
+### 7. Decision Button Hierarchy
+
+`使用修正版` = Primary：
+- Teal 600 background。
+- White text。
+- radius `12px`。
+- min-height `44px`。
+- Hover → Teal 500。
+- visible focus。
+
+`再調整` = Secondary：
+- White / neutral surface。
+- default border。
+- Ink text。
+
+`保留原版` = Tertiary / lower emphasis：
+- Ghost或 subtle neutral treatment。
+- 仍必須清楚可操作。
+- 不使用 destructive red；保留原版不是危險操作。
+
+`從原版重新修正` 再低一級，不進主要 decision row。
+
+### 8. Preview Actions
+
+`查看原版 App` / `查看修正版 App`全部採 Ghost / low emphasis。
+
+Rules：
+- 不得長得像 Decision button。
+- Preview開啟時清楚標示目前查看版本。
+- 返回後回原 compare context。
+- Preview不改變 active version。
+
+### 9. LIMITED Does Not Disable Primary
+
+即使為 `LIMITED_COMPARISON`，`使用修正版`仍保持可用 Primary。
+
+不得：
+- disabled Primary；
+- 隱藏 Primary；
+- 使用 danger styling逼 User拒絕。
+
+Limitation Notice必須在 CTA前被清楚看見，讓 User做 informed decision；S06不得把 LIMITED自行升級成 system veto。
+
+### 10. Typography
+
+- Screen title：Desktop `heading-xl 32/40`；Mobile `heading-lg 24/32`。
+- Compare label：`label-md / semibold`。
+- Section title：`heading-md 20/28`。
+- supporting / quality copy：`body-md 14/22`。
+- Decision button：`label-md`。
+- Material numeric result可使用 tabular numerals where supported。
+- NodeFF不得擅自把 Generated App內不重要的數字放大成主視覺。
+
+### 11. Motion
+
+- Hover / button feedback：約 `120ms`。
+- Compare / preview transition：約 `180–240ms`。
+- Before → After不得使用 morph animation暗示「變好了」。
+- 不做 confetti / fireworks。
+- 不做 serious notice shake / bounce。
+- 不做持續 pulse。
+- `prefers-reduced-motion`必須有 fallback。
+
+### 12. Interaction States
+
+S06共用元件至少支援：
+
+~~~text
+DEFAULT
+HOVER
+FOCUS_VISIBLE
+PRESSED
+DISABLED
+LOADING where applicable
+SELECTED where applicable
+~~~
+
+Rules：
+- Decision提交後避免 duplicate submit。
+- Loading presentation交 O05，不在 Button裡假裝 operation已完成。
+- Preview action與Decision action不得共用 selected-state semantics。
+- Compare Card預設不是 selectable card。
+
+### 13. Accessibility
+
+- Before / After不只靠顏色。
+- LIMITED不只靠顏色。
+- touch target ≥ `44 CSS px`。
+- keyboard / screen-reader順序維持：issue → Before → After → changes → quality → decisions。
+- focus visible且不造成 layout shift。
+- full Preview開啟 / 關閉需正確 focus move / restore。
+- Result change可適度 aria-live。
+- assistive tech必須能分辨「修正前結果」與「修正後結果」。
+- Mobile CTA不得被 safe-area / browser chrome遮住。
+- reduced-motion為 High-fi acceptance gate。
+
+### 14. Cursor Guardrails
+
+Cursor不得：
+- 把 S06做成 IDE / Git diff viewer。
+- 用 red / green作 Before / After主要區分。
+- 把 After做得比 Before大很多。
+- 把 Before畫成 disabled / obsolete。
+- 把 LIMITED當 Error或禁止 User接受。
+- 把 Brand Yellow當 Warning / Danger。
+- 把 Preview actions混進 Decision actions。
+- 增加第四個 decision。
+- 增加 Revert。
+- 把 Generated App內部重畫成 NodeFF UI。
+- 自行發明 progress；processing仍由 O05。
+- 自行發明 recovery palette；recovery仍由 O03 / shared semantic system。
+
+### 15. Step 3 Locked Decisions
+
+1. S06採克制的 Compare Decision Workspace visual。
+2. Before = Neutral；After = Teal / Aqua accent。
+3. Before / After一定有文字 label，不只靠顏色。
+4. **After slight emphasis = YES**，但只用 Teal / Aqua border / accent；不放大、不加重 shadow、不標記「推薦」。
+5. Compare Card只包 comparison context，不重畫 Generated App。
+6. What Changed使用 consumer semantic summary，不做 Git diff。
+7. LIMITED使用明顯 Inline Notice，但不是 Error。
+8. LIMITED時 `使用修正版`仍保持可用。
+9. `使用修正版` Primary；`再調整` Secondary；`保留原版`低 emphasis。
+10. Preview actions固定為 Ghost，不與 Decision混層。
+11. Yellow不作 Warning / Danger。
+12. Motion採 `120 / 180 / ≤240ms` restrained system。
+13. Accessibility、focus、keyboard、reduced-motion列為 High-fi acceptance gate。
+
+> Step 3：**APPROVED / LOCKED**。下一步：Step 4 — Final Visual Reference Lock。
+
 # 21. Review Status
 
-> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED — STEP3 NEXT**
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED — STEP4 NEXT**
 
-S06 ④A Low-fi與④B Step 1–2已完成 User Review。
+S06 ④A Low-fi與④B Step 1–3已完成 User Review。
 
-下一步：**S06 ④B Step 3 — Detailed High-fi Visual Rules Lock**。
+下一步：**S06 ④B Step 4 — Final Visual Reference Lock**。
 
 Formal Spec、Backlog / Sprint、Cursor implementation維持 HOLD。
