@@ -2,7 +2,7 @@
 
 > Overlay ID：O02
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED / STEP3 NEXT**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED / STEP4 NEXT**
 >
 > Phase：Phase 1
 >
@@ -277,8 +277,8 @@ User 已確認：
 > Current status：
 > - Step 1 — Structure Lock ✅
 > - Step 2 — Geometry + Visual Hierarchy Lock ✅
-> - Step 3 — Detailed High-fi Visual Rules Lock — NEXT
-> - Step 4 — Final Visual Reference Lock — PENDING
+> - Step 3 — Detailed High-fi Visual Rules Lock ✅
+> - Step 4 — Final Visual Reference Lock — NEXT
 
 ## Step 1 — Structure Lock ✅
 
@@ -642,12 +642,221 @@ O02預設 hierarchy：
 
 > Step 2：**APPROVED / LOCKED**。下一步：Step 3 — Detailed High-fi Visual Rules Lock。
 
+## Step 3 — Detailed High-fi Visual Rules Lock ✅
+
+> Approved by User：2026-09-23
+>
+> Step 3：**APPROVED / LOCKED**
+>
+> Scope：鎖定 O02 color usage、typography、Current Result summary、Primary / Optional input hierarchy、CTA、Clarification、Refine handoff、Processing presentation、field validation、motion、interaction states與 accessibility。不得改寫 Step 1 Function / state semantics或 Step 2 geometry。
+
+### 1. Core Visual Character
+
+O02採 **Focused Correction Composer** visual direction。
+
+Rules：
+- White / Soft Neutral為主。
+- Teal用於 focus / Primary CTA / active controls。
+- Yellow不作 warning / error主色。
+- 不做 AI glow。
+- 不做 gradient background。
+- 不做大型 decorative effect。
+- 視覺應比 S05更克制、更問題導向。
+
+### 2. Desktop Dialog Visual
+
+沿 Design System：
+- radius = `20px`。
+- elevation = `2`。
+- White surface。
+- padding約 `24px`。
+- Title使用 `heading-lg 24/32` 或 `heading-md 20/28`。
+- Close icon約20px，hit area ≥ 44px。
+
+Underlying S03保持可辨識但 inert。
+
+### 3. Current Result Summary
+
+Current Result Summary採 neutral context card：
+- Soft surface。
+- radius = `16px`。
+- border default。
+- elevation = `0–1`。
+- 明確 label：`目前結果`。
+- material result可適度強調，但不得套 success / error semantics。
+
+它的角色是確認 correction target，不是第二個 Result Screen。
+
+### 4. Primary Feedback Field
+
+`哪裡不對？`是 O02最強輸入區。
+
+Visual baseline：
+- White surface。
+- neutral border。
+- radius = `12px`。
+- focus = Teal treatment。
+- persistent visible label。
+- body-lg約 `16/26`。
+- placeholder只作 example，不得像 System替 User提出答案。
+
+它的視覺重量必須明顯高於 Optional field。
+
+### 5. Optional Expected Result / Rule Field
+
+`預期結果或規則（選填）`沿用同一 input family，但明確降階。
+
+Rules：
+- 尺寸較小。
+- helper copy較輕。
+- `選填`必須可讀，不可只靠超淡小字。
+- 不使用「建議填寫」等造成壓力的文案。
+- 空白不是 error。
+
+### 6. CTA Visual Hierarchy
+
+`開始修正` = Primary：
+- Teal 600 background。
+- White text。
+- radius `12px`。
+- min-height `44px`。
+- Hover → Teal 500。
+- visible focus。
+
+`取消` = Ghost / low emphasis。
+
+`取消`不得使用 destructive red。
+
+### 7. Field Validation
+
+若 `哪裡不對？` 為空：
+- 使用 inline field error。
+- icon + text。
+- 與 field programmatically associated。
+- 不只靠紅框。
+- 不另開 modal。
+
+Optional field空白不觸發 error。
+
+### 8. Clarification Presentation
+
+Clarification固定使用 **structured form / choice blocks**，不使用 chat-bubble / assistant conversation UI。
+
+**Clarification chat-bubble = NO。**
+
+Rules：
+- 沿用既有 Input / Choice component language。
+- 每題清楚編組。
+- 1–3 material questions採單欄 stacked。
+- 不做 chatbot transcript。
+- 不把 O02變成聊天介面。
+
+### 9. Refine Handoff
+
+若判定應轉 S05 / F06：
+- 使用 neutral / informational Inline Notice。
+- 說明「這比較像修改功能 / UI / 用途」。
+- `前往修改` = Primary。
+- 返回 correction = Secondary / Ghost（僅 semantics允許時）。
+- 不使用 warning / error styling。
+
+這是 intent handoff，不是 failure。
+
+### 10. Processing Presentation
+
+Processing完全沿 O05：
+
+~~~text
+Reliable checkpoints
+→ Stage + checkpoint-derived %
+
+No reliable checkpoints
+→ Stage only
+~~~
+
+Visual rules：
+- Teal / Aqua progress visual。
+- 不 fake %。
+- 不巨大 spinner。
+- 不用 pulse假裝仍在工作。
+- clarification waiting時不持續灌進度。
+- 不為動畫延遲 READY / Compare。
+
+### 11. Technical Failure Boundary
+
+O02不得自行發明新的 Error / Warning visual system。
+
+Technical failure / recovery由 O03 + shared Recovery system承接。
+
+Rules：
+- O02可 host recovery handoff。
+- 不自行建立 red modal。
+- 不把 Brand Yellow當 warning box。
+- exact semantic Warning / Danger palette由 O03 / shared semantic system owner。
+
+### 12. Motion
+
+- Button / control feedback = `120ms`。
+- Dialog / state transition = `180ms`。
+- Processing / clarification transition ≤ `240ms`。
+- 不做 bounce。
+- 不使用 morph暗示「修好了」。
+- `prefers-reduced-motion`必須有 fallback。
+
+### 13. Interaction States
+
+O02共用元件至少支援：
+~~~text
+DEFAULT
+HOVER
+FOCUS_VISIBLE
+PRESSED
+DISABLED
+INVALID
+LOADING where applicable
+~~~
+
+Rules：
+- Submit後避免 duplicate submission。
+- Loading不得清空 User draft。
+- Clarification返回後保留 feedback。
+- Refine handoff不得遺失 correction draft context。
+
+### 14. Accessibility
+
+- 每個 field都有 persistent label。
+- Error與 field programmatically associated。
+- touch target ≥ 44px。
+- focus order = Current Result → Primary feedback → Optional field → actions。
+- Mobile keyboard不得遮 Primary CTA。
+- Overlay focus trap / restore正確。
+- Progress / clarification使用適度 aria-live。
+- reduced-motion有 fallback。
+
+### 15. Step 3 Locked Decisions
+
+1. O02採 Focused Correction Composer visual。
+2. Desktop = White dialog / radius20 / elevation2。
+3. Current Result Summary使用 neutral context card，不套 success / error semantics。
+4. `哪裡不對？`是最強輸入區，Teal focus，persistent label。
+5. Optional expected-result field明確降階，`選填`保持可讀。
+6. `開始修正` = Teal Primary；`取消` = Ghost。
+7. Required field validation使用 inline error，不開 modal。
+8. **Clarification固定使用 structured form / choice blocks，不用 chat-bubble / chatbot transcript。**
+9. Refine handoff使用 informational Inline Notice，不視為 error。
+10. Processing完全沿 O05，不 fake progress。
+11. Technical failure visual交 O03 / shared Recovery system。
+12. Motion採 `120 / 180 / ≤240ms` restrained system。
+13. Accessibility / focus / keyboard / aria-live / reduced-motion列為 High-fi acceptance gate。
+
+> Step 3：**APPROVED / LOCKED**。下一步：Step 4 — Final Visual Reference Lock。
+
 # 17. Review Status
 
-> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED — STEP3 NEXT**
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED — STEP4 NEXT**
 
-O02 ④A Low-fi與④B Step 1–2已完成 User Review。
+O02 ④A Low-fi與④B Step 1–3已完成 User Review。
 
-下一步：**O02 ④B Step 3 — Detailed High-fi Visual Rules Lock**。
+下一步：**O02 ④B Step 4 — Final Visual Reference Lock**。
 
 Formal Spec、Backlog / Sprint、Cursor implementation維持 HOLD。
