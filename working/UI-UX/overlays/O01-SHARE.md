@@ -2,7 +2,7 @@
 
 > Overlay ID：O01
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1 APPROVED / STEP2 NEXT**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED / STEP3 NEXT**
 >
 > Phase：Phase 1
 >
@@ -249,8 +249,8 @@ User 已確認：
 >
 > Current status：
 > - Step 1 — Structure Lock ✅
-> - Step 2 — Geometry + Visual Hierarchy Lock — NEXT
-> - Step 3 — Detailed High-fi Visual Rules Lock — PENDING
+> - Step 2 — Geometry + Visual Hierarchy Lock ✅
+> - Step 3 — Detailed High-fi Visual Rules Lock — NEXT
 > - Step 4 — Final Visual Reference Lock — PENDING
 
 ## Step 1 — Structure Lock ✅
@@ -456,12 +456,197 @@ System Share cancelled
 
 > Step 1：**APPROVED / LOCKED**。下一步：Step 2 — Geometry + Visual Hierarchy Lock。
 
+## Step 2 — Geometry + Visual Hierarchy Lock ✅
+
+> Approved by User：2026-09-23
+>
+> Step 2：**APPROVED / LOCKED**
+>
+> Scope：鎖定 O01 Desktop / Mobile overlay geometry、state body placement、URL / action hierarchy、Privacy copy位置與不同 state 的版面穩定性。不得改寫 Step 1 Function / state semantics；color / border / shadow / motion留給 Step 3。
+
+### 1. Desktop Overlay Geometry
+
+Desktop採 **centered lightweight dialog**，不採 anchored popover。
+
+Recommended width：
+~~~text
+480–560px
+max-width：約 560px
+~~~
+
+原因：O01需同時承接 URL、Privacy copy、Copy / System Share、Creating / Failure state；centered dialog可提供穩定結構，又不會像完整頁面。
+
+### 2. Desktop Vertical Structure
+
+固定順序：
+~~~text
+Title + Close
+→ App Identity
+→ State Body
+→ Actions
+→ Privacy Copy
+~~~
+
+READY / CREATING / FAILURE都沿用同一外框與主要區塊位置，避免 state transition時整個 dialog大幅跳動。
+
+### 3. App Identity Scale
+
+App Identity只作 context，不是主視覺。
+
+Recommended：
+- Logo：約 40–48px。
+- App Title：約 16–20px。
+
+不得做大型 hero / identity card。
+
+### 4. Share URL Geometry
+
+READY時 Share URL是第一操作焦點。
+
+Rules：
+- 佔主要內容寬度。
+- 單行顯示。
+- 可 keyboard select / manual copy。
+- overflow安全處理。
+- 不做大型 textarea。
+- Desktop field高度約 44–48px。
+
+### 5. Desktop READY Actions
+
+Desktop READY actions預設同列：
+~~~text
+[複製連結]    [系統分享]
+Primary        Secondary
+~~~
+
+`複製連結` = Primary。
+`系統分享` = Secondary，只有 supported時存在。
+
+若 System Share不支援：
+- 不保留空槽。
+- 不顯示 disabled placeholder。
+- Copy自然成為唯一主要 action。
+
+### 6. Privacy Copy Placement
+
+Privacy copy固定放在 actions下方、overlay主體底部。
+
+Rules：
+- Always visible。
+- 視覺優先低於 URL / actions。
+- 仍屬主體內容，不縮成難以注意的 legal footer / tiny caption。
+- line length保持易讀。
+
+### 7. CREATING Layout Stability
+
+CREATING不改 dialog外框 geometry。
+
+App Identity保留；原 READY URL / action所在 State Body位置改呈現：
+~~~text
+正在準備分享連結…
++ O05 processing presentation
+~~~
+
+READY後只替換 State Body，不重建另一套 layout。
+
+### 8. FAILURE Layout Stability
+
+Share creation failure同樣在原 State Body位置替換：
+~~~text
+暫時無法建立分享連結
+你的 App 不受影響
+
+[再試一次]
+[關閉]
+~~~
+
+不另開第二個 modal，不轉成 full-screen error。
+
+### 9. Copy Feedback Locality
+
+Copy success / failure只影響 URL + Copy action附近。
+
+`已複製`放在 Copy action附近。
+
+Copy failure message放在 URL field下方，保留有效 URL與其餘 READY layout。
+
+不得因 clipboard feedback重排整個 Overlay。
+
+### 10. Mobile Bottom Sheet Geometry
+
+Mobile採 bottom sheet：
+- full available width。
+- horizontal padding約 16–20px。
+- top radius = 20px。
+- 預設由內容決定高度，不強制 full-height。
+- 小螢幕 /內容增加時可延伸。
+
+### 11. Mobile Action Order
+
+Mobile固定：
+~~~text
+[複製連結]
+[系統分享]  supported only
+Privacy copy
+Close
+~~~
+
+Rules：
+- 主要 actions直向堆疊。
+- 接近 full-width。
+- min-height ≥ 44px。
+- safe-area aware。
+- Close使用明確 close control；Step 2不預設增加額外大型 Cancel button。
+
+### 12. Visual Hierarchy
+
+READY：
+~~~text
+Share URL / Primary Copy Action
+> Overlay Title
+> App Identity
+> Secondary System Share
+> Privacy Copy
+> underlying NodeFF / Runtime context
+~~~
+
+CREATING：
+~~~text
+Processing state
+> Overlay Title
+> App Identity
+~~~
+
+FAILURE：
+~~~text
+Failure message + Recovery action
+> Overlay Title
+> App Identity
+~~~
+
+### 13. Step 2 Locked Decisions
+
+1. Desktop = centered lightweight dialog，不用 anchored popover。
+2. Desktop width約 480–560px，max-width約 560px。
+3. 固定結構：Title + Close → App Identity → State Body → Actions → Privacy Copy。
+4. App Identity保持 context scale：Logo約40–48px，Title約16–20px。
+5. READY的Share URL是第一操作焦點。
+6. `複製連結` = Primary；`系統分享` = Secondary。
+7. Unsupported System Share不留 disabled placeholder / empty slot。
+8. Privacy copy固定在 actions下方且 always visible。
+9. CREATING / FAILURE原地替換 State Body，不另建另一套 Overlay geometry。
+10. Copy success / failure維持 local feedback，不推倒 READY layout。
+11. Mobile = bottom sheet，actions直向堆疊。
+12. Mobile order = 複製連結 → 系統分享（supported only）→ Privacy copy → Close。
+
+> Step 2：**APPROVED / LOCKED**。下一步：Step 3 — Detailed High-fi Visual Rules Lock。
+
 # 18. Review Status
 
-> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1 APPROVED — STEP2 NEXT**
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED — STEP3 NEXT**
 
-O01 ④A Low-fi與④B Step 1已完成 User Review。
+O01 ④A Low-fi與④B Step 1–2已完成 User Review。
 
-下一步：**O01 ④B Step 2 — Geometry + Visual Hierarchy Lock**。
+下一步：**O01 ④B Step 3 — Detailed High-fi Visual Rules Lock**。
 
 Formal Spec、Backlog / Sprint、Cursor implementation維持 HOLD。
