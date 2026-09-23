@@ -76,7 +76,50 @@ NodeFF Phase 1 採：
 --color-accent-creation      = #2DD4BF
 ~~~
 
-Status colors需在後續 Component / Recovery High-fi review中建立完整 semantic palette；不得直接把 brand yellow 當 Warning，也不得把 brand teal 當 Success 的唯一訊號。
+Status colors已由 O03 Recovery High-fi Step 3正式鎖定；以下 shared semantic palette為 cross-screen Current Truth。
+
+## 2.3 Shared Semantic Status Palette — APPROVED
+
+> Approved in O03 Recovery High-fi Step 3：2026-09-23
+>
+> 這裡是 cross-screen semantic status color 的 canonical token SSOT；個別 Screen / Overlay不得自行建立另一套 Success / Warning / Danger colors。
+
+~~~text
+INFO
+semantic-info-600    = #2563EB
+semantic-info-bg     = #EFF6FF
+semantic-info-border = #BFDBFE
+
+SUCCESS
+semantic-success-600    = #15803D
+semantic-success-bg     = #F0FDF4
+semantic-success-border = #BBF7D0
+
+WARNING / DEGRADED
+semantic-warning-700    = #B45309
+semantic-warning-bg     = #FFFBEB
+semantic-warning-border = #FDE68A
+
+DANGER / BLOCKING FAILURE
+semantic-danger-700    = #B91C1C
+semantic-danger-bg     = #FEF2F2
+semantic-danger-border = #FECACA
+
+CRITICAL / SECURITY
+semantic-critical-800    = #7F1D1D
+semantic-critical-bg     = #FFF1F2
+semantic-critical-border = #FDA4AF
+~~~
+
+Rules：
+- Brand Yellow `#F4C84C` ≠ Warning。
+- Brand Teal不得作 Success唯一訊號。
+- Recovery Primary Safe Action仍預設使用 Brand Teal；按鈕顏色代表安全 next action，不代表 failure severity。
+- Severity不得只靠顏色，必須搭配 icon + copy + structure / action semantics。
+- Preserved Context不是完整 Success state；material Lost Context通常使用 Warning treatment。
+- Unsupported通常使用 Info / Warning family，不自動升級 Danger。
+- Critical / Security不得用大片深紅背景製造恐慌，也不得提供 bypass / fake Retry。
+
 
 ---
 
@@ -620,7 +663,6 @@ High-fi design不得通過，若：
 
 ## Still Open — To Resolve in ④B
 
-- exact semantic Success / Warning / Danger palette。
 - exact focus ring token。
 - exact button heights beyond minimum。
 - exact Capsule imagery / illustration language。
