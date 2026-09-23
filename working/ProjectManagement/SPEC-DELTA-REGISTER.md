@@ -163,14 +163,14 @@ F03 Runtime semantics changed
 | Delta ID | Title | Status | Working Closure | Promotion | Verification |
 |---|---|---|---|---|---|
 | SD-20260922-001 | Runtime Global Loading + Timeout | **APPROVED** | 96800388424929c616f803976d4630561762b923 | PENDING | PENDING |
-| SD-20260922-002 | F01 Creation Progress Checkpoint Contract | **OPEN — DEFERRED TO O05 REVIEW** | PENDING | PENDING | PENDING |
+| SD-20260922-002 | F01 Creation Progress Checkpoint Contract | **APPROVED** | d687246a82e2b6192ac26d6afea3b9d0a3707811 | PENDING | PENDING |
 
 Current counts：
 
 ~~~text
-OPEN = 1
+OPEN = 0
 REVIEWED = 0
-APPROVED but not PROMOTED = 1
+APPROVED but not PROMOTED = 2
 PROMOTED but not VERIFIED = 0
 
 PRE-CURSOR SPEC REFRESH GATE = HOLD
@@ -366,12 +366,12 @@ MATERIAL
 
 ## Origin / Reason
 
-來源為 S02 Create Workspace ④B High-fi Review，以及：
+來源為 S02 Create Workspace ④B High-fi Review、O05 High-fi Step 1，以及：
 
 - `working/DESIGN-WORKBENCH.md`
 - `PENDING-FUNC-004 — F01 Creation Progress Checkpoint Contract`
 
-S02 / O05 已批准 consumer presentation：
+O05 已先鎖定跨流程 presentation truth：
 
 ~~~text
 reliable checkpoints
@@ -381,71 +381,196 @@ no reliable checkpoints
 → Stage only
 ~~~
 
-但目前 F01 Working contract尚未正式閉合 creation operation 的：
+Function Delta Review已完成並閉合 F01 CREATE checkpoint truth、F00 S02 composite progress與 F03 handoff boundary。
 
-- canonical checkpoint schema；
-- planned / completed checkpoints；
-- checkpoint plan freeze / legal recalculation；
-- clarification round對 checkpoint plan的影響；
-- F01 → F00/S02 progress projection interface；
-- F01 / F03 Runtime-prepared handoff ownership；
-- cancel / retry / failure lifecycle；
-- Acceptance / Test。
+## Canonical Working Sources
 
-因此 UI presentation已鎖定，但 backend / Function contract仍有 Material gap；不得讓 Cursor自行發明 payload或 checkpoint semantics。
+Semantic owners：
 
-## Canonical Working Source
+1. `working/functions/F01-INTENT-COMPILATION.md`
+2. `working/functions/F00-EXPERIENCE-SHELL.md`
 
-- `working/DESIGN-WORKBENCH.md` — PENDING-FUNC-004
-- future reviewed owner：`working/functions/F01-INTENT-COMPILATION.md`
-- collaborators：F00 + O05 / S02 presentation
+Supporting UX / governance evidence：
 
-## Provisional Formal Targets
+3. `working/UI-UX/screens/S02-CREATE-WORKSPACE.md`
+4. `working/UI-UX/overlays/O05-LOADING-BUILDING-HYDRATION.md`
+5. `working/DESIGN-WORKBENCH.md`
 
-最終 targets待 Function Delta Review確認；目前至少預期影響：
+Ownership：
+
+- F01 owns CREATE compiler checkpoints。
+- F00 owns cross-Function S02 composite consumer projection。
+- F03 owns hydration / APP_READY truth。
+- O05 only presents source truth；不得自行產生 checkpoint。
+
+## Closed Working Contract
+
+F01 CREATE compiler plan v1 固定六個 checkpoints：
+
+~~~text
+F01-CREATE-CP-01  INTENT_ANALYZED
+F01-CREATE-CP-02  POLICY_EVALUATED
+F01-CREATE-CP-03  INTENT_RESOLVED
+F01-CREATE-CP-04  CAPABILITY_COVERAGE_RESOLVED
+F01-CREATE-CP-05  BLUEPRINT_COMPOSED
+F01-CREATE-CP-06  BLUEPRINT_VALIDATED
+~~~
+
+F00 S02 composite plan再加：
+
+~~~text
+F00-CREATE-CP-07  APP_READY
+owner truth = F03 READY
+~~~
+
+因此 consumer overall progress固定：
+
+~~~text
+1/7 = 14%
+2/7 = 28%
+3/7 = 42%
+4/7 = 57%
+5/7 = 71%
+6/7 = 85%
+7/7 = 100%
+~~~
+
+Rules：
+
+- checkpoint completion monotonic。
+- Clarification / Assumption waiting不改 denominator、不推進 progress。
+- material Intent edit = new logical creation progress operation。
+- request in-flight時只維持最後已知 truth；Phase 1不新增 polling / SSE / WebSocket。
+- network retry不重複 checkpoint。
+- User-triggered retry建立新 logical progress operation，只重新 derive仍有效 truth。
+- validation-driven recompose不回退 completed checkpoint。
+- F01 VALIDATED不是 App Ready；只有 F03 READY才可顯示100%。
+
+## Affected Formal Spec Targets
+
+Human-readable Function Specs：
 
 1. `spec/functions/F01-INTENT-COMPILATION.md`
-2. `spec/functions/F00-EXPERIENCE-SHELL.md`（若 projection interface需 formalize）
+2. `spec/functions/F00-EXPERIENCE-SHELL.md`
+
+Machine-readable Shared Spec Registry：
+
 3. `spec/shared/ACCEPTANCE-TEST-REGISTRY.json`
 
-若 Review發現 Data / API / Evidence registry也需變更，必須補入本筆 Delta後才能 promotion。
+**Promotion completeness = 3 / 3 targets synced。**
+
+No Formal target added for Evidence Event Registry：
+
+- 本 Delta不新增 Evidence Event ID。
+- 既有 F01 lifecycle events已足以支援主要 observability。
+- progress projection屬 Function/API + Consumer orchestration contract，不另建 telemetry stream。
+
+No Data Model target：
+
+- 本 Delta不新增 DB schema。
+- progress checkpoint plan為 deterministic Function contract；Phase 1不新增 durable progress table。
+
+## Acceptance / Test
+
+New F01 contracts：
+
+~~~text
+F01-AC-025 → TEST-F01-PROG-001
+F01-AC-026 → TEST-F01-PROG-002
+F01-AC-027 → TEST-F01-PROG-003
+F01-AC-028 → TEST-F01-PROG-004
+F01-AC-029 → TEST-F01-PROG-005
+~~~
+
+New F00 contracts：
+
+~~~text
+F00-AC-033 → TEST-F00-PROG-001
+F00-AC-034 → TEST-F00-PROG-002
+F00-AC-035 → TEST-F00-PROG-003
+~~~
+
+Total new Acceptance / Test contracts：**8**。
+
+## Registry / Stable ID Impact
+
+Acceptance/Test Registry：
+
+~~~text
+271 → 279
+~~~
+
+Evidence Event Registry：
+
+~~~text
+112 → 112
+no new F01 event IDs
+~~~
+
+Error / Recovery stable IDs：
+
+~~~text
+no new IDs
+~~~
 
 ## Status
 
-**OPEN**
+**APPROVED**
 
 Reason：
 
-- User已批准產品 / UX direction。
-- Function Delta Review尚未執行。
-- 尚未形成 closed F01 Working Current Truth。
-- Formal Spec維持 frozen。
+- O05 High-fi Step 1 已先鎖 shared processing presentation boundary。
+- F01 Function Delta Review已完成。
+- F01 / F00 Working Current Truth已同步。
+- Acceptance/Test Working Registry已同步至279。
+- O05 / Design Workbench dependency status已同步。
+- Formal Spec依 sequencing rule維持 frozen，尚未 promotion。
 
 ## Working Approval / Closure Commit
 
-PENDING
+d687246a82e2b6192ac26d6afea3b9d0a3707811
+
+Commit message：
+
+~~~text
+docs: 閉合 F01 建立進度 checkpoint Function Delta
+~~~
 
 ## Promotion Commit
 
 PENDING
 
+只有 3 / 3 Formal targets同步後才能改為 PROMOTED。
+
 ## Verification Evidence
 
 PENDING
 
+至少需記錄：
+
+- Working → Formal diff audit。
+- F01/F00 Formal contract sync。
+- Acceptance/Test Registry count = 279。
+- 8組新增 Acceptance → Test mapping completeness。
+- no duplicate stable IDs。
+- Formal Spec → Backlog forward mapping。
+- Backlog → Acceptance / Formal / Working reverse mapping。
+- orphan contract = 0。
+- orphan execution item = 0。
+
+完成後才可改為 VERIFIED。
+
 ## Pre-Cursor Requirement
 
-本 Delta必須完成：
+本 Delta目前 lifecycle：
 
 ~~~text
-OPEN
-→ REVIEWED
-→ APPROVED
+APPROVED
 → PROMOTED
 → VERIFIED
 ~~~
 
-Cursor implementation不得以 S02 High-fi mockup自行推導 backend progress checkpoint contract。
+Formal Spec仍 frozen，因此 promotion / verification都保持 PENDING。
 
 ---
 
@@ -578,8 +703,8 @@ Runtime Global Loading + Timeout
 
 SD-20260922-002
 F01 Creation Progress Checkpoint Contract
-= OPEN
-= Function Delta Review pending
+= APPROVED
+= Working Function Delta closed
 = Formal promotion pending
 = Verification pending
 
@@ -590,7 +715,6 @@ CURRENT UI/UX
 → S04 ④B next
 
 HOLD
-→ F01 Creation Progress Function Delta closure
 → remaining S04–S06 / O01–O05 ④B High-fi
 → Cursor Build / Operating Model Review
 → Formal Spec Refresh
@@ -601,11 +725,14 @@ HOLD
 
 ---
 
-## SD-20260922-002 — Deferred Review Note
+## SD-20260922-002 — Closure Note
 
-Status：**OPEN — DEFERRED TO O05 HIGH-FI / PROCESSING REVIEW**
+Status：**APPROVED / WORKING CLOSED / FORMAL_REFRESH_PENDING**
 
-- No Working Function contract change yet。
-- No Formal Spec promotion。
-- O05 will first define the cross-flow progress model；after that, each Function owner receives only its own required checkpoint delta。
+- O05 High-fi Step 1已完成 shared processing boundary。
+- F01 / F00 Function Delta已閉合並寫入 Working Current Truth。
+- Acceptance/Test Registry已由271更新至279。
+- No new DB schema。
+- No new Evidence Event ID。
+- Formal Spec未修改。
 - Promotion / Verification remain PENDING。
