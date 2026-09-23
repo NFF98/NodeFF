@@ -2,7 +2,7 @@
 
 > Screen ID：S04
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
 >
 > Phase：Phase 1
 >
@@ -12,6 +12,14 @@
 >
 > 本文件的 ④A Low-fi 與 ④B High-fi Step 1–4 已完成 User Review；Formal Spec仍維持 freeze，待 pre-Cursor Formal Spec Refresh。
 
+### Final Cross-Screen High-fi Review — PASSED
+
+> Verified：2026-09-23
+>
+> Final cross-screen authority：**Step 1–3 textual contract + Design System + Fxx Function truth > Step 4 visual reference。**
+>
+> 本次 Final Review只修 canonical text consistency / stale wording / status / reference precedence；**PNG artifacts不修改**。
+
 # 1. User Outcome
 
 S04 的核心任務：
@@ -20,7 +28,7 @@ S04 的核心任務：
 
 因此 S04 不應變成 Landing Page、Creator Profile、Share Preview Page 或登入牆。
 
-# 2. Core UX Direction — Proposed
+# 2. Core UX Direction — Approved
 
 S04 預設是一個 **transitional entry surface**，不是長時間停留的正式產品頁。
 
@@ -376,7 +384,7 @@ no reliable restore checkpoints
 → Stage only
 ~~~
 
-詳細 cross-flow progress model留待 O05 High-fi / Processing Review統一處理。
+Cross-flow progress model已由 O05 High-fi Step 1–4鎖定；S04只消費 source checkpoint truth，不自行產生 checkpoint或 fake progress。
 
 S04不得：
 - 用 elapsed time推算進度；
@@ -518,7 +526,7 @@ S04不是 Dashboard / Landing Page，因此不建立多欄、sidebar、hero mark
 Desktop restore / recovery主內容：
 
 ~~~text
-max-width：約 480–560px
+max-width：約 360–480px
 ~~~
 
 不做寬版 content panel。
@@ -679,13 +687,13 @@ Rules：
 - Background以 White / Soft Neutral為主。
 - Teal用於主要狀態、progress、focus與 recovery primary action。
 - Aqua只作 progress / restore supporting accent。
-- Yellow只允許小面積 completion / energy accent。
+- O05 progress的 Yellow只允許在 actual `100% / ready / committed` 後作小面積 completion accent；不得提前表示「快完成」。
 - 不使用大面積 gradient。
 - 不使用 neon / rainbow / glassmorphism。
 - 不使用重 shadow把 restore body做成大型浮島卡片。
 - Brand Yellow不得代表 warning / error / unsafe。
 
-Exact Error / Warning semantic color不由 S04自行發明；留待 O03 Recovery High-fi統一鎖定。
+Error / Warning semantic color不由 S04自行發明；已由 O03 Recovery Step 3 + Design System shared semantic palette統一鎖定。
 
 ### 2. App Identity Visual Treatment
 
@@ -888,7 +896,7 @@ Final Visual Reference覆蓋 Desktop / Mobile三種代表狀態：
 若圖片與文字 contract有任何衝突：
 
 ~~~text
-S04 Text Contract
+S04 Step 1–3 Text Contract + Fxx Function Truth
 > NodeFF Design System
 > Approved Visual Reference
 ~~~

@@ -10,7 +10,7 @@
 >
 > Function behavior sources：F06 Remix / Refine + F00 Experience Shell + F01 Intent Compilation + F03 Runtime。
 >
-> 本文件是 ④A Low-fi review draft，不代表 User 已批准，也不代表 Cursor 可實作。
+> 本文件的④A Low-fi與④B High-fi Step 1–4已完成 User Review；Formal Spec仍 frozen，Cursor implementation仍 HOLD。
 
 # 1. User Outcome
 
@@ -1284,7 +1284,7 @@ Cursor不得：
 - S05B 必須至少包含一個有效修改需求；圖片不得被解讀為 zero-change copy / ownership flow。
 - 圖中的 Processing stage / % 只作 presentation example；truthful checkpoint contract 仍由 O05 擁有。
 - 圖中的 Recovery copy / action 只作 visual reference；retry eligibility / recovery semantics 仍由 O03 / F12 擁有。
-- 若圖片文字因 rendering 產生 typo / sample discrepancy，**Step 1–3 textual contract + Fxx Function truth 優先於圖片**。
+- 若圖片文字因 rendering 產生 typo / sample discrepancy，**Step 1–3 textual contract + Design System + Fxx Function truth 優先於圖片**。
 - S05 不是 S06；圖片不得被解讀為要求 old/new side-by-side correction compare。
 - Desktop Preview 維持 Step 2 已鎖定的 **single-column Runtime + bottom decisions**。
 - Mobile CTA order 維持 Step 2 已鎖定的 S05A / S05B 各自 wording。
@@ -1307,3 +1307,11 @@ S05 ④B Step 1–4 已完成 User Review並鎖定。
 - Structure / Geometry / Visual Rules / Visual Reference 的 material change 必須 reopen 對應 Step。
 - Cross-screen follow-up：S03 對 S05A「修改這個 App」與 S05B「改成我的版本」的入口 presentation 仍待 S03 Step 1 reopen決定；此 pending 不改變 S05 本身 Current Truth。
 - Formal Spec仍維持 freeze，待 pre-Cursor Formal Spec Refresh。
+
+### Final Cross-Screen High-fi Review — PASSED
+
+> Verified：2026-09-23
+>
+> Final cross-screen authority：**Step 1–3 textual contract + Design System + Fxx Function truth > Step 4 visual reference。**
+>
+> 本次 Final Review只修 canonical text consistency / stale wording / status / reference precedence；**PNG artifacts不修改**。

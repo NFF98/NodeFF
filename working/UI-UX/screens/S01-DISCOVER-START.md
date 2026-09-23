@@ -2,13 +2,13 @@
 
 > Screen ID：S01
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_APPROVED / STEP 1–4 CLOSED**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
 >
 > Phase：Phase 1
 >
 > Screen-level canonical owner：`working/UI-UX/screens/S01-DISCOVER-START.md`
 >
-> Function behavior sources：`working/functions/F00-EXPERIENCE-SHELL.md` + approved `spec/functions/F00-EXPERIENCE-SHELL.md`
+> Function behavior source：`working/functions/F00-EXPERIENCE-SHELL.md`（Working Current Truth；Formal Spec仍 frozen）
 >
 > 注意：本文件只固定目前已確認的 Screen-level UI/UX。若需要改 F00 behavior contract，必須回 F00 Working Review。
 
@@ -449,14 +449,22 @@ Reference boundary：
 - 圖片鎖定 composition / density / visual impression / Desktop-Mobile relationship。
 - sample content / decorative props不自動成為 Function requirement。
 - 圖片不得新增 Profile / hamburger / duplicate Create / icon category grid / App Store metadata等未批准元素。
-- Step 1–3文字 contract + F00/F01 Function truth優先於圖片生成誤差。
+- Step 1–3文字 contract + Design System + F00/F01 Function truth優先於圖片生成誤差。
 
 # 10. Review Status / Change Control
 
-> **④A LOW_FI_APPROVED / ④B HIGH_FI_APPROVED — WORKING BASELINE**
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
 
 - S01 High-fi Step 1–4已 CLOSED。
 - 任何已批准 Structure / Geometry / Visual Rule / image reference改動，必須 reopen對應 Step。
 - 若後續 Cursor需要額外 component anatomy / state matrix / animation detail，可新增 `Step 4.5 — <Layer Name> Lock`；不得用 Step 4.5 偷改 Step 1–4。
 - 涉及 Function behavior則回 F00/F01 Working Review。
 - Formal Spec仍待 pre-Cursor refresh。
+
+### Final Cross-Screen High-fi Review — PASSED
+
+> Verified：2026-09-23
+>
+> Final cross-screen authority：**Step 1–3 textual contract + Design System + Fxx Function truth > Step 4 visual reference。**
+>
+> 本次 Final Review只修 canonical text consistency / stale wording / status / reference precedence；**PNG artifacts不修改**。

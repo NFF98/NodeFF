@@ -2,7 +2,7 @@
 
 > Screen ID：S03
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B HIGH_FI_APPROVED — WORKING BASELINE**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
 >
 > Phase：Phase 1
 >
@@ -511,9 +511,10 @@ Generated App取得約 80–90% attention。
 
 Visible presentation：
 - 極快、同一 render frame完成 → 不強迫 paint loading。
-- 看得到的 processing優先使用 Runtime頂部約 `3–4px` subtle progress rail + stage label。
-- reliable checkpoints → Stage + checkpoint-derived %。
-- no reliable checkpoints → Stage only。
+- 看得到的 processing使用 **Runtime Frame內的 in-place compact processing layer**；Generated App與last-known-good state保持可辨識。
+- Desktop compact layer約 `320–480px`，位於 Runtime Frame上方 / 上中區；Mobile沿 content edge，左右約 `16–20px`。
+- reliable checkpoints → Stage + checkpoint-derived % + progress rail。
+- no reliable checkpoints → Stage + bounded activity indicator；不顯示空 rail。
 - 不 fake smooth %。
 - 不用 elapsed time灌進度。
 - 不為動畫拖慢 operation。
@@ -533,7 +534,7 @@ Visible presentation：
 ### Overlay Visual Family
 
 O01：
-- Desktop約 `420–480px` lightweight dialog / anchored panel。
+- Desktop約 `480–560px` centered lightweight dialog。
 - Mobile bottom sheet。
 - App context仍可辨識。
 
@@ -550,7 +551,7 @@ O03 inline / node-level：
 S03方向：
 - Neutral / White：70%+。
 - Teal：約20%，用於 primary action / active / focus / processing。
-- Yellow：≤10%，實際可更少；只作 small energy / completion / new marker。
+- Yellow：≤10%，實際可更少；一般 screen可作 small energy / new marker；**O05 progress僅在 actual 100% / ready / committed後作 completion accent**。
 - Yellow不是 warning / danger。
 - 不靠顏色單獨表達 state。
 
@@ -615,11 +616,11 @@ Reference boundary：
 - 圖片鎖定 layout / visual hierarchy / component language / color use / Desktop-Mobile relationship。
 - sample restaurant content / imagery / labels / annotation examples不自動成為 Function requirements。
 - Mobile nav wording若圖片仍顯示舊 `App`，視為已被 Step 1 的 `目前 App` textual contract supersede；不構成重新批准舊 wording。
-- Step 1–3文字 contract + Fxx Function truth優先於圖片生成誤差。
+- Step 1–3文字 contract + Design System + Fxx Function truth優先於圖片生成誤差。
 
 # 19. Review Status / Change Control
 
-> **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / ④B HIGH_FI_APPROVED — WORKING BASELINE**
+> **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
 
 - S03 High-fi Step 1–4已 CLOSED。
 - approved PNG artifact已存在並驗證。
@@ -627,3 +628,11 @@ Reference boundary：
 - 若後續需要 component anatomy / overlay stacking / operation-state mapping等額外細節，可新增 `Step 4.5 — <Layer Name> Lock`。
 - Step 4.5不得偷改 Step 1–4；涉及 Function behavior必須回相關 Fxx Working Delta Review。
 - Formal Spec仍待 pre-Cursor refresh。
+
+### Final Cross-Screen High-fi Review — PASSED
+
+> Verified：2026-09-23
+>
+> Final cross-screen authority：**Step 1–3 textual contract + Design System + Fxx Function truth > Step 4 visual reference。**
+>
+> 本次 Final Review只修 canonical text consistency / stale wording / status / reference precedence；**PNG artifacts不修改**。

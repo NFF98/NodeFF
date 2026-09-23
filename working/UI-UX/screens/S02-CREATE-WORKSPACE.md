@@ -2,7 +2,7 @@
 
 > Screen ID：S02
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_APPROVED / STEP 1–4 CLOSED**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
 >
 > Phase：Phase 1
 >
@@ -10,7 +10,7 @@
 >
 > Function behavior sources：working/functions/F00-EXPERIENCE-SHELL.md、working/functions/F01-INTENT-COMPILATION.md
 >
-> 本文件是 Low-fi review draft，不代表 User 已批准，也不代表 Cursor 可實作。
+> 本文件的④A Low-fi與④B High-fi Step 1–4已完成 User Review；Formal Spec仍 frozen，Cursor implementation仍 HOLD。
 
 # 1. User Outcome
 
@@ -407,10 +407,10 @@ no reliable checkpoints
 - 不以 elapsed time / animation timer灌高進度。
 - 100%只在 target ready condition成立後。
 - completed = Teal check。
-- current = Teal active + restrained bounded pulse / flow。
+- current = Teal active；只有 indeterminate activity indicator可使用 restrained bounded motion，determinate rail不得用 pulse / flow假裝前進。
 - future = neutral gray。
-- Yellow只在 approaching completion / ready小面積使用。
-- F01 creation checkpoint backend contract仍以相關 Working Delta為準。
+- O05 progress在 `0–99%` 不使用 Yellow；只有 actual `100% / ready / committed` 後才允許小面積 Yellow completion accent。
+- F01 creation checkpoint backend contract已由 `SD-20260922-002` 完成 Working closure；Current Truth以 F01/F00 Working contract為準。
 
 ### Clarification Surface
 
@@ -435,7 +435,7 @@ no reliable checkpoints
 
 ### Completion
 
-- Teal → Aqua → 少量 Yellow accent。
+- Teal → Aqua為正常 processing；actual `100% / ready / committed` 後才可出現少量 Yellow completion accent。
 - check / completion motion約 `180–240ms`。
 - reduced-motion時直接 state change。
 - 不做 confetti / fireworks。
@@ -478,14 +478,22 @@ Reference boundary：
 - 圖片鎖定 composition / hierarchy / visual language / responsive relationship。
 - sample question copy / choice content是 presentation example，不自動成為 F01 semantic requirement。
 - 圖片不得新增 general navigation / Share / Profile / bottom nav / fake percentage / technical console。
-- Step 1–3文字 contract + F00/F01/O05 truth優先於圖片生成誤差。
+- Step 1–3文字 contract + Design System + F00/F01/O05 truth優先於圖片生成誤差。
 
 # 21. Review Status / Change Control
 
-> **④A LOW_FI_APPROVED / ④B HIGH_FI_APPROVED — WORKING BASELINE**
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
 
 - S02 High-fi Step 1–4已 CLOSED。
 - 任何已批准 Structure / Geometry / Visual Rule / image reference改動，必須 reopen對應 Step。
 - 若後續需要 component anatomy / clarification state matrix / progress mapping等額外層，可新增 `Step 4.5 — <Layer Name> Lock`。
 - Step 4.5不得偷改 Step 1–4；涉及 Function behavior必須回相關 Fxx Working Delta Review。
 - Formal Spec仍待 pre-Cursor refresh。
+
+### Final Cross-Screen High-fi Review — PASSED
+
+> Verified：2026-09-23
+>
+> Final cross-screen authority：**Step 1–3 textual contract + Design System + Fxx Function truth > Step 4 visual reference。**
+>
+> 本次 Final Review只修 canonical text consistency / stale wording / status / reference precedence；**PNG artifacts不修改**。
