@@ -12,7 +12,7 @@
 
 | Count | Lost Time / Incident | Total Lost Time |
 |---:|---:|---:|
-| 5 | mixed | **210 min / 3 hr 30 min** |
+| 6 | mixed | **255 min / 4 hr 15 min** |
 
 ---
 
@@ -25,6 +25,7 @@
 | SHAME-003 | 2026-09-22 | 第二次胡說八道：以 SVG 代替批准 PNG，還把它當成完成 | 明明 NodeFF 已有 S01–S03 真 PNG reference 的 precedent，卻建立 `S04-Shared-App-Entry-Highfi-v1.svg` 作替代，並宣稱 S04 Step 4 已正確寫入 GitHub。這違反「先查 GitHub Current Truth、不要假裝完成」的協作要求。 | 刪除 S04 SVG；建立真正 `working/UI-UX/references/S04-Shared-App-Entry-Highfi-v1.png`；同步修正 S04 Step 4 reference；重新驗證 repo tree。 | 45 min | CORRECTED |
 | SHAME-004 | 2026-09-23 | S05 寫入 + S04 PNG 修復指令卡住超過 10 小時仍未完成 | 將「寫入 S05 Step 4」與「修復 S04 PNG」混成長鏈工具嘗試，反覆轉檔／檢查／搬運，沒有在明確時間上限內停止失敗路徑，造成實際 wall-clock 延遲超過 10 小時。 | 之後 artifact 寫入採短鏈：先單獨完成文字 commit，再單獨處理每張 binary；每條工具鏈失敗 2 次即停止換路徑；任何單一工作若 10 分鐘內未收斂，立即回報阻塞點，不再無限試。 | 45 min | OPEN / PROCESS FIX |
 | SHAME-005 | 2026-09-23 | 明知 10 分鐘 Hard Stop 規則，S04/S05 PNG 修復仍再次拖到約 30 分鐘 | 在已經因 SHAME-004 明確訂下「同一路徑失敗 2 次即停止、單一工作 10 分鐘未收斂立即回報」後，本次重新處理 S04/S05 Hi-fi PNG 時仍持續 materialize／嘗試 binary 路徑／檢查 GitHub 歷史與 blob，超過 10 分鐘沒有主動停止，直到 User 再次指出 timeout。這是對已存在流程修正的直接違反。 | 立即停止 S04/S05 artifact 操作；之後 10 分鐘 hard stop 必須作為真正 execution gate：到時限即停止所有相關 tool calls、先回報目前完成狀態與唯一 blocker，未取得 User 新指示前不得繼續同一工作鏈。 | 30 min | OPEN / RULE VIOLATION |
+| SHAME-006 | 2026-09-23 | S05 完成後的下一步連續 3 次誤判，沒有依 High-fi canonical sequence 直接進 S06 | 在 User 已完成 S05A/S05B High-fi 後，先錯誤要求重做 F00/F03，再錯誤要求 Cross-Screen Review，之後又錯誤跳到 O05；沒有先讀 DESIGN-SYSTEM.md 的 High-fi Sequence 與 S06/O01–O05 Current Truth，造成連續 3 次錯誤導航。 | 下一步判斷必須先讀 canonical sequence + 當前 Screen status；High-fi 嚴格依 S01→S02→S03→S04→S05→S06→O01→O02→O03→O04→O05，不得用局部 Workbench note 覆蓋全局順序。 | 45 min | OPEN / PROCESS FIX |
 
 ---
 
@@ -36,9 +37,10 @@ SHAME-002  45 min
 SHAME-003  45 min
 SHAME-004  45 min
 SHAME-005  30 min
+SHAME-006  45 min
 -----------------
-TOTAL     210 min
-          3 hr 30 min
+TOTAL     255 min
+          4 hr 15 min
 ~~~
 
 ---
@@ -81,10 +83,16 @@ TOTAL     210 min
    - 「寫入成功」與「任務成功」分開；只有 GitHub 上實際可開啟的 artifact 才算完成。
    - S04/S05 實證：User 直接上傳約 30 秒完成；此路徑優先於不可靠的自動 binary orchestration。
 
+
+9. **Next-step navigation must follow canonical sequence**
+   - 判斷「下一步」前，先讀 `working/UI-UX/DESIGN-SYSTEM.md` High-fi Sequence 與目標 Screen / Overlay status。
+   - High-fi canonical sequence：S01 → S02 → S03 → S04 → S05 → S06 → O01 → O02 → O03 → O04 → O05。
+   - Workbench 的局部 follow-up / deferred note 不得覆蓋全局 delivery sequence。
+
 ---
 
 ## Current Status
 
-> **5 incidents / 210 minutes lost / 3 hr 30 min.**
+> **6 incidents / 255 minutes lost / 4 hr 15 min.**
 
 本表為 Working Project Management 紀錄，不屬 Formal Spec。
