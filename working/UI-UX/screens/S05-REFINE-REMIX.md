@@ -1265,11 +1265,11 @@ Cursor不得：
 >
 > Approved visual：
 >
-> ![S05 Refine / Remix High-fi v1](../references/S05-Refine-Remix-Highfi-v1.png)
+> ![S05 Refine / Remix High-fi v1](../references/S05 UI_UX最終視覺參考板.png)
 >
 > Canonical path：
 >
-> `working/UI-UX/references/S05-Refine-Remix-Highfi-v1.png`
+> `working/UI-UX/references/S05 UI_UX最終視覺參考板.png`
 >
 > Repository PNG blob SHA：
 >
@@ -1303,7 +1303,7 @@ Cursor不得：
 S05 ④B Step 1–4 已完成 User Review並鎖定。
 
 - S05 High-fi：**CLOSED / WORKING BASELINE**。
-- Canonical PNG：`working/UI-UX/references/S05-Refine-Remix-Highfi-v1.png`。
+- Canonical PNG：`working/UI-UX/references/S05 UI_UX最終視覺參考板.png`。
 - Structure / Geometry / Visual Rules / Visual Reference 的 material change 必須 reopen 對應 Step。
 - Cross-screen follow-up：S03 對 S05A「修改這個 App」與 S05B「改成我的版本」的入口 presentation 仍待 S03 Step 1 reopen決定；此 pending 不改變 S05 本身 Current Truth。
 - Formal Spec仍維持 freeze，待 pre-Cursor Formal Spec Refresh。
