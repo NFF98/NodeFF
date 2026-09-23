@@ -668,3 +668,19 @@ O05 的 Low-fi presentation direction、Runtime Function Delta、Cross-Screen Re
 `SD-20260922-002 — F01 Creation Progress Checkpoint Contract` 仍保持 **OPEN**，後續另做 Function Delta closure，不混入 O05 UI規格。
 
 Formal Spec與 Cursor implementation維持 HOLD。
+
+---
+
+## Post-Step1 Function Delta Closure Note — 2026-09-23
+
+`SD-20260922-002 — F01 Creation Progress Checkpoint Contract` 已在 O05 Step 1 後完成獨立 Function Delta Review。
+
+Current Truth：
+
+- F01 CREATE compiler checkpoint plan已閉合。
+- F00 S02 composite Create progress已閉合。
+- F03仍擁有 hydration / APP_READY truth。
+- O05仍只做 presentation，不擁有 checkpoint truth。
+- Formal Spec仍 frozen；promotion / verification pending。
+
+本 note只更新 Function dependency status，不改 O05 Step 1 已鎖定的 UI structure。

@@ -1,6 +1,6 @@
 # F01 — Intent Compilation + Model Gateway
 
-> 狀態：SPEC_READY
+> 狀態：SPEC_READY + WORKING_DELTA_CLOSED / FORMAL_REFRESH_PENDING
 > Formal Spec：spec/functions/F01-INTENT-COMPILATION.md
 >
 > Canonical Role：Phase 1 Intent Analysis、Clarification Policy、Resolved Intent、Capability Coverage coordination、Blueprint Composition 與 Model Gateway 的 Working Current Truth。
@@ -1194,3 +1194,187 @@ POST /api/v1/intents/{id}/compile
 ~~~
 
 > LLM 負責理解與提案；NodeFF Policy 負責決定資訊何時足夠；F02 負責決定 Blueprint 是否可以被信任執行。
+
+---
+
+## Closed Working Delta — F01 Creation Progress Checkpoint Contract
+
+> 狀態：**WORKING_DELTA_CLOSED（2026-09-23） / FORMAL_REFRESH_PENDING**
+>
+> 來源：S02 Create Workspace High-fi + O05 High-fi Step 1 + `SD-20260922-002`。
+>
+> Formal Spec：**暫不修改**。待 pre-Cursor Formal Spec Refresh 一次同步。
+
+### F01-DATA-009 — CREATE Compiler Checkpoint Plan v1
+
+Phase 1 `intent_kind = CREATE` 使用固定、finite、ordered 的 F01 compiler checkpoint plan：
+
+~~~text
+F01-CREATE-CP-01  INTENT_ANALYZED
+F01-CREATE-CP-02  POLICY_EVALUATED
+F01-CREATE-CP-03  INTENT_RESOLVED
+F01-CREATE-CP-04  CAPABILITY_COVERAGE_RESOLVED
+F01-CREATE-CP-05  BLUEPRINT_COMPOSED
+F01-CREATE-CP-06  BLUEPRINT_VALIDATED
+~~~
+
+Completion truth：
+
+- `INTENT_ANALYZED`：有效 Structured Intent Envelope 已產生並通過 shape validation。
+- `POLICY_EVALUATED`：NFF-owned Clarification Policy 至少完成一次 deterministic evaluation。
+- `INTENT_RESOLVED`：所有 required / material unknown 已解決，material assumptions 已完成 User decision，Intent 真正進入 READY。
+- `CAPABILITY_COVERAGE_RESOLVED`：F04 coverage result 已成立，且允許進 composition。
+- `BLUEPRINT_COMPOSED`：已產生符合 Prompt B output contract 的 Blueprint Candidate；仍不代表可執行。
+- `BLUEPRINT_VALIDATED`：F02 已 PASS；只有此時 F01 可宣告 VALIDATED。
+
+Rules：
+
+1. checkpoint completion 必須 monotonic；同一 progress operation 內完成後不得撤回。
+2. checkpoint 只表示已完成 work milestone，不表示剩餘時間。
+3. Provider latency、elapsed time、animation timer 不得推進 checkpoint。
+4. validation-driven bounded recompose 不回退已完成 checkpoint；`BLUEPRINT_VALIDATED` 仍要等最終 F02 PASS。
+5. F01 不擁有 Runtime hydration / APP_READY completion truth。
+
+### F01-RQ-009 — Plan Freeze / Clarification Semantics
+
+CREATE v1 的六個 F01 checkpoints 在 creation flow 開始時即固定；Clarification round 不新增或刪除 checkpoint，因此 denominator 不因「多問一輪」改變。
+
+~~~text
+ANALYZING
+→ INTENT_ANALYZED
+→ POLICY_EVALUATED
+→ NEEDS_CLARIFICATION / READY_WITH_VISIBLE_ASSUMPTIONS
+→ waiting for User
+→ re-analyze / re-evaluate as needed
+→ INTENT_RESOLVED only when READY
+~~~
+
+等待 User 時：
+
+- processing 不繼續推進。
+- completed checkpoint set 保持最後真實值。
+- 不因等待時間增加百分比。
+- 新 clarification round 不重置 plan。
+
+若 User 明確修改 original Intent，使先前 semantic work 不再有效：
+
+> 視為 **new logical creation progress operation**。
+
+新 operation 重新建立 progress projection；不得沿用舊 operation 的 completed count 假裝接續。
+
+### F01-API-005 — Creation Progress Projection
+
+F01 對 F00 提供 machine-readable progress snapshot；O05 / S02 不可自行猜 checkpoint。
+
+CREATE response 可包含：
+
+~~~json
+{
+  "progress": {
+    "plan_version": "f01-create-v1",
+    "mode": "DETERMINATE",
+    "planned_checkpoint_ids": [
+      "F01-CREATE-CP-01",
+      "F01-CREATE-CP-02",
+      "F01-CREATE-CP-03",
+      "F01-CREATE-CP-04",
+      "F01-CREATE-CP-05",
+      "F01-CREATE-CP-06"
+    ],
+    "completed_checkpoint_ids": [],
+    "lifecycle_state": "ANALYZING",
+    "waiting_for_user": false
+  }
+}
+~~~
+
+Contract：
+
+- `POST /intents`、`POST /intents/{id}/answers`、`POST /intents/{id}/compile` 的 CREATE success response 應回目前 progress snapshot。
+- Phase 1 **不因此新增 async polling / SSE / WebSocket**。
+- request in-flight 時，F00只可維持最後已知 checkpoint truth + truthful current stage；不得估算中間完成度。
+- response 一次完成多個 checkpoints 時，可以一次跳升多個真實 milestones。
+- 非 CREATE intent_kind 不被本 Delta 強制套用此 plan；Refine / Remix / Correct 由各 host Function 自己擁有 cross-flow progress semantics。
+
+### F01-RQ-010 — Retry / Cancel / Failure
+
+Network retry：
+
+- same Idempotency-Key + same body = same logical operation。
+- 不重複完成 checkpoint。
+- 不因 HTTP retry 增加 progress。
+
+User-triggered retry after terminal/recoverable failure：
+
+- 建立新的 logical progress operation。
+- 可重新使用仍然有效的 durable Intent / Resolved Intent truth。
+- completed checkpoints 必須從仍有效的 Function truth重新 derive，不得直接複製前一失敗 operation 的百分比。
+
+Cancel：
+
+- current progress operation 結束。
+- 未完成 checkpoints 永不因 Cancel 標 completed。
+- preserved Intent / Blueprint semantics沿既有 F01/F00 contract。
+
+Failure / timeout：
+
+- progress 停在最後真實 completed set。
+- 交 F12 / O03 recovery。
+- 不把 failure 自動補成 100%。
+
+### F01 / F00 / F03 Handoff Boundary
+
+F01只擁有六個 compiler checkpoints。
+
+S02 的「準備 App」與最終 100% 必須等 F03 hydration / APP_READY truth；F01 `VALIDATED` 不等於整個 App Ready。
+
+Canonical ownership：
+
+~~~text
+F01 compiler checkpoints 1–6
+→ F02 PASS / F01 VALIDATED
+→ F00 keeps Create progress surface
+→ F03 hydrate
+→ F03 READY
+→ F00 marks composite APP_READY checkpoint
+→ 100%
+~~~
+
+### Evidence Impact
+
+本 Delta **不新增 F01 Evidence Event ID**。
+
+理由：
+
+- 既有 `F01-EVT-002 intent_analysis_completed`
+- `F01-EVT-007 resolved_intent_ready`
+- `F01-EVT-008 capability_coverage_resolved`
+- `F01-EVT-010 composition_succeeded`
+- `F01-EVT-013 intent_validated`
+
+已足以對應主要 lifecycle observability；progress projection 是 Function/API contract，不要求另建一套 telemetry event stream。
+
+### F01 Acceptance Delta
+
+新增：
+
+- **F01-AC-025** CREATE v1 必須使用固定六 checkpoint plan；completed set 在同一 progress operation 內 monotonic。
+- **F01-AC-026** Clarification / Assumption waiting 不改 denominator、不推進 progress；material Intent edit 必須開始新的 logical progress operation。
+- **F01-AC-027** CREATE API success response 必須提供可驗證 progress snapshot；UI 不得依 elapsed time補進度。
+- **F01-AC-028** network retry 不重複 checkpoint；User-triggered retry建立新 progress operation並只重建仍有效 truth。
+- **F01-AC-029** validation-driven recompose 不回退 completed checkpoint；只有 F02 PASS 才完成 `BLUEPRINT_VALIDATED`。
+
+### F01 Test Mapping Delta
+
+~~~text
+F01-AC-025 → TEST-F01-PROG-001 fixed create checkpoint plan + monotonic completion
+F01-AC-026 → TEST-F01-PROG-002 clarification freeze + material edit new progress operation
+F01-AC-027 → TEST-F01-PROG-003 API progress snapshot truth / no elapsed-time inflation
+F01-AC-028 → TEST-F01-PROG-004 retry / idempotency checkpoint lifecycle
+F01-AC-029 → TEST-F01-PROG-005 recompose monotonicity + validated only after F02 PASS
+~~~
+
+### Status
+
+> **APPROVED WORKING CURRENT TRUTH — FORMAL REFRESH PENDING**
+

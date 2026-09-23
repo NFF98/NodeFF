@@ -469,7 +469,7 @@ registry digest
 
 Rules：
 
-- progress是 phase-based，不偽造百分比。
+- progress有 reliable checkpoints時採 checkpoint-derived %；沒有 reliable checkpoints時只顯示 stage，不偽造百分比。
 - operation timeout，保留 Intent。
 - validation-driven recompose最多一次時，不需閃爍回上一頁；同 BUILDING surface內完成。
 - 若需要新 User decision，才回 Clarification / Assumption。
@@ -1246,3 +1246,91 @@ Presentation：
 新增 `F00-AC-029`–`F00-AC-032` 與 `TEST-F00-029`–`TEST-F00-032`；machine-readable mapping同步在 `working/registries/acceptance-test-registry.json`。
 
 F03 operation truth與 F12 recovery truth分別由其 Working文件擁有；F00只呈現，不自行判斷 commit / integrity。
+
+---
+
+## Closed Working Delta — S02 Composite Create Progress Projection
+
+> 狀態：**WORKING_DELTA_CLOSED（2026-09-23） / FORMAL_REFRESH_PENDING**
+>
+> Source Delta：`SD-20260922-002 — F01 Creation Progress Checkpoint Contract`。
+>
+> F00只擁有 cross-Function consumer orchestration，不改寫 F01 / F03 completion truth。
+
+### F00-UX-025 — Composite Create Progress v1
+
+S02 overall Create progress 使用固定七個 owner-tagged milestones：
+
+~~~text
+1  F01-CREATE-CP-01  INTENT_ANALYZED                 owner F01
+2  F01-CREATE-CP-02  POLICY_EVALUATED                owner F01
+3  F01-CREATE-CP-03  INTENT_RESOLVED                 owner F01
+4  F01-CREATE-CP-04  CAPABILITY_COVERAGE_RESOLVED    owner F01
+5  F01-CREATE-CP-05  BLUEPRINT_COMPOSED              owner F01
+6  F01-CREATE-CP-06  BLUEPRINT_VALIDATED             owner F01/F02 truth
+7  F00-CREATE-CP-07  APP_READY                       owner F03 READY truth
+~~~
+
+F00 不得自行完成任何 F01-owned checkpoint，也不得在 F03 尚未 READY 時完成 `APP_READY`。
+
+Consumer percentage：
+
+~~~text
+progress_percent
+= floor(completed_composite_checkpoints / 7 × 100)
+
+1/7 → 14%
+2/7 → 28%
+3/7 → 42%
+4/7 → 57%
+5/7 → 71%
+6/7 → 85%
+7/7 → 100%
+~~~
+
+`100%` only when F03 READY / App target condition成立。
+
+### Consumer Stage Projection
+
+~~~text
+理解想法
+→ INTENT_ANALYZED / POLICY_EVALUATED / INTENT_RESOLVED
+
+整理 App
+→ CAPABILITY_COVERAGE_RESOLVED / BLUEPRINT_COMPOSED
+
+檢查互動
+→ F02 validation until BLUEPRINT_VALIDATED
+
+準備 App
+→ F03 hydration until APP_READY
+~~~
+
+Stage label 可在 checkpoint完成前先反映目前真的正在執行的 lifecycle state，但不得因此增加百分比。
+
+### Waiting For User
+
+Clarification / Assumption Review：
+
+- 保留最後真實 progress snapshot作 context。
+- processing animation停止。
+- 進 User decision surface。
+- User回答後再進後續 processing。
+- 等待期間不得推進 %。
+
+### F00 Acceptance Delta
+
+新增：
+
+- **F00-AC-033** S02 composite Create progress只能由 F01六個 checkpoint + F03 APP_READY truth組成；F00不得自行完成 source-owned checkpoint。
+- **F00-AC-034** Clarification / Assumption waiting 必須凍結 progress，停止 processing animation，不因等待時間前進。
+- **F00-AC-035** F01 VALIDATED 最多完成 composite 6/7（85%）；只有 F03 READY 才可顯示100%。
+
+### F00 Test Mapping Delta
+
+~~~text
+F00-AC-033 → TEST-F00-PROG-001 owner-tagged composite Create progress
+F00-AC-034 → TEST-F00-PROG-002 waiting-for-user freezes progress
+F00-AC-035 → TEST-F00-PROG-003 100 percent only after F03 READY
+~~~
+

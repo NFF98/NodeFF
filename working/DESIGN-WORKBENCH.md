@@ -745,7 +745,7 @@ Formal Spec、Backlog / Sprint、Cursor implementation仍維持 HOLD；待 High-
 
 ## PENDING-FUNC-004 — F01 Creation Progress Checkpoint Contract
 
-> Sync status：**OPEN / DEFERRED TO O05 HIGH-FI / PROCESSING REVIEW — NO WORKING FUNCTION CHANGE YET**
+> Sync status：**CLOSED / WORKING CURRENT TRUTH APPROVED — FORMAL_REFRESH_PENDING**
 >
 > 來源：S02 Create Workspace ④B High-fi Review。
 >
@@ -928,6 +928,27 @@ User confirmed：
 - First perform **O05 High-fi / Processing Review** to define the cross-flow progress model for Create / Refine / Remix / Correction / Restore / Share / Retry / Revert。
 - After O05 review, return to each semantic owner (F01 / F05 / F06 / F16 / F03 etc.) to add only the Function-specific checkpoint contract actually needed。
 - Formal Spec remains frozen。
+
+
+### 8. Function Delta Closure — 2026-09-23
+
+O05 High-fi Step 1 已先鎖定 shared processing rule；其後已完成 F01 Creation Progress Function Delta Review。
+
+Closed outcome：
+
+1. F01 CREATE 固定六個 compiler checkpoints。
+2. Clarification / Assumption waiting 不新增 denominator、不推進 progress。
+3. material Intent edit 開始新的 logical progress operation。
+4. CREATE API success response提供 machine-readable progress snapshot；Phase 1不新增 polling / SSE / WebSocket。
+5. F00以 F01六個 checkpoints + F03 APP_READY 組成 S02固定七 milestone composite progress。
+6. F01 VALIDATED只到 composite 6/7（85%）；F03 READY才可100%。
+7. network retry不重複 checkpoint；User-triggered retry建立新 logical progress operation。
+8. 新增 F01-AC-025–029、F00-AC-033–035與對應 Tests。
+9. 不新增 DB schema。
+10. 不新增 Evidence Event ID；沿用既有 F01 lifecycle events。
+11. Formal Spec仍 frozen，待 pre-Cursor Refresh promotion。
+
+`PENDING-FUNC-004` 至此轉為 **CLOSED / FORMAL_REFRESH_PENDING**。
 
 
 

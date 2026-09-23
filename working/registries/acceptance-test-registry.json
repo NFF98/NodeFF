@@ -2,7 +2,7 @@
   "registry_version": "1.1.0",
   "owner": "working/registries/acceptance-test-registry.json",
   "conventions": "working/ACCEPTANCE-CONVENTIONS.md",
-  "total_acceptance": 271,
+  "total_acceptance": 279,
   "entries": [
     {
       "acceptance_id": "F00-AC-001",
@@ -3260,6 +3260,102 @@
       "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "correction technical failure進 F12；semantic mismatch本身不進 F12 error。",
       "implementation_location": "tests/behavior/f16/test-f16-ac-034.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F01-AC-025",
+      "function_id": "F01",
+      "criterion": "CREATE v1 使用固定六 checkpoint plan；同一 progress operation 的 completed set 必須 monotonic。",
+      "test_id": "TEST-F01-PROG-001",
+      "verification_type": "AUTOMATED_CONTRACT",
+      "fixture_strategy": "CREATE fast-path + clarification fixtures asserting fixed plan ids and monotonic completed set",
+      "expected_observable": "六 checkpoint plan固定，completed checkpoints只增不減。",
+      "implementation_location": "tests/contracts/f01/test-f01-prog-001.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F01-AC-026",
+      "function_id": "F01",
+      "criterion": "Clarification / Assumption waiting 不改 denominator、不推進 progress；material Intent edit開始新的 logical progress operation。",
+      "test_id": "TEST-F01-PROG-002",
+      "verification_type": "AUTOMATED_BEHAVIOR",
+      "fixture_strategy": "multi-round clarification + material intent edit fixture",
+      "expected_observable": "等待 User 時 progress凍結；material edit後新 operation不沿用舊 completed count。",
+      "implementation_location": "tests/behavior/f01/test-f01-prog-002.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F01-AC-027",
+      "function_id": "F01",
+      "criterion": "CREATE API success response提供可驗證 progress snapshot；不得依 elapsed time補進度。",
+      "test_id": "TEST-F01-PROG-003",
+      "verification_type": "AUTOMATED_CONTRACT",
+      "fixture_strategy": "API response fixtures across /intents, /answers, /compile",
+      "expected_observable": "progress snapshot只包含 plan/completed truth；等待期間無 time-based inflation。",
+      "implementation_location": "tests/contracts/f01/test-f01-prog-003.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F01-AC-028",
+      "function_id": "F01",
+      "criterion": "network retry不重複 checkpoint；User-triggered retry建立新 progress operation並只重建仍有效 truth。",
+      "test_id": "TEST-F01-PROG-004",
+      "verification_type": "AUTOMATED_BEHAVIOR",
+      "fixture_strategy": "idempotent network retry + recovery retry fixtures",
+      "expected_observable": "same-key retry無 duplicate completion；new retry不直接複製舊百分比。",
+      "implementation_location": "tests/behavior/f01/test-f01-prog-004.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F01-AC-029",
+      "function_id": "F01",
+      "criterion": "validation-driven recompose不回退 completed checkpoint；只有 F02 PASS 才完成 BLUEPRINT_VALIDATED。",
+      "test_id": "TEST-F01-PROG-005",
+      "verification_type": "AUTOMATED_BEHAVIOR",
+      "fixture_strategy": "F02 reject -> bounded recompose -> pass/fail fixtures",
+      "expected_observable": "progress monotonic；BLUEPRINT_VALIDATED只在最終 F02 PASS。",
+      "implementation_location": "tests/behavior/f01/test-f01-prog-005.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F00-AC-033",
+      "function_id": "F00",
+      "criterion": "S02 composite Create progress只由 F01六 checkpoint + F03 APP_READY truth組成；F00不得自行完成 source-owned checkpoint。",
+      "test_id": "TEST-F00-PROG-001",
+      "verification_type": "AUTOMATED_BEHAVIOR",
+      "fixture_strategy": "owner-tagged F01/F03 progress projection fixture",
+      "expected_observable": "overall progress只隨 source owner truth推進。",
+      "implementation_location": "tests/behavior/f00/test-f00-prog-001.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F00-AC-034",
+      "function_id": "F00",
+      "criterion": "Clarification / Assumption waiting凍結 Create progress並停止 processing animation。",
+      "test_id": "TEST-F00-PROG-002",
+      "verification_type": "AUTOMATED_BEHAVIOR",
+      "fixture_strategy": "S02 clarification and assumption waiting fixtures",
+      "expected_observable": "等待 User期間 percent不前進、processing animation停止。",
+      "implementation_location": "tests/behavior/f00/test-f00-prog-002.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F00-AC-035",
+      "function_id": "F00",
+      "criterion": "F01 VALIDATED最多呈現 composite 6/7（85%）；只有 F03 READY才可呈現100%。",
+      "test_id": "TEST-F00-PROG-003",
+      "verification_type": "AUTOMATED_BEHAVIOR",
+      "fixture_strategy": "validated-not-hydrated + F03 ready fixtures",
+      "expected_observable": "VALIDATED時不顯示100%；F03 READY後才100%。",
+      "implementation_location": "tests/behavior/f00/test-f00-prog-003.spec.ts",
       "contract_status": "READY_FOR_IMPLEMENTATION",
       "required_for_spec": true
     }
