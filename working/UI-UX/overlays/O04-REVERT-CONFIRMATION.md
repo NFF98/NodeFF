@@ -2,7 +2,7 @@
 
 > Overlay ID：O04
 >
-> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / HIGH_FI_PENDING**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1 APPROVED / STEP2 NEXT**
 >
 > Phase：Phase 1
 >
@@ -10,7 +10,7 @@
 >
 > Function behavior source：F00 Experience Shell + F16 Result Correction。
 >
-> 本文件是 ④A Low-fi review draft，不代表 User 已批准，也不代表 Cursor 可實作。
+> ④A Low-fi 已完成 User Review；④B High-fi Step 1 已批准。Formal Spec 與 Cursor implementation 仍維持 HOLD。
 
 # 1. User Outcome
 
@@ -225,10 +225,253 @@ User 已確認：
 4. 若 previous/base 已不安全或 incompatible，不提供可執行 Revert；改由 O03 / F12 說明並保留目前修正版。
 5. 「目前修正版不會被刪除」對應 F16 既有 Function truth：成功 Revert 後 child Blueprint 與 CORRECT lineage 都保留，只是 active App 切回 previous/base。
 
-# 15. Review Status
+# 15. ④B High-fi Contract
 
-> **LOW_FI_DIRECTION_APPROVED — HIGH_FI_PENDING**
+> Step 1 approved by User：2026-09-23
+>
+> Canonical rule：本節是 O04 High-fi 的唯一 canonical contract。後續 Step 2–4 必須在本節續寫，不得另建重複 High-fi summary / shadow copy。
+>
+> Current status：
+> - Step 1 — Structure Lock ✅
+> - Step 2 — Geometry + Visual Hierarchy Lock — NEXT
+> - Step 3 — Detailed High-fi Visual Rules Lock — PENDING
+> - Step 4 — Final Visual Reference Lock — PENDING
 
-O04 ④A Low-fi 已完成 User Review。
+## Step 1 — Structure Lock ✅
 
-依固定流程，下一步進 O05 — Loading / Building / Hydration States ④A Low-fi。
+### 1. O04 Role / Revert Boundary
+
+O04只處理 **已 ACCEPTED correction 的 Revert Confirmation**。
+
+Entry preconditions：
+~~~text
+current active App
+= same-session previously ACCEPTED correction child
+
+AND
+
+previous / base Blueprint
+= still trusted + compatible
+~~~
+
+O04不是 Version History，也不提供任意版本挑選。
+
+### 2. Canonical Flow
+
+~~~text
+S03 Previous Version / 回到修正前版本
+→ O04 Revert Confirmation
+→ Confirm
+→ fresh ExecutionAdmission for base
+→ fresh F03 Runtime Instance
+→ S03 on base Blueprint
+~~~
+
+成功 Revert後回 S03，不回 S06 Compare。
+
+### 3. Confirmation Heading
+
+Heading固定為：
+
+> **回到修正前版本？**
+
+它必須明確表達這是一個 version switch decision，而不是 delete。
+
+### 4. Corrected Version Preservation Message
+
+`目前修正版不會被刪除。` 必須永遠可見。
+
+Rules：
+- 不藏在 tooltip。
+- 不只放 helper fine print。
+- 不因 breakpoint移除。
+- Revert只改 active App；child Blueprint與 CORRECT lineage保留。
+
+### 5. Target Version Identity
+
+O04必須顯示 User即將返回的 target identity。
+
+至少包含：
+- App Logo / Title。
+- `修正前版本` label。
+
+若有可靠 previous result summary，可補充 material summary。
+
+Consumer UI不得顯示：
+- Blueprint hash。
+- lineage ID。
+- correction_id。
+- internal version enum。
+
+### 6. Input Restoration Block — Always Visible
+
+Input Restoration是 O04的正式 decision / truth block，必須永遠顯示。
+
+只允許以下三種 mutually exclusive state。
+
+#### Case A — Before Snapshot Available
+
+當 same-session before snapshot仍在 memory且 compatible：
+~~~text
+✓ 回到修正前版本
+✓ 恢復修正前輸入
+~~~
+
+這是 default。
+
+Rules：
+- 不需要 User再確認 input restoration。
+- 不顯示 `保留目前輸入` Toggle。
+
+#### Case B — Only Current Inputs Can Be Safely Mapped
+
+當 before snapshot不存在，但 current inputs可安全映射：
+~~~text
+回到修正前版本
+[ ] 保留目前輸入
+~~~
+
+**Toggle default = OFF。**
+
+只有 User explicit opt-in才帶 current compatible inputs。
+
+#### Case C — No Safe Input Snapshot
+
+若沒有安全可恢復的 input snapshot：
+~~~text
+會回到修正前版本，
+但目前輸入不會恢復。
+
+App 將從原版初始狀態開始。
+~~~
+
+這件事必須在 Confirm前明確說明。
+
+### 7. Input Restoration Cases Are Mutually Exclusive
+
+三種 input restoration state不得混用。
+
+Rules：
+- Case A不得再出現 Case B Toggle。
+- Case B只有在 safe mapping成立時出現。
+- Case C不得提供看似可保留 input的 control。
+- UI不得把未知狀態假裝成可恢復。
+
+### 8. CTA Semantics
+
+Primary固定為：
+~~~text
+回到原版
+~~~
+
+Secondary固定為：
+~~~text
+取消
+~~~
+
+不得使用：
+- Delete New Version。
+- Undo Forever。
+- Restore Data。
+
+因為這些 wording會錯誤暗示 deletion / global data restore。
+
+### 9. Revert Is Not Delete
+
+O04是 Confirmation，不是 destructive deletion workflow。
+
+Confirm的語意是：
+~~~text
+switch active App
+→ previous / base Blueprint
+~~~
+
+不是：
+~~~text
+delete corrected child
+delete lineage
+erase correction history
+~~~
+
+### 10. Mutation Boundary
+
+只有 User按下 Confirm後，才開始 Runtime / active-version transition。
+
+以下行為不得造成 mutation：
+- 打開 O04。
+- 查看 target version。
+- Case B Toggle尚未 Confirm前。
+- Cancel。
+- Close。
+
+不得提前修改 correction outcome或 current active App。
+
+### 11. Cancel / Close
+
+Cancel / Close固定：
+- current corrected App保持 active。
+- correction outcome不變。
+- 不 mutation任何 Blueprint。
+- focus回 S03 Previous Version / Revert trigger或合理 safe surface。
+
+### 12. Confirm Processing Ownership
+
+Confirm後的 fresh ExecutionAdmission / Runtime建立若需要 async processing，presentation完全交 O05。
+
+Rules：
+- O04不自行建立第二套 loading。
+- progress只依 O05 Current Truth。
+- reliable checkpoints才顯示 checkpoint-derived %。
+- otherwise Stage only。
+
+### 13. Unsafe / Incompatible Target After Confirm
+
+若 Confirm後 target變成不能安全執行：
+~~~text
+do not force execute
+do not downgrade trust
+do not recompile old Blueprint to fake revert success
+~~~
+
+交 O03 + F12 Recovery。
+
+目前修正版維持可用；不得因 failed revert破壞 current corrected App。
+
+### 14. Sensitive Input Boundary
+
+`SENSITIVE / DO_NOT_PERSIST`資料不得因 Revert被額外 durable保存。
+
+O04只呈現 Function contract已確認可安全恢復 / 映射的 truth。
+
+不得為了讓 Revert看起來完整而繞過 privacy / persistence policy。
+
+### 15. Step 1 Locked Decisions
+
+1. O04只處理 same-session已 ACCEPTED correction的 Revert。
+2. previous/base必須仍 trusted + compatible。
+3. Canonical flow = S03 → O04 → fresh ExecutionAdmission → fresh F03 Runtime → S03 base。
+4. Heading固定為 `回到修正前版本？`。
+5. `目前修正版不會被刪除。` 必須永遠可見。
+6. Target identity至少顯示 App Identity + `修正前版本` label。
+7. **Input Restoration block永遠顯示。**
+8. **Case A / B / C三種 restoration state明確互斥。**
+9. **只有 Case B顯示 `保留目前輸入` Toggle，且 default OFF。**
+10. Primary = `回到原版`；Secondary = `取消`。
+11. O04不是 deletion workflow；child Blueprint與 lineage不刪除。
+12. Confirm前不得 mutation active App / Blueprint / correction outcome。
+13. Cancel / Close保持 corrected App active並 restore focus。
+14. Confirm processing完全交 O05。
+15. Unsafe / incompatible target交 O03 + F12；不得 fake revert success。
+16. Sensitive / DO_NOT_PERSIST input不得因 Revert額外 durable保存。
+
+> Step 1：**APPROVED / LOCKED**。下一步：Step 2 — Geometry + Visual Hierarchy Lock。
+
+# 16. Review Status
+
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1 APPROVED — STEP2 NEXT**
+
+O04 ④A Low-fi與④B Step 1已完成 User Review。
+
+下一步：**O04 ④B Step 2 — Geometry + Visual Hierarchy Lock**。
+
+Formal Spec、Backlog / Sprint、Cursor implementation維持 HOLD。
