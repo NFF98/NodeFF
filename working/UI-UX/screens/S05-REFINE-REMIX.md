@@ -1273,7 +1273,7 @@ Cursor不得：
 >
 > Repository PNG blob SHA：
 >
-> `d090661e769b51280a3a2c6b43d20fdb731b74d9`
+> `e7b9930928f6397267526598cf213fd3110ebd20`
 
 ### Reference Boundary
 
