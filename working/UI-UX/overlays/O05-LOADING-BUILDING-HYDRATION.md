@@ -2,7 +2,7 @@
 
 > Overlay / State ID：O05
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B HIGH_FI_STEP1 APPROVED / STEP2 NEXT**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED / STEP3 NEXT**
 >
 > Phase：Phase 1
 >
@@ -403,8 +403,8 @@ User 已確認：
 >
 > Current status：
 > - Step 1 — Structure Lock ✅
-> - Step 2 — Geometry + Visual Hierarchy Lock — NEXT
-> - Step 3 — Detailed High-fi Visual Rules Lock — PENDING
+> - Step 2 — Geometry + Visual Hierarchy Lock ✅
+> - Step 3 — Detailed High-fi Visual Rules Lock — NEXT
 > - Step 4 — Final Visual Reference Lock — PENDING
 
 ## Step 1 — Structure Lock ✅
@@ -619,7 +619,9 @@ Retry不是延續舊 progress。
 
 ### 17. F01 Creation Progress Delta Boundary
 
-`SD-20260922-002 — F01 Creation Progress Checkpoint Contract` 在本 Step 1後 **仍保持 OPEN**。
+> Historical status at Step 1 approval time：`SD-20260922-002` 當時仍為 **OPEN**；其後已於 2026-09-23 完成獨立 Function Delta Review並轉為 **APPROVED / WORKING CLOSED / FORMAL_REFRESH_PENDING**。
+>
+> 本 subsection保留 Step 1 當時的 boundary rationale；Current status以本檔後方 Closure Note與 `SPEC-DELTA-REGISTER.md` 為準。
 
 O05 Step 1只鎖 Consumer progress interface，不得藉此宣稱 F01 backend / Function contract已閉合。
 
@@ -653,19 +655,286 @@ Cursor不得從 O05 UI mockup反推 F01 backend semantics。
 14. O05盡量保留 host context，不做白畫面 spinner系統。
 15. Clarification / User Decision不是 Processing。
 16. Retry建立新 operation，不延續舊 progress。
-17. **SD-20260922-002仍保持 OPEN；O05 Step 1不得假裝 F01 Function Delta已閉合。**
+17. **Step 1當時不得假裝 F01 Function Delta已閉合；該 Delta已於後續獨立 Review正式閉合。**
 
 > Step 1：**APPROVED / LOCKED**。下一步：Step 2 — Geometry + Visual Hierarchy Lock。
 
+## Step 2 — Geometry + Visual Hierarchy Lock ✅
+
+> Approved by User：2026-09-23
+>
+> Step 2：**APPROVED / LOCKED**
+>
+> Scope：鎖定 O05 shared processing system在 Workspace、Restore、Runtime、Overlay四種 host family中的版位、尺寸、資訊層級、Long Wait / Cancel / Completion geometry與 responsive adaptation。不得改寫 Step 1 progress semantics；color / motion details留 Step 3。
+
+### 1. Host Geometry Families
+
+O05不使用單一固定 loading layout；依 host surface分成四種 geometry family：
+
+1. Workspace Processing — S02 / S05 / S06。
+2. Restore Processing — S04。
+3. Runtime Global Processing — S03。
+4. Overlay Processing — O01 / O02 / O03 Retry / O04。
+
+所有 family共用同一 information hierarchy與 progress truth，但不強迫相同容器形狀。
+
+### 2. Workspace Processing — S02 / S05 / S06
+
+Workspace processing固定留在原 workspace，不開新 page、不跳 modal。
+
+Desktop：
+- processing content沿主要 content column。
+- recommended max-width約 `640–840px`。
+- progress位於 workspace主要內容上半部。
+- normal processing不額外包大型 card。
+
+固定順序：
+~~~text
+Context
+→ Stage
+→ % / Progress Rail（if determinate）
+→ Support Copy
+→ Cancel（if safe）
+~~~
+
+Clarification / Assumption / other User Decision出現時：
+- progress位置可保留作 context。
+- processing motion停止。
+- User Decision surface接管主要 attention。
+- 不另開 loading page。
+
+### 3. S04 Restore Processing — Centered Transition Surface
+
+S04 restore允許使用 centered transition layout，因為此時尚未進入 S03 Runtime。
+
+Desktop recommended main block：
+~~~text
+360–480px
+~~~
+
+Mobile：
+~~~text
+viewport width - 32–40px
+~~~
+
+Canonical order：
+~~~text
+App Identity（when available）
+→ Stage
+→ % / Progress Rail（if determinate）
+→ `不需要登入，也不需要安裝`
+~~~
+
+Rules：
+- 不做 dialog。
+- 不預先 render Generated App Runtime。
+- App identity缺失不得阻塞 READY。
+- READY後立即交 S03。
+
+### 4. S03 Runtime Global Processing — In-place Runtime Processing Layer
+
+S03 Runtime processing正式鎖定為：
+
+> **App保持可見的 in-place processing layer，不是 full-screen Loading，也不是 Bottom Sheet。**
+
+Desktop：
+- Generated App保持原 geometry與 last-known-good committed state可辨識。
+- NodeFF Shell Header不被 processing screen取代。
+- processing layer位於 Runtime Frame內的上方 / 上中區。
+- recommended compact panel width約 `320–480px`。
+- Stage是第一 processing視覺；% / rail為第二。
+- 若 current operation需要 blocking，Runtime interaction controls可 temporarily inert；是否 blocking由 source semantics決定。
+
+Mobile：
+- 不蓋掉 S03 permanent bottom navigation。
+- processing layer位於 Runtime content內。
+- width跟隨 content edge，horizontal margin約 `16–20px`。
+- 不改成 Bottom Sheet，以免與真正 Overlay presentation混淆。
+
+### 5. Runtime Host Preservation
+
+S03 processing不得把整個 viewport變成空白 loading screen。
+
+必須保留：
+- Generated App可辨識 context。
+- NodeFF Shell identity。
+- last-known-good committed visual state。
+
+Processing只覆蓋目前 operation feedback，不抹掉 App。
+
+### 6. Overlay Processing — O01 / O02 / O03 / O04
+
+Overlay內開始 async processing時，**沿用原 Overlay geometry**。
+
+不得：
+- 關掉原 Overlay再開第二個 Loading Modal。
+- 因 processing突然換成不同尺寸的 dialog。
+- 把 User帶到獨立 loading route。
+
+原 action region原地切換成：
+~~~text
+Stage
+→ % / Progress Rail（if determinate）
+→ Support Copy
+→ Cancel（if safe）
+~~~
+
+O03 Retry與 O04 Revert沿用既有「same surface → O05 processing」contract。
+
+### 7. Determinate Progress Geometry
+
+Determinate baseline：
+~~~text
+Stage Label
+→ %
+→ Progress Rail
+~~~
+
+Recommended：
+- Desktop rail height約 `8px`。
+- Mobile rail height約 `6–8px`。
+- rail width跟 host processing container走。
+- `%`可 prominent，但不得壓過 operation context / Stage。
+
+不得使用固定 pixel width讓 progress component與 host脫節。
+
+### 8. Indeterminate Progress Geometry
+
+Indeterminate baseline：
+~~~text
+Stage Label
+→ bounded activity indicator
+→ Support Copy
+~~~
+
+**不顯示空 progress rail。**
+
+理由：空 rail容易讓 User誤解為 progress data壞掉或仍應該有百分比。
+
+### 9. Long Wait / Soft Timeout Geometry
+
+Long Wait / Soft Timeout不切 layout。
+
+同一 processing surface保留：
+- Stage。
+- 最後真實 %（if determinate）。
+- 原 progress rail。
+
+只在 support copy區增加 truthful waiting message，例如：
+`還在處理，你的內容都還在。`
+
+不得：
+- 新開 modal。
+- 放大成 error page。
+- 把 progress reset。
+
+### 10. Cancel Geometry
+
+Cancel永遠低於 Progress hierarchy。
+
+Placement：
+- Workspace → progress block下方 Ghost / Secondary action。
+- Overlay → 原 action region底部。
+- S03 → compact processing layer內 Secondary / Ghost。
+- S04 → source Function允許時放 centered block底部。
+
+若 Source Function不允許 Cancel：
+- control完全不存在。
+- 不顯示 disabled Cancel。
+
+### 11. Completion Geometry
+
+Completion不建立 O05-specific Success Card。
+
+當 owner Function actual ready / committed：
+~~~text
+100%（if determinate）
+→ target surface
+~~~
+
+Rules：
+- 不增加 `完成，請繼續`。
+- 不為動畫停留。
+- 不在同一 screen長出額外 success panel。
+
+若 host本身已有批准的 completion interaction，沿 host Current Truth，例如 S02的既有 completion handoff；O05不得自行新增另一層。
+
+### 12. Responsive Information Hierarchy
+
+Desktop baseline：
+~~~text
+Context
+> Stage
+> % / Rail
+> Support Copy
+> Cancel
+~~~
+
+Mobile baseline：
+~~~text
+Stage
+> % / Rail
+> Support Copy
+> Cancel
+~~~
+
+若 App / operation context已由 screen header清楚提供，Mobile可以不重複 context block。
+
+Responsive只能減少重複資訊，不得：
+- 移除 Stage。
+- 移除真實 consequence / Long Wait copy。
+- 把 determinate變 fake indeterminate或反之。
+- 改變 cancelability semantics。
+
+### 13. Geometry Stability
+
+同一 operation進入：
+~~~text
+normal processing
+→ long wait
+→ processing resumes
+~~~
+
+container geometry應盡量穩定，不因狀態切換產生大幅 layout jump。
+
+Overlay尤其必須保持原 dialog / sheet identity。
+
+### 14. Fast Completion
+
+若 operation在同一 render frame內完成：
+- O05可以完全不 paint。
+- 不保留空白 placeholder。
+- 不做最短顯示時間。
+- 不為了讓 progress看得到而延遲 target transition。
+
+### 15. Step 2 Locked Decisions
+
+1. O05使用四種 host geometry family：Workspace / Restore / Runtime / Overlay。
+2. Workspace processing留在原 workspace；Desktop約640–840px content column。
+3. S04 restore採 centered transition surface；Desktop約360–480px。
+4. **S03 Runtime processing = App保持可見的 in-place Runtime processing layer。**
+5. **S03不得變 full-screen Loading，也不得用 Bottom Sheet呈現 normal Runtime processing。**
+6. S03 Desktop compact processing panel約320–480px；Mobile左右16–20px。
+7. Overlay processing永遠沿用原 Overlay geometry，不開第二個 Loading Modal。
+8. Determinate = Stage → % → rail；Desktop rail約8px，Mobile約6–8px。
+9. Indeterminate不顯示空 rail，只顯示 Stage + bounded activity indicator。
+10. Long Wait沿用同一 geometry，只增加 truthful support copy。
+11. Cancel低於 progress hierarchy；source不允許時 control完全不存在。
+12. Completion不建立 O05-specific Success Card；ready後立即 target surface。
+13. Responsive只調整排列與重複 context，不改 progress / cancel semantics。
+14. Fast completion允許 O05不 paint，禁止 minimum-display delay。
+
+> Step 2：**APPROVED / LOCKED**。下一步：Step 3 — Detailed High-fi Visual Rules Lock。
+
 # 23. Review Status
 
-> **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B HIGH_FI_STEP1 APPROVED — STEP2 NEXT**
+> **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED — STEP3 NEXT**
 
-O05 的 Low-fi presentation direction、Runtime Function Delta、Cross-Screen Review與④B Step 1已由 User確認。
+O05 的 Low-fi presentation direction、Runtime Function Delta、Cross-Screen Review與④B Step 1–2已由 User確認。
 
-下一步：**O05 ④B Step 2 — Geometry + Visual Hierarchy Lock**。
+下一步：**O05 ④B Step 3 — Detailed High-fi Visual Rules Lock**。
 
-`SD-20260922-002 — F01 Creation Progress Checkpoint Contract` 仍保持 **OPEN**，後續另做 Function Delta closure，不混入 O05 UI規格。
+`SD-20260922-002 — F01 Creation Progress Checkpoint Contract` 已完成獨立 Function Delta closure；O05仍只承接 presentation，不成為 Function semantic owner。
 
 Formal Spec與 Cursor implementation維持 HOLD。
 
