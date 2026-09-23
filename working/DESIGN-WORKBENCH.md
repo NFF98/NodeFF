@@ -1049,3 +1049,129 @@ READY
 - consumer recovery action。
 
 > Working principle：**Never trust model-declared success. Trust independently verified state.**
+
+
+---
+
+## 中期必做：Layer 4 升級為 App Execution & Runtime Layer
+
+> 狀態：**MID-TERM MUST IMPLEMENT**
+>
+> 目的：避免 NodeFF 永遠停留在「只生成 UI」；中期必須支援真正可運作的 full-stack Micro-App。
+>
+> Formal Spec 目前仍 freeze；本節先作 Working Architecture Direction。
+
+### 為什麼要升級
+
+目前 Layer 4 若只被理解為：
+
+> React Frontend Renderer
+
+則不足以支撐 NodeFF 的核心願景：
+
+> **意圖就是 App。**
+
+真正的 App 中期一定會需要：
+
+- 儲存資料；
+- API call；
+- Database；
+- Workflow；
+- 定時任務；
+- 外部 Capability；
+- 多人狀態；
+- Auth / Permission；
+- AI call；
+- server-side calculation。
+
+因此四層架構本身可以保留，但 Layer 4 的責任必須擴大。
+
+### 中期 Layer 4 定義
+
+> **Layer 4 — App Execution & Runtime Layer**
+
+建議內部分成：
+
+~~~text
+4A UI Runtime
+React / Components / Interaction
+
+4B Logic Runtime
+Actions / Conditions / Workflow / Computation
+
+4C Data Runtime
+Local state / Persistence / DB
+
+4D Capability Runtime
+API / AI / Map / Payment / External services
+~~~
+
+### Layer 2 與 Layer 4 的分工
+
+Layer 2 的 LLM 是 **App Builder / Semantic Compiler**，負責把 User Intent 轉成更完整的 App Definition。
+
+中期 Blueprint 不只描述 UI，還要能描述：
+
+~~~text
+畫面
++ 狀態
++ 邏輯
++ workflow
++ data binding
++ capability calls
+~~~
+
+Layer 3 必須對上述 App Definition 做 deterministic validation。
+
+Layer 4 只執行已通過 Contract 的內容。
+
+### 重要原則
+
+> **Build App 要 LLM；Run App 不應依賴 LLM 才能成立。**
+
+正常流程：
+
+~~~text
+User Intent
+→ Layer 2 LLM builds / proposes App Blueprint
+→ Layer 3 validates
+→ Layer 4 executes
+→ App
+~~~
+
+只有當某個 App 的功能本身需要 AI，例如摘要、生成、分類等，Layer 4 才透過受控 AI Capability 呼叫 LLM。
+
+### 安全邊界
+
+中期即使支援更完整 App，也維持：
+
+- LLM 不直接生成並執行任意 backend code；
+- LLM 只能使用 NFF 定義好的 declarative contract；
+- API / DB / AI / Payment / external service 必須走受控 Capability；
+- Layer 3 驗證 schema / permission / capability / resource / compatibility；
+- Layer 4 不自行猜測 semantic intent。
+
+### 中期目標
+
+使用者感受到：
+
+> **「NodeFF 幫我做了一個完整 App。」**
+
+但底層仍然是：
+
+> **LLM 產生 App Definition → Contract 驗證 → Runtime 執行**
+
+而不是：
+
+> LLM 直接亂寫任意前後端程式並執行。
+
+### Architecture Review Trigger
+
+中期 Architecture Review 時，必須正式檢查：
+
+1. Layer 2 Blueprint 是否足以描述 full-stack intent；
+2. Layer 3 Contract 是否足以驗證 workflow / data / capability；
+3. Layer 4 是否已從 Frontend Renderer 升級為 App Execution Runtime；
+4. 4A–4D 的責任是否清楚；
+5. 是否仍能維持 No Arbitrary Code Execution 原則。
+
