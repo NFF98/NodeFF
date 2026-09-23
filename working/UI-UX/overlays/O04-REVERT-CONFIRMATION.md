@@ -2,7 +2,7 @@
 
 > Overlay ID：O04
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED / STEP3 NEXT**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED / STEP4 NEXT**
 >
 > Phase：Phase 1
 >
@@ -234,8 +234,8 @@ User 已確認：
 > Current status：
 > - Step 1 — Structure Lock ✅
 > - Step 2 — Geometry + Visual Hierarchy Lock ✅
-> - Step 3 — Detailed High-fi Visual Rules Lock — NEXT
-> - Step 4 — Final Visual Reference Lock — PENDING
+> - Step 3 — Detailed High-fi Visual Rules Lock ✅
+> - Step 4 — Final Visual Reference Lock — NEXT
 
 ## Step 1 — Structure Lock ✅
 
@@ -703,12 +703,198 @@ Desktop ↔ Mobile只改排列，不改 Case semantics。
 
 > Step 2：**APPROVED / LOCKED**。下一步：Step 3 — Detailed High-fi Visual Rules Lock。
 
+## Step 3 — Detailed High-fi Visual Rules Lock ✅
+
+> Approved by User：2026-09-23
+>
+> Step 3：**APPROVED / LOCKED**
+>
+> Scope：鎖定 O04 visual character、Target Version Identity、reassurance、Input Restoration Case A/B/C、CTA treatment、Confirm→Processing、failure handoff、Mobile、motion與 accessibility。不得改寫 Step 1 semantics或 Step 2 geometry。
+
+### 1. Core Visual Character
+
+O04採 **Calm Version Confirmation** visual role。
+
+Rules：
+- White / Soft Neutral為主。
+- Brand Teal用於 Primary action / focus。
+- 不使用大面積 Warning / Danger treatment。
+- 不把 Revert視覺塑造成 destructive deletion。
+- 不使用紅色警報式 framing。
+
+### 2. Desktop Dialog Visual
+
+Desktop沿 Design System：
+- White surface。
+- radius `20px`。
+- elevation `2`。
+- padding約 `24px`。
+- Heading使用 `heading-lg 24/32` 或 `heading-md 20/28`。
+- Close icon約20px，hit area ≥44px。
+- underlying S03可辨識但 inert。
+
+### 3. Target Version Identity Styling
+
+Target Version Identity採 neutral context card：
+- soft surface。
+- radius `16px`。
+- default border。
+- App Logo + App Title + `修正前版本` label。
+- 不使用 Success / Warning / Danger styling。
+- 不把 target畫成「被推薦的新版本」。
+
+### 4. Reassurance Styling
+
+`目前修正版不會被刪除。` 使用 neutral / Info-level reassurance。
+
+Rules：
+- 可搭 small info / check icon。
+- 不做大型 Success card。
+- 不使用整塊綠色 surface暗示 operation已成功。
+- 必須保持 readable、always visible。
+
+### 5. Input Restoration — Case A
+
+Case A顯示：
+~~~text
+✓ 回到修正前版本
+✓ 恢復修正前輸入
+~~~
+
+Visual：
+- subtle positive indicator。
+- neutral / soft surface。
+- 不畫成完整 Success state。
+
+這代表 restoration truth，不代表 Revert operation已完成。
+
+### 6. Input Restoration — Case B
+
+`保留目前輸入` full-row Toggle：
+- default OFF。
+- OFF = neutral state。
+- ON = Brand Teal active state。
+- label必須持續可讀。
+- 不只靠 Toggle顏色表達 state。
+- helper copy明確說明只保留「可安全映射的目前輸入」。
+
+### 7. Input Restoration — Case C
+
+Case C使用 shared Warning semantic family：
+~~~text
+semantic-warning-bg     = #FFFBEB
+semantic-warning-border = #FDE68A
+semantic-warning-700    = #B45309
+~~~
+
+Rules：
+- Warning只作用在 Input Restoration block。
+- 不把整張 Dialog變成 Warning。
+- copy明確說明目前輸入不會恢復，App將從原版初始狀態開始。
+
+### 8. Primary CTA — `回到原版`
+
+`回到原版` 固定為 Brand Teal Primary：
+- background = Teal 600。
+- text = White。
+- radius `12px`。
+- min-height ≥44px。
+- hover → Teal 500。
+- visible focus。
+
+**`回到原版` ≠ Destructive / Danger action。**
+
+不得因為是 Revert就改成 Danger red。
+
+### 9. Secondary CTA — `取消`
+
+`取消` = Secondary / Ghost。
+
+Rules：
+- neutral treatment。
+- 不做成與 Primary等權的 competing CTA。
+- 不使用 Danger styling。
+
+### 10. Confirm → Processing
+
+Confirm後沿同一 O04 surface：
+- Actions region原地切 O05 processing。
+- reliable checkpoints → Stage + checkpoint-derived %。
+- no reliable checkpoints → Stage only。
+- 不 fake progress。
+- 不使用 red progress bar。
+- 不因 animation延遲成功 transition。
+
+### 11. Confirm Failure Boundary
+
+若 target不能安全執行：
+- O04不自行建立新的 failure visual system。
+- 交 O03 / F12。
+- shared Danger / Recovery palette由 O03 presentation owner處理。
+- corrected App維持 safe current truth。
+
+### 12. Mobile Visual Rules
+
+Mobile沿同一 visual language：
+- Bottom sheet top radius `20px`。
+- Primary `回到原版` full-width。
+- `取消`在下一列。
+- safe-area aware。
+- Case C Warning block不得縮成一行 fine print。
+- Input Restoration consequence必須保持與 Desktop同等可見。
+
+### 13. Motion
+
+~~~text
+Button / Toggle feedback       = 120ms
+Dialog / Bottom Sheet          = 180ms
+Confirm → Processing transition ≤ 240ms
+~~~
+
+禁止：
+- shake。
+- bounce。
+- warning pulse。
+- flashing。
+
+`prefers-reduced-motion`必須有 fallback。
+
+### 14. Accessibility
+
+- Case A/B/C不得只靠 color區分。
+- Toggle具 programmatic label / state。
+- Warning block使用 icon + text。
+- overlay focus trap / restore正確。
+- Close / Button touch target ≥44px。
+- keyboard完整可操作。
+- processing使用適度 `aria-live`。
+- Mobile safe-area / keyboard不得遮 Primary。
+
+### 15. Step 3 Locked Decisions
+
+1. O04 = Calm Version Confirmation，不是 destructive deletion visual。
+2. Desktop沿 White surface / radius20 / elevation2。
+3. Target Version Identity使用 neutral context card。
+4. Reassurance使用 neutral / Info-level treatment，不做大型 Success card。
+5. Case A使用 subtle positive indicator，但不是 Success state。
+6. Case B Toggle default OFF；ON使用 Brand Teal active state。
+7. Case C使用 shared Warning semantic family，但只作用在 Input Restoration block。
+8. **`回到原版` 永遠不是 Destructive / Danger action；固定使用 Brand Teal Primary。**
+9. `取消` = Secondary / Ghost。
+10. Confirm → Processing完全沿 O05。
+11. Confirm failure交 O03 / F12，不在 O04發明第二套 failure UI。
+12. Mobile保持 Primary full-width、Cancel下一列、Case C consequence完整可見。
+13. Motion採 `120 / 180 / ≤240ms` restrained system。
+14. Accessibility / focus / toggle state / aria-live / safe-area列為 High-fi gate。
+
+> Step 3：**APPROVED / LOCKED**。下一步：Step 4 — Final Visual Reference Lock。
+
 # 16. Review Status
 
-> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED — STEP3 NEXT**
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED — STEP4 NEXT**
 
-O04 ④A Low-fi與④B Step 1–2已完成 User Review。
+O04 ④A Low-fi與④B Step 1–3已完成 User Review。
 
-下一步：**O04 ④B Step 3 — Detailed High-fi Visual Rules Lock**。
+下一步：**O04 ④B Step 4 — Final Visual Reference Lock**。
 
 Formal Spec、Backlog / Sprint、Cursor implementation維持 HOLD。
