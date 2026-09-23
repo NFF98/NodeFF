@@ -2,7 +2,7 @@
 
 > Screen ID：S06
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1 APPROVED / STEP2 NEXT**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED / STEP3 NEXT**
 >
 > Phase：Phase 1
 >
@@ -340,8 +340,8 @@ User 已確認：
 >
 > Current status：
 > - Step 1 — Structure Lock ✅
-> - Step 2 — Geometry + Visual Hierarchy Lock — NEXT
-> - Step 3 — Detailed High-fi Visual Rules Lock — PENDING
+> - Step 2 — Geometry + Visual Hierarchy Lock ✅
+> - Step 3 — Detailed High-fi Visual Rules Lock — NEXT
 > - Step 4 — Final Visual Reference Lock — PENDING
 
 ## Step 1 — Structure Lock ✅
@@ -451,12 +451,231 @@ S06不繼承 S03 permanent bottom navigation；不得把「目前 App / 修改 /
 
 > Step 1：**APPROVED / LOCKED**。下一步：Step 2 — Geometry + Visual Hierarchy Lock。
 
+## Step 2 — Geometry + Visual Hierarchy Lock ✅
+
+> Approved by User：2026-09-23
+>
+> Step 2：**APPROVED / LOCKED**
+>
+> Scope：鎖定 S06 Desktop / Mobile workspace width、Before / After排列、資訊區塊位置、Preview / Decision action分層、responsive transition與 visual attention order。不得改寫 Step 1 Function / state semantics；final color / border / motion / component styling留給 Step 3。
+
+### 1. Desktop Compare-first Workspace
+
+Desktop S06採單一 centered Compare Workspace。
+
+Recommended main workspace：
+
+~~~text
+max-width：約 1120–1200px
+~~~
+
+主結構：
+
+~~~text
+App Context
+→ Correction Statement
+→ Before / After Compare
+→ What Changed
+→ Comparison Quality / Limitation
+→ Decision Actions
+~~~
+
+S06不採 S05 的 640–720px focused composer width；S06需要足夠水平空間支援真正比較。
+
+### 2. Before / After Geometry
+
+Desktop預設：
+
+~~~text
+Before ≈ 50%
+After  ≈ 50%
+gap    ≈ 20–24px
+~~~
+
+Geometry本身不偏袒修正後結果。
+
+不得用「Before很窄 / After很寬」暗示 User應採用新版。
+
+修正後可以在 Step 3透過文字 label / border / accent取得較高 visual attention，但不改變基本 50/50 compare geometry。
+
+### 3. Correction Statement Placement
+
+`你剛剛說哪裡不對` 固定放在 Compare區塊上方。
+
+Recommended content width：
+
+~~~text
+約 720–800px
+~~~
+
+Rules：
+- 不做大型 Hero。
+- 短 feedback直接顯示。
+- 長 feedback顯示摘要 + 展開原文。
+- Correction context不得被藏到 Compare之後。
+
+### 4. Result Surface Sizing
+
+Before / After Result Surface不鎖固定高度。
+
+Desktop建議：
+
+~~~text
+minimum visible region：約 280–360px
+~~~
+
+Rules：
+- 同一 compare row內盡量維持等高。
+- 不得為了等高而裁掉 material output。
+- material outputs優先；secondary detail可展開。
+- Generated App result需要較完整 preview時，可以使用 bounded preview container。
+- 不得把 S06變成兩個完整 S03 Runtime並排。
+
+### 5. What Changed Placement
+
+`這次改了什麼` 固定為 Compare下方的獨立 section。
+
+不得塞進 After Result Card，避免把「結果差異」與「系統對本次修正的 semantic summary」混在同一層。
+
+### 6. Comparison Quality Placement
+
+Comparison Quality / Limitation固定放在：
+
+~~~text
+What Changed
+→ Comparison Quality / Limitation
+→ Decision Actions
+~~~
+
+正常可直接比較時可使用 compact presentation。
+
+`LIMITED_COMPARISON`時，原位置展開為明顯 limitation notice；不另開 Modal、不改整頁 information architecture。
+
+### 7. Desktop Decision Region
+
+Desktop Decision Actions使用正常 document flow，不採 sticky full-width footer作為 Step 2 baseline。
+
+Canonical order / hierarchy：
+
+~~~text
+[保留原版]     [再調整]                  [使用修正版]
+low             secondary                  primary
+~~~
+
+Rules：
+- 三個 decision都清楚可見。
+- `使用修正版`在右側作 Primary。
+- `再調整`為 Secondary。
+- `保留原版`為較低 emphasis decision。
+- 只有未來 usability evidence顯示長頁面造成決策不可達，才 reopen Step 2討論 restrained sticky decision bar。
+
+### 8. Preview Actions Are Local To Result Surfaces
+
+`查看原版 App` / `查看修正版 App` 不進入 Decision row。
+
+它們各自附屬對應 Result Surface，作低優先 Preview action。
+
+目的：避免 User把「查看」誤認為 Accept / Reject / Adjust decision。
+
+### 9. Mobile Stacked Compare
+
+Mobile固定採 stacked compare，不使用 Before / After Tabs。
+
+Canonical order：
+
+~~~text
+App Context
+→ 你剛剛說哪裡不對
+→ 修正前
+→ 修正後
+→ 這次改了什麼
+→ Comparison Quality / Limitation
+→ Decisions
+~~~
+
+Rules：
+- Before / After完整文字 label持續可見。
+- 不用 Tabs讓其中一個版本消失。
+- CTA不得遮 Compare內容。
+- mobile edge padding沿 Design System約 16–20px。
+
+### 10. Mobile Decision Order
+
+Mobile固定：
+
+~~~text
+[使用修正版]
+[再調整]
+[保留原版]
+~~~
+
+Rules：
+- 接近 full-width。
+- touch target ≥ 44 CSS px。
+- safe-area aware。
+- 不被 keyboard / browser chrome遮住。
+
+### 11. Responsive Transition
+
+Responsive不是只靠 viewport breakpoint硬切。
+
+Direction：
+
+~~~text
+≥ 1024px
+→ side-by-side
+
+640–1023px
+→ 依實際 content minimum width / container決定 side-by-side 或 stacked
+
+< 640px
+→ stacked
+~~~
+
+若 Result內容需要較大 minimum width，必須提早 stack，不可硬塞兩欄。
+
+### 12. Visual Attention Order
+
+S06 Step 2鎖定的預設 attention order：
+
+~~~text
+Before / After Result Compare
+> Correction Statement
+> What Changed
+> Decision Primary CTA
+> Comparison Quality
+> App / NodeFF chrome
+~~~
+
+例外：
+
+`LIMITED_COMPARISON`時，Limitation notice提升為 Decision前的高注意層級。
+
+NodeFF chrome不得壓過 Compare本身。
+
+### 13. Step 2 Locked Decisions
+
+1. Desktop main workspace約 1120–1200px。
+2. Desktop Before / After預設約 50/50 side-by-side。
+3. Geometry本身不偏袒 After；修正版強弱差異留給 Step 3 visual styling。
+4. Correction statement固定在 Compare上方。
+5. What Changed獨立放在 Compare下方，不塞進 After。
+6. Comparison Quality位於 Decision前；Limited時原地展開。
+7. Preview actions附屬各自 Result Surface，不與 Decision Actions混合。
+8. Desktop decision row = 保留原版 / 再調整 / 使用修正版。
+9. Desktop baseline不採 sticky decision bar。
+10. Mobile固定 stacked：Before → After，不使用 Tabs。
+11. Mobile decision order = 使用修正版 → 再調整 → 保留原版。
+12. 640–1023px採 content/container-aware transition；必要時提早 stack。
+
+> Step 2：**APPROVED / LOCKED**。下一步：Step 3 — Detailed High-fi Visual Rules Lock。
+
 # 21. Review Status
 
-> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1 APPROVED — STEP2 NEXT**
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED — STEP3 NEXT**
 
-S06 ④A Low-fi與④B Step 1已完成 User Review。
+S06 ④A Low-fi與④B Step 1–2已完成 User Review。
 
-下一步：**S06 ④B Step 2 — Geometry + Visual Hierarchy Lock**。
+下一步：**S06 ④B Step 3 — Detailed High-fi Visual Rules Lock**。
 
 Formal Spec、Backlog / Sprint、Cursor implementation維持 HOLD。
