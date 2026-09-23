@@ -2,7 +2,7 @@
 
 > Overlay ID：O03
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED / STEP3 NEXT**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED / STEP4 NEXT**
 >
 > Phase：Phase 1
 >
@@ -313,8 +313,8 @@ User 已確認並固定：
 > Current status：
 > - Step 1 — Structure Lock ✅
 > - Step 2 — Geometry + Visual Hierarchy Lock ✅
-> - Step 3 — Detailed High-fi Visual Rules Lock — NEXT
-> - Step 4 — Final Visual Reference Lock — PENDING
+> - Step 3 — Detailed High-fi Visual Rules Lock ✅
+> - Step 4 — Final Visual Reference Lock — NEXT
 
 ## Step 1 — Structure Lock ✅
 
@@ -767,12 +767,296 @@ Desktop dialog ↔ Mobile sheet只是 presentation adaptation。
 
 > Step 2：**APPROVED / LOCKED**。下一步：Step 3 — Detailed High-fi Visual Rules Lock。
 
+## Step 3 — Detailed High-fi Visual Rules Lock ✅
+
+> Approved by User：2026-09-23
+>
+> Step 3：**APPROVED / LOCKED**
+>
+> Scope：鎖定 O03 Recovery component styling、shared semantic palette、severity visual treatment、Preserved / Lost Context、Recovery CTA、Retry exhausted、Unsupported、Terminal / Critical、Security / Integrity、O05 retry-processing handoff、motion、icons與 accessibility。不得改寫 Step 1 semantics或 Step 2 geometry。
+
+### 1. Core Visual Character
+
+O03 visual role固定為：
+
+> **清楚、有分級、可信任，但不製造恐慌。**
+
+Rules：
+- White / Soft Neutral仍為主要 surface。
+- Brand Teal保留給 safe Primary action / focus。
+- Recovery severity使用獨立 semantic colors。
+- Brand Yellow不得作 Warning semantic color。
+- Brand Teal不得作 Success唯一訊號。
+- 不做大型紅底 error page。
+- 不使用警報式 flashing / shake / continuous pulse。
+
+### 2. Shared Semantic Palette
+
+O03 Step 3正式建立 cross-screen shared semantic palette；canonical token SSOT同步到 `working/UI-UX/DESIGN-SYSTEM.md`。
+
+~~~text
+INFO
+semantic-info-600    = #2563EB
+semantic-info-bg     = #EFF6FF
+semantic-info-border = #BFDBFE
+
+SUCCESS
+semantic-success-600    = #15803D
+semantic-success-bg     = #F0FDF4
+semantic-success-border = #BBF7D0
+
+WARNING / DEGRADED
+semantic-warning-700    = #B45309
+semantic-warning-bg     = #FFFBEB
+semantic-warning-border = #FDE68A
+
+DANGER / BLOCKING FAILURE
+semantic-danger-700    = #B91C1C
+semantic-danger-bg     = #FEF2F2
+semantic-danger-border = #FECACA
+
+CRITICAL / SECURITY
+semantic-critical-800    = #7F1D1D
+semantic-critical-bg     = #FFF1F2
+semantic-critical-border = #FDA4AF
+~~~
+
+Severity永遠不能只靠顏色表達。
+
+### 3. INFO Visual
+
+INFO採 small inline notice：
+- info icon + title / sentence。
+- `semantic-info-bg`。
+- border = `semantic-info-border`。
+- emphasis / icon = `semantic-info-600`。
+- radius約 `12px`。
+- padding約 `12–16px`。
+- 不使用 modal shadow。
+- action通常為 Ghost / text action。
+
+### 4. DEGRADED Visual
+
+DEGRADED表達「這一部分有問題，但其他部分仍能使用」。
+
+Rules：
+- warning icon + human copy。
+- Warning soft background。
+- 只在 affected component / node內呈現。
+- radius約 `12–16px`。
+- optional Retry / alternate action放 notice底部。
+- 不使用巨大 warning icon或大片黃色。
+
+### 5. BLOCKING_RECOVERABLE Visual
+
+Desktop blocking dialog沿 Step 2 geometry，視覺採：
+- White main surface。
+- radius `20px`。
+- elevation `2`。
+- severity icon約 `24px`。
+- heading使用 `heading-lg` 或 `heading-md`。
+- Danger accent集中在 icon / small border / notice。
+- **整張 Dialog不得鋪紅色。**
+
+固定 hierarchy：
+~~~text
+Failure Heading
+→ Human explanation
+→ Preserved / Lost Context
+→ Primary Safe Action
+→ Secondary Actions
+~~~
+
+### 6. Preserved Context Styling
+
+Preserved Context不是完整 Success state。
+
+例如：
+`✓ 原 App 和你的修改內容都還在`
+
+Recommended：
+- small success indicator。
+- neutral / soft background。
+- readable Ink text。
+- 不畫成大型 Success Card。
+
+目的：給 User安心感，但不得誤導成「整個 operation成功」。
+
+### 7. Lost Context Styling
+
+Material context真的遺失時，通常使用 Warning treatment。
+
+例如：
+`其中 2 個輸入無法保留，需要重新輸入。`
+
+只有 context loss本身造成無法安全繼續時，才由 F12升級 severity；O03不得自行升級。
+
+### 8. Recovery Primary Action
+
+Recovery Primary Button的顏色代表「安全下一步」，不是 failure severity。
+
+Default：
+- Brand Teal 600。
+- White text。
+- radius `12px`。
+- min-height ≥ `44px`。
+
+可包含：
+- 再試一次。
+- 回到安全版本。
+- 修改需求。
+- 回首頁。
+
+不得因 error state就把所有 Primary CTA改成 red。
+
+### 9. Secondary Actions
+
+Secondary：
+- White / Neutral surface。
+- default border。
+- Ink text。
+
+Ghost只用於低優先返回 / dismiss。
+
+真正 destructive action若未來存在，才使用 Danger component。
+
+`回原 App`不得畫成 destructive。
+
+### 10. Retry Budget Exhausted
+
+Immediate Retry budget耗盡後，不顯示：
+- `Retry limit exceeded`。
+- `Attempt 3/3`。
+
+Consumer copy應改成例如：
+`再試仍沒有完成，你可以稍後再試，或先回到原本的 App。`
+
+Visual轉為 Warning / alternate-path state；Primary / Secondary仍由 F12指定。
+
+### 11. UNSUPPORTED
+
+Unsupported不是 Danger。
+
+Presentation使用 Info / Warning family，依 F12 policy決定。
+
+Actions通常：
+- Primary：`修改需求`。
+- Secondary：`使用較簡單版本`。
+
+預設不顯示 Retry。
+
+### 12. TERMINAL / CRITICAL
+
+TERMINAL / CRITICAL採 Safe-State Surface。
+
+Rules：
+- Critical icon + heading。
+- Critical accent。
+- 保持大量 White / Neutral space。
+- 不把整頁染成深紅。
+- 不顯示正常 Runtime controls。
+- 不提供 fake Retry。
+- Safe exit actions清楚可達，例如 `回到安全版本` / `回首頁`。
+
+Critical UI必須冷靜、明確、不可誤操作。
+
+### 13. Security / Integrity
+
+Security / Integrity特別禁止：
+- `忽略並繼續`。
+- `仍然執行`。
+- hidden bypass。
+- Retry。
+- 用 Brand Yellow做「仍可繼續」式警告。
+
+Consumer headline應直接說明目前不能安全繼續。
+
+Consumer UI不顯示 raw security / diagnostic internals。
+
+### 14. Retry Processing
+
+Retry selected後：
+- Recovery geometry維持。
+- Action region原地切換 O05 processing。
+- Progress使用 Teal / Aqua。
+- reliable checkpoints才顯示 %。
+- failure回同一 recovery episode。
+- success才離開 Recovery。
+
+不使用 red progress bar。
+
+### 15. Motion
+
+~~~text
+control feedback       = 120ms
+inline notice          = 180ms
+dialog / bottom sheet  = 180ms
+safe-state transition  ≤ 240ms
+~~~
+
+禁止：
+- shake。
+- flashing。
+- bounce。
+- continuous pulse。
+- red blinking。
+- fake loading animation。
+
+`prefers-reduced-motion`必須支援。
+
+### 16. Icon Language
+
+沿 Design System單一 outline icon family：
+- INFO → info circle。
+- SUCCESS → check。
+- WARNING / DEGRADED → warning triangle。
+- DANGER → error / alert。
+- CRITICAL / Security → shield / stop family。
+
+Default約 `20–24px`。
+
+Severity永遠必須搭配文字與結構，不得只靠 icon或顏色。
+
+### 17. Accessibility
+
+- semantic state不只靠 color。
+- text / icon / control contrast需達標。
+- blocking dialog focus移至 heading / Primary action。
+- inline notice使用適度 `aria-live`。
+- critical safe-state進入時需正確 announce。
+- CTA ≥ 44px。
+- Close只在安全時存在。
+- keyboard可完整操作。
+- focus restore到 safe surface。
+- reduced-motion fallback必須存在。
+
+### 18. Step 3 Locked Decisions
+
+1. O03建立 cross-screen **Shared Semantic Palette**，canonical token同步進 Design System。
+2. INFO = Blue family。
+3. SUCCESS = Green family。
+4. WARNING / DEGRADED = Amber family。
+5. DANGER / BLOCKING FAILURE = Red family。
+6. CRITICAL / SECURITY = Dark Crimson family。
+7. **Brand Yellow ≠ Warning。**
+8. **Brand Teal ≠ Success。**
+9. Recovery Primary Safe Action仍預設使用 Brand Teal。
+10. Preserved Context不畫成完整 Success state。
+11. Lost Context通常使用 Warning treatment。
+12. Unsupported使用 Info / Warning family，不用 Danger。
+13. Critical採 Safe-State Surface，不鋪滿紅色、不提供 Retry。
+14. Retry Processing完全沿 O05。
+15. Motion採 `120 / 180 / ≤240ms` restrained system。
+16. Severity必須由 color + icon + copy + structure + actions共同表達。
+
+> Step 3：**APPROVED / LOCKED**。下一步：Step 4 — Final Visual Reference Lock。
+
 # 19. Review Status
 
-> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED — STEP3 NEXT**
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED — STEP4 NEXT**
 
-O03 ④A Low-fi與④B Step 1–2已完成 User Review。
+O03 ④A Low-fi與④B Step 1–3已完成 User Review。
 
-下一步：**O03 ④B Step 3 — Detailed High-fi Visual Rules Lock**。
+下一步：**O03 ④B Step 4 — Final Visual Reference Lock**。
 
 Formal Spec、Backlog / Sprint、Cursor implementation維持 HOLD。
