@@ -1175,3 +1175,130 @@ User Intent
 4. 4A–4D 的責任是否清楚；
 5. 是否仍能維持 No Arbitrary Code Execution 原則。
 
+
+
+---
+
+## 中期必做：Layer 3 升級為 Full App Contract & Deterministic Validation Layer
+
+> 狀態：**MID-TERM MUST IMPLEMENT**
+>
+> Trigger：與「Layer 4 — App Execution & Runtime Layer」升級同步設計、同步驗收。
+>
+> 原因：如果 Layer 4 中期開始支援 Logic / Data / Capability，但 Layer 3 仍只驗 UI Schema，NodeFF 會失去最重要的安全與可靠性邊界。
+
+### 核心結論
+
+> **Layer 4 能執行什麼，Layer 3 就必須能在執行前驗證什麼。**
+
+因此 Layer 3 不應只被理解為 LegoSpec UI JSON Schema。
+
+中期應升級為：
+
+> **Layer 3 — Full App Contract & Deterministic Validation Layer**
+
+### Layer 3 中期驗證範圍
+
+#### 3A — UI Contract Validation
+
+- component type 是否存在；
+- props 型別是否正確；
+- layout nesting 是否合法；
+- bind target 是否存在；
+- event / action reference 是否有效；
+- responsive / required accessibility contract 是否符合最低要求。
+
+#### 3B — Logic Contract Validation
+
+- action / condition / workflow graph 是否合法；
+- state reference 是否存在；
+- input / output type 是否匹配；
+- workflow 是否存在 impossible / invalid transition；
+- loop / recursion 是否超過允許範圍；
+- side effect 是否只有在允許的 action type 中出現。
+
+#### 3C — Data Contract Validation
+
+- data source / collection / entity reference 是否合法；
+- schema / field type 是否匹配；
+- read / write scope 是否允許；
+- persistence policy 是否明確；
+- anonymous / account / ownership requirement 是否符合；
+- 不允許 Blueprint 任意指定未註冊 DB / table / raw query。
+
+#### 3D — Capability Contract Validation
+
+- API / AI / Map / Payment / External Service capability 是否已在 Registry；
+- capability version 是否相容；
+- required permission / entitlement 是否具備；
+- input / output contract 是否符合；
+- cost / quota / latency class 是否在允許範圍；
+- capability unavailable 時 degradation / recovery path 是否存在。
+
+#### 3E — Runtime Safety / Resource Validation
+
+- hard timeout / execution budget；
+- retry limit；
+- concurrency limit；
+- payload / state size limit；
+- network / external call limit；
+- no arbitrary code execution；
+- prohibited side effect / unsupported operation 必須 fail closed。
+
+### Deterministic Validation 原則
+
+Layer 3 的核心判定應由可重現程式規則完成，不交給 LLM 自評。
+
+可包含：JSON Schema / Zod、Registry lookup、Type checking、Reference resolution、Permission / entitlement rules、Resource / timeout policy、Workflow graph validation、Capability compatibility validation。
+
+同一 Blueprint + 同一 Registry / Policy version 應得到可重現的 PASS / FAIL 結果。
+
+### 與 L2 / L4 的邊界
+
+Layer 2 LLM = propose App Definition。
+
+Layer 3 Deterministic Contract = decide whether the Definition is valid and allowed。
+
+Layer 4 Runtime = execute only validated Definition。
+
+LLM 可以幫忙修正被拒絕的 Blueprint，但：
+
+> **LLM 不能覆寫 Layer 3 的 PASS / FAIL。**
+
+### READY Gate
+
+中期 Full App READY 至少應成立於：
+
+UI Contract PASS + Logic Contract PASS + Data Contract PASS + Capability Contract PASS + Runtime Safety PASS + Hydration / Mount / Required Health Check PASS → READY。
+
+任何一項不通過 → NOT READY → Recovery / Clarification / Regeneration。
+
+不得因 LLM 宣稱「完成」而跳過驗證。
+
+### 與 Layer 4 的共同設計規則
+
+Layer 3 / Layer 4 必須成對演進：L4 新增可執行能力 → 先有 L3 Contract / Validation → 再允許 Blueprint 使用。
+
+不得先讓 Runtime 能執行，之後才補 Validator。
+
+> **No Runtime Capability Without Contract Coverage.**
+
+### 中期 Architecture Acceptance
+
+中期正式升級前至少確認：
+
+1. L4 4A–4D 每個 executable primitive 都有對應 L3 contract；
+2. 每個 Data / Capability side effect 都可在執行前被驗證；
+3. 不存在「LLM 可以繞過 Validator 直接叫 Runtime」的路徑；
+4. Registry / Policy / Contract 都有 versioning；
+5. Validation failure 有 machine-readable reason；
+6. Consumer failure 仍轉成 humanized Recovery UX；
+7. READY 由 independent gate 判定，不由 LLM 自宣告。
+
+### 與 Layer 4 的中期共同目標
+
+> **Layer 2 擴大生成能力，Layer 3 擴大可驗證範圍，Layer 4 擴大可執行能力。**
+
+三者必須同步：L2 can describe ≤ L3 can validate ≤ L4 can safely execute。
+
+若 L2 生成超出 L3 / L4 能力，必須降級、clarify 或拒絕，不能產生「看似成功、實際不可用」的 App。
