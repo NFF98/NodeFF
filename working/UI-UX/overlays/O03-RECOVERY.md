@@ -2,7 +2,7 @@
 
 > Overlay ID：O03
 >
-> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / HIGH_FI_PENDING**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1 APPROVED / STEP2 NEXT**
 >
 > Phase：Phase 1
 >
@@ -10,7 +10,7 @@
 >
 > Function behavior source：F12 Humanized Recovery + F00 Experience Shell。
 >
-> 本文件是 ④A Low-fi review draft，不代表 User 已批准，也不代表 Cursor 可實作。
+> ④A Low-fi 已完成 User Review；④B High-fi Step 1 已批准。Formal Spec 與 Cursor implementation 仍維持 HOLD。
 
 # 1. User Outcome
 
@@ -304,10 +304,269 @@ User 已確認並固定：
 5. Recovery 資訊順序固定為：**發生什麼 → 保留/遺失什麼 → 1 個 Primary + 最多 2 個 Secondary CTA**。
 6. 同一 recovery episode 最多 3 次 immediate User Retry；第 4 次改成稍後再試或其他安全路徑，不提供無限 Retry。
 
-# 18. Review Status
+# 18. ④B High-fi Contract
 
-> **LOW_FI_DIRECTION_APPROVED — HIGH_FI_PENDING**
+> Step 1 approved by User：2026-09-23
+>
+> Canonical rule：本節是 O03 High-fi 的唯一 canonical contract。後續 Step 2–4 必須在本節續寫，不得另建重複 High-fi summary / shadow copy。
+>
+> Current status：
+> - Step 1 — Structure Lock ✅
+> - Step 2 — Geometry + Visual Hierarchy Lock — NEXT
+> - Step 3 — Detailed High-fi Visual Rules Lock — PENDING
+> - Step 4 — Final Visual Reference Lock — PENDING
 
-O03 ④A Low-fi 已完成 User Review。
+## Step 1 — Structure Lock ✅
 
-依固定流程，下一步進 O04 — Revert Confirmation ④A Low-fi。
+### 1. O03 Role — Recovery Presentation System
+
+O03正式鎖定為 **一套 Recovery Presentation System**，不是「所有錯誤都跳同一個 Modal」。
+
+依 F12 severity使用不同 presentation：
+~~~text
+INFO
+→ inline notice
+
+DEGRADED
+→ inline / node-level recovery
+
+BLOCKING_RECOVERABLE
+→ blocking recovery overlay
+
+TERMINAL / CRITICAL
+→ terminal safe-state
+~~~
+
+**Recovery Presentation System = YES.**
+
+### 2. Core Recovery Principle
+
+所有 User-visible recovery固定遵循：
+~~~text
+Preserve Safe Context
+→ Explain Clearly
+→ Offer Safe Next Action
+~~~
+
+Recovery第一優先不是顯示 technical error，而是先保住能安全保留的 context。
+
+### 3. Consumer Information Order
+
+任何 O03 consumer presentation固定依序：
+1. 現在發生什麼。
+2. 哪些內容仍保留 / 哪些 material context可能遺失。
+3. Primary next action。
+4. 最多 2 個 Secondary actions。
+5. Technical diagnostics預設不顯示。
+
+### 4. Context Preservation Copy
+
+如果 context確實有保留，UI應明確說人話，例如：
+- `你的需求已保留`。
+- `原 App 還在`。
+- `目前結果還在`。
+- `分享連結仍有效`。
+
+如果 material context有遺失，必須明講，例如需要重新輸入哪些 material values。
+
+不得：
+- 默默清空。
+- 把 unsafe / corrupted context標成 preserved。
+- 因 Recovery而違反 privacy / sensitivity policy。
+
+### 5. Recovery Ownership Boundary
+
+O03不自行決定 recovery policy。
+
+Canonical ownership：
+~~~text
+Source Function
+→ technical trigger / source error context
+
+F12
+→ recovery class
+→ severity
+→ retryability
+→ preserved / lost context
+→ safe surface
+→ next actions
+
+O03
+→ consumer presentation
+~~~
+
+O03不得自行發明 source Function / F12未提供的安全路徑。
+
+### 6. INFO
+
+INFO不阻斷主要流程。
+
+Presentation：
+- inline notice。
+- 可 dismiss only when dismissal不造成誤解。
+- 不打斷 Runtime / creation flow。
+
+### 7. DEGRADED
+
+DEGRADED只限制 affected area。
+
+例如 component / node failure：
+- 只在 affected component顯示 Recovery。
+- 其他 Runtime / App區域仍可使用。
+- node恢復後 notice移除。
+
+不得把 partial failure升級成整個 App error page。
+
+### 8. BLOCKING_RECOVERABLE
+
+只有以下情況才使用真正 blocking recovery overlay：
+- 當前操作無法完成；
+- 仍有安全 next action；
+- last-known-good context可保留或可安全返回。
+
+Blocking只阻擋 affected operation；不得無理由破壞 safe App context。
+
+### 9. TERMINAL / CRITICAL
+
+TERMINAL / CRITICAL必須進 safe-state。
+
+Rules：
+- 停止 affected execution path。
+- 不提供明知無效的 Retry。
+- 不 silent bypass。
+- 不降低 validation / compatibility / security gate。
+- 必須提供 safe exit，例如 `回到安全版本` / `回首頁`。
+
+如果不存在安全 Close destination，不得只放 `×`。
+
+### 10. Action Contract
+
+Visible recovery actions遵循：
+- Primary action最多 1 個。
+- visible actions通常總共 1–3 個。
+- 每個 action必須真的可執行。
+- action內容來自 F12 next_actions / safe_surface contract。
+
+O03不得自行增加看似合理但底層不支援的 CTA。
+
+### 11. Retry Budget
+
+Retry必須 bounded。
+
+Phase 1同一 recovery episode：
+~~~text
+user-triggered immediate Retry max = 3
+~~~
+
+超過 immediate Retry budget後，應轉：
+- 稍後再試；
+- alternate safe path；
+- 或 terminal / safe-state action。
+
+UI不以 `attempt 2/3` 等 technical counter作主要 consumer copy。
+
+### 12. UNSUPPORTED Boundary
+
+`UNSUPPORTED`不是一般 retryable error。
+
+Preferred actions：
+- 修改需求。
+- 使用較簡單版本。
+
+不得顯示 `再試一次`，除非底層實際 failure是 transient dependency而不是 capability unsupported。
+
+### 13. Security / Integrity
+
+Security / integrity問題固定：
+- fail closed。
+- retryability = NO_RETRY。
+- 停止 affected execution path。
+- 保留安全 context。
+- 不提供 `仍然執行` / bypass action。
+- 不降低 security / validation semantics。
+- raw security code只留 diagnostics。
+
+### 14. Close / Dismiss Boundary
+
+不是所有 Recovery都可以 Close。
+
+- INFO / DEGRADED：可 dismiss，前提是不造成誤解。
+- BLOCKING_RECOVERABLE：只有 Close能安全回 host surface時才提供。
+- TERMINAL / CRITICAL：若沒有明確 safe surface，不提供單純 `×`。
+- Close不得造成 context silent loss。
+
+### 15. Retry Processing Ownership
+
+User按 `再試一次` 後，async processing presentation完全交 O05。
+
+~~~text
+Reliable checkpoints
+→ Stage label + checkpoint-derived %
+
+No reliable checkpoints
+→ Stage label only
+~~~
+
+Rules：
+- 不 fake %。
+- 不用 ETA灌高 progress。
+- 不另發明 O03-specific loading system。
+
+### 16. Technical Boundary
+
+O03 consumer UI不得顯示：
+- source_error_code。
+- recovery policy id。
+- diagnostic_ref。
+- trace_id。
+- provider / Runtime stack details。
+
+Technical diagnostics只能留在 diagnostic / evidence context。
+
+### 17. Safe Surface Is First-class Structure
+
+Recovery結束後回哪裡，不由 O03自行猜。
+
+由 F12 safe_surface + F00 presentation / navigation決定，例如：
+~~~text
+DISCOVER
+CREATE
+APP_CURRENT
+APP_PREVIOUS
+COMPARE
+SHARE_ROUTE
+NONE_FATAL
+~~~
+
+### 18. Step 1 Locked Decisions
+
+1. **O03 = Recovery Presentation System，不是單一 Modal。**
+2. INFO / DEGRADED / BLOCKING_RECOVERABLE / TERMINAL-CRITICAL使用不同 presentation level。
+3. Recovery順序固定為 Preserve Safe Context → Explain Clearly → Offer Safe Next Action。
+4. Consumer資訊順序固定為 what happened → preserved/lost context → Primary →最多2個 Secondary。
+5. Context preservation / loss必須 truthful且明確。
+6. Recovery policy由 F12擁有；O03只負責 consumer presentation。
+7. INFO不阻斷。
+8. DEGRADED只影響 affected area，不把 partial failure升級成整頁 error。
+9. BLOCKING_RECOVERABLE才使用 blocking overlay。
+10. TERMINAL / CRITICAL進 safe-state，不提供假 Retry / bypass。
+11. Primary action最多1個，visible actions通常總共1–3個。
+12. Immediate User Retry同一 episode最多3次。
+13. UNSUPPORTED預設不顯示 Retry。
+14. Security / Integrity = fail closed / NO_RETRY。
+15. Close只有在存在安全返回語意時才顯示。
+16. Retry processing完全交 O05。
+17. Consumer UI不顯示 technical diagnostics。
+18. Safe surface由 F12 + F00決定，O03不自行猜。
+
+> Step 1：**APPROVED / LOCKED**。下一步：Step 2 — Geometry + Visual Hierarchy Lock。
+
+# 19. Review Status
+
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1 APPROVED — STEP2 NEXT**
+
+O03 ④A Low-fi與④B Step 1已完成 User Review。
+
+下一步：**O03 ④B Step 2 — Geometry + Visual Hierarchy Lock**。
+
+Formal Spec、Backlog / Sprint、Cursor implementation維持 HOLD。
