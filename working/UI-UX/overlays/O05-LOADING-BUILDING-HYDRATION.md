@@ -2,7 +2,7 @@
 
 > Overlay / State ID：O05
 >
-> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / HIGH_FI_PENDING**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B HIGH_FI_STEP1 APPROVED / STEP2 NEXT**
 >
 > Phase：Phase 1
 >
@@ -395,10 +395,276 @@ User 已確認：
 4. 某 checkpoint卡住時，%停在最後真實完成值，不用動畫灌高。
 5. Timeout → Recovery → safe S03 / terminal safe-state contract已由 F03 + F12閉合。
 
-# 22. Review Status
+# 22. ④B High-fi Contract
 
-> **LOW_FI_DIRECTION_APPROVED — FUNCTION_DELTA_CLOSED — CROSS_SCREEN_REVIEW_APPROVED — HIGH_FI_PENDING**
+> Step 1 approved by User：2026-09-23
+>
+> Canonical rule：本節是 O05 High-fi 的唯一 canonical contract。後續 Step 2–4 必須在本節續寫，不得另建重複 High-fi summary / shadow copy。
+>
+> Current status：
+> - Step 1 — Structure Lock ✅
+> - Step 2 — Geometry + Visual Hierarchy Lock — NEXT
+> - Step 3 — Detailed High-fi Visual Rules Lock — PENDING
+> - Step 4 — Final Visual Reference Lock — PENDING
 
-O05 的 Low-fi presentation direction與 Runtime Function Delta已由 User確認。
+## Step 1 — Structure Lock ✅
 
-下一步是 Cross-Screen Consistency Review；其完成前仍不得進 High-fi。Formal Spec與 Cursor implementation維持 HOLD。
+### 1. O05 Role — Shared Processing Presentation System
+
+O05正式鎖定為 **Shared Processing Presentation System**，不是單一 Loading Overlay，也不是獨立 route。
+
+它可被以下 host surface共用：
+- S02 Create Workspace。
+- S03 App / Runtime。
+- S04 Shared App Restore。
+- S05 Refine / Remix。
+- S06 Correction Compare preparation / replay。
+- O01 Share creation。
+- O02 Correction Composer submit。
+- O03 Recovery Retry。
+- O04 Revert confirm。
+
+### 2. Only Two Legal Progress Presentation Modes
+
+O05 Consumer presentation只允許兩種 mode：
+
+~~~text
+DETERMINATE
+→ Stage label + checkpoint-derived Progress %
+
+INDETERMINATE
+→ Stage label only
+~~~
+
+不得存在第三種「時間估算型」或平滑動畫灌高的假百分比。
+
+### 3. Source Function Owns Progress Truth
+
+是否能顯示百分比，不由 O05決定。
+
+只有當 Source Function已提供可靠、finite、ordered checkpoint plan時，O05才可呈現 checkpoint-derived %。
+
+O05只負責 consumer projection，不擁有：
+- checkpoint定義。
+- checkpoint completion truth。
+- operation commit truth。
+- retryability。
+- cancelability。
+
+### 4. O05 Must Not Invent Checkpoints
+
+O05不得為了 UI想顯示 25 / 50 / 75 / 100，自行反推或補出 backend checkpoints。
+
+如果 Source Function沒有可靠 checkpoint contract：
+~~~text
+Stage label only
+~~~
+
+不得 fake precision。
+
+### 5. Progress Percentage Meaning
+
+Progress %只代表：
+
+> **已完成多少可驗證 work checkpoints。**
+
+Canonical formula：
+~~~text
+progress_percent
+= completed_checkpoints / planned_checkpoints × 100
+~~~
+
+它不代表：
+- 剩餘時間。
+- LLM ETA。
+- network ETA。
+- provider latency prediction。
+
+### 6. 100% Completion Rule
+
+`100%` 只可在 owner Function的 actual committed / ready condition成立後呈現。
+
+以下不得自行等同 100%：
+- commit_ready。
+- validation passed。
+- response received。
+- last internal step started。
+
+若 Function尚未 actual ready / committed，O05不得先跑到100%再等待。
+
+### 7. Stage and Percentage May Advance Independently
+
+Stage change與 % change不必一對一。
+
+Rules：
+- 同一 stage可完成多個 checkpoint。
+- 某個 stage可長時間停在同一真實 %。
+- 不因畫面看起來沒動，就人工增加 progress。
+- checkpoint completion必須 monotonic。
+
+### 8. Canonical Processing Information Structure
+
+所有 O05 processing presentation固定依序：
+
+~~~text
+Operation / App context
+→ Stage label
+→ Progress indicator（only when determinate）
+→ truthful support copy
+→ Cancel（only when Source Function says safe）
+~~~
+
+不得讓 spinner成為唯一資訊。
+
+### 9. Long Wait / Soft Timeout
+
+Long Wait / Soft Timeout是 `PROCESSING` 上的 non-terminal wait condition，不是 Error。
+
+此時：
+- 保持最後真實 checkpoint %。
+- 顯示現在仍在處理。
+- 可顯示「你的內容都還在」等 truthful preservation copy。
+- 不自行顯示 Retry。
+- 不切 O03。
+
+### 10. Failure / Hard Timeout Boundary
+
+Failure / Hard Timeout不由 O05處理。
+
+Canonical transition：
+~~~text
+O05 processing
+→ Source Function failure / timeout truth
+→ F12
+→ O03 Recovery
+~~~
+
+O05不得：
+- 自己發明 error modal。
+- 無限 spinner。
+- 清空 host surface。
+
+### 11. Cancel Ownership
+
+Cancel是否存在，必須由 Source Function授權。
+
+Rules：
+- safe cancel → O05可顯示 Cancel。
+- not cancellable → 不顯示 Cancel。
+- 不用 disabled Cancel假裝有能力。
+- O05不得自行判斷 operation是否安全可取消。
+
+### 12. Completion Transition
+
+一旦 owner Function actual ready / committed：
+~~~text
+100%（if determinate）
+→ immediately target surface
+~~~
+
+Rules：
+- 不為動畫刻意停留。
+- 不額外增加「完成，請繼續」頁。
+- 只有 Function明確需要 User decision時才停。
+
+### 13. S03 Runtime Fast Path
+
+每個被 F03 admitted 的 Runtime interaction都有 logical `GLOBAL_PROCESSING`。
+
+但若 operation在同一 browser render frame內完成：
+- loading frame可能完全不 paint。
+- logical lifecycle仍成立。
+- 這不是 UX violation。
+- **不得人工延長 operation只為讓 O05被看見。**
+
+### 14. Preserve Host Context
+
+O05不是「白畫面 + spinner」系統。
+
+Processing時應盡量保持 host context穩定，例如：
+- Create保留 creation context。
+- Runtime保留 safe App context。
+- Correction / Revert保留原 surface geometry。
+
+只有 Function安全語意需要時才可切更強 blocking presentation。
+
+### 15. User Decision Is Not Processing
+
+Clarification / Assumption Review等 User decision狀態，不得被當作 processing繼續跑。
+
+例如 F01：
+~~~text
+ANALYZING
+→ NEEDS_CLARIFICATION
+→ waiting for User
+→ User answers
+→ subsequent processing
+~~~
+
+等待 User回答時：
+- progress停止 / 離開 processing presentation。
+- 不繼續灌 %。
+- 不顯示假 loading。
+
+### 16. Retry Starts a New Operation
+
+Retry不是延續舊 progress。
+
+任何 Retry：
+- 由 Source Function建立新的 operation identity。
+- 使用新的 checkpoint plan / lifecycle truth。
+- O05重新 projection。
+
+不得從失敗前的 `75%` 接著跑到 `100%`。
+
+### 17. F01 Creation Progress Delta Boundary
+
+`SD-20260922-002 — F01 Creation Progress Checkpoint Contract` 在本 Step 1後 **仍保持 OPEN**。
+
+O05 Step 1只鎖 Consumer progress interface，不得藉此宣稱 F01 backend / Function contract已閉合。
+
+F01後續 Function Delta Review仍必須獨立完成：
+- canonical checkpoint schema。
+- planned / completed checkpoints。
+- checkpoint plan freeze / legal recalculation。
+- clarification round對 checkpoint plan的影響。
+- F01 → F00 / S02 progress projection interface。
+- F01 / F03 Runtime-prepared handoff ownership。
+- cancel / retry / failure lifecycle。
+- Acceptance / Test。
+
+Cursor不得從 O05 UI mockup反推 F01 backend semantics。
+
+### 18. Step 1 Locked Decisions
+
+1. **O05 = Shared Processing Presentation System，不是單一 Overlay。**
+2. **只允許兩種合法 progress mode：reliable checkpoints → Stage + %；otherwise Stage only。**
+3. Source Function擁有 checkpoint / completion truth；O05只做 presentation projection。
+4. **O05永遠不得自行產生 checkpoint或假百分比。**
+5. %代表 work checkpoint completion，不代表時間。
+6. 100%只在 actual committed / ready後。
+7. Stage與 %可不同步；不得為了動感人工灌高。
+8. Processing資訊順序固定為 Context → Stage → Progress(if determinate) → support copy → Cancel(if safe)。
+9. Long Wait / Soft Timeout仍屬 PROCESSING，不是 Error。
+10. Failure / Hard Timeout交 F12 → O03。
+11. Cancel是否顯示由 Source Function決定。
+12. Completion立即進 target surface，不加多餘完成頁。
+13. S03極快 operation可不 paint loading frame，禁止人工延長。
+14. O05盡量保留 host context，不做白畫面 spinner系統。
+15. Clarification / User Decision不是 Processing。
+16. Retry建立新 operation，不延續舊 progress。
+17. **SD-20260922-002仍保持 OPEN；O05 Step 1不得假裝 F01 Function Delta已閉合。**
+
+> Step 1：**APPROVED / LOCKED**。下一步：Step 2 — Geometry + Visual Hierarchy Lock。
+
+# 23. Review Status
+
+> **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B HIGH_FI_STEP1 APPROVED — STEP2 NEXT**
+
+O05 的 Low-fi presentation direction、Runtime Function Delta、Cross-Screen Review與④B Step 1已由 User確認。
+
+下一步：**O05 ④B Step 2 — Geometry + Visual Hierarchy Lock**。
+
+`SD-20260922-002 — F01 Creation Progress Checkpoint Contract` 仍保持 **OPEN**，後續另做 Function Delta closure，不混入 O05 UI規格。
+
+Formal Spec與 Cursor implementation維持 HOLD。
