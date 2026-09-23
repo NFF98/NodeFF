@@ -75,6 +75,12 @@ TOTAL     210 min
    - 單一工作 10 分鐘內未收斂就停止並明確回報阻塞點。
    - **10 分鐘是 execution gate，不是提醒：到時限後立即停止相關 tool calls；未取得 User 新指示前不得繼續同一工作鏈。**
 
+8. **Binary artifact fallback — User upload beats broken orchestration**
+   - 若 GitHub binary 寫入路徑在短時間內不穩定，不再做長鏈轉檔 / base64 / blob 重試。
+   - 優先改成：User 直接上傳真檔 → Assistant 只修 canonical path / SHA / Working references。
+   - 「寫入成功」與「任務成功」分開；只有 GitHub 上實際可開啟的 artifact 才算完成。
+   - S04/S05 實證：User 直接上傳約 30 秒完成；此路徑優先於不可靠的自動 binary orchestration。
+
 ---
 
 ## Current Status
