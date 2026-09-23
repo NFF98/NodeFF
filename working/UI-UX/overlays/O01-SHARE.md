@@ -2,7 +2,7 @@
 
 > Overlay ID：O01
 >
-> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / HIGH_FI_PENDING**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1 APPROVED / STEP2 NEXT**
 >
 > Phase：Phase 1
 >
@@ -10,7 +10,7 @@
 >
 > Function behavior source：F05 Share / Restore + F00 Experience Shell。
 >
-> 本文件是 ④A Low-fi review draft，不代表 User 已批准，也不代表 Cursor 可實作。
+> ④A Low-fi 已完成 User Review；④B High-fi Step 1 已批准。Formal Spec 與 Cursor implementation 仍維持 HOLD。
 
 # 1. User Outcome
 
@@ -241,10 +241,227 @@ User 已確認：
    - 分享目前結果 / Runtime snapshot：Phase 1 尚未有正式 Function。
    - 即時共同遊玩 / 共享狀態：由 F09 Realtime Room方向承接，目前為 Deferred，不納入 O01 Phase 1。
 
-# 17. Review Status
+# 17. ④B High-fi Contract
 
-> **LOW_FI_DIRECTION_APPROVED — HIGH_FI_PENDING**
+> Step 1 approved by User：2026-09-23
+>
+> Canonical rule：本節是 O01 High-fi 的唯一 canonical contract。後續 Step 2–4 必須在本節續寫，不得另建重複 High-fi summary / shadow copy。
+>
+> Current status：
+> - Step 1 — Structure Lock ✅
+> - Step 2 — Geometry + Visual Hierarchy Lock — NEXT
+> - Step 3 — Detailed High-fi Visual Rules Lock — PENDING
+> - Step 4 — Final Visual Reference Lock — PENDING
 
-O01 ④A Low-fi 已完成 User Review。
+## Step 1 — Structure Lock ✅
 
-依固定流程，下一步進 O02 — Correction Composer ④A Low-fi。
+### 1. O01 Role / Phase 1 Share Boundary
+
+O01只服務 **「分享這個 App」**。
+
+Phase 1分享的是 immutable App / Blueprint reference。
+
+O01不分享：
+- current Runtime inputs；
+- current Result；
+- Runtime mutable state；
+- raw Prompt；
+- realtime shared session / Live Room state。
+
+Future Share Result / Runtime Snapshot與Realtime Room需要獨立 Function contract，不得在 O01 High-fi偷偷擴張。
+
+### 2. Entry / Exit
+
+Canonical entry：
+
+~~~text
+S03 Share
+→ O01
+~~~
+
+Canonical exit：
+
+~~~text
+O01 Close
+→ 原本 S03 Runtime context
+~~~
+
+Share success / failure都不導航離開 S03；Close不得清掉 current App / Runtime context。
+
+### 3. Overlay Boundary
+
+O01是 Overlay，不是 Share Page。
+
+- Desktop = compact panel / lightweight dialog。
+- Mobile = bottom sheet。
+- 不建立 full-screen Share route。
+- O01 active時 underlying S03 Shell controls與 permanent bottom navigation必須 inert / unavailable。
+- Runtime context仍完整保留，但禁止 click-through。
+- Close後 focus回 S03 Share trigger或合理 safe surface。
+
+### 4. Consumer States
+
+O01固定承接以下 consumer states：
+
+~~~text
+CREATING
+→ READY
+   ├─ COPY feedback
+   └─ SYSTEM SHARE
+→ FAILURE when applicable
+~~~
+
+不得把所有狀態壓成單一 ambiguous「分享」button。
+
+### 5. CREATING
+
+CREATING只呈現：
+- App identity（可取得時）；
+- `正在準備分享連結…`；
+- O05 processing presentation；
+- Close。
+
+Rules：
+- 不顯示 fake URL。
+- 不顯示 content hash / internal ID。
+- 不要求第二個「建立連結」確認步驟。
+- duplicate create gesture依 F05去重 / coalesce。
+- User可Close；operation依既有 lifecycle安全繼續或收束，不影響 App。
+
+### 6. READY
+
+READY是 O01核心狀態。
+
+固定資訊順序：
+
+~~~text
+分享這個 App
+→ App Logo / Title
+→ Share URL
+→ 複製連結
+→ 系統分享（supported only）
+→ Privacy copy
+→ Close
+~~~
+
+Share URL是同一 public App Link；O01不得顯示 raw Blueprint hash等 internal metadata。
+
+### 7. Copy Link / System Share
+
+`複製連結`是 Phase 1基本、跨平台能力，READY時必須存在。
+
+`系統分享`是 convenience capability，只在裝置 / Browser支援時顯示。
+
+Native Share不支援時：
+- 不顯示 disabled dead button；
+- 保留 Copy Link即可。
+
+兩者分享的是同一 App Link，不建立兩種 Share semantics。
+
+### 8. Privacy Copy — Always Visible
+
+READY主體內固定可見：
+
+> **目前這個分享只分享 App 本身，不包含你現在的輸入或結果。**
+
+**Privacy copy always visible = YES.**
+
+Rules：
+- 不收進 tooltip / info icon / hidden disclosure。
+- 不降級成難以注意的 legal footer。
+- 此文字是 Phase 1 Share trust boundary的正式 consumer message。
+
+### 9. Copy Success
+
+`複製連結`成功後：
+
+~~~text
+已複製
+~~~
+
+只做短暫 inline feedback / polite live announcement。
+
+不得：
+- 關閉 O01才顯示成功；
+- 開第二個 Overlay；
+- 把 copy success誤當成 share creation的唯一成功判定。
+
+### 10. Copy Failure
+
+Copy failure只影響 clipboard action，不讓已READY的 Share失效。
+
+必須保留：
+- 有效 Share URL；
+- 手動選取 / 複製能力；
+- Retry when eligible。
+
+不得把整個 O01轉成 Share creation failure state。
+
+### 11. Share Creation Failure
+
+Share creation failure才進 O01真正 recovery state：
+
+~~~text
+暫時無法建立分享連結
+你的 App 不受影響
+
+[再試一次]
+[關閉]
+~~~
+
+Retry eligibility與 recovery semantics仍由 F05 / F12 truth決定；O01不得自行發明。
+
+### 12. Re-open Behavior
+
+若同一 logical Share已有有效 READY context：
+
+~~~text
+re-open O01
+→ READY directly
+~~~
+
+不得重新 create、不得重播 fake loading、不得建立 duplicate logical share。
+
+若沒有有效 READY context，才依 F05正常 create lifecycle。
+
+### 13. Native Share Cancel
+
+User關閉 / cancel OS或Browser Share Sheet不是 Error。
+
+Canonical return：
+
+~~~text
+System Share cancelled
+→ O01 READY
+~~~
+
+不得顯示「分享失敗」。
+
+### 14. Step 1 Locked Decisions
+
+1. O01 Phase 1只分享 App / immutable Blueprint reference。
+2. O01是 Overlay，不是獨立 Share Page。
+3. Entry = S03 Share → O01；Close回同一 S03 Runtime context。
+4. O01 consumer states固定為 CREATING / READY / COPY or SYSTEM SHARE feedback / FAILURE。
+5. CREATING不顯示 fake URL / hash / second confirmation。
+6. READY固定呈現 App identity → URL → Copy → supported System Share → Privacy copy → Close。
+7. Copy Link是基本能力；System Share只在supported時顯示。
+8. **Privacy copy always visible = YES**。
+9. Copy success只做 inline feedback，不換頁、不關 Overlay。
+10. Copy failure保留有效 URL與手動複製，不升級成 Share failure。
+11. Share creation failure提供 Retry + Close，且明確告知 App不受影響。
+12. Re-open READY不得重新 create。
+13. Native Share cancel不是 Error。
+14. O01不新增 Share Result / Runtime Snapshot / Live Room等 Phase 1外能力。
+
+> Step 1：**APPROVED / LOCKED**。下一步：Step 2 — Geometry + Visual Hierarchy Lock。
+
+# 18. Review Status
+
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1 APPROVED — STEP2 NEXT**
+
+O01 ④A Low-fi與④B Step 1已完成 User Review。
+
+下一步：**O01 ④B Step 2 — Geometry + Visual Hierarchy Lock**。
+
+Formal Spec、Backlog / Sprint、Cursor implementation維持 HOLD。
