@@ -2,7 +2,7 @@
 
 > Overlay ID：O04
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1 APPROVED / STEP2 NEXT**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED / STEP3 NEXT**
 >
 > Phase：Phase 1
 >
@@ -233,8 +233,8 @@ User 已確認：
 >
 > Current status：
 > - Step 1 — Structure Lock ✅
-> - Step 2 — Geometry + Visual Hierarchy Lock — NEXT
-> - Step 3 — Detailed High-fi Visual Rules Lock — PENDING
+> - Step 2 — Geometry + Visual Hierarchy Lock ✅
+> - Step 3 — Detailed High-fi Visual Rules Lock — NEXT
 > - Step 4 — Final Visual Reference Lock — PENDING
 
 ## Step 1 — Structure Lock ✅
@@ -466,12 +466,249 @@ O04只呈現 Function contract已確認可安全恢復 / 映射的 truth。
 
 > Step 1：**APPROVED / LOCKED**。下一步：Step 2 — Geometry + Visual Hierarchy Lock。
 
+## Step 2 — Geometry + Visual Hierarchy Lock ✅
+
+> Approved by User：2026-09-23
+>
+> Step 2：**APPROVED / LOCKED**
+>
+> Scope：鎖定 O04 Dialog / Bottom Sheet尺寸、Target Identity、reassurance、Input Restoration三種 Case、CTA排列、Confirm → Processing版面穩定性與 responsive hierarchy。不得改寫 Step 1 semantics；color / semantic styling留給 Step 3。
+
+### 1. Desktop Overlay Geometry
+
+Desktop baseline採 **centered lightweight confirmation dialog**。
+
+Recommended width：
+~~~text
+480–560px
+max-width：約 560px
+~~~
+
+Rules：
+- 不做 side panel。
+- 不做 full page。
+- underlying S03保持可辨識但 inert。
+
+### 2. Desktop Vertical Structure
+
+固定順序：
+~~~text
+Heading + Close
+→ Target Version Identity
+→ `目前修正版不會被刪除`
+→ Input Restoration
+→ Actions
+~~~
+
+### 3. Target Version Identity Geometry
+
+Target Version Identity採 compact context block。
+
+至少包含：
+- App Logo + Title。
+- `修正前版本` label。
+
+若有可靠 previous result summary，可補充一小段 material summary。
+
+Recommended normal height：約 `72–104px`。
+
+不得：
+- 做成第二張 S03 Runtime。
+- 做成 Before / After compare。
+- 放入 technical metadata。
+
+### 4. Reassurance Placement
+
+`目前修正版不會被刪除。` 固定為獨立 reassurance row。
+
+位置：
+~~~text
+Target Version Identity
+→ Reassurance
+→ Input Restoration
+~~~
+
+不得塞到 footer / tooltip / fine print。
+
+### 5. Input Restoration Geometry
+
+Input Restoration是 O04第二核心區塊。
+
+建議 section label：
+~~~text
+輸入狀態
+~~~
+
+Case A / B / C共用同一 geometry family，但內容依 truth自然變化。
+
+#### Case A
+
+兩行 confirmed state：
+~~~text
+✓ 回到修正前版本
+✓ 恢復修正前輸入
+~~~
+
+#### Case B
+
+一行版本狀態 + 一整列 `保留目前輸入` Toggle。
+
+#### Case C
+
+兩到三行明確說明：
+- 目前輸入不會恢復。
+- App將從原版初始狀態開始。
+
+三種 Case高度可自然變化，但 dialog不得出現劇烈 layout jump。
+
+### 6. Case B Toggle Geometry
+
+`保留目前輸入`使用 full-row control。
+
+Recommended：
+~~~text
+Label / helper text      [Toggle]
+~~~
+
+Rules：
+- Label在左，Toggle在右。
+- 可有一行 helper copy。
+- 不塞進 CTA row。
+- 不做成 Primary decision button。
+- default OFF仍依 Step 1 semantics。
+
+### 7. Desktop Actions
+
+Desktop baseline：
+~~~text
+[取消]                              [回到原版]
+Secondary / Ghost                  Primary
+~~~
+
+Rules：
+- `回到原版`靠右。
+- baseline不 sticky。
+- actions不得壓縮 Input Restoration內容。
+
+### 8. Confirm → Processing Stability
+
+Confirm後不開新 Overlay。
+
+同一 O04 dialog geometry保持；Actions region原地轉成 O05 processing presentation。
+
+Flow：
+~~~text
+O04 Confirmation
+→ Confirm
+→ same O04 surface + O05 processing
+→ success → S03 base
+→ failure → O03 / F12
+~~~
+
+不得用第二個 modal製造流程跳轉感。
+
+### 9. Mobile Sheet Geometry
+
+Mobile採 bottom sheet / confirmation sheet。
+
+Recommended：
+- horizontal padding `16–20px`。
+- top radius `20px`。
+- content-height baseline。
+- safe-area aware。
+- copy較長時 content region可 scroll。
+
+Target / Input Restoration / Primary CTA都必須容易找到。
+
+### 10. Mobile Canonical Order
+
+Mobile固定順序：
+~~~text
+Heading
+→ Target Identity
+→ Reassurance
+→ Input Restoration
+→ 回到原版
+→ 取消
+~~~
+
+### 11. Mobile Action Order
+
+Mobile正式鎖定：
+~~~text
+[回到原版]
+[取消]
+~~~
+
+**Mobile Primary First = YES.**
+
+`回到原版`：
+- full-width。
+- min-height ≥ 44px。
+
+`取消`：
+- 下一列 Secondary / Ghost。
+
+這取代 Low-fi草圖中先取消再 Primary的排列；Function semantics不變。
+
+### 12. Close Geometry
+
+Close與 Cancel語意相同。
+
+若提供 Close：
+- Desktop放右上角。
+- Mobile放 sheet / header右上角。
+- hit area ≥ 44px。
+
+Close後 focus依 Step 1回 S03 Revert trigger / safe surface。
+
+### 13. Visual Hierarchy
+
+O04固定 hierarchy：
+~~~text
+回到哪一版？
+> 修正版仍保留
+> 輸入會怎麼處理
+> 回到原版 CTA
+> Cancel / chrome
+~~~
+
+第一眼應該是 version decision + input consequence，而不是 technical restore operation。
+
+### 14. Responsive Semantics
+
+Desktop ↔ Mobile只改排列，不改 Case semantics。
+
+不得因 Mobile空間較小：
+- 隱藏 Case C的「輸入不恢復」。
+- 移除 reassurance。
+- 把 Case B Toggle改成 implicit opt-in。
+- 改變 default OFF。
+
+### 15. Step 2 Locked Decisions
+
+1. Desktop = centered lightweight confirmation dialog，約480–560px。
+2. 固定結構 = Heading/Close → Target Identity → Reassurance → Input Restoration → Actions。
+3. Target Identity保持 compact，常態約72–104px，不做第二個 Runtime / Compare。
+4. `目前修正版不會被刪除。` 固定為獨立 reassurance row。
+5. Input Restoration是第二核心區塊，三種 Case共用 geometry family。
+6. Case B Toggle = full-row control，不塞進 CTA row。
+7. Desktop actions = 取消（Secondary/Ghost）+ 回到原版（Primary right）。
+8. Confirm → Processing沿同一 O04 surface原地切 O05。
+9. Mobile = bottom sheet / confirmation sheet，safe-area aware。
+10. Mobile固定順序 = Heading → Target → Reassurance → Input Restoration → Primary → Cancel。
+11. **Mobile action order = 回到原版 → 取消；Primary full-width。**
+12. Close與 Cancel語意相同，hit area ≥44px。
+13. Responsive只改 presentation，不得改 Case A/B/C semantics。
+
+> Step 2：**APPROVED / LOCKED**。下一步：Step 3 — Detailed High-fi Visual Rules Lock。
+
 # 16. Review Status
 
-> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1 APPROVED — STEP2 NEXT**
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED — STEP3 NEXT**
 
-O04 ④A Low-fi與④B Step 1已完成 User Review。
+O04 ④A Low-fi與④B Step 1–2已完成 User Review。
 
-下一步：**O04 ④B Step 2 — Geometry + Visual Hierarchy Lock**。
+下一步：**O04 ④B Step 3 — Detailed High-fi Visual Rules Lock**。
 
 Formal Spec、Backlog / Sprint、Cursor implementation維持 HOLD。
