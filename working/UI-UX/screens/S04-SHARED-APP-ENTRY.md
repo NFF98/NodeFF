@@ -854,22 +854,26 @@ Next：
 ## Step 4 — Final Visual Reference Lock ✅
 
 
-> **PNG Display Repair Record — 2026-09-23**
+> **PNG Reference Repair Record — 2026-09-23**
 >
-> GitHub 上的 previous canonical PNG blob `28a2b6cd3d787e6db1af05c7f96ffcc36ebb79ee` 顯示異常。
+> 先前由 ChatGPT binary pipeline 建立的 S04 reference 已移除／不可用；User 已直接上傳可用 PNG 至新的 canonical path。
 >
-> 已再次以本次驗證可正常 render 的 **true PNG** 在同一 canonical path 原位替換；new repository blob：
+> Canonical path：
 >
-> `48c9a59e8ca024c6b73bacb695cf9665fd418a97`
+> `working/UI-UX/references/S04 アプリ起動画面デザイン仕様.png`
 >
-> 此次只修復 visual artifact display / integrity；**S04 Step 1–4 semantics、layout、interaction contract 完全不變，Step 4 不 reopen**。
+> Repository PNG blob SHA：
+>
+> `629c7156e149ff4cc4c4d33298f5797165f7b84b`
+>
+> 此次只修正 visual artifact path / integrity；**S04 Step 1–4 semantics、layout、interaction contract 完全不變，Step 4 不 reopen**。
 >
 > User approved：2026-09-22
 >
 > Approved visual reference：
-> \`working/UI-UX/references/S04-Shared-App-Entry-Highfi-v1.png\`
+> \`working/UI-UX/references/S04 アプリ起動画面デザイン仕様.png\`
 
-![S04 Shared App Entry High-fi v1](../references/S04-Shared-App-Entry-Highfi-v1.png)
+![S04 Shared App Entry High-fi v1](../references/S04 アプリ起動画面デザイン仕様.png)
 
 ### 1. Reference Coverage
 
