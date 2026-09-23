@@ -509,26 +509,135 @@ Shell Chrome：
 
 ---
 
-# 16. Progress
+# 16. Progress — O05 Step 3 Synced
 
-O05 High-fi foundation：
+> Shared Progress visual rule approved in O05 High-fi Step 3：2026-09-23。
+>
+> O05是 Progress / Stage presentation owner；Source Function仍擁有 checkpoint / ready / commit truth。
 
+## 16.1 Presentation Modes
+
+只有兩種合法模式：
 ~~~text
-Stage label
-+ checkpoint-derived Progress %
+DETERMINATE
+→ Stage label + checkpoint-derived Progress %
+
+INDETERMINATE
+→ Stage label + bounded activity indicator
 ~~~
 
-only when checkpoints are reliable。
+沒有可靠 checkpoints時不得顯示空 rail或假百分比。
 
-Progress visual direction：
+## 16.2 Determinate Track / Fill
 
-- Track：neutral border / soft surface。
-- Fill：Teal → Aqua，可在 completion端少量進 Yellow。
-- 100%只有 actual ready / committed後。
-- 卡住時保持最後真實值。
-- 無 reliable checkpoints → stage label only，不顯示虛假百分比。
+Track：
+~~~text
+surface = #F7FAF9
+border  = #DDE8E6
+radius  = pill
+~~~
 
-Progress不能像 deployment console / file downloader；應有「作品正在形成」的感覺。
+Normal fill：
+~~~text
+Teal #0F766E
+→ Aqua #2DD4BF
+~~~
+
+Rules：
+- fill只隨真實 checkpoint completion前進。
+- checkpoint不變時保持最後真實值。
+- 不使用 elapsed time / timer / provider latency灌 progress。
+- 0–99%正常 processing不使用 Warning / Danger semantic colors。
+
+## 16.3 Yellow Completion Boundary
+
+Brand Yellow `#F4C84C`：
+- **只在 actual 100% / ready / committed後**允許作小面積 completion accent。
+- 0–99%不提前使用 Yellow暗示「快完成」。
+- Long Wait / Soft Timeout不使用 Yellow。
+- Brand Yellow不是 Warning。
+
+Completion accent可為 very small cap / spark / highlight；不得變成大面積 yellow success surface。
+
+## 16.4 Completion Flourish
+
+`duration = 180–240ms max`
+
+Rules：
+- 可使用 small Yellow accent + check / completion mark。
+- 不得延遲 target transition。
+- target立即 ready時 flourish可以不 paint。
+- 不新增 O05-specific Success Card。
+- Runtime operation完成不得為 motion故意延遲。
+
+## 16.5 Stage / Number
+
+Stage：
+- Ink `#102124`。
+- 依 host採 `heading-md` / `body-lg`。
+- Consumer human language only。
+- 不顯示 Function ID / checkpoint ID / engineering enum。
+
+Percentage：
+- Ink `#102124`。
+- tabular numerals where supported。
+- 不顯示 ETA / remaining seconds。
+- Workspace / Restore可較 prominent；S03 / Overlay較 compact。
+
+## 16.6 Indeterminate Activity
+
+- Stage label + small bounded activity indicator。
+- 不顯示空 rail。
+- 不使用 fake shimmer progress / fake fill。
+- indicator只代表 operation active，不代表 work增加。
+- reduced-motion可改 static activity mark。
+
+## 16.7 Long Wait / Soft Timeout
+
+- 保持 Teal / Aqua visual language。
+- 最後真實 %不變。
+- support copy使用 secondary text `#586865`。
+- 可搭 neutral / Info icon。
+- 不切 Warning Yellow / Danger Red。
+- failure / hard timeout正式交 F12 / O03後，才使用 shared semantic status palette。
+
+## 16.8 Motion
+
+~~~text
+micro feedback           = 120ms
+state / label transition = 180ms
+progress transition      ≤ 240ms
+completion flourish      = 180–240ms max
+~~~
+
+禁止 fake smooth crawl、continuous pulse、infinite shimmer、bounce、red blink，以及在兩個真 checkpoint間自行補 intermediate progress。
+
+## 16.9 Host Visual Adaptation
+
+Workspace：可有較完整 creator-energy presentation。
+
+S04 Restore：更安靜、快速，不增加多餘 flourish。
+
+S03 Runtime：White / Soft Neutral compact surface、radius16、default border、elevation1 baseline；Generated App保持主角。
+
+Overlay：保留原 dialog / sheet visual identity；progress只承接 action region；O03 Retry / O04 Revert不得使用 Danger progress。
+
+## 16.10 Accessibility
+
+Determinate：semantic progressbar + truthful `aria-valuenow/min/max`。
+
+Indeterminate：不偽造 `aria-valuenow`；Stage / status text提供 activity語意。
+
+Required：
+- progress不只靠 motion或顏色。
+- Stage / completion / Long Wait使用適度 live announcement。
+- prefers-reduced-motion有 fallback。
+- Cancel / controls touch target ≥44px。
+- focus transition不得丟失。
+
+Progress visual goal：
+
+> **讓 User感覺作品正在形成，而不是看 deployment console / file downloader。**
 
 ---
 
@@ -668,7 +777,6 @@ High-fi design不得通過，若：
 - exact Capsule imagery / illustration language。
 - exact Header geometry。
 - exact S03 bottom navigation item visual styling。
-- exact progress animation / completion flourish。
 - final breakpoint tuning per Screen / component。
 - dark mode（Phase 1目前未承諾）。
 

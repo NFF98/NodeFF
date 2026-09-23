@@ -2,7 +2,7 @@
 
 > Overlay / State ID：O05
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED / STEP3 NEXT**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED / STEP4 NEXT**
 >
 > Phase：Phase 1
 >
@@ -404,8 +404,8 @@ User 已確認：
 > Current status：
 > - Step 1 — Structure Lock ✅
 > - Step 2 — Geometry + Visual Hierarchy Lock ✅
-> - Step 3 — Detailed High-fi Visual Rules Lock — NEXT
-> - Step 4 — Final Visual Reference Lock — PENDING
+> - Step 3 — Detailed High-fi Visual Rules Lock ✅
+> - Step 4 — Final Visual Reference Lock — NEXT
 
 ## Step 1 — Structure Lock ✅
 
@@ -926,13 +926,241 @@ Overlay尤其必須保持原 dialog / sheet identity。
 
 > Step 2：**APPROVED / LOCKED**。下一步：Step 3 — Detailed High-fi Visual Rules Lock。
 
+## Step 3 — Detailed High-fi Visual Rules Lock ✅
+
+> Approved by User：2026-09-23
+>
+> Step 3：**APPROVED / LOCKED**
+>
+> Scope：鎖定 O05 shared processing system的 visual character、progress rail、Stage / % typography、indeterminate activity、Long Wait、S03 Runtime processing layer、Overlay processing、Cancel、completion flourish、motion與 accessibility。不得改寫 Step 1 semantics或 Step 2 geometry。
+
+### 1. Core Visual Character — Active Creation, Not Technical Loading
+
+O05 visual role固定為 **Active Creation / Processing**，不是 technical loading console。
+
+Rules：
+- White / Soft Neutral為主要背景。
+- Teal / Aqua表達「正在形成 / processing」。
+- 不做 deployment console / file downloader視覺。
+- 不用 spinner作唯一狀態訊號。
+- 不把整個 Screen長時間鋪高飽和 gradient。
+- Generated App仍為 S03主角。
+
+### 2. Determinate Progress Rail
+
+Track：
+~~~text
+surface = #F7FAF9
+border  = #DDE8E6
+radius  = pill
+~~~
+
+Fill baseline：
+~~~text
+Teal #0F766E
+→ Aqua #2DD4BF
+~~~
+
+Rules：
+- fill只在真實 checkpoint completion改變時前進。
+- checkpoint truth沒變時，fill保持不動。
+- 不用 elapsed time / timer / easing假裝 work完成。
+- rail本身不使用 Warning / Danger semantic colors表示正常 processing。
+
+### 3. Yellow Completion Boundary
+
+正常 `0–99%` progress **不使用 Yellow**。
+
+Brand Yellow `#F4C84C` 只允許在 **actual 100% / ready / committed已成立後** 作小面積 completion accent。
+
+不得：
+- 在57% / 71% / 85%提前放 Yellow暗示「快好了」。
+- 用 Yellow表示 Soft Timeout / Long Wait。
+- 把 Brand Yellow當 Warning。
+
+### 4. 100% Completion Visual
+
+當 owner Function actual ready / committed成立後：
+- Teal / Aqua rail完成。
+- 可出現 very small Yellow cap / spark / completion accent。
+- 可搭 outline check icon + completion text where host Current Truth需要。
+- flourish duration = `180–240ms` max。
+- flourish不得阻塞 target transition。
+- target立即 transition時，completion flourish可以完全不 paint。
+
+Completion不是新的 O05 Success Card。
+
+### 5. Progress Number
+
+- 使用 tabular numerals where supported。
+- color = Ink `#102124`。
+- 不使用巨大 scoreboard styling。
+- 不加 ETA。
+- 不加「剩餘 X 秒」。
+- Workspace / Restore可較 prominent。
+- S03 compact processing / Overlay降低一級。
+- `%`不得壓過 Stage / operation context。
+
+### 6. Stage Label
+
+- primary text = Ink `#102124`。
+- 依 host使用 `heading-md` 或 `body-lg`。
+- 必須高於 support copy一級。
+- Consumer copy使用人話。
+
+不得直接顯示 internal lifecycle enum、checkpoint ID、Fxx Function ID、`VALIDATING` / `COMMIT_READY`等工程術語。
+
+### 7. Indeterminate Activity
+
+Indeterminate mode：
+~~~text
+Stage Label
+→ small bounded activity indicator
+→ Support Copy
+~~~
+
+Rules：
+- 不顯示空 progress rail。
+- indicator只代表 operation仍 active，不代表 progress增加。
+- 不使用 fake fill。
+- 不使用 shimmer progress bar製造「正在前進」錯覺。
+- 不使用 continuous full-surface pulse。
+- reduced-motion時 indicator可降為 static activity mark，Stage文字仍完整存在。
+
+### 8. Motion Contract
+
+~~~text
+micro feedback           = 120ms
+state / label transition = 180ms
+progress transition      ≤ 240ms
+completion flourish      = 180–240ms max
+~~~
+
+checkpoint jump可從舊真值 transition到新真值，但不得在兩個真 checkpoint中自行補 intermediate progress。
+
+禁止 fake smooth crawl、bounce、continuous glowing pulse、red blink、infinite shimmer，以及為了 animation延遲 Runtime / target ready。
+
+### 9. Long Wait / Soft Timeout Visual
+
+Long Wait / Soft Timeout仍使用 **正常 Teal / Aqua processing language**。
+
+不得切成 Yellow Warning、Danger Red或 Error surface。
+
+Support copy：
+- secondary text `#586865`。
+- 可搭 small neutral / Info icon。
+- 例如：`還在處理，你的內容都還在。`
+
+Determinate：最後真實 %保持不動。
+Indeterminate：Stage + bounded activity indicator保持，不因等待更久改變 fake progress intensity。
+
+### 10. S03 Runtime Processing Layer Visual
+
+S03 compact processing surface：
+~~~text
+surface    = White / Soft Neutral
+radius     = 16px
+border     = default
+elevation  = 1 baseline
+~~~
+
+Rules：
+- 不大面積 gradient。
+- 不大型 glow。
+- 不用高 elevation壓過 Generated App。
+- last-known-good App visual state仍可辨識。
+- processing layer只表示 current operation。
+- source semantics若要求 blocking，可降低 Runtime interaction affordance，但不把整個 NodeFF Shell染成 disabled gray。
+
+### 11. Workspace / Restore Visual Adaptation
+
+S02 / S05 / S06可使用較完整 creator-energy progress treatment；Teal / Aqua存在感可較明顯，但仍遵守70 / 20 / 10品牌平衡。
+
+S04保持更安靜；目的只是快速、可信地打開 App，不加入多餘 creation flourish。
+
+所有 host使用同一 Progress / Stage component tokens，不重新發明 skin。
+
+### 12. Overlay Processing Visual
+
+O01 / O02 / O03 Retry / O04：
+- 保持原 dialog / sheet visual identity。
+- progress只替換原 action region內容。
+- 不把整張 dialog改成 Teal card。
+- 不新開 loading modal。
+- O03 Retry processing不得使用 Danger red progress。
+- O04 Revert processing不得因 version switch使用 destructive progress color。
+
+### 13. Cancel Visual
+
+Cancel = Secondary / Ghost。
+
+Rules：
+- neutral treatment。
+- 不用 Danger red。
+- touch target ≥44px。
+- focus / hover沿 Design System。
+- Spinner不得取代 `取消` label。
+- source不允許 Cancel時 control不存在。
+
+### 14. Semantic Color Boundary
+
+O05正常 processing不得自行使用 `semantic-warning-*`、`semantic-danger-*`、`semantic-critical-*`。
+
+Boundary：
+- processing / long wait → O05 Teal / Aqua。
+- failure / hard timeout → F12 / O03 semantic palette。
+- actual completion → host target truth + optional small Yellow completion accent。
+
+### 15. Accessibility
+
+Determinate progress：
+- 使用 semantic `role="progressbar"` where appropriate。
+- 提供真實 `aria-valuemin` / `aria-valuemax` / `aria-valuenow`。
+- label與 Stage有 programmatic association。
+
+Indeterminate：
+- 不偽造 `aria-valuenow`。
+- 使用 Stage / status text表達 activity。
+
+Announcements：
+- Stage change / completion / Long Wait採適度 live announcement。
+- 不因每個 motion frame重複播報百分比。
+
+Required：
+- progress不得只靠顏色或 motion。
+- reduced-motion移除非必要 transition。
+- Cancel keyboard可達。
+- touch target ≥44px。
+- focus不因 processing transition丟失。
+- target ready後 focus依 host Current Truth移至合理 target content。
+
+### 16. Step 3 Locked Decisions
+
+1. O05 visual role = Active Creation / Processing，不是 technical loading console。
+2. Determinate track = Soft Neutral + default border；fill = **Teal → Aqua**。
+3. **0–99%不使用 Yellow。**
+4. **Yellow只在 actual 100% / ready / committed後作小面積 completion accent。**
+5. Long Wait / Soft Timeout保持正常 Teal / Aqua，不使用 Warning / Danger色。
+6. Progress number使用 Ink + tabular numerals，不顯示 ETA。
+7. Stage比 support copy高一級，且永遠使用 Consumer human language。
+8. Indeterminate = Stage + bounded activity indicator；不顯示空 rail / fake shimmer progress。
+9. Motion = `120 / 180 / ≤240ms`，不得 fake crawl或 continuous pulse。
+10. completion flourish `180–240ms` max，且不得延遲 target transition。
+11. S03 Runtime processing surface = White/Soft Neutral、radius16、border default、elevation1 baseline。
+12. Overlay processing保持原 Overlay visual identity，不使用 Danger progress。
+13. Cancel = Secondary / Ghost，不是 destructive action。
+14. Failure / Hard Timeout semantic colors只在轉交 F12 / O03後使用。
+15. Determinate / Indeterminate ARIA semantics不得造假；progress不只靠顏色 / motion。
+
+> Step 3：**APPROVED / LOCKED**。下一步：Step 4 — Final Visual Reference Lock。
+
 # 23. Review Status
 
-> **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED — STEP3 NEXT**
+> **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED — STEP4 NEXT**
 
-O05 的 Low-fi presentation direction、Runtime Function Delta、Cross-Screen Review與④B Step 1–2已由 User確認。
+O05 的 Low-fi presentation direction、Runtime Function Delta、Cross-Screen Review與④B Step 1–3已由 User確認。
 
-下一步：**O05 ④B Step 3 — Detailed High-fi Visual Rules Lock**。
+下一步：**O05 ④B Step 4 — Final Visual Reference Lock**。
 
 `SD-20260922-002 — F01 Creation Progress Checkpoint Contract` 已完成獨立 Function Delta closure；O05仍只承接 presentation，不成為 Function semantic owner。
 
