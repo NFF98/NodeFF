@@ -2,7 +2,7 @@
 
 > Screen ID：S06
 >
-> 狀態：**WORKING — LOW_FI_DIRECTION_APPROVED / HIGH_FI_PENDING**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1 APPROVED / STEP2 NEXT**
 >
 > Phase：Phase 1
 >
@@ -10,7 +10,7 @@
 >
 > Function behavior sources：F16 Result Correction + F00 Experience Shell + F03 Runtime。
 >
-> 本文件是 ④A Low-fi review draft，不代表 User 已批准，也不代表 Cursor 可實作。
+> ④A Low-fi 已完成 User Review；④B High-fi Step 1 已批准。Formal Spec 與 Cursor implementation 仍維持 HOLD。
 
 # 1. User Outcome
 
@@ -332,12 +332,131 @@ User 已確認：
 3. 三個主要 CTA 固定為：**保留原版 / 再調整 / 使用修正版**。
 4. 若 comparison_mode = LIMITED_COMPARISON，必須明確告知 User「這次只能有限比較」，不可暗示兩邊完全 apples-to-apples。
 
-# 20. Review Status
+# 20. ④B High-fi Contract
 
-> **LOW_FI_DIRECTION_APPROVED — HIGH_FI_PENDING**
+> Step 1 approved by User：2026-09-23
+>
+> Canonical rule：本節是 S06 High-fi 的唯一 canonical contract。後續 Step 2–4 必須在本節續寫，不得另建重複 High-fi summary / shadow copy。
+>
+> Current status：
+> - Step 1 — Structure Lock ✅
+> - Step 2 — Geometry + Visual Hierarchy Lock — NEXT
+> - Step 3 — Detailed High-fi Visual Rules Lock — PENDING
+> - Step 4 — Final Visual Reference Lock — PENDING
 
-S06 ④A Low-fi 已完成 User Review。
+## Step 1 — Structure Lock ✅
 
-Main Screens S01–S06 的 Low-fi 已全部完成。
+### 1. S06 Role
 
-依固定流程，下一步進 O01–O05 Overlay / State ④A Low-fi；全部 Low-fi完成後，再做 Cross-Screen Review → High-fi Design System → ④B High-fi。
+S06 只服務 **F16 Result Correction**。
+
+Canonical entry：
+
+~~~text
+S03 Result
+→ O02 Correction Composer
+→ correction generation / replay
+→ S06 Correction Compare
+~~~
+
+新增功能、改 UI、改用途仍走 S05，不進 S06。
+
+S06 是 **Compare Decision Workspace**，不是 Editor、Builder、一般 Refine Preview或 technical diff viewer。
+
+### 2. Canonical Information Order
+
+S06 固定依序呈現：
+
+~~~text
+App context
+→ 你剛剛說哪裡不對
+→ 修正前 / 修正後
+→ 這次改了什麼
+→ 比較可信度 / 限制
+→ Decision actions
+~~~
+
+若 correction feedback 過長，可顯示摘要並提供展開原文；不可移除 correction context。
+
+### 3. Before / After Result Surfaces
+
+修正前與修正後都必須來自 F16 + F03 canonical result，且必須有明確文字 label，不可只靠顏色。
+
+Consumer UI不顯示 JSON / AST diff、state key diff、model reasoning、internal correction delta ID、technical Blueprint path。
+
+Unavailable / protected outputs依 Function / policy truth呈現，不 fake default。
+
+### 4. What Changed
+
+「這次改了什麼」只呈現 consumer semantic summary；來源仍是 Resolved Correction Intent / Correction Delta / deterministic semantic diff metadata，UI不得自行推論改動。
+
+### 5. Comparison Quality Is First-class Structure
+
+Comparison quality / limitation不得藏進 technical detail。
+
+若為 LIMITED_COMPARISON：
+- 必須明確顯示「這次只能有限比較」；
+- 必須說明數值差異不一定全部來自本次修正；
+- 不得包裝成「系統已證明修正正確」。
+
+F16允許在限制已明確揭露時仍由 User自行決定是否採用修正版；S06不得自行把 LIMITED等同於失敗。
+
+### 6. Decision Actions
+
+S06只有三個產品決策：**保留原版 / 再調整 / 使用修正版**；Primary = **使用修正版**。
+
+- 保留原版 → correction outcome = REJECTED → 回 S03 base App。
+- 再調整 → 繼續 correction lifecycle；Phase 1 default base = latest generated child。
+- 使用修正版 → correction outcome = ACCEPTED → corrected child becomes active → 回 S03。
+
+再調整仍保留 secondary option：**從原版重新修正**；使用 original pre-correction Blueprint作 base。
+
+### 7. Preview Is Not A Decision
+
+可以提供 **查看原版 App / 查看修正版 App**，但只能是 Preview action。
+
+- 查看不等於 Accept / Reject。
+- Preview返回後保留同一 compare context。
+- 若進 full Runtime preview，必須明確標示目前查看版本。
+- 不增加第四個「回目前 App」Decision CTA。
+
+### 8. Revert Boundary
+
+S06不提供 Revert。接受修正版後若 User要回前版，由 **S03 → O04 Revert Confirmation** 承接。
+
+### 9. Focused Workspace / Shell Boundary
+
+S06不繼承 S03 permanent bottom navigation；不得把「目前 App / 修改 / 分享」帶進 S06 decision workspace。
+
+### 10. Loading / Recovery Ownership
+
+- correction generation / replay / comparison processing presentation → O05。
+- technical failure / retry / preserved context → O03 + F12。
+- S06只呈現 compare-ready content與 consumer decision。
+
+### 11. Step 1 Locked Decisions
+
+1. S06只服務 F16 Correction。
+2. S06定位為 Compare Decision Workspace，不是 Editor / technical diff viewer。
+3. Information order固定為 App context → issue → Before/After → changed summary → quality/limits → decisions。
+4. Before / After都是 canonical Result surface，且明確文字標示。
+5. What Changed只用 consumer semantic summary。
+6. Comparison Quality / LIMITED_COMPARISON是正式可見結構。
+7. 三個唯一產品決策為保留原版 / 再調整 / 使用修正版，Primary = 使用修正版。
+8. Adjust Again預設以 latest generated child繼續；可 secondary選擇從原版重新修正。
+9. 查看原版 / 修正版只屬 Preview，不是 decision。
+10. S06不放 Revert；接受後若要回前版由 S03 → O04承接。
+11. S06不繼承 S03 permanent bottom navigation。
+12. Processing交 O05；Failure / Recovery交 O03 + F12。
+
+> Step 1：**APPROVED / LOCKED**。下一步：Step 2 — Geometry + Visual Hierarchy Lock。
+
+# 21. Review Status
+
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1 APPROVED — STEP2 NEXT**
+
+S06 ④A Low-fi與④B Step 1已完成 User Review。
+
+下一步：**S06 ④B Step 2 — Geometry + Visual Hierarchy Lock**。
+
+Formal Spec、Backlog / Sprint、Cursor implementation維持 HOLD。
