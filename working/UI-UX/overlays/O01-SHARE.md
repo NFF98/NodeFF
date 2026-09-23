@@ -2,7 +2,7 @@
 
 > Overlay ID：O01
 >
-> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED / STEP3 NEXT**
+> 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED / STEP4 NEXT**
 >
 > Phase：Phase 1
 >
@@ -250,8 +250,8 @@ User 已確認：
 > Current status：
 > - Step 1 — Structure Lock ✅
 > - Step 2 — Geometry + Visual Hierarchy Lock ✅
-> - Step 3 — Detailed High-fi Visual Rules Lock — NEXT
-> - Step 4 — Final Visual Reference Lock — PENDING
+> - Step 3 — Detailed High-fi Visual Rules Lock ✅
+> - Step 4 — Final Visual Reference Lock — NEXT
 
 ## Step 1 — Structure Lock ✅
 
@@ -641,12 +641,272 @@ Failure message + Recovery action
 
 > Step 2：**APPROVED / LOCKED**。下一步：Step 3 — Detailed High-fi Visual Rules Lock。
 
+## Step 3 — Detailed High-fi Visual Rules Lock ✅
+
+> Approved by User：2026-09-23
+>
+> Step 3：**APPROVED / LOCKED**
+>
+> Scope：鎖定 O01 color usage、typography、Share URL field、button hierarchy、Copy feedback、Privacy copy、CREATING / FAILURE presentation、motion、interaction states與 accessibility。不得改寫 Step 1 Function / state semantics或 Step 2 geometry。
+
+### 1. Core Visual Character
+
+O01採 **lightweight, trustworthy Share Overlay** visual direction。
+
+Rules：
+- White / Soft Neutral為主。
+- Teal = Primary / focus / active。
+- Aqua只作少量 supporting accent。
+- Yellow不作 Share success / warning主色。
+- 不使用 gradient background。
+- 不做 glass / neon / heavy shadow。
+- Dialog / Bottom Sheet應保持輕量，不像設定頁或 wizard。
+
+### 2. Desktop Dialog Visual
+
+沿 Design System：
+- radius = `20px`。
+- elevation = `2`。
+- White surface。
+- subtle border。
+- padding約 `24px`。
+- Title使用 `heading-lg 24/32` 或較克制的 `heading-md 20/28`。
+- Close icon約20px，hit area ≥ 44px。
+
+Underlying S03 context保持可辨識但 inert；backdrop只做克制 dim，不將 Runtime完全遮黑。
+
+### 3. App Identity
+
+App Identity只回答「你正在分享哪個 App」。
+
+Rules：
+- Logo = `40–48px`。
+- Title約 `16–20px / semibold`。
+- 不做大型卡片。
+- 不加 gradient halo / glow。
+- 不顯示 Creator、hash、Prompt、provider等 metadata。
+
+### 4. Share URL Field
+
+READY時 Share URL是最重要操作區。
+
+Recommended：
+- White / Soft surface。
+- neutral border。
+- radius = `12px`。
+- height約 `44–48px`。
+- URL使用 `body-md`。
+- 可使用 readable monospace-like treatment，但不得像 developer console。
+- Focus / selection使用 Teal focus treatment。
+- URL過長可 truncate，但完整內容仍必須可 select / copy。
+
+不得：
+- 使用 textarea。
+- 顯示 raw hash style。
+- 做 code block。
+- 自行新增 QR code。
+
+### 5. Copy Link = Primary
+
+`複製連結`使用 Primary Button：
+- Teal 600 background。
+- White text。
+- radius `12px`。
+- min-height `44px`。
+- Hover → Teal 500。
+- Focus visible。
+- Pressed使用 restrained feedback。
+
+Copy success後，Primary label可短暫由：
+~~~text
+複製連結
+→ 已複製
+~~~
+
+**Copy success button label = YES.**
+
+Rules：
+- Button geometry不得改變。
+- 不造成 layout shift。
+- 數秒後恢復 `複製連結`。
+- 同時提供 polite live announcement。
+
+### 6. System Share = Secondary
+
+`系統分享`使用 Secondary Button：
+- White / Neutral surface。
+- border default。
+- Ink text。
+- 可搭 outline share icon。
+- 不與 Copy搶 Primary權重。
+
+Unsupported時完全不顯示，不留下 disabled dead button。
+
+### 7. Privacy Copy
+
+Privacy copy固定 always visible，但低於主要 action。
+
+Recommended：
+- `body-md 14/22`。
+- Secondary text。
+- 可搭 small privacy / info icon。
+- 不做 warning box。
+- 不做 legal fine print。
+- 不收進 tooltip。
+
+固定文案：
+
+> **目前這個分享只分享 App 本身，不包含你現在的輸入或結果。**
+
+它是 trust reassurance，不是 warning。
+
+### 8. Copy Success
+
+Copy success只做 local positive feedback。
+
+Allowed：
+- Primary label短暫變 `已複製`。
+- 或在 URL / Copy附近顯示 small success feedback。
+
+Not allowed：
+- confetti。
+- blocking toast。
+- 關閉 O01。
+- layout jump。
+
+Exact Success semantic color等待 shared semantic palette；O01不得自行發明另一套 success green。
+
+### 9. Copy Failure
+
+Copy failure只在 URL / Copy區域附近呈現：
+
+~~~text
+無法自動複製
+你仍可以選取上方連結手動複製
+~~~
+
+Rules：
+- inline message。
+- icon + text。
+- 不只靠顏色。
+- Share URL繼續正常顯示。
+- Retry使用 Secondary / low emphasis。
+- 不把整個 dialog轉成 Error UI。
+
+### 10. CREATING
+
+CREATING完全沿 O05 processing system：
+- reliable checkpoints → Stage + checkpoint-derived %。
+- no reliable checkpoints → Stage only。
+
+Rules：
+- 不用巨大 spinner。
+- 不 fake smooth %。
+- Progress color沿 Teal / Aqua。
+- 不畫假的 skeleton URL。
+- 不為 animation延遲 READY。
+
+### 11. Share Creation Failure
+
+Share creation failure是較高層 recovery：
+
+~~~text
+暫時無法建立分享連結
+你的 App 不受影響
+~~~
+
+Visual rules：
+- 沿 shared Recovery visual family。
+- `再試一次` = Primary。
+- `關閉` = Secondary / Ghost。
+- Brand Yellow不作 Warning。
+- exact Error / Warning palette由 O03 / shared semantic system統一。
+
+O01只負責 host presentation，不建立自己的 Error color system。
+
+### 12. Mobile Bottom Sheet
+
+Mobile沿同一 visual hierarchy：
+- top radius = `20px`。
+- elevation = `2`。
+- safe-area aware。
+- drag handle只有真的支援 gesture dismiss才顯示。
+- actions full-width。
+- URL field full-width。
+- Privacy copy保持可讀。
+- Close容易觸及。
+
+不預設 full-screen sheet；只有內容量 / 裝置空間真的需要時才延伸。
+
+### 13. Motion
+
+- Button / hover = `120ms`。
+- Dialog / Bottom Sheet enter / exit = `180ms`。
+- READY transition ≤ `240ms`。
+- Copy success feedback短暫且無 bounce。
+- 不做 pulse假裝 Share仍在工作。
+- 不為 transition延遲 READY。
+- `prefers-reduced-motion`必須有 fallback。
+
+### 14. Interaction States
+
+O01共用元件至少支援：
+~~~text
+DEFAULT
+HOVER
+FOCUS_VISIBLE
+PRESSED
+DISABLED
+LOADING where applicable
+ERROR where applicable
+~~~
+
+Rules：
+- duplicate create / copy gesture需安全處理。
+- Copy loading不得清掉 URL。
+- System Share開啟時不把 O01切成 loading page。
+- System Share cancel回 READY。
+- Close保持可操作，除非 Function明確禁止。
+
+### 15. Accessibility
+
+- URL keyboard可 select / copy。
+- Close hit target ≥ 44px。
+- Actions ≥ 44px。
+- Overlay focus trap / restore正確。
+- Close後 focus回 S03 Share trigger。
+- Copy success使用 polite live announcement。
+- Error / failure不得只靠顏色。
+- unsupported System Share不留下不可操作元素。
+- Mobile safe-area aware。
+- reduced-motion有 fallback。
+
+### 16. Step 3 Locked Decisions
+
+1. O01採輕量、可信任的 Share Overlay visual。
+2. Desktop = White dialog / radius 20 / elevation 2。
+3. Share URL使用 neutral field，不做 developer / code風格。
+4. `複製連結` = Teal Primary。
+5. `系統分享` = Secondary，只在 supported時存在。
+6. Privacy copy always visible，但視覺低於 URL / actions。
+7. Copy success只做 local feedback，不關 Overlay、不跳 layout。
+8. **Copy success button label = YES：`複製連結`可短暫變成`已複製`，button geometry不變，數秒後恢復。**
+9. Copy failure只影響 Copy區域，不升級成 Share failure。
+10. CREATING完全沿 O05，不 fake progress。
+11. Share creation failure沿 shared Recovery visual family。
+12. Brand Yellow不作 Warning / Error。
+13. Mobile Bottom Sheet沿同一 hierarchy。
+14. Motion採 `120 / 180 / ≤240ms` restrained system。
+15. Accessibility / focus / live announcement / reduced-motion列入 High-fi acceptance gate。
+
+> Step 3：**APPROVED / LOCKED**。下一步：Step 4 — Final Visual Reference Lock。
+
 # 18. Review Status
 
-> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–2 APPROVED — STEP3 NEXT**
+> **④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–3 APPROVED — STEP4 NEXT**
 
-O01 ④A Low-fi與④B Step 1–2已完成 User Review。
+O01 ④A Low-fi與④B Step 1–3已完成 User Review。
 
-下一步：**O01 ④B Step 3 — Detailed High-fi Visual Rules Lock**。
+下一步：**O01 ④B Step 4 — Final Visual Reference Lock**。
 
 Formal Spec、Backlog / Sprint、Cursor implementation維持 HOLD。
