@@ -923,6 +923,8 @@ Evidence：
 - F06-AC-021 child generated與User accepted可分開量測。
 - F06-AC-022 no_effective_change可辨識。
 - F06-AC-023 Shared App → Remix lineage / evidence可追蹤。
+- F06-AC-024 REFINE / REMIX intent必須由 User明確選擇；ownership、Shared來源或目前頁面不得自動決定 relation_type。
+- F06-AC-025 S05 `查看原版`的 returnable inspection不得建立第二個 F06/S05 change session；返回後必須續用原 session / draft / Preview context。
 
 # 37. Test Mapping Seed
 
@@ -940,6 +942,8 @@ F06-AC-015 → TEST-F06-015 shared F01 lifecycle
 F06-AC-016 → TEST-F06-016 share/source consistency
 F06-AC-018 → TEST-F06-018 idempotent lineage
 F06-AC-019 → TEST-F06-019 sensitive context exclusion
+F06-AC-024 → TEST-F06-024 explicit relation selection
+F06-AC-025 → TEST-F06-025 inspection does not create nested change session
 ~~~
 
 # 38. Dependencies

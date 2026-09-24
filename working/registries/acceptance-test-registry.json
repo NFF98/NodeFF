@@ -2,7 +2,7 @@
   "registry_version": "1.1.0",
   "owner": "working/registries/acceptance-test-registry.json",
   "conventions": "working/ACCEPTANCE-CONVENTIONS.md",
-  "total_acceptance": 279,
+  "total_acceptance": 285,
   "entries": [
     {
       "acceptance_id": "F00-AC-001",
@@ -3356,6 +3356,78 @@
       "fixture_strategy": "validated-not-hydrated + F03 ready fixtures",
       "expected_observable": "VALIDATED時不顯示100%；F03 READY後才100%。",
       "implementation_location": "tests/behavior/f00/test-f00-prog-003.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F00-AC-036",
+      "function_id": "F00",
+      "criterion": "Normal S03 必須讓 User 明確選擇「修改這個 App → S05A/REFINE」或「改成我的版本 → S05B/REMIX」；UI不得依 ownership、Shared來源或其他 metadata替 User猜 intent。",
+      "test_id": "TEST-F00-036",
+      "verification_type": "AUTOMATED_BEHAVIOR",
+      "fixture_strategy": "Normal S03 desktop + mobile chooser fixtures across own/shared source contexts",
+      "expected_observable": "兩條 consumer action明確且 routing正確；source/ownership變化不會自動選 relation。",
+      "implementation_location": "tests/behavior/f00/test-f00-036.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F00-AC-037",
+      "function_id": "F00",
+      "criterion": "從既有 S05「查看原版」進 S03 Inspection Mode時，必須保留同一 S05 session/path/draft/preview context，依 origin提供返回修改畫面或返回新版預覽，且不得建立第二個 S05 session。",
+      "test_id": "TEST-F00-037",
+      "verification_type": "AUTOMATED_BEHAVIOR",
+      "fixture_strategy": "S05 Composer-origin + Preview-origin returnable inspection fixtures",
+      "expected_observable": "Inspection可操作 source App；return回原 session/context；無 nested S05。",
+      "implementation_location": "tests/behavior/f00/test-f00-037.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F00-AC-038",
+      "function_id": "F00",
+      "criterion": "Phase 1 Inspiration Capsule 的 Try/Fork 必須進 editable prefill → F01 Create；不得套用 Shared App use-as-is restore semantics。",
+      "test_id": "TEST-F00-038",
+      "verification_type": "AUTOMATED_BEHAVIOR",
+      "fixture_strategy": "Inspiration Capsule Try/Fork fixture",
+      "expected_observable": "Capsule開啟 editable prefill並進 F01 Create，沒有直接 hydrate existing Blueprint。",
+      "implementation_location": "tests/behavior/f00/test-f00-038.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F05-AC-022",
+      "function_id": "F05",
+      "criterion": "Shared App Restore READY後可直接 use-as-is；單純 open/use不得建立 REMIX lineage，只有 User明確選「改成我的版本」才進 F06 Remix。",
+      "test_id": "TEST-F05-022",
+      "verification_type": "AUTOMATED_BEHAVIOR",
+      "fixture_strategy": "share restore READY + normal use + later explicit remix fixture",
+      "expected_observable": "restore建立 fresh Runtime Instance並可直接使用；open/use無 remix lineage；explicit remix才建立。",
+      "implementation_location": "tests/behavior/f05/test-f05-022.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F06-AC-024",
+      "function_id": "F06",
+      "criterion": "REFINE / REMIX intent必須由 User明確選擇；ownership、Shared來源或目前頁面不得自動決定 relation_type。",
+      "test_id": "TEST-F06-024",
+      "verification_type": "AUTOMATED_CONTRACT",
+      "fixture_strategy": "same source Blueprint exercised through explicit Refine and Remix selections",
+      "expected_observable": "relation_type只由 explicit selected intent決定，source metadata不覆寫。",
+      "implementation_location": "tests/contracts/f06/test-f06-024.spec.ts",
+      "contract_status": "READY_FOR_IMPLEMENTATION",
+      "required_for_spec": true
+    },
+    {
+      "acceptance_id": "F06-AC-025",
+      "function_id": "F06",
+      "criterion": "S05「查看原版」的 returnable inspection不得建立第二個 F06/S05 change session；返回後必須續用原 session/draft/Preview context。",
+      "test_id": "TEST-F06-025",
+      "verification_type": "AUTOMATED_BEHAVIOR",
+      "fixture_strategy": "active S05A/S05B session → source inspection → return fixtures",
+      "expected_observable": "session id unchanged；draft/preview preserved；no duplicate lineage/change operation created。",
+      "implementation_location": "tests/behavior/f06/test-f06-025.spec.ts",
       "contract_status": "READY_FOR_IMPLEMENTATION",
       "required_for_spec": true
     }

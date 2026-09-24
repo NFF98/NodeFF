@@ -880,6 +880,7 @@ Evidence：
 - F05-AC-019 share create/open/restore ready/failure可量測。
 - F05-AC-020 telemetry不要求 Runtime input/result。
 - F05-AC-021 Share Open與Restore Ready可區分，不能把 click當成功使用。
+- F05-AC-022 Shared App Restore READY後可直接 use-as-is；單純 open / use不得建立 REMIX lineage，只有 User之後明確選 `改成我的版本`才進 F06 Remix。
 
 # 33. Test Mapping Seed
 
@@ -896,6 +897,7 @@ F05-AC-012 → TEST-F05-012 compatibility gate
 F05-AC-014 → TEST-F05-014 CDN cannot bypass trust
 F05-AC-016 → TEST-F05-016 transient retry
 F05-AC-018 → TEST-F05-018 shared-to-remix entry
+F05-AC-022 → TEST-F05-022 shared app use-as-is creates no remix lineage
 ~~~
 
 # 34. Dependencies

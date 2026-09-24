@@ -1333,6 +1333,9 @@ Clarification / Assumption Review：
 - **F00-AC-033** S02 composite Create progress只能由 F01六個 checkpoint + F03 APP_READY truth組成；F00不得自行完成 source-owned checkpoint。
 - **F00-AC-034** Clarification / Assumption waiting 必須凍結 progress，停止 processing animation，不因等待時間前進。
 - **F00-AC-035** F01 VALIDATED 最多完成 composite 6/7（85%）；只有 F03 READY 才可顯示100%。
+- **F00-AC-036** Normal S03 必須讓 User 明確選擇 `修改這個 App → S05A/REFINE` 或 `改成我的版本 → S05B/REMIX`；UI不得依 ownership、Shared來源或其他 metadata替 User猜 intent。
+- **F00-AC-037** 從既有 S05 `查看原版`進 S03 Inspection Mode時，必須保留同一 S05 session / path / draft / preview context，並依 origin提供 `返回修改畫面`或`返回新版預覽`；不得建立第二個 S05 session。
+- **F00-AC-038** Phase 1 Inspiration Capsule 的 `Try / Fork` 必須進 editable prefill → F01 Create；不得套用 Shared App 的 use-as-is restore semantics。
 
 ### F00 Test Mapping Delta
 
@@ -1340,5 +1343,8 @@ Clarification / Assumption Review：
 F00-AC-033 → TEST-F00-PROG-001 owner-tagged composite Create progress
 F00-AC-034 → TEST-F00-PROG-002 waiting-for-user freezes progress
 F00-AC-035 → TEST-F00-PROG-003 100 percent only after F03 READY
+F00-AC-036 → TEST-F00-036 explicit S03 refine/remix choice
+F00-AC-037 → TEST-F00-037 returnable inspection preserves S05 context
+F00-AC-038 → TEST-F00-038 inspiration capsule stays create flow
 ~~~
 
