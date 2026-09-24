@@ -12,7 +12,7 @@
 
 | Count | Lost Time / Incident | Total Lost Time |
 |---:|---:|---:|
-| 6 | mixed | **255 min / 4 hr 15 min** |
+| 7 | mixed | **300 min / 5 hr** |
 
 ---
 
@@ -26,6 +26,7 @@
 | SHAME-004 | 2026-09-23 | S05 寫入 + S04 PNG 修復指令卡住超過 10 小時仍未完成 | 將「寫入 S05 Step 4」與「修復 S04 PNG」混成長鏈工具嘗試，反覆轉檔／檢查／搬運，沒有在明確時間上限內停止失敗路徑，造成實際 wall-clock 延遲超過 10 小時。 | 之後 artifact 寫入採短鏈：先單獨完成文字 commit，再單獨處理每張 binary；每條工具鏈失敗 2 次即停止換路徑；任何單一工作若 10 分鐘內未收斂，立即回報阻塞點，不再無限試。 | 45 min | OPEN / PROCESS FIX |
 | SHAME-005 | 2026-09-23 | 明知 10 分鐘 Hard Stop 規則，S04/S05 PNG 修復仍再次拖到約 30 分鐘 | 在已經因 SHAME-004 明確訂下「同一路徑失敗 2 次即停止、單一工作 10 分鐘未收斂立即回報」後，本次重新處理 S04/S05 Hi-fi PNG 時仍持續 materialize／嘗試 binary 路徑／檢查 GitHub 歷史與 blob，超過 10 分鐘沒有主動停止，直到 User 再次指出 timeout。這是對已存在流程修正的直接違反。 | 立即停止 S04/S05 artifact 操作；之後 10 分鐘 hard stop 必須作為真正 execution gate：到時限即停止所有相關 tool calls、先回報目前完成狀態與唯一 blocker，未取得 User 新指示前不得繼續同一工作鏈。 | 30 min | OPEN / RULE VIOLATION |
 | SHAME-006 | 2026-09-23 | S05 完成後的下一步連續 3 次誤判，沒有依 High-fi canonical sequence 直接進 S06 | 在 User 已完成 S05A/S05B High-fi 後，先錯誤要求重做 F00/F03，再錯誤要求 Cross-Screen Review，之後又錯誤跳到 O05；沒有先讀 DESIGN-SYSTEM.md 的 High-fi Sequence 與 S06/O01–O05 Current Truth，造成連續 3 次錯誤導航。 | 下一步判斷必須先讀 canonical sequence + 當前 Screen status；High-fi 嚴格依 S01→S02→S03→S04→S05→S06→O01→O02→O03→O04→O05，不得用局部 Workbench note 覆蓋全局順序。 | 45 min | OPEN / PROCESS FIX |
+| SHAME-007 | 2026-09-24 | FG-06 分析左右搖擺：沒有先辨識全域入口與區塊內 CTA 的不同角色 | 在討論 S01「探索靈感」與「探索更多」時，先因兩者可能導向同一個 inspiration area，就過早建議移除 Header / Mobile Nav 的「探索靈感」；之後才在 User 指出「其他畫面仍需要全域入口」後承認兩者其實角色不同。這代表分析沒有先從 cross-screen information architecture、入口作用域、使用者視線與就近操作一起判斷，反而左右改口，讓 User 必須自己完成關鍵邏輯。User 對此的原話評價是純粹「suck dog」，並指出這種左右搖擺會破壞工作。 | 正確決策：兩個都保留，但 contract 必須分開。Header / Mobile Nav「探索靈感」＝跨畫面的 global Discover navigation；S01 區塊「探索更多」＝使用者正在看 Capsules 時的 local continuation CTA。之後遇到「兩個入口是否重複」不得只看 destination 是否相同，必須先比較 scope、context、reachability 與 user intent。 | 45 min | OPEN / ANALYSIS FAILURE |
 
 ---
 
@@ -38,9 +39,10 @@ SHAME-003  45 min
 SHAME-004  45 min
 SHAME-005  30 min
 SHAME-006  45 min
+SHAME-007  45 min
 -----------------
-TOTAL     255 min
-          4 hr 15 min
+TOTAL     300 min
+          5 hr
 ~~~
 
 ---
@@ -89,10 +91,17 @@ TOTAL     255 min
    - High-fi canonical sequence：S01 → S02 → S03 → S04 → S05 → S06 → O01 → O02 → O03 → O04 → O05。
    - Workbench 的局部 follow-up / deferred note 不得覆蓋全局 delivery sequence。
 
+
+10. **Same destination ≠ duplicate action**
+   - 判斷兩個 CTA 是否重複時，不可只看最後 destination 是否相同。
+   - 必須先比較：global vs local scope、跨畫面 reachability、使用者當下視線/context、最短操作路徑。
+   - FG-06 正確角色：`探索靈感` = global Discover navigation；`探索更多` = S01 Inspiration 區塊內 local continuation CTA。
+   - 在這四項未比較完成前，不得提出移除入口的建議。
+
 ---
 
 ## Current Status
 
-> **6 incidents / 255 minutes lost / 4 hr 15 min.**
+> **7 incidents / 300 minutes lost / 5 hr.**
 
 本表為 Working Project Management 紀錄，不屬 Formal Spec。
