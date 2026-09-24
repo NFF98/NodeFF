@@ -55,7 +55,7 @@ Rules：
 O01 不採全頁。
 
 Low-fi 建議：
-- Desktop：compact anchored panel / lightweight dialog。
+- Desktop：**centered lightweight dialog**；④B final geometry為約 480–560px，**不採 anchored popover / anchored panel**。
 - Mobile：bottom sheet。
 - 都可隨時 Close。
 - 不使用阻斷整個 App 的 full-screen loading。
@@ -111,7 +111,7 @@ Cross-screen layering rule：
 Processing presentation統一交 O05：
 
 - 有可靠 checkpoints → Stage label + checkpoint-derived Progress %。
-- 沒有可靠 checkpoints → Stage label only。
+- 沒有 reliable checkpoints → Stage label + bounded activity indicator；不顯示 fake % / empty rail。
 - 不 fake %，不以時間估算灌高進度。
 - 不為了 animation故意拖慢 Share ready。
 
@@ -292,7 +292,7 @@ Share success / failure都不導航離開 S03；Close不得清掉 current App / 
 
 O01是 Overlay，不是 Share Page。
 
-- Desktop = compact panel / lightweight dialog。
+- Desktop = **centered lightweight dialog（約 480–560px）**，不採 anchored popover / anchored panel。
 - Mobile = bottom sheet。
 - 不建立 full-screen Share route。
 - O01 active時 underlying S03 Shell controls與 permanent bottom navigation必須 inert / unavailable。
@@ -936,14 +936,16 @@ Rules：
 
 O01 ④A Low-fi與④B Step 1–4已完成 User Review並鎖定。
 
-Final Cross-Screen High-fi Review：**PASSED / ALIGNED**。
+Final Cross-Screen High-fi Review：**OPEN — FG-02 / FG-03 PENDING**。
 
 Formal Spec、Backlog / Sprint、Cursor implementation維持 HOLD。
 
-### Final Cross-Screen High-fi Review — PASSED
+### Final Cross-Screen High-fi Review — OPEN
 
-> Verified：2026-09-23
+> Repair checkpoint：2026-09-24
+>
+> FG-01 / FG-04 / FG-05 / FG-06 / FG-07 deterministic consistency repair已處理；**FG-02 / FG-03仍待 S03 ↔ S05A/S05B + returnable inspection context 決策，因此 Final Gate不得標 PASSED / CLOSED。**
 >
 > Final cross-screen authority：**Step 1–3 textual contract + Design System + Fxx Function truth > Step 4 visual reference。**
 >
-> 本次 Final Review只修 canonical text consistency / stale wording / status / reference precedence；**PNG artifacts不修改**。
+> 本輪 deterministic repair不修改 PNG artifacts；是否需要 reopen S03 Step 4，待 FG-02 / FG-03決策後判定。

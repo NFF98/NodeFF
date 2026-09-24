@@ -12,13 +12,15 @@
 >
 > 本文件的 ④A Low-fi 與 ④B High-fi Step 1–4 已完成 User Review；Formal Spec仍維持 freeze，待 pre-Cursor Formal Spec Refresh。
 
-### Final Cross-Screen High-fi Review — PASSED
+### Final Cross-Screen High-fi Review — OPEN
 
-> Verified：2026-09-23
+> Repair checkpoint：2026-09-24
+>
+> FG-01 / FG-04 / FG-05 / FG-06 / FG-07 deterministic consistency repair已處理；**FG-02 / FG-03仍待 S03 ↔ S05A/S05B + returnable inspection context 決策，因此 Final Gate不得標 PASSED / CLOSED。**
 >
 > Final cross-screen authority：**Step 1–3 textual contract + Design System + Fxx Function truth > Step 4 visual reference。**
 >
-> 本次 Final Review只修 canonical text consistency / stale wording / status / reference precedence；**PNG artifacts不修改**。
+> 本輪 deterministic repair不修改 PNG artifacts；是否需要 reopen S03 Step 4，待 FG-02 / FG-03決策後判定。
 
 # 1. User Outcome
 
@@ -75,8 +77,8 @@ Consumer 不顯示這些工程狀態名稱。
 
 User-facing restore UI 固定顯示：
 - App Logo / App Title（可取得時）。
-- Loading progress %。
-- 簡短人話狀態。
+- 簡短人話狀態 / Stage。
+- **只有 source Function提供 reliable checkpoints時才顯示 checkpoint-derived Loading %；沒有 reliable checkpoints時改用 bounded activity indicator，不顯示 fake %或 empty progress rail。**
 
 Proposed consumer stages：
 

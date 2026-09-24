@@ -51,9 +51,17 @@ O05 可被以下畫面 / Overlay使用：
 
 # 4. Progress Model
 
-O05 建議統一採：
+O05 final rule只允許兩種 presentation mode：
 
-> **Stage label + Checkpoint-derived Progress %**
+~~~text
+DETERMINATE
+→ Stage label + checkpoint-derived Progress %
+
+INDETERMINATE
+→ Stage label + bounded activity indicator
+~~~
+
+只有 reliable checkpoints存在時才顯示 %。
 
 百分比代表：
 - 已完成多少個「可驗證 work checkpoints」。
@@ -62,6 +70,11 @@ O05 建議統一採：
 - 還剩幾秒。
 - LLM多久會回。
 - network多久會好。
+
+沒有 reliable checkpoints時：
+- 不顯示 fake %；
+- 不顯示 empty progress rail；
+- bounded activity indicator只表示 operation仍 active，不代表工作量增加。
 
 例如 4 個 major checkpoints：
 
@@ -103,7 +116,7 @@ Example：
 - S04：已核准 checkpoint-derived Loading %。
 - O02：已核准 checkpoint-derived Progress %。
 
-O05 建議統一後：
+O05 final cross-screen rule：
 
     S02 / S04 / S05 / S06 / O01 / O02 / O03 retry / O04 revert
     → 能定義可靠 checkpoints時
@@ -433,7 +446,7 @@ DETERMINATE
 → Stage label + checkpoint-derived Progress %
 
 INDETERMINATE
-→ Stage label only
+→ Stage label + bounded activity indicator
 ~~~
 
 不得存在第三種「時間估算型」或平滑動畫灌高的假百分比。
@@ -457,10 +470,10 @@ O05不得為了 UI想顯示 25 / 50 / 75 / 100，自行反推或補出 backend c
 
 如果 Source Function沒有可靠 checkpoint contract：
 ~~~text
-Stage label only
+Stage label + bounded activity indicator
 ~~~
 
-不得 fake precision。
+不顯示 fake precision或 empty progress rail。
 
 ### 5. Progress Percentage Meaning
 
@@ -640,7 +653,7 @@ Cursor不得從 O05 UI mockup反推 F01 backend semantics。
 ### 18. Step 1 Locked Decisions
 
 1. **O05 = Shared Processing Presentation System，不是單一 Overlay。**
-2. **只允許兩種合法 progress mode：reliable checkpoints → Stage + %；otherwise Stage only。**
+2. **只允許兩種合法 progress mode：reliable checkpoints → Stage + %；otherwise Stage + bounded activity indicator。**
 3. Source Function擁有 checkpoint / completion truth；O05只做 presentation projection。
 4. **O05永遠不得自行產生 checkpoint或假百分比。**
 5. %代表 work checkpoint completion，不代表時間。
@@ -1190,7 +1203,7 @@ Required：
 
 O05 的 Low-fi presentation direction、Runtime Function Delta、Cross-Screen Review與④B Step 1–4已由 User確認。
 
-Final Cross-Screen High-fi Review：**PASSED / ALIGNED**。
+Final Cross-Screen High-fi Review：**OPEN — FG-02 / FG-03 PENDING**。
 
 `SD-20260922-002 — F01 Creation Progress Checkpoint Contract` 已完成獨立 Function Delta closure；O05仍只承接 presentation，不成為 Function semantic owner。
 
@@ -1210,12 +1223,14 @@ Current Truth：
 - O05仍只做 presentation，不擁有 checkpoint truth。
 - Formal Spec仍 frozen；promotion / verification pending。
 
-### Final Cross-Screen High-fi Review — PASSED
+### Final Cross-Screen High-fi Review — OPEN
 
-> Verified：2026-09-23
+> Repair checkpoint：2026-09-24
+>
+> FG-01 / FG-04 / FG-05 / FG-06 / FG-07 deterministic consistency repair已處理；**FG-02 / FG-03仍待 S03 ↔ S05A/S05B + returnable inspection context 決策，因此 Final Gate不得標 PASSED / CLOSED。**
 >
 > Final cross-screen authority：**Step 1–3 textual contract + Design System + Fxx Function truth > Step 4 visual reference。**
 >
-> 本次 Final Review只修 canonical text consistency / stale wording / status / reference precedence；**PNG artifacts不修改**。
+> 本輪 deterministic repair不修改 PNG artifacts；是否需要 reopen S03 Step 4，待 FG-02 / FG-03決策後判定。
 
 本 note只更新 Function dependency status，不改 O05 Step 1 已鎖定的 UI structure。

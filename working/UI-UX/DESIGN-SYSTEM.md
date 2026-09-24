@@ -149,7 +149,7 @@ Recommended token：
 
 - S01 brand / creator moment。
 - Inspiration Capsule accent。
-- O05 Progress fill / creation transition。
+- O05 **actual 100% / ready / committed後**的小面積 completion flourish；0–99% Progress fill不使用完整 Teal → Aqua → Yellow brand gradient，依 §16只用 Teal → Aqua。
 - small success / completion accent。
 - decorative brand stroke / glow。
 
@@ -159,6 +159,7 @@ Recommended token：
 - 所有 Primary Button 都用 gradient。
 - 整個 S03 Runtime background長期鋪 gradient。
 - Error / Warning / Security state只靠 gradient表達。
+- O05 0–99% Progress fill使用含 Yellow 的完整 brand gradient；Yellow只可在 actual 100% / ready / committed後作小面積 completion accent。
 - 為了「AI感」加入無意義 rainbow / neon。
 
 原則：
@@ -722,7 +723,7 @@ High-fi至少共用以下 components：
 5. Inspiration Capsule Card
 6. App Identity
 7. Shell Header
-8. S03 Bottom Navigation
+8. NodeFF Bottom Navigation（S01 Discover scope / S03 Runtime scope variants）
 9. Progress / Stage
 10. Result Surface
 11. Version Card

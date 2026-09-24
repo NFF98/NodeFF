@@ -285,7 +285,11 @@ Category navigation位於作品卡上方：
 ~~~
 
 - 純文字 tabs，不使用 category icon grid。
-- `探索更多 →`是 secondary / ghost action，只存在 Inspiration區，不進 Header。
+- `探索靈感` = S01 top-level / persistent Discover navigation entry；目的地是 S01 Inspiration區，不建立獨立 Explore Screen。
+- `探索更多 →` = Inspiration區內的 local continuation CTA；User正在看 Capsules時，就近載入 / 展開更多 Capsules，留在 S01。
+- 兩者可使用同一份 Inspiration content source，但 **action contract不同**：前者負責到達 Inspiration區，後者負責在該區繼續探索。
+- 不得因 destination同屬 S01 Inspiration區，就把兩個入口視為 duplicate action。
+- Cross-screen navigation scope仍以 Screen Inventory為準；不得把 `探索靈感`自行擴張成 S02–S06都常駐的 global nav。
 
 ### Footer
 
@@ -461,10 +465,12 @@ Reference boundary：
 - 涉及 Function behavior則回 F00/F01 Working Review。
 - Formal Spec仍待 pre-Cursor refresh。
 
-### Final Cross-Screen High-fi Review — PASSED
+### Final Cross-Screen High-fi Review — OPEN
 
-> Verified：2026-09-23
+> Repair checkpoint：2026-09-24
+>
+> FG-01 / FG-04 / FG-05 / FG-06 / FG-07 deterministic consistency repair已處理；**FG-02 / FG-03仍待 S03 ↔ S05A/S05B + returnable inspection context 決策，因此 Final Gate不得標 PASSED / CLOSED。**
 >
 > Final cross-screen authority：**Step 1–3 textual contract + Design System + Fxx Function truth > Step 4 visual reference。**
 >
-> 本次 Final Review只修 canonical text consistency / stale wording / status / reference precedence；**PNG artifacts不修改**。
+> 本輪 deterministic repair不修改 PNG artifacts；是否需要 reopen S03 Step 4，待 FG-02 / FG-03決策後判定。
