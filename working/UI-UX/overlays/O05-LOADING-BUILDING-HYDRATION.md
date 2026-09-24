@@ -167,7 +167,7 @@ Example：
 O01 Share creation也使用同一 processing presentation：
 
 - 有可靠 Share creation checkpoints → Stage + checkpoint-derived %。
-- 沒有可靠 checkpoints → 顯示「正在準備分享連結…」等 truthful stage，不顯示 fake %。
+- 沒有 reliable checkpoints → 顯示「正在準備分享連結…」等 truthful stage + bounded activity indicator，不顯示 fake % / empty rail。
 - READY立即轉 O01 READY，不為了動畫停留。
 - Share failure仍由 F05 / F12 → O03 recovery semantics承接；O05只負責 processing presentation。
 

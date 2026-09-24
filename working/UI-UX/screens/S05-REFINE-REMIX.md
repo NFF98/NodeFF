@@ -171,7 +171,7 @@ Low-fi proposed stages：
 
 Rules：
 - 共用 O05：有可靠 checkpoints時顯示 **Stage label + checkpoint-derived Progress %**。
-- 沒有可靠 checkpoints時只顯示 Stage label，不 fake %。
+- 沒有 reliable checkpoints時顯示 Stage + bounded activity indicator，不 fake % / empty rail。
 - % 代表 work completion，不代表剩餘時間。
 - 不為了讓 progress看得到而延遲真正完成。
 - 不顯示 Prompt / Validation engineering terminology。
@@ -597,7 +597,7 @@ S05 current session
   - Composer來源 → `返回修改畫面`
   - Preview來源 → `返回新版預覽`
 - S03 正常的 Modify / Remix entry **不得建立第二個 S05 session**。
-- 正常 Modify / Remix entry 要採隱藏、disabled、或導回既有 session，**實際 presentation 留到 S03 reopen 時決定**。
+- S03 Inspection Mode 已於 2026-09-24鎖定：正常 `修改這個 App` / `改成我的版本` entry **隱藏**；以 `正在查看原版` context strip + origin-specific return action回同一既有 S05 session。
 - 此處只鎖 behavior：不得 duplication session，不得丟失 draft / preview context。
 
 ## 20.7 Navigation Boundary
@@ -1133,7 +1133,7 @@ S05 processing完全沿 O05與 Design System Progress：
 - Fill：Teal → Aqua。
 - completion端可極少量 Yellow energy accent。
 - 有 reliable checkpoints → Stage + checkpoint-derived %。
-- 無 reliable checkpoints → Stage only。
+- 無 reliable checkpoints → Stage + bounded activity indicator。
 - 100%只有 actual READY後。
 - %卡住時停在最後真實 checkpoint。
 - 不 fake smooth movement。

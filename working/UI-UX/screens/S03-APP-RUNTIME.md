@@ -729,10 +729,10 @@ Reference boundary：
 
 # 19. Review Status / Change Control
 
-> **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B STEP1–3 RE-CLOSED / STEP4 REOPENED FOR FG-02/FG-03 REFERENCE**
+> **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B STEP1–4 RE-CLOSED / WORKING BASELINE**
 
 - S03 Step 1–3已依 2026-09-24 FG-02 / FG-03 decision重新 CLOSED。
-- Step 4待 replacement PNG寫入並驗證後重新 CLOSED。
+- Step 4 replacement PNG已寫入並驗證，Step 4重新 CLOSED。
 - 任何 Structure / Geometry / Visual Rule / image reference改動，必須 reopen對應 Step。
 - 若後續需要 component anatomy / overlay stacking / operation-state mapping等額外細節，可新增 `Step 4.5 — <Layer Name> Lock`。
 - Step 4.5不得偷改 Step 1–4；涉及 Function behavior必須回相關 Fxx Working Delta Review。
@@ -742,7 +742,7 @@ Reference boundary：
 
 > Repair checkpoint：2026-09-24
 >
-> FG-01 / FG-04 / FG-05 / FG-06 / FG-07 deterministic consistency repair已處理；FG-02 / FG-03 **產品決策已 APPROVED 並同步至 Step 1–3**，目前只待 S03 Step 4 replacement reference + final re-audit。
+> FG-01 / FG-04 / FG-05 / FG-06 / FG-07 deterministic consistency repair已處理；FG-02 / FG-03 **產品決策已 APPROVED 並同步至 Step 1–3**，S03 Step 4 replacement reference已完成；目前只待 final full-set re-audit。
 >
 > Final cross-screen authority：**Step 1–3 textual contract + Design System + Fxx Function truth > Step 4 visual reference。**
 >

@@ -201,7 +201,7 @@ Low-fi copy可用：
 處理中 presentation 統一遵循 **O05 Current Truth**：
 
 - 有可靠 checkpoints → Stage label + checkpoint-derived Progress %。
-- 沒有可靠 checkpoints → Stage label only。
+- 沒有 reliable checkpoints → Stage + bounded activity indicator；不顯示 fake % / empty rail。
 - 百分比只代表已完成 work，不是 ETA。
 - clarification等待 User input時暫停，不假裝持續增加。
 - 進入 child compose / validation / replay時，只在真實 checkpoint完成時更新。
@@ -265,7 +265,7 @@ User 已確認：
 1. Desktop 使用 lightweight dialog / side panel；Mobile 使用 bottom sheet / full-height sheet，不做獨立頁。
 2. O02 固定顯示：**目前結果摘要 +「哪裡不對？」+「預期結果或規則（選填）」**。
 3. Primary CTA 固定為 **「開始修正」**；Submit 後先進 progress / clarification，最後才進 S06 Compare。
-4. Correction 處理中遵循 **O05 Current Truth**：有可靠 checkpoints 才顯示 checkpoint-derived Progress %；沒有可靠 checkpoints 則 Stage only，不做 fake % / ETA。
+4. Correction 處理中遵循 **O05 Current Truth**：有可靠 checkpoints 才顯示 checkpoint-derived Progress %；沒有 reliable checkpoints 則 Stage + bounded activity indicator，不做 fake % / ETA / empty rail。
 5. 若 User其實是在加功能 / 改 UI / 改用途，由系統引導轉 S05 Refine，不把 O02 擴張成通用修改器。
 
 # 16. ④B High-fi Contract
@@ -417,7 +417,7 @@ Reliable checkpoints
 → Stage label + checkpoint-derived Progress %
 
 No reliable checkpoints
-→ Stage label only
+→ Stage + bounded activity indicator
 ~~~
 
 Rules：
@@ -465,7 +465,7 @@ O02不得顯示：
 9. Submit後必須先完成必要 capture / analyze / compose / validate / replay truth，Compare Ready才進 S06。
 10. Clarification保留在 correction lifecycle，不新增 Screen。
 11. Feature/UI/use-case change明確 handoff到 S05 / F06，不在 O02偷偷處理。
-12. **Progress rule = O05 Current Truth：有可靠 checkpoints才顯示 %；否則 Stage only。**
+12. **Progress rule = O05 Current Truth：有可靠 checkpoints才顯示 %；否則 Stage + bounded activity indicator。**
 13. Technical failure / recovery交 O03 + F12。
 14. Consumer UI不顯示 internal technical metadata。
 
@@ -771,7 +771,7 @@ Reliable checkpoints
 → Stage + checkpoint-derived %
 
 No reliable checkpoints
-→ Stage only
+→ Stage + bounded activity indicator
 ~~~
 
 Visual rules：

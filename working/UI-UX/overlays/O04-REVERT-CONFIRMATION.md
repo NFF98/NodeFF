@@ -422,7 +422,7 @@ Rules：
 - O04不自行建立第二套 loading。
 - progress只依 O05 Current Truth。
 - reliable checkpoints才顯示 checkpoint-derived %。
-- otherwise Stage only。
+- otherwise Stage + bounded activity indicator。
 
 ### 13. Unsafe / Incompatible Target After Confirm
 
@@ -820,7 +820,7 @@ Rules：
 Confirm後沿同一 O04 surface：
 - Actions region原地切 O05 processing。
 - reliable checkpoints → Stage + checkpoint-derived %。
-- no reliable checkpoints → Stage only。
+- no reliable checkpoints → Stage + bounded activity indicator。
 - 不 fake progress。
 - 不使用 red progress bar。
 - 不因 animation延遲成功 transition。

@@ -797,7 +797,7 @@ Rules：
 
 CREATING完全沿 O05 processing system：
 - reliable checkpoints → Stage + checkpoint-derived %。
-- no reliable checkpoints → Stage only。
+- no reliable checkpoints → Stage + bounded activity indicator。
 
 Rules：
 - 不用巨大 spinner。

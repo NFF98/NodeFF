@@ -147,7 +147,7 @@ S04 progress 是 restore progress，不是 AI generation progress。
 Rules：
 - 不使用 S02 的「理解 / 組 App」copy。
 - 不顯示 LLM / Compile / Validation engineering terminology。
-- **有 reliable restore checkpoints 時顯示 Stage + checkpoint-derived %；沒有 reliable checkpoints 時顯示 Stage only。**
+- **有 reliable restore checkpoints 時顯示 Stage + checkpoint-derived %；沒有 reliable checkpoints 時顯示 Stage + bounded activity indicator。**
 - 若顯示百分比，只能根據已完成的 restore checkpoints / hydration work推進，不能假裝預測剩餘秒數。
 - 不為了動畫而故意延長 loading。
 - 當 metadata 已取得時，同時顯示 App Logo / Title。
@@ -284,7 +284,7 @@ User 實際看到 / 使用 App後，再從 S03 進：
 User 已確認：
 
 1. **S04 採幾乎隱形的過渡層**；成功時自動進 S03，不建立 Share Landing Page。
-2. Restore 過程遵循 **reliable checkpoints → Stage + checkpoint-derived %；no reliable checkpoints → Stage only**。
+2. Restore 過程遵循 **reliable checkpoints → Stage + checkpoint-derived %；no reliable checkpoints → Stage + bounded activity indicator**。
 3. S04 顯示 **App Logo / App Title + truthful restore status**；有 reliable checkpoints 才加 checkpoint-derived %；不顯示 Login、Creator資料、Prompt、Result Preview。
 4. 永久失效的 Share 不重新生成舊 App；只有暫時性錯誤才提供 Retry，其餘提供 Home / Create New 等安全出口。
 5. 若顯示 Loading %，必須由已完成 restore work推進，不代表預估剩餘時間；沒有 reliable checkpoints 時不顯示 %。
@@ -383,7 +383,7 @@ reliable restore checkpoints
 → Stage + checkpoint-derived %
 
 no reliable restore checkpoints
-→ Stage only
+→ Stage + bounded activity indicator
 ~~~
 
 Cross-flow progress model已由 O05 High-fi Step 1–4鎖定；S04只消費 source checkpoint truth，不自行產生 checkpoint或 fake progress。
@@ -604,7 +604,7 @@ Stage + checkpoint-derived %
 以及：
 
 ~~~text
-Stage only
+Stage + bounded activity indicator
 ~~~
 
 S04不得因是否有 \`%\` 而切換成不同 information architecture。
@@ -728,7 +728,7 @@ reliable restore checkpoints
 → Stage + checkpoint-derived %
 
 no reliable restore checkpoints
-→ Stage only
+→ Stage + bounded activity indicator
 ~~~
 
 Progress visual：
@@ -890,7 +890,7 @@ Next：
 Final Visual Reference覆蓋 Desktop / Mobile三種代表狀態：
 
 1. Restore — reliable checkpoints → **Stage + checkpoint-derived %**。
-2. Restore — no reliable checkpoints → **Stage only**。
+2. Restore — no reliable checkpoints → **Stage + bounded activity indicator**。
 3. Recovery — restore failure於同一 S04 surface提供 recovery actions。
 
 ### 2. Authority / Precedence
@@ -919,7 +919,7 @@ Cursor不得用圖片細節反向改寫 Step 1–3。
 - Failure → Desktop / Mobile都必須保留可見的 **\`回到首頁\`**。
 - Retry只在 source Function truth判定 retryable時顯示。
 - reliable checkpoints → Stage + checkpoint-derived %。
-- no reliable checkpoints → Stage only。
+- no reliable checkpoints → Stage + bounded activity indicator。
 - 不 fake progress、不以 elapsed time推算、不為動畫延遲 READY。
 - S04 restore期間沒有 S03 permanent bottom navigation。
 - 進 S03後 Mobile nav = \`目前 App | 修改 | 分享\`。

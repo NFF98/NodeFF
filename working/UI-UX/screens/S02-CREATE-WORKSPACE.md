@@ -131,7 +131,7 @@ Proposed 4 stages：
 規則：
 - stage-based bar / stepper。
 - Active stage 有 bounded motion。
-- 有可靠 work checkpoints時顯示 checkpoint-derived Progress %；沒有可靠 checkpoints時不顯示假百分比。
+- 有可靠 work checkpoints時顯示 checkpoint-derived Progress %；沒有 reliable checkpoints時不顯示假百分比，改用 Stage + bounded activity indicator。
 - validation-driven recompose 保持在同一 BUILDING surface。
 - 若需要 User decision，才回 Clarification / Assumption。
 
@@ -398,7 +398,7 @@ reliable checkpoints
 → Stage + checkpoint-derived Progress %
 
 no reliable checkpoints
-→ Stage only
+→ Stage + bounded activity indicator
 ~~~
 
 - 不存在「沒有 reliable checkpoints但顯示 %」模式。

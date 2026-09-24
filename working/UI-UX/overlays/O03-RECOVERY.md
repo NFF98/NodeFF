@@ -504,7 +504,7 @@ Reliable checkpoints
 → Stage label + checkpoint-derived %
 
 No reliable checkpoints
-→ Stage label only
+→ Stage + bounded activity indicator
 ~~~
 
 Rules：
