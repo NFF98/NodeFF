@@ -1,6 +1,6 @@
 # NodeFF UI/UX Design System
 
-> 狀態：**WORKING — HIGH-FI DIRECTION A APPROVED / FOUNDATIONS BASELINE**
+> 狀態：**WORKING — HIGH-FI BASELINE APPROVED / FINAL CROSS-SCREEN VERIFIED**
 >
 > Phase：Phase 1
 >
@@ -754,7 +754,7 @@ High-fi design不得通過，若：
 
 ---
 
-# 23. What Is Approved vs Still Open
+# 23. Approved Baseline / Non-blocking Implementation Tuning
 
 ## Approved — Direction A Foundations
 
@@ -771,7 +771,9 @@ High-fi design不得通過，若：
 - S03 Runtime chrome低干擾。
 - NodeFF Shell與Generated App presentation分離。
 
-## Still Open — To Resolve in ④B
+## Non-blocking implementation tuning — does not reopen ④B
+
+> 以下項目不是 Phase 1 product / UX open decision，也不是 Final Gate blocker。Cursor只能在各 Screen / Overlay Step 1–4 已批准的 geometry、visual rule、reference與 accessibility boundary內做實作級 tuning；若 tuning 會改變 structure / behavior / material geometry，必須 reopen對應 Step。
 
 - exact focus ring token。
 - exact button heights beyond minimum。
@@ -783,36 +785,21 @@ High-fi design不得通過，若：
 
 ---
 
-# 24. High-fi Sequence
+# 24. High-fi Sequence — COMPLETED
 
 ~~~text
 Direction A Foundations — APPROVED
-→ Core Component High-fi
-→ S01 ④B High-fi
-→ S02 ④B High-fi
-→ S03 ④B High-fi
-→ S04 ④B High-fi
-→ S05 ④B High-fi
-→ S06 ④B High-fi
-→ O01–O05 ④B High-fi
-→ Final Cross-Screen High-fi Review
+→ S01–S06 + O01–O05 ④B High-fi Step 1–4 — CLOSED
+→ FG-01–FG-07 repair / decision closure — COMPLETE
+→ S03 v2 canonical reference — VERIFIED
+→ Final Cross-Screen High-fi Review — CLOSED / VERIFIED（2026-09-24）
 ~~~
 
-下一步：
+Final re-audit結果：
 
-> **S01 — Discover / Start ④B High-fi Review**
+> **0 個新的 material cross-screen finding。**
 
-在 S01 review中優先定：
-
-1. Header geometry。
-2. Hero typography / hierarchy。
-3. Prompt Composer final geometry。
-4. Inspiration Capsule visual language。
-5. gradient / yellow實際使用比例。
-6. Desktop / Mobile final composition。
-7. Ghost Text / suggestion chip visual。
-8. Explore presentation。
-
+下一個 gate不是再做 High-fi，而是依 User既定流程進行 **pre-Cursor Formal Spec Refresh**；在 User明確開始該 Gate前，Formal Spec與 Cursor implementation維持 HOLD。
 
 ---
 

@@ -1,6 +1,6 @@
 # Phase 1 Screen Inventory
 
-> 狀態：WORKING UI/UX — FG-01–FG-07 REPAIRED / S03 V2 STEP 4 LOCKED / FINAL CROSS-SCREEN HIGH-FI REVIEW OPEN — FINAL RE-AUDIT PENDING
+> 狀態：WORKING UI/UX — S01–S06 + O01–O05 ④B CLOSED / FG-01–FG-07 CLOSED / FINAL CROSS-SCREEN HIGH-FI REVIEW CLOSED / VERIFIED
 >
 > 目的：管理 Phase 1 的 Screen / Surface 地圖、Screen-level UX Review 狀態與畫面之間的關係。
 >
@@ -26,10 +26,10 @@ Phase 1 目前採 **6 個主要 Screen / Surface + 5 類 Overlay / State**。
 | S02 | Create Workspace | 分析、補充必要資訊、確認假設並生成 App | F00 + F01 | **④A LOW_FI_APPROVED / ④B STEP1–4 CLOSED** |
 | S03 | App / Runtime | 使用生成 App，進入 Share / Refine / Remix / Correct；承接 S05 Inspection Mode | F00 + F03 + F06 | **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / ④B STEP1–4 RE-CLOSED** |
 | S04 | Shared App Entry / Restore | 從分享連結恢復並立即使用 App | F05 + F00 | **④A LOW_FI_APPROVED / ④B STEP1–4 CLOSED** |
-| S05 | Refine / Remix Workspace | 修改既有 App、Preview child、決定是否採用 | F06 + F00 | **④A LOW_FI_APPROVED / ④B STEP1–4 CLOSED / FINAL GATE OPEN** |
+| S05 | Refine / Remix Workspace | 修改既有 App、Preview child、決定是否採用 | F06 + F00 | **④A LOW_FI_APPROVED / ④B STEP1–4 CLOSED** |
 | S06 | Correction Compare | 比較修正前後並 Accept / Keep / Adjust | F16 + F00 | **④A LOW_FI_APPROVED / ④B STEP1–4 CLOSED** |
 
-S01–S06 與 O01–O05 的既有 ④A / ④B baseline已完成。2026-09-24 FG-01–FG-07均已處理；FG-02 / FG-03已同步到 Function/UI Working；S03 Step 1–4已 re-closed，v2 replacement PNG path / SHA / size已驗證。現在只剩 final full-set re-audit；findings = 0 才關閉 Final Cross-Screen Gate。
+S01–S06 與 O01–O05 的 ④A / ④B baseline均已完成。2026-09-24 FG-01–FG-07均已處理；FG-02 / FG-03已同步到 Function/UI Working；S03 Step 1–4已 re-closed，v2 replacement PNG path / SHA / size已驗證。Final full-set re-audit結果為 **0 個新的 material finding**，因此 Final Cross-Screen High-fi Gate 已 **CLOSED / VERIFIED**。
 
 # 3. Overlay / State Inventory
 
@@ -339,36 +339,32 @@ User 已確認目前策略：
   1. F00/F03/F12 Runtime Loading + Timeout Working Function Delta Review（**完成：2026-09-22**）；
   2. Cross-Screen Consistency Review（**完成：2026-09-22**）；
   3. High-fi Design System / S01–S06 + O01–O05 ④B High-fi Step 1–4（**完成**）；
-  4. Final Cross-Screen High-fi Review（**FG-01–FG-07 REPAIRED；S03 V2 STEP 4 LOCKED；FINAL RE-AUDIT PENDING**）。
+  4. Final Cross-Screen High-fi Review（**CLOSED / VERIFIED — 2026-09-24**）。
 - **正式 Cursor 開發前**，再做一次短期 Formal Spec Refresh，把最後批准的 Working truth一次同步到 implementation contract。
 - 在該 refresh前，Cursor implementation維持 HOLD。
 
 # 9. Next
 
-目前唯一剩餘 UI/UX Gate工作：
+Final Cross-Screen High-fi Review 已於 **2026-09-24 CLOSED / VERIFIED**。
 
-> **全套 Final Cross-Screen re-audit → findings = 0 後 CLOSED / VERIFIED**
+Final verification：
+- S01–S06 + O01–O05：逐份 re-fetch / cross-screen consistency audit完成。
+- FG-01–FG-07：全部 CLOSED。
+- S03 v2 canonical PNG：path / SHA / non-zero size驗證完成。
+- 其餘 10 張 canonical PNG：path / SHA / non-zero size驗證完成，未重畫。
+- F00 / F05 / F06：FG-02 / FG-03 Function truth已同步。
+- working/registries/acceptance-test-registry.json：F00-AC-036/037/038、F05-AC-022、F06-AC-025均已有 automated test mapping，狀態 READY_FOR_IMPLEMENTATION。
+- Final re-audit：**0 個新的 material finding**。
 
-FG-02 / FG-03 已 APPROVED：
-- Shared App：Restore後預設 **use as-is**；open / use本身不是 Remix。
-- Inspiration Capsule：Phase 1維持 **Try / Fork → editable prefill → F01 Create**，不做 Shared App式 use-as-is。
-- Normal S03：Desktop明確顯示 `修改這個 App → S05A`與`改成我的版本 → S05B`；Mobile `修改`先開 explicit chooser。
-- S05 `查看原版` → S03 **Inspection Mode**；保留同一 S05 session，依來源返回 `返回修改畫面`或`返回新版預覽`，不得 nested S05。
+下一個 Gate：
 
-已同步：
-- F00 Experience Shell。
-- F05 Share / Restore。
-- F06 Remix / Refine。
-- S03 App / Runtime Step 1–3。
-- S05 Refine / Remix cross-screen closure。
-- 本 Screen Inventory。
+> **Pre-Cursor Formal Spec Refresh — NEXT / NOT STARTED**
 
-Picture scope：
-- **只重做 S03 canonical PNG；已完成並驗證。**
-- S01 / S02 / S04 / S05 / S06 / O01–O05 共 10 張 PNG不改。
-- 目前重新 fetch S01–S06 + O01–O05 + Design System + Inventory +相關 F00/F05/F06；findings = 0 才標 Final Gate CLOSED / VERIFIED。
-
-Formal Spec、Backlog / Sprint、Cursor implementation仍 HOLD；Final Gate關閉後再進 pre-Cursor Formal Spec Refresh。
+仍遵守：
+- Formal Spec目前維持 freeze，直到 User明確開始下一個 Gate。
+- Cursor implementation維持 HOLD。
+- Working仍是唯一 Current Truth。
+- 不因 Final UI Gate關閉而自動 promotion Formal Spec。
 
 ## 9.1 Approved Visual References — Current
 

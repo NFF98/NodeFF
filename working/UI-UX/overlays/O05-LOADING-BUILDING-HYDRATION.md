@@ -1203,7 +1203,7 @@ Required：
 
 O05 的 Low-fi presentation direction、Runtime Function Delta、Cross-Screen Review與④B Step 1–4已由 User確認。
 
-Final Cross-Screen High-fi Review：**OPEN — FG-02 / FG-03 PENDING**。
+Final Cross-Screen High-fi Review：**CLOSED / VERIFIED**。
 
 `SD-20260922-002 — F01 Creation Progress Checkpoint Contract` 已完成獨立 Function Delta closure；O05仍只承接 presentation，不成為 Function semantic owner。
 
@@ -1223,14 +1223,14 @@ Current Truth：
 - O05仍只做 presentation，不擁有 checkpoint truth。
 - Formal Spec仍 frozen；promotion / verification pending。
 
-### Final Cross-Screen High-fi Review — OPEN
+### Final Cross-Screen High-fi Review — CLOSED / VERIFIED
 
-> Repair checkpoint：2026-09-24
+> Verified：2026-09-24
 >
-> FG-01 / FG-04 / FG-05 / FG-06 / FG-07 deterministic consistency repair已處理；**FG-02 / FG-03仍待 S03 ↔ S05A/S05B + returnable inspection context 決策，因此 Final Gate不得標 PASSED / CLOSED。**
+> FG-01–FG-07 已全部完成修正與決策；2026-09-24 final full-set re-audit 未發現新的 material cross-screen finding。**Final Cross-Screen High-fi Gate = CLOSED / VERIFIED。**
 >
 > Final cross-screen authority：**Step 1–3 textual contract + Design System + Fxx Function truth > Step 4 visual reference。**
 >
-> 本輪 deterministic repair不修改 PNG artifacts；是否需要 reopen S03 Step 4，待 FG-02 / FG-03決策後判定。
+> Final re-audit確認：S03 使用 approved v2 canonical reference；其餘既有 canonical PNG維持不變。圖片不覆蓋 Step 1–3 textual contract / Design System / Fxx Function truth。
 
 本 note只更新 Function dependency status，不改 O05 Step 1 已鎖定的 UI structure。

@@ -1308,11 +1308,11 @@ S05 ④B Step 1–4 已完成 User Review並鎖定。
 - Cross-screen follow-up已於 2026-09-24決定：Normal S03明確承接 S05A `修改這個 App`與 S05B `改成我的版本`；Mobile `修改`先開 explicit chooser。
 - Formal Spec仍維持 freeze，待 pre-Cursor Formal Spec Refresh。
 
-### Final Cross-Screen High-fi Review — OPEN
+### Final Cross-Screen High-fi Review — CLOSED / VERIFIED
 
-> Repair checkpoint：2026-09-24
+> Verified：2026-09-24
 >
-> FG-01–FG-07產品／一致性修正已完成；S03 v2 replacement PNG已完成並驗證。S05 contract本身無需 reopen；目前只待 final full-set re-audit後一起關閉 Final Gate。
+> FG-01–FG-07產品／一致性修正已完成；S03 v2 replacement PNG已完成並驗證。S05 contract本身無需 reopen；2026-09-24 final full-set re-audit結果：**0 個新的 material finding，CLOSED / VERIFIED。**
 >
 > Final cross-screen authority：**Step 1–3 textual contract + Design System + Fxx Function truth > Step 4 visual reference。**
 >
