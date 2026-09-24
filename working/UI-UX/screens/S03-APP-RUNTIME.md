@@ -696,11 +696,11 @@ Cursor不得：
 - 在 Mobile點`修改`後直接開 S05而沒有 explicit S05A/S05B choice；
 - 在 Inspection Mode建立新的 S05 session或遺失既有 draft / Preview context。
 
-## Step 4 — Final Visual Reference Lock 🔄 REOPENED — 2026-09-24
+## Step 4 — Final Visual Reference Lock ✅ RE-CLOSED — 2026-09-24
 
 Reopen reason：
 
-> FG-02 / FG-03新增 normal S03雙 change-entry presentation、Mobile explicit chooser與 S05 returnable Inspection Mode；舊 PNG已不足以完整呈現新的 Structure / Geometry。
+> FG-02 / FG-03新增 normal S03雙 change-entry presentation、Mobile explicit chooser與 S05 returnable Inspection Mode；舊 PNG已由 v2 reference取代。
 
 Replacement visual requirements：
 - Normal Desktop：`修改這個 App` / `改成我的版本` / `分享`。
@@ -711,7 +711,7 @@ Replacement visual requirements：
 
 舊 reference在 replacement commit前只作歷史 reference，不再代表 FG-02 / FG-03完整 Current Truth：
 
-![S03 App Runtime High-fi v1](../references/S03-App-Runtime-Highfi-v1.png)
+![S03 App Runtime High-fi v2](../references/S03-App-Runtime-Highfi-v2.png)
 
 Canonical path：
 
@@ -746,4 +746,4 @@ Reference boundary：
 >
 > Final cross-screen authority：**Step 1–3 textual contract + Design System + Fxx Function truth > Step 4 visual reference。**
 >
-> S03 Step 4已因 FG-02 / FG-03 material visual change正式 reopen；其餘 10 張 PNG不修改。
+> S03 Step 4已以 FG-02 / FG-03 v2 reference重新 CLOSED；其餘 10 張 PNG不修改。
