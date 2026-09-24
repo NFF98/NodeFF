@@ -1312,7 +1312,7 @@ S05 ④B Step 1–4 已完成 User Review並鎖定。
 
 > Repair checkpoint：2026-09-24
 >
-> FG-01 / FG-04 / FG-05 / FG-06 / FG-07 repair已處理；FG-02 / FG-03產品決策已 APPROVED。S05 contract本身無需 reopen；待 S03 replacement PNG + final re-audit後一起關閉 Final Gate。
+> FG-01–FG-07產品／一致性修正已完成；S03 v2 replacement PNG已完成並驗證。S05 contract本身無需 reopen；目前只待 final full-set re-audit後一起關閉 Final Gate。
 >
 > Final cross-screen authority：**Step 1–3 textual contract + Design System + Fxx Function truth > Step 4 visual reference。**
 >
