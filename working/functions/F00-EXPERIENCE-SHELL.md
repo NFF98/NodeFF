@@ -691,28 +691,36 @@ F00不決定：
 
 ## F00-UX-018
 
-APP surface提供：
+APP surface提供兩個**不同 consumer intent**：
 
 ~~~text
-Remix / 改成我的版本
 Refine / 修改這個 App
+→ S05A
+
+Remix / 改成我的版本
+→ S05B
 ~~~
 
 Entry behavior：
 
 ~~~text
 Current Blueprint
-→ open Create surface with context
-→ prefill semantic editing context
+→ User明確選 Refine 或 Remix
+→ open對應 S05A / S05B change context
 → User describes change
 → F06/F01
 ~~~
 
 Rules：
 
+- `修改這個 App` = 延續目前 App 的創作脈絡；`改成我的版本` = 以目前 App 為 base 建立 derivative。
+- F00 / UI不得用 ownership、shared status或來源頁面自行猜 Refine / Remix；由 User明確選擇。
+- Shared App restore後**先直接使用原 App**；open本身不是 Remix。User之後主動選 `改成我的版本` 才建立 Remix flow。
+- Inspiration Capsule在 Phase 1仍走 `Try / Fork → editable prefill → F01 Create`；不是 Shared App 的 use-as-is restore flow。
 - original App仍可返回。
 - Runtime state mutation不等於 Refine。
 - Remix / Refine failure不破壞 original App。
+- 若 S03 是由既有 S05 `查看原版`暫時進入，F00必須保留同一 S05 session / draft / preview context；S03的 Modify / Remix UI不得建立第二個 S05 session，必須提供 origin-specific return action回原 session。
 
 # 22. Recovery Overlay Model
 

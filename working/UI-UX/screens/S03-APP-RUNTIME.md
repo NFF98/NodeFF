@@ -182,16 +182,24 @@ Share pending / success / failure 都保留 App。
 
 O01 詳細 presentation 見 `working/UI-UX/overlays/O01-SHARE.md`。
 
-# 10. Remix / Refine Entry — S05
+# 10. Remix / Refine Entry — S05A / S05B
 
-User 想改的是「這個 App 本身」：
+User 想改的是「這個 App 本身」時，必須在進 S05前明確選擇 intent：
 
-    S03
-    → Remix / 修改這個 App
-    → S05
+~~~text
+S03
+├─ 修改這個 App → S05A / REFINE
+└─ 改成我的版本 → S05B / REMIX
+~~~
 
-原 App 必須可返回。
-Runtime input mutation不等於 Refine。
+- `修改這個 App` = 延續目前 App。
+- `改成我的版本` = 以目前 App為 base建立 derivative。
+- Shared App restore後預設先直接使用原 App；不因來源是 Shared就自動 Remix。
+- Inspiration Capsule仍屬 S01 → editable prefill → F01 Create，不使用 Shared App use-as-is semantics。
+- 原 App 必須可返回。
+- Runtime input mutation不等於 Refine。
+
+若 S03由 S05 `查看原版`進入，則進入 **Inspection Mode**，不得在此建立第二個 S05 session。
 
 # 11. Correct Result Entry — O02 → S06
 
@@ -321,6 +329,15 @@ User 已確認：
 
 ## Step 1 — Structure Lock ✅
 
+> **Step 1 Reopen Record — 2026-09-24 / FG-02 + FG-03**
+>
+> User final decision：
+> 1. Normal S03必須明確承接 S05A `修改這個 App`與 S05B `改成我的版本`；不得由 UI猜 intent。
+> 2. Shared App restore後先 use as-is；Inspiration Capsule仍走 Try / Fork → editable prefill → Create。
+> 3. S05 `查看原版`進 S03時使用 **Inspection Mode**；保留同一 S05 session，提供 `返回修改畫面`或`返回新版預覽`，不得建立第二個 S05。
+>
+> Step 1依此更新後：**RE-CLOSED / APPROVED**。
+>
 > **Step 1 Reopen Record — 2026-09-22**
 >
 > User reopened Step 1 only for Mobile permanent navigation consumer wording.
@@ -336,14 +353,15 @@ User 已確認：
 Header：
 
 ~~~text
-NodeFF Logo + App Identity        修改這個 App | 分享 | •••
+NodeFF Logo + App Identity        修改這個 App | 改成我的版本 | 分享 | •••
 ~~~
 
 Rules：
 - NodeFF Logo = explicit Home / New App escape hatch → S01。
 - App identity可為 Logo / Title / Logo + Title。
 - 不搬入 S01完整 navigation。
-- `修改這個 App` visible。
+- `修改這個 App` visible → S05A。
+- `改成我的版本` visible但視覺權重低於 Share / primary App content → S05B。
 - `分享` visible。
 - Revert等低頻 contextual action進 `•••`。
 - `•••`可包含安全的 Home/New備援入口。
@@ -362,8 +380,8 @@ Rules：
 - 只有 canonical `result.outputs`存在 AVAILABLE output且需要 NodeFF-level result action時才出現。
 - Generated App若已自然呈現 result，不重複抄寫 value。
 - Result區只保留必要 `調整結果`。
-- `修改這個 App`固定由 Header承接。
-- 「改 App」與「改結果」在 visual placement與 Function semantics天然分流。
+- `修改這個 App`與`改成我的版本`固定由 Shell change-entry區承接，不放進 Result。
+- 「改 App / 衍生版本」與「改結果」在 visual placement與 Function semantics天然分流。
 
 ### Mobile Shell
 
@@ -381,7 +399,10 @@ Permanent bottom navigation：
 - `目前 App`只代表目前正在使用的 S03 App / Runtime destination，不自行加入 reset / scroll-top行為，也不是 S01 首頁、App 清單或「建立 App」。
 - 2026-09-22：S03 Step 1 依 User 指示 **reopen**，將原 consumer label `App` 改為更明確的 `目前 App`；相關 Working UI引用同步更新後，Step 1重新 CLOSED。
 - `目前 App` 是 consumer-facing navigation label；internal destination仍是 S03 App / Runtime。
-- `修改` → S05。
+- `修改`是 **change launcher**，本身不建立 S05 session；tap後開 lightweight action sheet，User必須再明確選：
+  - `修改這個 App` → S05A；
+  - `改成我的版本` → S05B。
+- action sheet consumer title：`你想怎麼改？`；不得把兩條 path合併成模糊的單一「開始修改」。
 - `分享` → O01。
 - `調整結果`不進 permanent nav。
 - `•••`可提供 `回到首頁 / 建立新的 App`文字備援。
@@ -400,7 +421,10 @@ Permanent bottom navigation：
    - Share只分享 Blueprint durable reference，不包含目前 inputs / result。
    - Share failure不得破壞 current App。
 
-3. Modify → **F06 → S05**
+3. Change App → **F06 → S05A / S05B**
+   - `修改這個 App` → REFINE → S05A。
+   - `改成我的版本` → REMIX → S05B。
+   - 不用 ownership / shared status猜 intent；User明確選擇。
    - 不原地 mutation immutable Blueprint。
    - 產生 new immutable Blueprint + lineage + fresh Runtime Instance。
    - original App可返回。
@@ -419,6 +443,45 @@ Permanent bottom navigation：
 6. Home/New → **F00 → S01**
    - NodeFF Logo是 global escape hatch。
    - 不依賴 Browser Back。
+
+### Inspection Mode — Returnable Source App Inspection
+
+Trigger：
+
+~~~text
+S05A / S05B
+→ 查看原版
+→ S03 Inspection Mode
+~~~
+
+Inspection Mode不是新的正常 S03 session。
+
+Context truth：
+- 保留原 S05 session id、path identity（S05A / S05B）、change draft，以及 origin = Composer | Preview。
+- source App可正常操作 / 查看；不得 mutation source Blueprint。
+- **不得建立第二個 S05 session。**
+
+Desktop presentation：
+- Header保留 App Identity、Share與必要 overflow。
+- 正常 `修改這個 App` / `改成我的版本` entry在 Inspection Mode隱藏。
+- Header下方顯示 slim contextual bar：`正在查看原版`。
+- Composer來源 CTA = **`返回修改畫面`**。
+- Preview來源 CTA = **`返回新版預覽`**。
+
+Mobile presentation：
+- Header仍以 App Identity為主。
+- 保留三槽 Runtime bottom navigation geometry，但中間 change slot改成 origin-specific return：
+  - Composer來源：`返回修改`；
+  - Preview來源：`返回預覽`。
+- 同時在 Runtime上方顯示 `正在查看原版` context strip與完整文字 return action，避免只靠 nav縮寫理解。
+- Inspection Mode中不開 change chooser；中間 slot與 context CTA都回**同一既有 S05 session**。
+- Share仍可用；`目前 App`仍只代表目前正在查看的 source Runtime。
+
+Exit：
+~~~text
+Composer origin → 返回修改畫面 → same S05 Composer session
+Preview origin  → 返回新版預覽 → same S05 Preview session
+~~~
 
 ### Explicitly Not Present
 
@@ -465,6 +528,27 @@ Generated App取得約 80–90% attention。
 - Result Surface位於內容流，不 floating在 bottom nav上。
 - fixed bottom nav不得遮 Runtime內容。
 
+### Change Entry / Inspection Geometry
+
+Normal Desktop：
+- Header change-entry cluster依序：`修改這個 App` → `改成我的版本` → `分享` → `•••`。
+- 三個文字 action維持 compact，不建立 builder toolbar；Generated App仍是第一視覺。
+- viewport不足時可讓 `改成我的版本`轉入 compact secondary menu，但 menu item wording必須完整，且不得與 S05A混成同一 action。
+
+Normal Mobile：
+- Bottom nav仍固定三槽：`目前 App | 修改 | 分享`。
+- `修改` action sheet從 bottom edge開啟，內容高度只承接兩個選項與簡短說明，不做 full-screen route。
+
+Inspection Desktop：
+- Context bar位於 Header下、Runtime上，與 Runtime同一 content width；約 `44–52px`高。
+- 左側：`正在查看原版`；右側：origin-specific return CTA。
+- 不新增 sidebar，不縮小 Runtime主內容。
+
+Inspection Mobile：
+- Context strip位於 Header下、Runtime上；可兩行，但不得蓋住 App。
+- Bottom nav維持三槽 geometry；中間 slot暫時改為 `返回修改`或`返回預覽`。
+- full return wording仍在 context strip，以免 nav label過短造成語意不清。
+
 ### App Identity
 
 - App Title：約 `18–20px semibold`。
@@ -487,7 +571,9 @@ Generated App取得約 80–90% attention。
 - subtle 1px divider。
 - 不做 glassmorphism、重陰影、大面積 gradient。
 - Share = compact Teal primary shell action。
-- Modify = secondary / outline / ghost。
+- `修改這個 App` = secondary / outline。
+- `改成我的版本` = lower-emphasis secondary / ghost；必須可辨識，不藏成只有 icon。
+- Mobile `修改` action sheet兩個 option同層級呈現，不用顏色暗示 ownership。
 - overflow = icon control，target ≥44px。
 - Shell action視覺權重不得高於 App內 primary CTA。
 - NodeFF Logo hover / accessible label可表達「回到首頁」。
@@ -521,6 +607,15 @@ Visible presentation：
 - normal processing不 blanket-disable整個 App；只依 Function truth限制 affected interaction。
 - Soft Timeout提升 processing presence並保留 last true checkpoint。
 - Hard Timeout → F03 discard uncommitted transaction → F12 / O03 Recovery。
+
+### Inspection Context Visual
+
+- Inspection不是 Warning / Error，不使用 Yellow warning、Danger或Recovery styling。
+- Context bar使用 soft neutral surface + subtle Teal context indicator。
+- `正在查看原版`以 body/label hierarchy呈現，不搶過 Runtime。
+- return CTA使用清楚 contextual action treatment；不得長得像 destructive Back。
+- normal Modify / Remix entry在 Inspection Mode不顯示；不得用 disabled controls留下「可開新修改」的錯誤暗示。
+- focus進入 Inspection Mode時維持 Runtime可操作；context return action必須 keyboard / screen-reader可達。
 
 ### Mobile Bottom Navigation
 
@@ -596,11 +691,25 @@ Cursor不得：
 - blanket-disable整個 Runtime除非 Function truth要求；
 - 把 S01 nav搬進 S03；
 - 把 Generated App重畫成 NodeFF dashboard；
-- 把 sample mockup內容當 Function requirement。
+- 把 sample mockup內容當 Function requirement；
+- 用 Shared / ownership狀態自動替 User選 Refine或 Remix；
+- 在 Mobile點`修改`後直接開 S05而沒有 explicit S05A/S05B choice；
+- 在 Inspection Mode建立新的 S05 session或遺失既有 draft / Preview context。
 
-## Step 4 — Final Visual Reference Lock ✅
+## Step 4 — Final Visual Reference Lock 🔄 REOPENED — 2026-09-24
 
-Approved visual：
+Reopen reason：
+
+> FG-02 / FG-03新增 normal S03雙 change-entry presentation、Mobile explicit chooser與 S05 returnable Inspection Mode；舊 PNG已不足以完整呈現新的 Structure / Geometry。
+
+Replacement visual requirements：
+- Normal Desktop：`修改這個 App` / `改成我的版本` / `分享`。
+- Normal Mobile：`目前 App | 修改 | 分享` + `修改` action sheet兩個明確 option。
+- Inspection Desktop：`正在查看原版` context + origin-specific return CTA；不顯示 normal Modify / Remix entry。
+- Inspection Mobile：context strip + `返回修改` / `返回預覽` return behavior。
+- Generated App仍為主角；reference不得把 S03畫成 builder。
+
+舊 reference在 replacement commit前只作歷史 reference，不再代表 FG-02 / FG-03完整 Current Truth：
 
 ![S03 App Runtime High-fi v1](../references/S03-App-Runtime-Highfi-v1.png)
 
@@ -620,10 +729,10 @@ Reference boundary：
 
 # 19. Review Status / Change Control
 
-> **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
+> **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B STEP1–3 RE-CLOSED / STEP4 REOPENED FOR FG-02/FG-03 REFERENCE**
 
-- S03 High-fi Step 1–4已 CLOSED。
-- approved PNG artifact已存在並驗證。
+- S03 Step 1–3已依 2026-09-24 FG-02 / FG-03 decision重新 CLOSED。
+- Step 4待 replacement PNG寫入並驗證後重新 CLOSED。
 - 任何 Structure / Geometry / Visual Rule / image reference改動，必須 reopen對應 Step。
 - 若後續需要 component anatomy / overlay stacking / operation-state mapping等額外細節，可新增 `Step 4.5 — <Layer Name> Lock`。
 - Step 4.5不得偷改 Step 1–4；涉及 Function behavior必須回相關 Fxx Working Delta Review。
@@ -633,8 +742,8 @@ Reference boundary：
 
 > Repair checkpoint：2026-09-24
 >
-> FG-01 / FG-04 / FG-05 / FG-06 / FG-07 deterministic consistency repair已處理；**FG-02 / FG-03仍待 S03 ↔ S05A/S05B + returnable inspection context 決策，因此 Final Gate不得標 PASSED / CLOSED。**
+> FG-01 / FG-04 / FG-05 / FG-06 / FG-07 deterministic consistency repair已處理；FG-02 / FG-03 **產品決策已 APPROVED 並同步至 Step 1–3**，目前只待 S03 Step 4 replacement reference + final re-audit。
 >
 > Final cross-screen authority：**Step 1–3 textual contract + Design System + Fxx Function truth > Step 4 visual reference。**
 >
-> 本輪 deterministic repair不修改 PNG artifacts；是否需要 reopen S03 Step 4，待 FG-02 / FG-03決策後判定。
+> S03 Step 4已因 FG-02 / FG-03 material visual change正式 reopen；其餘 10 張 PNG不修改。

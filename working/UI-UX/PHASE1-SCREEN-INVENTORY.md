@@ -1,6 +1,6 @@
 # Phase 1 Screen Inventory
 
-> 狀態：WORKING UI/UX — S01–S06 + O01–O05 ④A / ④B STEP 1–4 CLOSED / FINAL CROSS-SCREEN HIGH-FI REVIEW OPEN — FG-02 / FG-03 PENDING
+> 狀態：WORKING UI/UX — FG-02 / FG-03 PRODUCT DECISION APPROVED / S03 STEP 4 REFERENCE REOPENED / FINAL CROSS-SCREEN HIGH-FI REVIEW OPEN
 >
 > 目的：管理 Phase 1 的 Screen / Surface 地圖、Screen-level UX Review 狀態與畫面之間的關係。
 >
@@ -24,12 +24,12 @@ Phase 1 目前採 **6 個主要 Screen / Surface + 5 類 Overlay / State**。
 |---|---|---|---|---|
 | S01 | Discover / Start | 從想法或靈感開始 Create | F00 | **④A LOW_FI_APPROVED / ④B STEP1–4 CLOSED** |
 | S02 | Create Workspace | 分析、補充必要資訊、確認假設並生成 App | F00 + F01 | **④A LOW_FI_APPROVED / ④B STEP1–4 CLOSED** |
-| S03 | App / Runtime | 使用生成 App，進入 Share / Remix / Correct | F00 + F03 | **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / ④B STEP1–4 CLOSED / FINAL GATE OPEN** |
+| S03 | App / Runtime | 使用生成 App，進入 Share / Refine / Remix / Correct；承接 S05 Inspection Mode | F00 + F03 + F06 | **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / STEP1–3 RE-CLOSED / STEP4 REOPENED FOR FG-02/03** |
 | S04 | Shared App Entry / Restore | 從分享連結恢復並立即使用 App | F05 + F00 | **④A LOW_FI_APPROVED / ④B STEP1–4 CLOSED** |
 | S05 | Refine / Remix Workspace | 修改既有 App、Preview child、決定是否採用 | F06 + F00 | **④A LOW_FI_APPROVED / ④B STEP1–4 CLOSED / FINAL GATE OPEN** |
 | S06 | Correction Compare | 比較修正前後並 Accept / Keep / Adjust | F16 + F00 | **④A LOW_FI_APPROVED / ④B STEP1–4 CLOSED** |
 
-目前 S01–S06 Main Screens 與 O01–O05 Overlay / State 的 ④A Low-fi、④B High-fi Step 1–4均已完成 User Review並 CLOSED；S03/O05 Runtime Global Loading + Timeout Function Delta也已閉合。Final Cross-Screen High-fi Review目前仍 **OPEN**：FG-01 / FG-04 / FG-05 / FG-06 / FG-07 deterministic repair已處理，FG-02 / FG-03待 S03 ↔ S05A/S05B + returnable inspection context決策後才能關 Gate。
+S01–S06 與 O01–O05 的既有 ④A / ④B baseline已完成。2026-09-24 FG-02 / FG-03產品決策已批准並同步到 Function/UI Working；S03 Step 1–3已 re-closed，Step 4因 material visual change暫時 reopen，待 replacement PNG + final re-audit後才能關閉 Final Cross-Screen Gate。
 
 # 3. Overlay / State Inventory
 
@@ -240,11 +240,14 @@ S01–S06 + O01–O05 ④A Low-fi
 - S01 Mobile bottom navigation固定為：`首頁 / 探索靈感 / 我的 App · Soon`，不放 Create / Profile；Create只由 S01 Creator Composer提供。`探索靈感`是 S01 top-level / persistent entry到 Inspiration區；區塊內 `探索更多`是 local continuation CTA，兩者 action contract不同。
 - S03 App / Runtime bottom navigation仍依 Runtime scope管理，不因 S01 navigation而新增重複 Create入口。
 - S03 App / Runtime bottom navigation固定為：`目前 App / 修改 / 分享`。
+- Normal S03的 `修改`只是 change launcher：tap後必須明確選 `修改這個 App → S05A`或`改成我的版本 → S05B`，launcher本身不建立 S05 session。
+- Desktop normal S03直接顯示兩個明確 consumer entry：`修改這個 App`與`改成我的版本`。
 - `目前 App` = current S03 Runtime destination，**not S01**；不代表 reset、scroll-top、App清單或建立 App。
 - 2026-09-22：S03 Step 1為此 consumer wording reopen，`App` → `目前 App`；語意不變，完成相關 Working UI同步後重新 CLOSED。
 - S04 Restore 尚未進入 Runtime，不顯示 permanent bottom navigation；READY 後才由 S03 接管。
 - S05 Refine / Remix 與 S06 Correction Compare 是 focused decision workspace，不繼承 S03 permanent bottom navigation。
 - S05 / S06 使用自己的 Back / View / Decision CTA，不把 S03 shell navigation 帶進決策流程。
+- S05 `查看原版`暫時進 S03時使用 **Inspection Mode**：保留同一 S05 session / draft / Preview context；Normal Modify / Remix不得建立第二個 session；Composer來源回 `返回修改畫面`，Preview來源回 `返回新版預覽`。
 
 ## Overlay Layering
 
@@ -262,7 +265,7 @@ reliable checkpoints
 → Stage label + checkpoint-derived Progress %
 
 no reliable checkpoints
-→ Stage label only
+→ Stage label + bounded activity indicator
 ~~~
 
 Rules：
@@ -336,27 +339,36 @@ User 已確認目前策略：
   1. F00/F03/F12 Runtime Loading + Timeout Working Function Delta Review（**完成：2026-09-22**）；
   2. Cross-Screen Consistency Review（**完成：2026-09-22**）；
   3. High-fi Design System / S01–S06 + O01–O05 ④B High-fi Step 1–4（**完成**）；
-  4. Final Cross-Screen High-fi Review（**OPEN — FG-02 / FG-03 PENDING**）。
+  4. Final Cross-Screen High-fi Review（**FG-02 / FG-03 DECISION APPROVED；S03 STEP 4 REFERENCE PENDING**）。
 - **正式 Cursor 開發前**，再做一次短期 Formal Spec Refresh，把最後批准的 Working truth一次同步到 implementation contract。
 - 在該 refresh前，Cursor implementation維持 HOLD。
 
 # 9. Next
 
-目前唯一 UI/UX Gate：
+目前唯一剩餘 UI/UX Gate工作：
 
-> **Final Cross-Screen High-fi Review — FG-02 / FG-03：S03 ↔ S05A/S05B entry presentation + returnable inspection context**
+> **S03 Step 4 replacement visual reference → 全套 Final Cross-Screen re-audit**
 
-已完成：
-- S01–S06：④A Low-fi + ④B High-fi Step 1–4 CLOSED。
-- O01–O05：④A Low-fi + ④B High-fi Step 1–4 CLOSED。
-- FG-01 / FG-04 / FG-05 / FG-06 / FG-07：deterministic consistency repair完成。
-- 11 個 approved PNG references仍維持原檔，不因本輪 deterministic repair重畫。
+FG-02 / FG-03 已 APPROVED：
+- Shared App：Restore後預設 **use as-is**；open / use本身不是 Remix。
+- Inspiration Capsule：Phase 1維持 **Try / Fork → editable prefill → F01 Create**，不做 Shared App式 use-as-is。
+- Normal S03：Desktop明確顯示 `修改這個 App → S05A`與`改成我的版本 → S05B`；Mobile `修改`先開 explicit chooser。
+- S05 `查看原版` → S03 **Inspection Mode**；保留同一 S05 session，依來源返回 `返回修改畫面`或`返回新版預覽`，不得 nested S05。
 
-仍待：
-- FG-02 / FG-03 consumer UX decision。
-- 決策後只 reopen受影響的 canonical Step；**不得因此重做 / 重新設計全部 11 個 Screen / Overlay**。
-- FG-02 / FG-03修正後重新 fetch全套 S01–S06 + O01–O05 + Design System + Inventory；findings = 0 才能把 Final Cross-Screen Gate標 CLOSED / VERIFIED。
-- Formal Spec、Backlog / Sprint、Cursor implementation目前仍 HOLD；Final Gate關閉後再進 pre-Cursor Formal Spec Refresh。
+已同步：
+- F00 Experience Shell。
+- F05 Share / Restore。
+- F06 Remix / Refine。
+- S03 App / Runtime Step 1–3。
+- S05 Refine / Remix cross-screen closure。
+- 本 Screen Inventory。
+
+Picture scope：
+- **只重做 S03 canonical PNG。**
+- S01 / S02 / S04 / S05 / S06 / O01–O05 共 10 張 PNG不改。
+- S03 replacement reference完成後，重新 fetch S01–S06 + O01–O05 + Design System + Inventory +相關 F00/F05/F06；findings = 0 才標 Final Gate CLOSED / VERIFIED。
+
+Formal Spec、Backlog / Sprint、Cursor implementation仍 HOLD；Final Gate關閉後再進 pre-Cursor Formal Spec Refresh。
 
 ## 9.1 Approved Visual References — Current
 

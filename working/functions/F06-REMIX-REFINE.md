@@ -155,21 +155,30 @@ Rules：
 
 ## F06-UX-001
 
-F00 APP surface提供：
+F00 APP surface提供兩條明確 consumer path：
 
 ~~~text
 Refine / 修改這個 App
+→ S05A
+
 Remix / 改成我的版本
+→ S05B
 ~~~
 
 Entry：
 
 ~~~text
 Current App
-→ Change Composer
+→ User明確選 Refine 或 Remix
+→ 對應 Change Composer
 → User describes desired change
 → submit
 ~~~
+
+UI rules：
+- 不得用 ownership / Shared App來源自行替 User決定 Refine 或 Remix。
+- S05B不是 zero-change copy；必須有至少一個有效 change request。
+- 若 User從既有 S05 session點 `查看原版`暫時進 S03，該 S03屬 returnable inspection context；任何 Modify / Remix action都不得建立第二個 S05 session，必須回原 S05 context。
 
 Change Composer minimum：
 

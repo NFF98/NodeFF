@@ -537,16 +537,17 @@ Recipient：
 
 - 不需 install
 - 不需 login
-- 可以先用 App
+- **預設先直接使用 Shared App（use as-is）**
+- Restore同一 immutable Blueprint後建立自己的 fresh Runtime Instance；open / use本身不建立 child Blueprint或 lineage
 - 可以建立自己的 anonymous_identity
 - 可以再 Share
-- 可以進 Remix
+- 只有 User之後明確選 `改成我的版本`，才進 Remix
 
 First value前不出現 registration wall。
 
 # 19. Share → Remix
 
-F05 restore READY 後，F00可顯示 Remix。
+F05 restore READY 後先進 S03直接使用原 Shared App；F00可提供 `改成我的版本` Remix entry，但不得把 restore/open自動轉成 Remix。
 
 ~~~text
 Shared Blueprint
