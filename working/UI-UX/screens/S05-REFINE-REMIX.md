@@ -1308,10 +1308,12 @@ S05 ④B Step 1–4 已完成 User Review並鎖定。
 - Cross-screen follow-up：S03 對 S05A「修改這個 App」與 S05B「改成我的版本」的入口 presentation 仍待 S03 Step 1 reopen決定；此 pending 不改變 S05 本身 Current Truth。
 - Formal Spec仍維持 freeze，待 pre-Cursor Formal Spec Refresh。
 
-### Final Cross-Screen High-fi Review — PASSED
+### Final Cross-Screen High-fi Review — OPEN
 
-> Verified：2026-09-23
+> Repair checkpoint：2026-09-24
+>
+> FG-01 / FG-04 / FG-05 / FG-06 / FG-07 deterministic consistency repair已處理；**FG-02 / FG-03仍待 S03 ↔ S05A/S05B + returnable inspection context 決策，因此 Final Gate不得標 PASSED / CLOSED。**
 >
 > Final cross-screen authority：**Step 1–3 textual contract + Design System + Fxx Function truth > Step 4 visual reference。**
 >
-> 本次 Final Review只修 canonical text consistency / stale wording / status / reference precedence；**PNG artifacts不修改**。
+> 本輪 deterministic repair不修改 PNG artifacts；是否需要 reopen S03 Step 4，待 FG-02 / FG-03決策後判定。

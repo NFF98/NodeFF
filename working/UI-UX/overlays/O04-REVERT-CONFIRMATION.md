@@ -924,14 +924,16 @@ Confirm → Processing transition ≤ 240ms
 
 O04 ④A Low-fi與④B Step 1–4已完成 User Review並鎖定。
 
-Final Cross-Screen High-fi Review：**PASSED / ALIGNED**。
+Final Cross-Screen High-fi Review：**OPEN — FG-02 / FG-03 PENDING**。
 
 Formal Spec、Backlog / Sprint、Cursor implementation維持 HOLD。
 
-### Final Cross-Screen High-fi Review — PASSED
+### Final Cross-Screen High-fi Review — OPEN
 
-> Verified：2026-09-23
+> Repair checkpoint：2026-09-24
+>
+> FG-01 / FG-04 / FG-05 / FG-06 / FG-07 deterministic consistency repair已處理；**FG-02 / FG-03仍待 S03 ↔ S05A/S05B + returnable inspection context 決策，因此 Final Gate不得標 PASSED / CLOSED。**
 >
 > Final cross-screen authority：**Step 1–3 textual contract + Design System + Fxx Function truth > Step 4 visual reference。**
 >
-> 本次 Final Review只修 canonical text consistency / stale wording / status / reference precedence；**PNG artifacts不修改**。
+> 本輪 deterministic repair不修改 PNG artifacts；是否需要 reopen S03 Step 4，待 FG-02 / FG-03決策後判定。
