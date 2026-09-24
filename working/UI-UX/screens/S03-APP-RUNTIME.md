@@ -696,11 +696,11 @@ Cursor不得：
 - 在 Mobile點`修改`後直接開 S05而沒有 explicit S05A/S05B choice；
 - 在 Inspection Mode建立新的 S05 session或遺失既有 draft / Preview context。
 
-## Step 4 — Final Visual Reference Lock 🔄 REOPENED — BINARY ARTIFACT PENDING
+## Step 4 — Final Visual Reference Lock ✅
 
 Reopen reason：
 
-> FG-02 / FG-03新增 normal S03雙 change-entry presentation、Mobile explicit chooser與 S05 returnable Inspection Mode。2026-09-24 connector binary upload integrity check失敗；Step 1–3仍為 Current Truth，Step 4必須等待完整 replacement PNG寫入與 SHA/size驗證。
+> FG-02 / FG-03新增 normal S03雙 change-entry presentation、Mobile explicit chooser與 S05 returnable Inspection Mode。User 已於 2026-09-24 上傳並批准 replacement PNG；GitHub path / blob SHA / size 已驗證。
 
 Replacement visual requirements：
 - Normal Desktop：`修改這個 App` / `改成我的版本` / `分享`。
@@ -709,17 +709,23 @@ Replacement visual requirements：
 - Inspection Mobile：context strip + `返回修改` / `返回預覽` return behavior。
 - Generated App仍為主角；reference不得把 S03畫成 builder。
 
-舊 reference在 replacement commit前只作歷史 reference，不再代表 FG-02 / FG-03完整 Current Truth：
+Canonical replacement reference：
 
-![S03 App Runtime High-fi v1 — historical until v2 artifact verified](../references/S03-App-Runtime-Highfi-v1.png)
+![S03 App Runtime High-fi v2](../references/S03-App-Runtime-Highfi-v2.png)
 
 Canonical path：
 
-`working/UI-UX/references/S03-App-Runtime-Highfi-v1.png`
+`working/UI-UX/references/S03-App-Runtime-Highfi-v2.png`
 
 Repository PNG blob SHA：
 
-`bfc2f2a3e8f7baa8539685cf681ab088e90c4082`
+`47d281d5d184b47855a5c406e26c11aa2801a238`
+
+Repository file size：
+
+`1,704,020 bytes`
+
+舊 v1 reference只保留在 Git history / repository作歷史追溯，不再是 S03 canonical visual reference。
 
 Reference boundary：
 - 圖片鎖定 layout / visual hierarchy / component language / color use / Desktop-Mobile relationship。
@@ -729,10 +735,10 @@ Reference boundary：
 
 # 19. Review Status / Change Control
 
-> **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B STEP1–3 RE-CLOSED / STEP4 ARTIFACT PENDING**
+> **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B STEP1–4 RE-CLOSED — WORKING BASELINE**
 
 - S03 Step 1–3已依 2026-09-24 FG-02 / FG-03 decision重新 CLOSED。
-- Step 4 replacement PNG尚未通過 binary integrity驗證；Step 4維持 REOPENED / ARTIFACT PENDING。
+- Step 4 replacement PNG已由 User上傳並完成 path / blob SHA / size驗證；Step 4 **RE-CLOSED / APPROVED / LOCKED**。
 - 任何 Structure / Geometry / Visual Rule / image reference改動，必須 reopen對應 Step。
 - 若後續需要 component anatomy / overlay stacking / operation-state mapping等額外細節，可新增 `Step 4.5 — <Layer Name> Lock`。
 - Step 4.5不得偷改 Step 1–4；涉及 Function behavior必須回相關 Fxx Working Delta Review。
@@ -742,8 +748,8 @@ Reference boundary：
 
 > Repair checkpoint：2026-09-24
 >
-> FG-01 / FG-04 / FG-05 / FG-06 / FG-07 deterministic consistency repair已處理；FG-02 / FG-03 **產品決策已 APPROVED 並同步至 Step 1–3**，S03 Step 4 replacement reference已完成；目前只待 final full-set re-audit。
+> FG-01–FG-07產品／一致性修正與 S03 v2 replacement reference均已完成；目前只待 final full-set re-audit。findings = 0 後才標 CLOSED / VERIFIED。
 >
 > Final cross-screen authority：**Step 1–3 textual contract + Design System + Fxx Function truth > Step 4 visual reference。**
 >
-> S03 Step 4 replacement PNG仍待完整 binary寫入與 integrity驗證；其餘 10 張 PNG不修改。
+> S03 v2 PNG已驗證；其餘 10 張 PNG不修改。
