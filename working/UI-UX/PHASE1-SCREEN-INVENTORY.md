@@ -1,6 +1,6 @@
 # Phase 1 Screen Inventory
 
-> 狀態：WORKING UI/UX — FG-02 / FG-03 PRODUCT DECISION APPROVED / S03 STEP 4 RE-CLOSED / FINAL CROSS-SCREEN HIGH-FI REVIEW OPEN — FINAL RE-AUDIT PENDING
+> 狀態：WORKING UI/UX — FG-02 / FG-03 PRODUCT DECISION APPROVED / S03 STEP 4 ARTIFACT PENDING / FINAL CROSS-SCREEN HIGH-FI REVIEW OPEN
 >
 > 目的：管理 Phase 1 的 Screen / Surface 地圖、Screen-level UX Review 狀態與畫面之間的關係。
 >
@@ -24,12 +24,12 @@ Phase 1 目前採 **6 個主要 Screen / Surface + 5 類 Overlay / State**。
 |---|---|---|---|---|
 | S01 | Discover / Start | 從想法或靈感開始 Create | F00 | **④A LOW_FI_APPROVED / ④B STEP1–4 CLOSED** |
 | S02 | Create Workspace | 分析、補充必要資訊、確認假設並生成 App | F00 + F01 | **④A LOW_FI_APPROVED / ④B STEP1–4 CLOSED** |
-| S03 | App / Runtime | 使用生成 App，進入 Share / Refine / Remix / Correct；承接 S05 Inspection Mode | F00 + F03 + F06 | **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / ④B STEP1–4 RE-CLOSED FOR FG-02/03** |
+| S03 | App / Runtime | 使用生成 App，進入 Share / Refine / Remix / Correct；承接 S05 Inspection Mode | F00 + F03 + F06 | **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / ④B STEP1–3 RE-CLOSED / STEP4 ARTIFACT PENDING** |
 | S04 | Shared App Entry / Restore | 從分享連結恢復並立即使用 App | F05 + F00 | **④A LOW_FI_APPROVED / ④B STEP1–4 CLOSED** |
 | S05 | Refine / Remix Workspace | 修改既有 App、Preview child、決定是否採用 | F06 + F00 | **④A LOW_FI_APPROVED / ④B STEP1–4 CLOSED / FINAL GATE OPEN** |
 | S06 | Correction Compare | 比較修正前後並 Accept / Keep / Adjust | F16 + F00 | **④A LOW_FI_APPROVED / ④B STEP1–4 CLOSED** |
 
-S01–S06 與 O01–O05 的既有 ④A / ④B baseline已完成。2026-09-24 FG-02 / FG-03產品決策已批准並同步到 Function/UI Working；S03 Step 1–4已 re-closed，v2 replacement PNG已寫入。只剩 final full-set re-audit；findings = 0 才關閉 Final Cross-Screen Gate。
+S01–S06 與 O01–O05 的既有 ④A / ④B baseline已完成。2026-09-24 FG-02 / FG-03產品決策已批准並同步到 Function/UI Working；S03 Step 1–3已 re-closed；Step 4 replacement PNG因 connector binary integrity失敗維持 ARTIFACT PENDING。完整 PNG寫入並驗證後，再做 final full-set re-audit；findings = 0 才關閉 Final Cross-Screen Gate。
 
 # 3. Overlay / State Inventory
 
@@ -339,7 +339,7 @@ User 已確認目前策略：
   1. F00/F03/F12 Runtime Loading + Timeout Working Function Delta Review（**完成：2026-09-22**）；
   2. Cross-Screen Consistency Review（**完成：2026-09-22**）；
   3. High-fi Design System / S01–S06 + O01–O05 ④B High-fi Step 1–4（**完成**）；
-  4. Final Cross-Screen High-fi Review（**FG-02 / FG-03 DECISION APPROVED；S03 STEP 4 RE-CLOSED；FINAL RE-AUDIT PENDING**）。
+  4. Final Cross-Screen High-fi Review（**FG-02 / FG-03 DECISION APPROVED；S03 STEP 4 ARTIFACT PENDING**）。
 - **正式 Cursor 開發前**，再做一次短期 Formal Spec Refresh，把最後批准的 Working truth一次同步到 implementation contract。
 - 在該 refresh前，Cursor implementation維持 HOLD。
 
@@ -347,7 +347,7 @@ User 已確認目前策略：
 
 目前唯一剩餘 UI/UX Gate工作：
 
-> **全套 Final Cross-Screen re-audit → findings = 0 後 CLOSED / VERIFIED**
+> **S03 v2 PNG完整寫入 + integrity驗證 → 全套 Final Cross-Screen re-audit → findings = 0 後 CLOSED / VERIFIED**
 
 FG-02 / FG-03 已 APPROVED：
 - Shared App：Restore後預設 **use as-is**；open / use本身不是 Remix。
@@ -375,7 +375,7 @@ Formal Spec、Backlog / Sprint、Cursor implementation仍 HOLD；Final Gate關�
 ~~~text
 S01  working/UI-UX/references/S01-Discover-Start-Highfi-v1.png
 S02  working/UI-UX/references/S02-Create-Workspace-Highfi-v1.png
-S03  working/UI-UX/references/S03-App-Runtime-Highfi-v2.png
+S03  working/UI-UX/references/S03-App-Runtime-Highfi-v1.png  # historical; v2 artifact pending
 S04  working/UI-UX/references/S04-Highfi-v1.png
 S05  working/UI-UX/references/S05-Highfi-v1.png
 S06  working/UI-UX/references/S06-Hi-FI-Debug-v1.png

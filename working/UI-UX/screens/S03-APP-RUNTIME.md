@@ -696,11 +696,11 @@ Cursor不得：
 - 在 Mobile點`修改`後直接開 S05而沒有 explicit S05A/S05B choice；
 - 在 Inspection Mode建立新的 S05 session或遺失既有 draft / Preview context。
 
-## Step 4 — Final Visual Reference Lock ✅ RE-CLOSED — 2026-09-24
+## Step 4 — Final Visual Reference Lock 🔄 REOPENED — BINARY ARTIFACT PENDING
 
 Reopen reason：
 
-> FG-02 / FG-03新增 normal S03雙 change-entry presentation、Mobile explicit chooser與 S05 returnable Inspection Mode；舊 PNG已由 v2 reference取代。
+> FG-02 / FG-03新增 normal S03雙 change-entry presentation、Mobile explicit chooser與 S05 returnable Inspection Mode。2026-09-24 connector binary upload integrity check失敗；Step 1–3仍為 Current Truth，Step 4必須等待完整 replacement PNG寫入與 SHA/size驗證。
 
 Replacement visual requirements：
 - Normal Desktop：`修改這個 App` / `改成我的版本` / `分享`。
@@ -711,7 +711,7 @@ Replacement visual requirements：
 
 舊 reference在 replacement commit前只作歷史 reference，不再代表 FG-02 / FG-03完整 Current Truth：
 
-![S03 App Runtime High-fi v2](../references/S03-App-Runtime-Highfi-v2.png)
+![S03 App Runtime High-fi v1 — historical until v2 artifact verified](../references/S03-App-Runtime-Highfi-v1.png)
 
 Canonical path：
 
@@ -729,10 +729,10 @@ Reference boundary：
 
 # 19. Review Status / Change Control
 
-> **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B STEP1–4 RE-CLOSED / WORKING BASELINE**
+> **④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B STEP1–3 RE-CLOSED / STEP4 ARTIFACT PENDING**
 
 - S03 Step 1–3已依 2026-09-24 FG-02 / FG-03 decision重新 CLOSED。
-- Step 4 replacement PNG已寫入並驗證，Step 4重新 CLOSED。
+- Step 4 replacement PNG尚未通過 binary integrity驗證；Step 4維持 REOPENED / ARTIFACT PENDING。
 - 任何 Structure / Geometry / Visual Rule / image reference改動，必須 reopen對應 Step。
 - 若後續需要 component anatomy / overlay stacking / operation-state mapping等額外細節，可新增 `Step 4.5 — <Layer Name> Lock`。
 - Step 4.5不得偷改 Step 1–4；涉及 Function behavior必須回相關 Fxx Working Delta Review。
@@ -746,4 +746,4 @@ Reference boundary：
 >
 > Final cross-screen authority：**Step 1–3 textual contract + Design System + Fxx Function truth > Step 4 visual reference。**
 >
-> S03 Step 4已以 FG-02 / FG-03 v2 reference重新 CLOSED；其餘 10 張 PNG不修改。
+> S03 Step 4 replacement PNG仍待完整 binary寫入與 integrity驗證；其餘 10 張 PNG不修改。
