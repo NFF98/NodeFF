@@ -1,56 +1,84 @@
 # NodeFF Working — Human Navigation
 
-> `working/` = NodeFF 唯一可修改 Product Design Current Truth。
+> `working/` = NodeFF 唯一可修改的 Product Design Current Truth。
+>
+> 結構狀態：**STRUCTURE_READY / CONTENT_REVIEW_PENDING**
+>
+> 目前只代表目錄與 semantic ownership 結構已定案；內容仍需進行 Quality Review / Dedup / Consistency Audit。尚未達到 Build Freeze。
 
-## 先分兩類看
-
-### 1. Common Core
-`working/common-core/`
-
-跨 Phase 共用、不應每一 Phase 重複的核心：
-- App / Infra Architecture
-- Data invariants
-- Business thesis
-- Capability contract
-- API / Acceptance conventions
-- Execution Admission
-- Design-to-Delivery governance
-- Technical Moat
-
-### 2. Phase / Detailed Modules
-- `architecture/evolution/` — 每 Phase architecture additions
-- `data-model/` — 每 Phase data contract / delta
-- `infrastructure/` — 每 Phase infra activation
-- `roadmap/product/` — 每 Phase product / business roadmap
-- `roadmap/capability/` — 每 Phase Capability roadmap
-- `functions/` — Function detailed design
-- `UI-UX/` — Screen / Overlay detailed design
-- `registries/` — machine-readable contracts
-- `DESIGN-WORKBENCH.md` — temporary discussion only
-
-## Growth Rule
+## Canonical Structure
 
 ```text
-Common Core
-+ Phase 1 module
-+ Phase 2 delta
-+ Phase 3 delta
-+ Phase 4+ delta
+working/
+├─ README.md
+├─ DESIGN-WORKBENCH.md
+│
+├─ common-core/
+│  ├─ APP-ARCHITECTURE.md
+│  ├─ BUSINESS-PLAN.md
+│  ├─ CAPABILITY-FABRIC.md
+│  ├─ DATA-MODEL.md
+│  ├─ INFRA-ARCHITECTURE.md
+│  ├─ TECHNICAL-MOAT.md
+│  ├─ API-CONVENTIONS.md
+│  ├─ ACCEPTANCE-CONVENTIONS.md
+│  ├─ EXECUTION-ADMISSION.md
+│  └─ DESIGN-TO-DELIVERY.md
+│
+└─ detailed-design/
+   ├─ README.md
+   ├─ APP-DETAILED-DESIGN-OVERVIEW.md
+   ├─ data-model/
+   │  └─ DATA-MODEL-DETAILED.md
+   ├─ infrastructure/
+   │  └─ INFRASTRUCTURE-DETAILED.md
+   ├─ functions/
+   ├─ UI-UX/
+   └─ registries/
 ```
 
-不建立 Phase 2 的整套 Working copy。
+## Ownership Rule
 
-Future / deferred Phase file 存在，也不代表 implementation scope。
+### Common Core
 
-真正每 Phase frozen copy 在 NFFBuild：`BS-P1-001`, `BS-P2-001`...
+`working/common-core/` 放跨 Phase 共用、長期沿用的原則、邊界與 shared contract。
 
-## Phase 1 Build Freeze Current Set
+Common Core 不因 Phase 1 / 2 / 3 / 4 複製。
 
-Phase 1 Build Freeze 最終 review 使用：
-- `core/` shared truth
-- `architecture/evolution/PHASE-1.md`
-- `data-model/PHASE-1.md`
-- `infrastructure/PHASE-1.md`
-- `roadmap/product/PHASE-1.md`
-- `roadmap/capability/PHASE-1.md`
-- Phase 1 Functions / UI-UX / Registries
+### Detailed Design
+
+`working/detailed-design/` 放 implementation-facing 的詳細設計。
+
+Functions、UI/UX、Registries 依 semantic owner 維持單一 canonical truth，不按 Phase 複製。
+
+Data Model / Infrastructure 的詳細內容也以單一 detailed owner 管理；Phase 只作為 scope / applicability / activation metadata，不自動形成 folder boundary。
+
+### Design Workbench
+
+`working/DESIGN-WORKBENCH.md` 只作為尚未決定、尚未有 canonical owner、或 evidence-gated 的暫存討論區。
+
+它不是 Product Design SSOT，也不是 Build Spec source。
+
+## Build Boundary
+
+```text
+NodeFF Working
+→ Content Quality Review / Dedup
+→ Cross-file Consistency / Acceptance / UI Audit
+→ Human approval
+→ Build Freeze
+→ NFFBuild immutable BS-*
+→ Backlog / Sprint / Cursor / Test / Evidence / Release
+```
+
+NFFBuild 負責 implementation / delivery governance；NodeFF 不重複維護 Cursor execution rules。
+
+## Current Next Step
+
+1. 逐檔 Content Quality Review。
+2. Dedup：同一 semantic truth 只能留在一個 canonical owner。
+3. 修正 cross-reference / ownership / consistency。
+4. 確認 Phase 1 Build Freeze set。
+5. User 批准後才建立 NFFBuild locked baseline。
+
+> **Structure Ready ≠ Content Ready ≠ Build Freeze Ready。**
