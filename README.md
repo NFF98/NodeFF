@@ -25,8 +25,8 @@ working/
 - Function Details：`working/functions/Fxx-*.md`
 - UI/UX：`working/UI-UX/`
 - Machine-readable Registries：`working/registries/`
-- Product Roadmap：`working/ProjectManagement/roadmap/`
-- Capability Roadmap：`working/ProjectManagement/capability-roadmap/`
+- Product Roadmap：`working/roadmap/product/`
+- Capability Roadmap：`working/roadmap/capability/`
 
 ## Build / Delivery Boundary
 
@@ -54,9 +54,6 @@ NodeFF working/
 
 `archive/` 只保存歷史治理、討論與協作證據；**永遠不是 Current Truth、Build Freeze input 或 Cursor implementation authority**。
 
-## Decisions
-
-Architecture / product-impacting decisions 記錄於 `decisions/`。
 
 
 ## Working Growth Rule

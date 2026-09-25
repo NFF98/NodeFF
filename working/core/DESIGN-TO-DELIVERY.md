@@ -386,11 +386,11 @@ F00 F01 F02 F03 F04 F05 F06 F07 F12 F16
 ```
 
 Canonical Phase scope：
-- Product / Business：`working/ProjectManagement/roadmap/PHASE-1.md`
+- Product / Business：`working/roadmap/product/PHASE-1.md`
 - Architecture：`working/architecture/evolution/PHASE-1.md`
 - Infrastructure：`working/infrastructure/PHASE-1.md`
 - Data：`working/data-model/PHASE-1.md`
-- Capability：`working/ProjectManagement/capability-roadmap/PHASE-1.md`
+- Capability：`working/roadmap/capability/PHASE-1.md`
 - Function portfolio：`working/core/APP-DETAILED-DESIGN-OVERVIEW.md`
 
 中長期 module 可以先存在作 deferred design，但 **未經 Evidence Gate + Human approval + Build Freeze inclusion 就不是 implementation scope**。

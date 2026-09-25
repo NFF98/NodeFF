@@ -406,10 +406,10 @@ WebXR、Immersive Scene、Spatial Anchor、Gaze、Controller、Shared Spatial St
 
 Capability Card Contract、Maturity、Coverage、Families、Portfolio 與 Registry Architecture 留在本文件；各 Phase 要新增／成熟／延後的 capability scope 拆到 phase roadmap。
 
-- Phase 1：`working/ProjectManagement/capability-roadmap/PHASE-1.md`
-- Phase 2：`working/ProjectManagement/capability-roadmap/PHASE-2.md`
-- Phase 3：`working/ProjectManagement/capability-roadmap/PHASE-3.md`
-- Phase 4+：`working/ProjectManagement/capability-roadmap/PHASE-4-PLUS.md`
+- Phase 1：`working/roadmap/capability/PHASE-1.md`
+- Phase 2：`working/roadmap/capability/PHASE-2.md`
+- Phase 3：`working/roadmap/capability/PHASE-3.md`
+- Phase 4+：`working/roadmap/capability/PHASE-4-PLUS.md`
 
 > Capability 只有在 Evidence / Maturity 達標時才升級，不因 Phase 名稱自動 RELEASED。
 

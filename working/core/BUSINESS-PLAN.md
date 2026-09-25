@@ -74,10 +74,10 @@ NodeFF 採四段節奏，而不是把未來能力全部塞進 Phase 1。
 
 商業核心、五大產品原則、KPI 與 Strategic Guardrails 留在本文件；每一 Phase 的目標、能力、Gate 與商業假設拆到 roadmap，避免 Business Plan 隨時間無限增長。
 
-- Phase 1：`working/ProjectManagement/roadmap/PHASE-1.md`
-- Phase 2：`working/ProjectManagement/roadmap/PHASE-2.md`
-- Phase 3：`working/ProjectManagement/roadmap/PHASE-3.md`
-- Phase 4+：`working/ProjectManagement/roadmap/PHASE-4-PLUS.md`
+- Phase 1：`working/roadmap/product/PHASE-1.md`
+- Phase 2：`working/roadmap/product/PHASE-2.md`
+- Phase 3：`working/roadmap/product/PHASE-3.md`
+- Phase 4+：`working/roadmap/product/PHASE-4-PLUS.md`
 
 > Phase advancement = Evidence-gated，不因日曆自動發生。
 

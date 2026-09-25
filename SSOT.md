@@ -97,19 +97,17 @@ working/
     PHASE-3.md
     PHASE-4-PLUS.md
 
-  ProjectManagement/
-    roadmap/
+  roadmap/
+    product/
       PHASE-1.md
       PHASE-2.md
       PHASE-3.md
       PHASE-4-PLUS.md
-    capability-roadmap/
+    capability/
       PHASE-1.md
       PHASE-2.md
       PHASE-3.md
       PHASE-4-PLUS.md
-    OPEN-QUESTIONS.md
-    DECISION-CANDIDATES.md
 
   functions/
     Fxx-*.md

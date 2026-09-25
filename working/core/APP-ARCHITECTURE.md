@@ -672,10 +672,10 @@ Commerce mechanics
 APP-ARCHITECTURE.md
 → 系統、責任、流程、演進
 
-ProjectManagement/BUSINESS-PLAN.md
+core/BUSINESS-PLAN.md
 → 商業假設、價值、Evidence Gate、時間軸
 
-ProjectManagement/CAPABILITY-FABRIC.md
+core/CAPABILITY-FABRIC.md
 → 能力 Contract、Coverage、Maturity、能力演進
 
 INFRA-ARCHITECTURE.md

@@ -41,7 +41,7 @@ working/data-model/PHASE-*.md
 working/core/CAPABILITY-FABRIC.md
 → shared capability semantic contract
 
-working/ProjectManagement/capability-roadmap/PHASE-*.md
+working/roadmap/capability/PHASE-*.md
 → phase-specific capability activation / maturity roadmap
 
 working/functions/Fxx-*.md
@@ -242,7 +242,7 @@ Outcome：
 |---|---|
 | Blueprint / Trust Admission | `functions/F02-BLUEPRINT-VALIDATION.md` + `DATA-MODEL.md` |
 | Runtime Semantics | `functions/F03-RUNTIME-EXECUTION.md` |
-| Capability Contract / Registry | `ProjectManagement/CAPABILITY-FABRIC.md` + `functions/F04-CAPABILITY-REGISTRY.md` |
+| Capability Contract / Registry | `core/CAPABILITY-FABRIC.md` + `functions/F04-CAPABILITY-REGISTRY.md` |
 | Result Quality / Logic Correction | `functions/F16-RESULT-CORRECTION.md` |
 | Recovery | `functions/F12-HUMANIZED-RECOVERY.md` |
 | Anonymous Evidence | `functions/F07-ANONYMOUS-IDENTITY-EVIDENCE.md` |

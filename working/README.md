@@ -21,8 +21,8 @@
 - `architecture/evolution/` — 每 Phase architecture additions
 - `data-model/` — 每 Phase data contract / delta
 - `infrastructure/` — 每 Phase infra activation
-- `ProjectManagement/roadmap/` — 每 Phase product / business roadmap
-- `ProjectManagement/capability-roadmap/` — 每 Phase Capability roadmap
+- `roadmap/product/` — 每 Phase product / business roadmap
+- `roadmap/capability/` — 每 Phase Capability roadmap
 - `functions/` — Function detailed design
 - `UI-UX/` — Screen / Overlay detailed design
 - `registries/` — machine-readable contracts
@@ -51,6 +51,6 @@ Phase 1 Build Freeze 最終 review 使用：
 - `architecture/evolution/PHASE-1.md`
 - `data-model/PHASE-1.md`
 - `infrastructure/PHASE-1.md`
-- `ProjectManagement/roadmap/PHASE-1.md`
-- `ProjectManagement/capability-roadmap/PHASE-1.md`
+- `roadmap/product/PHASE-1.md`
+- `roadmap/capability/PHASE-1.md`
 - Phase 1 Functions / UI-UX / Registries
