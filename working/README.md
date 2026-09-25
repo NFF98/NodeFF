@@ -5,7 +5,7 @@
 ## 先分兩類看
 
 ### 1. Common Core
-`working/core/`
+`working/common-core/`
 
 跨 Phase 共用、不應每一 Phase 重複的核心：
 - App / Infra Architecture

@@ -13,20 +13,20 @@ working/
 ```
 
 主要入口：
-- Top Architecture：`working/core/APP-ARCHITECTURE.md`
-- Function Portfolio：`working/core/APP-DETAILED-DESIGN-OVERVIEW.md`
-- Shared Data Invariants / Index：`working/core/DATA-MODEL.md`
-- Phase Data Modules：`working/data-model/`
-- Architecture Evolution：`working/architecture/evolution/`
-- Infrastructure Phase Modules：`working/infrastructure/`
-- Shared API：`working/core/API-CONVENTIONS.md`
-- Execution Admission：`working/core/EXECUTION-ADMISSION.md`
-- Acceptance/Test Conventions：`working/core/ACCEPTANCE-CONVENTIONS.md`
-- Function Details：`working/functions/Fxx-*.md`
-- UI/UX：`working/UI-UX/`
-- Machine-readable Registries：`working/registries/`
-- Product Roadmap：`working/roadmap/product/`
-- Capability Roadmap：`working/roadmap/capability/`
+- Top Architecture：`working/common-core/APP-ARCHITECTURE.md`
+- Function Portfolio：`working/common-core/APP-DETAILED-DESIGN-OVERVIEW.md`
+- Shared Data Invariants / Index：`working/common-core/DATA-MODEL.md`
+- Phase Data Modules：`working/detailed-design/data-model/`
+- Architecture Evolution：`working/common-core/APP-ARCHITECTURE.md#preserved-architecture-evolution-content`
+- Infrastructure Phase Modules：`working/detailed-design/infrastructure/`
+- Shared API：`working/common-core/API-CONVENTIONS.md`
+- Execution Admission：`working/common-core/EXECUTION-ADMISSION.md`
+- Acceptance/Test Conventions：`working/common-core/ACCEPTANCE-CONVENTIONS.md`
+- Function Details：`working/detailed-design/functions/Fxx-*.md`
+- UI/UX：`working/detailed-design/UI-UX/`
+- Machine-readable Registries：`working/detailed-design/registries/`
+- Product Roadmap：`working/common-core/BUSINESS-PLAN.md#preserved-product-roadmap-content`
+- Capability Roadmap：`working/common-core/CAPABILITY-FABRIC.md#preserved-capability-roadmap-content`
 
 ## Build / Delivery Boundary
 

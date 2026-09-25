@@ -47,7 +47,7 @@ Build Spec 不是新的 Product Design SSOT；它是某一 approved Working comm
 3. 同一語意只能有一個 canonical Working owner。
 4. Function detailed truth 以 Fxx 為單位，不拆成平行 FE / BE / API / DB 主規格。
 5. Shared contract 只有真正跨 Function 時才進 shared Working owner。
-6. `working/UI-UX/` 擁有 Screen composition / visual hierarchy / responsive / presentation；Function behavior semantics 仍由 `working/functions/Fxx-*.md` 擁有。
+6. `working/detailed-design/UI-UX/` 擁有 Screen composition / visual hierarchy / responsive / presentation；Function behavior semantics 仍由 `working/detailed-design/functions/Fxx-*.md` 擁有。
 7. Machine-readable registries 把已批准 Working contract 轉為可驗證形式，不建立第二套產品語意。
 8. Material Product / Architecture / UX / Contract / Acceptance change 必須先更新 NodeFF Working 並經 Human approval。
 9. Cursor 不得從 raw demand、Chat、歷史 Spec 或過期報告自行發明 Product Truth。
