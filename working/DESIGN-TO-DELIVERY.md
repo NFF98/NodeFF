@@ -44,7 +44,7 @@ Spec
 = 已 Review、可直接開發的正式 Contract
 
 Execution
-= 從 Spec 派生出的實作工作與 Sprint
+= 由 `NFF98/NFFBuild` 承接的 Build Spec / Backlog / Sprint / Cursor / Test / Evidence / Release；NodeFF 不維護 `execution/` mirror
 ~~~
 
 同一件事在同一層級只能有一個 Current Truth。
@@ -110,8 +110,8 @@ spec/functions/
 spec/shared/
 → reviewed cross-Function shared contracts
 
-execution/
-→ backlog / sprint / changelog generated from approved Spec
+NFF98/NFFBuild
+→ immutable Build Spec / backlog / sprint / implementation / test / evidence / release execution
 ~~~
 
 不得為 Frontend / Backend / DB 再建立彼此割裂的平行主規格。
@@ -235,6 +235,8 @@ Open Decisions = 無 blocker
 ---
 
 # 8. Spec → Backlog / Sprint
+
+Backlog / Sprint 的 canonical execution home 是 `NFF98/NFFBuild`；NodeFF 不保留 `execution/` mirror。
 
 Backlog 與 Sprint 必須由 Spec 派生。
 
@@ -450,7 +452,7 @@ Read approved Spec
 → preserve contracts
 → write / update mapped tests
 → report deviations / blockers
-→ update execution records
+→ update NFFBuild delivery / evidence records
 ~~~
 
 Cursor 不負責：

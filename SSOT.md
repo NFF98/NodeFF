@@ -19,7 +19,7 @@
 1. Discussion / Chat 不是 implementation truth。
 2. working/ 是目前可修改的 Current Working Truth。
 3. spec/ 只放已 Review、可直接實作的正式 Contract。
-4. execution/ 只能由已批准 Spec 派生。
+4. NodeFF 不維護 `execution/`；Build Spec、Backlog、Sprint、implementation evidence 與 Release execution 由 `NFF98/NFFBuild` 承接。
 5. 同一層級同一語意只能有一個 canonical owner。
 6. Function detailed truth 以 Fxx 為單位，不拆成平行 FE/BE/API/DB 主規格。
 7. Shared contract 只有真正跨 Function 時才進 shared owner。
@@ -27,7 +27,7 @@
 8. 程式碼與測試不得覆蓋 Spec。
 9. 產品行為 / public contract / data / security 變更必須先更新對應 Working/Spec。
 10. decisions/ 記錄 architecture/product-impacting decisions。
-11. execution/CHANGELOG.md 記錄已交付或已提交的 execution change。
+11. Execution change / evidence / release records 由 `NFF98/NFFBuild` 維護；NodeFF 不保留 execution mirror。
 12. 文件預設使用繁體中文；技術 identifier / API / Schema / Protocol 名稱可保留英文。
 
 ## Canonical Structure
@@ -69,7 +69,6 @@ spec/
     ACCEPTANCE-TEST-REGISTRY.json
 
 decisions/
-execution/
 ~~~
 
 ## Legacy Spec Files
@@ -98,7 +97,7 @@ Repository governance authority：
 2. reviewed spec/functions + spec/shared
 3. decisions/
 4. working/（尚未升 Spec 的 Current Working Truth）
-5. execution/
+5. `NFF98/NFFBuild` immutable Build Spec / delivery records（implementation / execution authority）
 6. code / tests
 
 若 code 與 approved Spec 衝突，以 Spec 為準並停止 implementation decision drift。
@@ -131,4 +130,4 @@ Phase 1 Working registries：
 2. 回 Working / Review；
 3. 更新 shared / Function canonical owner；
 4. 重新通過相關 Gate；
-5. 再進 execution。
+5. 經 Human-approved Build Freeze 交付 `NFF98/NFFBuild`，再進 execution。
