@@ -1,20 +1,16 @@
-# Phase 1 Machine-readable Registries
+# NodeFF Working Registries
 
-此目錄是 Working 階段可由 CI / code generation / review 使用的 structured contract source。
+> **CURRENT AUTHORITY：NodeFF Working machine-readable Product Design contracts**
 
-- recovery-registry.json：stable source error → F12 recovery policy / message / actions。
-- evidence-event-registry.json：stable event ID → F07 collection / property / retention metadata。
-- acceptance-test-registry.json：stable Acceptance ID → Test Contract；已進 Formal的舊 ID保留原語意，以 superseded / deprecated lifecycle處理，不重用或改寫。
+本目錄維護：
+- `recovery-registry.json`
+- `evidence-event-registry.json`
+- `acceptance-test-registry.json`
 
 規則：
 
-1. JSON registry不是第二份產品語意；source error/event meaning仍由Fxx + F12/F07擁有。
-2. Registry負責把已批准語意變成machine-readable mapping。
-3. 新增/變更stable ID時，Markdown owner與JSON registry必須同commit更新。
-4. Spec promotion後，reviewed snapshot升到spec/shared對應registry。
-
-Current Working registry baseline（2026-09-22）：
-
-- Recovery mappings：122。
-- Evidence event contracts：112。
-- Acceptance / Test contracts：271（其中 `F00-AC-008`已在 Working superseded，待 Formal Refresh deprecated）。
+1. Registry 必須對應 canonical Working Function / Shared contracts。
+2. Registry 不得自行發明產品語意。
+3. Stable ID 不重用；superseded / deprecated 必須保留 traceability。
+4. Build Freeze 時，approved registry snapshot 隨其他 Working truth 一起投影到 `NFF98/NFFBuild/build-spec/baselines/BS-*`。
+5. 舊 `spec/shared/*-REGISTRY.json` promotion 模型已 **RETIRED / NO-USE**。

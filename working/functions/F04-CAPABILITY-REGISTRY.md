@@ -1,7 +1,7 @@
 # F04 — Capability Registry / Resolution
 
-> 狀態：SPEC_READY
-> Formal Spec：spec/functions/F04-CAPABILITY-REGISTRY.md
+> 狀態：BUILD_FREEZE_READY
+> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved NFFBuild locked BS-*。
 >
 > Canonical Role：Phase 1 Concrete Capability Registry 的 Working Current Truth。
 >

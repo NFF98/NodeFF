@@ -1,7 +1,7 @@
 # F12 — Humanized Recovery Orchestration
 
-> 狀態：SPEC_READY + WORKING_DELTA_CLOSED / FORMAL_REFRESH_PENDING
-> Formal Spec：spec/functions/F12-HUMANIZED-RECOVERY.md
+> 狀態：BUILD_FREEZE_READY + WORKING_DELTA_CLOSED / FORMAL_REFRESH_PENDING
+> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved NFFBuild locked BS-*。
 >
 > Canonical Role：Phase 1 Cross-Function Error Classification、Recovery Policy、Context Preservation、Humanized Message、Next Action、Recovery Episode Evidence 的 Working Current Truth。
 >
@@ -1168,7 +1168,7 @@ Fxx-ERR technical truth
 
 > 狀態：WORKING_DELTA_CLOSED（2026-09-22）/ FORMAL_REFRESH_PENDING
 >
-> Formal Spec：**暫不修改**；本 Working policy待 pre-Cursor Formal Spec Refresh一次同步。
+> Formal Spec：**暫不修改**；本 Working policy待 pre-Build Freeze reconciliation一次同步。
 
 normal F03 Runtime action timeout已由 `F12-POL-011`形成完整 mapping。
 

@@ -1,7 +1,7 @@
 # F16 — Result Feedback / Logic Correction
 
-> 狀態：SPEC_READY
-> Formal Spec：spec/functions/F16-RESULT-CORRECTION.md
+> 狀態：BUILD_FREEZE_READY
+> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved NFFBuild locked BS-*。
 >
 > Canonical Role：Phase 1 Semantic Mismatch Detection、Correction Intent、Input Replay、Before/After Result Comparison、CORRECT Lineage 與 Accept / Reject / Revert 的 Working Current Truth。
 >

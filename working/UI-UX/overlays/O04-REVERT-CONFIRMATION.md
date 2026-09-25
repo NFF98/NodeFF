@@ -1,5 +1,7 @@
 # O04 — Revert Confirmation
 
+> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion、pre-Build Freeze reconciliation 字樣均為 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。UI/UX Current Truth仍在本 Working；implementation input = Human-approved Build Freeze → NFFBuild locked BS-*。
+
 > Overlay ID：O04
 >
 > 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
@@ -926,7 +928,7 @@ O04 ④A Low-fi與④B Step 1–4已完成 User Review並鎖定。
 
 Final Cross-Screen High-fi Review：**CLOSED / VERIFIED**。
 
-Formal Spec、Backlog / Sprint、Cursor implementation維持 HOLD。
+Build Freeze / NFFBuild activation / Cursor implementation 維持 HOLD。
 
 ### Final Cross-Screen High-fi Review — CLOSED / VERIFIED
 

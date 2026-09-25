@@ -1,7 +1,7 @@
 # F05 — Share / Restore
 
-> 狀態：SPEC_READY
-> Formal Spec：spec/functions/F05-SHARE-RESTORE.md
+> 狀態：BUILD_FREEZE_READY
+> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved NFFBuild locked BS-*。
 >
 > Canonical Role：Phase 1 Share Creation、Public Share Resolution、Blueprint Restore、Recipient Entry UX 與 Share Reliability 的 Working Current Truth。
 >
@@ -1006,4 +1006,4 @@ Future directions：
 2. **Realtime shared game / shared mutable state**：由 F09 Realtime Room方向承接。
 3. Future UI可形成「分享 App / 分享結果 / 開啟共同遊玩 Room」三種意圖，但 Phase 1 O01只落地「分享 App」。
 
-此 boundary 不修改目前 SPEC_READY F05 semantics。
+此 boundary 不修改目前 BUILD_FREEZE_READY F05 semantics。

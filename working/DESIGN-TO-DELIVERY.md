@@ -1,75 +1,63 @@
 # NodeFF Design-to-Delivery Contract
 
-> 狀態：Working Baseline。本文定義 NodeFF 從設計到開發、測試、除錯、Release 與 Evidence 回饋的共同規則。所有 Function（Fxx）都必須遵守本 Contract；未通過對應 Gate 的內容不得跳級進入下一階段。
+> 狀態：CURRENT GOVERNANCE。
+>
+> `spec/` / Formal Spec / Working → Spec / Spec Promotion / Formal Spec Refresh 模型已 **RETIRED / NO-USE**。
+>
+> Current flow：**NodeFF Working → Human-approved Build Freeze → NFFBuild immutable BS-* → Delivery**。
 
 # 1. Purpose
 
-NodeFF 的設計不能停在文件，也不能讓 Cursor 在實作時自行發明產品或架構決策。
+NodeFF 的設計不能停在 Chat，也不能讓 Cursor 在實作時自行發明產品或架構決策。
 
 Canonical lifecycle：
 
-~~~text
+```text
 Discussion
-→ Working Design
-→ Review
-→ Spec
+→ NodeFF Working Design
+→ Review / Consistency / Delta / Acceptance / UI Audit
+→ Human approval
+→ Build Freeze
+→ NFFBuild Locked Build Spec
 → Backlog
 → Sprint
 → Cursor Implementation
-→ Test
-→ Runtime Debug / Evidence
+→ Test / Evidence
 → Release
 → Production Evidence
-→ Design / Spec Improvement
-~~~
+→ NodeFF Working Improvement
+```
 
 核心原則：
 
-> 後一階段應由前一階段的已批准內容派生，不重新發明需求。
-
----
+> 後一階段由前一階段的已批准內容派生，不重新發明需求。
 
 # 2. Current Truth / Source of Truth
 
-NodeFF 區分四種資訊：
-
-~~~text
+```text
 Discussion
 = 思考、比較、未定方案
 
-Working
-= 目前最新設計答案，可持續修改
+NodeFF Working
+= 唯一可修改 Product Design Current Truth
 
-Spec
-= 已 Review、可直接開發的正式 Contract
+NFFBuild Locked BS-*
+= 某一 approved Working commit 的 immutable implementation snapshot
 
-Execution
-= 由 `NFF98/NFFBuild` 承接的 Build Spec / Backlog / Sprint / Cursor / Test / Evidence / Release；NodeFF 不維護 `execution/` mirror
-~~~
+NFFBuild Delivery
+= Backlog / Sprint / Code / Test / Evidence / Release
+```
 
-同一件事在同一層級只能有一個 Current Truth。
-
-例如 Share 曾討論 A / B / C，若目前決定 B：
-
-~~~text
-Discussion = A / B / C 都可保留
-Working = 只描述目前採 B
-Spec = Review 後正式批准 B
-Code / Test = 只能實作 B
-~~~
-
-Chat / Discussion 不是 implementation source。
-
----
+不存在 NodeFF 內部第二份 Formal Spec Current Truth。
 
 # 3. Canonical Document Responsibilities
 
-~~~text
+```text
 working/APP-ARCHITECTURE.md
 → system boundary / top architecture
 
 working/APP-DETAILED-DESIGN-OVERVIEW.md
-→ Function Portfolio / dependency / release scope
+→ Function Portfolio / dependency / phase / release scope
 
 working/DATA-MODEL.md
 → shared canonical data model
@@ -81,52 +69,37 @@ working/EXECUTION-ADMISSION.md
 → fresh Blueprint trust / compatibility execution gate
 
 working/ACCEPTANCE-CONVENTIONS.md
-→ shared Acceptance → Test Contract conventions
+→ shared Acceptance → Test conventions
 
-working/registries/recovery-registry.json
-→ exact source Error → F12 Recovery machine mapping
-
-working/registries/evidence-event-registry.json
-→ exact Event ID → F07 Evidence machine contract
-
-working/registries/acceptance-test-registry.json
-→ exact Acceptance → Test Contract mapping
+working/registries/
+→ machine-readable Recovery / Evidence / Acceptance contracts
 
 working/ProjectManagement/CAPABILITY-FABRIC.md
 → capability semantic contract
 
 working/functions/Fxx-*.md
-→ single Function end-to-end detailed behavior / contract design
+→ single Function end-to-end detailed Product Design truth
 
-working/UI-UX/PHASE1-SCREEN-INVENTORY.md
-→ Phase 1 Screen / Surface map + Screen review status
+working/UI-UX/
+→ screen composition / visual hierarchy / responsive / presentation truth
 
-working/UI-UX/screens/Sxx-*.md
-→ screen composition / visual hierarchy / responsive / Low-fi / High-fi Working design;不得自行改寫 Function behavior semantics
+NFF98/NFFBuild/build-spec/baselines/BS-*
+→ Human-approved immutable implementation snapshot
 
-spec/functions/
-→ reviewed Function implementation contracts
+NFF98/NFFBuild/delivery/
+→ backlog / sprint / evidence execution
 
-spec/shared/
-→ reviewed cross-Function shared contracts
+NFF98/NFFBuild/releases/
+→ release execution
+```
 
-NFF98/NFFBuild
-→ immutable Build Spec / backlog / sprint / implementation / test / evidence / release execution
-~~~
-
-不得為 Frontend / Backend / DB 再建立彼此割裂的平行主規格。
-
-UI/UX Screen 文件是 visual / screen composition owner，不是第二份 Function behavior owner。若 Screen design 需要改 product behavior / state semantics / API / Data / Runtime，必須回到對應 Fxx Working Design 並重新 Review。
-
----
+UI/UX 文件不得自行改寫 Function behavior semantics。需要改 Product behavior / state semantics / API / Data / Runtime 時，必須先回對應 Working canonical owner。
 
 # 4. Function Design Unit
 
-NodeFF 的基本設計、開發、測試、Debug、Release 追蹤單位是 Function。
+每個 Fxx 應完整串通：
 
-每個 Fxx 必須完整串通：
-
-~~~text
+```text
 User Outcome
 → User Flow
 → UI / UX
@@ -139,337 +112,252 @@ User Outcome
 → Security / Permission
 → Telemetry / Evidence
 → Acceptance / Test
-~~~
+```
 
-若其中任何必要環節未定義，Function 不得標記為 Ready for Spec。
+缺少 implementation 必需 contract 時，不得進 Build Freeze。
 
----
+# 5. Working Maturity
 
-# 5. Lifecycle States
+建議使用：
 
-每個 Function 使用以下狀態：
-
-~~~text
+```text
 DRAFT
 → REVIEW
 → WORKING_BASELINE
-→ SPEC_READY
-→ IN_IMPLEMENTATION
-→ IMPLEMENTED
-→ TESTED
-→ RELEASE_READY
-→ RELEASED
-→ EVIDENCE_REVIEW
-~~~
+→ BUILD_FREEZE_READY
+```
 
-定義：
+舊 `SPEC_READY` 名稱只代表歷史治理狀態；**NO-USE 作為現行 authority gate**。
 
-- DRAFT：仍有重大未決設計。
-- REVIEW：內容已可完整審查。
-- WORKING_BASELINE：目前 Working Current Truth。
-- SPEC_READY：UX / Data / API / Backend / Runtime / Error / Security / Evidence / Acceptance 全部串通並完成 Review。
-- IN_IMPLEMENTATION：已進 Sprint，Cursor 可執行。
-- IMPLEMENTED：Code path 已完成，但尚未代表測試或產品成功。
-- TESTED：Required Acceptance 對應測試已通過。
-- RELEASE_READY：Release Gate 全部通過。
-- RELEASED：已正式發佈。
-- EVIDENCE_REVIEW：使用 Production Evidence 評估改善。
+`BUILD_FREEZE_READY` 代表：
+- required product semantics 已閉合；
+- Acceptance/Test mapping 已足夠；
+- blocking open decisions = 0；
+- 可以進 Human Build Freeze Review。
 
-不得因為 Build 成功直接從 IMPLEMENTED 跳到 RELEASED。
-
----
+它不等於 implemented / tested / released。
 
 # 6. Stable Traceability IDs
 
-所有正式設計項目必須使用穩定 ID。
+正式設計項目使用 stable IDs，例如：
 
-建議格式：
+```text
+F01-RQ-001
+F01-UX-001
+F01-DATA-001
+F01-API-001
+F01-POL-001
+F01-ERR-001
+F01-EVT-001
+F01-SEC-001
+F01-AC-001
+TEST-F01-001
+```
 
-~~~text
-F01-RQ-001    Requirement
-F01-UX-001    UX behavior / state
-F01-DATA-001  Data contract
-F01-API-001   API contract
-F01-POL-001   Policy / decision rule
-F01-ERR-001   Error class
-F01-EVT-001   Telemetry / Evidence event
-F01-SEC-001   Security / Permission rule
-F01-AC-001    Acceptance criterion
-TEST-F01-001  Test case / suite mapping
-~~~
+ID 不重用。淘汰時標記 deprecated / superseded，不重編造成 traceability 斷裂。
 
-ID 一旦進 Spec 不應重編號；被淘汰時標記 deprecated / superseded，不重用舊 ID。
+# 7. Build Freeze Gate
 
----
+進入 Build Freeze 前必須確認：
 
-# 7. Working → Spec Gate
-
-Function 只有在以下項目全部完成時才可由 Working 升格為 Spec：
-
-~~~text
+```text
 Scope / Non-Scope
 User Flow
 UI / UX
 Frontend State
-Data / DB read-write
+Data / DB
 API / Contract
-Backend / Runtime processing
+Backend / Runtime
 Capability dependency
 Error / Recovery
 Security / Permission
 Telemetry / Evidence
-Acceptance Criteria
+Acceptance / Test
 Dependency / Compatibility
 Open Decisions = 無 blocker
-~~~
-
-升格規則：
-
-1. Working 是可修改 Current Truth。
-2. Spec 是批准後的 implementation contract。
-3. 升格不是重新改寫需求，而是固定已 Review 的 Working。
-4. **任何 WORKING_BASELINE / REVIEW → SPEC_READY promotion，必須先取得 User 明確批准。沒有 User 明確答覆「同意」不得升格。**
-5. Spec 變更必須留下可追蹤 change。
-6. Cursor 不得以 Chat 討論覆蓋 Spec。
-
----
-
-# 8. Spec → Backlog / Sprint
-
-Backlog / Sprint 的 canonical execution home 是 `NFF98/NFFBuild`；NodeFF 不保留 `execution/` mirror。
-
-Backlog 與 Sprint 必須由 Spec 派生。
-
-每個 execution item 至少要能指回：
-
-~~~text
-Function ID
-Requirement ID(s)
-Acceptance ID(s)
-Dependency
-Implementation scope
-Test expectation
-~~~
-
-不得建立無 Spec / 無 Acceptance 的 implementation task，除非明確標記為 spike / experiment，且不得被當成正式 product behavior。
-
----
-
-# 9. Acceptance → Executable Test
-
-Acceptance 是 Test 的來源，不是 Release 前才補的文字。
-
-例如：
-
-~~~text
-F02-AC-007
-Unknown capability must never enter Runtime.
-~~~
-
-至少對應：
-
-~~~text
-TEST-F02-007-A
-unknown capability ID → validation rejected
-
-TEST-F02-007-B
-unsupported capability version → rejected / incompatible
-~~~
-
-每個 Critical Acceptance 必須有 automated test 或明確記錄為 manual / runtime evidence test，且說明原因。
+Phase Boundary
+```
 
 規則：
 
-> Test 驗證 Spec，不重新發明需求。
+1. Working 是唯一可修改 Current Truth。
+2. Build Freeze 只能固定已 Review 的 Working，不重新改寫需求。
+3. **沒有 User 明確批准，不得建立或啟用 NFFBuild BS-*。**
+4. Freeze 必須記 exact NodeFF source commit。
+5. Freeze inventory 必須列出 included Function / Shared / UI-UX / Registry files。
+6. NFFBuild baseline merge 後 immutable。
+7. 後續 semantic change 必須回 NodeFF Working，再建立新 baseline；不得改舊 baseline。
 
----
+# 8. Build Spec → Backlog / Sprint
 
-# 10. Executable Policy / Decision Table
+NFFBuild Backlog / Sprint 必須由 active Locked Build Spec 派生。
 
-Deterministic product policy 必須同時具備：
+每個 work item 至少可追蹤：
 
-~~~text
+```text
+Build Spec ID
+Function ID
+Requirement / Contract ID(s)
+Acceptance ID(s)
+Test ID(s)
+Dependency
+Implementation scope
+```
+
+不得讓 Cursor 從 Chat 或未批准 Working delta 建正式 implementation task。
+
+# 9. Acceptance → Executable Test
+
+Acceptance 是 Test 的來源。
+
+每個 Critical Acceptance 必須有 automated test，或明確標記 manual / runtime evidence test 並說明原因。
+
+規則：
+
+> Test 驗證 frozen Build Spec，不重新發明 Product Truth。
+
+# 10. Executable Policy
+
+Deterministic policy 應具有：
+
+```text
 Human-readable rule
 + stable Policy ID
 + machine-executable implementation
 + mapped tests
 + telemetry evidence where relevant
-~~~
-
-例如 F01 Clarification Policy：
-
-~~~text
-F01-POL-CP-001
-Required execution value missing + no safe default
-→ NEEDS_CLARIFICATION
-~~~
-
-應對應：
-
-~~~text
-implementation rule
-→ TEST-F01-CP-001-*
-→ telemetry policy_rule_id = F01-POL-CP-001
-~~~
+```
 
 LLM 不得覆蓋 deterministic policy result。
 
----
-
 # 11. Runtime Debug Traceability
 
-Runtime failure 不應只有 stack trace。
+Runtime failure 在可行時應能追蹤：
 
-可觀測資料在可行時至少應能指向：
-
-~~~text
+```text
 request / session
+Build Spec
+Sprint / Task
 Function
 Blueprint hash / revision
 Capability ID / version
 Runtime stage
 Error Class
 Recovery Policy
-related Requirement / Acceptance when applicable
-~~~
-
-例如：
-
-~~~text
-function_id = F03
-capability_id = game.timer@1
-runtime_stage = EFFECT
-error_code = F03-ERR-012
-recovery_policy = F12-POL-004
-~~~
+Acceptance / Test
+```
 
 Stack trace 是工程資訊，不是 Consumer UX。
 
----
-
 # 12. Error / Recovery Contract
 
-每個預期 failure 必須：
-
+預期 failure 應：
 1. 有 stable Error ID / class。
 2. 指明 retryable / terminal。
-3. 指明哪些 context 必須保留。
+3. 指明 preserve context。
 4. 對應 Humanized Recovery。
-5. 至少提供一個有效 next action，除非確實無法繼續。
+5. 有有效 next action，除非確實無法繼續。
 6. 需要時產生 telemetry evidence。
-
-一般 User 不直接看到裸工程錯誤碼。
-
----
 
 # 13. Evidence Contract
 
-Telemetry 不是附加功能。
+每個 Function 在 Working Design 階段就應定義 Evidence，用來回答：
 
-每個 Function 在 Design 階段就必須定義哪些 Evidence 用來回答：
-
-~~~text
+```text
 Did it work technically?
 Did it match user intent?
 Did recovery work?
 Was the function useful?
 What did it cost?
 Should we improve / expand / stop?
-~~~
+```
 
-Evidence event 必須可追蹤到 Function；必要時追蹤 Requirement / Policy / Capability。
-
-不得為方便 Debug 無限制收集敏感資料。
-
----
+不得為 Debug 無限制收集敏感資料。
 
 # 14. Release Gate
 
-Function / Release 只有在所有 Required Gate 通過時才能 Release：
+Release authority 在 `NFF98/NFFBuild`。
 
-~~~text
-Required Spec approved
-+ Required implementation complete
+Release 至少要求：
+
+```text
+Locked Build Spec
++ required implementation complete
 + Acceptance tests pass
 + security / permission checks pass
-+ compatibility / migration checks pass
++ compatibility checks pass
 + runtime smoke tests pass
 + Humanized Recovery verified
-+ required telemetry exists
++ required evidence exists
 + known blockers = 0
-~~~
++ required User release approval
+```
 
-Release Scope 由 APP-DETAILED-DESIGN-OVERVIEW.md 定義，不以「Code 已完成」取代 Release Gate。
+Build Success ≠ Release。
 
----
+# 15. Production Evidence Loop
 
-# 15. Post-Release Evidence Loop
-
-Release 不是終點。
-
-~~~text
+```text
 Production Evidence
-→ Detect mismatch / failure / friction
-→ Trace to Function / Policy / Capability
-→ Working Design Delta
-→ Review
-→ Spec Change when approved
-→ Implementation / Test / Release
-~~~
+→ detect mismatch / failure / friction
+→ trace to Function / Policy / Capability
+→ NodeFF Working Delta
+→ Human review / approval
+→ new Build Freeze / Rebaseline when implementation truth changes
+→ NFFBuild delivery
+```
 
-Evidence 可以改變設計，但不得直接繞過 Working / Spec 修改 Production contract。
+Evidence 不得直接改 Production contract。
 
----
+# 16. Change Control / Design Delta
 
-# 16. Change Control
-
-設計變更分三類：
-
-## Minor
+### Minor
 不改 user outcome / public contract / data compatibility。
 
-→ 可直接更新 Working，保留 change trace。
+→ 更新 canonical Working，保留 change trace。
 
-## Material
-改變 UX flow、API、Data、Runtime semantics、Acceptance、Security、Compatibility。
+### Material
+改 UX flow、API、Data、Runtime semantics、Acceptance、Security、Compatibility。
 
-→ 必須重新 Review 受影響 Function / Shared Contract。
+→ Review affected Working owners；Human approval 後才能進下一次 Build Freeze。
 
-## Architecture-impacting
-改變 Top Architecture、system boundary、Capability trust boundary、Blueprint model、Infra truth boundary。
+### Architecture-impacting
+改 Top Architecture、system boundary、Capability trust boundary、Blueprint model、Infra truth boundary。
 
-→ 必須先指出衝突 / 缺口，不可在 Function 文件中偷偷改方向。
+→ 必須先在 NodeFF Working 解決，不可在 NFFBuild / Cursor 偷做。
 
----
+若 implementation 發現 Material issue：
+
+```text
+NFFBuild Finding
+→ NodeFF Working
+→ Human approval
+→ new BS-* Rebaseline
+→ rebind backlog / sprint
+```
 
 # 17. Cursor Contract
 
-Cursor 的責任：
+Cursor：
 
-~~~text
-Read approved Spec
-→ implement exactly defined scope
+```text
+Read active NFFBuild Locked Build Spec
+→ work only on active Sprint task
 → preserve contracts
-→ write / update mapped tests
-→ report deviations / blockers
-→ update NFFBuild delivery / evidence records
-~~~
+→ write/update mapped tests
+→ record evidence
+→ report Finding / blocker
+```
 
-Cursor 不負責：
-
+Cursor 不得：
 - 發明產品行為
 - 改 Top Architecture
 - 自創 API / DB contract
 - 用實作方便性覆蓋 Acceptance
-- 把 unresolved design 當成 coding choice
-
-若 Spec 有矛盾或缺口，應回到 Design，而不是在 Code 中默默決策。
-
----
+- 直接修改 locked Build Spec
+- 由 raw demand 建 Product Truth
 
 # 18. Software Engineering Guardrails
-
-NodeFF Detailed Design 與 Delivery 從 Day 1 遵守：
 
 - Requirement traceability
 - Contract-first design
@@ -485,13 +373,11 @@ NodeFF Detailed Design 與 Delivery 從 Day 1 遵守：
 - No arbitrary generated code
 - No hidden product decision in implementation
 
----
-
 # 19. Phase 1 Application
 
-0–1 月 Core Release 的 Functions：
+Phase 1 / NOW BUILD：
 
-~~~text
+```text
 F00
 F01
 F02
@@ -502,440 +388,60 @@ F06
 F07
 F12
 F16
-~~~
+```
 
-全部遵守本 Contract。
-
-中長期 Function 可以保留 compatibility metadata，但不得因本 Contract 提前進入 Implementation。
-
----
+中長期 Function 可以保留 future-compatible hooks，但不得因此提前進 implementation scope。
 
 # 20. Definition of Done
 
-一個 Function 的 Definition of Done 不是「頁面會跑」。
+一個 Function 的完成不是「頁面會跑」。
 
-最低標準：
-
-~~~text
-Spec approved
-+ Implementation mapped to Spec
-+ Required tests mapped to Acceptance
+```text
+Approved Build Spec
++ implementation mapped
++ Acceptance/Test passed
 + Error / Recovery verified
 + Security verified
-+ Evidence instrumentation verified
++ Evidence verified
 + Release Gate passed
-+ Production Evidence can be traced back
-~~~
++ Production Evidence可回溯
+```
 
-因此：
+# 21. Commit / Revert Rule
 
-> Build Success ≠ Function Success。
->
-> Runtime Success ≠ Semantic Success。
->
-> Release ≠ Learning Complete。
+每次改變 GitHub Current Truth 的更新，都要有可辨識、可回退 commit。
 
-# 21. CT Commit / Revert Rule
+回報至少包含：
 
-每一次會改變 GitHub Current Truth 的更新，都必須有一個可辨識、可回退的 commit point。
-
-每次更新後，對 User 的說明至少包含：
-
-~~~text
+```text
 Commit
-→ 哪個 commit
-
 Changed
-→ 改了什麼
-
 Why
-→ 為什麼改
-
 Impact
-→ 影響哪些 Current Truth / Function / downstream work
-
 Revert
-→ 如果方向不對，要回到哪個 commit / 哪個變更前狀態
-~~~
+```
 
-規則：
+Material / Architecture-impacting change 不與無關 cleanup 混在同一 commit。
 
-1. commit message 必須是人可以理解的 change summary，不使用無意義訊息。
-2. 一個 commit 優先只承載一個 coherent design change。
-3. Material / Architecture-impacting change 不與無關 cleanup 混在同一 commit。
-4. User Review 後若方向不對，可依 commit boundary revert / forward-fix。
-5. Revert 不代表刪除討論歷史；只代表 Current Truth 回到先前 approved state。
-6. 每次 GitHub Working 更新後，ChatGPT 必須提供白話 commit 說明與 rollback point。
+# 22. Retired Governance Notice
 
----
+以下模型已 **RETIRED / NO-USE**：
 
-# 22. Detailed Design All-Picture Completion Matrix
-
-此 Matrix 是 0–1 月 Detailed Design 的進度總覽。它追蹤「Current Working Baseline 是否已建立」，不等於已升格 Spec / Implemented / Released。
-
-## 22.1 Established Baselines
-
-| Area | Status | Canonical Location | Role |
-|---|---|---|---|
-| Top Architecture | ✅ STABLE_BASELINE | `working/APP-ARCHITECTURE.md` | system boundary |
-| Product Boundary | ✅ STABLE_BASELINE | `working/ProjectManagement/BUSINESS-PLAN.md` + Architecture | product / evidence boundary |
-| Function Portfolio | ✅ STABLE_BASELINE | `working/APP-DETAILED-DESIGN-OVERVIEW.md` | Fxx scope / dependency |
-| Release Scope | ✅ STABLE_BASELINE | `working/APP-DETAILED-DESIGN-OVERVIEW.md` | 0–1 / 3 / 6 month scope |
-| Infra Boundary | ✅ STABLE_BASELINE | `working/INFRA-ARCHITECTURE.md` | Browser / Edge / Postgres / External |
-| Capability Philosophy | ✅ STABLE_BASELINE | `working/ProjectManagement/CAPABILITY-FABRIC.md` | capability boundary / maturity |
-| Design-to-Delivery | ✅ STABLE_BASELINE | `working/DESIGN-TO-DELIVERY.md` | Working → Spec → Test → Release rules |
-
-## 22.2 Detailed Design Gaps
-
-| Area | Status | Canonical Location | Main Dependency |
-|---|---|---|---|
-| Canonical Data Model | ✅ SPEC_READY | `spec/shared/DATA-MODEL.md` | reviewed shared data contract |
-| Executable Blueprint | ✅ SPEC_READY | `spec/functions/F02-BLUEPRINT-VALIDATION.md` | reviewed executable Blueprint / trust contract |
-| Concrete Registry | ✅ SPEC_READY | `spec/functions/F04-CAPABILITY-REGISTRY.md` + `spec/shared/CAPABILITY-FABRIC.md` | reviewed capability contract |
-| API Contracts | ✅ SPEC_READY | `spec/shared/API-CONVENTIONS.md` + Function Specs | shared transport/control + Function endpoint contracts |
-| UX State Machines | ✅ SPEC_READY | F00 + F05 + F06 + F12 + F16 Function Specs | reviewed Phase 1 Core UX flows |
-| Runtime Semantics | ✅ SPEC_READY | `spec/functions/F03-RUNTIME-EXECUTION.md` + `spec/shared/EXECUTION-ADMISSION.md` | reviewed runtime + fresh admission contract |
-| Error Taxonomy | ✅ SPEC_READY | F12 Spec + `spec/shared/RECOVERY-REGISTRY.json` | 121 / 121 exact machine mappings |
-| Evidence Schema | ✅ SPEC_READY | F07 Spec + `spec/shared/EVIDENCE-EVENT-REGISTRY.json` | 106 / 106 exact event contracts |
-| Function Specs | ✅ SPEC_READY | `spec/functions/` | 10 / 10 Phase 1 Core Functions promoted |
-| Executable Acceptance | ✅ SPEC_READY | `spec/shared/ACCEPTANCE-TEST-REGISTRY.json` + `spec/shared/ACCEPTANCE-CONVENTIONS.md` | 257 / 257 Test Contracts ready; execution occurs during implementation/test |
-
-## 22.3 Dependency Order
-
-~~~text
-Canonical Data Model
-        ↓
-Concrete Registry
-        ↓
-Executable Blueprint
-        ↓
-Runtime Semantics
-        ↓
-F01 Compilation / API
-        ↓
-F00 UX State Machine
-        ↓
-Share / Remix / Identity-Evidence / Recovery / Correction
-        ↓
-Complete Function Specs
-        ↓
-Executable Acceptance
-        ↓
-Working → Spec Gate
-~~~
-
-這不是禁止平行設計；而是避免 downstream 文件自行發明 upstream contract。
-
-## 22.4 Status Meaning
-
-~~~text
-❌ NOT_STARTED
-= 尚未建立 canonical Working design
-
-🟡 DRAFT
-= 已開始，但仍有 blocker / major open decision
-
-✅ WORKING_BASELINE
-= 已建立目前 Current Truth，可供 downstream design 引用，但尚未代表 Spec
-
-✅ SPEC_READY
-= Function / shared contract 已完成 Review，可升格正式 Spec
-~~~
-
-任何 status change 都必須伴隨對應 GitHub commit，並依 §21 提供白話 change / impact / revert 說明。
-
----
-
-# 23. Phase 1 Core Working → Spec Gate Re-Audit
-
-Latest re-audit：
-
-- working/ProjectManagement/PHASE1-CORE-SPEC-GATE-REAUDIT.md
-- Audited baseline：c206a2590bfd8ebd0a2bb2b6a4922354956cff11
-- Verdict：PASS — ELIGIBLE FOR SPEC PROMOTION
-- Original blockers closed：10 / 10
-- Core Function SPEC_READY：10 / 10
-- Recovery Registry：121 / 121
-- Evidence Event Registry：106 / 106
-- Acceptance/Test Contract：257 / 257
-- Blocking Open Decisions：0
-
-Formal Spec promotion completed under：
-
-~~~text
+```text
+Working → Formal Spec → NodeFF Backlog / Sprint
 spec/functions/
 spec/shared/
-~~~
-
-Lifecycle reminder：
-
-~~~text
-SPEC_READY
-≠ IMPLEMENTED
-≠ TESTED
-≠ RELEASE_READY
-~~~
-
-Cursor may now implement only from approved Spec, not mutable Working files。
-
-# Conclusion
-
-NodeFF 的 Delivery 原則只有一句：
-
-> **每個產品決策都能一路追到 Code / Test / Runtime Evidence；每個 Production 問題也能一路追回答案與設計。**
-
-這份文件是 Working 階段的共同 Delivery Contract。未來所有 Function 詳細設計、Spec 升格、Execution、Test、Debug、Release 都以此為共同規則。
-
-
----
-
-## Temporary Gate — Pre-Cursor Formal Spec Refresh
-
-> User decision：2026-09-21。
->
-> 本節是目前 NodeFF Phase 1 的 delivery sequencing rule。
-
-目前已存在的 Formal Spec 保持不動；新發現的 UI/UX / Runtime behavior delta先進 Working Design，不立即反覆 promotion。
-
-正式 Cursor implementation 前必須依序完成：
-
-~~~text
-Working Function Delta closure
-→ UI/UX Cross-Screen Review
-→ High-fi Design System / ④B High-fi
-→ Cursor Build / Operating Model Review
-→ Short-term Formal Spec Refresh
-→ Backlog / Sprint refresh
-→ Cursor Implementation
-~~~
-
-Rules：
-
-1. F00/F03 Runtime Loading + Timeout Delta目前只更新 Working，不改 Formal Spec。
-2. UI/UX visual / behavior review期間若發現 Material Function Delta，回對應 Fxx Working Design記錄並 Review。
-3. Formal Spec Refresh採「開發前一次性短期 refresh」策略，避免 UI/UX與 Cursor operating model尚未穩定時重複 promotion。
-4. Short-term Formal Spec Refresh仍需 User明確批准；不得自動 promotion。
-5. Refresh後重新檢查 Spec → Backlog / Sprint mapping，再解除 Cursor implementation HOLD。
-6. Cursor Build / Operating Model未討論完成前，不啟動正式 product implementation。
-
-此 Temporary Gate不取消既有 Design-to-Delivery Gate；只固定本階段的 promotion時機。
-
-### Current Progress — 2026-09-22
-
-~~~text
-✅ Runtime Loading + Timeout Working Function Delta closed
-✅ UI/UX Cross-Screen Consistency Review complete
-✅ High-fi Direction A Design System approved
-✅ S01 High-fi Step 1–4 closed
-✅ S02 High-fi Step 1–4 closed
-✅ S03 High-fi Step 1–4 closed + PNG artifact verified
-
-→ NEXT UI/UX: S04 ④B High-fi
-→ OPEN FUNCTION DELTA: F01 Creation Progress Checkpoint Contract (SD-20260922-002)
-→ HOLD: remaining High-fi、Cursor Build / Operating Model Review、
-        Formal Spec Refresh、Backlog/Sprint refresh、Cursor implementation
-~~~
-
-High-fi gate規則現由 `working/UI-UX/PHASE1-SCREEN-INVENTORY.md §5.1` 擁有：
-
-~~~text
-Step 1 Structure
-→ Step 2 Geometry + Visual Hierarchy
-→ Step 3 Detailed High-fi Visual Rules
-→ Step 4 Final Visual Reference
-→ optional Step 4.5 additional layer detail
-~~~
-
-每一 Step都必須 User批准後立即寫回對應 Working文件並 commit；不得只留在 Chat。
-
-Formal `spec/`仍維持 frozen baseline。Runtime Delta `SD-20260922-001`仍為 APPROVED / promotion pending；新增 `SD-20260922-002` 為 OPEN，必須完成 F01 Function Delta Review。兩筆 Delta最終都必須在 pre-Cursor refresh完成 promotion + verification，Gate才可解除。
-
-
----
-
-## Spec Delta Register / Spec Refresh Gate
-
-> User decision：2026-09-22。
->
-> Canonical ledger：working/ProjectManagement/SPEC-DELTA-REGISTER.md
->
-> Purpose：在 Formal Spec freeze 期間，確保所有已批准 Working Delta 最終都能完整 promotion 回 Formal Spec，且能一路追到 Acceptance / Test 與 Backlog，不漏同步、不產生 orphan contract / task。
-
-### 1. Single Ledger Rule
-
-所有會造成 frozen Formal Spec 與 Working Current Truth 不一致的 Material / Architecture-impacting Delta，都必須登記到唯一總帳：
-
-~~~text
-working/ProjectManagement/SPEC-DELTA-REGISTER.md
-~~~
-
-不得另外建立平行 Delta ledger。
-
-Screen / UX 文件若只是 visual / composition / copy change，且不改 semantic contract，可以不建立 Spec Delta。
-
-若改變 Function / Shared Contract 的 UX behavior、API、Data、Runtime semantics、Error / Recovery、Security、Compatibility、Evidence 或 Acceptance，必須建立或更新對應 SD-*。
-
-### 2. Canonical Delta Lifecycle
-
-~~~text
-OPEN
-→ REVIEWED
-→ APPROVED
-→ PROMOTED
-→ VERIFIED
-~~~
-
-Meaning：
-
-- OPEN：已識別 Delta，但 Working review尚未完成。
-- REVIEWED：Working review完成，等待 User批准。
-- APPROVED：User已批准 Working Current Truth，但 Formal尚未同步。
-- PROMOTED：該 Delta列出的所有 Formal targets全部完成同步。
-- VERIFIED：完成正向與反向 traceability核對，確認沒有漏同步或 orphan。
-
-APPROVED 不等於 PROMOTED。
-
-PROMOTED 不等於 VERIFIED。
-
-Working文件寫 CLOSED，也不代表 Formal debt已清。
-
-### 3. Pre-Cursor Status Gate
-
-正式 Cursor implementation 前，本 Register 必須滿足：
-
-~~~text
-OPEN = 0
-REVIEWED = 0
-APPROVED but not PROMOTED = 0
-PROMOTED but not VERIFIED = 0
-~~~
-
-等價規則：
-
-> 所有 active Spec Delta 必須 VERIFIED。
-
-只要任一項非 0：
-
-~~~text
-SPEC REFRESH GATE = HOLD
-CURSOR IMPLEMENTATION = HOLD
-~~~
-
-不得以「大部分已同步」解除 Gate。
-
-### 4. Forward Traceability Check
-
-每筆 Delta在 Spec Refresh後都必須能完整追蹤：
-
-~~~text
-Working Current Truth
-→ Formal Function / Shared Spec
-→ Acceptance / Test Contract
-→ Backlog
-~~~
-
-Required checks：
-
-1. 每個 canonical Working change都有對應 Formal owner。
-2. 所有 affected Formal targets均已同步。
-3. human-readable Spec與 machine-readable Registry都必須同步。
-4. Required Acceptance均有 Test Contract。
-5. Backlog item只從已 promotion的 Formal Spec / Acceptance派生。
-
-若 Delta同時改 Function Markdown與 machine-readable registry，只同步其中一邊不算 PROMOTED。
-
-### 5. Reverse Traceability Check
-
-從 execution反向核對：
-
-~~~text
-Backlog
-→ Acceptance / Test
-→ Formal Spec
-→ Working Delta / approved baseline
-~~~
-
-所有因本輪 Refresh新增 / 修改的 Backlog item、Acceptance / Test、Formal contract、Registry entry，都必須能回到：
-
-- 一筆 SPEC-DELTA-REGISTER 的 SD-*；或
-- 既有、未變更的 approved Formal baseline。
-
-Gate要求：
-
-~~~text
-orphan backlog = 0
-orphan acceptance = 0
-orphan formal contract = 0
-unregistered working delta = 0
-~~~
-
-### 6. Formal Promotion Completeness
-
-每筆 Delta必須列明 affected Formal targets。
-
-只有 listed targets 全部同步，才可：
-
-~~~text
-APPROVED
-→ PROMOTED
-~~~
-
-每次 promotion須記 Promotion commit。
-
-之後完成 verification時須記 verification evidence；只有這時才可：
-
-~~~text
-PROMOTED
-→ VERIFIED
-~~~
-
-### 7. Discovery Check
-
-Pre-Cursor Formal Spec Refresh開始前，必須掃描 canonical Working owners，確認以下訊號都能追到一筆 SD-*：
-
-- FORMAL_REFRESH_PENDING
-- WORKING_DELTA_*
-- superseded Formal stable ID
-- new / changed Acceptance
-- new / changed Error / Policy / Event
-- API / Data / Runtime / Security / Compatibility semantic change
-
-這一步用來防止「Working已經改了，但根本沒有被登記」。
-
-### 8. Current Gate State — 2026-09-22
-
-目前唯一已登記 Delta：
-
-~~~text
-SD-20260922-001
-Runtime Global Loading + Timeout
-Status = APPROVED
-Working closure = 96800388424929c616f803976d4630561762b923
-Promotion = PENDING
-Verification = PENDING
-~~~
-
-Current query：
-
-~~~text
-OPEN = 0
-REVIEWED = 0
-APPROVED but not PROMOTED = 1
-PROMOTED but not VERIFIED = 0
-
-SPEC REFRESH GATE = HOLD
-CURSOR IMPLEMENTATION = HOLD
-~~~
-
-這是目前預期狀態，不是 blocker anomaly。
-
-原因是 Formal Spec依 sequencing rule仍 frozen；先繼續：
-
-~~~text
-UI/UX Cross-Screen Consistency Review
-→ High-fi Design System / ④B High-fi
-→ Cursor Build / Operating Model Review
-→ pre-Cursor Formal Spec Refresh
-~~~
-
-到 Formal Refresh 時，再把 Register內所有 APPROVED Delta一次 promotion並 verification；Gate全清後，才進 Backlog / Sprint refresh與 Cursor implementation。
+Formal Spec Refresh
+Spec Promotion
+```
+
+歷史 Audit / Re-Audit / Closure Report 可以保留上述文字作歷史證據，但不得作 Current Governance。
+
+Current model only：
+
+```text
+NodeFF Working
+→ Human-approved Build Freeze
+→ NFFBuild immutable BS-*
+→ NFFBuild Delivery
+```

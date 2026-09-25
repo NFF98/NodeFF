@@ -1,5 +1,7 @@
 # O01 — Share Overlay
 
+> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion、pre-Build Freeze reconciliation 字樣均為 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。UI/UX Current Truth仍在本 Working；implementation input = Human-approved Build Freeze → NFFBuild locked BS-*。
+
 > Overlay ID：O01
 >
 > 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
@@ -10,7 +12,7 @@
 >
 > Function behavior source：F05 Share / Restore + F00 Experience Shell。
 >
-> ④A Low-fi與④B High-fi Step 1–4已完成 User Review並鎖定；Formal Spec與 Cursor implementation仍維持 HOLD。
+> ④A Low-fi與④B High-fi Step 1–4已完成 User Review並鎖定；Build Freeze 與 Cursor implementation 仍維持 HOLD。
 
 # 1. User Outcome
 

@@ -1,5 +1,7 @@
 # NodeFF Spec Delta Register
 
+> **STATUS：RETIRED / NO-USE FOR CURRENT AUTHORITY**。本 Register 完整保留為歷史 reconciliation evidence，不再是 active gate / ledger。舊 `spec/`、Formal Spec、Working → Spec、Promotion / Verification lifecycle 全部退役。Current delta flow = NodeFF Working Delta → Human approval → Build Freeze / Rebaseline → NFFBuild locked BS-*。
+
 > Status：Working Governance Current Truth
 >
 > Purpose：唯一追蹤 **Working Current Truth 已變更、但 frozen Formal Spec 尚未同步** 的 Material / Architecture-impacting Delta。

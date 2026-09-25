@@ -1,5 +1,7 @@
 # S02 — Create Workspace
 
+> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion、pre-Build Freeze reconciliation 字樣均為 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。UI/UX Current Truth仍在本 Working；implementation input = Human-approved Build Freeze → NFFBuild locked BS-*。
+
 > Screen ID：S02
 >
 > 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
@@ -10,7 +12,7 @@
 >
 > Function behavior sources：working/functions/F00-EXPERIENCE-SHELL.md、working/functions/F01-INTENT-COMPILATION.md
 >
-> 本文件的④A Low-fi與④B High-fi Step 1–4已完成 User Review；Formal Spec仍 frozen，Cursor implementation仍 HOLD。
+> 本文件的④A Low-fi與④B High-fi Step 1–4已完成 User Review；Legacy Formal Spec 已 RETIRED / NO-USE，Cursor implementation仍 HOLD。
 
 # 1. User Outcome
 
@@ -488,7 +490,7 @@ Reference boundary：
 - 任何已批准 Structure / Geometry / Visual Rule / image reference改動，必須 reopen對應 Step。
 - 若後續需要 component anatomy / clarification state matrix / progress mapping等額外層，可新增 `Step 4.5 — <Layer Name> Lock`。
 - Step 4.5不得偷改 Step 1–4；涉及 Function behavior必須回相關 Fxx Working Delta Review。
-- Formal Spec仍待 pre-Cursor refresh。
+- Legacy Formal Spec 已 RETIRED / NO-USE；待 Build Freeze reconciliation。
 
 ### Final Cross-Screen High-fi Review — CLOSED / VERIFIED
 

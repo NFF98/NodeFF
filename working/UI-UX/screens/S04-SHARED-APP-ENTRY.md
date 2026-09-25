@@ -1,5 +1,7 @@
 # S04 — Shared App Entry / Restore
 
+> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion、pre-Build Freeze reconciliation 字樣均為 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。UI/UX Current Truth仍在本 Working；implementation input = Human-approved Build Freeze → NFFBuild locked BS-*。
+
 > Screen ID：S04
 >
 > 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
@@ -10,7 +12,7 @@
 >
 > Function behavior sources：F05 Share / Restore + F00 Experience Shell + F03 Runtime。
 >
-> 本文件的 ④A Low-fi 與 ④B High-fi Step 1–4 已完成 User Review；Formal Spec仍維持 freeze，待 pre-Cursor Formal Spec Refresh。
+> 本文件的 ④A Low-fi 與 ④B High-fi Step 1–4 已完成 User Review；Legacy Formal Spec 已 RETIRED / NO-USE，待 pre-Build Freeze reconciliation。
 
 ### Final Cross-Screen High-fi Review — CLOSED / VERIFIED
 

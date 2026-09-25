@@ -1,5 +1,7 @@
 # O05 — Loading / Building / Hydration States
 
+> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion、pre-Build Freeze reconciliation 字樣均為 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。UI/UX Current Truth仍在本 Working；implementation input = Human-approved Build Freeze → NFFBuild locked BS-*。
+
 > Overlay / State ID：O05
 >
 > 狀態：**WORKING — ④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
@@ -248,7 +250,7 @@ Presentation rules：
 - 不為了讓 loading「看得到」而人工增加不必要等待。
 - action在同一 render frame內完成時，完整 loading frame可能不 paint；logical state仍需存在，且不算 UX violation。
 
-**Formal sync note：** 既有 Formal F00仍是舊語意；此 Working Current Truth待 pre-Cursor Formal Spec Refresh一次同步。O05不擁有 operation / commit semantics，仍以 F03為 owner。
+**Formal sync note：** 既有 Formal F00仍是舊語意；此 Working Current Truth待 pre-Build Freeze reconciliation一次同步。O05不擁有 operation / commit semantics，仍以 F03為 owner。
 
 Node/component單獨 async仍可有 component-local detail，但不取消全域 processing feedback。
 
@@ -1207,7 +1209,7 @@ Final Cross-Screen High-fi Review：**CLOSED / VERIFIED**。
 
 `SD-20260922-002 — F01 Creation Progress Checkpoint Contract` 已完成獨立 Function Delta closure；O05仍只承接 presentation，不成為 Function semantic owner。
 
-Formal Spec與 Cursor implementation維持 HOLD。
+Build Freeze 與 Cursor implementation 維持 HOLD。
 
 ---
 
@@ -1221,7 +1223,7 @@ Current Truth：
 - F00 S02 composite Create progress已閉合。
 - F03仍擁有 hydration / APP_READY truth。
 - O05仍只做 presentation，不擁有 checkpoint truth。
-- Formal Spec仍 frozen；promotion / verification pending。
+- Legacy Formal Spec 已 RETIRED / NO-USE；promotion / verification pending。
 
 ### Final Cross-Screen High-fi Review — CLOSED / VERIFIED
 

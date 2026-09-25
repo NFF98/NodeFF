@@ -1,5 +1,7 @@
 # ASSISTANT SHAME LOG — 恥辱表
 
+> **GOVERNANCE NOTICE**：本檔內任何 retired `spec/` (NO-USE)、Formal Spec、Working → Spec、Spec Promotion、Formal Spec Refresh 字樣均為 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current flow = NodeFF Working → Human-approved Build Freeze → NFFBuild locked BS-*。
+
 > 目的：記錄 ChatGPT 在 NodeFF 協作過程中，因重複 Current Truth、錯誤陳述、未先驗證 GitHub 現況等失誤，實際浪費 User 的時間。
 >
 > 這不是情緒性備忘，而是 **協作品質與時間損失紀錄**。

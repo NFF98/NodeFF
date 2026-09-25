@@ -1,5 +1,7 @@
 # NodeFF UI/UX Design System
 
+> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion、pre-Build Freeze reconciliation 字樣均為 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。UI/UX Current Truth仍在本 Working；implementation input = Human-approved Build Freeze → NFFBuild locked BS-*。
+
 > 狀態：**WORKING — HIGH-FI BASELINE APPROVED / FINAL CROSS-SCREEN VERIFIED**
 >
 > Phase：Phase 1
@@ -799,7 +801,7 @@ Final re-audit結果：
 
 > **0 個新的 material cross-screen finding。**
 
-下一個 gate不是再做 High-fi，而是依 User既定流程進行 **pre-Cursor Formal Spec Refresh**；在 User明確開始該 Gate前，Formal Spec與 Cursor implementation維持 HOLD。
+下一個 gate不是再做 High-fi，而是依 User既定流程進行 **pre-Build Freeze reconciliation**；在 User明確開始該 Gate前，Formal Spec與 Cursor implementation維持 HOLD。
 
 ---
 

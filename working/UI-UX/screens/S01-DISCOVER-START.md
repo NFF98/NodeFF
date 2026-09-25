@@ -1,5 +1,7 @@
 # S01 — Discover / Start
 
+> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion、pre-Build Freeze reconciliation 字樣均為 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。UI/UX Current Truth仍在本 Working；implementation input = Human-approved Build Freeze → NFFBuild locked BS-*。
+
 > Screen ID：S01
 >
 > 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
@@ -8,7 +10,7 @@
 >
 > Screen-level canonical owner：`working/UI-UX/screens/S01-DISCOVER-START.md`
 >
-> Function behavior source：`working/functions/F00-EXPERIENCE-SHELL.md`（Working Current Truth；Formal Spec仍 frozen）
+> Function behavior source：`working/functions/F00-EXPERIENCE-SHELL.md`（Working Current Truth；Legacy Formal Spec 已 RETIRED / NO-USE）
 >
 > 注意：本文件只固定目前已確認的 Screen-level UI/UX。若需要改 F00 behavior contract，必須回 F00 Working Review。
 
@@ -463,7 +465,7 @@ Reference boundary：
 - 任何已批准 Structure / Geometry / Visual Rule / image reference改動，必須 reopen對應 Step。
 - 若後續 Cursor需要額外 component anatomy / state matrix / animation detail，可新增 `Step 4.5 — <Layer Name> Lock`；不得用 Step 4.5 偷改 Step 1–4。
 - 涉及 Function behavior則回 F00/F01 Working Review。
-- Formal Spec仍待 pre-Cursor refresh。
+- Legacy Formal Spec 已 RETIRED / NO-USE；待 Build Freeze reconciliation。
 
 ### Final Cross-Screen High-fi Review — CLOSED / VERIFIED
 

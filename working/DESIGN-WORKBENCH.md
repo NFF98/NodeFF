@@ -1,8 +1,10 @@
 # NodeFF Design Workbench
 
+> **WORKBENCH NOTICE**：本檔內任何 retired `spec/` (NO-USE)、Formal Spec、Working → Spec、Spec Promotion、Formal Spec Refresh 字樣均為 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current flow = NodeFF Working → Human-approved Build Freeze → NFFBuild locked BS-*。
+
 > 狀態：Working Discussion Buffer  
 > 用途：暫存目前正在收斂中的產品／商業／架構觀點。  
-> 規則：本文件不是正式 SSOT；在使用者明確說 `sync` 前，不自動同步到其他 Working Docs、`spec/` 或 `decisions/`。
+> 規則：本文件不是正式 SSOT；在使用者明確說 `sync` 前，不自動同步到其他 Working Docs、retired `spec/` (NO-USE) 或 `decisions/`。
 
 ---
 

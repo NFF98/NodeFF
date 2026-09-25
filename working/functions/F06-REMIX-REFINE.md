@@ -1,7 +1,7 @@
 # F06 — Remix / Refine
 
-> 狀態：SPEC_READY
-> Formal Spec：spec/functions/F06-REMIX-REFINE.md
+> 狀態：BUILD_FREEZE_READY
+> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved NFFBuild locked BS-*。
 >
 > Canonical Role：Phase 1 Existing Blueprint → Semantic Change → New Immutable Blueprint 的 Working Current Truth。
 >

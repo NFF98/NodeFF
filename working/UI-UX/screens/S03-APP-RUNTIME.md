@@ -1,5 +1,7 @@
 # S03 — App / Runtime
 
+> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion、pre-Build Freeze reconciliation 字樣均為 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。UI/UX Current Truth仍在本 Working；implementation input = Human-approved Build Freeze → NFFBuild locked BS-*。
+
 > Screen ID：S03
 >
 > 狀態：**WORKING — ④A LOW_FI_APPROVED / FUNCTION_DELTA_CLOSED / CROSS_SCREEN_REVIEW_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
@@ -264,7 +266,7 @@ User 已在 O05 Low-fi 明確要求：
 
 > **S03 normal local Runtime interaction 也要顯示 global loading。**
 
-Working F00/F03/F12已閉合此 Material Delta；既有 Formal Spec暫時保留舊語意，待 pre-Cursor Formal Spec Refresh一次同步。
+Working F00/F03/F12已閉合此 Material Delta；既有 Legacy Formal Spec 已 RETIRED / NO-USE，待 pre-Build Freeze reconciliation一次同步。
 
 Low-fi presentation contract：
 - 每次被 F03 accepted / admitted 的 Runtime interaction都建立 operation token並進入 logical global processing state；不是等到 commit後才開始。
@@ -742,7 +744,7 @@ Reference boundary：
 - 任何 Structure / Geometry / Visual Rule / image reference改動，必須 reopen對應 Step。
 - 若後續需要 component anatomy / overlay stacking / operation-state mapping等額外細節，可新增 `Step 4.5 — <Layer Name> Lock`。
 - Step 4.5不得偷改 Step 1–4；涉及 Function behavior必須回相關 Fxx Working Delta Review。
-- Formal Spec仍待 pre-Cursor refresh。
+- Legacy Formal Spec 已 RETIRED / NO-USE；待 Build Freeze reconciliation。
 
 ### Final Cross-Screen High-fi Review — CLOSED / VERIFIED
 

@@ -1,5 +1,7 @@
 # NodeFF Decision Candidates
 
+> **GOVERNANCE NOTICE**：本檔內任何 retired `spec/` (NO-USE)、Formal Spec、Working → Spec、Spec Promotion、Formal Spec Refresh 字樣均為 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current flow = NodeFF Working → Human-approved Build Freeze → NFFBuild locked BS-*。
+
 > 狀態：Working — Not SSOT。
 
 # 1. 這份文件的用途
@@ -18,7 +20,7 @@ Question
  → Recommended Direction
  → Review
  → User Approval
- → Promote to spec/ or decisions/
+ → Approve into canonical Working / decisions; implementation changes then enter Human-approved Build Freeze
 ~~~
 
 一旦正式核准並移入 SSOT，本文件只保留簡短狀態或移除該 Candidate。
@@ -81,5 +83,5 @@ F04 Capability Registry 進入實作前。
 - 已經決定方向，只剩 implementation details。
 
 以下正式核准後移至：
-- `spec/`
+- retired `spec/` (NO-USE)
 - `decisions/`

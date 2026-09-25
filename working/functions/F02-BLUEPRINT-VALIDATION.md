@@ -1,7 +1,7 @@
 # F02 — Blueprint Validation / Trust Admission
 
-> 狀態：SPEC_READY
-> Formal Spec：spec/functions/F02-BLUEPRINT-VALIDATION.md
+> 狀態：BUILD_FREEZE_READY
+> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved NFFBuild locked BS-*。
 >
 > Canonical Role：Phase 1 Executable Blueprint + L3 Validation 的 Working Current Truth。
 >

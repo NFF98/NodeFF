@@ -1,25 +1,33 @@
-# NodeFF Function Designs
+# NodeFF Functions
 
-此目錄是 NodeFF **單一 Function 詳細設計的 canonical home**。
+> **CURRENT AUTHORITY：NodeFF Working Product Design Truth**
 
-~~~text
-APP-DETAILED-DESIGN-OVERVIEW.md
-→ Portfolio / Dependency / Release / Status Index
+`working/functions/Fxx-*.md` 是 Function end-to-end Product Design 的 canonical home。
 
-working/functions/Fxx-*.md
-→ 該 Function 唯一的 end-to-end detailed design
-~~~
+每個 Function 依成熟度可包含：
 
-每份 Fxx 最終應完整描述 User Outcome、Flow、UI/UX、Frontend State、Data/DB、API、Backend/Runtime、Capability Dependencies、Error/Recovery、Security/Permission、Telemetry/Evidence、Acceptance/Test、Dependency/Compatibility、Release/Migration。
+```text
+Scope / Non-Scope
+User Flow
+UI / UX
+Frontend State
+Data / DB
+API / Interfaces
+Backend / Runtime
+Capability dependency
+Error / Recovery
+Security / Permission
+Evidence
+Acceptance / Tests
+Compatibility / Migration
+```
 
 規則：
 
-1. APP-DETAILED-DESIGN 不再複製 Function 級詳細內容。
-2. Fxx 若改 shared Data / Architecture / Capability boundary，必須回 shared canonical contract Review。
-3. DRAFT / DEFERRED_BASELINE 只是已搬入 Current Truth，不代表 SPEC_READY。
-4. F02 / F03 / F04 已有 WORKING_BASELINE；其他 Function 後續逐步深化。
-5. Cursor 只能依 approved Spec 實作，不以 Portfolio 摘要取代 Fxx contract。
-
-共同 Delivery 規則：`../DESIGN-TO-DELIVERY.md`
-
-Portfolio / Dependency / Release Scope：`../APP-DETAILED-DESIGN-OVERVIEW.md`
+1. 一個 Function 一份 canonical Working design。
+2. 不把同一 Function 的 API / UI / Data 拆成平行主規格。
+3. Phase 1 已完成詳細設計的 Function 仍以本目錄內容作 Current Truth。
+4. Phase 2 / 3 deferred Function 可以是不完整 Working baseline；未完成部分不得由 Cursor自行補產品決策。
+5. 舊 `SPEC_READY` / Formal Spec / promotion 字樣只代表 retired governance lifecycle，不建立第二份 authority。
+6. Build execution需要時，Human-approved Build Freeze 從 Working 投影到 `NFF98/NFFBuild/build-spec/baselines/BS-*`。
+7. NFFBuild baseline是 immutable implementation snapshot，不回寫覆蓋 NodeFF Working。

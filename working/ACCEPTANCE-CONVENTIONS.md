@@ -1,7 +1,7 @@
 # NodeFF Acceptance / Test Contract Conventions
 
-> 狀態：SPEC_READY / Phase 1。
-> Formal Spec：spec/shared/ACCEPTANCE-CONVENTIONS.md
+> 狀態：BUILD_FREEZE_READY / Phase 1 — Working Current Truth。
+> Legacy Formal Spec reference：RETIRED / NO-USE；Build implementation snapshot 改由 Human-approved Build Freeze → NFFBuild BS-*。
 > Canonical Role：把 Fxx Acceptance Criteria 轉成可實作、可測試、可追蹤的 Test Contract。
 
 # 1. Core Rule
@@ -52,7 +52,7 @@ Registry 是 machine-readable mapping；Acceptance meaning仍由各 Fxx 擁有�
 
 # 4. Implementation Rule
 
-SPEC_READY 代表 Test Contract 已固定，不代表 test code 已經執行通過。
+BUILD_FREEZE_READY 代表 Product Design / Acceptance contract 已足夠進 Build Freeze Review，不代表 implementation 或 test 已完成。
 
 Implementation 階段 Cursor：
 

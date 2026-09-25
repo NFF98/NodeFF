@@ -1,5 +1,7 @@
 # Phase 1 Screen Inventory
 
+> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion、pre-Build Freeze reconciliation 字樣均為 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。UI/UX Current Truth仍在本 Working；implementation input = Human-approved Build Freeze → NFFBuild locked BS-*。
+
 > 狀態：WORKING UI/UX — S01–S06 + O01–O05 ④B CLOSED / FG-01–FG-07 CLOSED / FINAL CROSS-SCREEN HIGH-FI REVIEW CLOSED / VERIFIED
 >
 > 目的：管理 Phase 1 的 Screen / Surface 地圖、Screen-level UX Review 狀態與畫面之間的關係。
@@ -340,7 +342,7 @@ User 已確認目前策略：
   2. Cross-Screen Consistency Review（**完成：2026-09-22**）；
   3. High-fi Design System / S01–S06 + O01–O05 ④B High-fi Step 1–4（**完成**）；
   4. Final Cross-Screen High-fi Review（**CLOSED / VERIFIED — 2026-09-24**）。
-- **正式 Cursor 開發前**，再做一次短期 Formal Spec Refresh，把最後批准的 Working truth一次同步到 implementation contract。
+- **正式 Cursor 開發前**，再做一次短期 Build Freeze reconciliation，把最後批准的 Working truth一次同步到 implementation contract。
 - 在該 refresh前，Cursor implementation維持 HOLD。
 
 # 9. Next
@@ -358,10 +360,10 @@ Final verification：
 
 下一個 Gate：
 
-> **Pre-Cursor Formal Spec Refresh — NEXT / NOT STARTED**
+> **Pre-Cursor Build Freeze reconciliation — NEXT / NOT STARTED**
 
 仍遵守：
-- Formal Spec目前維持 freeze，直到 User明確開始下一個 Gate。
+- Build Freeze 尚未開始，直到 User明確開始下一個 Gate。
 - Cursor implementation維持 HOLD。
 - Working仍是唯一 Current Truth。
 - 不因 Final UI Gate關閉而自動 promotion Formal Spec。

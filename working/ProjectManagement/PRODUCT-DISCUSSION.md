@@ -1,5 +1,7 @@
 # NodeFF Product Discussion
 
+> **HISTORICAL / NO-USE FOR CURRENT AUTHORITY**：本檔保留歷史證據。任何 `spec/`、Formal Spec、Working → Spec、Spec Promotion、NodeFF execution 字樣皆屬 retired governance；Current flow = NodeFF Working → Human-approved Build Freeze → NFFBuild locked BS-*。
+
 ## Purpose
 Working notes for NodeFF product discussions before decisions are approved into the official specification.
 

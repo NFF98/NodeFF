@@ -2,37 +2,49 @@
 
 NodeFF 是一個 No-install、Everyone-is-creator、Sharable/Linkable、Intent Commerce、Fun/Social 的 Intent-to-App Runtime Platform。
 
-## Documentation
+## Repository Role
 
-### Governance
-- SSOT：SSOT.md
-- Design → Delivery：working/DESIGN-TO-DELIVERY.md
-- Phase 1 Gate Re-Audit：working/ProjectManagement/PHASE1-CORE-SPEC-GATE-REAUDIT.md
-- Gate Closure Sprint Report：working/ProjectManagement/PHASE1-GATE-CLOSURE-SPRINT-REPORT.md
-- Historical Pre-Closure Audit：working/ProjectManagement/PHASE1-CORE-SPEC-GATE-AUDIT.md
+`NFF98/NodeFF` = **Product Design Current Truth**，負責 WHAT / WHY / WHEN。
 
-### Current Working Truth
-- Top Architecture：working/APP-ARCHITECTURE.md
-- Function Portfolio：working/APP-DETAILED-DESIGN-OVERVIEW.md
-- Shared Data：working/DATA-MODEL.md
-- Shared API：working/API-CONVENTIONS.md
-- Execution Admission：working/EXECUTION-ADMISSION.md
-- Acceptance/Test Conventions：working/ACCEPTANCE-CONVENTIONS.md
-- Function Details：working/functions/Fxx-*.md
-- Phase 1 Screen Inventory：working/UI-UX/PHASE1-SCREEN-INVENTORY.md
-- Screen-level UI/UX：working/UI-UX/screens/
-- Machine-readable Registries：working/registries/
+唯一可修改的 Product Design Current Truth：
 
-### Formal Spec
-- Function Specs：spec/functions/
-- Shared Specs：spec/shared/
+```text
+working/
+```
 
-spec/ 根目錄仍保留的 legacy templates（01–07、09–11）只作 index / navigation；舊 `spec/08-UI.md` 已刪除。
+主要入口：
+- Top Architecture：`working/APP-ARCHITECTURE.md`
+- Function Portfolio：`working/APP-DETAILED-DESIGN-OVERVIEW.md`
+- Shared Data：`working/DATA-MODEL.md`
+- Shared API：`working/API-CONVENTIONS.md`
+- Execution Admission：`working/EXECUTION-ADMISSION.md`
+- Acceptance/Test Conventions：`working/ACCEPTANCE-CONVENTIONS.md`
+- Function Details：`working/functions/Fxx-*.md`
+- UI/UX：`working/UI-UX/`
+- Machine-readable Registries：`working/registries/`
 
-## Delivery / Execution Boundary
-NodeFF 不維護 Backlog / Sprint / implementation evidence / Release execution records。
+## Build / Delivery Boundary
 
-所有實作與交付執行由獨立 Repo `NFF98/NFFBuild` 承接；NodeFF 保留 Product Design / Product Truth / Roadmap / Phase Boundary / UX / Contract / Acceptance。
+Approved Product Design 不在 NodeFF 內再複製成 Formal Spec。
+
+```text
+NodeFF working/
+→ consistency / delta / acceptance / UI audit
+→ Human approval
+→ Build Freeze
+→ NFF98/NFFBuild/build-spec/baselines/BS-*
+→ backlog / sprint / Cursor / test / evidence / release
+```
+
+`NFF98/NFFBuild` = implementation / delivery authority。
+
+## Retired Structures
+
+- `spec/`：**RETIRED / NO-USE**。Preservation Audit 已確認 Current Working 完整覆蓋舊 Formal Spec；目錄已移除。
+- `execution/`：**RETIRED / NO-USE**。Execution 已完整移至 `NFF98/NFFBuild`。
+
+歷史文件若仍出現 `spec/`、Formal Spec、Working → Spec、Spec Promotion、Formal Spec Refresh 等字樣，只代表當時的歷史治理模型，不是 Current Truth。
 
 ## Decisions
-Architecture / product-impacting decisions 記錄於 decisions/。
+
+Architecture / product-impacting decisions 記錄於 `decisions/`。

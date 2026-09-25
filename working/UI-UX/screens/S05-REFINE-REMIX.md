@@ -1,5 +1,7 @@
 # S05 — Refine / Remix Workspace
 
+> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion、pre-Build Freeze reconciliation 字樣均為 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。UI/UX Current Truth仍在本 Working；implementation input = Human-approved Build Freeze → NFFBuild locked BS-*。
+
 > Screen ID：S05
 >
 > 狀態：**WORKING — ④A LOW_FI_APPROVED / ④B HIGH_FI_STEP1–4 APPROVED — WORKING BASELINE**
@@ -10,7 +12,7 @@
 >
 > Function behavior sources：F06 Remix / Refine + F00 Experience Shell + F01 Intent Compilation + F03 Runtime。
 >
-> 本文件的④A Low-fi與④B High-fi Step 1–4已完成 User Review；Formal Spec仍 frozen，Cursor implementation仍 HOLD。
+> 本文件的④A Low-fi與④B High-fi Step 1–4已完成 User Review；Legacy Formal Spec 已 RETIRED / NO-USE，Cursor implementation仍 HOLD。
 
 # 1. User Outcome
 
@@ -1306,7 +1308,7 @@ S05 ④B Step 1–4 已完成 User Review並鎖定。
 - Canonical PNG：`working/UI-UX/references/S05-Highfi-v1.png`。
 - Structure / Geometry / Visual Rules / Visual Reference 的 material change 必須 reopen 對應 Step。
 - Cross-screen follow-up已於 2026-09-24決定：Normal S03明確承接 S05A `修改這個 App`與 S05B `改成我的版本`；Mobile `修改`先開 explicit chooser。
-- Formal Spec仍維持 freeze，待 pre-Cursor Formal Spec Refresh。
+- Legacy Formal Spec 已 RETIRED / NO-USE，待 pre-Build Freeze reconciliation。
 
 ### Final Cross-Screen High-fi Review — CLOSED / VERIFIED
 

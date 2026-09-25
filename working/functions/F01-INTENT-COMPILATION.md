@@ -1,7 +1,7 @@
 # F01 — Intent Compilation + Model Gateway
 
-> 狀態：SPEC_READY + WORKING_DELTA_CLOSED / FORMAL_REFRESH_PENDING
-> Formal Spec：spec/functions/F01-INTENT-COMPILATION.md
+> 狀態：BUILD_FREEZE_READY + WORKING_DELTA_CLOSED / FORMAL_REFRESH_PENDING
+> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved NFFBuild locked BS-*。
 >
 > Canonical Role：Phase 1 Intent Analysis、Clarification Policy、Resolved Intent、Capability Coverage coordination、Blueprint Composition 與 Model Gateway 的 Working Current Truth。
 >
@@ -1203,7 +1203,7 @@ POST /api/v1/intents/{id}/compile
 >
 > 來源：S02 Create Workspace High-fi + O05 High-fi Step 1 + `SD-20260922-002`。
 >
-> Formal Spec：**暫不修改**。待 pre-Cursor Formal Spec Refresh 一次同步。
+> Legacy Formal Spec：**RETIRED / NO-USE**。待 pre-Build Freeze reconciliation 一次同步。
 
 ### F01-DATA-009 — CREATE Compiler Checkpoint Plan v1
 

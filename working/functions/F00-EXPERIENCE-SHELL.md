@@ -1,7 +1,7 @@
 # F00 — Experience Shell / 靈感精靈
 
-> 狀態：SPEC_READY + WORKING_DELTA_CLOSED / FORMAL_REFRESH_PENDING
-> Formal Spec：spec/functions/F00-EXPERIENCE-SHELL.md
+> 狀態：BUILD_FREEZE_READY + WORKING_DELTA_CLOSED / FORMAL_REFRESH_PENDING
+> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved NFFBuild locked BS-*。
 >
 > Canonical Role：Phase 1 Consumer Experience Shell、Creation UX、Clarification / Assumption UX、Runtime Frame、Result Feedback Entry、Share / Remix / Recovery Entry 的 Working Current Truth。
 >
@@ -1065,7 +1065,7 @@ Core Flow：
 
 Runtime / Product Loop：
 
-- F00-AC-008 normal Runtime interaction不觸發 global shell loading。**Working disposition：SUPERSEDED；保留原 stable ID / 原語意，待 pre-Cursor Formal Spec Refresh標記 deprecated，不重用或改寫。**
+- F00-AC-008 normal Runtime interaction不觸發 global shell loading。**Working disposition：SUPERSEDED；保留原 stable ID / 原語意，待 pre-Build Freeze reconciliation標記 deprecated，不重用或改寫。**
 - F00-AC-009 APP surface可到 Share / Remix / Correction入口。
 - F00-AC-010 correction failure不破壞 current App。
 - F00-AC-011 Compare可 Accept New / Keep Previous / Adjust Again。
@@ -1213,7 +1213,7 @@ DISCOVER
 
 > 狀態：WORKING_DELTA_CLOSED（2026-09-22）/ FORMAL_REFRESH_PENDING
 >
-> Formal Spec：**暫不修改**。既有 Formal F00-UX-022 / F00-AC-008仍保持原文；待 pre-Cursor Formal Spec Refresh一次同步。
+> Legacy Formal Spec：**RETIRED / NO-USE**。既有 Formal F00-UX-022 / F00-AC-008仍保持原文；待 pre-Build Freeze reconciliation一次同步。
 >
 > 來源：Phase 1 O05 Low-fi Review + DESIGN-WORKBENCH。
 

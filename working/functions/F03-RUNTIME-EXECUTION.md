@@ -1,7 +1,7 @@
 # F03 — Runtime Execution / Semantics
 
-> 狀態：SPEC_READY + WORKING_DELTA_CLOSED / FORMAL_REFRESH_PENDING
-> Formal Spec：spec/functions/F03-RUNTIME-EXECUTION.md
+> 狀態：BUILD_FREEZE_READY + WORKING_DELTA_CLOSED / FORMAL_REFRESH_PENDING
+> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved NFFBuild locked BS-*。
 >
 > Canonical Role：Phase 1 Browser Runtime Semantics 的 Working Current Truth。
 >
@@ -1612,7 +1612,7 @@ Validated immutable Blueprint
 
 > 狀態：WORKING_DELTA_CLOSED（2026-09-22）/ FORMAL_REFRESH_PENDING
 >
-> Formal Spec：**暫不修改**；本 Working contract待 pre-Cursor Formal Spec Refresh一次同步。
+> Formal Spec：**暫不修改**；本 Working contract待 pre-Build Freeze reconciliation一次同步。
 >
 > Canonical detail已整合至 §16.1–§16.4、Error / Evidence、Acceptance / Test sections。
 
