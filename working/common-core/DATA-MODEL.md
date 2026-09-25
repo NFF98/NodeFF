@@ -1,7 +1,7 @@
-# NodeFF Canonical Data Model
+# appf2 Canonical Data Model
 
 > 狀態：Working Current Truth — Shared Data Model Index / Invariants。本文只保留跨 Phase 不應重複的資料原則；Phase-specific schema / tables / migration additions 拆到 `working/detailed-design/data-model/`。
-> Legacy Formal Spec reference：RETIRED / NO-USE；Build implementation snapshot 改由 Human-approved Build Freeze → NFFBuild BS-*。
+> Legacy Formal Spec reference：RETIRED / NO-USE；Build implementation snapshot 改由 Human-approved Build Freeze → appf2-build BS-*。
 >
 > Delivery / Traceability 規則以 `working/common-core/DESIGN-TO-DELIVERY.md` 為準；Infrastructure boundary 以 `working/common-core/INFRA-ARCHITECTURE.md` 為準。
 
@@ -10,7 +10,7 @@
 這份文件回答：
 
 ~~~text
-什麼資料是 NodeFF 的 durable truth？
+什麼資料是 appf2 的 durable truth？
 哪些只存在 Browser？
 哪些資料 immutable？
 Share / Remix / Correct 怎麼關聯？
@@ -102,7 +102,7 @@ Telemetry 只能收完成產品判斷所需的最小資料；不得因 debug 方
 
 LegoSpec / Function Contract 不得依賴 Supabase table API。
 
-Application 透過 NFF-owned repository / service interface 使用資料層。
+Application 透過 appf2-owned repository / service interface 使用資料層。
 
 ---
 

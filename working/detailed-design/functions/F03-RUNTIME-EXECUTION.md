@@ -1,7 +1,7 @@
 # F03 — Runtime Execution / Semantics
 
 > 狀態：BUILD_FREEZE_READY + WORKING_DELTA_CLOSED / BUILD_FREEZE_RECONCILIATION_PENDING
-> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved NFFBuild locked BS-*。
+> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved appf2-build locked BS-*。
 >
 > Canonical Role：Phase 1 Browser Runtime Semantics 的 Working Current Truth。
 >
@@ -366,7 +366,7 @@ Rules：
 - DIV / MOD denominator 0 → F03-ERR-008
 - non-finite result → F03-ERR-009
 
-Canonical NFF ROUND v1：
+Canonical appf2 ROUND v1：
 
 ~~~text
 nearest integer
@@ -798,7 +798,7 @@ Rules：
 
 # 23. Seeded Randomness
 
-## F03-RQ-009 — NFF PRNG v1
+## F03-RQ-009 — appf2 PRNG v1
 
 Phase 1 random / dice / wheel 必須使用 Runtime RNG service，不直接呼叫 Math.random。
 
@@ -807,17 +807,17 @@ Instance seed：
 ~~~text
 crypto.getRandomValues
 → 128-bit instance seed
-→ NFF PRNG v1
+→ appf2 PRNG v1
 ~~~
 
-NFF PRNG v1：
+appf2 PRNG v1：
 
 > PCG32-compatible deterministic stream；正式 implementation 必須用 golden-vector tests 固定輸出。
 
 Metadata：
 
 ~~~text
-algorithm = NFF-PCG32-v1
+algorithm = appf2-PCG32-v1
 seed
 counter
 ~~~
@@ -1200,7 +1200,7 @@ Dispose 後 event → ignore + dev diagnostic。
 
 # 35. Runtime Security Boundary
 
-Phase 1 Capability handler 是 NFF build-time trusted first-party code，不是 hostile-code sandbox。
+Phase 1 Capability handler 是 appf2 build-time trusted first-party code，不是 hostile-code sandbox。
 
 安全依賴：
 
@@ -1291,7 +1291,7 @@ invokeCapabilityAction(nodeId, actionName, args)
 disposeCapability(nodeId)
 ~~~
 
-NFF-owned interfaces，不把 React / vendor API 當核心 protocol。
+appf2-owned interfaces，不把 React / vendor API 當核心 protocol。
 
 `RuntimeOperationHandle`只暴露 operation token與只讀 lifecycle / checkpoint projection；consumer不能透過 handle強制 commit、reopen token或修改 Runtime store。
 
@@ -1548,7 +1548,7 @@ Phase 1 Runtime：
 
 ~~~text
 Browser React Runtime
-+ NFF Rule VM
++ appf2 Rule VM
 + trusted static Capability Registry
 + local Instance Store
 + FIFO Dispatcher
@@ -1603,7 +1603,7 @@ Validated immutable Blueprint
 → explicit Result surface
 ~~~
 
-> NodeFF Runtime 的工作不是再次「理解」App，而是忠實、安全、可重播地執行已經被理解與驗證過的 App。
+> appf2 Runtime 的工作不是再次「理解」App，而是忠實、安全、可重播地執行已經被理解與驗證過的 App。
 
 
 ---

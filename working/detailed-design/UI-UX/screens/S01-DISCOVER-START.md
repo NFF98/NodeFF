@@ -1,6 +1,6 @@
 # S01 — Discover / Start
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → NFFBuild locked BS-*。
+> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → appf2-build locked BS-*。
 
 > Screen ID：S01
 >
@@ -18,9 +18,9 @@
 
 S01 的核心任務：
 
-> **讓第一次進 NodeFF 的 User，不需要先學 Prompt Engineering，就能很快理解「我可以把現在的想法直接做成 App」，並開始 Create。**
+> **讓第一次進 appf2 的 User，不需要先學 Prompt Engineering，就能很快理解「我可以把現在的想法直接做成 App」，並開始 Create。**
 
-不是讓 User 先理解 NodeFF 的全部功能，也不是把首頁做成傳統搜尋首頁或 App Store。
+不是讓 User 先理解 appf2 的全部功能，也不是把首頁做成傳統搜尋首頁或 App Store。
 
 # 2. Product / UX Direction — Approved
 
@@ -42,12 +42,12 @@ S01 目前固定四個核心區塊：
 
 必要內容：
 
-- NodeFF brand。
+- appf2 brand。
 - 主訊息：**意圖就是 App**。
 - 一句簡短人話，說明「把你的想法／需求直接變成可用 App」。
 
 目的：
-- User 第一眼就知道 NodeFF 做什麼。
+- User 第一眼就知道 appf2 做什麼。
 - 不塞大量產品教育或技術詞。
 
 ## B. Prompt Composer
@@ -89,7 +89,7 @@ Visual rule：
 
 ~~~text
 ┌────────────────────────────────────────────────┐
-│ NodeFF                         minimal controls │
+│ appf2                         minimal controls │
 │                                                │
 │ 意圖就是 App                                   │
 │ 短句：把你的想法直接變成可用 App               │
@@ -121,7 +121,7 @@ Visual rule：
 
 ~~~text
 ┌──────────────────────────┐
-│ NodeFF        minimal UI │
+│ appf2        minimal UI │
 │                          │
 │ 意圖就是 App             │
 │ 短句                     │
@@ -199,7 +199,7 @@ Phase 1 是否採同頁展開或獨立 surface，留待後續 Screen review；�
 Phase 1 S01 Header：
 
 - 必須乾淨。
-- NodeFF brand 必須可辨識。
+- appf2 brand 必須可辨識。
 - 非必要 controls 不出現在首屏。
 - 不因「以後可能需要」就提前放 Docs / Community / Settings / model picker。
 - Registration 不得阻擋 First Value。
@@ -229,7 +229,7 @@ Phase 1 S01 Header：
 Desktop：
 
 ~~~text
-NodeFF Logo | 首頁 | 探索靈感 | 我的 App
+appf2 Logo | 首頁 | 探索靈感 | 我的 App
 ~~~
 
 Rules：
@@ -295,7 +295,7 @@ Category navigation位於作品卡上方：
 
 ### Footer
 
-- 可放 NodeFF官方 social icons。
+- 可放 appf2官方 social icons。
 - Footer保持低視覺權重。
 - 不放「分享這個 App」；App Share只屬 S03 / O01。
 

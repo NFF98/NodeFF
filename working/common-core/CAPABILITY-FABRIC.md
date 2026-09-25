@@ -1,10 +1,10 @@
-# NodeFF Capability Fabric
+# appf2 Capability Fabric
 
-> 狀態：Working Architecture Baseline。本文定義 NodeFF 的原子能力模型、Capability Card Contract、成熟度、Coverage Resolution 與 1／3／6 個月發展策略。Capability Fabric 是產品能力邊界，不是 Component 清單。
+> 狀態：Working Architecture Baseline。本文定義 appf2 的原子能力模型、Capability Card Contract、成熟度、Coverage Resolution 與 1／3／6 個月發展策略。Capability Fabric 是產品能力邊界，不是 Component 清單。
 
 # 1. Capability Fabric 是什麼
 
-Capability 是 NodeFF 可以被 Compiler 理解、被 Blueprint 引用、被 Validator 驗證、被 Runtime 安全執行的原子能力。
+Capability 是 appf2 可以被 Compiler 理解、被 Blueprint 引用、被 Validator 驗證、被 Runtime 安全執行的原子能力。
 
 ~~~text
 Intent
@@ -19,8 +19,8 @@ Intent
 
 Capability Fabric 要同時回答：
 
-1. **NFF 理論上想會什麼？**
-2. **NFF 現在真的可靠會什麼？**
+1. **appf2 理論上想會什麼？**
+2. **appf2 現在真的可靠會什麼？**
 3. **哪些能力值得繼續投資？**
 4. **哪些能力未來可以變成 Creator / Paid / External Capability？**
 
@@ -248,7 +248,7 @@ Card 應知道自己是否能參與：
 
 Evidence 要回答：
 
-> **這個 Capability 是否真的讓 NFF 更能把 Intent 變成正確、有用、可分享、可 Remix 的 App？**
+> **這個 Capability 是否真的讓 appf2 更能把 Intent 變成正確、有用、可分享、可 Remix 的 App？**
 
 ---
 
@@ -494,7 +494,7 @@ Orchestration Metadata / Compatibility Graph
 10. Capability Gap 是 roadmap input。
 11. Realtime / AI / Media / Commerce 都是 Capability，不是繞開 Runtime 的特例。
 12. Capability Network 只有 6 個月後、供需成立時才升級成主要平台能力。
-13. Multi-step workflow 必須由 NFF Orchestration Contract 描述，不能依賴某個 workflow vendor 的私有 DSL。
+13. Multi-step workflow 必須由 appf2 Orchestration Contract 描述，不能依賴某個 workflow vendor 的私有 DSL。
 14. n8n / Temporal / Queue / Worker 類工具只能是可替換 execution backend。
 15. Provider 數量不是護城河；可被 Compiler 發現、可驗證、可組合、可觀測、可結算才算有效供給。
 
@@ -516,7 +516,7 @@ Capability Fabric 的發展順序：
 逐步建立 Capability Network + Heterogeneous Orchestration
 ~~~
 
-> **NodeFF 的能力壁壘不在「有多少元件」，而在「可靠能力能否被 Compiler 正確發現、組合、編排並交付可驗證 Outcome」。**
+> **appf2 的能力壁壘不在「有多少元件」，而在「可靠能力能否被 Compiler 正確發現、組合、編排並交付可驗證 Outcome」。**
 
 
 ---
@@ -525,7 +525,7 @@ Capability Fabric 的發展順序：
 
 > Structure migration preservation block. Content below is preserved from the former files. Dedup / semantic cleanup is intentionally deferred.
 
-# NodeFF Capability Roadmap — Phase 1
+# appf2 Capability Roadmap — Phase 1
 
 > Shared capability contract：`../../core/CAPABILITY-FABRIC.md`
 
@@ -570,7 +570,7 @@ Recovery / Notice presentation
 
 ---
 
-# NodeFF Capability Roadmap — Phase 2
+# appf2 Capability Roadmap — Phase 2
 
 > Shared capability contract：`../../core/CAPABILITY-FABRIC.md`
 
@@ -605,7 +605,7 @@ Recovery / Notice presentation
 
 ---
 
-# NodeFF Capability Roadmap — Phase 3
+# appf2 Capability Roadmap — Phase 3
 
 > Shared capability contract：`../../core/CAPABILITY-FABRIC.md`
 
@@ -635,7 +635,7 @@ Recovery / Notice presentation
 
 ---
 
-# NodeFF Capability Roadmap — Phase 4+
+# appf2 Capability Roadmap — Phase 4+
 
 > Shared capability contract：`../../core/CAPABILITY-FABRIC.md`
 
@@ -671,7 +671,7 @@ Resolved Intent
 → Validated Outcome
 ~~~
 
-Orchestration metadata 必須仍然來自 Capability Contract；不能讓外部 workflow engine 自己發明 NFF semantics。
+Orchestration metadata 必須仍然來自 Capability Contract；不能讓外部 workflow engine 自己發明 appf2 semantics。
 
 長期 Fabric：
 
@@ -690,7 +690,7 @@ Same Blueprint Model
         ↓
 Same Runtime Boundary
         +
-NFF Orchestration Contract
+appf2 Orchestration Contract
 ~~~
 
 ---

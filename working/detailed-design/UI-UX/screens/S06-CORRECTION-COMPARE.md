@@ -1,6 +1,6 @@
 # S06 — Correction Compare
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → NFFBuild locked BS-*。
+> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → appf2-build locked BS-*。
 
 > Screen ID：S06
 >
@@ -18,7 +18,7 @@
 
 S06 的核心任務：
 
-> **當 User 認為結果 / 規則 / 邏輯不對時，NodeFF 讓他用相同可重播 inputs 比較修正前後結果，清楚知道改了什麼，再自己決定要不要採用新版。**
+> **當 User 認為結果 / 規則 / 邏輯不對時，appf2 讓他用相同可重播 inputs 比較修正前後結果，清楚知道改了什麼，再自己決定要不要採用新版。**
 
 S06 不是一般 Refine Preview，也不是技術 diff viewer。
 
@@ -58,7 +58,7 @@ Default 不顯示：
 # 4. Proposed Desktop Low-fi
 
     ┌──────────────────────────────────────────────────────────────┐
-    │ NodeFF   App Title                                            │
+    │ appf2   App Title                                            │
     ├──────────────────────────────────────────────────────────────┤
     │ 你說：主管應該付兩倍，但現在沒有                            │
     │                                                              │
@@ -646,14 +646,14 @@ Before / After Result Compare
 > What Changed
 > Decision Primary CTA
 > Comparison Quality
-> App / NodeFF chrome
+> App / appf2 chrome
 ~~~
 
 例外：
 
 `LIMITED_COMPARISON`時，Limitation notice提升為 Decision前的高注意層級。
 
-NodeFF chrome不得壓過 Compare本身。
+appf2 chrome不得壓過 Compare本身。
 
 ### 13. Step 2 Locked Decisions
 
@@ -682,7 +682,7 @@ NodeFF chrome不得壓過 Compare本身。
 
 ### 1. Core Visual Character
 
-S06採 **Compare Decision Workspace** visual direction，沿用 NodeFF Design System：**Clean Creator Canvas + Playful Energy**，但比 S05更理性、克制。
+S06採 **Compare Decision Workspace** visual direction，沿用 appf2 Design System：**Clean Creator Canvas + Playful Energy**，但比 S05更理性、克制。
 
 Rules：
 - White / Soft Neutral為主。
@@ -714,7 +714,7 @@ Before / After差異至少同時依賴文字 label + border / accent；不得只
 
 ### 3. Compare Card
 
-Compare Card是 NodeFF comparison context，不重畫 Generated App。
+Compare Card是 appf2 comparison context，不重畫 Generated App。
 
 Recommended treatment：
 - radius = `16px`。
@@ -725,9 +725,9 @@ Recommended treatment：
 
 Canonical principle：
 
-> **NodeFF owns the comparison frame; the App owns result presentation.**
+> **appf2 owns the comparison frame; the App owns result presentation.**
 
-不得強迫 Generated App內部 Result改成 NodeFF component visual language。
+不得強迫 Generated App內部 Result改成 appf2 component visual language。
 
 ### 4. Correction Statement
 
@@ -821,7 +821,7 @@ Limitation Notice必須在 CTA前被清楚看見，讓 User做 informed decision
 - supporting / quality copy：`body-md 14/22`。
 - Decision button：`label-md`。
 - Material numeric result可使用 tabular numerals where supported。
-- NodeFF不得擅自把 Generated App內不重要的數字放大成主視覺。
+- appf2不得擅自把 Generated App內不重要的數字放大成主視覺。
 
 ### 11. Motion
 
@@ -878,7 +878,7 @@ Cursor不得：
 - 把 Preview actions混進 Decision actions。
 - 增加第四個 decision。
 - 增加 Revert。
-- 把 Generated App內部重畫成 NodeFF UI。
+- 把 Generated App內部重畫成 appf2 UI。
 - 自行發明 progress；processing仍由 O05。
 - 自行發明 recovery palette；recovery仍由 O03 / shared semantic system。
 
@@ -937,7 +937,7 @@ S06 ④A Low-fi與④B Step 1–4已完成 User Review並鎖定。
 
 Final Cross-Screen High-fi Review：**CLOSED / VERIFIED**。
 
-Build Freeze / NFFBuild activation / Cursor implementation 維持 HOLD。
+Build Freeze / appf2-build activation / Cursor implementation 維持 HOLD。
 
 ### Final Cross-Screen High-fi Review — CLOSED / VERIFIED
 

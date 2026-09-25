@@ -1,10 +1,10 @@
-# NodeFF Infrastructure Architecture
+# appf2 Infrastructure Architecture
 
-> 狀態：Current Working Baseline / POC。本文是 NodeFF Infrastructure 的設計方案，不是討論紀錄。目標是在 **短期最低成本驗證核心循環** 的同時，不阻斷中期 Reuse / Identity / Creator Value 與長期 Intent Commerce / Capability Network。
+> 狀態：Current Working Baseline / POC。本文是 appf2 Infrastructure 的設計方案，不是討論紀錄。目標是在 **短期最低成本驗證核心循環** 的同時，不阻斷中期 Reuse / Identity / Creator Value 與長期 Intent Commerce / Capability Network。
 
 # 1. Architecture Decision
 
-NodeFF 採用：
+appf2 採用：
 
 > **Browser Runtime + Global Edge Control Plane + PostgreSQL System of Record + Pluggable External Capability Plane**
 
@@ -42,7 +42,7 @@ Phase 1 建議實作組合：
 
 ## 2.1 Runtime 與 Control Plane 分離
 
-NodeFF 最大量的互動應發生在 Browser：
+appf2 最大量的互動應發生在 Browser：
 
 ~~~text
 Button
@@ -225,7 +225,7 @@ flowchart TB
 - payment vendor；
 - object-storage vendor。
 
-必須經過 NFF-owned interfaces：
+必須經過 appf2-owned interfaces：
 
 ~~~text
 CompilerAdapter
@@ -250,7 +250,7 @@ Phase 1 不建議：
 
 ## 全部 Server-side Rendering / Server Runtime
 
-會讓每個互動都變成 backend cost，與 NodeFF 核心相反。
+會讓每個互動都變成 backend cost，與 appf2 核心相反。
 
 ## Kubernetes / Microservices
 
@@ -334,7 +334,7 @@ specialized scaling only where proven
 
 # 8. 最終 Architecture Thesis
 
-NodeFF 最成本有效的架構，不是找到一個「最便宜的 Cloud」。
+appf2 最成本有效的架構，不是找到一個「最便宜的 Cloud」。
 
 真正的成本優勢來自：
 
@@ -354,4 +354,4 @@ NodeFF 最成本有效的架構，不是找到一個「最便宜的 Cloud」。
 4. **External Capability Plane** — Heavy / Paid / Commerce 可插拔。
 5. **Orchestration Plane** — 多步、非同步、跨 Provider 工作流可恢復、可替換、可治理。
 
-只要這四個邊界保持穩定，NodeFF 可以從 POC 走到 Reuse / Creator，再走到 Intent Commerce / Capability Network / Heterogeneous Orchestration，而不需要中途推翻整套 Infrastructure。
+只要這四個邊界保持穩定，appf2 可以從 POC 走到 Reuse / Creator，再走到 Intent Commerce / Capability Network / Heterogeneous Orchestration，而不需要中途推翻整套 Infrastructure。

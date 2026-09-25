@@ -1,7 +1,7 @@
 # F12 — Humanized Recovery Orchestration
 
 > 狀態：BUILD_FREEZE_READY + WORKING_DELTA_CLOSED / BUILD_FREEZE_RECONCILIATION_PENDING
-> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved NFFBuild locked BS-*。
+> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved appf2-build locked BS-*。
 >
 > Canonical Role：Phase 1 Cross-Function Error Classification、Recovery Policy、Context Preservation、Humanized Message、Next Action、Recovery Episode Evidence 的 Working Current Truth。
 >
@@ -15,7 +15,7 @@
 
 User Outcome：
 
-> 當 NodeFF 某一步失敗時，User 不需要理解 HTTP、schema、provider、Runtime 或 stack trace；系統會保留能保留的內容，說清楚發生了什麼，並給出可以真正繼續的下一步。
+> 當 appf2 某一步失敗時，User 不需要理解 HTTP、schema、provider、Runtime 或 stack trace；系統會保留能保留的內容，說清楚發生了什麼，並給出可以真正繼續的下一步。
 
 Canonical flow：
 

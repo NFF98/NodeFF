@@ -1,7 +1,7 @@
 # F07 — Anonymous Identity & Evidence
 
 > 狀態：BUILD_FREEZE_READY
-> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved NFFBuild locked BS-*。
+> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved appf2-build locked BS-*。
 >
 > Canonical Role：Phase 1 Anonymous Identity continuity、Session identity、Evidence Envelope、Event Ingestion、Batch / Retry / Dedupe、Privacy / Retention 與 Core Proof Metrics 的 Working Current Truth。
 >
@@ -9,13 +9,13 @@
 >
 > 下游 / collaborators：F08 Durable Identity、F10 Reuse、F12 Recovery、F16 Result Correction，以及所有需要 Product Evidence 的 Function。
 >
-> F07 的目的不是建立 telemetry firehose，而是在不要求註冊、不 fingerprint、不複製 raw user content 的前提下，讓 NodeFF 能回答：「核心循環有沒有成立？哪裡失敗？值不值得進下一 Phase？」
+> F07 的目的不是建立 telemetry firehose，而是在不要求註冊、不 fingerprint、不複製 raw user content 的前提下，讓 appf2 能回答：「核心循環有沒有成立？哪裡失敗？值不值得進下一 Phase？」
 
 # 1. Purpose / User Outcome
 
 User Outcome：
 
-> User 不需要先登入，也能在同一 Browser 持續建立、分享、Remix；同時 NodeFF 能用最少必要 Evidence 判斷產品是否真的有用，而不是只知道頁面有沒有打開。
+> User 不需要先登入，也能在同一 Browser 持續建立、分享、Remix；同時 appf2 能用最少必要 Evidence 判斷產品是否真的有用，而不是只知道頁面有沒有打開。
 
 Phase 1 Evidence 必須回答：
 
@@ -94,7 +94,7 @@ durable user_id
 
 ## F07-RQ-001
 
-Browser 第一次需要 NodeFF identity 時：
+Browser 第一次需要 appf2 identity 時：
 
 ~~~text
 crypto.randomUUID()
@@ -105,7 +105,7 @@ crypto.randomUUID()
 Canonical browser key：
 
 ~~~text
-nff.anonymous_id.v1
+appf2.anonymous_id.v1
 ~~~
 
 Rules：
@@ -187,7 +187,7 @@ Phase 1 不做 hidden identity stitching。
 session_id 使用 random UUID，存在：
 
 ~~~text
-nff.session_id.v1
+appf2.session_id.v1
 → sessionStorage / equivalent
 ~~~
 
@@ -203,7 +203,7 @@ Semantics：
 
 ## F07-POL-003
 
-NodeFF 不把所有 Evidence 都塞進 product_event。
+appf2 不把所有 Evidence 都塞進 product_event。
 
 Canonical precedence：
 
@@ -1262,7 +1262,7 @@ Browser random anonymous ID
 
 未來若換 analytics provider：
 
-> Provider只能是 sink / adapter；F07 Event Contract仍是 NFF-owned。
+> Provider只能是 sink / adapter；F07 Event Contract仍是 appf2-owned。
 
 # 52.1 Machine-readable Event Registry
 

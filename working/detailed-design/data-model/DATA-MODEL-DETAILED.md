@@ -1,8 +1,8 @@
-# NodeFF Data Model — Detailed Design
+# appf2 Data Model — Detailed Design
 
 > Structure migration preservation file. Content below is preserved from the former phase files. Dedup / semantic cleanup is intentionally deferred.
 
-# NodeFF Data Model — Phase 1 Detailed Contract
+# appf2 Data Model — Phase 1 Detailed Contract
 
 > Shared invariants / module index：`../../common-core/DATA-MODEL.md`
 >
@@ -172,7 +172,7 @@ erDiagram
 | prompt_version | text | YES | versioned prompt |
 | schema_version | text | YES | target contract version |
 | registry_version | text | YES | capability snapshot |
-| model_adapter | text | YES | NFF adapter ID |
+| model_adapter | text | YES | appf2 adapter ID |
 | provider_model | text | NO | operational metadata；不進 Blueprint |
 | attempt_no | int | YES | >= 1 |
 | started_at | timestamptz | YES | |
@@ -224,7 +224,7 @@ erDiagram
 
 目的：
 
-> NodeFF validated App definition 的 immutable durable truth。
+> appf2 validated App definition 的 immutable durable truth。
 
 | Field | Type | Required | Rule |
 |---|---|---:|---|
@@ -729,7 +729,7 @@ OPERATIONAL_METADATA
 
 Application code 不直接把 Supabase API 當 domain contract。
 
-最低 NFF-owned interfaces：
+最低 appf2-owned interfaces：
 
 ~~~text
 AnonymousIdentityRepository
@@ -868,7 +868,7 @@ Anonymous Identity
 
 ---
 
-# NodeFF Data Model — Phase 2 Extensions
+# appf2 Data Model — Phase 2 Extensions
 
 > Shared invariants：`../../common-core/DATA-MODEL.md`
 >
@@ -931,7 +931,7 @@ Immutable Blueprint
 
 ---
 
-# NodeFF Data Model — Phase 3 Extensions
+# appf2 Data Model — Phase 3 Extensions
 
 > Shared invariants：`../../common-core/DATA-MODEL.md`
 >
@@ -942,7 +942,7 @@ Immutable Blueprint
 
 ---
 
-# NodeFF Data Model — Phase 4+ Extensions
+# appf2 Data Model — Phase 4+ Extensions
 
 > Shared invariants：`../../common-core/DATA-MODEL.md`
 >

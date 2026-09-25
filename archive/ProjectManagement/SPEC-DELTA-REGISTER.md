@@ -1,6 +1,6 @@
-# NodeFF Spec Delta Register
+# appf2 Spec Delta Register
 
-> **STATUS：RETIRED / NO-USE FOR CURRENT AUTHORITY**。本 Register 完整保留為歷史 reconciliation evidence，不再是 active gate / ledger。舊 `spec/`、Formal Spec、Working → Spec、Promotion / Verification lifecycle 全部退役。Current delta flow = NodeFF Working Delta → Human approval → Build Freeze / Rebaseline → NFFBuild locked BS-*。
+> **STATUS：RETIRED / NO-USE FOR CURRENT AUTHORITY**。本 Register 完整保留為歷史 reconciliation evidence，不再是 active gate / ledger。舊 `spec/`、Formal Spec、Working → Spec、Promotion / Verification lifecycle 全部退役。Current delta flow = appf2 Working Delta → Human approval → Build Freeze / Rebaseline → appf2-build locked BS-*。
 
 > Status：Working Governance Current Truth
 >
@@ -14,7 +14,7 @@
 
 # 1. Why This Register Exists
 
-NodeFF 目前採：
+appf2 目前採：
 
 ~~~text
 Working keeps moving

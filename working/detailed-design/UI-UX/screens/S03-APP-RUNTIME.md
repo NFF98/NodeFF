@@ -1,6 +1,6 @@
 # S03 — App / Runtime
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → NFFBuild locked BS-*。
+> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → appf2-build locked BS-*。
 
 > Screen ID：S03
 >
@@ -18,7 +18,7 @@
 
 S03 的核心任務：
 
-> **User 一進來就能直接使用剛生成的 App；NodeFF 本身退到背景，只在需要 Share、Remix、Correct、Revert 或 Recovery 時出現。**
+> **User 一進來就能直接使用剛生成的 App；appf2 本身退到背景，只在需要 Share、Remix、Correct、Revert 或 Recovery 時出現。**
 
 S03 不是 Dashboard，也不是 Builder / Editor。
 
@@ -26,7 +26,7 @@ S03 不是 Dashboard，也不是 Builder / Editor。
 
 F00 已定義 APP surface 由兩層組成：
 
-    NFF Shell Chrome
+    appf2 Shell Chrome
     + Generated App Runtime Frame
 
 Low-fi 原則：
@@ -61,7 +61,7 @@ Low-fi 原則：
 # 4. Proposed Desktop Low-fi
 
     ┌───────────────────────────────────────────────────────────┐
-    │ NodeFF   App Title                         [Share] [•••] │
+    │ appf2   App Title                         [Share] [•••] │
     ├───────────────────────────────────────────────────────────┤
     │                                                           │
     │                                                           │
@@ -106,10 +106,10 @@ Top shell 原則：
 
 Mobile 原則：
 - App 本體仍優先佔最大可用空間。
-- **採 NodeFF permanent bottom navigation**，承接最重要的 Shell actions。
+- **採 appf2 permanent bottom navigation**，承接最重要的 Shell actions。
 - Bottom navigation 必須精簡，只放高頻／高價值操作。
 - Result actions 仍只在需要時出現。
-- 若 Generated App 本身需要 bottom controls，必須在 layout 上避免與 NodeFF bottom navigation互相遮擋或搶操作區。
+- 若 Generated App 本身需要 bottom controls，必須在 layout 上避免與 appf2 bottom navigation互相遮擋或搶操作區。
 
 # 6. Runtime App Area
 
@@ -117,7 +117,7 @@ Generated App area 完全由 F03 render tree呈現。
 
 S03 Shell：
 - 不直接 mutation App state。
-- 不把 Generated App 的 button / input 包成 NodeFF control。
+- 不把 Generated App 的 button / input 包成 appf2 control。
 - 不替 Runtime 猜 result。
 - 不攔截正常 local interaction。
 
@@ -127,7 +127,7 @@ User 應感覺：
 
 而不是：
 
-> 「我還在 NodeFF 的生成工具裡。」
+> 「我還在 appf2 的生成工具裡。」
 
 # 7. Shell Chrome — Proposed Priority
 
@@ -136,8 +136,8 @@ User 應感覺：
 - App identity：Title / Logo / Logo + Title。
 - Share。
 - 其他高優先功能依當前 screen width / device context保持 visible。
-- Mobile 由 bottom navigation承接核心 NodeFF actions。
-- **S03 是 Runtime scope 的 permanent NodeFF bottom navigation host；S01 Discover另有 Discover-scope permanent bottom navigation。兩者 scope不同，S05 / S06不繼承。**
+- Mobile 由 bottom navigation承接核心 appf2 actions。
+- **S03 是 Runtime scope 的 permanent appf2 bottom navigation host；S01 Discover另有 Discover-scope permanent bottom navigation。兩者 scope不同，S05 / S06不繼承。**
 - 進入 S05 Refine / Remix 或 S06 Correction Compare 時，不把 S03 bottom navigation 帶入 focused workspace。
 - O01 / O02 / blocking O03 / O04 active 時，underlying S03 Shell controls與 bottom navigation 必須 inert；Overlay close後再恢復。
 
@@ -305,13 +305,13 @@ Mobile：
 
 User 已確認：
 
-1. **Generated App 佔畫面絕對主體**；NodeFF Shell Chrome保持極簡，但 Share等重要功能必須明顯。
+1. **Generated App 佔畫面絕對主體**；appf2 Shell Chrome保持極簡，但 Share等重要功能必須明顯。
 2. App identity 可以是 **App Title、Logo，或 Logo + Title**。Header / Shell 的重要功能能顯示就顯示；空間不足時才收進 `•••`。
 3. **Correct 與 Remix 不混在一起**：
    - Correct = 調整結果 / 邏輯。
    - Remix = 修改 App 本身。
 4. **Mobile 採 permanent bottom navigation**，但仍要把最大可用空間留給 Generated App。
-5. Generated App若自己有 bottom controls，NodeFF bottom navigation必須避免遮擋與操作衝突。
+5. Generated App若自己有 bottom controls，appf2 bottom navigation必須避免遮擋與操作衝突。
 
 # 18. ④B High-fi Contract — Approved
 
@@ -355,11 +355,11 @@ User 已確認：
 Header：
 
 ~~~text
-NodeFF Logo + App Identity        修改這個 App | 改成我的版本 | 分享 | •••
+appf2 Logo + App Identity        修改這個 App | 改成我的版本 | 分享 | •••
 ~~~
 
 Rules：
-- NodeFF Logo = explicit Home / New App escape hatch → S01。
+- appf2 Logo = explicit Home / New App escape hatch → S01。
 - App identity可為 Logo / Title / Logo + Title。
 - 不搬入 S01完整 navigation。
 - `修改這個 App` visible → S05A。
@@ -372,14 +372,14 @@ Rules：
 
 - Generated App = 畫面絕對主角。
 - Shell不直接 mutation App state。
-- Shell不把 Generated App controls包成 NodeFF controls。
+- Shell不把 Generated App controls包成 appf2 controls。
 - Shell不從 DOM猜 result。
 - Shell不攔截正常 local interaction。
 - Runtime可保有自己的 App presentation / visual personality。
 
 ### Result Surface
 
-- 只有 canonical `result.outputs`存在 AVAILABLE output且需要 NodeFF-level result action時才出現。
+- 只有 canonical `result.outputs`存在 AVAILABLE output且需要 appf2-level result action時才出現。
 - Generated App若已自然呈現 result，不重複抄寫 value。
 - Result區只保留必要 `調整結果`。
 - `修改這個 App`與`改成我的版本`固定由 Shell change-entry區承接，不放進 Result。
@@ -388,7 +388,7 @@ Rules：
 ### Mobile Shell
 
 Header：
-- NodeFF Logo / App Identity / `•••`。
+- appf2 Logo / App Identity / `•••`。
 - Share / Modify不塞 Header。
 
 Permanent bottom navigation：
@@ -443,7 +443,7 @@ Permanent bottom navigation：
    - UI不得自行推定 revert eligibility。
 
 6. Home/New → **F00 → S01**
-   - NodeFF Logo是 global escape hatch。
+   - appf2 Logo是 global escape hatch。
    - 不依賴 Browser Back。
 
 ### Inspection Mode — Returnable Source App Inspection
@@ -513,9 +513,9 @@ Attention hierarchy：
 ~~~text
 Generated App
 > App Title / Identity
-> Primary NodeFF actions
+> Primary appf2 actions
 > Result-specific correction
-> NodeFF brand chrome
+> appf2 brand chrome
 > Overflow
 ~~~
 
@@ -555,16 +555,16 @@ Inspection Mobile：
 
 - App Title：約 `18–20px semibold`。
 - 過長單行 ellipsis，不撐高 Header。
-- NodeFF brand visual weight低於 App identity / Runtime。
+- appf2 brand visual weight低於 App identity / Runtime。
 
 ## Step 3 — Detailed High-fi Visual Rules Lock ✅
 
 ### Core Visual Principle
 
-> **NodeFF owns the shell; creators own the App presentation.**
+> **appf2 owns the shell; creators own the App presentation.**
 
 - Shell存在但退到背景。
-- Generated App可有自己的 UI style；NodeFF不強制重畫成同一套 App內 controls。
+- Generated App可有自己的 UI style；appf2不強制重畫成同一套 App內 controls。
 - S03不能看起來像 SaaS admin / builder / editor。
 
 ### Shell / Header
@@ -578,13 +578,13 @@ Inspection Mobile：
 - Mobile `修改` action sheet兩個 option同層級呈現，不用顏色暗示 ownership。
 - overflow = icon control，target ≥44px。
 - Shell action視覺權重不得高於 App內 primary CTA。
-- NodeFF Logo hover / accessible label可表達「回到首頁」。
+- appf2 Logo hover / accessible label可表達「回到首頁」。
 
 ### Runtime Canvas
 
 - 不強制再包巨大 card-in-card。
 - Runtime canvas可由 Generated App自己決定內部卡片 / imagery / layout。
-- NodeFF不插 sidebar / inspector / debug badges。
+- appf2不插 sidebar / inspector / debug badges。
 
 ### Result / Correction
 
@@ -692,7 +692,7 @@ Cursor不得：
 - 為了 loading動畫延遲 operation；
 - blanket-disable整個 Runtime除非 Function truth要求；
 - 把 S01 nav搬進 S03；
-- 把 Generated App重畫成 NodeFF dashboard；
+- 把 Generated App重畫成 appf2 dashboard；
 - 把 sample mockup內容當 Function requirement；
 - 用 Shared / ownership狀態自動替 User選 Refine或 Remix；
 - 在 Mobile點`修改`後直接開 S05而沒有 explicit S05A/S05B choice；

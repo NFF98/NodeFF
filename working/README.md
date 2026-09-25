@@ -1,6 +1,6 @@
-# NodeFF Working — Human Navigation
+# appf2 Working — Human Navigation
 
-> `working/` = NodeFF 唯一可修改的 Product Design Current Truth。
+> `working/` = appf2 唯一可修改的 Product Design Current Truth。
 >
 > 結構狀態：**STRUCTURE_READY / CONTENT_REVIEW_PENDING**
 >
@@ -62,16 +62,16 @@ Data Model / Infrastructure 的詳細內容也以單一 detailed owner 管理；
 ## Build Boundary
 
 ```text
-NodeFF Working
+appf2 Working
 → Content Quality Review / Dedup
 → Cross-file Consistency / Acceptance / UI Audit
 → Human approval
 → Build Freeze
-→ NFFBuild immutable BS-*
+→ appf2-build immutable BS-*
 → Backlog / Sprint / Cursor / Test / Evidence / Release
 ```
 
-NFFBuild 負責 implementation / delivery governance；NodeFF 不重複維護 Cursor execution rules。
+appf2-build 負責 implementation / delivery governance；appf2 不重複維護 Cursor execution rules。
 
 ## Current Next Step
 
@@ -79,6 +79,6 @@ NFFBuild 負責 implementation / delivery governance；NodeFF 不重複維護 Cu
 2. Dedup：同一 semantic truth 只能留在一個 canonical owner。
 3. 修正 cross-reference / ownership / consistency。
 4. 確認 Phase 1 Build Freeze set。
-5. User 批准後才建立 NFFBuild locked baseline。
+5. User 批准後才建立 appf2-build locked baseline。
 
 > **Structure Ready ≠ Content Ready ≠ Build Freeze Ready。**

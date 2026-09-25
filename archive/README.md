@@ -1,4 +1,4 @@
-# NodeFF Archive
+# appf2 Archive
 
 > **HISTORICAL EVIDENCE ONLY / NO AUTHORITY**
 
@@ -8,7 +8,7 @@
 
 1. `archive/` 不是 Product Design Current Truth。
 2. `archive/` 不得作為 Build Freeze input。
-3. `archive/` 不得作為 NFFBuild Build Spec source。
+3. `archive/` 不得作為 appf2-build Build Spec source。
 4. `archive/` 不得作為 Cursor implementation authority。
 5. 若 archive 與 `working/` 衝突，一律以 `working/` 為準。
 6. 保留歷史文件是為了 traceability / audit / lessons learned，不代表舊治理模型仍有效。

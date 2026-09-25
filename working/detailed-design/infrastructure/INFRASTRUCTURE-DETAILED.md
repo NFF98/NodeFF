@@ -1,8 +1,8 @@
-# NodeFF Infrastructure — Detailed Design
+# appf2 Infrastructure — Detailed Design
 
 > Structure migration preservation file. Content below is preserved from the former phase files. Dedup / semantic cleanup is intentionally deferred.
 
-# NodeFF Infrastructure — Phase 1
+# appf2 Infrastructure — Phase 1
 
 > Shared infrastructure truth：`../../common-core/INFRA-ARCHITECTURE.md`
 
@@ -10,7 +10,7 @@
 
 ## 4.1 Cloudflare 作為 Edge / Serverless
 
-NodeFF 適合 Global Edge 的原因：
+appf2 適合 Global Edge 的原因：
 
 - Web App 靜態資源可全球 CDN 發布；
 - API 大部分是 short-lived / I/O-heavy；
@@ -34,7 +34,7 @@ Static Hosting
 
 ## 4.2 PostgreSQL 作為唯一 System of Record
 
-NodeFF 的核心資料天然是關聯型：
+appf2 的核心資料天然是關聯型：
 
 ~~~text
 anonymous identity
@@ -84,7 +84,7 @@ Postgres
 
 因此中期可以擴張而不必立刻新增四個不同 Vendor。
 
-但 NFF 的 Repository / Identity / Realtime / Storage 都必須保留 Adapter Boundary，不讓 Supabase API 成為 LegoSpec / Runtime Protocol 的一部分。
+但 appf2 的 Repository / Identity / Realtime / Storage 都必須保留 Adapter Boundary，不讓 Supabase API 成為 LegoSpec / Runtime Protocol 的一部分。
 
 ---
 
@@ -244,7 +244,7 @@ DB + KV + CDN
 
 # 9. Sharing Architecture
 
-NodeFF 保留三種分享模式，但按需求啟動。
+appf2 保留三種分享模式，但按需求啟動。
 
 Phase 1 啟用策略由 F05 定義：
 
@@ -419,7 +419,7 @@ Phase 1 不同時養：
 
 ---
 
-# NodeFF Infrastructure — Phase 2
+# appf2 Infrastructure — Phase 2
 
 > Shared infrastructure truth：`../../common-core/INFRA-ARCHITECTURE.md`
 
@@ -497,7 +497,7 @@ Intent Embedding
 
 ---
 
-# NodeFF Infrastructure — Phase 3
+# appf2 Infrastructure — Phase 3
 
 > Shared infrastructure truth：`../../common-core/INFRA-ARCHITECTURE.md`
 
@@ -528,7 +528,7 @@ Capability Action
 
 ---
 
-# NodeFF Infrastructure — Phase 4+
+# appf2 Infrastructure — Phase 4+
 
 > Shared infrastructure truth：`../../common-core/INFRA-ARCHITECTURE.md`
 
@@ -540,7 +540,7 @@ Capability Action
 
 ~~~mermaid
 flowchart LR
-    R[NodeFF Runtime]
+    R[appf2 Runtime]
     G[Capability Gateway]
     P[Provider Registry]
     E[Entitlement / Policy]
@@ -583,7 +583,7 @@ Intent
  → all interactions through central commerce server
 ~~~
 
-否則會破壞 NodeFF 的成本模型與即時性。
+否則會破壞 appf2 的成本模型與即時性。
 
 ## Heterogeneous Orchestration Plane
 
@@ -600,7 +600,7 @@ Capability Action
 ~~~
 
 Infra 規則：
-- NFF 自己定義 workflow contract。
+- appf2 自己定義 workflow contract。
 - 外部 workflow engine 必須放在 Adapter 後，可替換。
 - workflow state 與 Browser Instance 分離。
 - 每個 step 必須可追蹤 provider、version、attempt、timeout、result。

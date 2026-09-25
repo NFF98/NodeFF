@@ -1,4 +1,4 @@
-# NodeFF Design Workbench History — Archived 2026-09-25
+# appf2 Design Workbench History — Archived 2026-09-25
 
 > **HISTORICAL / NO CURRENT AUTHORITY**
 >
@@ -6,9 +6,9 @@
 
 ---
 
-# NodeFF Design Workbench
+# appf2 Design Workbench
 
-> **WORKBENCH NOTICE**：本檔內任何 retired `spec/` (NO-USE)、Formal Spec、Working → Spec、Spec Promotion、Formal Spec Refresh 字樣均為 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current flow = NodeFF Working → Human-approved Build Freeze → NFFBuild locked BS-*。
+> **WORKBENCH NOTICE**：本檔內任何 retired `spec/` (NO-USE)、Formal Spec、Working → Spec、Spec Promotion、Formal Spec Refresh 字樣均為 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current flow = appf2 Working → Human-approved Build Freeze → appf2-build locked BS-*。
 
 > 狀態：Working Discussion Buffer  
 > 用途：暫存目前正在收斂中的產品／商業／架構觀點。  
@@ -145,17 +145,17 @@ Business Plan 的階段描述應調整為：
 
 ---
 
-## 新主題：NodeFF 的核心不是 Decision App，而是 Idea-to-App
+## 新主題：appf2 的核心不是 Decision App，而是 Idea-to-App
 
 ### 問題
 
 Business Plan 目前有一句：
 
-> 「任何人遇到一個複雜決策 → NodeFF 立即變成一個可互動、可分享、可交易的小 App」
+> 「任何人遇到一個複雜決策 → appf2 立即變成一個可互動、可分享、可交易的小 App」
 
-這個描述把 NodeFF 的產品範圍縮得太窄。
+這個描述把 appf2 的產品範圍縮得太窄。
 
-NodeFF 不應被定義成「Decision Generator」。
+appf2 不應被定義成「Decision Generator」。
 
 Decision 只是目前容易理解、容易建立 use case 的其中一類。
 
@@ -163,9 +163,9 @@ Decision 只是目前容易理解、容易建立 use case 的其中一類。
 
 ## 修正方向
 
-更接近 NodeFF 本質的描述是：
+更接近 appf2 本質的描述是：
 
-> **任何人有一個想法、需求、情境或互動構想，只要它適合被做成一個 App，就不需要先去搜尋哪個既有 App 可以完成，而是直接讓 NodeFF 幫他把想法變成可用的 Micro-App。**
+> **任何人有一個想法、需求、情境或互動構想，只要它適合被做成一個 App，就不需要先去搜尋哪個既有 App 可以完成，而是直接讓 appf2 幫他把想法變成可用的 Micro-App。**
 
 概念轉換：
 
@@ -176,14 +176,14 @@ Idea / Need
  → Install / Learn / Configure
  → Use
 
-NodeFF Model
+appf2 Model
 Idea / Need
  → Describe Intent
- → NodeFF creates usable Micro-App
+ → appf2 creates usable Micro-App
  → Use / Share / Remix
 ```
 
-因此 NodeFF 解決的不是單一 domain 問題，而是：
+因此 appf2 解決的不是單一 domain 問題，而是：
 
 > **從「Search for an App」轉成「Create the App I need now」。**
 
@@ -203,7 +203,7 @@ Idea / Need
 - Creative Interaction
 - 其他目前尚未發現的 Micro-App 類型
 
-Phase 1 可以先選幾個容易驗證的 use case 作為 Wedge，但不能把這些 Wedge 誤寫成 NodeFF 的最終產品定義。
+Phase 1 可以先選幾個容易驗證的 use case 作為 Wedge，但不能把這些 Wedge 誤寫成 appf2 的最終產品定義。
 
 正確關係：
 
@@ -224,11 +224,11 @@ Observed Usage
 
 較佳候選句：
 
-> **NodeFF 讓任何人不必先找 App，而是直接把當下的想法或需求變成 App。**
+> **appf2 讓任何人不必先找 App，而是直接把當下的想法或需求變成 App。**
 
 更完整版本：
 
-> **當一個人產生「如果現在有個 App 可以幫我做這件事就好了」的念頭時，NodeFF 直接把這個念頭變成可互動、可分享、可 Remix 的 Micro-App。**
+> **當一個人產生「如果現在有個 App 可以幫我做這件事就好了」的念頭時，appf2 直接把這個念頭變成可互動、可分享、可 Remix 的 Micro-App。**
 
 ---
 
@@ -250,9 +250,9 @@ Observed Usage
 > **意圖就是 App。**
 
 定位：
-- NodeFF 的 CEO 主口號；
+- appf2 的 CEO 主口號；
 - 對外最核心、最簡潔的產品宣言；
-- 表達 NodeFF 想改寫「先找 App，再使用 App」的傳統軟體心智。
+- 表達 appf2 想改寫「先找 App，再使用 App」的傳統軟體心智。
 
 其背後的產品轉換：
 
@@ -263,7 +263,7 @@ Intent
  → Install / Learn / Configure
  → Use
 
-NodeFF
+appf2
 Intent
  → App
 ```
@@ -282,7 +282,7 @@ Intent
 本輪已將成熟結論同步至 Working Design：
 
 - `APP-ARCHITECTURE.md`：只保留四層整體架構、核心流程與責任邊界。
-- `CAPABILITY-FABRIC.md`：獨立承接 NFF 引擎底座 Capability。
+- `CAPABILITY-FABRIC.md`：獨立承接 appf2 引擎底座 Capability。
 - `APP-DETAILED-DESIGN-OVERVIEW.md`：採 Function-Oriented 詳細設計。
 - `working/functions/`：未來每個 Function 的 Frontend / Backend / Contract / Acceptance 詳細設計。
 - `INFRA-ARCHITECTURE.md`：收斂為 Infrastructure 設計結果。
@@ -384,7 +384,7 @@ Browser Runtime Plane
 - semantic reuse 優先沿用 Postgres / pgvector，有證據後再啟用，不先建 dedicated Vector DB；
 - Queue / Background Worker 只為 Heavy Capability 啟動；
 - 中長期 Capability Gateway / Provider Registry / Entitlement / Metering / Transaction layer 必須沿用相同 Blueprint / Runtime model；
-- Cloudflare / Supabase / LLM / Realtime / Payment 等 Vendor 必須藏在 NFF-owned adapter 後面。
+- Cloudflare / Supabase / LLM / Realtime / Payment 等 Vendor 必須藏在 appf2-owned adapter 後面。
 
 主要影響 Function：
 - F01 Intent Compilation
@@ -432,7 +432,7 @@ Browser Runtime Plane
 
 2. **LLM Provider Abstraction**
    - 邏輯位置：Layer 2 Semantic Compiler。
-   - 使用 NFF-owned Model Gateway / Model Router / Provider Adapter。
+   - 使用 appf2-owned Model Gateway / Model Router / Provider Adapter。
    - Provider / Model 可依 capability、cost、latency、quota、availability、fallback policy 切換。
    - LegoSpec、Runtime、Layer 3 Contract 不得依賴特定 LLM vendor。
    - 使用者手動選模型是否提供，屬未來 Product Feature，不是核心 Architecture 要求。
@@ -571,11 +571,11 @@ https://predge.jp/210039/
 - 此處是色彩方向參考，不複製 Tiffany 品牌識別；
 - High-fi 階段再確認實際 HEX、gradient stop、contrast、dark/light surface、accessibility；
 - 黃色偏 accent / energy / completion，藍綠色偏 creation / calm / brand anchor；
-- 最終 palette 必須形成 NodeFF 自己的 brand system。
+- 最終 palette 必須形成 appf2 自己的 brand system。
 
 ### 新增 UX 候選 — Visible Generation Progress
 
-使用者在本次 UI 生成過程中特別確認：**可視化生成進度非常有價值，NodeFF 也應納入此體驗。**
+使用者在本次 UI 生成過程中特別確認：**可視化生成進度非常有價值，appf2 也應納入此體驗。**
 
 候選方向：
 
@@ -788,7 +788,7 @@ ANALYZING
 
 ### 2. Approved Direction
 
-F01 Creation Progress 應補一層 NFF-owned checkpoint contract。
+F01 Creation Progress 應補一層 appf2-owned checkpoint contract。
 
 Candidate logical checkpoints：
 
@@ -972,13 +972,13 @@ Closed outcome：
 
 ### 核心問題
 
-本次 artifact pipeline 暴露一個對 NodeFF Runtime 同樣重要的風險：
+本次 artifact pipeline 暴露一個對 appf2 Runtime 同樣重要的風險：
 
 > **「模型說完成」不等於「系統真的完成」。**
 
 LLM 可以產生合理-looking output，也可能在工具失敗、validation 不完整、artifact 不可用時仍誤判為 success。
 
-因此 NodeFF 不可把 LLM 自己的 completion / confidence 當成 App READY truth。
+因此 appf2 不可把 LLM 自己的 completion / confidence 當成 App READY truth。
 
 ### 核心原則
 
@@ -1088,7 +1088,7 @@ READY
 
 > 狀態：**MID-TERM MUST IMPLEMENT**
 >
-> 目的：避免 NodeFF 永遠停留在「只生成 UI」；中期必須支援真正可運作的 full-stack Micro-App。
+> 目的：避免 appf2 永遠停留在「只生成 UI」；中期必須支援真正可運作的 full-stack Micro-App。
 >
 > Formal Spec 目前仍 freeze；本節先作 Working Architecture Direction。
 
@@ -1098,7 +1098,7 @@ READY
 
 > React Frontend Renderer
 
-則不足以支撐 NodeFF 的核心願景：
+則不足以支撐 appf2 的核心願景：
 
 > **意圖就是 App。**
 
@@ -1177,7 +1177,7 @@ User Intent
 中期即使支援更完整 App，也維持：
 
 - LLM 不直接生成並執行任意 backend code；
-- LLM 只能使用 NFF 定義好的 declarative contract；
+- LLM 只能使用 appf2 定義好的 declarative contract；
 - API / DB / AI / Payment / external service 必須走受控 Capability；
 - Layer 3 驗證 schema / permission / capability / resource / compatibility；
 - Layer 4 不自行猜測 semantic intent。
@@ -1186,7 +1186,7 @@ User Intent
 
 使用者感受到：
 
-> **「NodeFF 幫我做了一個完整 App。」**
+> **「appf2 幫我做了一個完整 App。」**
 
 但底層仍然是：
 
@@ -1216,7 +1216,7 @@ User Intent
 >
 > Trigger：與「Layer 4 — App Execution & Runtime Layer」升級同步設計、同步驗收。
 >
-> 原因：如果 Layer 4 中期開始支援 Logic / Data / Capability，但 Layer 3 仍只驗 UI Schema，NodeFF 會失去最重要的安全與可靠性邊界。
+> 原因：如果 Layer 4 中期開始支援 Logic / Data / Capability，但 Layer 3 仍只驗 UI Schema，appf2 會失去最重要的安全與可靠性邊界。
 
 ### 核心結論
 

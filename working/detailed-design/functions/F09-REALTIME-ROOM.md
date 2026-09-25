@@ -40,7 +40,7 @@ Acceptance：
 
 > Sync source：O01 Low-fi Review / DESIGN-WORKBENCH。
 
-未來若 NodeFF支援「共享遊戲 / 多人共同操作 / 同步 mutable App state」，由 F09 Realtime Room 承接，不擴張 F05 static Share/Restore。
+未來若 appf2支援「共享遊戲 / 多人共同操作 / 同步 mutable App state」，由 F09 Realtime Room 承接，不擴張 F05 static Share/Restore。
 
 Conceptual boundary：
 

@@ -1,4 +1,4 @@
-# NodeFF Detailed Design
+# appf2 Detailed Design
 
 > `working/detailed-design/` = implementation-facing detailed design。
 

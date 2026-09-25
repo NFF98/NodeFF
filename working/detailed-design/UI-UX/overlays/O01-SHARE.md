@@ -1,6 +1,6 @@
 # O01 — Share Overlay
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → NFFBuild locked BS-*。
+> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → appf2-build locked BS-*。
 
 > Overlay ID：O01
 >
@@ -74,7 +74,7 @@ Low-fi 建議：
     │                                        │
     │ 分享連結                               │
     │ ┌────────────────────────────────────┐ │
-    │ │ nodeff.../share/xxxxx              │ │
+    │ │ appf2.../share/xxxxx              │ │
     │ └────────────────────────────────────┘ │
     │                                        │
     │ [複製連結]          [系統分享]         │
@@ -89,7 +89,7 @@ Low-fi 建議：
     │                            │
     │ [Logo] App Title           │
     │                            │
-    │ nodeff.../share/xxxxx      │
+    │ appf2.../share/xxxxx      │
     │                            │
     │ [      複製連結      ]     │
     │ [      系統分享      ]     │
@@ -199,7 +199,7 @@ O01 使用精準 consumer copy：
 
 > **目前這個分享只分享 App 本身，不包含你現在的輸入或結果。**
 
-這對 NodeFF 很重要，因為 F05 明確規定 Share只指向 Blueprint，不含 Runtime input / Result。
+這對 appf2 很重要，因為 F05 明確規定 Share只指向 Blueprint，不含 Runtime input / Result。
 
 不顯示：
 - anonymous ID
@@ -609,7 +609,7 @@ Share URL / Primary Copy Action
 > App Identity
 > Secondary System Share
 > Privacy Copy
-> underlying NodeFF / Runtime context
+> underlying appf2 / Runtime context
 ~~~
 
 CREATING：

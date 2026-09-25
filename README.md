@@ -1,10 +1,10 @@
-# NodeFF
+# appf2
 
-NodeFF 是一個 No-install、Everyone-is-creator、Sharable/Linkable、Intent Commerce、Fun/Social 的 Intent-to-App Runtime Platform。
+appf2 是一個 No-install、Everyone-is-creator、Sharable/Linkable、Intent Commerce、Fun/Social 的 Intent-to-App Runtime Platform。
 
 ## Repository Role
 
-`NFF98/NodeFF` = **Product Design Current Truth**，負責 WHAT / WHY / WHEN。
+`appf2/appf2-design` = **Product Design Current Truth**，負責 WHAT / WHY / WHEN。
 
 唯一可修改的 Product Design Current Truth：
 
@@ -30,23 +30,23 @@ working/
 
 ## Build / Delivery Boundary
 
-Approved Product Design 不在 NodeFF 內再複製成 Formal Spec。
+Approved Product Design 不在 appf2 內再複製成 Formal Spec。
 
 ```text
-NodeFF working/
+appf2 working/
 → consistency / delta / acceptance / UI audit
 → Human approval
 → Build Freeze
-→ NFF98/NFFBuild/build-spec/baselines/BS-*
+→ appf2/appf2-build/build-spec/baselines/BS-*
 → backlog / sprint / Cursor / test / evidence / release
 ```
 
-`NFF98/NFFBuild` = implementation / delivery authority。
+`appf2/appf2-build` = implementation / delivery authority。
 
 ## Retired Structures
 
 - `spec/`：**RETIRED / NO-USE**。Preservation Audit 已確認 Current Working 完整覆蓋舊 Formal Spec；目錄已移除。
-- `execution/`：**RETIRED / NO-USE**。Execution 已完整移至 `NFF98/NFFBuild`。
+- `execution/`：**RETIRED / NO-USE**。Execution 已完整移至 `appf2/appf2-build`。
 
 歷史文件若仍出現 `spec/`、Formal Spec、Working → Spec、Spec Promotion、Formal Spec Refresh 等字樣，只代表當時的歷史治理模型，不是 Current Truth。
 
@@ -58,9 +58,9 @@ NodeFF working/
 
 ## Working Growth Rule
 
-NodeFF 不為 Phase 2 / 3 / 4 複製一整套 Working 文件。
+appf2 不為 Phase 2 / 3 / 4 複製一整套 Working 文件。
 
 - shared / long-lived truth 留在 root canonical owner；
 - phase-specific additions 放在對應 `PHASE-*.md` module；
 - 後一 Phase 只寫 delta / new activation，不複製前一 Phase 全文；
-- NFFBuild 才建立每次 immutable `BS-Px-nnn` snapshot。
+- appf2-build 才建立每次 immutable `BS-Px-nnn` snapshot。

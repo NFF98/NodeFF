@@ -1,7 +1,7 @@
 # F05 — Share / Restore
 
 > 狀態：BUILD_FREEZE_READY
-> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved NFFBuild locked BS-*。
+> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved appf2-build locked BS-*。
 >
 > Canonical Role：Phase 1 Share Creation、Public Share Resolution、Blueprint Restore、Recipient Entry UX 與 Share Reliability 的 Working Current Truth。
 >
@@ -306,7 +306,7 @@ Logical flow：
 
 ~~~text
 GET /share/{share_id}
-→ load NFF Shell
+→ load appf2 Shell
 → resolve share mapping
 → verify share status
 → obtain content_hash
@@ -979,7 +979,7 @@ Active validated Blueprint
 → Recipient uses immediately
 ~~~
 
-> Share 分享的是 App definition，不是 Creator 當時的私有操作狀態。這讓 NodeFF 的連結既便宜、可快取、可重播，也不需要 Recipient 重新呼叫 LLM。
+> Share 分享的是 App definition，不是 Creator 當時的私有操作狀態。這讓 appf2 的連結既便宜、可快取、可重播，也不需要 Recipient 重新呼叫 LLM。
 
 
 ---

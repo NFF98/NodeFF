@@ -1,31 +1,31 @@
-# NodeFF Design-to-Delivery Contract
+# appf2 Design-to-Delivery Contract
 
 > 狀態：CURRENT GOVERNANCE。
 >
 > `spec/` / Formal Spec / Working → Spec / Spec Promotion / Formal Spec Refresh 模型已 **RETIRED / NO-USE**。
 >
-> Current flow：**NodeFF Working → Human-approved Build Freeze → NFFBuild immutable BS-* → Delivery**。
+> Current flow：**appf2 Working → Human-approved Build Freeze → appf2-build immutable BS-* → Delivery**。
 
 # 1. Purpose
 
-NodeFF 的設計不能停在 Chat，也不能讓 Cursor 在實作時自行發明產品或架構決策。
+appf2 的設計不能停在 Chat，也不能讓 Cursor 在實作時自行發明產品或架構決策。
 
 Canonical lifecycle：
 
 ```text
 Discussion
-→ NodeFF Working Design
+→ appf2 Working Design
 → Review / Consistency / Delta / Acceptance / UI Audit
 → Human approval
 → Build Freeze
-→ NFFBuild Locked Build Spec
+→ appf2-build Locked Build Spec
 → Backlog
 → Sprint
 → Cursor Implementation
 → Test / Evidence
 → Release
 → Production Evidence
-→ NodeFF Working Improvement
+→ appf2 Working Improvement
 ```
 
 核心原則：
@@ -38,17 +38,17 @@ Discussion
 Discussion
 = 思考、比較、未定方案
 
-NodeFF Working
+appf2 Working
 = 唯一可修改 Product Design Current Truth
 
-NFFBuild Locked BS-*
+appf2-build Locked BS-*
 = 某一 approved Working commit 的 immutable implementation snapshot
 
-NFFBuild Delivery
+appf2-build Delivery
 = Backlog / Sprint / Code / Test / Evidence / Release
 ```
 
-不存在 NodeFF 內部第二份 Formal Spec Current Truth。
+不存在 appf2 內部第二份 Formal Spec Current Truth。
 
 # 3. Canonical Document Responsibilities
 
@@ -83,13 +83,13 @@ working/detailed-design/functions/Fxx-*.md
 working/detailed-design/UI-UX/
 → screen composition / visual hierarchy / responsive / presentation truth
 
-NFF98/NFFBuild/build-spec/baselines/BS-*
+appf2/appf2-build/build-spec/baselines/BS-*
 → Human-approved immutable implementation snapshot
 
-NFF98/NFFBuild/delivery/
+appf2/appf2-build/delivery/
 → backlog / sprint / evidence execution
 
-NFF98/NFFBuild/releases/
+appf2/appf2-build/releases/
 → release execution
 ```
 
@@ -182,15 +182,15 @@ Phase Boundary
 
 1. Working 是唯一可修改 Current Truth。
 2. Build Freeze 只能固定已 Review 的 Working，不重新改寫需求。
-3. **沒有 User 明確批准，不得建立或啟用 NFFBuild BS-*。**
-4. Freeze 必須記 exact NodeFF source commit。
+3. **沒有 User 明確批准，不得建立或啟用 appf2-build BS-*。**
+4. Freeze 必須記 exact appf2 source commit。
 5. Freeze inventory 必須列出 included Function / Shared / UI-UX / Registry files。
-6. NFFBuild baseline merge 後 immutable。
-7. 後續 semantic change 必須回 NodeFF Working，再建立新 baseline；不得改舊 baseline。
+6. appf2-build baseline merge 後 immutable。
+7. 後續 semantic change 必須回 appf2 Working，再建立新 baseline；不得改舊 baseline。
 
 # 8. Build Spec → Backlog / Sprint
 
-NFFBuild Backlog / Sprint 必須由 active Locked Build Spec 派生。
+appf2-build Backlog / Sprint 必須由 active Locked Build Spec 派生。
 
 每個 work item 至少可追蹤：
 
@@ -276,7 +276,7 @@ Should we improve / expand / stop?
 
 # 14. Release Gate
 
-Release authority 在 `NFF98/NFFBuild`。
+Release authority 在 `appf2/appf2-build`。
 
 Release 至少要求：
 
@@ -301,10 +301,10 @@ Build Success ≠ Release。
 Production Evidence
 → detect mismatch / failure / friction
 → trace to Function / Policy / Capability
-→ NodeFF Working Delta
+→ appf2 Working Delta
 → Human review / approval
 → new Build Freeze / Rebaseline when implementation truth changes
-→ NFFBuild delivery
+→ appf2-build delivery
 ```
 
 Evidence 不得直接改 Production contract。
@@ -324,13 +324,13 @@ Evidence 不得直接改 Production contract。
 ### Architecture-impacting
 改 Top Architecture、system boundary、Capability trust boundary、Blueprint model、Infra truth boundary。
 
-→ 必須先在 NodeFF Working 解決，不可在 NFFBuild / Cursor 偷做。
+→ 必須先在 appf2 Working 解決，不可在 appf2-build / Cursor 偷做。
 
 若 implementation 發現 Material issue：
 
 ```text
-NFFBuild Finding
-→ NodeFF Working
+appf2-build Finding
+→ appf2 Working
 → Human approval
 → new BS-* Rebaseline
 → rebind backlog / sprint
@@ -341,7 +341,7 @@ NFFBuild Finding
 Cursor：
 
 ```text
-Read active NFFBuild Locked Build Spec
+Read active appf2-build Locked Build Spec
 → work only on active Sprint task
 → preserve contracts
 → write/update mapped tests
@@ -431,7 +431,7 @@ Material / Architecture-impacting change 不與無關 cleanup 混在同一 commi
 以下模型已 **RETIRED / NO-USE**：
 
 ```text
-Working → Formal Spec → NodeFF Backlog / Sprint
+Working → Formal Spec → appf2 Backlog / Sprint
 spec/functions/
 spec/shared/
 Formal Spec Refresh
@@ -443,8 +443,8 @@ Spec Promotion
 Current model only：
 
 ```text
-NodeFF Working
+appf2 Working
 → Human-approved Build Freeze
-→ NFFBuild immutable BS-*
-→ NFFBuild Delivery
+→ appf2-build immutable BS-*
+→ appf2-build Delivery
 ```

@@ -1,6 +1,6 @@
-# NodeFF App Detailed Design Overview
+# appf2 App Detailed Design Overview
 
-> **CURRENT GOVERNANCE NOTICE**：舊 `spec/` / Formal Spec / Working → Spec / Spec Promotion 流程已 RETIRED / NO-USE。Current authority = NodeFF Working；implementation input = Human-approved Build Freeze → NFFBuild locked BS-*。
+> **CURRENT GOVERNANCE NOTICE**：舊 `spec/` / Formal Spec / Working → Spec / Spec Promotion 流程已 RETIRED / NO-USE。Current authority = appf2 Working；implementation input = Human-approved Build Freeze → appf2-build locked BS-*。
 
 > 狀態：Working Design Baseline。
 >
@@ -13,7 +13,7 @@
 # 1. Purpose
 
 Architecture 回答：
-> NFF 是什麼、系統邊界在哪裡。
+> appf2 是什麼、系統邊界在哪裡。
 
 本文件回答：
 > 有哪些 Functions、彼此依賴什麼、哪個 Phase 做、目前進度在哪裡、詳細設計去哪裡看。
@@ -48,7 +48,7 @@ working/detailed-design/functions/Fxx-*.md
 → single Function end-to-end detailed design
 
 working/common-core/DESIGN-TO-DELIVERY.md
-→ cross-phase Working → Human-approved Build Freeze → NFFBuild BS-* governance
+→ cross-phase Working → Human-approved Build Freeze → appf2-build BS-* governance
 ~~~
 
 同一 Function 的 detailed behavior 不得同時在本文件與 Fxx 文件各維護一份。
@@ -56,7 +56,7 @@ working/common-core/DESIGN-TO-DELIVERY.md
 ---
 
 # 3. Function Portfolio / Canonical Index
-> Phase 1 Core Function Product Design authority = `working/detailed-design/functions/Fxx-*.md`。Implementation 只能讀 Human-approved NFFBuild locked Build Spec；舊 Formal Spec authority 已 RETIRED / NO-USE。
+> Phase 1 Core Function Product Design authority = `working/detailed-design/functions/Fxx-*.md`。Implementation 只能讀 Human-approved appf2-build locked Build Spec；舊 Formal Spec authority 已 RETIRED / NO-USE。
 
 
 | ID | Function | 核心結果 | Phase | Lifecycle Status | Canonical Detail |
@@ -288,7 +288,7 @@ User Outcome
 10. 第 2–3 個月才把 Anonymous Value 升成 Durable Identity。
 11. 第 4–6 個月才把 External / Paid Capability 提升為正式 execution path。
 12. 6 個月後才持續建 Provider / Transaction / Orchestration Network。
-13. Workflow engine vendor 只能是 Adapter，不得成為 NFF semantic contract。
+13. Workflow engine vendor 只能是 Adapter，不得成為 appf2 semantic contract。
 14. Multi-step external workflow 必須有 timeout / retry / idempotency / compensation policy。
 15. 日期不自動解鎖功能；Evidence Gate 才解鎖。
 16. 所有新 Function 必須證明不破壞 Intent → Blueprint → Runtime 核心。
@@ -307,6 +307,6 @@ Lifecycle、Traceability ID、Build Freeze Gate、Acceptance → Test、Runtime 
 
 APP-DETAILED-DESIGN 現在只做一件事：
 
-> **管理 NodeFF 的 Function 地圖：有誰、依賴誰、何時做、目前做到哪裡，以及詳細設計唯一去哪裡看。**
+> **管理 appf2 的 Function 地圖：有誰、依賴誰、何時做、目前做到哪裡，以及詳細設計唯一去哪裡看。**
 
 真正 Function 行為只存在各自 Fxx canonical file；不再出現 APP-DETAILED-DESIGN 一套、Fxx 又一套的 Current Truth 衝突。

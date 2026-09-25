@@ -1,7 +1,7 @@
-# NodeFF Execution Admission Contract
+# appf2 Execution Admission Contract
 
 > 狀態：BUILD_FREEZE_READY / Phase 1 — Working Current Truth。
-> Legacy Formal Spec reference：RETIRED / NO-USE；Build implementation snapshot 改由 Human-approved Build Freeze → NFFBuild BS-*。
+> Legacy Formal Spec reference：RETIRED / NO-USE；Build implementation snapshot 改由 Human-approved Build Freeze → appf2-build BS-*。
 > Canonical Role：把 immutable Blueprint content delivery 與 mutable current trust / compatibility decision分開，確保 CDN舊body不能繞過 revoke / incompatibility。
 
 # 1. Problem
@@ -154,7 +154,7 @@ F02-EVT-012 execution_admission_denied
 F02-EVT-013 execution_admission_failed
 ~~~
 
-正式 event ID 以 `working/detailed-design/registries/evidence-event-registry.json` 為 Current Truth；Build Freeze 時投影到 NFFBuild locked baseline。
+正式 event ID 以 `working/detailed-design/registries/evidence-event-registry.json` 為 Current Truth；Build Freeze 時投影到 appf2-build locked baseline。
 
 # 11. Acceptance
 

@@ -1,6 +1,6 @@
 # S04 — Shared App Entry / Restore
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → NFFBuild locked BS-*。
+> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → appf2-build locked BS-*。
 
 > Screen ID：S04
 >
@@ -97,7 +97,7 @@ Loading % 必須表示「已完成的 restore work」，不是預估剩餘時間
 # 5. Proposed Desktop Low-fi
 
     ┌──────────────────────────────────────────────┐
-    │ NodeFF                                       │
+    │ appf2                                       │
     │                                              │
     │                                              │
     │              [ App Logo ]                    │
@@ -122,7 +122,7 @@ Loading % 必須表示「已完成的 restore work」，不是預估剩餘時間
 # 6. Proposed Mobile Low-fi
 
     ┌──────────────────────────┐
-    │ NodeFF                   │
+    │ appf2                   │
     │                          │
     │      [ App Logo ]        │
     │       App Title          │
@@ -139,7 +139,7 @@ Mobile 不顯示 navigation / bottom navigation，因為還沒有進入真正 S0
 READY 後再由 S03 接管 Header / Bottom Navigation。
 
 Cross-screen rule：
-- permanent NodeFF bottom navigation只屬於 S03 Runtime。
+- permanent appf2 bottom navigation只屬於 S03 Runtime。
 - S04 restore期間不預先顯示 S03 Shell navigation，也不讓 User在 restore中誤進其他 Shell flow。
 
 # 7. Progress Behavior
@@ -200,7 +200,7 @@ S04 必須承接 F05 / F12 的 humanized failure。
 
     這個分享連結找不到了。
 
-    [回到 NodeFF]
+    [回到 appf2]
     [建立自己的 App]
 
 不 Retry 無意義 permanent 404。
@@ -209,7 +209,7 @@ S04 必須承接 F05 / F12 的 humanized failure。
 
     這個分享 App 已經無法使用。
 
-    [回到 NodeFF]
+    [回到 appf2]
 
 不假裝重新生成舊 App。
 
@@ -218,7 +218,7 @@ S04 必須承接 F05 / F12 的 humanized failure。
     暫時打不開，但分享連結還在。
 
     [再試一次]
-    [回到 NodeFF]
+    [回到 appf2]
 
 保留原 share route / reference。
 
@@ -227,7 +227,7 @@ S04 必須承接 F05 / F12 的 humanized failure。
     這個 App 目前無法安全開啟。
 
     [重新整理再試]
-    [回到 NodeFF]
+    [回到 appf2]
 
 不 silently reinterpret、不偷偷 recompile。
 
@@ -340,7 +340,7 @@ S04 不是：
 
 Desktop / Mobile 一致：
 
-- 只保留必要的 NodeFF brand / entry chrome。
+- 只保留必要的 appf2 brand / entry chrome。
 - 不顯示 S01完整 navigation。
 - 不顯示「首頁 / 探索靈感 / 我的 App / 修改 / 分享 / Profile」。
 - 不顯示 hamburger。
@@ -415,7 +415,7 @@ restore READY
 
 Desktop / Mobile一致。
 
-只要 S04 無法進入正常 READY，UI必須提供 **可返回 NodeFF 首頁 S01 的安全出口**，讓 User離開失敗 share flow並可重新建立自己的 App。
+只要 S04 無法進入正常 READY，UI必須提供 **可返回 appf2 首頁 S01 的安全出口**，讓 User離開失敗 share flow並可重新建立自己的 App。
 
 Canonical safe exit：
 
@@ -463,7 +463,7 @@ same immutable Blueprint
 Mobile與 Desktop採相同 semantic structure：
 
 ~~~text
-NodeFF brand
+appf2 brand
 ↓
 App Identity（when available）
 ↓
@@ -574,7 +574,7 @@ Current Restore Status
 > Progress Presentation
 > App Identity
 > No-login / No-install reassurance
-> NodeFF entry chrome
+> appf2 entry chrome
 ~~~
 
 User第一眼應理解：
@@ -652,7 +652,7 @@ Mobile：
 Mobile採單欄 transitional layout：
 
 ~~~text
-Top NodeFF chrome
+Top appf2 chrome
 → App Identity
 → Restore Status / Recovery
 ~~~
@@ -681,7 +681,7 @@ READY後才切換到 S03，並由 S03顯示：
 
 ### 1. Screen Character / Color Usage
 
-S04沿用 NodeFF Design System Direction A：
+S04沿用 appf2 Design System Direction A：
 
 > **Clean Creator Canvas + Playful Energy**
 
@@ -901,7 +901,7 @@ Final Visual Reference覆蓋 Desktop / Mobile三種代表狀態：
 
 ~~~text
 S04 Step 1–3 Text Contract + Fxx Function Truth
-> NodeFF Design System
+> appf2 Design System
 > Approved Visual Reference
 ~~~
 

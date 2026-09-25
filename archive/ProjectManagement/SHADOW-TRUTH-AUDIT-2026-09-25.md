@@ -1,4 +1,4 @@
-# NodeFF Shadow Truth Audit — 2026-09-25
+# appf2 Shadow Truth Audit — 2026-09-25
 
 > **AUDIT EVIDENCE ONLY / NO CURRENT AUTHORITY**
 >
@@ -6,11 +6,11 @@
 
 ## Audit Baseline
 
-- Repository：NFF98/NodeFF
+- Repository：appf2/appf2-design
 - Branch：main
 - Audited HEAD：3eda549759fa36c59bc016245eb2a01877bf4c77
 - Current Product Design Truth：`working/`
-- Delivery boundary：NodeFF Working → Human-approved Build Freeze → NFFBuild locked BS-*
+- Delivery boundary：appf2 Working → Human-approved Build Freeze → appf2-build locked BS-*
 
 ## 1. DESIGN-WORKBENCH — Section → Canonical Owner Proof
 

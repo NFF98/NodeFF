@@ -1,7 +1,7 @@
 # F02 — Blueprint Validation / Trust Admission
 
 > 狀態：BUILD_FREEZE_READY
-> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved NFFBuild locked BS-*。
+> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved appf2-build locked BS-*。
 >
 > Canonical Role：Phase 1 Executable Blueprint + L3 Validation 的 Working Current Truth。
 >
@@ -10,14 +10,14 @@
 > 下游：F03 Runtime、F01 Blueprint Composer、F05 Restore、F06 Remix、F16 Correction。
 >
 > 本文件回答兩件事：
-> 1. Blueprint Candidate 必須長什麼樣，才能成為 NodeFF 可執行 App definition。
+> 1. Blueprint Candidate 必須長什麼樣，才能成為 appf2 可執行 App definition。
 > 2. Candidate 必須通過哪些 deterministic validation / trust gates，才准進 Runtime。
 
 # 1. Purpose / User Outcome
 
 User Outcome：
 
-> NodeFF 產生的 App 不只是 JSON 能 parse，而是所有 state、binding、rule、action、Capability、resource、permission、compatibility 都能被平台安全理解與執行。
+> appf2 產生的 App 不只是 JSON 能 parse，而是所有 state、binding、rule、action、Capability、resource、permission、compatibility 都能被平台安全理解與執行。
 
 Canonical flow：
 
@@ -1234,4 +1234,4 @@ Resolved Intent
 → Runtime
 ~~~
 
-> Blueprint 是可驗證的資料，不是生成出來的程式碼。只有完整通過 F02 的 canonical Blueprint 才是 NodeFF 可以信任與執行的 App。
+> Blueprint 是可驗證的資料，不是生成出來的程式碼。只有完整通過 F02 的 canonical Blueprint 才是 appf2 可以信任與執行的 App。

@@ -1,7 +1,7 @@
 # F04 — Capability Registry / Resolution
 
 > 狀態：BUILD_FREEZE_READY
-> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved NFFBuild locked BS-*。
+> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved appf2-build locked BS-*。
 >
 > Canonical Role：Phase 1 Concrete Capability Registry 的 Working Current Truth。
 >
@@ -13,7 +13,7 @@
 
 F04 的結果不是讓 User 看見 Registry，而是：
 
-> User 的 Intent 只能被組成 NodeFF 真正會、安全會、目前可執行的能力；Compiler 不幻想不存在的能力，Validator 與 Runtime 也不各自有不同答案。
+> User 的 Intent 只能被組成 appf2 真正會、安全會、目前可執行的能力；Compiler 不幻想不存在的能力，Validator 與 Runtime 也不各自有不同答案。
 
 Canonical flow：
 

@@ -1,6 +1,6 @@
 # O03 — Recovery Overlay
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → NFFBuild locked BS-*。
+> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → appf2-build locked BS-*。
 
 > Overlay ID：O03
 >
@@ -18,7 +18,7 @@
 
 O03 的核心任務：
 
-> **當某一步失敗時，User 不需要懂技術錯誤；NodeFF 要先保住能保住的內容，再用人話說明發生什麼，最後只提供真正能執行的下一步。**
+> **當某一步失敗時，User 不需要懂技術錯誤；appf2 要先保住能保住的內容，再用人話說明發生什麼，最後只提供真正能執行的下一步。**
 
 Recovery 的第一優先不是「顯示錯誤」，而是：
 
@@ -1090,7 +1090,7 @@ O03 ④A Low-fi與④B Step 1–4已完成 User Review並鎖定。
 
 Final Cross-Screen High-fi Review：**CLOSED / VERIFIED**。
 
-Build Freeze / NFFBuild activation / Cursor implementation 維持 HOLD。
+Build Freeze / appf2-build activation / Cursor implementation 維持 HOLD。
 
 ### Final Cross-Screen High-fi Review — CLOSED / VERIFIED
 

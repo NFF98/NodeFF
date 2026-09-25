@@ -1,7 +1,7 @@
-# NodeFF Shared API Conventions
+# appf2 Shared API Conventions
 
 > 狀態：BUILD_FREEZE_READY / Phase 1 — Working Current Truth。
-> Legacy Formal Spec reference：RETIRED / NO-USE；Build implementation snapshot 改由 Human-approved Build Freeze → NFFBuild BS-*。
+> Legacy Formal Spec reference：RETIRED / NO-USE；Build implementation snapshot 改由 Human-approved Build Freeze → appf2-build BS-*。
 > Canonical Role：所有 Phase 1 public HTTP APIs 的共同 transport、identity、idempotency、concurrency、error、rate-limit、timeout 與 versioning contract。
 > Function-specific endpoint payload / semantics 仍由各 Fxx 擁有。
 

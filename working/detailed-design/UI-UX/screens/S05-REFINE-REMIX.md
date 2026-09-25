@@ -1,6 +1,6 @@
 # S05 — Refine / Remix Workspace
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → NFFBuild locked BS-*。
+> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → appf2-build locked BS-*。
 
 > Screen ID：S05
 >
@@ -78,7 +78,7 @@ S04 Shared App restore完成後，也是先進 S03，再由 S03進 Remix。
 # 5. Proposed Desktop Low-fi — Change Composer
 
     ┌──────────────────────────────────────────────────────────┐
-    │ NodeFF    [App Logo] App Title              [回原 App] │
+    │ appf2    [App Logo] App Title              [回原 App] │
     ├──────────────────────────────────────────────────────────┤
     │ Refine / Remix                                           │
     │                                                          │
@@ -162,7 +162,7 @@ Assumption Review：
 
 # 9. Change Progress
 
-S05 建議沿用 NodeFF creation progress語言，但改成 change context。
+S05 建議沿用 appf2 creation progress語言，但改成 change context。
 
 Low-fi proposed stages：
 
@@ -677,13 +677,13 @@ App identity
 >
 「原版會保留」 / 「查看原版」
 >
-NodeFF chrome
+appf2 chrome
 ~~~
 
 Rules：
 
 - App identity 用來確認「現在改哪個 App」，不是主視覺。
-- NodeFF chrome 不可比 task title / input 更搶眼。
+- appf2 chrome 不可比 task title / input 更搶眼。
 - 不顯示左側 inspector、右側 properties、雙欄 old/new editor。
 
 ### 4. Change Input Geometry
@@ -751,7 +751,7 @@ Canonical desktop composition：
 
 ~~~text
 ┌──────────────────────────────────────────────┐
-│ NodeFF   App Title — 新版預覽    查看原版    │
+│ appf2   App Title — 新版預覽    查看原版    │
 ├──────────────────────────────────────────────┤
 │                                              │
 │            NEW APP RUNTIME                   │
@@ -780,7 +780,7 @@ S05A：使用新版 / S05B：使用我的版本
 >
 保留原版 / 查看原版
 >
-NodeFF chrome
+appf2 chrome
 ~~~
 
 Generated App Runtime應取得約 `75–85%` 的視覺注意力。
@@ -948,7 +948,7 @@ S05 是 **Focused Creator Workspace**，不是 Builder / Admin / IDE。
 Visual direction：
 
 - White / Soft Neutral為主。
-- NodeFF chrome低干擾。
+- appf2 chrome低干擾。
 - 不做 sidebar / inspector / properties rail。
 - 不做大面積 gradient。
 - 不做 glassmorphism。
@@ -988,7 +988,7 @@ Task Title：
 - S05A：`修改這個 App`。
 - S05B：`改成我的版本`。
 
-第一視覺焦點必須先回答「現在要做什麼」，而不是先看到 NodeFF品牌或 source metadata。
+第一視覺焦點必須先回答「現在要做什麼」，而不是先看到 appf2品牌或 source metadata。
 
 ### 3. Composer Visual Treatment
 
@@ -1012,7 +1012,7 @@ Change Composer沿 Design System Input / Composer：
 
 S05A / S05B **不靠不同主色區分**。
 
-共同使用相同 NodeFF system palette與 geometry。
+共同使用相同 appf2 system palette與 geometry。
 
 區分方式固定為：
 
@@ -1109,7 +1109,7 @@ UI emphasis不得改變 Function capability；Secondary / Tertiary action仍必�
 
 ### 8. Preview Runtime Visual Boundary
 
-> **NodeFF owns preview context; creator App owns its own presentation.**
+> **appf2 owns preview context; creator App owns its own presentation.**
 
 S05 Preview可以提供克制的 outer context：
 
@@ -1120,10 +1120,10 @@ S05 Preview可以提供克制的 outer context：
 
 但不得：
 
-- 強迫 Generated App內部元件改成 NodeFF visual style；
-- 用巨大 NodeFF card-in-card壓縮 Runtime；
+- 強迫 Generated App內部元件改成 appf2 visual style；
+- 用巨大 appf2 card-in-card壓縮 Runtime；
 - 插入 inspector / debug / blueprint badge；
-- 讓 NodeFF版本 chrome比 Generated App更搶眼。
+- 讓 appf2版本 chrome比 Generated App更搶眼。
 
 Runtime仍是 Preview主要視覺。
 
@@ -1233,7 +1233,7 @@ Cursor不得：
 - 把 Source / Candidate只用顏色區分。
 - 把 Yellow當 warning / danger。
 - 把 Preview變成 S06-style side-by-side Compare。
-- 把 Generated App內部重畫成 NodeFF UI。
+- 把 Generated App內部重畫成 appf2 UI。
 - 用 fake progress / smooth time-based %。
 - 為 animation延遲 READY。
 - Recovery時清空可安全保留的 draft / preview context。
@@ -1243,7 +1243,7 @@ Cursor不得：
 
 1. S05採 Focused Creator Workspace visual direction，不做 Builder / IDE視覺。
 2. Neutral / White主導；Teal作 Primary / Focus / Candidate accent；Yellow只作 small energy marker。
-3. Task title visual weight高於 App identity / NodeFF chrome。
+3. Task title visual weight高於 App identity / appf2 chrome。
 4. Composer沿 shared radius / focus / error / typography tokens，不做 glowing AI prompt box。
 5. S05A / S05B不靠不同主色區分。
 6. Source = Neutral +明確文字；Candidate = Teal / Aqua accent +明確文字。

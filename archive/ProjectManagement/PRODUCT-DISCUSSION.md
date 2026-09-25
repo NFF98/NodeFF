@@ -1,9 +1,9 @@
-# NodeFF Product Discussion
+# appf2 Product Discussion
 
-> **HISTORICAL / NO-USE FOR CURRENT AUTHORITY**：本檔保留歷史證據。任何 `spec/`、Formal Spec、Working → Spec、Spec Promotion、NodeFF execution 字樣皆屬 retired governance；Current flow = NodeFF Working → Human-approved Build Freeze → NFFBuild locked BS-*。
+> **HISTORICAL / NO-USE FOR CURRENT AUTHORITY**：本檔保留歷史證據。任何 `spec/`、Formal Spec、Working → Spec、Spec Promotion、appf2 execution 字樣皆屬 retired governance；Current flow = appf2 Working → Human-approved Build Freeze → appf2-build locked BS-*。
 
 ## Purpose
-Working notes for NodeFF product discussions before decisions are approved into the official specification.
+Working notes for appf2 product discussions before decisions are approved into the official specification.
 
 ## Status
 - Working document — **not SSOT**
@@ -12,9 +12,9 @@ Working notes for NodeFF product discussions before decisions are approved into 
 ## Discussion Notes
 
 ### Top Mission / Game-Changing Reason
-The user identified the following source material as the starting point for NodeFF's top mission / game-changing reason:
+The user identified the following source material as the starting point for appf2's top mission / game-changing reason:
 
-- NodeFF aims to challenge the traditional App model by reducing or eliminating the friction created by apps as isolated containers.
+- appf2 aims to challenge the traditional App model by reducing or eliminating the friction created by apps as isolated containers.
 - **Zero Cross-App Friction:** a user's natural-language intent can potentially chain multiple C2C APIs/data capabilities in the background, instead of requiring manual app switching, copying, and pasting.
 - **Intent-adaptive UI / Disposable UI:** instead of forcing users through fixed app pages, the interface can be dynamically composed around the user's current intent and only expose the capabilities needed for that task.
 - The proposed ecosystem shift is from users finding and operating individual apps toward users expressing intent while underlying capability providers become composable services/APIs.
@@ -34,7 +34,7 @@ Current working keys identified by the user:
 | 5 | **Fun and socialable** |
 
 ### Business Idea Exploration
-Initial business/application directions explored from the current NodeFF keys:
+Initial business/application directions explored from the current appf2 keys:
 
 | # | Idea | Intent Commerce | Social |
 |---:|---|:---:|:---:|
@@ -52,17 +52,17 @@ Initial business/application directions explored from the current NodeFF keys:
 ### Working Product Hypothesis
 A recurring hypothesis from the discussion is:
 
-> 「20 人怎麼分帳」不是產品本身；「任何人遇到一個複雜決策 → NodeFF 秒變成一個可互動、可分享、可交易的小 App」才可能是產品。
+> 「20 人怎麼分帳」不是產品本身；「任何人遇到一個複雜決策 → appf2 秒變成一個可互動、可分享、可交易的小 App」才可能是產品。
 
 This remains a working hypothesis and is not yet an approved product decision.
 
 ### Phase 1 Scope — Working
-The uploaded Phase 1 material frames NFF as a **dynamic micro-application engine**, not a replacement for native apps.
+The uploaded Phase 1 material frames appf2 as a **dynamic micro-application engine**, not a replacement for native apps.
 
 **Boundary / positioning:**
 - Native Apps: high-stickiness, long-lifecycle experiences with deep identity/data, background system capabilities.
-- NFF: instant-intent, single-session, disposable experiences with zero-download / zero-registration entry.
-- NFF is aimed at long-tail, fragmented, dynamically generated, C2C/social micro-app experiences rather than replacing mature native apps.
+- appf2: instant-intent, single-session, disposable experiences with zero-download / zero-registration entry.
+- appf2 is aimed at long-tail, fragmented, dynamically generated, C2C/social micro-app experiences rather than replacing mature native apps.
 
 **Phase 1 boundary model under discussion:**
 - **Tier 1:** lightweight client-side / ephemeral experiences, including real-time social games, calculators, timers, and browser/WASM workloads.
@@ -79,7 +79,7 @@ The uploaded Phase 1 material frames NFF as a **dynamic micro-application engine
 **Open decisions from the Phase 1 material:**
 1. Runtime LLM usage: quota within free tier vs. automatically Tier 2 when runtime AI is required.
 2. Ephemeral room limits: proposed example is 10 concurrent users / 15-minute idle destruction.
-3. Macro-app reframing: automatically reduce a large-app request to an NFF-sized intent, or ask for confirmation first.
+3. Macro-app reframing: automatically reduce a large-app request to an appf2-sized intent, or ask for confirmation first.
 
 **Working note / better suggestion:** Keep Phase 1 focused on proving the **instant-intent → generated micro-app → share/use → disappear** loop. Treat exact cost figures, room limits, and technical thresholds as provisional until validated by implementation and real usage.
 
@@ -116,14 +116,14 @@ Examples:
 - 「深蹲 5 組，從 60kg 開始每組加 5kg，每組休息 90 秒」
 - 「月薪 65,000，扶養 1 人，幫我算實領薪資與勞健保」
 
-Purpose: continuously demonstrate that **ordinary everyday language can be directly turned into a usable NFF experience.**
+Purpose: continuously demonstrate that **ordinary everyday language can be directly turned into a usable appf2 experience.**
 
 #### 4. 漸進式對話微調 (Progressive Refinement)
 The first request does not need to be perfect.
 
 Example flow:
 1. User: **「幫我做個 3 人分帳」**
-2. NFF generates a basic 3-person bill-splitting card.
+2. appf2 generates a basic 3-person bill-splitting card.
 3. The generated card then presents contextual suggestion capsules such as:
    - **[ 💡 試試加入：匯率換算 ]**
    - **[ 💡 試試加入：權重比例 ]**
@@ -147,17 +147,17 @@ The desired experience is that users gradually move from **copying → modifying
 
 **Better suggestion:** Avoid making the product feel like a Prompt school. The UI should optimize for **getting the user to a useful result quickly**, while the learning happens invisibly through examples and refinement. In other words: **「先完成，再學會；不是先學會，才能完成。」**
 
-A second UX principle worth validating later: the capsule should be **outcome-led rather than prompt-led**. Show users what they can make/do (e.g. 「3人多幣分帳」) and let the editable prompt remain the mechanism underneath. This keeps NFF feeling like a consumer creation tool rather than an AI prompt editor.
+A second UX principle worth validating later: the capsule should be **outcome-led rather than prompt-led**. Show users what they can make/do (e.g. 「3人多幣分帳」) and let the editable prompt remain the mechanism underneath. This keeps appf2 feeling like a consumer creation tool rather than an AI prompt editor.
 
 ### Working Status
 All content in this file remains working discussion material unless explicitly approved and moved into `spec/` or `decisions/`.
 
 ### Detailed Design — Layer 2: Semantic Compiler Layer (Working)
 
-**定位：** 將非結構化的自然語言，轉換為符合 NodeFF 定義的結構化 JSON。
+**定位：** 將非結構化的自然語言，轉換為符合 appf2 定義的結構化 JSON。
 
 **核心元件 / processing：**
-- **Context Injector：** 注入 System Prompt 與 NFF Component Registry 可用清單，讓 LLM 只知道目前前端可使用的 Lego/Component primitives。
+- **Context Injector：** 注入 System Prompt 與 appf2 Component Registry 可用清單，讓 LLM 只知道目前前端可使用的 Lego/Component primitives。
 - **LLM Inference Engine：** 可使用 Groq / OpenAI 相容 API；強制 Structured Outputs（JSON Mode）。
 - **Intent Convergence：** 將自然語言意圖收斂為可處理的 Archetype，例如「午餐吃什麼」→ Decision Archetype、「算熱量」→ Entity Archetype。
 - **Schema Validator：** 後端以 Pydantic 或 Zod 做第一次結構驗證，並檢查 bind 的變數是否存在於 initialState；失敗時觸發內部 Retry。
@@ -174,7 +174,7 @@ All content in this file remains working discussion material unless explicitly a
 - Layer 2 產生並驗證 LegoSpec JSON AST，成功後交給後續 Layer。
 
 **Architecture Boundary（Working）：**
-NodeFF 的核心技術方向暫定為：**約 12–15 個高階領域 Component Libraries（可包含 3D、動畫、影音等 Rich Primitives）＋純宣告式 JSON Contract＋瀏覽器端 AST 安全沙盒 Renderer/Runtime。**
+appf2 的核心技術方向暫定為：**約 12–15 個高階領域 Component Libraries（可包含 3D、動畫、影音等 Rich Primitives）＋純宣告式 JSON Contract＋瀏覽器端 AST 安全沙盒 Renderer/Runtime。**
 
 **Working caution：** 上述「100%」、「O(1)」、「sub-millisecond」、「12–15 個」等數字/性能表述目前視為設計目標或假設，不視為已驗證的實際性能保證；後續詳細設計與實測再確認。
 
@@ -196,7 +196,7 @@ User Prompt → Normalize → SHA-256 Key → Edge KV Lookup → Hit: Verified L
 
 ### Detailed Design — Layer 3: Contract Layer / LegoSpec JSON Schema (Working)
 
-**定位：** NodeFF 架構的核心契約層。以宣告式 Schema 嚴格定義 State、UI Layout、Logic/Actions，以及資料與畫面的綁定關係。
+**定位：** appf2 架構的核心契約層。以宣告式 Schema 嚴格定義 State、UI Layout、Logic/Actions，以及資料與畫面的綁定關係。
 
 **Schema 核心三大區塊：**
 - **state：** 定義所有變數的初始值與型別（目前討論包含 Number、String、Array）。
@@ -267,7 +267,7 @@ User Prompt → Normalize → SHA-256 Key → Edge KV Lookup → Hit: Verified L
 
 #### Transparent Protocol / Graceful Degradation
 
-當需求超越 NodeFF 當前能力邊界時，系統不應假裝完成，也不應直接讓使用者得到空白/錯誤結果。
+當需求超越 appf2 當前能力邊界時，系統不應假裝完成，也不應直接讓使用者得到空白/錯誤結果。
 
 Working protocol：
 - Layer 2 必須將「能力不足 + 替代方案」編碼進 LegoSpec 的 `notice`。
@@ -304,7 +304,7 @@ Example concept:
 
 #### Lego-fication / Five Atomic Roles
 
-Working model: 多數 NodeFF 派對/決策微應用可由以下五類原子組合：
+Working model: 多數 appf2 派對/決策微應用可由以下五類原子組合：
 1. **State** — 儲存目前資料/遊戲狀態。
 2. **Action** — 使用者觸發互動，例如 Button、DiceRoller、WheelSpinner、Timer。
 3. **Rule / Expression** — 受限制的純資料運算與規則。
@@ -358,13 +358,13 @@ Layer 4 可提供類似 spreadsheet 的**通用資料運算 primitives**，例�
 
 ### Error Handling & System Recovery — Working
 
-**目標：** NodeFF 的錯誤處理不是單一「Error Page」，而是依錯誤發生階段採取不同的 recovery strategy，並盡量維持使用者流程不中斷。
+**目標：** appf2 的錯誤處理不是單一「Error Page」，而是依錯誤發生階段採取不同的 recovery strategy，並盡量維持使用者流程不中斷。
 
 #### 1. Four Major Error Scenarios
 
 | Error Scenario | Cause |
 |---|---|
-| **Error in Making（生成階段失敗）** | LLM 輸出破損 JSON、連線 timeout、或輸出未通過 NFF Primitive / Schema validation。 |
+| **Error in Making（生成階段失敗）** | LLM 輸出破損 JSON、連線 timeout、或輸出未通過 appf2 Primitive / Schema validation。 |
 | **Made but Error in Request（生成成功但意圖不符）** | JSON 合法，但生成結果與使用者原始意圖不一致，例如要求 6 顆骰子加倍，卻產生 4 顆一般骰子。 |
 | **Made but Run Error（生成成功但執行崩潰）** | 初次 render 正常，但互動後發生 runtime exception，例如除以零、undefined / NaN、或狀態流程進入無效狀態。 |
 | **System Recovery Pipeline（跨層錯誤）** | 錯誤跨越 generation、validation、runtime 等多個階段，需要連續 recovery / telemetry。 |
@@ -449,7 +449,7 @@ Telemetry 不應記錄不必要的敏感使用者資料；正式 Privacy / Secur
 
 #### 7. Important Design Suggestions
 
-1. **不要把「Self-Healing」理解成系統可以任意修改自己的程式。** NodeFF 的 recovery 應是受控的 retry、delta patch、fallback、component isolation 與 blueprint quarantine，而不是 runtime 自我生成 / 執行任意 code。
+1. **不要把「Self-Healing」理解成系統可以任意修改自己的程式。** appf2 的 recovery 應是受控的 retry、delta patch、fallback、component isolation 與 blueprint quarantine，而不是 runtime 自我生成 / 執行任意 code。
 2. **Error Recovery 必須有上限。** Retry / Delta Patch 不應無限循環；正式設計需要定義 retry budget / circuit breaker。
 3. **Intent mismatch 最好保留使用者控制權。** 系統可以提供 refinement suggestion，但不應偷偷修改使用者需求後直接替換結果。
 4. **「2 次即 Unpublish」先保留為候選，不升格為硬規則。** Client error 次數本身可能受到瀏覽器、網路或 transient failure 影響。
@@ -477,11 +477,11 @@ These should become first-class concepts in later data-model and API design rath
 
 ### Latest Working Input — Heavy Tasks / Control Plane / Compilation Paths
 
-#### 1. NFF Control Plane Boundary
+#### 1. appf2 Control Plane Boundary
 New working principle:
-> **NFF Engine 是輕量 Control Plane，不是 Heavy Compute Plane。**
+> **appf2 Engine 是輕量 Control Plane，不是 Heavy Compute Plane。**
 
-NFF 核心負責：
+appf2 核心負責：
 - UI rendering
 - state packaging / transport
 - realtime synchronization
@@ -494,29 +494,29 @@ Heavy work should be delegated to either:
 3. external persistent storage when durable large-scale data is required.
 
 #### 2. Chat Boundary
-**Room Chat** fits the NFF ephemeral-session model:
+**Room Chat** fits the appf2 ephemeral-session model:
 - text / stickers can use the room's realtime broadcast channel;
 - room-only messages may remain ephemeral and disappear with the room;
 - WebRTC voice is a possible capability for live sessions.
 
-**Long-lived communication** such as Discord/Telegram-style history, account systems and background notifications is outside the natural NFF core and should not be treated as a native replacement target.
+**Long-lived communication** such as Discord/Telegram-style history, account systems and background notifications is outside the natural appf2 core and should not be treated as a native replacement target.
 
 Important distinction: ephemeral room chat is a candidate capability; exact retention, WebRTC behavior and provider architecture remain to be designed.
 
 #### 3. Heavy Task Delegation
 Three working paths:
 
-| Task | Execution | NFF Role |
+| Task | Execution | appf2 Role |
 |---|---|---|
 | Browser-capable heavy work | WASM / Web Workers | UI + parameters + progress/result presentation |
 | Server-required heavy work | Async Action → external API/worker | Orchestrator + status dashboard + result presentation |
-| Large/durable data | External storage / approved backend | Controlled connector/reference, not NFF core data plane |
+| Large/durable data | External storage / approved backend | Controlled connector/reference, not appf2 core data plane |
 
 Examples include image processing, audio processing, browser ML, video generation, long-form AI processing and large data queries.
 
 #### 4. Golden Rule
 Working architecture rule:
-> **「NFF 只做輕量控制面；重型運算與大型持久資料交給瀏覽器本地算力或專業外部服務。」**
+> **「appf2 只做輕量控制面；重型運算與大型持久資料交給瀏覽器本地算力或專業外部服務。」**
 
 This protects the intended product properties:
 - no installation;
@@ -565,7 +565,7 @@ The product distinction is:
 - heavy capabilities are explicitly delegated.
 
 This reinforces:
-**Intent → WidgetSpec → Data/State → NFF Runtime**
+**Intent → WidgetSpec → Data/State → appf2 Runtime**
 rather than:
 **Intent → generate a new application deployment for every user.**
 
@@ -596,11 +596,11 @@ Candidate metrics:
 
 Important measurement guardrail: anonymous browser IDs are not equivalent to people. Storage clearing, browser/device switching and privacy controls can under/over-count users. Report them explicitly as anonymous browser/device metrics rather than registered-user MAU.
 
-User-provided claims such as “80% registration drop-off,” specific CPUI values and example volume/K-factor figures are hypotheses/benchmarks, not validated NFF facts.
+User-provided claims such as “80% registration drop-off,” specific CPUI values and example volume/K-factor figures are hypotheses/benchmarks, not validated appf2 facts.
 
 #### LLM Cartridge Model
 Useful mental model:
-> **LLM = cartridge designer/compiler; NFF Runtime = cartridge player.**
+> **LLM = cartridge designer/compiler; appf2 Runtime = cartridge player.**
 
 For a new uncached intent:
 `Intent → LLM compile once → validated WidgetSpec/Blueprint`
@@ -725,17 +725,17 @@ A high-level four-layer diagram is insufficient implementation instruction for a
 Working engineering principle:
 > **Architecture/spec owns design decisions; Cursor implements approved contracts.**
 
-This does not mean every implementation detail must be frozen forever. It means Cursor must not silently invent architecture that changes NFF's trust boundaries or SSOT.
+This does not mean every implementation detail must be frozen forever. It means Cursor must not silently invent architecture that changes appf2's trust boundaries or SSOT.
 
 #### Candidate Implementation Stack — Not Yet Approved
-- Semantic compiler: Vercel AI SDK or provider SDK behind an NFF adapter.
+- Semantic compiler: Vercel AI SDK or provider SDK behind an appf2 adapter.
 - Runtime schema: Zod.
 - Contract: TypeScript types derived from / aligned with the runtime schema.
 - UI: React; Tailwind/shadcn remain candidate UI implementation choices.
 - State: Zustand or a reducer-based store; exact choice unresolved.
 - Expression/rule engine: a restricted evaluator; `expr-eval` is a candidate, not yet assumed safe enough without threat-model testing.
 - Component Registry: explicit allowlisted map/factory.
-- Patch protocol: validated JSON Patch or an NFF-restricted patch subset.
+- Patch protocol: validated JSON Patch or an appf2-restricted patch subset.
 
 #### Important Zod Correction
 Zod can validate structure/types at runtime, but a basic schema alone does **not** automatically prove cross-field semantics such as:
@@ -764,7 +764,7 @@ Potential compiler output can include:
 Critical product guardrail:
 > **Social defaults are assumptions, not facts.**
 
-If the user did not provide role counts, total bill or weighting policy, generated defaults must be visibly labeled/editable. NFF must not present culturally/socially inferred weights as authoritative or objectively fair.
+If the user did not provide role counts, total bill or weighting policy, generated defaults must be visibly labeled/editable. appf2 must not present culturally/socially inferred weights as authoritative or objectively fair.
 
 A stronger UX may compile ambiguity into an editable scenario rather than silently deciding it.
 
@@ -850,7 +850,7 @@ Out-of-scope for the core declarative runtime unless a separately approved capab
 - unbounded recursive/agentic RPG logic;
 - unsupported custom media/system behaviors.
 
-Important nuance: JSON itself is not the technical limitation. Declarative JSON can configure sophisticated engines. NFF's hard wall is the **approved runtime capability/trust boundary**: NFF intentionally does not expose arbitrary physics/rendering/script capabilities in the core.
+Important nuance: JSON itself is not the technical limitation. Declarative JSON can configure sophisticated engines. appf2's hard wall is the **approved runtime capability/trust boundary**: appf2 intentionally does not expose arbitrary physics/rendering/script capabilities in the core.
 
 #### Fallback Rule
 For unsupported requests:
@@ -903,4 +903,4 @@ Examples of candidate generic operations:
 The LLM's world knowledge is not authoritative. For culturally variable or disputed game/domain rules, the compiler should surface assumptions/rule variant or ask for clarification rather than silently claiming one universal rule.
 
 #### SSOT Lesson
-The supplied case study reinforces the existing NodeFF governance already present in this repo: architecture memory belongs in repository documents, not chat history. We should **not create a second docs/ SSOT tree** beside the existing `SSOT.md`, `spec/`, `decisions/`, `execution/`, and `working/` hierarchy.
+The supplied case study reinforces the existing appf2 governance already present in this repo: architecture memory belongs in repository documents, not chat history. We should **not create a second docs/ SSOT tree** beside the existing `SSOT.md`, `spec/`, `decisions/`, `execution/`, and `working/` hierarchy.

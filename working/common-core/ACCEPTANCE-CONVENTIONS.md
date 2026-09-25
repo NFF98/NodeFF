@@ -1,7 +1,7 @@
-# NodeFF Acceptance / Test Contract Conventions
+# appf2 Acceptance / Test Contract Conventions
 
 > 狀態：BUILD_FREEZE_READY / Phase 1 — Working Current Truth。
-> Legacy Formal Spec reference：RETIRED / NO-USE；Build implementation snapshot 改由 Human-approved Build Freeze → NFFBuild BS-*。
+> Legacy Formal Spec reference：RETIRED / NO-USE；Build implementation snapshot 改由 Human-approved Build Freeze → appf2-build BS-*。
 > Canonical Role：把 Fxx Acceptance Criteria 轉成可實作、可測試、可追蹤的 Test Contract。
 
 # 1. Core Rule

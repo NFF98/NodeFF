@@ -1,6 +1,6 @@
 # S02 — Create Workspace
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → NFFBuild locked BS-*。
+> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → appf2-build locked BS-*。
 
 > Screen ID：S02
 >
@@ -18,7 +18,7 @@
 
 S02 的核心任務：
 
-> **讓 User 感覺 NodeFF 正在把他的想法往「可用 App」推進；只有真的缺少關鍵資訊時才打斷他，而且任何回答、假設與失敗都不讓他從頭重來。**
+> **讓 User 感覺 appf2 正在把他的想法往「可用 App」推進；只有真的缺少關鍵資訊時才打斷他，而且任何回答、假設與失敗都不讓他從頭重來。**
 
 S02 不是 AI chat room，也不是 engineering status console。
 
@@ -53,7 +53,7 @@ READY_TO_BUILD 是內部 transition。若 Intent 已足夠且沒有 material cla
 # 5. Proposed Desktop Low-fi
 
     ┌─────────────────────────────────────────────────────┐
-    │ NodeFF                                  [取消/返回] │
+    │ appf2                                  [取消/返回] │
     │                                                     │
     │                                                     │
     │ ● 理解想法   ○ 整理成 App   ○ 檢查互動   ○ 準備 App│
@@ -72,7 +72,7 @@ Desktop 預設採 single-focus workspace，不做 permanent sidebar / dashboard�
 # 6. Proposed Mobile Low-fi
 
     ┌────────────────────────────┐
-    │ NodeFF              [返回] │
+    │ appf2              [返回] │
     │                            │
     │ ● ━ ○ ━ ○ ━ ○            │
     │ 理解  組合  檢查  準備     │
@@ -251,7 +251,7 @@ User 已確認：
 User-facing：
 
 ~~~text
-NodeFF
+appf2
 ← 回到建立 App
 ~~~
 

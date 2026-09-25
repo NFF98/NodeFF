@@ -1,10 +1,10 @@
-# NodeFF App Architecture
+# appf2 App Architecture
 
-> 狀態：Working Architecture Baseline。本文只回答四件事：**NFF 有哪些系統、每個系統負責什麼結果、核心流程怎麼跑、1／3／6 個月怎麼長。** Function 實作細節由 APP-DETAILED-DESIGN-OVERVIEW.md 與 working/detailed-design/functions/ 承接。
+> 狀態：Working Architecture Baseline。本文只回答四件事：**appf2 有哪些系統、每個系統負責什麼結果、核心流程怎麼跑、1／3／6 個月怎麼長。** Function 實作細節由 APP-DETAILED-DESIGN-OVERVIEW.md 與 working/detailed-design/functions/ 承接。
 
 # 1. Architecture Thesis
 
-NodeFF 是一個 **Intent-to-App Runtime Platform**。
+appf2 是一個 **Intent-to-App Runtime Platform**。
 
 > **意圖就是 App。**
 
@@ -21,7 +21,7 @@ Intent
 → Learn from Evidence
 ~~~
 
-NodeFF 不為每個 Micro-App 生成、部署一套新程式。
+appf2 不為每個 Micro-App 生成、部署一套新程式。
 
 它部署的是一個穩定平台：
 
@@ -88,7 +88,7 @@ flowchart LR
 
 ---
 
-# 3. NFF 有什麼？各自負責什麼結果？
+# 3. appf2 有什麼？各自負責什麼結果？
 
 | 系統 | 主要責任 | 必須產生的結果 |
 |---|---|---|
@@ -96,7 +96,7 @@ flowchart LR
 | **L1 Ingestion & Routing** | safety、policy、quota、reuse lookup、routing | 合法請求進正確路徑，原始 Intent 被保存 |
 | **L2 Semantic Compiler** | 理解 Intent、列出不確定性、Clarification Policy、Capability selection、composition | 先得到 Resolved Intent，再產生正確 Blueprint Candidate |
 | **Model Gateway** | LLM routing / adapter / fallback | 可依能力、成本、速度切模型而不改核心 |
-| **Capability Fabric** | 定義 NFF 可執行能力 | Compiler、Validator、Runtime 共用同一能力真相 |
+| **Capability Fabric** | 定義 appf2 可執行能力 | Compiler、Validator、Runtime 共用同一能力真相 |
 | **L3 LegoSpec Validation** | schema、semantic boundary、security、compatibility | 只有可信任 Blueprint 可進 Runtime |
 | **L4 Universal Runtime** | state、rules、actions、views、effects | Browser 端低成本、可重播的互動 App |
 | **State / Identity / Evidence** | Blueprint、Instance、result、lineage、anonymous/account evidence | Share、Remix、Reuse、Ownership 與改善證據 |
@@ -181,7 +181,7 @@ Raw Intent
 
 分工：
 - LLM 負責理解 Intent、列出 missing / ambiguity / assumption。
-- NFF Clarification Policy 負責決定「直接做、顯示假設、還是必須追問」。
+- appf2 Clarification Policy 負責決定「直接做、顯示假設、還是必須追問」。
 - Experience Shell 負責把問題與 Visible Assumptions 用可修改 UI 呈現。
 - material assumption 必須有來源，不可把 LLM 建議冒充 User 事實。
 
@@ -297,7 +297,7 @@ Model Gateway 屬於 L2。
 ~~~mermaid
 flowchart LR
     C[Semantic Compiler] --> R[Model Router]
-    R --> I[NFF Model Interface]
+    R --> I[appf2 Model Interface]
     I --> A[Provider A]
     I --> B[Provider B]
     I --> C2[Provider C]
@@ -323,7 +323,7 @@ Provider failure 可以切模型，但新輸出仍必須重新通過 L3 Validati
 
 ---
 
-# 6. Capability Fabric：NFF 真正會做什麼
+# 6. Capability Fabric：appf2 真正會做什麼
 
 Capability Fabric 不是第五層，而是 L2／L3／L4 共用的能力真相。
 
@@ -350,7 +350,7 @@ Compiler Metadata
 
 ---
 
-# 7. User 要的東西 NFF 不會怎麼辦？
+# 7. User 要的東西 appf2 不會怎麼辦？
 
 任何 Intent 必須先得到 Capability Coverage 結論：
 
@@ -472,7 +472,7 @@ Architecture rules：
 
 結果：
 
-> **NFF 不只負責「App 能跑」，還要負責讓 User 能低摩擦地把 App 修到符合意圖。**
+> **appf2 不只負責「App 能跑」，還要負責讓 User 能低摩擦地把 App 修到符合意圖。**
 
 ## Error / Recovery
 
@@ -636,14 +636,14 @@ Provider discovery / routing
 Commerce mechanics
 ~~~
 
-這個分法是避免未來每三個月重寫一次 NFF 的關鍵。
+這個分法是避免未來每三個月重寫一次 appf2 的關鍵。
 
 ---
 
 # 13. Architecture Guardrails
 
 1. LLM 不得把模糊 Intent 直接腦補成 Blueprint。
-2. Clarification Policy 是 NFF-owned quality gate，LLM 不得 bypass。
+2. Clarification Policy 是 appf2-owned quality gate，LLM 不得 bypass。
 3. Material assumption 必須可見、可修改、有 provenance。
 4. LLM 只在 Resolved Intent 後產生受控 Blueprint。
 5. Runtime 不做 free-form Intent inference。
@@ -659,7 +659,7 @@ Commerce mechanics
 15. Component failure 不得造成整頁 White Screen。
 16. Heavy / Paid / External Work 必須經 Capability Boundary。
 17. 中長期只能擴張核心，不能繞過核心另建第二套 Runtime。
-18. Multi-capability workflow 必須經 NFF-owned Orchestration Contract；workflow vendor 不得成為核心語意。
+18. Multi-capability workflow 必須經 appf2-owned Orchestration Contract；workflow vendor 不得成為核心語意。
 19. Async / external step 必須有 timeout、retry、idempotency、compensation 或明確 failure policy。
 20. Provider Network 必須建立在 certification、compatibility、evidence 與可治理 routing 上，不以 API 數量當可用供給。
 21. Product Evidence 決定何時解鎖下一階段。
@@ -690,10 +690,10 @@ working/detailed-design/functions/
 
 # 結論
 
-NodeFF 的 App Architecture 應該讓團隊永遠能回答：
+appf2 的 App Architecture 應該讓團隊永遠能回答：
 
 ~~~text
-NFF 有什麼？
+appf2 有什麼？
 → Experience + Engine + Fabric + Runtime + Evidence + Recovery
 
 誰負責什麼？
@@ -721,7 +721,7 @@ NFF 有什麼？
 
 > Structure migration preservation block. Content below is preserved from the former files. Dedup / semantic cleanup is intentionally deferred.
 
-# NodeFF Architecture Evolution — Phase 1
+# appf2 Architecture Evolution — Phase 1
 
 > Canonical Role：Phase 1 architecture additions / activation only. Shared architecture invariants remain in `working/common-core/APP-ARCHITECTURE.md`.
 
@@ -753,7 +753,7 @@ NFF 有什麼？
 
 ---
 
-# NodeFF Architecture Evolution — Phase 2
+# appf2 Architecture Evolution — Phase 2
 
 > Canonical Role：Phase 2 architecture additions / activation only. Shared architecture invariants remain in `working/common-core/APP-ARCHITECTURE.md`.
 
@@ -778,7 +778,7 @@ NFF 有什麼？
 
 ---
 
-# NodeFF Architecture Evolution — Phase 3
+# appf2 Architecture Evolution — Phase 3
 
 > Canonical Role：Phase 3 architecture additions / activation only. Shared architecture invariants remain in `working/common-core/APP-ARCHITECTURE.md`.
 
@@ -803,7 +803,7 @@ NFF 有什麼？
 
 ---
 
-# NodeFF Architecture Evolution — Phase 4+
+# appf2 Architecture Evolution — Phase 4+
 
 > Canonical Role：Phase 4+ architecture additions / activation only. Shared architecture invariants remain in `working/common-core/APP-ARCHITECTURE.md`.
 
@@ -836,7 +836,7 @@ Intent
 → Validated Outcome
 ~~~
 
-Orchestration Engine 只負責執行已被 NFF Contract 描述的 workflow。
+Orchestration Engine 只負責執行已被 appf2 Contract 描述的 workflow。
 Temporal、n8n 或其他 workflow engine 都只能位於 Adapter 後方，不可把 vendor DSL 寫進 Blueprint 核心。
 
 仍維持：

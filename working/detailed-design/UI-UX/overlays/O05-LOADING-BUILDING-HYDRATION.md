@@ -1,6 +1,6 @@
 # O05 — Loading / Building / Hydration States
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → NFFBuild locked BS-*。
+> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → appf2-build locked BS-*。
 
 > Overlay / State ID：O05
 >
@@ -108,7 +108,7 @@ Example：
 
 這可以同時滿足：
 - User需要看到 %。
-- NodeFF不提供假 precision。
+- appf2不提供假 precision。
 
 # 6. Proposed Cross-Screen Consistency Delta
 
@@ -754,7 +754,7 @@ S03 Runtime processing正式鎖定為：
 
 Desktop：
 - Generated App保持原 geometry與 last-known-good committed state可辨識。
-- NodeFF Shell Header不被 processing screen取代。
+- appf2 Shell Header不被 processing screen取代。
 - processing layer位於 Runtime Frame內的上方 / 上中區。
 - recommended compact panel width約 `320–480px`。
 - Stage是第一 processing視覺；% / rail為第二。
@@ -772,7 +772,7 @@ S03 processing不得把整個 viewport變成空白 loading screen。
 
 必須保留：
 - Generated App可辨識 context。
-- NodeFF Shell identity。
+- appf2 Shell identity。
 - last-known-good committed visual state。
 
 Processing只覆蓋目前 operation feedback，不抹掉 App。
@@ -1085,7 +1085,7 @@ Rules：
 - 不用高 elevation壓過 Generated App。
 - last-known-good App visual state仍可辨識。
 - processing layer只表示 current operation。
-- source semantics若要求 blocking，可降低 Runtime interaction affordance，但不把整個 NodeFF Shell染成 disabled gray。
+- source semantics若要求 blocking，可降低 Runtime interaction affordance，但不把整個 appf2 Shell染成 disabled gray。
 
 ### 11. Workspace / Restore Visual Adaptation
 

@@ -42,7 +42,7 @@ Resolved Intent
 → Final Validated Outcome
 ~~~
 
-NFF-owned Orchestration Contract 至少必須描述：
+appf2-owned Orchestration Contract 至少必須描述：
 
 ~~~text
 workflow_id

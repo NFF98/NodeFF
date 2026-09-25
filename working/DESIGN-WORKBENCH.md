@@ -1,4 +1,4 @@
-# NodeFF Design Workbench
+# appf2 Design Workbench
 
 > 狀態：ACTIVE DISCUSSION BUFFER — **NOT SSOT**
 >
@@ -22,7 +22,7 @@
    - approved unique truth = 0
    - closed-but-unsynced item = 0
    - active orphan decision = 0
-6. Workbench 不得直接成為 NFFBuild Build Spec source。
+6. Workbench 不得直接成為 appf2-build Build Spec source。
 
 ## Evidence-Gated Open Questions
 
@@ -32,7 +32,7 @@
 
 候選包含 Utility、Decision、Game / Fun、Social、Sentimental / Creative。
 
-已確定：Product Vision = Intent → App；任何單一 Wedge 都不是 NodeFF 最終產品邊界。
+已確定：Product Vision = Intent → App；任何單一 Wedge 都不是 appf2 最終產品邊界。
 
 仍需要 Evidence：
 - create → use completion

@@ -1,7 +1,7 @@
 # F01 — Intent Compilation + Model Gateway
 
 > 狀態：BUILD_FREEZE_READY + WORKING_DELTA_CLOSED / BUILD_FREEZE_RECONCILIATION_PENDING
-> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved NFFBuild locked BS-*。
+> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved appf2-build locked BS-*。
 >
 > Canonical Role：Phase 1 Intent Analysis、Clarification Policy、Resolved Intent、Capability Coverage coordination、Blueprint Composition 與 Model Gateway 的 Working Current Truth。
 >
@@ -9,13 +9,13 @@
 >
 > 下游：F02 Blueprint Validation、F00 Experience Shell、F06 Remix / Refine、F07 Evidence、F12 Recovery、F16 Result Correction。
 >
-> F01 不允許一步式「Prompt → LLM 腦補 → Blueprint」。LLM 只做受控 semantic work；是否需要追問、是否可採 default、是否可進 Blueprint Composition，由 NFF-owned deterministic policy 決定。
+> F01 不允許一步式「Prompt → LLM 腦補 → Blueprint」。LLM 只做受控 semantic work；是否需要追問、是否可採 default、是否可進 Blueprint Composition，由 appf2-owned deterministic policy 決定。
 
 # 1. Purpose / User Outcome
 
 User Outcome：
 
-> User 不必會 Prompt Engineering，也能把自然語言 Intent 可靠轉成符合自己真正意思、可被 F02 驗證的 Blueprint Candidate；資訊不夠時，NodeFF 只問必要問題，不偷偷腦補重要規則。
+> User 不必會 Prompt Engineering，也能把自然語言 Intent 可靠轉成符合自己真正意思、可被 F02 驗證的 Blueprint Candidate；資訊不夠時，appf2 只問必要問題，不偷偷腦補重要規則。
 
 Canonical flow：
 
@@ -221,7 +221,7 @@ Rules：
 
 # 6. Clarification Policy
 
-Clarification Policy 是 deterministic NFF code，不是 Prompt。
+Clarification Policy 是 deterministic appf2 code，不是 Prompt。
 
 ## F01-POL-CP-001
 必要執行值缺失且沒有安全明確 default → NEEDS_CLARIFICATION。
@@ -485,7 +485,7 @@ Prompt B output 永遠視為 untrusted Candidate，必須進 F02。
 
 ## F01-RQ-007
 
-NFF-owned interface：
+appf2-owned interface：
 
 ~~~text
 ModelGateway
@@ -1193,7 +1193,7 @@ POST /api/v1/intents/{id}/compile
 → coverage / compose / F02 validate
 ~~~
 
-> LLM 負責理解與提案；NodeFF Policy 負責決定資訊何時足夠；F02 負責決定 Blueprint 是否可以被信任執行。
+> LLM 負責理解與提案；appf2 Policy 負責決定資訊何時足夠；F02 負責決定 Blueprint 是否可以被信任執行。
 
 ---
 
@@ -1221,7 +1221,7 @@ F01-CREATE-CP-06  BLUEPRINT_VALIDATED
 Completion truth：
 
 - `INTENT_ANALYZED`：有效 Structured Intent Envelope 已產生並通過 shape validation。
-- `POLICY_EVALUATED`：NFF-owned Clarification Policy 至少完成一次 deterministic evaluation。
+- `POLICY_EVALUATED`：appf2-owned Clarification Policy 至少完成一次 deterministic evaluation。
 - `INTENT_RESOLVED`：所有 required / material unknown 已解決，material assumptions 已完成 User decision，Intent 真正進入 READY。
 - `CAPABILITY_COVERAGE_RESOLVED`：F04 coverage result 已成立，且允許進 composition。
 - `BLUEPRINT_COMPOSED`：已產生符合 Prompt B output contract 的 Blueprint Candidate；仍不代表可執行。

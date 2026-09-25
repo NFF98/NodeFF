@@ -1,10 +1,10 @@
-# NodeFF 技術護城河
+# appf2 技術護城河
 
-> 狀態：Working。本文描述 NodeFF 技術護城河的核心模型與發展順序；除非依 SSOT 流程正式升格，否則不具正式規格效力。
+> 狀態：Working。本文描述 appf2 技術護城河的核心模型與發展順序；除非依 SSOT 流程正式升格，否則不具正式規格效力。
 
 # 1. 核心命題
 
-NodeFF 的產品宣言是：
+appf2 的產品宣言是：
 
 > **意圖就是 App。**
 
@@ -12,7 +12,7 @@ NodeFF 的產品宣言是：
 
 > **把多樣的人類意圖，穩定轉成安全、可執行、可互動、可分享的 App。**
 
-NodeFF 的技術護城河分成三層：
+appf2 的技術護城河分成三層：
 
 ~~~text
 Capability Fabric
@@ -22,15 +22,15 @@ Composition Intelligence
 Intent & Execution Learning Graph
 ~~~
 
-- **Capability Fabric**：NodeFF 能做什麼。
-- **Composition Intelligence**：NodeFF 知道怎麼把能力組成 App。
-- **Learning Graph**：NodeFF 從真實使用中越做越準、越做越快。
+- **Capability Fabric**：appf2 能做什麼。
+- **Composition Intelligence**：appf2 知道怎麼把能力組成 App。
+- **Learning Graph**：appf2 從真實使用中越做越準、越做越快。
 
 ---
 
 # 2. Capability Fabric：可執行能力底座
 
-Capability Fabric 不是「一堆 Component」，而是 NodeFF 可安全執行的能力集合。
+Capability Fabric 不是「一堆 Component」，而是 appf2 可安全執行的能力集合。
 
 ~~~text
 Intent
@@ -110,7 +110,7 @@ Intent
 
 ## 4.2 建立 Composition Intelligence
 
-有很多 Capability 不代表 NodeFF 很強。
+有很多 Capability 不代表 appf2 很強。
 
 真正關鍵是：
 
@@ -135,7 +135,7 @@ Player
 + Animation
 ~~~
 
-NodeFF 必須逐步掌握：
+appf2 必須逐步掌握：
 
 - 哪些 Capability 適合一起使用；
 - State 怎麼設計；
@@ -188,7 +188,7 @@ Intent
 
 > **某個 Intent 最後用什麼可執行結構成功了。**
 
-這會形成 NodeFF 專屬的 Intent-to-Software Dataset。
+這會形成 appf2 專屬的 Intent-to-Software Dataset。
 
 ---
 
@@ -204,7 +204,7 @@ Intent
  → Execute
 ~~~
 
-NodeFF 就能從「每次重新生成」逐漸轉成：
+appf2 就能從「每次重新生成」逐漸轉成：
 
 > **Reuse + Adaptation**
 
@@ -220,7 +220,7 @@ NodeFF 就能從「每次重新生成」逐漸轉成：
 
 ## 5.3 Reliability Knowledge
 
-NodeFF 最重要的失敗知識之一是：
+appf2 最重要的失敗知識之一是：
 
 > **什麼 App 看起來可以用，但其實解錯問題。**
 
@@ -261,7 +261,7 @@ LegoSpec syntax 本身不是 moat。
 
 ~~~text
 Intent
- → NodeFF
+ → appf2
  → Internal + External Capabilities
  → App
 ~~~
@@ -281,7 +281,7 @@ Intent
 
 # 6. Cross-Media 是重要方向
 
-NodeFF 不應最後只變成：
+appf2 不應最後只變成：
 
 > Text + Form + Chart Generator
 
@@ -300,7 +300,7 @@ Data
 
 而且共享同一套 State / Action / Event / Rule / Permission / Wiring。
 
-這樣 NodeFF 才能同時承載 Utility、Game、Social、Creative、Sentimental 等不同 Intent。
+這樣 appf2 才能同時承載 Utility、Game、Social、Creative、Sentimental 等不同 Intent。
 
 ---
 
@@ -324,7 +324,7 @@ Data
 
 真正的差異在：
 
-> **NodeFF 如何把這些 Building Block 統一成 Capability System，並學會如何把人的意圖可靠地組成 App。**
+> **appf2 如何把這些 Building Block 統一成 Capability System，並學會如何把人的意圖可靠地組成 App。**
 
 ---
 
@@ -360,8 +360,8 @@ Capability Network
 
 # 9. 最終 Moat Thesis
 
-> **NodeFF 的核心護城河，是一套持續擴張的 Executable Capability Fabric，加上把人類 Intent 組合成 App 的 Composition Intelligence，再由真實 Execution、Failure、Correction、Reuse 與 Remix 累積成 Learning Graph。**
+> **appf2 的核心護城河，是一套持續擴張的 Executable Capability Fabric，加上把人類 Intent 組合成 App 的 Composition Intelligence，再由真實 Execution、Failure、Correction、Reuse 與 Remix 累積成 Learning Graph。**
 
 一句話：
 
-> **別人可以擁有相同的模型與元件；NodeFF 要擁有的是「如何把任何意圖可靠地變成 App」的能力與經驗。**
+> **別人可以擁有相同的模型與元件；appf2 要擁有的是「如何把任何意圖可靠地變成 App」的能力與經驗。**

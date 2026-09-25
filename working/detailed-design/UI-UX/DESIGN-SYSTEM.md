@@ -1,6 +1,6 @@
-# NodeFF UI/UX Design System
+# appf2 UI/UX Design System
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → NFFBuild locked BS-*。
+> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → appf2-build locked BS-*。
 
 > 狀態：**WORKING — HIGH-FI BASELINE APPROVED / FINAL CROSS-SCREEN VERIFIED**
 >
@@ -20,7 +20,7 @@
 
 # 1. High-fi Direction A
 
-NodeFF Phase 1 採：
+appf2 Phase 1 採：
 
 > **Clean Creator Canvas + Playful Energy**
 
@@ -37,7 +37,7 @@ NodeFF Phase 1 採：
 - 乾淨、低干擾。
 - 有 Creator / App-making 感，不像 Search page。
 - 有 Fun / Social energy，但不做玩具感。
-- Generated App 是主角；NodeFF Shell 退到背景。
+- Generated App 是主角；appf2 Shell 退到背景。
 - 品牌活力集中在 creation moment、progress、capsule、success transition。
 - 不用大面積高飽和漸層壓過內容。
 
@@ -49,17 +49,17 @@ NodeFF Phase 1 採：
 
 | Token | Value | Role |
 |---|---:|---|
-| `--nff-teal-600` | `#0F766E` | Primary brand / CTA / active state |
-| `--nff-teal-500` | `#12958A` | Hover / active accent |
-| `--nff-aqua-400` | `#2DD4BF` | Progress / creation energy / supporting accent |
-| `--nff-yellow-400` | `#F4C84C` | Energy / completion / highlight |
-| `--nff-yellow-500` | `#EAB83E` | Yellow hover / stronger accent |
-| `--nff-ink-900` | `#102124` | Primary text |
-| `--nff-text-600` | `#586865` | Secondary text |
-| `--nff-surface-0` | `#FFFFFF` | Main surface |
-| `--nff-surface-50` | `#F7FAF9` | Soft canvas / section surface |
-| `--nff-border-200` | `#DDE8E6` | Default border |
-| `--nff-border-300` | `#C8D9D6` | Stronger divider / control border |
+| `--appf2-teal-600` | `#0F766E` | Primary brand / CTA / active state |
+| `--appf2-teal-500` | `#12958A` | Hover / active accent |
+| `--appf2-aqua-400` | `#2DD4BF` | Progress / creation energy / supporting accent |
+| `--appf2-yellow-400` | `#F4C84C` | Energy / completion / highlight |
+| `--appf2-yellow-500` | `#EAB83E` | Yellow hover / stronger accent |
+| `--appf2-ink-900` | `#102124` | Primary text |
+| `--appf2-text-600` | `#586865` | Secondary text |
+| `--appf2-surface-0` | `#FFFFFF` | Main surface |
+| `--appf2-surface-50` | `#F7FAF9` | Soft canvas / section surface |
+| `--appf2-border-200` | `#DDE8E6` | Default border |
+| `--appf2-border-300` | `#C8D9D6` | Stronger divider / control border |
 
 ## 2.2 Semantic Tokens
 
@@ -271,13 +271,13 @@ Usage：
 - Card / Capsule / Result Surface：16px。
 - Dialog / Bottom Sheet：20px。
 - Tag / Chip：pill。
-- Generated App Runtime不強迫套 NodeFF radius；由 Generated App presentation決定。
+- Generated App Runtime不強迫套 appf2 radius；由 Generated App presentation決定。
 
 ---
 
 # 7. Elevation / Shadow
 
-NodeFF預設偏 flat。
+appf2預設偏 flat。
 
 ~~~text
 elevation-0
@@ -503,12 +503,12 @@ Shell Chrome：
 - clean / low density。
 - Generated App佔主體。
 - S03 permanent bottom navigation只屬 Runtime。
-- Shell control使用 NodeFF system tokens。
-- Generated App內部 controls不得被強制重畫成 NodeFF元件。
+- Shell control使用 appf2 system tokens。
+- Generated App內部 controls不得被強制重畫成 appf2元件。
 
 原則：
 
-> **NodeFF owns the shell; creators own the App presentation.**
+> **appf2 owns the shell; creators own the App presentation.**
 
 ---
 
@@ -725,7 +725,7 @@ High-fi至少共用以下 components：
 5. Inspiration Capsule Card
 6. App Identity
 7. Shell Header
-8. NodeFF Bottom Navigation（S01 Discover scope / S03 Runtime scope variants）
+8. appf2 Bottom Navigation（S01 Discover scope / S03 Runtime scope variants）
 9. Progress / Stage
 10. Result Surface
 11. Version Card
@@ -771,7 +771,7 @@ High-fi design不得通過，若：
 - low-elevation / mostly-flat UI。
 - restrained motion。
 - S03 Runtime chrome低干擾。
-- NodeFF Shell與Generated App presentation分離。
+- appf2 Shell與Generated App presentation分離。
 
 ## Non-blocking implementation tuning — does not reopen ④B
 
@@ -817,7 +817,7 @@ Approved visual impression：
 - 整體仍採 **70% Neutral + 20% Teal + 10% Yellow** 的視覺平衡。
 - 感覺應是 **Clean Creator Canvas + Playful Energy**。
 - UI要乾淨、明亮、有創作感，但不變成高飽和玩具感或 generic AI SaaS。
-- Generated App仍是主角；NodeFF brand chrome不得壓過 App內容。
+- Generated App仍是主角；appf2 brand chrome不得壓過 App內容。
 
 Visual reference status：
 

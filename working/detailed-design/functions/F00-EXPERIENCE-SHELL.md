@@ -1,7 +1,7 @@
 # F00 — Experience Shell / 靈感精靈
 
 > 狀態：BUILD_FREEZE_READY + WORKING_DELTA_CLOSED / BUILD_FREEZE_RECONCILIATION_PENDING
-> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved NFFBuild locked BS-*。
+> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved appf2-build locked BS-*。
 >
 > Canonical Role：Phase 1 Consumer Experience Shell、Creation UX、Clarification / Assumption UX、Runtime Frame、Result Feedback Entry、Share / Remix / Recovery Entry 的 Working Current Truth。
 >
@@ -15,7 +15,7 @@
 
 User Outcome：
 
-> User 打開 NodeFF 後，不需要理解 Prompt Engineering、Blueprint、Capability、Validation 或 Runtime，就能從靈感開始、說出需求、回答必要問題、立即得到可玩的 App、分享、Remix、修正結果，且失敗時不丟掉已做的事情。
+> User 打開 appf2 後，不需要理解 Prompt Engineering、Blueprint、Capability、Validation 或 Runtime，就能從靈感開始、說出需求、回答必要問題、立即得到可玩的 App、分享、Remix、修正結果，且失敗時不丟掉已做的事情。
 
 Phase 1 UX thesis：
 
@@ -507,7 +507,7 @@ Hydration loading應短而穩定，不再顯示 Compiler copy。
 APP surface分兩層：
 
 ~~~text
-NFF Shell Chrome
+appf2 Shell Chrome
 + Generated App Runtime Frame
 ~~~
 

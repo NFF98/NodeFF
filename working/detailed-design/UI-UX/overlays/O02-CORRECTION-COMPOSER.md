@@ -1,6 +1,6 @@
 # O02 — Correction Composer
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → NFFBuild locked BS-*。
+> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → appf2-build locked BS-*。
 
 > Overlay ID：O02
 >
@@ -18,7 +18,7 @@
 
 O02 的核心任務：
 
-> **User 發現目前結果 / 規則 / 邏輯不符合預期時，可以直接說「哪裡不對」，NodeFF 保留原 App 與目前結果，開始 correction flow。**
+> **User 發現目前結果 / 規則 / 邏輯不符合預期時，可以直接說「哪裡不對」，appf2 保留原 App 與目前結果，開始 correction flow。**
 
 O02 不是一般 Refine Composer。
 

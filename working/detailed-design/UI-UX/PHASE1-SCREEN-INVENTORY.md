@@ -1,6 +1,6 @@
 # Phase 1 Screen Inventory
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → NFFBuild locked BS-*。
+> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → appf2-build locked BS-*。
 
 > 狀態：WORKING UI/UX — S01–S06 + O01–O05 ④B CLOSED / FG-01–FG-07 CLOSED / FINAL CROSS-SCREEN HIGH-FI REVIEW CLOSED / VERIFIED
 >
@@ -77,7 +77,7 @@ Phase 1 UI/UX 必須固定走以下 6 步，不得跳步、混步或提前升格
    - **④A Low-fi**：逐頁確認版面、資訊層級、CTA、流程、states、Desktop / Mobile；**不討論顏色與品牌視覺**。
    - **④B High-fi**：全部 Low-fi 完成並做 Cross-Screen Review 後，才統一確認顏色、字體、間距、圓角、陰影、動畫、Hover / Loading 效果、品牌風格、Desktop / Mobile 視覺一致性與 Design System。
 5. **User 批准後**：才整理成 UI/UX Working Design baseline。
-6. **最後進 Human Build Freeze Review**：沒有 User 明確批准，不得建立或啟用 NFFBuild locked BS-*。
+6. **最後進 Human Build Freeze Review**：沒有 User 明確批准，不得建立或啟用 appf2-build locked BS-*。
 
 硬規則：
 - 單一 Screen 的 Low-fi 未確認，不得把該 Screen 標為 LOW_FI_DIRECTION_APPROVED。
@@ -217,7 +217,7 @@ S01–S06 + O01–O05 ④A Low-fi
 目前 High-fi 方向已有 Working note：
 
 - 主色探索：Tiffany Blue → Yellow direction。
-- 必須形成 NodeFF 自己的 brand system，不複製其他品牌識別。
+- 必須形成 appf2 自己的 brand system，不複製其他品牌識別。
 - 介面優先乾淨、低干擾。
 - Must not resemble Google / Search UI。
 - 生成流程應探索 visible stage-based progress，而非只有 generic spinner。
@@ -238,7 +238,7 @@ S01–S06 + O01–O05 ④A Low-fi
 
 ## Navigation Scope
 
-- **S01 Discover / Start 與 S03 App / Runtime 都可使用 NodeFF permanent bottom navigation，但 navigation scope 不同。**
+- **S01 Discover / Start 與 S03 App / Runtime 都可使用 appf2 permanent bottom navigation，但 navigation scope 不同。**
 - S01 Mobile bottom navigation固定為：`首頁 / 探索靈感 / 我的 App · Soon`，不放 Create / Profile；Create只由 S01 Creator Composer提供。`探索靈感`是 S01 top-level / persistent entry到 Inspiration區；區塊內 `探索更多`是 local continuation CTA，兩者 action contract不同。
 - S03 App / Runtime bottom navigation仍依 Runtime scope管理，不因 S01 navigation而新增重複 Create入口。
 - S03 App / Runtime bottom navigation固定為：`目前 App / 修改 / 分享`。
@@ -317,7 +317,7 @@ Legacy formal promotion target（**RETIRED / NO-USE**）：
 ~~~text
 spec/ui-ux/  ← RETIRED / NO-USE
 
-Current Build Freeze destination：`NFF98/NFFBuild/build-spec/baselines/BS-*/UI-UX/`
+Current Build Freeze destination：`appf2/appf2-build/build-spec/baselines/BS-*/UI-UX/`
 ├─ PHASE1-SCREEN-INVENTORY.md
 ├─ DESIGN-SYSTEM.md
 ├─ screens/

@@ -1,7 +1,7 @@
 # F16 — Result Feedback / Logic Correction
 
 > 狀態：BUILD_FREEZE_READY
-> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved NFFBuild locked BS-*。
+> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved appf2-build locked BS-*。
 >
 > Canonical Role：Phase 1 Semantic Mismatch Detection、Correction Intent、Input Replay、Before/After Result Comparison、CORRECT Lineage 與 Accept / Reject / Revert 的 Working Current Truth。
 >
@@ -15,7 +15,7 @@
 
 User Outcome：
 
-> User 發現結果不對時，不需要從頭重做 App，也不用重新輸入原本資料；可以直接說哪裡不對，NodeFF 保留原版本與輸入，產生修正版，用相同可重播 inputs 跑一次，讓 User 比較新舊結果，再決定接受、繼續修或回上一版。
+> User 發現結果不對時，不需要從頭重做 App，也不用重新輸入原本資料；可以直接說哪裡不對，appf2 保留原版本與輸入，產生修正版，用相同可重播 inputs 跑一次，讓 User 比較新舊結果，再決定接受、繼續修或回上一版。
 
 Canonical flow：
 
@@ -1448,7 +1448,7 @@ Semantic Mismatch Rate numerator：
 
 代替 semantic mismatch。
 
-這讓 NodeFF能區分：
+這讓 appf2能區分：
 
 ~~~text
 technical success
@@ -1682,4 +1682,4 @@ User reports mismatch
 → evidence
 ~~~
 
-> F16 的價值不是「AI 自己修自己」，而是讓 User 能指出語意錯誤，而 NodeFF 用可追蹤、可回退、可比較的方式產生真正的新版本。
+> F16 的價值不是「AI 自己修自己」，而是讓 User 能指出語意錯誤，而 appf2 用可追蹤、可回退、可比較的方式產生真正的新版本。

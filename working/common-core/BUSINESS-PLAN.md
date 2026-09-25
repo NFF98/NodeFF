@@ -1,10 +1,10 @@
-# NodeFF Business Plan
+# appf2 Business Plan
 
-> 狀態：Working Strategy Baseline。本文定義 NodeFF 的產品商業邏輯、發展節奏與各階段驗證 Gate；不是會議記錄，也不把尚未驗證的市場假設寫成事實。
+> 狀態：Working Strategy Baseline。本文定義 appf2 的產品商業邏輯、發展節奏與各階段驗證 Gate；不是會議記錄，也不把尚未驗證的市場假設寫成事實。
 
 # 1. 商業核心
 
-NodeFF 要改變的不是某一種 App，而是傳統軟體的入口方式。
+appf2 要改變的不是某一種 App，而是傳統軟體的入口方式。
 
 ~~~text
 Old
@@ -15,7 +15,7 @@ Idea / Need
 → Configure
 → Use
 
-NodeFF
+appf2
 Intent
 → App
 → Use
@@ -27,11 +27,11 @@ Intent
 
 > **意圖就是 App。**
 
-NodeFF 的產品是：
+appf2 的產品是：
 
 > **把當下 Intent 直接轉成可互動、可分享、可 Remix 的 Micro-App。**
 
-NodeFF 不是 Decision App、AI Code Generator、Form Builder，也不是所有 Native App 的替代品。
+appf2 不是 Decision App、AI Code Generator、Form Builder，也不是所有 Native App 的替代品。
 
 Phase 1 的 Decision / Utility / Party / Social use cases 都只是 Wedge，不是產品邊界。
 
@@ -53,7 +53,7 @@ Phase 1 的 Decision / Utility / Party / Social use cases 都只是 Wedge，不�
 
 # 3. 發展時間軸
 
-NodeFF 採四段節奏，而不是把未來能力全部塞進 Phase 1。
+appf2 採四段節奏，而不是把未來能力全部塞進 Phase 1。
 
 | 時間 | 階段 | 核心任務 | 主要判斷 |
 |---|---|---|---|
@@ -124,7 +124,7 @@ More Intent Demand
 
 # 6. KPI Tree
 
-NodeFF 不以 Vanity Metrics 管理。
+appf2 不以 Vanity Metrics 管理。
 
 ## Core Value
 - Successful Intent
@@ -180,7 +180,7 @@ NodeFF 不以 Vanity Metrics 管理。
 
 # 結論
 
-NodeFF 的發展順序不是：
+appf2 的發展順序不是：
 
 ~~~text
 先做大平台
@@ -212,7 +212,7 @@ NodeFF 的發展順序不是：
 
 > Structure migration preservation block. Content below is preserved from the former files. Dedup / semantic cleanup is intentionally deferred.
 
-# NodeFF Product Roadmap — Phase 1
+# appf2 Product Roadmap — Phase 1
 
 > Shared business truth：`../../core/BUSINESS-PLAN.md`
 
@@ -318,7 +318,7 @@ First Value 前原則上不要求註冊。
 
 ---
 
-# NodeFF Product Roadmap — Phase 2
+# appf2 Product Roadmap — Phase 2
 
 > Shared business truth：`../../core/BUSINESS-PLAN.md`
 
@@ -406,13 +406,13 @@ anonymous_id
 
 ---
 
-# NodeFF Product Roadmap — Phase 3
+# appf2 Product Roadmap — Phase 3
 
 > Shared business truth：`../../core/BUSINESS-PLAN.md`
 
 # 6. 第 4–6 個月：Scale Readiness
 
-這不是全面平台化，而是確認 NFF 是否值得開始承接更高成本、更高價值的需求。
+這不是全面平台化，而是確認 appf2 是否值得開始承接更高成本、更高價值的需求。
 
 主要工作：
 
@@ -471,20 +471,20 @@ Intent
 - 跨 Provider workflow 的 retry / timeout / compensation 可治理
 - metering / entitlement 可被正確管理
 - 供需雙方有足夠密度，不是只有單邊 catalog
-- NFF 在交易鏈中提供不可取代的 orchestration value
+- appf2 在交易鏈中提供不可取代的 orchestration value
 
 ---
 
 
 ---
 
-# NodeFF Product Roadmap — Phase 4+
+# appf2 Product Roadmap — Phase 4+
 
 > Shared business truth：`../../core/BUSINESS-PLAN.md`
 
 # 7. 6 個月後：Intent Commerce / Capability Network
 
-長期 NodeFF 的角色可能演進為：
+長期 appf2 的角色可能演進為：
 
 > **Intent → Capability → Interaction → Transaction 的 Control Plane。**
 
