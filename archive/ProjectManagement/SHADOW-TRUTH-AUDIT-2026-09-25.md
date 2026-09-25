@@ -173,3 +173,22 @@ Choose one:
 - **DEMOTE** the exact split to discussion and retain only existing F02 / architecture validation principles.
 
 Everything else can be mechanically cleaned after HD-01 / HD-02 without further product decision.
+
+
+## 6. Human Resolution — APPROVED 2026-09-25
+
+User approved both remaining architecture dispositions:
+
+- HD-01 = **ABSORB**
+  - Mid-term L4 exact internal split 4A UI / 4B Logic / 4C Data / 4D Capability Runtime absorbed into `working/APP-ARCHITECTURE.md`.
+  - Explicitly clarified: this is an internal technical responsibility split; User still sees one App / one screen experience.
+
+- HD-02 = **ABSORB**
+  - Mid-term L3 exact split 3A UI / 3B Logic / 3C Data / 3D Capability / 3E Runtime Safety absorbed into `working/APP-ARCHITECTURE.md`.
+  - Invariant absorbed: **No Runtime Capability Without Contract Coverage.**
+
+Post-resolution:
+- Workbench orphan truth = 0
+- Active Decision Candidates = 0
+- Open Questions narrowed to true evidence-gated items
+- Active Workbench may be slimmed without Product Truth loss

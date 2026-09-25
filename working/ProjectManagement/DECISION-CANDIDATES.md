@@ -1,87 +1,33 @@
 # NodeFF Decision Candidates
 
-> **GOVERNANCE NOTICE**：本檔內任何 retired `spec/` (NO-USE)、Formal Spec、Working → Spec、Spec Promotion、Formal Spec Refresh 字樣均為 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current flow = NodeFF Working → Human-approved Build Freeze → NFFBuild locked BS-*。
+> 狀態：ACTIVE DECISION GATE LIST — **NOT SSOT**
+>
+> 用途：只記錄「已有兩個以上合理方案，而且必須由 Human 做產品／架構選擇」的尚未決決策。
 
-> 狀態：Working — Not SSOT。
+# Current Decision Gates
 
-# 1. 這份文件的用途
+**NONE**
 
-本文件只記錄：
+目前沒有尚未決定、會阻擋 Phase 1 Build Freeze 的 Architecture / Contract / Compatibility Decision Gate。
 
-> **已經存在兩個以上合理方案，而且選擇其中一個會影響 Architecture、Contract、Compatibility 或 Implementation 的決策。**
+## 2026-09-25 Cleanup
 
-它不是會議紀錄，也不是所有未完成事項的清單。
+以下舊 Decision 已確認為 resolved，因此不再列為 Active：
 
-決策流程：
+- DC-001 Rule Representation  
+  → 已由 F02 / F03 固定為 pure typed Expression AST / Rule VM；不允許 free-form expression string。
 
-~~~text
-Question
- → Options
- → Recommended Direction
- → Review
- → User Approval
- → Approve into canonical Working / decisions; implementation changes then enter Human-approved Build Freeze
-~~~
+- DC-002 Capability Registry Source Format  
+  → 已由 F04 / Capability Fabric 固定為 One Canonical Versioned Source → deterministic generated Compiler / Validator / Runtime / Compatibility artifacts。
 
-一旦正式核准並移入 SSOT，本文件只保留簡短狀態或移除該 Candidate。
+完整 proof：
+- `archive/ProjectManagement/SHADOW-TRUTH-AUDIT-2026-09-25.md`
 
----
+## Rules
 
-# 2. Current Decision Gates
-
-## DC-001 — Rule Representation
-
-**問題**  
-Runtime rule 應使用：
-- Typed Declarative Rule AST；
-- Restricted Expression String；
-- 或 Hybrid。
-
-**目前方向**  
-偏向 **Typed Declarative Rule AST**，因為更容易：
-- static validation；
-- allowlisting；
-- dependency analysis；
-- resource bounding；
-- deterministic serialization；
-- versioning。
-
-**決策時點**  
-F03 Runtime Execution / F04 Capability Registry 詳細設計前必須定案。
-
----
-
-## DC-002 — Capability Registry Source Format
-
-**問題**  
-Capability Registry 的 machine-readable source 應採何種 canonical format，才能同時產生：
-- Compiler metadata；
-- validation schema；
-- Runtime registration；
-- documentation；
-- tests / compatibility metadata。
-
-**已確定原則**  
-不能人工維護多份平行 Capability 定義。
-
-**尚未決定**  
-具體 source format 與 generation pipeline。
-
-**決策時點**  
-F04 Capability Registry 進入實作前。
-
----
-
-# 3. 不應放在這裡的內容
-
-以下改放 `OPEN-QUESTIONS.md`：
-- 還不知道需求是否存在；
-- 需要使用者數據驗證；
-- 還沒有形成可比較方案的問題。
-
-以下改放 Function Design：
-- 已經決定方向，只剩 implementation details。
-
-以下正式核准後移至：
-- retired `spec/` (NO-USE)
-- `decisions/`
+1. 已決定的內容必須進 canonical Working owner，不得長期留在本檔。
+2. 需要真實 usage / benchmark 才能回答的問題放 `OPEN-QUESTIONS.md`。
+3. 純 implementation detail 不建立 Product Decision Gate。
+4. Build Freeze 前：
+   - unresolved blocking decision = 0
+   - approved-but-unsynced decision = 0

@@ -225,7 +225,70 @@ Hydrate
 
 Runtime 不猜 Intent、不選模型、不發明 Capability、不執行 arbitrary generated code。
 
+#### L3 / L4 中期擴張方向（不是 Phase 1 implementation scope）
+
+Phase 1 仍依目前 F02 / F03 已批准 contract 實作；以下只固定中期架構責任，避免未來支援更完整 App 時重寫核心。
+
+**L3 — Full App Contract & Deterministic Validation**
+
+未來當 Blueprint 開始描述更多 Logic / Data / External Capability 時，L3 內部責任擴張為：
+
+~~~text
+3A UI Contract Validation
+3B Logic Contract Validation
+3C Data Contract Validation
+3D Capability Contract Validation
+3E Runtime Safety / Resource Validation
+~~~
+
+目的不是新增五個產品層，而是確保所有可執行內容在進 Runtime 前都有 deterministic contract coverage。
+
+核心規則：
+
+> **No Runtime Capability Without Contract Coverage.**
+
+也就是 L4 新增任何 executable primitive 前，L3 必須先能驗證其 schema、type、reference、permission、compatibility、resource / safety boundary。
+
+**L4 — App Execution & Runtime**
+
+中期 L4 仍是 User 眼中的**同一個 App、同一個畫面與互動體驗**；以下只是內部技術責任拆分：
+
+~~~text
+4A UI Runtime
+= React / Components / Interaction
+
+4B Logic Runtime
+= Actions / Conditions / Workflow / Computation
+
+4C Data Runtime
+= Local State / Persistence / Controlled Data Access
+
+4D Capability Runtime
+= API / AI / Map / Payment / External Services
+~~~
+
+這四個不是四個 User-facing screens，也不是四套 App。User 不應感知 Runtime 分層；User 只看到一個完整 App Experience。
+
+共同演進原則：
+
+~~~text
+L2 can describe
+≤ L3 can validate
+≤ L4 can safely execute
+~~~
+
+如果 L2 產生的內容超過 L3 / L4 能力，必須 clarify、degrade 或 reject，不能 fake success。
+
+中期仍維持：
+- no arbitrary generated backend / frontend code execution；
+- External / DB / AI / Payment 都走受控 Capability；
+- LLM 不可覆寫 L3 PASS / FAIL；
+- App READY 必須由 independently verified state 決定；
+- Build App 可以用 LLM，正常 Run App 不應依賴 LLM 才能成立。
+
 ---
+
+
 
 # 5. Model Gateway：LLM 可自由切換
 

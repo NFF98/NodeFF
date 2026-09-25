@@ -21,3 +21,6 @@
 - `archive/ProjectManagement/SPEC-DELTA-REGISTER.md`
 - `archive/ProjectManagement/PRODUCT-DISCUSSION.md`
 - `archive/ProjectManagement/ASSISTANT-SHAME-LOG.md`
+
+- `archive/ProjectManagement/DESIGN-WORKBENCH-HISTORY-2026-09-25.md`
+- `archive/ProjectManagement/SHADOW-TRUTH-AUDIT-2026-09-25.md`
