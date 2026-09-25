@@ -1,6 +1,6 @@
 # Phase 1 Screen Inventory
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion、pre-Build Freeze reconciliation 字樣均為 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。UI/UX Current Truth仍在本 Working；implementation input = Human-approved Build Freeze → NFFBuild locked BS-*。
+> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → NFFBuild locked BS-*。
 
 > 狀態：WORKING UI/UX — S01–S06 + O01–O05 ④B CLOSED / FG-01–FG-07 CLOSED / FINAL CROSS-SCREEN HIGH-FI REVIEW CLOSED / VERIFIED
 >
@@ -77,13 +77,13 @@ Phase 1 UI/UX 必須固定走以下 6 步，不得跳步、混步或提前升格
    - **④A Low-fi**：逐頁確認版面、資訊層級、CTA、流程、states、Desktop / Mobile；**不討論顏色與品牌視覺**。
    - **④B High-fi**：全部 Low-fi 完成並做 Cross-Screen Review 後，才統一確認顏色、字體、間距、圓角、陰影、動畫、Hover / Loading 效果、品牌風格、Desktop / Mobile 視覺一致性與 Design System。
 5. **User 批准後**：才整理成 UI/UX Working Design baseline。
-6. **最後再問 User 是否升 Spec**：沒有 User 明確批准，不得 promotion 到 formal Spec。
+6. **最後進 Human Build Freeze Review**：沒有 User 明確批准，不得建立或啟用 NFFBuild locked BS-*。
 
 硬規則：
 - 單一 Screen 的 Low-fi 未確認，不得把該 Screen 標為 LOW_FI_DIRECTION_APPROVED。
 - **所有 S01–S06 / O01–O05 Low-fi 未完成前，不得開始任何 Screen 的 ④B High-fi。**
 - High-fi 未確認，不得標記完整 UI/UX Working Baseline。
-- Working UI/UX 未完成 Cross-Screen Review，不得詢問 Spec promotion。
+- Working UI/UX 未完成 Cross-Screen Review，不得進 Build Freeze Review。
 - 顏色 / 效果 / 風格屬於 **④B High-fi**，不得在 ④A Low-fi 當成 approval blocker。
 - Screen-level visual design 不得自行改寫 Function behavior semantics。
 
@@ -308,14 +308,16 @@ S06 Compare 不提供模糊的「回目前 App」獨立決策出口。
 
 ---
 
-# 8. Spec Promotion Note
+# 8. Build Freeze Projection Note
 
-舊 `spec/08-UI.md` 已淘汰，不再作 UI/UX 正式入口。
+舊 `spec/08-UI.md` 已 **RETIRED / NO-USE**，不再作 UI/UX 入口。
 
-目前已記錄未來 UI/UX formal promotion target：
+Legacy formal promotion target（**RETIRED / NO-USE**）：
 
 ~~~text
-spec/ui-ux/
+spec/ui-ux/  ← RETIRED / NO-USE
+
+Current Build Freeze destination：`NFF98/NFFBuild/build-spec/baselines/BS-*/UI-UX/`
 ├─ PHASE1-SCREEN-INVENTORY.md
 ├─ DESIGN-SYSTEM.md
 ├─ screens/
@@ -326,13 +328,13 @@ spec/ui-ux/
 
 **注意：以上 formal structure 現在尚未建立。**
 
-只有在 S01–S06 / O01–O05 Low-fi + High-fi + Cross-Screen Review 完成，且 User 明確答覆「同意升格」後，才建立 / promotion。
+只有在 S01–S06 / O01–O05 Low-fi + High-fi + Cross-Screen Review 完成，且 User 明確答覆「同意升格」後，才可納入 Human-approved Build Freeze projection。
 
 需要改 product behavior 的 UI decision，仍必須同步回相關 Fxx Working → Review → Spec；UI/UX Spec不得成為第二份 Function behavior truth。
 
 未取得 User 明確批准前，不升格、不啟動 Cursor implementation。
 
-# 9.1 Formal Spec Freeze / Pre-Cursor Refresh
+# 9.1 Build Freeze Preparation
 
 User 已確認目前策略：
 

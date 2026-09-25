@@ -1,6 +1,6 @@
 # F01 — Intent Compilation + Model Gateway
 
-> 狀態：BUILD_FREEZE_READY + WORKING_DELTA_CLOSED / FORMAL_REFRESH_PENDING
+> 狀態：BUILD_FREEZE_READY + WORKING_DELTA_CLOSED / BUILD_FREEZE_RECONCILIATION_PENDING
 > Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved NFFBuild locked BS-*。
 >
 > Canonical Role：Phase 1 Intent Analysis、Clarification Policy、Resolved Intent、Capability Coverage coordination、Blueprint Composition 與 Model Gateway 的 Working Current Truth。
@@ -1199,7 +1199,7 @@ POST /api/v1/intents/{id}/compile
 
 ## Closed Working Delta — F01 Creation Progress Checkpoint Contract
 
-> 狀態：**WORKING_DELTA_CLOSED（2026-09-23） / FORMAL_REFRESH_PENDING**
+> 狀態：**WORKING_DELTA_CLOSED（2026-09-23） / BUILD_FREEZE_RECONCILIATION_PENDING**
 >
 > 來源：S02 Create Workspace High-fi + O05 High-fi Step 1 + `SD-20260922-002`。
 >

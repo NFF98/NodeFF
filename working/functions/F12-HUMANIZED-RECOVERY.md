@@ -1,6 +1,6 @@
 # F12 — Humanized Recovery Orchestration
 
-> 狀態：BUILD_FREEZE_READY + WORKING_DELTA_CLOSED / FORMAL_REFRESH_PENDING
+> 狀態：BUILD_FREEZE_READY + WORKING_DELTA_CLOSED / BUILD_FREEZE_RECONCILIATION_PENDING
 > Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved NFFBuild locked BS-*。
 >
 > Canonical Role：Phase 1 Cross-Function Error Classification、Recovery Policy、Context Preservation、Humanized Message、Next Action、Recovery Episode Evidence 的 Working Current Truth。
@@ -1166,7 +1166,7 @@ Fxx-ERR technical truth
 
 ## Closed Working Delta — Runtime Action Timeout Recovery
 
-> 狀態：WORKING_DELTA_CLOSED（2026-09-22）/ FORMAL_REFRESH_PENDING
+> 狀態：WORKING_DELTA_CLOSED（2026-09-22）/ BUILD_FREEZE_RECONCILIATION_PENDING
 >
 > Formal Spec：**暫不修改**；本 Working policy待 pre-Build Freeze reconciliation一次同步。
 

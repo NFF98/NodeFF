@@ -1,6 +1,6 @@
 # F00 — Experience Shell / 靈感精靈
 
-> 狀態：BUILD_FREEZE_READY + WORKING_DELTA_CLOSED / FORMAL_REFRESH_PENDING
+> 狀態：BUILD_FREEZE_READY + WORKING_DELTA_CLOSED / BUILD_FREEZE_RECONCILIATION_PENDING
 > Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved NFFBuild locked BS-*。
 >
 > Canonical Role：Phase 1 Consumer Experience Shell、Creation UX、Clarification / Assumption UX、Runtime Frame、Result Feedback Entry、Share / Remix / Recovery Entry 的 Working Current Truth。
@@ -1211,7 +1211,7 @@ DISCOVER
 
 ## Closed Working Delta — Runtime Global Loading + Timeout
 
-> 狀態：WORKING_DELTA_CLOSED（2026-09-22）/ FORMAL_REFRESH_PENDING
+> 狀態：WORKING_DELTA_CLOSED（2026-09-22）/ BUILD_FREEZE_RECONCILIATION_PENDING
 >
 > Legacy Formal Spec：**RETIRED / NO-USE**。既有 Formal F00-UX-022 / F00-AC-008仍保持原文；待 pre-Build Freeze reconciliation一次同步。
 >
@@ -1259,7 +1259,7 @@ F03 operation truth與 F12 recovery truth分別由其 Working文件擁有；F00�
 
 ## Closed Working Delta — S02 Composite Create Progress Projection
 
-> 狀態：**WORKING_DELTA_CLOSED（2026-09-23） / FORMAL_REFRESH_PENDING**
+> 狀態：**WORKING_DELTA_CLOSED（2026-09-23） / BUILD_FREEZE_RECONCILIATION_PENDING**
 >
 > Source Delta：`SD-20260922-002 — F01 Creation Progress Checkpoint Contract`。
 >
