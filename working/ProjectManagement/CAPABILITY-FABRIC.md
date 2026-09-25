@@ -402,152 +402,20 @@ WebXR、Immersive Scene、Spatial Anchor、Gaze、Controller、Shared Spatial St
 
 ---
 
-# 11. 0–1 個月：Core Capability Set
+# 11. Capability Phase Roadmap Index
 
-第 1 個月不追求能力數量，而追求高組合密度。
+Capability Card Contract、Maturity、Coverage、Families、Portfolio 與 Registry Architecture 留在本文件；各 Phase 要新增／成熟／延後的 capability scope 拆到 phase roadmap。
 
-優先候選：
+- Phase 1：`working/ProjectManagement/capability-roadmap/PHASE-1.md`
+- Phase 2：`working/ProjectManagement/capability-roadmap/PHASE-2.md`
+- Phase 3：`working/ProjectManagement/capability-roadmap/PHASE-3.md`
+- Phase 4+：`working/ProjectManagement/capability-roadmap/PHASE-4-PLUS.md`
 
-~~~text
-Layout / Container
-Text / Card / List
-Button
-Number / Text / Select / Toggle
-Stat / Basic Table / Basic Chart
-Random / Dice / Wheel
-Timer / Score / Simple Turn
-Basic Image / Audio / Video playback
-Basic Animation / Confetti
-Shareable State
-Recovery / Notice presentation
-~~~
-
-選擇標準：
-
-1. 能服務多種 Intent
-2. Semantic Meaning 清楚
-3. 容易安全組合
-4. Browser 可低成本執行
-5. Compiler 能合理選擇
-6. Share / Remix 有意義
-7. 可測試、可版本化
-
-第 1 個月目標不是全部 RELEASED。
-
-合理目標是：
-
-> **少量核心 Capability 至少到 TESTED，關鍵 Capability 開始累積 VALIDATED Evidence。**
+> Capability 只有在 Evidence / Maturity 達標時才升級，不因 Phase 名稱自動 RELEASED。
 
 ---
 
-# 12. 第 2–3 個月：Reuse / Identity / Creator Capability
-
-前提：核心 Loop 已有 Evidence。
-
-增加或強化：
-
-- richer parameterization
-- stable reusable families
-- ownership-aware capability
-- attribution
-- creator configuration
-- durable state
-- save / history
-- publishing hooks
-- premium entitlement
-- realtime only where use case proves it
-- semantic reuse metadata
-
-這一階段 Capability 的主要要求從：
-
-> 能跑
-
-提高到：
-
-> **能穩定 Reuse、Remix、Version、Own。**
-
----
-
-# 13. 第 4–6 個月：Scale Readiness / External Capability Pilot
-
-只針對產品證據強的需求加入：
-
-- runtime AI
-- external search / data
-- media generation
-- heavy compute
-- richer realtime
-- object / media capability
-- paid capability pilot
-- provider execution metadata
-- metering hooks
-- entitlement enforcement
-
-這一階段不是建立 Marketplace。
-
-目標是先證明：
-
-> **External / Paid Capability 能不能仍然安全地進入同一套 Fabric。**
-
----
-
-# 14. 6 個月後：Capability Network + Orchestration
-
-只有供需證據成立後才逐步加入：
-
-- certified third-party providers
-- provider registry
-- booking / payment / commerce
-- usage metering
-- transaction lifecycle
-- settlement
-- provider SLA
-- capability certification
-- marketplace discovery
-- creator / provider economics
-- multi-capability workflow composition
-- async step lifecycle
-- retry / timeout / idempotency metadata
-- compensation / rollback semantics
-- human-in-the-loop step when required
-
-長期 Fabric 不只描述「一個 Capability 能做什麼」，還要能描述「多個 Capability 如何可靠合作」。
-
-~~~text
-Resolved Intent
-→ Capability Graph
-→ Step A: Internal Capability
-→ Step B: External Provider
-→ Step C: Async Worker
-→ Step D: Human / Approval if required
-→ Validated Outcome
-~~~
-
-Orchestration metadata 必須仍然來自 Capability Contract；不能讓外部 workflow engine 自己發明 NFF semantics。
-
-長期 Fabric：
-
-~~~text
-Internal Capability
-        +
-Creator Capability
-        +
-Paid Capability
-        +
-External Provider Capability
-        ↓
-Same Capability Contract
-        ↓
-Same Blueprint Model
-        ↓
-Same Runtime Boundary
-        +
-NFF Orchestration Contract
-~~~
-
----
-
-# 15. Capability Portfolio 管理
+# 12. Capability Portfolio 管理
 
 Capability 不以「想到就加入」管理。
 
@@ -580,7 +448,7 @@ Real Intent Demand
 
 ---
 
-# 16. Registry Architecture
+# 13. Registry Architecture
 
 Phase 1 Registry 應是：
 
@@ -612,7 +480,7 @@ Orchestration Metadata / Compatibility Graph
 
 ---
 
-# 17. Capability Guardrails
+# 14. Capability Guardrails
 
 1. Capability ≠ UI Component。
 2. Capability 必須有 semantic meaning。

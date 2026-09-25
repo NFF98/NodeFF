@@ -1,19 +1,33 @@
 # NodeFF Project Management
 
-> 狀態：Working。
+> 狀態：Working Project / Phase Governance。
 
-此目錄集中管理 NodeFF 的 Product Planning、Roadmap、Phase Boundary、Release Planning、Dependency、Risk / Blocker 與 Build Freeze 前準備。
+本目錄管理 **WHY / WHEN / Phase boundary / evidence-gated roadmap**，不管理 Cursor backlog / sprint / implementation evidence。
 
-用途包括：
-- Roadmap / Phase 規劃
-- Release Planning
-- Function 開發排序
-- Dependency / Milestone
-- Risk / Blocker
-- Build Freeze 前準備與追蹤
+## Canonical Files
 
-原則：
-- 本目錄不是獨立 Product Truth SSOT；產品 / Architecture / Function Design 仍留在各自 canonical Working 文件。
-- NodeFF 不維護 Backlog / Sprint / implementation evidence / Release execution mirror。
-- 經 Human approval 進入 Build Freeze 的 execution input，由 `NFF98/NFFBuild` 的 immutable Build Spec 與 delivery structure 承接。
-- 不在本目錄複製 NFFBuild 的 execution truth。
+- `BUSINESS-PLAN.md` — shared business model / principles / KPI / strategic guardrails
+- `CAPABILITY-FABRIC.md` — shared Capability semantic / maturity / registry contract
+- `roadmap/` — Product / Business phase-specific evolution
+- `capability-roadmap/` — Capability phase-specific evolution
+- `DECISION-CANDIDATES.md` — only unresolved human decision gates
+- `OPEN-QUESTIONS.md` — only evidence-gated unknowns
+
+## Phase Structure
+
+```text
+Shared Core
+├─ BUSINESS-PLAN.md
+└─ CAPABILITY-FABRIC.md
+
+Phase Growth
+├─ roadmap/PHASE-1..4+
+└─ capability-roadmap/PHASE-1..4+
+```
+
+Rule：
+- 不為 Phase 2 複製整套 ProjectManagement。
+- shared 原則只寫一次。
+- Phase file 只寫該階段的 target / scope / gate / new activation。
+- Calendar 不自動解鎖 Phase；Evidence + Human approval 才能解鎖。
+- Backlog / Sprint / Cursor / Test Evidence / Release execution 永遠由 `NFF98/NFFBuild` 承接。

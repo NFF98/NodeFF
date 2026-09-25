@@ -373,24 +373,27 @@ Cursor 不得：
 - No arbitrary generated code
 - No hidden product decision in implementation
 
-# 19. Phase 1 Application
+# 19. Per-Phase Application
 
-Phase 1 / NOW BUILD：
+Design-to-Delivery governance 本身跨 Phase 共用，不為 Phase 2 / 3 複製另一份流程。
+
+每次 Build Freeze 必須從 Product Roadmap 與 Function Portfolio 明確選定該次 Phase scope。
+
+Current Phase 1 / NOW BUILD：
 
 ```text
-F00
-F01
-F02
-F03
-F04
-F05
-F06
-F07
-F12
-F16
+F00 F01 F02 F03 F04 F05 F06 F07 F12 F16
 ```
 
-中長期 Function 可以保留 future-compatible hooks，但不得因此提前進 implementation scope。
+Canonical Phase scope：
+- Product / Business：`working/ProjectManagement/roadmap/PHASE-1.md`
+- Architecture：`working/architecture/evolution/PHASE-1.md`
+- Infrastructure：`working/infrastructure/PHASE-1.md`
+- Data：`working/data-model/PHASE-1.md`
+- Capability：`working/ProjectManagement/capability-roadmap/PHASE-1.md`
+- Function portfolio：`working/APP-DETAILED-DESIGN-OVERVIEW.md`
+
+中長期 module 可以先存在作 deferred design，但 **未經 Evidence Gate + Human approval + Build Freeze inclusion 就不是 implementation scope**。
 
 # 20. Definition of Done
 

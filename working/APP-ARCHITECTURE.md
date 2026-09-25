@@ -589,126 +589,20 @@ Blueprint Revision A
 
 ---
 
-# 11. 1／3／6 個月 Architecture Evolution
+# 11. Architecture Evolution Index
 
-核心原則：
+共用核心架構留在本文件；各 Phase 的新增／解鎖內容拆到獨立 evolution 文件，避免本檔隨 Phase 2／3／4 持續膨脹。
 
-> **不是每階段換架構，而是在同一個 Intent → Blueprint → Runtime 核心上增加能力。**
+> **Phase files 只描述該階段新增或啟用什麼，不複製本文件的 shared core。**
 
-~~~mermaid
-flowchart LR
-    P1["0–1 月<br/>Core Proof"]
-    P2["2–3 月<br/>Reuse / Identity / Creator"]
-    P3["4–6 月<br/>Scale Readiness"]
-    P4["6 月後<br/>Commerce / Network"]
+- Phase 1 / Core Proof：`working/architecture/evolution/PHASE-1.md`
+- Phase 2 / Reuse・Identity・Creator：`working/architecture/evolution/PHASE-2.md`
+- Phase 3 / Scale Readiness：`working/architecture/evolution/PHASE-3.md`
+- Phase 4+ / Commerce・Network・Orchestration：`working/architecture/evolution/PHASE-4-PLUS.md`
 
-    P1 --> P2 --> P3 --> P4
-~~~
+解鎖規則仍然是：
 
-## 0–1 個月：Core Proof
-
-必須穩定：
-
-- Experience Shell
-- L1–L4
-- Model Gateway basic adapter
-- core Capability Fabric
-- Blueprint / Instance
-- Share / Restore
-- Remix
-- Result Feedback / Logic Correction
-- Anonymous Evidence
-- Humanized Recovery
-
-架構 Gate：
-
-> **能做的 Intent 做對；結果不對時能低摩擦修正；不能做的誠實處理；正常 Interaction 不依賴 LLM。**
-
-不先做：
-- Marketplace
-- dedicated vector DB
-- large realtime infrastructure
-- complex provider network
-
-## 第 2–3 個月：Reuse / Identity / Creator
-
-在原核心上加入：
-
-- Trusted Blueprint Reuse
-- anonymous → account
-- ownership
-- history / save
-- attribution
-- publishing
-- semantic retrieval when evidence exists
-- realtime only when proven
-- premium entitlement metadata
-
-架構 Gate：
-
-> **Reuse 不破壞 Blueprint immutability；Identity 不成為 First Value 的牆。**
-
-## 第 4–6 個月：Scale Readiness
-
-主要不是新增大量 UI，而是強化：
-
-- reliability
-- compatibility / versioning
-- Blueprint trust
-- model cost routing
-- semantic reuse quality
-- external capability pilot
-- runtime AI / heavy job where proven
-- metering / entitlement enforcement
-- operational evidence
-
-架構 Gate：
-
-> **External / Paid Capability 可以接入，而不繞開 Capability Contract 與 Runtime trust boundary。**
-
-## 6 個月後：Intent Commerce / Capability Network
-
-逐步加入：
-
-- external provider registry
-- provider certification
-- booking / payment / commerce
-- metering
-- transaction lifecycle
-- settlement
-- SLA / trust
-- broader creator / provider ecosystem
-- Heterogeneous Orchestration Plane
-- async workflow state / retry / timeout / compensation
-- evidence-based provider discovery / routing
-- human approval step when required
-
-長期新增的是「多 Capability 如何可靠完成一個 Outcome」，不是第二套 App Runtime。
-
-~~~text
-Intent
-→ Resolved Intent
-→ Capability Graph
-→ Runtime local steps
-→ External / Async steps when required
-→ Retry / Compensation / Approval
-→ Validated Outcome
-~~~
-
-Orchestration Engine 只負責執行已被 NFF Contract 描述的 workflow。
-Temporal、n8n 或其他 workflow engine 都只能位於 Adapter 後方，不可把 vendor DSL 寫進 Blueprint 核心。
-
-仍維持：
-
-~~~text
-Intent
-→ Capability Selection
-→ Blueprint
-→ Runtime
-→ External Gateway only when required
-~~~
-
-不能演變成所有 Interaction 都經過中央 Commerce Server。
+> **Evidence 決定是否進下一階段；日期本身不自動解鎖。**
 
 ---
 

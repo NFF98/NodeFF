@@ -64,6 +64,22 @@ working/
   APP-ARCHITECTURE.md
   APP-DETAILED-DESIGN-OVERVIEW.md
   DATA-MODEL.md
+  data-model/
+    PHASE-1.md
+    PHASE-2.md
+    PHASE-3.md
+    PHASE-4-PLUS.md
+  architecture/
+    evolution/
+      PHASE-1.md
+      PHASE-2.md
+      PHASE-3.md
+      PHASE-4-PLUS.md
+  infrastructure/
+    PHASE-1.md
+    PHASE-2.md
+    PHASE-3.md
+    PHASE-4-PLUS.md
   API-CONVENTIONS.md
   EXECUTION-ADMISSION.md
   ACCEPTANCE-CONVENTIONS.md
@@ -79,10 +95,39 @@ working/
     evidence-event-registry.json
     acceptance-test-registry.json
   ProjectManagement/
+    roadmap/
+      PHASE-1.md
+      PHASE-2.md
+      PHASE-3.md
+      PHASE-4-PLUS.md
+    capability-roadmap/
+      PHASE-1.md
+      PHASE-2.md
+      PHASE-3.md
+      PHASE-4-PLUS.md
 
 decisions/
 archive/
 ```
+
+## Growth / Phase Modularity Rule
+
+同一產品語意仍只能有一個 canonical owner，但大型 owner 可以拆成 shared root + phase modules：
+
+```text
+Shared Core
++ Phase 1 module
++ Phase 2 delta
++ Phase 3 delta
++ Phase 4+ delta
+```
+
+規則：
+1. 不建立 Phase 2 的整套平行 Working copy。
+2. Phase module 只描述該 Phase 新增／啟用／migration／Gate，不複製 shared core。
+3. Current Truth = shared root + 目前已啟用的 phase modules。
+4. Future / deferred module 不因存在就自動進 implementation scope。
+5. Build Freeze 必須明確列出本次包含哪些 phase modules。
 
 ## Retired / No-Use Structures
 

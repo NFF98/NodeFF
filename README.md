@@ -15,13 +15,18 @@ working/
 主要入口：
 - Top Architecture：`working/APP-ARCHITECTURE.md`
 - Function Portfolio：`working/APP-DETAILED-DESIGN-OVERVIEW.md`
-- Shared Data：`working/DATA-MODEL.md`
+- Shared Data Invariants / Index：`working/DATA-MODEL.md`
+- Phase Data Modules：`working/data-model/`
+- Architecture Evolution：`working/architecture/evolution/`
+- Infrastructure Phase Modules：`working/infrastructure/`
 - Shared API：`working/API-CONVENTIONS.md`
 - Execution Admission：`working/EXECUTION-ADMISSION.md`
 - Acceptance/Test Conventions：`working/ACCEPTANCE-CONVENTIONS.md`
 - Function Details：`working/functions/Fxx-*.md`
 - UI/UX：`working/UI-UX/`
 - Machine-readable Registries：`working/registries/`
+- Product Roadmap：`working/ProjectManagement/roadmap/`
+- Capability Roadmap：`working/ProjectManagement/capability-roadmap/`
 
 ## Build / Delivery Boundary
 
@@ -52,3 +57,13 @@ NodeFF working/
 ## Decisions
 
 Architecture / product-impacting decisions 記錄於 `decisions/`。
+
+
+## Working Growth Rule
+
+NodeFF 不為 Phase 2 / 3 / 4 複製一整套 Working 文件。
+
+- shared / long-lived truth 留在 root canonical owner；
+- phase-specific additions 放在對應 `PHASE-*.md` module；
+- 後一 Phase 只寫 delta / new activation，不複製前一 Phase 全文；
+- NFFBuild 才建立每次 immutable `BS-Px-nnn` snapshot。

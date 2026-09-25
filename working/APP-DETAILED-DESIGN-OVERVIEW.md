@@ -33,16 +33,22 @@ working/APP-DETAILED-DESIGN-OVERVIEW.md
 → Function Portfolio / Dependency / Release / Status Index
 
 working/DATA-MODEL.md
-→ shared canonical data model
+→ shared data invariants / phase-module index
+
+working/data-model/PHASE-*.md
+→ phase-specific detailed data contract / delta
 
 working/ProjectManagement/CAPABILITY-FABRIC.md
-→ capability semantic contract
+→ shared capability semantic contract
+
+working/ProjectManagement/capability-roadmap/PHASE-*.md
+→ phase-specific capability activation / maturity roadmap
 
 working/functions/Fxx-*.md
 → single Function end-to-end detailed design
 
 working/DESIGN-TO-DELIVERY.md
-→ Working → Human-approved Build Freeze → NFFBuild BS-* → Execution / Test / Release governance
+→ cross-phase Working → Human-approved Build Freeze → NFFBuild BS-* governance
 ~~~
 
 同一 Function 的 detailed behavior 不得同時在本文件與 Fxx 文件各維護一份。

@@ -70,293 +70,20 @@ NodeFF 採四段節奏，而不是把未來能力全部塞進 Phase 1。
 
 ---
 
-# 4. 0–1 個月：證明核心循環
+# 4. Phase Roadmap Index
 
-唯一優先問題：
+商業核心、五大產品原則、KPI 與 Strategic Guardrails 留在本文件；每一 Phase 的目標、能力、Gate 與商業假設拆到 roadmap，避免 Business Plan 隨時間無限增長。
 
-> **使用者能不能很快把 Intent 變成正確、有用的 App，而且願意使用、分享、再 Remix？**
+- Phase 1：`working/ProjectManagement/roadmap/PHASE-1.md`
+- Phase 2：`working/ProjectManagement/roadmap/PHASE-2.md`
+- Phase 3：`working/ProjectManagement/roadmap/PHASE-3.md`
+- Phase 4+：`working/ProjectManagement/roadmap/PHASE-4-PLUS.md`
 
-核心循環：
-
-~~~text
-Intent
-→ Correct App
-→ Immediate Use
-→ Share
-→ Recipient Use
-→ Remix / Create
-~~~
-
-## 必須交付的產品能力
-
-- Experience Shell / 靈感精靈
-- Inspiration Capsules / Ghost Text
-- Progressive Refinement
-- Semantic Compiler
-- Capability Resolution
-- Trusted Blueprint
-- Browser Runtime
-- Share / Restore
-- Remix
-- Anonymous Identity
-- Humanized Recovery
-- 最小必要 Evidence
-
-## Phase 1 UX 原則
-
-使用者不應被迫先學 Prompt。
-
-~~~text
-Copy
-→ Modify
-→ Generate
-→ Use
-→ Remix
-→ Create
-~~~
-
-模糊需求應轉成「可見、可修改的 assumptions」，而不是偷偷替使用者做決定。
-
-## Phase 1 Growth
-
-Growth unit 是 **可分享的 App Artifact**，不是 Account。
-
-~~~text
-Create
-→ Share
-→ Open
-→ Use
-→ Remix
-→ New Create
-~~~
-
-First Value 前原則上不要求註冊。
-
-## Phase 1 Business Model
-
-收入不是主要 KPI。
-
-免費核心應優先支援低邊際成本能力：
-
-- browser execution
-- deterministic rules
-- approved capabilities
-- shareable Blueprint
-- bounded compilation
-
-只有產生真實邊際成本或 Durable Value 才適合成為付費候選：
-
-- runtime AI
-- heavy API
-- media generation
-- durable storage
-- larger realtime
-- premium capability
-
-## 1 個月 Gate
-
-進入下一階段前，至少要有證據回答：
-
-1. Intent 是否真的比 chat answer 更適合被做成 App？
-2. Semantic correctness 是否足以讓人信任？
-3. 使用者是否真的會 Share？
-4. Recipient 是否真的會 Use？
-5. Remix 是否會自然發生？
-6. Anonymous-first 是否降低摩擦？
-7. 每個 Successful Intent 的成本是否可持續？
-
-沒有這些 Evidence，不進 Creator Economy 或 Marketplace。
+> Phase advancement = Evidence-gated，不因日曆自動發生。
 
 ---
 
-# 5. 第 2–3 個月：Reuse、Identity、Creator Value
-
-這一階段的目的不是增加功能數量，而是讓「一次性的好 App」開始變成可累積資產。
-
-## 5.1 Trusted Reuse
-
-從：
-
-~~~text
-Intent
-→ Fresh Compile
-~~~
-
-逐步變成：
-
-~~~text
-Intent
-→ Retrieve Trusted Blueprint Family
-→ Minimal Semantic Delta
-→ Validate
-→ Execute
-~~~
-
-價值：
-
-- 更快
-- 更便宜
-- 更穩定
-- 更少 semantic failure
-- 更容易 Remix
-
-## 5.2 Progressive Identity
-
-Authentication 只在 Durable Value 出現時要求。
-
-~~~text
-anonymous_id
-→ value requested
-→ authenticate
-→ ownership claim
-→ user_id
-~~~
-
-可解鎖：
-
-- Save
-- History
-- Ownership
-- Publishing
-- Cross-device
-- Private artifact
-- Paid entitlement
-
-## 5.3 Creator Value
-
-只有 Reuse / Remix 行為存在後，才建立：
-
-- creator attribution
-- publishing
-- reusable Blueprint family
-- creator profile
-- premium artifact / capability
-- creator analytics
-
-不先假設 Creator Economy 一定成立。
-
-## 3 個月 Gate
-
-進入 Scale Readiness 前，至少要看到：
-
-- repeat creation
-- repeat use
-- Blueprint reuse
-- anonymous → account conversion
-- save / publish behavior
-- creator retention
-- cost per successful intent 持續下降
-- semantic mismatch 持續下降
-
----
-
-# 6. 第 4–6 個月：Scale Readiness
-
-這不是全面平台化，而是確認 NFF 是否值得開始承接更高成本、更高價值的需求。
-
-主要工作：
-
-## Reliability
-
-- Trusted Blueprint Families
-- Compatibility / versioning
-- Capability maturity governance
-- failure quarantine
-- recovery quality
-- observability
-
-## Cost
-
-- reuse before compile
-- CDN / cache optimization
-- model routing by cost / capability
-- batch telemetry
-- only proven heavy work goes server-side
-
-## Product Expansion
-
-只針對真實 usage 證明需要的能力增加：
-
-- Realtime
-- Object / media storage
-- runtime AI
-- heavy external API
-- semantic retrieval
-- premium capability
-
-## Commerce Pilot
-
-可以開始驗證：
-
-~~~text
-Intent
-→ Paid / External Capability
-→ Price / Permission
-→ Explicit User Choice
-→ Execute
-→ Meter
-→ Result
-~~~
-
-這仍是 Pilot，不是 Marketplace。
-
-## 6 個月 Gate
-
-只有以下證據成立，才值得把 Intent Commerce / Capability Network 提升為主要平台方向：
-
-- 明確 recurring demand
-- 可識別的外部 capability supply
-- 使用者願意為 outcome / durable value 付費
-- provider execution 可被可靠控制
-- 跨 Provider workflow 的 retry / timeout / compensation 可治理
-- metering / entitlement 可被正確管理
-- 供需雙方有足夠密度，不是只有單邊 catalog
-- NFF 在交易鏈中提供不可取代的 orchestration value
-
----
-
-# 7. 6 個月後：Intent Commerce / Capability Network
-
-長期 NodeFF 的角色可能演進為：
-
-> **Intent → Capability → Interaction → Transaction 的 Control Plane。**
-
-~~~text
-User Intent
-→ Capability Selection
-→ Dynamic App
-→ Internal / External Capability
-→ Outcome / Transaction
-~~~
-
-可能的 Provider：
-
-- AI
-- Data
-- Search
-- Booking
-- Payment
-- Commerce
-- Media
-- Specialized Compute
-- External Workflow
-
-長期商業模式候選：
-
-- Capability transaction fee
-- API margin
-- premium capability
-- creator revenue share
-- provider / marketplace commission
-- orchestration / workflow execution fee
-- enterprise capability access / governance
-- durable workspace / team value
-
-但 Network 只有在真實供需密度成立後才有價值。
-
----
-
-# 8. 商業 Flywheel
+# 5. 商業 Flywheel
 
 第一個 Flywheel：
 
@@ -395,7 +122,7 @@ More Intent Demand
 
 ---
 
-# 9. KPI Tree
+# 6. KPI Tree
 
 NodeFF 不以 Vanity Metrics 管理。
 
@@ -433,7 +160,7 @@ NodeFF 不以 Vanity Metrics 管理。
 
 ---
 
-# 10. Strategic Guardrails
+# 7. Strategic Guardrails
 
 1. Product Vision 永遠是 Intent → App，不被單一 Wedge 綁死。
 2. Phase 1 優先 Semantic Correctness，不追求 Capability 數量。
