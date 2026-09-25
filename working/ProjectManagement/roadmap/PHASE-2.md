@@ -1,6 +1,6 @@
 # NodeFF Product Roadmap — Phase 2
 
-> Shared business truth：`../BUSINESS-PLAN.md`
+> Shared business truth：`../../core/BUSINESS-PLAN.md`
 
 # 5. 第 2–3 個月：Reuse、Identity、Creator Value
 

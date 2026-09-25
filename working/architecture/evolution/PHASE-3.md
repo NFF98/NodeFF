@@ -1,6 +1,6 @@
 # NodeFF Architecture Evolution — Phase 3
 
-> Canonical Role：Phase 3 architecture additions / activation only. Shared architecture invariants remain in `working/APP-ARCHITECTURE.md`.
+> Canonical Role：Phase 3 architecture additions / activation only. Shared architecture invariants remain in `working/core/APP-ARCHITECTURE.md`.
 
 ## 第 4–6 個月：Scale Readiness
 

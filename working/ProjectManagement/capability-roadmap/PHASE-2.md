@@ -1,6 +1,6 @@
 # NodeFF Capability Roadmap — Phase 2
 
-> Shared capability contract：`../CAPABILITY-FABRIC.md`
+> Shared capability contract：`../../core/CAPABILITY-FABRIC.md`
 
 # 12. 第 2–3 個月：Reuse / Identity / Creator Capability
 

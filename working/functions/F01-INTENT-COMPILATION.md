@@ -581,7 +581,7 @@ F01 不偷偷 mutation F02 Candidate。
 
 # 18. Public API Conventions
 
-Cross-Function canonical owner：`working/API-CONVENTIONS.md`。
+Cross-Function canonical owner：`working/core/API-CONVENTIONS.md`。
 
 F01以下只列 Function-specific usage；若與 Shared API Conventions衝突，以 Shared contract為準。
 

@@ -1017,7 +1017,7 @@ canonical_blueprint?  // trusted internal path
 
 Client 不可傳 trust_status=VALIDATED 自我宣告可信。
 
-Browser / F03 fresh execution gate由 `working/EXECUTION-ADMISSION.md` 擁有；F02提供current trust assertion，不讓 immutable CDN body本身充當執行授權。
+Browser / F03 fresh execution gate由 `working/core/EXECUTION-ADMISSION.md` 擁有；F02提供current trust assertion，不讓 immutable CDN body本身充當執行授權。
 
 # 38. Data / DB Read-Write
 
@@ -1214,7 +1214,7 @@ Compatibility：
 - F01 Composer / Candidate boundary已建立。
 - F12 recovery mapping已建立並由 machine-readable Recovery Registry承接。
 - F16 Result Snapshot / sensitivity / correction flow已建立。
-- Fresh Execution Admission已由 working/EXECUTION-ADMISSION.md 固定。
+- Fresh Execution Admission已由 working/core/EXECUTION-ADMISSION.md 固定。
 
 未來擴充 Date/Time、Map、Media input、async/external Action時，必須走 versioned extension，不回寫 Phase 1 contract。
 

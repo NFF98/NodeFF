@@ -53,28 +53,28 @@ NFFBuild Delivery
 # 3. Canonical Document Responsibilities
 
 ```text
-working/APP-ARCHITECTURE.md
+working/core/APP-ARCHITECTURE.md
 → system boundary / top architecture
 
-working/APP-DETAILED-DESIGN-OVERVIEW.md
+working/core/APP-DETAILED-DESIGN-OVERVIEW.md
 → Function Portfolio / dependency / phase / release scope
 
-working/DATA-MODEL.md
+working/core/DATA-MODEL.md
 → shared canonical data model
 
-working/API-CONVENTIONS.md
+working/core/API-CONVENTIONS.md
 → shared public API transport / control contract
 
-working/EXECUTION-ADMISSION.md
+working/core/EXECUTION-ADMISSION.md
 → fresh Blueprint trust / compatibility execution gate
 
-working/ACCEPTANCE-CONVENTIONS.md
+working/core/ACCEPTANCE-CONVENTIONS.md
 → shared Acceptance → Test conventions
 
 working/registries/
 → machine-readable Recovery / Evidence / Acceptance contracts
 
-working/ProjectManagement/CAPABILITY-FABRIC.md
+working/core/CAPABILITY-FABRIC.md
 → capability semantic contract
 
 working/functions/Fxx-*.md
@@ -391,7 +391,7 @@ Canonical Phase scope：
 - Infrastructure：`working/infrastructure/PHASE-1.md`
 - Data：`working/data-model/PHASE-1.md`
 - Capability：`working/ProjectManagement/capability-roadmap/PHASE-1.md`
-- Function portfolio：`working/APP-DETAILED-DESIGN-OVERVIEW.md`
+- Function portfolio：`working/core/APP-DETAILED-DESIGN-OVERVIEW.md`
 
 中長期 module 可以先存在作 deferred design，但 **未經 Evidence Gate + Human approval + Build Freeze inclusion 就不是 implementation scope**。
 

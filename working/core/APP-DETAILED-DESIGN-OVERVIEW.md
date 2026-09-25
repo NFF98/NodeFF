@@ -26,19 +26,19 @@ Function 詳細設計回答：
 # 2. Document Responsibility Boundary
 
 ~~~text
-working/APP-ARCHITECTURE.md
+working/core/APP-ARCHITECTURE.md
 → Top Architecture / system boundary
 
-working/APP-DETAILED-DESIGN-OVERVIEW.md
+working/core/APP-DETAILED-DESIGN-OVERVIEW.md
 → Function Portfolio / Dependency / Release / Status Index
 
-working/DATA-MODEL.md
+working/core/DATA-MODEL.md
 → shared data invariants / phase-module index
 
 working/data-model/PHASE-*.md
 → phase-specific detailed data contract / delta
 
-working/ProjectManagement/CAPABILITY-FABRIC.md
+working/core/CAPABILITY-FABRIC.md
 → shared capability semantic contract
 
 working/ProjectManagement/capability-roadmap/PHASE-*.md
@@ -47,7 +47,7 @@ working/ProjectManagement/capability-roadmap/PHASE-*.md
 working/functions/Fxx-*.md
 → single Function end-to-end detailed design
 
-working/DESIGN-TO-DELIVERY.md
+working/core/DESIGN-TO-DELIVERY.md
 → cross-phase Working → Human-approved Build Freeze → NFFBuild BS-* governance
 ~~~
 
@@ -299,7 +299,7 @@ User Outcome
 
 Lifecycle、Traceability ID、Build Freeze Gate、Acceptance → Test、Runtime Debug、Release Gate、CT Commit/Revert 規則，只引用：
 
-> `working/DESIGN-TO-DELIVERY.md`
+> `working/core/DESIGN-TO-DELIVERY.md`
 
 本文件不再複製 Delivery Contract。
 

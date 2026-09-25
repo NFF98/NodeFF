@@ -1,6 +1,6 @@
 # NodeFF Data Model — Phase 2 Extensions
 
-> Shared invariants：`../DATA-MODEL.md`
+> Shared invariants：`../core/DATA-MODEL.md`
 >
 > 本檔只定義 Phase 2 相對於 Phase 1 的新增／migration hooks；不得複製 Phase 1 tables。
 

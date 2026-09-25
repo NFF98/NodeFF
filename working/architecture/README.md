@@ -1,6 +1,6 @@
 # NodeFF Architecture Modules
 
-`working/APP-ARCHITECTURE.md` = shared / long-lived architecture Current Truth。
+`working/core/APP-ARCHITECTURE.md` = shared / long-lived architecture Current Truth。
 
 `evolution/` = phase-specific additions only：
 - PHASE-1.md

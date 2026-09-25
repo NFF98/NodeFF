@@ -2,7 +2,7 @@
 
 本目錄只記錄 **Phase-specific product / business evolution**。
 
-Shared business truth：`../BUSINESS-PLAN.md`
+Shared business truth：`../../core/BUSINESS-PLAN.md`
 
 - PHASE-1.md — Core Proof
 - PHASE-2.md — Reuse / Identity / Creator Value

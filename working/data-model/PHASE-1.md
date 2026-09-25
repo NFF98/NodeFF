@@ -1,6 +1,6 @@
 # NodeFF Data Model — Phase 1 Detailed Contract
 
-> Shared invariants / module index：`../DATA-MODEL.md`
+> Shared invariants / module index：`../core/DATA-MODEL.md`
 >
 > Status：BUILD_FREEZE_READY / Phase 1 Current Truth。本文是 Phase 1 detailed data contract；Phase 2+ additions 不得偷偷加入本檔。
 

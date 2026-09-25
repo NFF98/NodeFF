@@ -1,6 +1,6 @@
 # NodeFF Capability Roadmap — Phase 1
 
-> Shared capability contract：`../CAPABILITY-FABRIC.md`
+> Shared capability contract：`../../core/CAPABILITY-FABRIC.md`
 
 # 11. 0–1 個月：Core Capability Set
 

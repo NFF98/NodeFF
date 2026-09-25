@@ -1,6 +1,6 @@
 # NodeFF Architecture Evolution — Phase 4+
 
-> Canonical Role：Phase 4+ architecture additions / activation only. Shared architecture invariants remain in `working/APP-ARCHITECTURE.md`.
+> Canonical Role：Phase 4+ architecture additions / activation only. Shared architecture invariants remain in `working/core/APP-ARCHITECTURE.md`.
 
 ## 6 個月後：Intent Commerce / Capability Network
 

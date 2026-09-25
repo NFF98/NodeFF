@@ -571,7 +571,7 @@ child Runtime使用 child Blueprint initial state。
 
 # 24. API Strategy
 
-Common transport / idempotency / error / versioning由 `working/API-CONVENTIONS.md` 擁有。
+Common transport / idempotency / error / versioning由 `working/core/API-CONVENTIONS.md` 擁有。
 
 F06 Phase 1 不新增平行 Compiler endpoint。
 

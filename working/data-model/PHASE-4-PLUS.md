@@ -1,6 +1,6 @@
 # NodeFF Data Model — Phase 4+ Extensions
 
-> Shared invariants：`../DATA-MODEL.md`
+> Shared invariants：`../core/DATA-MODEL.md`
 >
 > Status：DEFERRED / NO ACTIVE PHASE 4+ DATA EXTENSION YET。
 >

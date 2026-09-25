@@ -32,7 +32,7 @@
 - Capability / Infra / Experience Shell / Recovery：已進 canonical Working。
 - UI/UX、Runtime Timeout、Creation Progress：已進對應 UI / Function / Registry。
 - LLM Proposal ≠ READY Truth：已由 Architecture + F02 + F03 + F12 覆蓋。
-- 中期 L3 3A–3E 與 L4 4A–4D：經 User 批准後已吸收到 `working/APP-ARCHITECTURE.md`，明確標為中期方向，不是 Phase 1 implementation scope。
+- 中期 L3 3A–3E 與 L4 4A–4D：經 User 批准後已吸收到 `working/core/APP-ARCHITECTURE.md`，明確標為中期方向，不是 Phase 1 implementation scope。
 
 完整歷史內容：
 - `archive/ProjectManagement/DESIGN-WORKBENCH-HISTORY-2026-09-25.md`

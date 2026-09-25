@@ -1,6 +1,6 @@
 # NodeFF Capability Roadmap
 
-Shared capability contract：`../CAPABILITY-FABRIC.md`
+Shared capability contract：`../../core/CAPABILITY-FABRIC.md`
 
 本目錄只記各 Phase 要新增、成熟、驗證或延後的 Capability scope。
 

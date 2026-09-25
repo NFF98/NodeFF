@@ -1,6 +1,6 @@
 # NodeFF Infrastructure — Phase 3
 
-> Shared infrastructure truth：`../INFRA-ARCHITECTURE.md`
+> Shared infrastructure truth：`../core/INFRA-ARCHITECTURE.md`
 
 # 14. 中期 Heavy Capability
 

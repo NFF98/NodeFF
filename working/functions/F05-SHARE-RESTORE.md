@@ -334,7 +334,7 @@ Rules：
 2. response body = canonical Blueprint JSON。
 3. cache immutable Blueprint aggressively。
 4. same hash永遠不得返回不同 body。
-5. F03在 hydrate前必須取得 `working/EXECUTION-ADMISSION.md` 定義的 fresh ExecutionAdmission。
+5. F03在 hydrate前必須取得 `working/core/EXECUTION-ADMISSION.md` 定義的 fresh ExecutionAdmission。
 6. trust status本身不是 immutable；cached body不能當 execution permission。
 
 因此：
@@ -371,7 +371,7 @@ Security revocation應能 purge / bypass cache。
 
 # 13. API Conventions
 
-F05沿用 cross-Function canonical `working/API-CONVENTIONS.md`：
+F05沿用 cross-Function canonical `working/core/API-CONVENTIONS.md`：
 
 ~~~text
 /api/v1

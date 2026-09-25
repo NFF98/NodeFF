@@ -346,7 +346,7 @@ Compiler Metadata
 
 詳細能力 Contract、Maturity、1／3／6 個月發展：
 
-- working/ProjectManagement/CAPABILITY-FABRIC.md
+- working/core/CAPABILITY-FABRIC.md
 
 ---
 

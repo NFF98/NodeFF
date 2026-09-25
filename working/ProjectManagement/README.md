@@ -6,8 +6,8 @@
 
 ## Canonical Files
 
-- `BUSINESS-PLAN.md` — shared business model / principles / KPI / strategic guardrails
-- `CAPABILITY-FABRIC.md` — shared Capability semantic / maturity / registry contract
+- `../core/BUSINESS-PLAN.md` — shared business model / principles / KPI / strategic guardrails
+- `../core/CAPABILITY-FABRIC.md` — shared Capability semantic / maturity / registry contract
 - `roadmap/` — Product / Business phase-specific evolution
 - `capability-roadmap/` — Capability phase-specific evolution
 - `DECISION-CANDIDATES.md` — only unresolved human decision gates

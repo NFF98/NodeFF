@@ -1,6 +1,6 @@
 # NodeFF Infrastructure Modules
 
-Shared infrastructure truth：`../INFRA-ARCHITECTURE.md`
+Shared infrastructure truth：`../core/INFRA-ARCHITECTURE.md`
 
 - PHASE-1.md — current Phase 1 runtime / edge / DB / share / evidence / cost baseline
 - PHASE-2.md — reuse / identity / creator infrastructure activation

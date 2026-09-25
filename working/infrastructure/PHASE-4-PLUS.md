@@ -1,6 +1,6 @@
 # NodeFF Infrastructure — Phase 4+
 
-> Shared infrastructure truth：`../INFRA-ARCHITECTURE.md`
+> Shared infrastructure truth：`../core/INFRA-ARCHITECTURE.md`
 
 # 15. 長期：Intent Commerce / Capability Network / Orchestration
 

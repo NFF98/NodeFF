@@ -1,6 +1,6 @@
 # NodeFF Product Roadmap — Phase 3
 
-> Shared business truth：`../BUSINESS-PLAN.md`
+> Shared business truth：`../../core/BUSINESS-PLAN.md`
 
 # 6. 第 4–6 個月：Scale Readiness
 

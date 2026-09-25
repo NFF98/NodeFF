@@ -3,7 +3,7 @@
 > 狀態：Working Current Truth — Shared Data Model Index / Invariants。本文只保留跨 Phase 不應重複的資料原則；Phase-specific schema / tables / migration additions 拆到 `working/data-model/`。
 > Legacy Formal Spec reference：RETIRED / NO-USE；Build implementation snapshot 改由 Human-approved Build Freeze → NFFBuild BS-*。
 >
-> Delivery / Traceability 規則以 `working/DESIGN-TO-DELIVERY.md` 為準；Infrastructure boundary 以 `working/INFRA-ARCHITECTURE.md` 為準。
+> Delivery / Traceability 規則以 `working/core/DESIGN-TO-DELIVERY.md` 為準；Infrastructure boundary 以 `working/core/INFRA-ARCHITECTURE.md` 為準。
 
 # 1. Purpose
 

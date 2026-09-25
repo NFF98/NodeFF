@@ -1,6 +1,6 @@
 # NodeFF Infrastructure — Phase 1
 
-> Shared infrastructure truth：`../INFRA-ARCHITECTURE.md`
+> Shared infrastructure truth：`../core/INFRA-ARCHITECTURE.md`
 
 # 4. 為什麼是 Cloudflare Edge + Supabase Postgres
 

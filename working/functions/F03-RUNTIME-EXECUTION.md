@@ -116,7 +116,7 @@ registry_version
 registry_digest
 ~~~
 
-Hydration 前依 `working/EXECUTION-ADMISSION.md` 確認：
+Hydration 前依 `working/core/EXECUTION-ADMISSION.md` 確認：
 
 ~~~text
 fresh ExecutionAdmission exists

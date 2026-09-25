@@ -7,7 +7,7 @@
 
 # 1. Ownership
 
-Shared owner：working/API-CONVENTIONS.md。
+Shared owner：working/core/API-CONVENTIONS.md。
 
 Function文件不得再複製一整套 common API rules；只定義 endpoint-specific差異。
 
@@ -229,7 +229,7 @@ Breaking route/request/response semantics需要新 API major或明確 migration�
 
 # 12.1 Execution Admission Read
 
-Fresh Blueprint execution permission由 `working/EXECUTION-ADMISSION.md` 擁有：
+Fresh Blueprint execution permission由 `working/core/EXECUTION-ADMISSION.md` 擁有：
 
 ~~~text
 GET /api/v1/blueprints/{content_hash}/execution-admission

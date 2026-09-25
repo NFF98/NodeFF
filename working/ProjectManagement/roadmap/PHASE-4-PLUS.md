@@ -1,6 +1,6 @@
 # NodeFF Product Roadmap — Phase 4+
 
-> Shared business truth：`../BUSINESS-PLAN.md`
+> Shared business truth：`../../core/BUSINESS-PLAN.md`
 
 # 7. 6 個月後：Intent Commerce / Capability Network
 

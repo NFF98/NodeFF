@@ -1,6 +1,6 @@
 # NodeFF Architecture Evolution — Phase 2
 
-> Canonical Role：Phase 2 architecture additions / activation only. Shared architecture invariants remain in `working/APP-ARCHITECTURE.md`.
+> Canonical Role：Phase 2 architecture additions / activation only. Shared architecture invariants remain in `working/core/APP-ARCHITECTURE.md`.
 
 ## 第 2–3 個月：Reuse / Identity / Creator
 

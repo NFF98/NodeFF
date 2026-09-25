@@ -61,39 +61,42 @@ README.md
 SSOT.md
 
 working/
-  APP-ARCHITECTURE.md
-  APP-DETAILED-DESIGN-OVERVIEW.md
-  DATA-MODEL.md
-  data-model/
-    PHASE-1.md
-    PHASE-2.md
-    PHASE-3.md
-    PHASE-4-PLUS.md
+  README.md
+  DESIGN-WORKBENCH.md
+
+  core/
+    README.md
+    APP-ARCHITECTURE.md
+    APP-DETAILED-DESIGN-OVERVIEW.md
+    DATA-MODEL.md
+    INFRA-ARCHITECTURE.md
+    BUSINESS-PLAN.md
+    CAPABILITY-FABRIC.md
+    TECHNICAL-MOAT.md
+    API-CONVENTIONS.md
+    ACCEPTANCE-CONVENTIONS.md
+    EXECUTION-ADMISSION.md
+    DESIGN-TO-DELIVERY.md
+
   architecture/
     evolution/
       PHASE-1.md
       PHASE-2.md
       PHASE-3.md
       PHASE-4-PLUS.md
+
+  data-model/
+    PHASE-1.md
+    PHASE-2.md
+    PHASE-3.md
+    PHASE-4-PLUS.md
+
   infrastructure/
     PHASE-1.md
     PHASE-2.md
     PHASE-3.md
     PHASE-4-PLUS.md
-  API-CONVENTIONS.md
-  EXECUTION-ADMISSION.md
-  ACCEPTANCE-CONVENTIONS.md
-  functions/
-    Fxx-*.md
-  UI-UX/
-    PHASE1-SCREEN-INVENTORY.md
-    screens/
-    overlays/
-    references/
-  registries/
-    recovery-registry.json
-    evidence-event-registry.json
-    acceptance-test-registry.json
+
   ProjectManagement/
     roadmap/
       PHASE-1.md
@@ -105,8 +108,23 @@ working/
       PHASE-2.md
       PHASE-3.md
       PHASE-4-PLUS.md
+    OPEN-QUESTIONS.md
+    DECISION-CANDIDATES.md
 
-decisions/
+  functions/
+    Fxx-*.md
+
+  UI-UX/
+    PHASE1-SCREEN-INVENTORY.md
+    screens/
+    overlays/
+    references/
+
+  registries/
+    recovery-registry.json
+    evidence-event-registry.json
+    acceptance-test-registry.json
+
 archive/
 ```
 
@@ -186,7 +204,6 @@ NFF98/NFFBuild/build-spec/baselines/BS-Px-nnn/
 
 ```text
 NodeFF Working Current Truth
-> approved decision records
 > historical reports / discussion
 ```
 

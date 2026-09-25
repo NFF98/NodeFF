@@ -1,6 +1,6 @@
 # NodeFF Capability Roadmap — Phase 3
 
-> Shared capability contract：`../CAPABILITY-FABRIC.md`
+> Shared capability contract：`../../core/CAPABILITY-FABRIC.md`
 
 # 13. 第 4–6 個月：Scale Readiness / External Capability Pilot
 

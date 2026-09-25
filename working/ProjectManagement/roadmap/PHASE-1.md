@@ -1,6 +1,6 @@
 # NodeFF Product Roadmap — Phase 1
 
-> Shared business truth：`../BUSINESS-PLAN.md`
+> Shared business truth：`../../core/BUSINESS-PLAN.md`
 
 # 4. 0–1 個月：證明核心循環
 

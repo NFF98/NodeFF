@@ -1,6 +1,6 @@
 # NodeFF Data Model Modules
 
-`../DATA-MODEL.md` = shared cross-phase invariants / index。
+`../core/DATA-MODEL.md` = shared cross-phase invariants / index。
 
 Phase modules：
 - PHASE-1.md — current Phase 1 detailed entities / tables / integrity / privacy / acceptance

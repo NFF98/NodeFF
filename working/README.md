@@ -2,51 +2,55 @@
 
 > `working/` = NodeFF 唯一可修改 Product Design Current Truth。
 
-## 先讀這 6 個入口
+## 先分兩類看
 
-1. `APP-ARCHITECTURE.md` — NFF 是什麼、系統怎麼分工
-2. `APP-DETAILED-DESIGN-OVERVIEW.md` — Functions / dependency / release scope
-3. `ProjectManagement/BUSINESS-PLAN.md` — 商業核心 / KPI / guardrails
-4. `ProjectManagement/CAPABILITY-FABRIC.md` — NFF 能做什麼
-5. `DESIGN-TO-DELIVERY.md` — 怎麼從設計進 Build Freeze / NFFBuild
-6. `ProjectManagement/roadmap/PHASE-1.md` — 現在 Phase 1 要證明什麼
+### 1. Common Core
+`working/core/`
 
-## Shared Core vs Phase Growth
+跨 Phase 共用、不應每一 Phase 重複的核心：
+- App / Infra Architecture
+- Data invariants
+- Business thesis
+- Capability contract
+- API / Acceptance conventions
+- Execution Admission
+- Design-to-Delivery governance
+- Technical Moat
 
-```text
-Shared / long-lived truth
-├─ APP-ARCHITECTURE.md
-├─ DATA-MODEL.md
-├─ INFRA-ARCHITECTURE.md
-├─ BUSINESS-PLAN.md
-└─ CAPABILITY-FABRIC.md
-
-Phase-specific growth
-├─ architecture/evolution/PHASE-*.md
-├─ data-model/PHASE-*.md
-├─ infrastructure/PHASE-*.md
-├─ ProjectManagement/roadmap/PHASE-*.md
-└─ ProjectManagement/capability-roadmap/PHASE-*.md
-```
+### 2. Phase / Detailed Modules
+- `architecture/evolution/` — 每 Phase architecture additions
+- `data-model/` — 每 Phase data contract / delta
+- `infrastructure/` — 每 Phase infra activation
+- `ProjectManagement/roadmap/` — 每 Phase product / business roadmap
+- `ProjectManagement/capability-roadmap/` — 每 Phase Capability roadmap
+- `functions/` — Function detailed design
+- `UI-UX/` — Screen / Overlay detailed design
+- `registries/` — machine-readable contracts
+- `DESIGN-WORKBENCH.md` — temporary discussion only
 
 ## Growth Rule
 
-- 同一語意只有一個 owner。
-- 不建立「Phase 2 完整複製版」。
-- Phase 2 只寫相對 shared core / Phase 1 的新增與改變。
-- Deferred phase file 可以存在，但不等於 implementation scope。
-- 真正每 Phase frozen copy 在 NFFBuild：`BS-P1-001`, `BS-P2-001`...。
+```text
+Common Core
++ Phase 1 module
++ Phase 2 delta
++ Phase 3 delta
++ Phase 4+ delta
+```
+
+不建立 Phase 2 的整套 Working copy。
+
+Future / deferred Phase file 存在，也不代表 implementation scope。
+
+真正每 Phase frozen copy 在 NFFBuild：`BS-P1-001`, `BS-P2-001`...
 
 ## Phase 1 Build Freeze Current Set
 
-Phase 1 Build Freeze 最終 review 會使用：
-
-- shared core canonical Working
+Phase 1 Build Freeze 最終 review 使用：
+- `core/` shared truth
 - `architecture/evolution/PHASE-1.md`
 - `data-model/PHASE-1.md`
 - `infrastructure/PHASE-1.md`
 - `ProjectManagement/roadmap/PHASE-1.md`
 - `ProjectManagement/capability-roadmap/PHASE-1.md`
 - Phase 1 Functions / UI-UX / Registries
-
-UI-UX / Functions / Registries 仍留到最後做 quality / tidy / consistency review。

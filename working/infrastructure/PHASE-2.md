@@ -1,6 +1,6 @@
 # NodeFF Infrastructure — Phase 2
 
-> Shared infrastructure truth：`../INFRA-ARCHITECTURE.md`
+> Shared infrastructure truth：`../core/INFRA-ARCHITECTURE.md`
 
 # 13. 中期：Reuse / Identity / Creator Value
 
