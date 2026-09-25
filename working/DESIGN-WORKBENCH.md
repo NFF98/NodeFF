@@ -350,7 +350,7 @@ Workbench 中的「Anonymous-First ≠ No Usage Record」與「Idea / Need → A
 
 來源：
 - `working/INFRA-ARCHITECTURE.md`
-- `working/ProjectManagement/PRODUCT-DISCUSSION.md`
+- `archive/ProjectManagement/PRODUCT-DISCUSSION.md`
 - `working/ProjectManagement/BUSINESS-PLAN.md`
 - `working/ProjectManagement/CAPABILITY-FABRIC.md`
 - `working/TECHNICAL-MOAT.md`
@@ -407,7 +407,7 @@ Browser Runtime Plane
 
 來源：
 - `working/APP-ARCHITECTURE.md`
-- `working/ProjectManagement/PRODUCT-DISCUSSION.md`
+- `archive/ProjectManagement/PRODUCT-DISCUSSION.md`
 - `working/ProjectManagement/CAPABILITY-FABRIC.md`
 
 > 本項只記錄本輪新增差異；前面已同步／已記錄的 Architecture、Infra、Capability Contract 內容不重複。

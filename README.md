@@ -45,6 +45,10 @@ NodeFF working/
 
 歷史文件若仍出現 `spec/`、Formal Spec、Working → Spec、Spec Promotion、Formal Spec Refresh 等字樣，只代表當時的歷史治理模型，不是 Current Truth。
 
+## Archive
+
+`archive/` 只保存歷史治理、討論與協作證據；**永遠不是 Current Truth、Build Freeze input 或 Cursor implementation authority**。
+
 ## Decisions
 
 Architecture / product-impacting decisions 記錄於 `decisions/`。

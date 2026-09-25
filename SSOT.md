@@ -81,6 +81,7 @@ working/
   ProjectManagement/
 
 decisions/
+archive/
 ```
 
 ## Retired / No-Use Structures
@@ -103,6 +104,18 @@ decisions/
 **RETIRED / NO-USE.**
 
 Backlog / Sprint / implementation evidence / release execution 全部由 `NFF98/NFFBuild` 承接。
+
+### `archive/`
+
+**HISTORICAL EVIDENCE ONLY / NO AUTHORITY.**
+
+`archive/` 可保存已退役治理、舊 Gate 報告、過去討論與協作紀錄，但不得作為：
+- Product Design Current Truth
+- Build Freeze input
+- NFFBuild Build Spec source
+- Cursor implementation authority
+
+若 archive 與 `working/` 衝突，一律以 `working/` 為準。
 
 ## Build Freeze
 
