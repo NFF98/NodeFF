@@ -83,13 +83,13 @@ working/detailed-design/functions/Fxx-*.md
 working/detailed-design/UI-UX/
 → screen composition / visual hierarchy / responsive / presentation truth
 
-appf2/appf2-build/build-spec/baselines/BS-*
+NFF98/appf2-build/build-spec/baselines/BS-*
 → Human-approved immutable implementation snapshot
 
-appf2/appf2-build/delivery/
+NFF98/appf2-build/delivery/
 → backlog / sprint / evidence execution
 
-appf2/appf2-build/releases/
+NFF98/appf2-build/releases/
 → release execution
 ```
 
@@ -276,7 +276,7 @@ Should we improve / expand / stop?
 
 # 14. Release Gate
 
-Release authority 在 `appf2/appf2-build`。
+Release authority 在 `NFF98/appf2-build`。
 
 Release 至少要求：
 

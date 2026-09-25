@@ -317,7 +317,7 @@ Legacy formal promotion target（**RETIRED / NO-USE**）：
 ~~~text
 spec/ui-ux/  ← RETIRED / NO-USE
 
-Current Build Freeze destination：`appf2/appf2-build/build-spec/baselines/BS-*/UI-UX/`
+Current Build Freeze destination：`NFF98/appf2-build/build-spec/baselines/BS-*/UI-UX/`
 ├─ PHASE1-SCREEN-INVENTORY.md
 ├─ DESIGN-SYSTEM.md
 ├─ screens/

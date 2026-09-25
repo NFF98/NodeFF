@@ -5,11 +5,11 @@
 ## Repository Authority
 
 ```text
-appf2/appf2-design
+NFF98/appf2-design
 = WHAT / WHY / WHEN
 = Product Design Current Truth
 
-appf2/appf2-build
+NFF98/appf2-build
 = HOW / EXECUTION / EVIDENCE / RELEASE
 = Build & Delivery Authority
 ```
@@ -164,7 +164,7 @@ Shared Core
 
 **RETIRED / NO-USE.**
 
-Backlog / Sprint / implementation evidence / release execution 全部由 `appf2/appf2-build` 承接。
+Backlog / Sprint / implementation evidence / release execution 全部由 `NFF98/appf2-build` 承接。
 
 ### `archive/`
 
@@ -191,7 +191,7 @@ Human-approved Build Freeze 必須固定：
 Freeze 後輸出到：
 
 ```text
-appf2/appf2-build/build-spec/baselines/BS-Px-nnn/
+NFF98/appf2-build/build-spec/baselines/BS-Px-nnn/
 ```
 
 已鎖定 baseline 不得修改；任何 Product Design semantic change 都回 appf2 Working，批准後建立新 baseline。

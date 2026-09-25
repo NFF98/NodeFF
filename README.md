@@ -4,7 +4,7 @@ appf2 是一個 No-install、Everyone-is-creator、Sharable/Linkable、Intent Co
 
 ## Repository Role
 
-`appf2/appf2-design` = **Product Design Current Truth**，負責 WHAT / WHY / WHEN。
+`NFF98/appf2-design` = **Product Design Current Truth**，負責 WHAT / WHY / WHEN。
 
 唯一可修改的 Product Design Current Truth：
 
@@ -37,16 +37,16 @@ appf2 working/
 → consistency / delta / acceptance / UI audit
 → Human approval
 → Build Freeze
-→ appf2/appf2-build/build-spec/baselines/BS-*
+→ NFF98/appf2-build/build-spec/baselines/BS-*
 → backlog / sprint / Cursor / test / evidence / release
 ```
 
-`appf2/appf2-build` = implementation / delivery authority。
+`NFF98/appf2-build` = implementation / delivery authority。
 
 ## Retired Structures
 
 - `spec/`：**RETIRED / NO-USE**。Preservation Audit 已確認 Current Working 完整覆蓋舊 Formal Spec；目錄已移除。
-- `execution/`：**RETIRED / NO-USE**。Execution 已完整移至 `appf2/appf2-build`。
+- `execution/`：**RETIRED / NO-USE**。Execution 已完整移至 `NFF98/appf2-build`。
 
 歷史文件若仍出現 `spec/`、Formal Spec、Working → Spec、Spec Promotion、Formal Spec Refresh 等字樣，只代表當時的歷史治理模型，不是 Current Truth。
 
