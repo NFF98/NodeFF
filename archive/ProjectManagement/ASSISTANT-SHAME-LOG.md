@@ -14,7 +14,7 @@
 
 | Count | Lost Time / Incident | Total Lost Time |
 |---:|---:|---:|
-| 9 | mixed | **>645 min / >10 hr 45 min** |
+| 10 | mixed | **>735 min / >12 hr 15 min** |
 
 ---
 
@@ -31,6 +31,7 @@
 | SHAME-007 | 2026-09-24 | FG-06 分析左右搖擺：沒有先辨識全域入口與區塊內 CTA 的不同角色 | 在討論 S01「探索靈感」與「探索更多」時，先因兩者可能導向同一個 inspiration area，就過早建議移除 Header / Mobile Nav 的「探索靈感」；之後才在 User 指出「其他畫面仍需要全域入口」後承認兩者其實角色不同。這代表分析沒有先從 cross-screen information architecture、入口作用域、使用者視線與就近操作一起判斷，反而左右改口，讓 User 必須自己完成關鍵邏輯。User 對此的原話評價是純粹「suck dog」，並指出這種左右搖擺會破壞工作。 | 正確決策：兩個都保留，但 contract 必須分開。Header / Mobile Nav「探索靈感」＝跨畫面的 global Discover navigation；S01 區塊「探索更多」＝使用者正在看 Capsules 時的 local continuation CTA。之後遇到「兩個入口是否重複」不得只看 destination 是否相同，必須先比較 scope、context、reachability 與 user intent。 | 45 min | OPEN / ANALYSIS FAILURE |
 | SHAME-008 | 2026-09-26 | STEP 2 Review 定義一開始偏向 cleanup / dedup，漏掉 Completeness / 補缺 | 在說明 Working Content Quality Review 重點時，雖有去重、矛盾、owner、boundary、traceability、Build Freeze readiness，但沒有把「主動補足不足的 Product / Function / Runtime / UI / Acceptance truth」明確列為一級目標，容易把 Review 誤導成只做瘦身。直到 User 指出才補上。 | 將 Review 正式改為雙軌：Cleanup + Completeness；缺失、模糊、edge case、cross-layer、NFR、lifecycle、UI↔Function、Registry、Acceptance 與 decision debt 都必須主動補齊。規則寫入 `working/common-core/DESIGN-TO-DELIVERY.md`，以 Build Freeze 是否可在不靠 Chat / Memory / Cursor 猜測下成立作最終判準。 | 45 min | CORRECTED / RULE ADDED |
 | SHAME-009 | 2026-09-26 | Rename 工作拖超過 5 小時，違反已存在的 Hard Stop 治理 | appf2 repo / product rename 本應是可分段、可驗證的 bounded migration，但實際執行曾長時間卡在 repo rename / reference update / tool orchestration，總耗時超過 5 小時；這直接違反既有「同一路徑失敗 2 次就換方法、單一工作 10 分鐘未收斂就停止並回報 blocker」規則，也讓 User 長時間等待一個理應可拆解的治理任務。 | Rename / migration 類工作必須拆成 read-only audit → bounded file batch → verification → commit 四段；任何一段 10 分鐘未收斂立即 hard stop。不得因「快完成了」繼續延長同一路徑；若 GitHub ruleset / owner rename / repo-level constraint 阻塞，必須立刻把 blocker 與唯一下一步說清楚。 | >300 min / >5 hr | OPEN / MAJOR PROCESS FAILURE |
+| SHAME-010 | 2026-09-26 | Generic Build Machine 同步工作卡約 1.5 小時，沒有遵守「先一個 repo 完成再複製」與 10 分鐘 Hard Stop | User 要求把已在 `appf2-build` 約 10 分鐘完成的 Build Readiness hardening 同步到 Demo / Template；執行時同時做 schema 差異盤點、跨 repo 同步、舊 E2E 相容修補與多輪 tool orchestration，造成 `CursorBuildMachine-Demo` 遲遲未完成，約 1.5 小時仍沒有一個 repo 的 PASS checkpoint。這再次違反既有 10 分鐘 execution gate，也沒有優先採「先完成一個 → 驗證 → 再複製第二個」的 bounded strategy。 | Generic machine 同步固定採單 repo 串行：① 只選一個 target ② 同步通用 machine files ③ 第一個 red E2E 立即停下，不做廣泛逐段修補；若 fixture 大幅過期，直接重寫 bounded regression fixture ④ 全綠後立刻 merge + PASS checkpoint ⑤ 才複製到第二 repo。任何單 repo 10 分鐘未收斂必須停止並回報唯一 blocker。 | 90 min / 1.5 hr | OPEN / MAJOR PROCESS FAILURE |
 
 ---
 
@@ -46,9 +47,10 @@ SHAME-006  45 min
 SHAME-007  45 min
 SHAME-008  45 min
 SHAME-009  >300 min
+SHAME-010   90 min
 -----------------
-TOTAL     >645 min
-          >10 hr 45 min
+TOTAL     >735 min
+          >12 hr 15 min
 ~~~
 
 ---
@@ -115,10 +117,15 @@ TOTAL     >645 min
    - 任一階段 10 分鐘未收斂即 hard stop；不得用「應該快好了」合理化繼續拖延。
    - Repo-level blocker（ruleset、owner、branch protection、connector limitation）必須立即隔離並明確回報，不得讓整個 migration 無限延長。
 
+13. **Generic Build Machine sync = one repo at a time**
+   - 不同 target repo 不可同時展開 hardening；先把 Demo 或第一個 target 做到 CI / Governance / Attack / E2E / CodeQL 全綠並建立 PASS checkpoint，再複製第二個。
+   - 第一個 Full E2E red 即停止擴散修改；若原因是 fixture 舊 schema，優先整體重寫 bounded fixture，不做長時間逐段補丁。
+   - 單 repo 10 分鐘未收斂，立即 hard stop，回報唯一 blocker 與下一個 bounded action。
+
 ---
 
 ## Current Status
 
-> **9 incidents / >645 minutes lost / >10 hr 45 min.**
+> **10 incidents / >735 minutes lost / >12 hr 15 min.**
 
 本表為 Working Project Management 紀錄，不屬 Formal Spec。
