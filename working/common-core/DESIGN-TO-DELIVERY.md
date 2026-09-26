@@ -448,3 +448,168 @@ appf2 Working
 → appf2-build immutable BS-*
 → appf2-build Delivery
 ```
+
+# 23. Working Content Quality Review + Build Freeze Migration Rule
+
+> 本節是 Working Review 與 Build Freeze 前 migration 的 canonical governance rule。
+>
+> 這裡的 `migration` 指 **appf2 Working → Human-approved Build Freeze input** 的收斂；不代表已退休的 Formal Spec / Spec Promotion 模型。
+
+## 23.1 Review Objective
+
+Working Content Quality Review 不是單純「瘦身」或「去重」。
+
+Canonical review model：
+
+```text
+Cleanup
++ Completeness
++ Consistency
++ Ownership
++ Traceability
++ Freeze Readiness
+= Working Content Quality Review
+```
+
+Review 的 KPI 不是文件數或字數變少，而是：
+
+> **更少重複、更少模糊、沒有矛盾、缺口補齊、owner 清楚，並足以在不靠 Chat / Memory / Cursor 猜測的情況下進 Build Freeze。**
+
+## 23.2 Mandatory Review Dimensions
+
+每次 Working Content Quality Review 至少必須同時檢查：
+
+1. **Duplicate / Shadow Truth**
+   - 同一 Product / Architecture / Data / API / Runtime / UX / Acceptance truth 只能有一個 canonical owner。
+   - 其他文件以 reference / dependency 表達，不建立近似副本。
+
+2. **Contradiction**
+   - Common Core、Detailed Design、Function、UI/UX、Data、Infrastructure、Registry 互相不得產生不一致 semantics。
+
+3. **Wrong Owner / Boundary**
+   - Truth 必須位於正確 canonical owner。
+   - Design 定義 WHAT / WHY / WHEN / observable correctness。
+   - appf2-build 定義 HOW TO EXECUTE / TEST / EVIDENCE / CI / SPRINT / RELEASE。
+
+4. **Obsolete Governance / Shadow Process**
+   - 清除或明確標記已失效的流程、舊 authority、舊 phase-folder assumptions、retired Formal Spec / Promotion wording。
+   - 歷史紀錄可保留，但不得被誤讀為 Current Governance。
+
+5. **Missing Design Truth**
+   - Review 必須主動找「沒寫、寫不完整、實作者仍需自行決策」的地方並補入 canonical owner。
+   - 包含但不限於 input / output、state transition、failure、timeout、retry、empty/loading/partial states、persistence、compatibility、lifecycle、permission、recovery、evidence、acceptance。
+
+6. **Ambiguity**
+   - 「適當」、「必要時」、「快速」、「系統判斷」、「友善處理」等非 deterministic wording 必須檢查是否需要轉成 rule / state / enum / threshold / contract。
+   - 會影響 implementation outcome 的模糊處不得留給 Cursor 自行解釋。
+
+7. **Edge-case Completeness**
+   - Happy path 以外，必須檢查 network failure、timeout、invalid input / blueprint、expired / stale state、duplicate request、race、partial state、restore mismatch、mobile / responsive constraints 等 relevant failure modes。
+
+8. **Cross-layer Completeness**
+   - 每個 Function 應可追蹤：
+   ```text
+   Product Intent
+   → Function Behavior
+   → Data
+   → API
+   → Runtime
+   → UI State
+   → Error / Recovery
+   → Evidence
+   → Acceptance
+   ```
+   - 中間斷鏈即視為 design gap。
+
+9. **Acceptance Readiness**
+   - Design 不負責測試執行方式，但必須明確定義「什麼叫做正確」。
+   - Critical behavior 必須具有可觀察、可驗證的 Acceptance truth，足以讓 appf2-build 建立 Test mapping。
+
+10. **Phase Applicability**
+    - Phase 是 scope / applicability metadata，不得產生第二份 SSOT。
+    - 必須明確區分 universal contract、Phase 1 required、deferred Phase 2 / 3+。
+    - 日期本身不得自動 unlock implementation scope。
+
+11. **Non-functional Requirements**
+    - 依功能需要檢查 latency / timeout、security、privacy、anonymous identity、cache semantics、reliability、idempotency、recoverability、accessibility、responsive behavior、observability / evidence。
+    - 該定義的 boundary 不得留空。
+
+12. **Lifecycle / Versioning / Compatibility**
+    - Blueprint、schema、registry、share / restore、runtime contract、data model 等若存在版本演進，需定義 backward compatibility / reject / migrate / restore 行為。
+
+13. **UI ↔ Function Parity**
+    - Function 有 behavior 但沒有 UI state，或 UI 有 interaction 但 Function / Runtime contract 沒有 owner，均視為 gap。
+    - UI/UX 不得自行發明 Product semantics。
+
+14. **Registry Completeness**
+    - Registry 必須足以限制 compiler / runtime 的合法能力、參數、validation 與 compatibility。
+    - 不得只列名稱、卻把 contract 留給 LLM 或前端猜。
+
+15. **Assumption / Decision Debt**
+    - 未真正決定的內容不得偽裝成已完成 truth。
+    - 必須標記為 OPEN / DECISION REQUIRED / DEFERRED，並判斷是否為 Build Freeze blocker。
+
+16. **Cross-reference Integrity**
+    - path、Function ID、Screen / Overlay、Registry、Data / API / Acceptance reference 必須指向現行 canonical owner。
+    - 重整後的舊 path / stale reference 必須修正。
+
+## 23.3 Review Execution Rule
+
+Review 必須同時執行兩條線：
+
+```text
+Track A — Cleanup
+duplicate
+obsolete
+wrong owner
+contradiction
+stale reference
+build-only execution detail
+
+Track B — Completeness
+missing truth
+ambiguity
+edge cases
+cross-layer gaps
+acceptance gaps
+NFR gaps
+version / lifecycle gaps
+UI ↔ Function gaps
+registry gaps
+decision debt
+```
+
+不得因 Track A 完成就宣稱 Review 完成。
+
+## 23.4 Canonical Review Order
+
+除非有 blocker，Review 順序為：
+
+```text
+working/common-core/
+→ working/detailed-design/data-model/
+→ working/detailed-design/infrastructure/
+→ working/detailed-design/functions/
+→ working/detailed-design/UI-UX/
+→ working/detailed-design/registries/
+→ cross-file consistency audit
+→ acceptance mapping audit
+→ UI/UX consistency audit
+→ registry audit
+→ Human approval
+→ Build Freeze
+```
+
+Review 期間：
+- 不改既定 folder structure，除非發現真正 authority blocker 並經 Human approval。
+- 不因 cleanup 直接把全部 Working 搬入 appf2-build。
+- 只在 Build Freeze 後 migration 該次 approved implementation truth。
+
+## 23.5 Build Freeze Fitness Test
+
+Working Content Quality Review 完成的最後判準：
+
+> **如果今天把 Phase scope freeze，appf2-build / Cursor 能否只靠 approved Working truth，無需口頭補充、Chat 記憶或自行發明，即可建立唯一、正確、可驗證的 implementation contract？**
+
+若答案不是 YES，則仍有 Review gap，不得進 Build Freeze。
+

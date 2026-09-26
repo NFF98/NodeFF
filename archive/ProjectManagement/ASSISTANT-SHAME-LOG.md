@@ -14,7 +14,7 @@
 
 | Count | Lost Time / Incident | Total Lost Time |
 |---:|---:|---:|
-| 7 | mixed | **300 min / 5 hr** |
+| 9 | mixed | **>645 min / >10 hr 45 min** |
 
 ---
 
@@ -29,6 +29,8 @@
 | SHAME-005 | 2026-09-23 | 明知 10 分鐘 Hard Stop 規則，S04/S05 PNG 修復仍再次拖到約 30 分鐘 | 在已經因 SHAME-004 明確訂下「同一路徑失敗 2 次即停止、單一工作 10 分鐘未收斂立即回報」後，本次重新處理 S04/S05 Hi-fi PNG 時仍持續 materialize／嘗試 binary 路徑／檢查 GitHub 歷史與 blob，超過 10 分鐘沒有主動停止，直到 User 再次指出 timeout。這是對已存在流程修正的直接違反。 | 立即停止 S04/S05 artifact 操作；之後 10 分鐘 hard stop 必須作為真正 execution gate：到時限即停止所有相關 tool calls、先回報目前完成狀態與唯一 blocker，未取得 User 新指示前不得繼續同一工作鏈。 | 30 min | OPEN / RULE VIOLATION |
 | SHAME-006 | 2026-09-23 | S05 完成後的下一步連續 3 次誤判，沒有依 High-fi canonical sequence 直接進 S06 | 在 User 已完成 S05A/S05B High-fi 後，先錯誤要求重做 F00/F03，再錯誤要求 Cross-Screen Review，之後又錯誤跳到 O05；沒有先讀 DESIGN-SYSTEM.md 的 High-fi Sequence 與 S06/O01–O05 Current Truth，造成連續 3 次錯誤導航。 | 下一步判斷必須先讀 canonical sequence + 當前 Screen status；High-fi 嚴格依 S01→S02→S03→S04→S05→S06→O01→O02→O03→O04→O05，不得用局部 Workbench note 覆蓋全局順序。 | 45 min | OPEN / PROCESS FIX |
 | SHAME-007 | 2026-09-24 | FG-06 分析左右搖擺：沒有先辨識全域入口與區塊內 CTA 的不同角色 | 在討論 S01「探索靈感」與「探索更多」時，先因兩者可能導向同一個 inspiration area，就過早建議移除 Header / Mobile Nav 的「探索靈感」；之後才在 User 指出「其他畫面仍需要全域入口」後承認兩者其實角色不同。這代表分析沒有先從 cross-screen information architecture、入口作用域、使用者視線與就近操作一起判斷，反而左右改口，讓 User 必須自己完成關鍵邏輯。User 對此的原話評價是純粹「suck dog」，並指出這種左右搖擺會破壞工作。 | 正確決策：兩個都保留，但 contract 必須分開。Header / Mobile Nav「探索靈感」＝跨畫面的 global Discover navigation；S01 區塊「探索更多」＝使用者正在看 Capsules 時的 local continuation CTA。之後遇到「兩個入口是否重複」不得只看 destination 是否相同，必須先比較 scope、context、reachability 與 user intent。 | 45 min | OPEN / ANALYSIS FAILURE |
+| SHAME-008 | 2026-09-26 | STEP 2 Review 定義一開始偏向 cleanup / dedup，漏掉 Completeness / 補缺 | 在說明 Working Content Quality Review 重點時，雖有去重、矛盾、owner、boundary、traceability、Build Freeze readiness，但沒有把「主動補足不足的 Product / Function / Runtime / UI / Acceptance truth」明確列為一級目標，容易把 Review 誤導成只做瘦身。直到 User 指出才補上。 | 將 Review 正式改為雙軌：Cleanup + Completeness；缺失、模糊、edge case、cross-layer、NFR、lifecycle、UI↔Function、Registry、Acceptance 與 decision debt 都必須主動補齊。規則寫入 `working/common-core/DESIGN-TO-DELIVERY.md`，以 Build Freeze 是否可在不靠 Chat / Memory / Cursor 猜測下成立作最終判準。 | 45 min | CORRECTED / RULE ADDED |
+| SHAME-009 | 2026-09-26 | Rename 工作拖超過 5 小時，違反已存在的 Hard Stop 治理 | appf2 repo / product rename 本應是可分段、可驗證的 bounded migration，但實際執行曾長時間卡在 repo rename / reference update / tool orchestration，總耗時超過 5 小時；這直接違反既有「同一路徑失敗 2 次就換方法、單一工作 10 分鐘未收斂就停止並回報 blocker」規則，也讓 User 長時間等待一個理應可拆解的治理任務。 | Rename / migration 類工作必須拆成 read-only audit → bounded file batch → verification → commit 四段；任何一段 10 分鐘未收斂立即 hard stop。不得因「快完成了」繼續延長同一路徑；若 GitHub ruleset / owner rename / repo-level constraint 阻塞，必須立刻把 blocker 與唯一下一步說清楚。 | >300 min / >5 hr | OPEN / MAJOR PROCESS FAILURE |
 
 ---
 
@@ -42,9 +44,11 @@ SHAME-004  45 min
 SHAME-005  30 min
 SHAME-006  45 min
 SHAME-007  45 min
+SHAME-008  45 min
+SHAME-009  >300 min
 -----------------
-TOTAL     300 min
-          5 hr
+TOTAL     >645 min
+          >10 hr 45 min
 ~~~
 
 ---
@@ -100,10 +104,21 @@ TOTAL     300 min
    - FG-06 正確角色：`探索靈感` = global Discover navigation；`探索更多` = S01 Inspiration 區塊內 local continuation CTA。
    - 在這四項未比較完成前，不得提出移除入口的建議。
 
+
+11. **Review means Cleanup + Completeness**
+   - Working Content Quality Review 不能只做 dedup / cleanup / 瘦身。
+   - 每輪 Review 必須同時找出 missing truth、ambiguity、edge case、cross-layer gap、Acceptance gap、NFR、lifecycle / versioning、UI ↔ Function、Registry 與 decision debt。
+   - 最終判準不是「文件變少」，而是「能否在不靠 Chat / Memory / Cursor 猜測的情況下安全 Build Freeze」。
+
+12. **Rename / migration tasks are bounded operations**
+   - 固定拆成：read-only audit → bounded change batch → zero-hit / semantic verification → one rollback-friendly commit。
+   - 任一階段 10 分鐘未收斂即 hard stop；不得用「應該快好了」合理化繼續拖延。
+   - Repo-level blocker（ruleset、owner、branch protection、connector limitation）必須立即隔離並明確回報，不得讓整個 migration 無限延長。
+
 ---
 
 ## Current Status
 
-> **7 incidents / 300 minutes lost / 5 hr.**
+> **9 incidents / >645 minutes lost / >10 hr 45 min.**
 
 本表為 Working Project Management 紀錄，不屬 Formal Spec。
