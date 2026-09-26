@@ -201,18 +201,23 @@ flowchart TB
 
 ---
 
-# 4. Infrastructure Phase Modules
+# 4. Detailed Infrastructure Owner / Phase Applicability
 
-本文件只保留 shared infrastructure principles / topology / vendor boundary / anti-patterns。各 Phase 的具體 provider baseline、storage / runtime / cost / scaling activation 拆到 phase module。
+Shared topology、plane separation、vendor boundary 與 anti-patterns 只在本文定義一次。
 
-- Phase 1：`working/detailed-design/infrastructure/PHASE-1.md`
-- Phase 2：`working/detailed-design/infrastructure/PHASE-2.md`
-- Phase 3：`working/detailed-design/infrastructure/PHASE-3.md`
-- Phase 4+：`working/detailed-design/infrastructure/PHASE-4-PLUS.md`
+所有 detailed infrastructure baseline 由單一 canonical owner 管理：
 
-> Phase module 可以更換 provider 或啟用新 infrastructure，但不得改變 shared rule：Browser-first、PostgreSQL durable truth、vendor behind adapter、no premature distributed complexity。
+~~~text
+working/detailed-design/infrastructure/INFRASTRUCTURE-DETAILED.md
+~~~
 
----
+該檔內以 section 區分：
+- Phase 1：目前 Build Freeze candidate。
+- Phase 2：deferred。
+- Phase 3：deferred。
+- Phase 4+：deferred。
+
+Phase 不再形成平行 infrastructure files；future provider / storage / scaling content 只有在 Evidence + Human approval + Build Freeze inclusion 後才成為 implementation scope。
 
 # 5. Vendor Lock-in Boundary
 

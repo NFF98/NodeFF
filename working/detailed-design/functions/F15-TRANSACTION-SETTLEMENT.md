@@ -1,14 +1,14 @@
 # F15 — Transaction / Settlement
 
-> 狀態：DEFERRED BASELINE — MIGRATED
+> 狀態：DEFERRED_BASELINE / NOT_BUILD_FREEZE_READY
 >
-> 本文件在 SSOT Cleanup 中由 `working/common-core/APP-DETAILED-DESIGN-OVERVIEW.md` 的既有 Function 級內容搬入。此次搬移 **不改產品架構、不新增功能決策**；只是把既有 Current Truth 放回單一 Function canonical home。
+> Activation Gate：日期本身不 unlock；只有 Evidence + Human approval + complete Detailed Design + Build Freeze inclusion 才可進 implementation scope。
 >
 > Horizon：6 月後
 >
 > Delivery 規則：`working/common-core/DESIGN-TO-DELIVERY.md`
 >
-> Function Portfolio / Dependency / Release Scope：`working/common-core/APP-DETAILED-DESIGN-OVERVIEW.md`
+> Function Portfolio / Dependency / Release Scope：`working/detailed-design/APP-DETAILED-DESIGN-OVERVIEW.md`
 
 # 1. Migrated Current Truth
 
@@ -28,16 +28,21 @@ Acceptance：
 
 F14 / F15 / F17 都不改寫 F01–F06 的核心 Intent → Blueprint → Runtime 流程。
 
-F17 只在 Blueprint / Capability Plan 明確需要外部多步執行時加入：
-
-~~~text
-Runtime / Capability Action
-→ F17 Orchestration
-→ External / Async Steps
-→ Validated Outcome
-→ Runtime / Durable State
-~~~
+F15 只擁有 transaction / settlement truth；若 transaction path需要 heterogeneous multi-step orchestration，F15只引用 F17 validated outcome，F17 flow / retry / compensation semantics仍由 `F17-WORKFLOW-ORCHESTRATION.md` 單獨擁有。
 
 # Status Note
 
-此文件目前是從既有 Portfolio 文件搬出的 Working 內容，**不因搬家自動升格為完整 Function Spec / BUILD_FREEZE_READY**。後續 Detailed Design 仍需依 Design-to-Delivery Contract 補齊缺少的 UI / API / Data / Error / Security / Evidence / Acceptance 等部分。
+此文件是 intentional deferred baseline，不是 Phase 1 / current Build Freeze input。
+
+啟用前必須補齊與 Review：
+- UI / UX（若有 User-facing surface）；
+- API / Interface；
+- Data / lifecycle；
+- Error / Recovery / timeout / retry；
+- Security / Permission / Privacy；
+- Evidence / observability；
+- Acceptance / expected observable；
+- compatibility / versioning；
+- unresolved decisions = 0 blockers。
+
+缺少的 Product Design 不得由 appf2-build / Cursor自行補決策。

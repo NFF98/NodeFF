@@ -1,7 +1,7 @@
 # F04 — Capability Registry / Resolution
 
-> 狀態：BUILD_FREEZE_READY
-> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved appf2-build locked BS-*。
+> 狀態：BUILD_FREEZE_READY / STEP2_REVIEWED
+> Governance：Current Truth = this Working file；Build Freeze / implementation boundary 以 `working/common-core/DESIGN-TO-DELIVERY.md` 為準。
 >
 > Canonical Role：Phase 1 Concrete Capability Registry 的 Working Current Truth。
 >
@@ -939,7 +939,7 @@ Registry update：
 
 # 30. Open Decisions
 
-目前沒有阻擋 Phase 1 Core Spec Gate 的 open decision。
+目前沒有阻擋 Phase 1 Build Freeze Gate 的 open decision。
 
 已閉合：
 

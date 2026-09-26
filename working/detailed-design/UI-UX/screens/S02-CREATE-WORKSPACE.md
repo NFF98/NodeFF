@@ -1,6 +1,6 @@
 # S02 — Create Workspace
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → appf2-build locked BS-*。
+> Governance：本檔為 UI/UX Working Current Truth；Build Freeze / delivery lifecycle 以 `working/common-core/DESIGN-TO-DELIVERY.md` 為準。
 
 > Screen ID：S02
 >
@@ -8,11 +8,11 @@
 >
 > Phase：Phase 1
 >
-> Screen-level canonical owner：working/UI-UX/screens/S02-CREATE-WORKSPACE.md
+> Screen-level canonical owner：working/detailed-design/UI-UX/screens/S02-CREATE-WORKSPACE.md
 >
-> Function behavior sources：working/functions/F00-EXPERIENCE-SHELL.md、working/functions/F01-INTENT-COMPILATION.md
+> Function behavior sources：working/detailed-design/functions/F00-EXPERIENCE-SHELL.md、working/detailed-design/functions/F01-INTENT-COMPILATION.md
 >
-> 本文件的④A Low-fi與④B High-fi Step 1–4已完成 User Review；Legacy Formal Spec 已 RETIRED / NO-USE，Cursor implementation仍 HOLD。
+> 本文件的④A Low-fi與④B High-fi Step 1–4已完成 User Review；implementation input 仍需 Human-approved Build Freeze。
 
 # 1. User Outcome
 
@@ -22,7 +22,7 @@ S02 的核心任務：
 
 S02 不是 AI chat room，也不是 engineering status console。
 
-# 2. Core UX Principles — Proposed
+# 2. Core UX Principles — Approved
 
 1. **One Workspace, Changing State**：ANALYZING / CLARIFICATION / ASSUMPTION / BUILDING / HYDRATING 都留在同一 Create Workspace，不為每個 state 跳新頁。
 2. **Fast Path First**：Intent 已足夠時，ANALYZING 後直接進 BUILDING；不插入 clarification / assumption，也不增加固定「確認建立」步驟。
@@ -238,7 +238,7 @@ User 已確認：
 >
 > Implementation precedence：
 > 1. 本節 Step 1–4；
-> 2. `working/UI-UX/DESIGN-SYSTEM.md`；
+> 2. `working/detailed-design/UI-UX/DESIGN-SYSTEM.md`；
 > 3. approved visual reference；
 > 4. 其他示意圖。
 >
@@ -470,7 +470,7 @@ Approved visual：
 
 Canonical path：
 
-`working/UI-UX/references/S02-Create-Workspace-Highfi-v1.png`
+`working/detailed-design/UI-UX/references/S02-Create-Workspace-Highfi-v1.png`
 
 Repository PNG blob SHA：
 
@@ -490,7 +490,7 @@ Reference boundary：
 - 任何已批准 Structure / Geometry / Visual Rule / image reference改動，必須 reopen對應 Step。
 - 若後續需要 component anatomy / clarification state matrix / progress mapping等額外層，可新增 `Step 4.5 — <Layer Name> Lock`。
 - Step 4.5不得偷改 Step 1–4；涉及 Function behavior必須回相關 Fxx Working Delta Review。
-- Legacy Formal Spec 已 RETIRED / NO-USE；待 Build Freeze reconciliation。
+- STEP2 content reconciliation已完成；仍待 Final Audit + Human-approved Build Freeze。
 
 ### Final Cross-Screen High-fi Review — CLOSED / VERIFIED
 

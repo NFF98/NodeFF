@@ -404,16 +404,16 @@ WebXR、Immersive Scene、Spatial Anchor、Gaze、Controller、Shared Spatial St
 
 # 11. Capability Phase Roadmap Index
 
-Capability Card Contract、Maturity、Coverage、Families、Portfolio 與 Registry Architecture 留在本文件；各 Phase 要新增／成熟／延後的 capability scope 拆到 phase roadmap。
+Capability Card Contract、Maturity、Coverage、Families 與 Registry Architecture 只在本檔定義一次。
 
-- Phase 1：`working/common-core/CAPABILITY-FABRIC.md#preserved-capability-roadmap-contentPHASE-1.md`
-- Phase 2：`working/common-core/CAPABILITY-FABRIC.md#preserved-capability-roadmap-contentPHASE-2.md`
-- Phase 3：`working/common-core/CAPABILITY-FABRIC.md#preserved-capability-roadmap-contentPHASE-3.md`
-- Phase 4+：`working/common-core/CAPABILITY-FABRIC.md#preserved-capability-roadmap-contentPHASE-4-PLUS.md`
+本檔後段的 Phase sections只描述 capability portfolio 的新增 / maturity target / defer：
 
-> Capability 只有在 Evidence / Maturity 達標時才升級，不因 Phase 名稱自動 RELEASED。
+- `appf2 Capability Roadmap — Phase 1`：Core Capability Set。
+- `appf2 Capability Roadmap — Phase 2`：Reuse / Identity / Creator。
+- `appf2 Capability Roadmap — Phase 3`：Scale Readiness / External Capability Pilot。
+- `appf2 Capability Roadmap — Phase 4+`：Capability Network + Orchestration。
 
----
+> Phase 不是第二份 registry；Capability 是否可進 release 由 maturity evidence、compatibility與 Human-approved Build Freeze inclusion共同決定。
 
 # 12. Capability Portfolio 管理
 
@@ -521,9 +521,9 @@ Capability Fabric 的發展順序：
 
 ---
 
-# Preserved Capability Roadmap Content
+# Capability Roadmap Sections
 
-> Structure migration preservation block. Content below is preserved from the former files. Dedup / semantic cleanup is intentionally deferred.
+> Consolidated canonical roadmap。Future capability maturity / release activation仍需 Evidence + Human approval.
 
 # appf2 Capability Roadmap — Phase 1
 

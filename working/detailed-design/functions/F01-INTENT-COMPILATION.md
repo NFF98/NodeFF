@@ -1,7 +1,7 @@
 # F01 — Intent Compilation + Model Gateway
 
-> 狀態：BUILD_FREEZE_READY + WORKING_DELTA_CLOSED / BUILD_FREEZE_RECONCILIATION_PENDING
-> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved appf2-build locked BS-*。
+> 狀態：BUILD_FREEZE_READY / STEP2_REVIEWED
+> Governance：Current Truth = this Working file；Build Freeze / implementation boundary 以 `working/common-core/DESIGN-TO-DELIVERY.md` 為準。
 >
 > Canonical Role：Phase 1 Intent Analysis、Clarification Policy、Resolved Intent、Capability Coverage coordination、Blueprint Composition 與 Model Gateway 的 Working Current Truth。
 >
@@ -1199,11 +1199,11 @@ POST /api/v1/intents/{id}/compile
 
 ## Closed Working Delta — F01 Creation Progress Checkpoint Contract
 
-> 狀態：**WORKING_DELTA_CLOSED（2026-09-23） / BUILD_FREEZE_RECONCILIATION_PENDING**
+> 狀態：**WORKING_DELTA_CLOSED（2026-09-23） / STEP2_RECONCILED**
 >
 > 來源：S02 Create Workspace High-fi + O05 High-fi Step 1 + `SD-20260922-002`。
 >
-> Legacy Formal Spec：**RETIRED / NO-USE**。待 pre-Build Freeze reconciliation 一次同步。
+> STEP2 reconciliation：此 delta 已整合回 canonical F01 sections；Build Freeze直接讀整合後 Working truth。
 
 ### F01-DATA-009 — CREATE Compiler Checkpoint Plan v1
 
@@ -1376,5 +1376,5 @@ F01-AC-029 → TEST-F01-PROG-005 recompose monotonicity + validated only after F
 
 ### Status
 
-> **APPROVED WORKING CURRENT TRUTH — FORMAL REFRESH PENDING**
+> **APPROVED WORKING CURRENT TRUTH — STEP2_RECONCILED / BUILD_FREEZE_READY**
 

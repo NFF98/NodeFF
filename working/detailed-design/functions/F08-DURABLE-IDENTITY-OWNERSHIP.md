@@ -1,14 +1,14 @@
 # F08 — Durable Identity / Ownership
 
-> 狀態：DEFERRED BASELINE — MIGRATED
+> 狀態：DEFERRED_BASELINE / NOT_BUILD_FREEZE_READY
 >
-> 本文件在 SSOT Cleanup 中由 `working/common-core/APP-DETAILED-DESIGN-OVERVIEW.md` 的既有 Function 級內容搬入。此次搬移 **不改產品架構、不新增功能決策**；只是把既有 Current Truth 放回單一 Function canonical home。
+> Activation Gate：日期本身不 unlock；只有 Evidence + Human approval + complete Detailed Design + Build Freeze inclusion 才可進 implementation scope。
 >
 > Horizon：2–3 月
 >
 > Delivery 規則：`working/common-core/DESIGN-TO-DELIVERY.md`
 >
-> Function Portfolio / Dependency / Release Scope：`working/common-core/APP-DETAILED-DESIGN-OVERVIEW.md`
+> Function Portfolio / Dependency / Release Scope：`working/detailed-design/APP-DETAILED-DESIGN-OVERVIEW.md`
 
 # 1. Migrated Current Truth
 
@@ -32,7 +32,6 @@ Acceptance：
 - F05
 - F06
 - F07
-- F08
 - F09
 - F10
 - F13
@@ -47,4 +46,17 @@ Acceptance：
 
 # Status Note
 
-此文件目前是從既有 Portfolio 文件搬出的 Working 內容，**不因搬家自動升格為完整 Function Spec / BUILD_FREEZE_READY**。後續 Detailed Design 仍需依 Design-to-Delivery Contract 補齊缺少的 UI / API / Data / Error / Security / Evidence / Acceptance 等部分。
+此文件是 intentional deferred baseline，不是 Phase 1 / current Build Freeze input。
+
+啟用前必須補齊與 Review：
+- UI / UX（若有 User-facing surface）；
+- API / Interface；
+- Data / lifecycle；
+- Error / Recovery / timeout / retry；
+- Security / Permission / Privacy；
+- Evidence / observability；
+- Acceptance / expected observable；
+- compatibility / versioning；
+- unresolved decisions = 0 blockers。
+
+缺少的 Product Design 不得由 appf2-build / Cursor自行補決策。

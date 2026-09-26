@@ -1,6 +1,6 @@
 # appf2 App Detailed Design Overview
 
-> **CURRENT GOVERNANCE NOTICE**：舊 `spec/` / Formal Spec / Working → Spec / Spec Promotion 流程已 RETIRED / NO-USE。Current authority = appf2 Working；implementation input = Human-approved Build Freeze → appf2-build locked BS-*。
+> Governance：Product Design Current Truth = appf2 Working；implementation input only after Human-approved Build Freeze → appf2-build locked BS-*。詳細 lifecycle 以 `working/common-core/DESIGN-TO-DELIVERY.md` 為準。
 
 > 狀態：Working Design Baseline。
 >
@@ -29,14 +29,14 @@ Function 詳細設計回答：
 working/common-core/APP-ARCHITECTURE.md
 → Top Architecture / system boundary
 
-working/common-core/APP-DETAILED-DESIGN-OVERVIEW.md
+working/detailed-design/APP-DETAILED-DESIGN-OVERVIEW.md
 → Function Portfolio / Dependency / Release / Status Index
 
 working/common-core/DATA-MODEL.md
 → shared data invariants / phase-module index
 
-working/detailed-design/data-model/PHASE-*.md
-→ phase-specific detailed data contract / delta
+working/detailed-design/data-model/DATA-MODEL-DETAILED.md
+→ consolidated detailed data contract；Phase 以 section / applicability metadata區分
 
 working/common-core/CAPABILITY-FABRIC.md
 → shared capability semantic contract
@@ -56,7 +56,7 @@ working/common-core/DESIGN-TO-DELIVERY.md
 ---
 
 # 3. Function Portfolio / Canonical Index
-> Phase 1 Core Function Product Design authority = `working/detailed-design/functions/Fxx-*.md`。Implementation 只能讀 Human-approved appf2-build locked Build Spec；舊 Formal Spec authority 已 RETIRED / NO-USE。
+> Phase 1 Function Product Design authority = `working/detailed-design/functions/Fxx-*.md`。Implementation 只能讀 Human-approved appf2-build locked Build Spec。
 
 
 | ID | Function | 核心結果 | Phase | Lifecycle Status | Canonical Detail |
@@ -80,7 +80,7 @@ working/common-core/DESIGN-TO-DELIVERY.md
 | F16 | Result Feedback / Logic Correction | 錯誤結果可修正、比較、回退 | 0–1 月 | BUILD_FREEZE_READY | `functions/F16-RESULT-CORRECTION.md` |
 | F17 | Heterogeneous Workflow Orchestration | 多異質 steps 完成同一 Outcome | 6 月後 | DEFERRED_BASELINE | `functions/F17-WORKFLOW-ORCHESTRATION.md` |
 
-搬家本身不代表 Function 已完成 Detailed Design。
+Deferred baseline 的存在不等於 activation；只有 `BUILD_FREEZE_READY` Function 才可進當期 Build Freeze candidate set。
 
 ---
 

@@ -1,7 +1,7 @@
 # F07 — Anonymous Identity & Evidence
 
-> 狀態：BUILD_FREEZE_READY
-> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved appf2-build locked BS-*。
+> 狀態：BUILD_FREEZE_READY / STEP2_REVIEWED
+> Governance：Current Truth = this Working file；Build Freeze / implementation boundary 以 `working/common-core/DESIGN-TO-DELIVERY.md` 為準。
 >
 > Canonical Role：Phase 1 Anonymous Identity continuity、Session identity、Evidence Envelope、Event Ingestion、Batch / Retry / Dedupe、Privacy / Retention 與 Core Proof Metrics 的 Working Current Truth。
 >

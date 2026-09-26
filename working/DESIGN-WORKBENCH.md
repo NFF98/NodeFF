@@ -96,16 +96,9 @@ Open Question
 
 ---
 
-## Latest Cleanup
+## Historical Review Records
 
-2026-09-25 Shadow Truth Audit 已確認：
-- Anonymous-first / Identity / Evidence：已進 Business Plan / Data Model / F07 / F08。
-- Intent → App / Wedge boundary：已進 App Architecture / Business Plan。
-- Capability / Infra / Experience Shell / Recovery：已進 canonical Working。
-- UI/UX、Runtime Timeout、Creation Progress：已進對應 UI / Function / Registry。
-- LLM Proposal ≠ READY Truth：已由 Architecture + F02 + F03 + F12 覆蓋。
-- 中期 L3 3A–3E 與 L4 4A–4D：經 User 批准後已吸收到 `working/common-core/APP-ARCHITECTURE.md`，明確標為中期方向，不是 Phase 1 implementation scope。
+Closed cleanup / audit detail 不留在 Workbench，避免形成 shadow truth。歷史證據只在 archive：
 
-完整歷史內容：
 - `archive/ProjectManagement/DESIGN-WORKBENCH-HISTORY-2026-09-25.md`
 - `archive/ProjectManagement/SHADOW-TRUTH-AUDIT-2026-09-25.md`

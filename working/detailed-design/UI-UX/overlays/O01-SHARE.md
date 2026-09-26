@@ -1,6 +1,6 @@
 # O01 — Share Overlay
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → appf2-build locked BS-*。
+> Governance：本檔為 UI/UX Working Current Truth；Build Freeze / delivery lifecycle 以 `working/common-core/DESIGN-TO-DELIVERY.md` 為準。
 
 > Overlay ID：O01
 >
@@ -8,11 +8,11 @@
 >
 > Phase：Phase 1
 >
-> Screen-level canonical owner：`working/UI-UX/overlays/O01-SHARE.md`
+> Screen-level canonical owner：`working/detailed-design/UI-UX/overlays/O01-SHARE.md`
 >
 > Function behavior source：F05 Share / Restore + F00 Experience Shell。
 >
-> ④A Low-fi與④B High-fi Step 1–4已完成 User Review並鎖定；Build Freeze 與 Cursor implementation 仍維持 HOLD。
+> ④A Low-fi與④B High-fi Step 1–4已完成 User Review並鎖定；implementation input 仍需 Human-approved Build Freeze。
 
 # 1. User Outcome
 
@@ -399,7 +399,7 @@ Copy failure只影響 clipboard action，不讓已READY的 Share失效。
 
 不得把整個 O01轉成 Share creation failure state。
 
-### 11. Share Creation Failure
+### 11. Share Creation Failure — Behavior
 
 Share creation failure才進 O01真正 recovery state：
 
@@ -808,7 +808,7 @@ Rules：
 - 不畫假的 skeleton URL。
 - 不為 animation延遲 READY。
 
-### 11. Share Creation Failure
+### 11. Share Creation Failure — Visual Treatment
 
 Share creation failure是較高層 recovery：
 
@@ -915,7 +915,7 @@ Rules：
 >
 > Canonical path：
 >
-> `working/UI-UX/references/O01-Hi-FI-v1.png`
+> `working/detailed-design/UI-UX/references/O01-Hi-FI-v1.png`
 >
 > Repository PNG blob SHA：
 >
@@ -940,7 +940,7 @@ O01 ④A Low-fi與④B Step 1–4已完成 User Review並鎖定。
 
 Final Cross-Screen High-fi Review：**CLOSED / VERIFIED**。
 
-Formal Spec、Backlog / Sprint、Cursor implementation維持 HOLD。
+未經 Human-approved Build Freeze，Backlog / Sprint / Cursor implementation不得由本 UI 文件啟動。
 
 ### Final Cross-Screen High-fi Review — CLOSED / VERIFIED
 

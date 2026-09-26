@@ -1,6 +1,6 @@
 {
-  "registry_version": "1.1.0",
-  "owner": "working/registries/recovery-registry.json",
+  "registry_version": "1.1.1",
+  "owner": "working/detailed-design/registries/recovery-registry.json",
   "source_of_truth": "Fxx source errors + F12 recovery policy",
   "entries": [
     {

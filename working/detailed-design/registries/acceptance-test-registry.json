@@ -1,7 +1,7 @@
 {
-  "registry_version": "1.1.0",
-  "owner": "working/registries/acceptance-test-registry.json",
-  "conventions": "working/ACCEPTANCE-CONVENTIONS.md",
+  "registry_version": "2.0.0",
+  "owner": "working/detailed-design/registries/acceptance-test-registry.json",
+  "conventions": "working/common-core/ACCEPTANCE-CONVENTIONS.md",
   "total_acceptance": 285,
   "entries": [
     {
@@ -9,3427 +9,2856 @@
       "function_id": "F00",
       "criterion": "User可從空白 prompt 或 Capsule開始 Create。",
       "test_id": "TEST-F00-001",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "User可從空白 prompt 或 Capsule開始 Create。",
-      "implementation_location": "tests/behavior/f00/test-f00-001.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-002",
       "function_id": "F00",
       "criterion": "Capsule prefill永遠可編輯。",
       "test_id": "TEST-F00-AC-002",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Capsule prefill永遠可編輯。",
-      "implementation_location": "tests/behavior/f00/test-f00-ac-002.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-003",
       "function_id": "F00",
       "criterion": "Clear Intent不增加不必要 confirmation page。",
       "test_id": "TEST-F00-003",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Clear Intent不增加不必要 confirmation page。",
-      "implementation_location": "tests/behavior/f00/test-f00-003.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-004",
       "function_id": "F00",
       "criterion": "F01需要 clarification時，F00一次只呈現選定的1–3題。",
       "test_id": "TEST-F00-004",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "F01需要 clarification時，F00一次只呈現選定的1–3題。",
-      "implementation_location": "tests/behavior/f00/test-f00-004.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-005",
       "function_id": "F00",
       "criterion": "material proposal一定可見且可 Accept/Edit/Reject。",
       "test_id": "TEST-F00-005",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "material proposal一定可見且可 Accept/Edit/Reject。",
-      "implementation_location": "tests/behavior/f00/test-f00-005.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-006",
       "function_id": "F00",
       "criterion": "prompt / answers在 recoverable failure後仍保留。",
       "test_id": "TEST-F00-006",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "prompt / answers在 recoverable failure後仍保留。",
-      "implementation_location": "tests/behavior/f00/test-f00-006.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-007",
       "function_id": "F00",
       "criterion": "VALIDATED Blueprint可進 F03 hydrate並切到 APP surface。",
       "test_id": "TEST-F00-007",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "VALIDATED Blueprint可進 F03 hydrate並切到 APP surface。",
-      "implementation_location": "tests/behavior/f00/test-f00-007.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-008",
       "function_id": "F00",
       "criterion": "normal Runtime interaction不觸發 global shell loading。",
       "test_id": "TEST-F00-008",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "normal Runtime interaction不觸發 global shell loading。",
-      "implementation_location": "tests/contracts/f00/test-f00-008.spec.ts",
-      "contract_status": "SUPERSEDED_PENDING_FORMAL_REFRESH",
-      "working_disposition": "SUPERSEDED",
+      "contract_status": "SUPERSEDED",
       "superseded_by": [
         "F00-AC-029",
         "F00-AC-030",
         "F00-AC-031",
         "F00-AC-032"
       ],
-      "required_for_spec": false
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": false
     },
     {
       "acceptance_id": "F00-AC-009",
       "function_id": "F00",
       "criterion": "APP surface可到 Share / Remix / Correction入口。",
       "test_id": "TEST-F00-AC-009",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "APP surface可到 Share / Remix / Correction入口。",
-      "implementation_location": "tests/behavior/f00/test-f00-ac-009.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-010",
       "function_id": "F00",
       "criterion": "correction failure不破壞 current App。",
       "test_id": "TEST-F00-010",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "correction failure不破壞 current App。",
-      "implementation_location": "tests/behavior/f00/test-f00-010.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-011",
       "function_id": "F00",
       "criterion": "Compare可 Accept New / Keep Previous / Adjust Again。",
       "test_id": "TEST-F00-011",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Compare可 Accept New / Keep Previous / Adjust Again。",
-      "implementation_location": "tests/behavior/f00/test-f00-011.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-012",
       "function_id": "F00",
       "criterion": "Keep Previous不 mutation old Blueprint。",
       "test_id": "TEST-F00-AC-012",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Keep Previous不 mutation old Blueprint。",
-      "implementation_location": "tests/contracts/f00/test-f00-ac-012.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-013",
       "function_id": "F00",
       "criterion": "unsupported intent不 fake success。",
       "test_id": "TEST-F00-013",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "unsupported intent不 fake success。",
-      "implementation_location": "tests/behavior/f00/test-f00-013.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-014",
       "function_id": "F00",
       "criterion": "consumer不看到 raw 401/500/stack trace。",
       "test_id": "TEST-F00-014",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "consumer不看到 raw 401/500/stack trace。",
-      "implementation_location": "tests/evidence/f00/test-f00-014.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-015",
       "function_id": "F00",
       "criterion": "recoverable failure至少有一個有效 next action。",
       "test_id": "TEST-F00-AC-015",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "recoverable failure至少有一個有效 next action。",
-      "implementation_location": "tests/behavior/f00/test-f00-ac-015.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-016",
       "function_id": "F00",
       "criterion": "node-level Runtime failure不強迫離開整個 App。",
       "test_id": "TEST-F00-AC-016",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "node-level Runtime failure不強迫離開整個 App。",
-      "implementation_location": "tests/contracts/f00/test-f00-ac-016.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-017",
       "function_id": "F00",
       "criterion": "terminal failure提供 safe exit。",
       "test_id": "TEST-F00-AC-017",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "terminal failure提供 safe exit。",
-      "implementation_location": "tests/behavior/f00/test-f00-ac-017.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-018",
       "function_id": "F00",
       "criterion": "DO_NOT_PERSIST value不進 local draft storage。",
       "test_id": "TEST-F00-AC-018",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "DO_NOT_PERSIST value不進 local draft storage。",
-      "implementation_location": "tests/contracts/f00/test-f00-ac-018.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-019",
       "function_id": "F00",
       "criterion": "duplicate tap不造成 duplicate logical create/compile。",
       "test_id": "TEST-F00-019",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "duplicate tap不造成 duplicate logical create/compile。",
-      "implementation_location": "tests/behavior/f00/test-f00-019.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-020",
       "function_id": "F00",
       "criterion": "Shell不直接修改 Runtime Instance Store。",
       "test_id": "TEST-F00-020",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Shell不直接修改 Runtime Instance Store。",
-      "implementation_location": "tests/contracts/f00/test-f00-020.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-021",
       "function_id": "F00",
       "criterion": "Shell不把 LLM proposal顯示成 User fact。",
       "test_id": "TEST-F00-AC-021",
-      "verification_type": "AUTOMATED_E2E",
-      "fixture_strategy": "browser fixture with deterministic Function state and user actions",
       "expected_observable": "Shell不把 LLM proposal顯示成 User fact。",
-      "implementation_location": "tests/e2e/f00/test-f00-ac-021.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "END_TO_END",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-022",
       "function_id": "F00",
       "criterion": "Phase 1 Core Create flow可全鍵盤操作。",
       "test_id": "TEST-F00-A11Y-001",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Phase 1 Core Create flow可全鍵盤操作。",
-      "implementation_location": "tests/behavior/f00/test-f00-a11y-001.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-023",
       "function_id": "F00",
       "criterion": "modal關閉後focus回合理觸發點。",
       "test_id": "TEST-F00-AC-023",
-      "verification_type": "AUTOMATED_E2E",
-      "fixture_strategy": "browser fixture with deterministic Function state and user actions",
       "expected_observable": "modal關閉後focus回合理觸發點。",
-      "implementation_location": "tests/e2e/f00/test-f00-ac-023.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "END_TO_END",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-024",
       "function_id": "F00",
       "criterion": "mobile width下 clarification / compare無必要 horizontal scroll。",
       "test_id": "TEST-F00-RWD-001",
-      "verification_type": "AUTOMATED_E2E",
-      "fixture_strategy": "browser fixture with deterministic Function state and user actions",
       "expected_observable": "mobile width下 clarification / compare無必要 horizontal scroll。",
-      "implementation_location": "tests/e2e/f00/test-f00-rwd-001.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "END_TO_END",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-025",
       "function_id": "F00",
       "criterion": "reduced-motion preference被 Shell animation尊重。",
       "test_id": "TEST-F00-AC-025",
-      "verification_type": "AUTOMATED_E2E",
-      "fixture_strategy": "browser fixture with deterministic Function state and user actions",
       "expected_observable": "reduced-motion preference被 Shell animation尊重。",
-      "implementation_location": "tests/e2e/f00/test-f00-ac-025.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "END_TO_END",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-026",
       "function_id": "F00",
       "criterion": "Create / clarification / App Ready / recovery / share / remix / correction入口可量測。",
       "test_id": "TEST-F00-AC-026",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "Create / clarification / App Ready / recovery / share / remix / correction入口可量測。",
-      "implementation_location": "tests/evidence/f00/test-f00-ac-026.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-027",
       "function_id": "F00",
       "criterion": "telemetry不記 every keystroke。",
       "test_id": "TEST-F00-AC-027",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "telemetry不記 every keystroke。",
-      "implementation_location": "tests/evidence/f00/test-f00-ac-027.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-028",
       "function_id": "F00",
       "criterion": "App Ready不被 telemetry命名為 semantic success。",
       "test_id": "TEST-F00-AC-028",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "App Ready不被 telemetry命名為 semantic success。",
-      "implementation_location": "tests/evidence/f00/test-f00-ac-028.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-029",
       "function_id": "F00",
       "criterion": "每個被F03 accepted/admitted的Runtime interaction都進入logical global processing presentation；同一render frame內完成而未paint完整loading frame不算failure。",
       "test_id": "TEST-F00-029",
-      "verification_type": "AUTOMATED_E2E",
-      "fixture_strategy": "browser fixture covering normal and same-frame Runtime interactions",
       "expected_observable": "admitted interaction建立processing presentation state，且不為極快操作強迫額外paint。",
-      "implementation_location": "tests/e2e/f00/test-f00-029.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "END_TO_END",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-030",
       "function_id": "F00",
       "criterion": "checkpoint-derived Progress %只反映已完成planned checkpoints，且只有commit成立後才可呈現100%。",
       "test_id": "TEST-F00-030",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "operation progress fixture with finite plans, missing plans, soft timeout, commit-ready and committed states",
       "expected_observable": "progress單調且truthful；無可靠plan不顯示百分比；commit-ready不顯示100%。",
-      "implementation_location": "tests/contracts/f00/test-f00-030.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-031",
       "function_id": "F00",
       "criterion": "Runtime processing不得為了讓loading可見而人工延長action。",
       "test_id": "TEST-F00-031",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic same-frame Runtime action with presentation scheduler instrumentation",
       "expected_observable": "action完成後立即離開processing，沒有minimum-display delay阻擋commit outcome。",
-      "implementation_location": "tests/behavior/f00/test-f00-031.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-032",
       "function_id": "F00",
       "criterion": "Runtime Hard Timeout轉交F12；integrity成立時回安全S03 last-known-good App，無法證明integrity時進terminal safe-state。",
       "test_id": "TEST-F00-032",
-      "verification_type": "AUTOMATED_E2E",
-      "fixture_strategy": "browser timeout fixtures covering proven-safe and integrity-uncertain F03 outcomes",
       "expected_observable": "safe timeout回APP_CURRENT；integrity uncertainty不render正常Runtime並進terminal safe-state。",
-      "implementation_location": "tests/e2e/f00/test-f00-032.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "END_TO_END",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-001",
       "function_id": "F01",
       "criterion": "User fact 不被 LLM proposal 覆蓋。",
       "test_id": "TEST-F01-001",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "User fact 不被 LLM proposal 覆蓋。",
-      "implementation_location": "tests/behavior/f01/test-f01-001.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-002",
       "function_id": "F01",
       "criterion": "required missing + no safe default → NEEDS_CLARIFICATION。",
       "test_id": "TEST-F01-CP-001",
-      "verification_type": "AUTOMATED_E2E",
-      "fixture_strategy": "browser fixture with deterministic Function state and user actions",
       "expected_observable": "required missing + no safe default → NEEDS_CLARIFICATION。",
-      "implementation_location": "tests/e2e/f01/test-f01-cp-001.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "END_TO_END",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-003",
       "function_id": "F01",
       "criterion": "money/permission/cost rule 未 USER_EXPLICIT → NEEDS_CLARIFICATION。",
       "test_id": "TEST-F01-CP-003",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "money/permission/cost rule 未 USER_EXPLICIT → NEEDS_CLARIFICATION。",
-      "implementation_location": "tests/contracts/f01/test-f01-cp-003.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-004",
       "function_id": "F01",
       "criterion": "material proposal 必須 visible。",
       "test_id": "TEST-F01-004",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "material proposal 必須 visible。",
-      "implementation_location": "tests/behavior/f01/test-f01-004.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-005",
       "function_id": "F01",
       "criterion": "answered question 不重問，除非 upstream condition 改變。",
       "test_id": "TEST-F01-005",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "answered question 不重問，除非 upstream condition 改變。",
-      "implementation_location": "tests/behavior/f01/test-f01-005.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-006",
       "function_id": "F01",
       "criterion": "same Envelope + policy version → same decision。",
       "test_id": "TEST-F01-006",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "same Envelope + policy version → same decision。",
-      "implementation_location": "tests/behavior/f01/test-f01-006.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-007",
       "function_id": "F01",
       "criterion": "Prompt B 不得在 gate pass 前執行。",
       "test_id": "TEST-F01-007",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Prompt B 不得在 gate pass 前執行。",
-      "implementation_location": "tests/behavior/f01/test-f01-007.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-008",
       "function_id": "F01",
       "criterion": "unknown Capability 不可由 LLM 創造並進 Blueprint。",
       "test_id": "TEST-F01-008",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "unknown Capability 不可由 LLM 創造並進 Blueprint。",
-      "implementation_location": "tests/contracts/f01/test-f01-008.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-009",
       "function_id": "F01",
       "criterion": "Unsupported / External 不 fake local success。",
       "test_id": "TEST-F01-AC-009",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Unsupported / External 不 fake local success。",
-      "implementation_location": "tests/behavior/f01/test-f01-ac-009.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-010",
       "function_id": "F01",
       "criterion": "Prompt B output 100% 經 F02。",
       "test_id": "TEST-F01-010",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Prompt B output 100% 經 F02。",
-      "implementation_location": "tests/behavior/f01/test-f01-010.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-011",
       "function_id": "F01",
       "criterion": "F02 rejection 不可 bypass。",
       "test_id": "TEST-F01-AC-011",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "F02 rejection 不可 bypass。",
-      "implementation_location": "tests/contracts/f01/test-f01-ac-011.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-012",
       "function_id": "F01",
       "criterion": "validation-driven recompose 最多 1 次。",
       "test_id": "TEST-F01-012",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "validation-driven recompose 最多 1 次。",
-      "implementation_location": "tests/behavior/f01/test-f01-012.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-013",
       "function_id": "F01",
       "criterion": "POST /intents retry 不 duplicate intent。",
       "test_id": "TEST-F01-API-001",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "POST /intents retry 不 duplicate intent。",
-      "implementation_location": "tests/contracts/f01/test-f01-api-001.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-014",
       "function_id": "F01",
       "criterion": "POST /compile retry 不 duplicate logical compile。",
       "test_id": "TEST-F01-AC-014",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "POST /compile retry 不 duplicate logical compile。",
-      "implementation_location": "tests/contracts/f01/test-f01-ac-014.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-015",
       "function_id": "F01",
       "criterion": "stale intent_version → 409。",
       "test_id": "TEST-F01-API-002",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "stale intent_version → 409。",
-      "implementation_location": "tests/contracts/f01/test-f01-api-002.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-016",
       "function_id": "F01",
       "criterion": "error envelope 永遠有 request_id + stable code。",
       "test_id": "TEST-F01-API-003",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "error envelope 永遠有 request_id + stable code。",
-      "implementation_location": "tests/contracts/f01/test-f01-api-003.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-017",
       "function_id": "F01",
       "criterion": "Client 無法送 resolved_intent 繞過 policy。",
       "test_id": "TEST-F01-SEC-007",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Client 無法送 resolved_intent 繞過 policy。",
-      "implementation_location": "tests/behavior/f01/test-f01-sec-007.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-018",
       "function_id": "F01",
       "criterion": "Provider secret 不出 Client / Blueprint。",
       "test_id": "TEST-F01-AC-018",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Provider secret 不出 Client / Blueprint。",
-      "implementation_location": "tests/contracts/f01/test-f01-ac-018.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-019",
       "function_id": "F01",
       "criterion": "provider retry bounded。",
       "test_id": "TEST-F01-019",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "provider retry bounded。",
-      "implementation_location": "tests/contracts/f01/test-f01-019.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-020",
       "function_id": "F01",
       "criterion": "timeout 保留 Intent，可 retry。",
       "test_id": "TEST-F01-AC-020",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "timeout 保留 Intent，可 retry。",
-      "implementation_location": "tests/contracts/f01/test-f01-ac-020.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-021",
       "function_id": "F01",
       "criterion": "compile failure 不破壞 existing Blueprint。",
       "test_id": "TEST-F01-021",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "compile failure 不破壞 existing Blueprint。",
-      "implementation_location": "tests/behavior/f01/test-f01-021.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-022",
       "function_id": "F01",
       "criterion": "prompt/schema/registry/model adapter version 可追。",
       "test_id": "TEST-F01-AC-022",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "prompt/schema/registry/model adapter version 可追。",
-      "implementation_location": "tests/contracts/f01/test-f01-ac-022.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-023",
       "function_id": "F01",
       "criterion": "Raw Intent 不要求進 telemetry。",
       "test_id": "TEST-F01-AC-023",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "Raw Intent 不要求進 telemetry。",
-      "implementation_location": "tests/evidence/f01/test-f01-ac-023.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-024",
       "function_id": "F01",
       "criterion": "token/cost/latency 可按 compiler_run 量測。",
       "test_id": "TEST-F01-AC-024",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "token/cost/latency 可按 compiler_run 量測。",
-      "implementation_location": "tests/evidence/f01/test-f01-ac-024.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F02-AC-001",
       "function_id": "F02",
       "criterion": "相同 logical Blueprint canonicalize 後 byte-for-byte 相同。",
       "test_id": "TEST-F02-001",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "相同 logical Blueprint canonicalize 後 byte-for-byte 相同。",
-      "implementation_location": "tests/behavior/f02/test-f02-001.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F02-AC-002",
       "function_id": "F02",
       "criterion": "相同 canonical Blueprint 產生相同 SHA-256 content_hash。",
       "test_id": "TEST-F02-002",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "相同 canonical Blueprint 產生相同 SHA-256 content_hash。",
-      "implementation_location": "tests/contracts/f02/test-f02-002.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F02-AC-003",
       "function_id": "F02",
       "criterion": "任一 canonical content change 改變 content_hash。",
       "test_id": "TEST-F02-003",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "任一 canonical content change 改變 content_hash。",
-      "implementation_location": "tests/contracts/f02/test-f02-003.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F02-AC-004",
       "function_id": "F02",
       "criterion": "invalid / unknown top-level executable key 被拒絕。",
       "test_id": "TEST-F02-004",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "invalid / unknown top-level executable key 被拒絕。",
-      "implementation_location": "tests/behavior/f02/test-f02-004.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F02-AC-005",
       "function_id": "F02",
       "criterion": "unknown capability ID/version 100% 不得 admission。",
       "test_id": "TEST-F02-005",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "unknown capability ID/version 100% 不得 admission。",
-      "implementation_location": "tests/contracts/f02/test-f02-005.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F02-AC-006",
       "function_id": "F02",
       "criterion": "invalid state / binding / rule / action reference 100% 不得 admission。",
       "test_id": "TEST-F02-006",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "invalid state / binding / rule / action reference 100% 不得 admission。",
-      "implementation_location": "tests/contracts/f02/test-f02-006.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F02-AC-007",
       "function_id": "F02",
       "criterion": "node / derived rule cycles 被拒絕。",
       "test_id": "TEST-F02-007",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "node / derived rule cycles 被拒絕。",
-      "implementation_location": "tests/behavior/f02/test-f02-007.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F02-AC-008",
       "function_id": "F02",
       "criterion": "admitted Blueprint 可保存為 immutable blueprint_content。",
       "test_id": "TEST-F02-AC-008",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "admitted Blueprint 可保存為 immutable blueprint_content。",
-      "implementation_location": "tests/contracts/f02/test-f02-ac-008.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F02-AC-009",
       "function_id": "F02",
       "criterion": "arbitrary JS / eval / dynamic import 無法成為 executable path。",
       "test_id": "TEST-F02-009",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "arbitrary JS / eval / dynamic import 無法成為 executable path。",
-      "implementation_location": "tests/behavior/f02/test-f02-009.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F02-AC-010",
       "function_id": "F02",
       "criterion": "超過 hard resource ceiling 在 Runtime 前被拒絕。",
       "test_id": "TEST-F02-010",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "超過 hard resource ceiling 在 Runtime 前被拒絕。",
-      "implementation_location": "tests/contracts/f02/test-f02-010.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F02-AC-011",
       "function_id": "F02",
       "criterion": "disabled / revoked / incompatible capability 不得 admission / execute。",
       "test_id": "TEST-F02-011",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "disabled / revoked / incompatible capability 不得 admission / execute。",
-      "implementation_location": "tests/contracts/f02/test-f02-011.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F02-AC-012",
       "function_id": "F02",
       "criterion": "Client supplied trust flag 無法繞過 validation。",
       "test_id": "TEST-F02-012",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Client supplied trust flag 無法繞過 validation。",
-      "implementation_location": "tests/contracts/f02/test-f02-012.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F02-AC-013",
       "function_id": "F02",
       "criterion": "validation failure 不破壞既有 validated Blueprint。",
       "test_id": "TEST-F02-AC-013",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "validation failure 不破壞既有 validated Blueprint。",
-      "implementation_location": "tests/behavior/f02/test-f02-ac-013.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F02-AC-014",
       "function_id": "F02",
       "criterion": "rejected candidate body 不成為 executable durable artifact。",
       "test_id": "TEST-F02-AC-014",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "rejected candidate body 不成為 executable durable artifact。",
-      "implementation_location": "tests/behavior/f02/test-f02-ac-014.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F02-AC-015",
       "function_id": "F02",
       "criterion": "PARTIALLY_SUPPORTED 必須有 explicit user-visible degradation metadata。",
       "test_id": "TEST-F02-015",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "PARTIALLY_SUPPORTED 必須有 explicit user-visible degradation metadata。",
-      "implementation_location": "tests/behavior/f02/test-f02-015.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F02-AC-016",
       "function_id": "F02",
       "criterion": "semantic core not preserved 不得 admission 為 partial success。",
       "test_id": "TEST-F02-AC-016",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "semantic core not preserved 不得 admission 為 partial success。",
-      "implementation_location": "tests/behavior/f02/test-f02-ac-016.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F02-AC-017",
       "function_id": "F02",
       "criterion": "result surface 有 explicit outputs，不需 F16 從 UI tree 猜結果。",
       "test_id": "TEST-F02-017",
-      "verification_type": "AUTOMATED_E2E",
-      "fixture_strategy": "browser fixture with deterministic Function state and user actions",
       "expected_observable": "result surface 有 explicit outputs，不需 F16 從 UI tree 猜結果。",
-      "implementation_location": "tests/e2e/f02/test-f02-017.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "END_TO_END",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F02-AC-018",
       "function_id": "F02",
       "criterion": "Runtime Instance state change 不改 Blueprint hash。",
       "test_id": "TEST-F02-AC-018",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Runtime Instance state change 不改 Blueprint hash。",
-      "implementation_location": "tests/contracts/f02/test-f02-ac-018.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F02-AC-019",
       "function_id": "F02",
       "criterion": "每次 validation 可追蹤 stage / error / trace。",
       "test_id": "TEST-F02-AC-019",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "每次 validation 可追蹤 stage / error / trace。",
-      "implementation_location": "tests/evidence/f02/test-f02-ac-019.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F02-AC-020",
       "function_id": "F02",
       "criterion": "validation evidence 不需要 telemetry raw Blueprint body。",
       "test_id": "TEST-F02-AC-020",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "validation evidence 不需要 telemetry raw Blueprint body。",
-      "implementation_location": "tests/evidence/f02/test-f02-ac-020.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F02-AC-021",
       "function_id": "F02",
       "criterion": "admitted Blueprint 可追到 admitting validation_run。",
       "test_id": "TEST-F02-021",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "admitted Blueprint 可追到 admitting validation_run。",
-      "implementation_location": "tests/behavior/f02/test-f02-021.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F02-AC-022",
       "function_id": "F02",
       "criterion": "trust revoke / incompatible 可追蹤但不 mutation Blueprint body。",
       "test_id": "TEST-F02-AC-022",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "trust revoke / incompatible 可追蹤但不 mutation Blueprint body。",
-      "implementation_location": "tests/evidence/f02/test-f02-ac-022.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-001",
       "function_id": "F03",
       "criterion": "Valid admitted Blueprint 可 deterministic hydrate 到 READY。",
       "test_id": "TEST-F03-001",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Valid admitted Blueprint 可 deterministic hydrate 到 READY。",
-      "implementation_location": "tests/behavior/f03/test-f03-001.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-002",
       "function_id": "F03",
       "criterion": "normal interaction 0 LLM call。",
       "test_id": "TEST-F03-AC-002",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "normal interaction 0 LLM call。",
-      "implementation_location": "tests/behavior/f03/test-f03-ac-002.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-003",
       "function_id": "F03",
       "criterion": "normal local interaction 不需 server round trip。",
       "test_id": "TEST-F03-AC-003",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "normal local interaction 不需 server round trip。",
-      "implementation_location": "tests/behavior/f03/test-f03-ac-003.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-004",
       "function_id": "F03",
       "criterion": "state mutation 後 affected derived/rules 正確 recompute。",
       "test_id": "TEST-F03-004",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "state mutation 後 affected derived/rules 正確 recompute。",
-      "implementation_location": "tests/contracts/f03/test-f03-004.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-005",
       "function_id": "F03",
       "criterion": "FIFO event 順序固定，無 parallel state writer。",
       "test_id": "TEST-F03-005",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "FIFO event 順序固定，無 parallel state writer。",
-      "implementation_location": "tests/evidence/f03/test-f03-005.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-006",
       "function_id": "F03",
       "criterion": "Action 全成功才 commit；step failure 無 partial state。",
       "test_id": "TEST-F03-006",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Action 全成功才 commit；step failure 無 partial state。",
-      "implementation_location": "tests/contracts/f03/test-f03-006.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-007",
       "function_id": "F03",
       "criterion": "emitted nested event 只 queue，不 re-enter current Action。",
       "test_id": "TEST-F03-007",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "emitted nested event 只 queue，不 re-enter current Action。",
-      "implementation_location": "tests/evidence/f03/test-f03-007.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-008",
       "function_id": "F03",
       "criterion": "Reset 回 Blueprint initial mutable state。",
       "test_id": "TEST-F03-AC-008",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Reset 回 Blueprint initial mutable state。",
-      "implementation_location": "tests/contracts/f03/test-f03-ac-008.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-009",
       "function_id": "F03",
       "criterion": "Result 由 result.outputs 評估，不讀 DOM。",
       "test_id": "TEST-F03-009",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Result 由 result.outputs 評估，不讀 DOM。",
-      "implementation_location": "tests/behavior/f03/test-f03-009.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-010",
       "function_id": "F03",
       "criterion": "pure expression 同 inputs → 同 typed output。",
       "test_id": "TEST-F03-010",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "pure expression 同 inputs → 同 typed output。",
-      "implementation_location": "tests/behavior/f03/test-f03-010.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-011",
       "function_id": "F03",
       "criterion": "same RNG seed + consumption order → same sequence。",
       "test_id": "TEST-F03-011",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "same RNG seed + consumption order → same sequence。",
-      "implementation_location": "tests/behavior/f03/test-f03-011.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-012",
       "function_id": "F03",
       "criterion": "Timer 以 monotonic elapsed 為 truth。",
       "test_id": "TEST-F03-012",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Timer 以 monotonic elapsed 為 truth。",
-      "implementation_location": "tests/behavior/f03/test-f03-012.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-013",
       "function_id": "F03",
       "criterion": "background-tab delay 不造成 tick-count drift。",
       "test_id": "TEST-F03-AC-013",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "background-tab delay 不造成 tick-count drift。",
-      "implementation_location": "tests/behavior/f03/test-f03-ac-013.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-014",
       "function_id": "F03",
       "criterion": "Blueprint 無法注入 runtime handler / JS。",
       "test_id": "TEST-F03-AC-014",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Blueprint 無法注入 runtime handler / JS。",
-      "implementation_location": "tests/contracts/f03/test-f03-ac-014.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-015",
       "function_id": "F03",
       "criterion": "Node render failure 不造成整頁 White Screen。",
       "test_id": "TEST-F03-015",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Node render failure 不造成整頁 White Screen。",
-      "implementation_location": "tests/behavior/f03/test-f03-015.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-016",
       "function_id": "F03",
       "criterion": "Action failure rollback current transaction。",
       "test_id": "TEST-F03-AC-016",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Action failure rollback current transaction。",
-      "implementation_location": "tests/behavior/f03/test-f03-ac-016.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-017",
       "function_id": "F03",
       "criterion": "event loop / queue bounded。",
       "test_id": "TEST-F03-017",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "event loop / queue bounded。",
-      "implementation_location": "tests/evidence/f03/test-f03-017.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-018",
       "function_id": "F03",
       "criterion": "revoked / incompatible Blueprint 不進 READY。",
       "test_id": "TEST-F03-018",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "revoked / incompatible Blueprint 不進 READY。",
-      "implementation_location": "tests/contracts/f03/test-f03-018.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-019",
       "function_id": "F03",
       "criterion": "dispose 後 timers/subscriptions 不再改 state。",
       "test_id": "TEST-F03-019",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "dispose 後 timers/subscriptions 不再改 state。",
-      "implementation_location": "tests/contracts/f03/test-f03-019.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-020",
       "function_id": "F03",
       "criterion": "Runtime 不可放寬 F02/F04 resource ceiling。",
       "test_id": "TEST-F03-AC-020",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Runtime 不可放寬 F02/F04 resource ceiling。",
-      "implementation_location": "tests/contracts/f03/test-f03-ac-020.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-021",
       "function_id": "F03",
       "criterion": "Instance state mutation 不改 Blueprint content_hash。",
       "test_id": "TEST-F03-021",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Instance state mutation 不改 Blueprint content_hash。",
-      "implementation_location": "tests/contracts/f03/test-f03-021.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-022",
       "function_id": "F03",
       "criterion": "Runtime 不逐 click 寫 PostgreSQL。",
       "test_id": "TEST-F03-022",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Runtime 不逐 click 寫 PostgreSQL。",
-      "implementation_location": "tests/contracts/f03/test-f03-022.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-023",
       "function_id": "F03",
       "criterion": "capability-local state 與 Blueprint state 分離。",
       "test_id": "TEST-F03-AC-023",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "capability-local state 與 Blueprint state 分離。",
-      "implementation_location": "tests/contracts/f03/test-f03-ac-023.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-024",
       "function_id": "F03",
       "criterion": "Result sensitivity 可供 F16 persistence policy。",
       "test_id": "TEST-F03-AC-024",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Result sensitivity 可供 F16 persistence policy。",
-      "implementation_location": "tests/behavior/f03/test-f03-ac-024.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-025",
       "function_id": "F03",
       "criterion": "Runtime failure 保留最近一次完整 committed state。",
       "test_id": "TEST-F03-AC-025",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Runtime failure 保留最近一次完整 committed state。",
-      "implementation_location": "tests/contracts/f03/test-f03-ac-025.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-026",
       "function_id": "F03",
       "criterion": "action commit / rollback / fatal failure 可 trace。",
       "test_id": "TEST-F03-AC-026",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "action commit / rollback / fatal failure 可 trace。",
-      "implementation_location": "tests/evidence/f03/test-f03-ac-026.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-027",
       "function_id": "F03",
       "criterion": "node isolation 帶 capability/node/error context。",
       "test_id": "TEST-F03-AC-027",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "node isolation 帶 capability/node/error context。",
-      "implementation_location": "tests/contracts/f03/test-f03-ac-027.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-028",
       "function_id": "F03",
       "criterion": "telemetry failure 不阻斷 Runtime。",
       "test_id": "TEST-F03-AC-028",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "telemetry failure 不阻斷 Runtime。",
-      "implementation_location": "tests/evidence/f03/test-f03-ac-028.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-029",
       "function_id": "F03",
       "criterion": "evidence 不要求 raw Runtime state。",
       "test_id": "TEST-F03-AC-029",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "evidence 不要求 raw Runtime state。",
-      "implementation_location": "tests/evidence/f03/test-f03-ac-029.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-030",
       "function_id": "F03",
       "criterion": "每個admitted Runtime interaction建立唯一operation token，terminal token永不重用或reopen。",
       "test_id": "TEST-F03-030",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "dispatcher fixture admitting multiple interactions and terminal outcomes",
       "expected_observable": "每次admission取得不同token，terminal transition後token不可再次active。",
-      "implementation_location": "tests/contracts/f03/test-f03-030.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-031",
       "function_id": "F03",
       "criterion": "checkpoint progress保持單調、truthful、operation-scoped；無可靠checkpoint plan時不造假百分比。",
       "test_id": "TEST-F03-031",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "operation checkpoint fixtures covering reordered, duplicate, cross-token and absent-plan updates",
       "expected_observable": "只接受當前token plan內的單調完成checkpoint，無plan只回stage。",
-      "implementation_location": "tests/contracts/f03/test-f03-031.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-032",
       "function_id": "F03",
       "criterion": "Hard Timeout不留下partial state、staged effect或未提交event；committed store保持原樣。",
       "test_id": "TEST-F03-032",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "fake monotonic clock crosses hard deadline after staged state, effect and emitted event",
       "expected_observable": "working transaction、effects與events全部discard，last committed store byte-for-byte unchanged。",
-      "implementation_location": "tests/behavior/f03/test-f03-032.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-033",
       "function_id": "F03",
       "criterion": "closed/stale token與late completion永遠不得commit。",
       "test_id": "TEST-F03-033",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "late handler/callback fixtures for timed-out, cancelled, failed and stale-epoch tokens",
       "expected_observable": "所有late/stale completion被discard且不改變store、UI或recovery outcome。",
-      "implementation_location": "tests/behavior/f03/test-f03-033.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-034",
       "function_id": "F03",
       "criterion": "同一recovery episode的每次Retry都建立新operation token。",
       "test_id": "TEST-F03-034",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "recovery retry fixture with repeated attempts in one episode",
       "expected_observable": "episode ID保持，operation token每次更新且舊token維持closed。",
-      "implementation_location": "tests/contracts/f03/test-f03-034.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-035",
       "function_id": "F03",
       "criterion": "hard deadline跨越後，即使synchronous handler稍後返回，pre-commit guard仍拒絕commit。",
       "test_id": "TEST-F03-035",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "fake monotonic clock advances past deadline during trusted synchronous handler",
       "expected_observable": "handler return後pre-commit產生F03-ERR-021並discard transaction。",
-      "implementation_location": "tests/behavior/f03/test-f03-035.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F03-AC-036",
       "function_id": "F03",
       "criterion": "Runtime integrity無法證明時產生F03-ERR-018並停止affected execution path，不得回正常Runtime。",
       "test_id": "TEST-F03-036",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "post-timeout invariant fixture with unknown store/epoch integrity",
       "expected_observable": "F03-ERR-018取代recoverable timeout path並停止affected execution。",
-      "implementation_location": "tests/behavior/f03/test-f03-036.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F04-AC-001",
       "function_id": "F04",
       "criterion": "Canonical source 可 deterministic 產生 Compiler / Validator / Runtime / Compatibility artifacts。",
       "test_id": "TEST-F04-AC-001",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Canonical source 可 deterministic 產生 Compiler / Validator / Runtime / Compatibility artifacts。",
-      "implementation_location": "tests/contracts/f04/test-f04-ac-001.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F04-AC-002",
       "function_id": "F04",
       "criterion": "同一 registry_version 若 source digest 改變，build 必須 fail。",
       "test_id": "TEST-F04-002",
-      "verification_type": "AUTOMATED_E2E",
-      "fixture_strategy": "browser fixture with deterministic Function state and user actions",
       "expected_observable": "同一 registry_version 若 source digest 改變，build 必須 fail。",
-      "implementation_location": "tests/e2e/f04/test-f04-002.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "END_TO_END",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F04-AC-003",
       "function_id": "F04",
       "criterion": "duplicate capability ID+version 必須 fail build。",
       "test_id": "TEST-F04-003",
-      "verification_type": "AUTOMATED_E2E",
-      "fixture_strategy": "browser fixture with deterministic Function state and user actions",
       "expected_observable": "duplicate capability ID+version 必須 fail build。",
-      "implementation_location": "tests/e2e/f04/test-f04-003.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "END_TO_END",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F04-AC-004",
       "function_id": "F04",
       "criterion": "unknown capability / version 必須被 Validator 拒絕。",
       "test_id": "TEST-F04-004",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "unknown capability / version 必須被 Validator 拒絕。",
-      "implementation_location": "tests/contracts/f04/test-f04-004.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F04-AC-005",
       "function_id": "F04",
       "criterion": "ENABLED capability 必須存在 trusted runtime handler。",
       "test_id": "TEST-F04-005",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "ENABLED capability 必須存在 trusted runtime handler。",
-      "implementation_location": "tests/contracts/f04/test-f04-005.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F04-AC-006",
       "function_id": "F04",
       "criterion": "Compiler / Validator / Runtime deployment 使用同 registry version/digest。",
       "test_id": "TEST-F04-AC-006",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Compiler / Validator / Runtime deployment 使用同 registry version/digest。",
-      "implementation_location": "tests/contracts/f04/test-f04-ac-006.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F04-AC-007",
       "function_id": "F04",
       "criterion": "dependency cycle 必須 fail build。",
       "test_id": "TEST-F04-007",
-      "verification_type": "AUTOMATED_E2E",
-      "fixture_strategy": "browser fixture with deterministic Function state and user actions",
       "expected_observable": "dependency cycle 必須 fail build。",
-      "implementation_location": "tests/e2e/f04/test-f04-007.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "END_TO_END",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F04-AC-008",
       "function_id": "F04",
       "criterion": "Blueprint 無法指定 JS / module path / dynamic handler。",
       "test_id": "TEST-F04-008",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Blueprint 無法指定 JS / module path / dynamic handler。",
-      "implementation_location": "tests/behavior/f04/test-f04-008.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F04-AC-009",
       "function_id": "F04",
       "criterion": "disabled / revoked capability 不得執行。",
       "test_id": "TEST-F04-009",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "disabled / revoked capability 不得執行。",
-      "implementation_location": "tests/contracts/f04/test-f04-009.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F04-AC-010",
       "function_id": "F04",
       "criterion": "Card 不可突破 platform global resource ceiling。",
       "test_id": "TEST-F04-AC-010",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Card 不可突破 platform global resource ceiling。",
-      "implementation_location": "tests/behavior/f04/test-f04-ac-010.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F04-AC-011",
       "function_id": "F04",
       "criterion": "required dependency 不可用時 dependent capability 不可假裝 available。",
       "test_id": "TEST-F04-AC-011",
-      "verification_type": "AUTOMATED_E2E",
-      "fixture_strategy": "browser fixture with deterministic Function state and user actions",
       "expected_observable": "required dependency 不可用時 dependent capability 不可假裝 available。",
-      "implementation_location": "tests/e2e/f04/test-f04-ac-011.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "END_TO_END",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F04-AC-012",
       "function_id": "F04",
       "criterion": "Coverage Result 對每個 material requirement 都有 COVERED / DEGRADED / UNSUPPORTED / EXTERNAL_REQUIRED。",
       "test_id": "TEST-F04-012",
-      "verification_type": "AUTOMATED_E2E",
-      "fixture_strategy": "browser fixture with deterministic Function state and user actions",
       "expected_observable": "Coverage Result 對每個 material requirement 都有 COVERED / DEGRADED / UNSUPPORTED / EXTERNAL_REQUIRED。",
-      "implementation_location": "tests/e2e/f04/test-f04-012.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "END_TO_END",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F04-AC-013",
       "function_id": "F04",
       "criterion": "PARTIAL degradation 必須標記是否保留 semantic core。",
       "test_id": "TEST-F04-AC-013",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "PARTIAL degradation 必須標記是否保留 semantic core。",
-      "implementation_location": "tests/behavior/f04/test-f04-ac-013.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F04-AC-014",
       "function_id": "F04",
       "criterion": "不保留 semantic core 時不得回 FULL / PARTIAL success。",
       "test_id": "TEST-F04-014",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "不保留 semantic core 時不得回 FULL / PARTIAL success。",
-      "implementation_location": "tests/behavior/f04/test-f04-014.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F04-AC-015",
       "function_id": "F04",
       "criterion": "LLM 建議 unknown capability 不得進 Blueprint。",
       "test_id": "TEST-F04-AC-015",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "LLM 建議 unknown capability 不得進 Blueprint。",
-      "implementation_location": "tests/contracts/f04/test-f04-ac-015.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F04-AC-016",
       "function_id": "F04",
       "criterion": "Optional capability 缺失不能阻斷 Release 1 Core Loop。",
       "test_id": "TEST-F04-AC-016",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Optional capability 缺失不能阻斷 Release 1 Core Loop。",
-      "implementation_location": "tests/contracts/f04/test-f04-ac-016.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F04-AC-017",
       "function_id": "F04",
       "criterion": "selected / rejected / gap / mismatch 可形成 traceable evidence。",
       "test_id": "TEST-F04-AC-017",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "selected / rejected / gap / mismatch 可形成 traceable evidence。",
-      "implementation_location": "tests/evidence/f04/test-f04-ac-017.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F04-AC-018",
       "function_id": "F04",
       "criterion": "evidence 可辨識 capability version + registry version。",
       "test_id": "TEST-F04-AC-018",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "evidence 可辨識 capability version + registry version。",
-      "implementation_location": "tests/evidence/f04/test-f04-ac-018.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F04-AC-019",
       "function_id": "F04",
       "criterion": "Registry evidence 不要求 raw user intent。",
       "test_id": "TEST-F04-AC-019",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "Registry evidence 不要求 raw user intent。",
-      "implementation_location": "tests/evidence/f04/test-f04-ac-019.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F05-AC-001",
       "function_id": "F05",
       "criterion": "validated compatible Blueprint可建立 Durable Share。",
       "test_id": "TEST-F05-001",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "validated compatible Blueprint可建立 Durable Share。",
-      "implementation_location": "tests/behavior/f05/test-f05-001.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F05-AC-002",
       "function_id": "F05",
       "criterion": "Candidate / revoked / incompatible Blueprint不可建立 production share。",
       "test_id": "TEST-F05-002",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Candidate / revoked / incompatible Blueprint不可建立 production share。",
-      "implementation_location": "tests/contracts/f05/test-f05-002.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F05-AC-003",
       "function_id": "F05",
       "criterion": "duplicate submit with same Idempotency-Key不建立 duplicate logical share。",
       "test_id": "TEST-F05-003",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "duplicate submit with same Idempotency-Key不建立 duplicate logical share。",
-      "implementation_location": "tests/contracts/f05/test-f05-003.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F05-AC-004",
       "function_id": "F05",
       "criterion": "Share failure不破壞 current App。",
       "test_id": "TEST-F05-AC-004",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Share failure不破壞 current App。",
-      "implementation_location": "tests/behavior/f05/test-f05-ac-004.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F05-AC-005",
       "function_id": "F05",
       "criterion": "public Share URL不含 Runtime input/result/raw prompt。",
       "test_id": "TEST-F05-005",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "public Share URL不含 Runtime input/result/raw prompt。",
-      "implementation_location": "tests/contracts/f05/test-f05-005.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F05-AC-006",
       "function_id": "F05",
       "criterion": "Recipient不需 install。",
       "test_id": "TEST-F05-AC-006",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Recipient不需 install。",
-      "implementation_location": "tests/behavior/f05/test-f05-ac-006.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F05-AC-007",
       "function_id": "F05",
       "criterion": "Recipient First Value前不需 account。",
       "test_id": "TEST-F05-AC-007",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Recipient First Value前不需 account。",
-      "implementation_location": "tests/behavior/f05/test-f05-ac-007.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F05-AC-008",
       "function_id": "F05",
       "criterion": "valid ACTIVE share解析到原 immutable Blueprint hash。",
       "test_id": "TEST-F05-008",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "valid ACTIVE share解析到原 immutable Blueprint hash。",
-      "implementation_location": "tests/contracts/f05/test-f05-008.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F05-AC-009",
       "function_id": "F05",
       "criterion": "Share Restore不呼叫 LLM。",
       "test_id": "TEST-F05-009",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Share Restore不呼叫 LLM。",
-      "implementation_location": "tests/behavior/f05/test-f05-009.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F05-AC-010",
       "function_id": "F05",
       "criterion": "Recipient建立fresh Runtime Instance，不取得 Creator Runtime state。",
       "test_id": "TEST-F05-010",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Recipient建立fresh Runtime Instance，不取得 Creator Runtime state。",
-      "implementation_location": "tests/contracts/f05/test-f05-010.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F05-AC-011",
       "function_id": "F05",
       "criterion": "revoked/expired share不 hydrate App。",
       "test_id": "TEST-F05-011",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "revoked/expired share不 hydrate App。",
-      "implementation_location": "tests/contracts/f05/test-f05-011.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F05-AC-012",
       "function_id": "F05",
       "criterion": "Runtime/Registry incompatible時不 silently reinterpret Blueprint。",
       "test_id": "TEST-F05-012",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Runtime/Registry incompatible時不 silently reinterpret Blueprint。",
-      "implementation_location": "tests/contracts/f05/test-f05-012.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F05-AC-013",
       "function_id": "F05",
       "criterion": "Blueprint fetch cache miss仍可由 durable source restore。",
       "test_id": "TEST-F05-AC-013",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Blueprint fetch cache miss仍可由 durable source restore。",
-      "implementation_location": "tests/behavior/f05/test-f05-ac-013.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F05-AC-014",
       "function_id": "F05",
       "criterion": "CDN中存在 Blueprint body不能繞過 revoked trust gate。",
       "test_id": "TEST-F05-014",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "CDN中存在 Blueprint body不能繞過 revoked trust gate。",
-      "implementation_location": "tests/contracts/f05/test-f05-014.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F05-AC-015",
       "function_id": "F05",
       "criterion": "Copy failure不使 Share失效。",
       "test_id": "TEST-F05-AC-015",
-      "verification_type": "AUTOMATED_E2E",
-      "fixture_strategy": "browser fixture with deterministic Function state and user actions",
       "expected_observable": "Copy failure不使 Share失效。",
-      "implementation_location": "tests/e2e/f05/test-f05-ac-015.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "END_TO_END",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F05-AC-016",
       "function_id": "F05",
       "criterion": "Restore transient failure可 retry且保留 Share reference。",
       "test_id": "TEST-F05-016",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Restore transient failure可 retry且保留 Share reference。",
-      "implementation_location": "tests/contracts/f05/test-f05-016.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F05-AC-017",
       "function_id": "F05",
       "criterion": "Share not found / expired / revoked有 humanized next action。",
       "test_id": "TEST-F05-AC-017",
-      "verification_type": "AUTOMATED_E2E",
-      "fixture_strategy": "browser fixture covering not-found / expired / revoked share states",
       "expected_observable": "Share not found / expired / revoked有 humanized next action。",
-      "implementation_location": "tests/e2e/f05/test-f05-ac-017.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "END_TO_END",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F05-AC-018",
       "function_id": "F05",
       "criterion": "Shared App READY後可進 Remix。",
       "test_id": "TEST-F05-018",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Shared App READY後可進 Remix。",
-      "implementation_location": "tests/behavior/f05/test-f05-018.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F05-AC-019",
       "function_id": "F05",
       "criterion": "share create/open/restore ready/failure可量測。",
       "test_id": "TEST-F05-AC-019",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "share create/open/restore ready/failure可量測。",
-      "implementation_location": "tests/evidence/f05/test-f05-ac-019.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F05-AC-020",
       "function_id": "F05",
       "criterion": "telemetry不要求 Runtime input/result。",
       "test_id": "TEST-F05-AC-020",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "telemetry不要求 Runtime input/result。",
-      "implementation_location": "tests/evidence/f05/test-f05-ac-020.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F05-AC-021",
       "function_id": "F05",
       "criterion": "Share Open與Restore Ready可區分，不能把 click當成功使用。",
       "test_id": "TEST-F05-AC-021",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Share Open與Restore Ready可區分，不能把 click當成功使用。",
-      "implementation_location": "tests/behavior/f05/test-f05-ac-021.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-001",
       "function_id": "F06",
       "criterion": "REFINE / REMIX都必須有 source Blueprint hash。",
       "test_id": "TEST-F06-AC-001",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "REFINE / REMIX都必須有 source Blueprint hash。",
-      "implementation_location": "tests/contracts/f06/test-f06-ac-001.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-002",
       "function_id": "F06",
       "criterion": "source Blueprint永遠不被 mutation。",
       "test_id": "TEST-F06-002",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "source Blueprint永遠不被 mutation。",
-      "implementation_location": "tests/contracts/f06/test-f06-002.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-003",
       "function_id": "F06",
       "criterion": "Runtime state change不建立 lineage。",
       "test_id": "TEST-F06-003",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Runtime state change不建立 lineage。",
-      "implementation_location": "tests/contracts/f06/test-f06-003.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-004",
       "function_id": "F06",
       "criterion": "Semantic Delta不能作 executable Blueprint patch。",
       "test_id": "TEST-F06-004",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Semantic Delta不能作 executable Blueprint patch。",
-      "implementation_location": "tests/behavior/f06/test-f06-004.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-005",
       "function_id": "F06",
       "criterion": "child永遠完整經 F02 Validation。",
       "test_id": "TEST-F06-005",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "child永遠完整經 F02 Validation。",
-      "implementation_location": "tests/behavior/f06/test-f06-005.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-006",
       "function_id": "F06",
       "criterion": "validated child內容不同時產生新 content_hash。",
       "test_id": "TEST-F06-AC-006",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "validated child內容不同時產生新 content_hash。",
-      "implementation_location": "tests/contracts/f06/test-f06-ac-006.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-007",
       "function_id": "F06",
       "criterion": "REFINE / REMIX建立正確 relation_type lineage。",
       "test_id": "TEST-F06-007",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "REFINE / REMIX建立正確 relation_type lineage。",
-      "implementation_location": "tests/contracts/f06/test-f06-007.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-008",
       "function_id": "F06",
       "criterion": "same source/new hash不建立 self-lineage。",
       "test_id": "TEST-F06-008",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "same source/new hash不建立 self-lineage。",
-      "implementation_location": "tests/contracts/f06/test-f06-008.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-009",
       "function_id": "F06",
       "criterion": "MUST_PRESERVE requirement衝突時必須 clarification。",
       "test_id": "TEST-F06-009",
-      "verification_type": "AUTOMATED_E2E",
-      "fixture_strategy": "browser fixture with deterministic Function state and user actions",
       "expected_observable": "MUST_PRESERVE requirement衝突時必須 clarification。",
-      "implementation_location": "tests/e2e/f06/test-f06-009.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "END_TO_END",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-010",
       "function_id": "F06",
       "criterion": "failure不破壞 source App。",
       "test_id": "TEST-F06-010",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "failure不破壞 source App。",
-      "implementation_location": "tests/behavior/f06/test-f06-010.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-011",
       "function_id": "F06",
       "criterion": "child preview前 source App仍可返回。",
       "test_id": "TEST-F06-AC-011",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "child preview前 source App仍可返回。",
-      "implementation_location": "tests/behavior/f06/test-f06-ac-011.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-012",
       "function_id": "F06",
       "criterion": "Keep Previous不 mutation/delete source。",
       "test_id": "TEST-F06-AC-012",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Keep Previous不 mutation/delete source。",
-      "implementation_location": "tests/contracts/f06/test-f06-ac-012.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-013",
       "function_id": "F06",
       "criterion": "Adjust Again保留 change context。",
       "test_id": "TEST-F06-AC-013",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Adjust Again保留 change context。",
-      "implementation_location": "tests/behavior/f06/test-f06-ac-013.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-014",
       "function_id": "F06",
       "criterion": "一般 Refine/Remix 不自動 carry Runtime input。",
       "test_id": "TEST-F06-014",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "一般 Refine/Remix 不自動 carry Runtime input。",
-      "implementation_location": "tests/contracts/f06/test-f06-014.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-015",
       "function_id": "F06",
       "criterion": "F06重用 F01 lifecycle，不建立第二套 compiler endpoint。",
       "test_id": "TEST-F06-015",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "F06重用 F01 lifecycle，不建立第二套 compiler endpoint。",
-      "implementation_location": "tests/contracts/f06/test-f06-015.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-016",
       "function_id": "F06",
       "criterion": "Remix share_id與 source hash不一致時拒絕。",
       "test_id": "TEST-F06-016",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Remix share_id與 source hash不一致時拒絕。",
-      "implementation_location": "tests/contracts/f06/test-f06-016.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-017",
       "function_id": "F06",
       "criterion": "Client不能用 arbitrary Blueprint body當 source。",
       "test_id": "TEST-F06-AC-017",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Client不能用 arbitrary Blueprint body當 source。",
-      "implementation_location": "tests/behavior/f06/test-f06-ac-017.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-018",
       "function_id": "F06",
       "criterion": "retry不重複建立 logical intent / lineage。",
       "test_id": "TEST-F06-018",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "retry不重複建立 logical intent / lineage。",
-      "implementation_location": "tests/contracts/f06/test-f06-018.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-019",
       "function_id": "F06",
       "criterion": "sensitive Runtime input不因 change flow自動送 Model。",
       "test_id": "TEST-F06-019",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "sensitive Runtime input不因 change flow自動送 Model。",
-      "implementation_location": "tests/contracts/f06/test-f06-019.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-020",
       "function_id": "F06",
       "criterion": "Refine與Remix可分開量測。",
       "test_id": "TEST-F06-AC-020",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "Refine與Remix可分開量測。",
-      "implementation_location": "tests/evidence/f06/test-f06-ac-020.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-021",
       "function_id": "F06",
       "criterion": "child generated與User accepted可分開量測。",
       "test_id": "TEST-F06-AC-021",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "child generated與User accepted可分開量測。",
-      "implementation_location": "tests/evidence/f06/test-f06-ac-021.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-022",
       "function_id": "F06",
       "criterion": "no_effective_change可辨識。",
       "test_id": "TEST-F06-AC-022",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "no_effective_change可辨識。",
-      "implementation_location": "tests/behavior/f06/test-f06-ac-022.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-023",
       "function_id": "F06",
       "criterion": "Shared App → Remix lineage / evidence可追蹤。",
       "test_id": "TEST-F06-AC-023",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "Shared App → Remix lineage / evidence可追蹤。",
-      "implementation_location": "tests/evidence/f06/test-f06-ac-023.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-001",
       "function_id": "F07",
       "criterion": "First Value前不需 account。",
       "test_id": "TEST-F07-AC-001",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "First Value前不需 account。",
-      "implementation_location": "tests/behavior/f07/test-f07-ac-001.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-002",
       "function_id": "F07",
       "criterion": "first-party random anonymous_id不使用 fingerprint。",
       "test_id": "TEST-F07-002",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "first-party random anonymous_id不使用 fingerprint。",
-      "implementation_location": "tests/behavior/f07/test-f07-002.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-003",
       "function_id": "F07",
       "criterion": "clear site storage後不嘗試重建舊 identity。",
       "test_id": "TEST-F07-003",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "clear site storage後不嘗試重建舊 identity。",
-      "implementation_location": "tests/behavior/f07/test-f07-003.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-004",
       "function_id": "F07",
       "criterion": "anonymous_id不能授權 owner-only action。",
       "test_id": "TEST-F07-004",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "anonymous_id不能授權 owner-only action。",
-      "implementation_location": "tests/behavior/f07/test-f07-004.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-005",
       "function_id": "F07",
       "criterion": "last_seen不因每個 event同步 write。",
       "test_id": "TEST-F07-AC-005",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "last_seen不因每個 event同步 write。",
-      "implementation_location": "tests/evidence/f07/test-f07-ac-005.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-006",
       "function_id": "F07",
       "criterion": "unknown event_type被拒絕。",
       "test_id": "TEST-F07-006",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "unknown event_type被拒絕。",
-      "implementation_location": "tests/evidence/f07/test-f07-006.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-007",
       "function_id": "F07",
       "criterion": "function_id / event_type prefix mismatch被拒絕。",
       "test_id": "TEST-F07-AC-007",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "function_id / event_type prefix mismatch被拒絕。",
-      "implementation_location": "tests/evidence/f07/test-f07-ac-007.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-008",
       "function_id": "F07",
       "criterion": "forbidden property不能進 product_event。",
       "test_id": "TEST-F07-008",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "forbidden property不能進 product_event。",
-      "implementation_location": "tests/evidence/f07/test-f07-008.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-009",
       "function_id": "F07",
       "criterion": "raw Intent / raw Result不需要進 Evidence。",
       "test_id": "TEST-F07-009",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "raw Intent / raw Result不需要進 Evidence。",
-      "implementation_location": "tests/evidence/f07/test-f07-009.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-010",
       "function_id": "F07",
       "criterion": "event retry使用同 event_id且不 duplicate durable row。",
       "test_id": "TEST-F07-010",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "event retry使用同 event_id且不 duplicate durable row。",
-      "implementation_location": "tests/evidence/f07/test-f07-010.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-011",
       "function_id": "F07",
       "criterion": "one invalid event不 rollback整個 valid batch。",
       "test_id": "TEST-F07-011",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "one invalid event不 rollback整個 valid batch。",
-      "implementation_location": "tests/evidence/f07/test-f07-011.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-012",
       "function_id": "F07",
       "criterion": "payload limits在 server enforce。",
       "test_id": "TEST-F07-AC-012",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "payload limits在 server enforce。",
-      "implementation_location": "tests/behavior/f07/test-f07-ac-012.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-013",
       "function_id": "F07",
       "criterion": "normal local Runtime interaction不逐 action發 network request。",
       "test_id": "TEST-F07-013",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "normal local Runtime interaction不逐 action發 network request。",
-      "implementation_location": "tests/contracts/f07/test-f07-013.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-014",
       "function_id": "F07",
       "criterion": "batch最多50 events。",
       "test_id": "TEST-F07-014",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "batch最多50 events。",
-      "implementation_location": "tests/evidence/f07/test-f07-014.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-015",
       "function_id": "F07",
       "criterion": "transient ingest failure不阻斷 product flow。",
       "test_id": "TEST-F07-AC-015",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "transient ingest failure不阻斷 product flow。",
-      "implementation_location": "tests/behavior/f07/test-f07-ac-015.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-016",
       "function_id": "F07",
       "criterion": "unsent queue最多保留24h。",
       "test_id": "TEST-F07-016",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "unsent queue最多保留24h。",
-      "implementation_location": "tests/behavior/f07/test-f07-016.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-017",
       "function_id": "F07",
       "criterion": "queue overflow優先保留 CORE_OUTCOME / RELIABILITY。",
       "test_id": "TEST-F07-017",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "queue overflow優先保留 CORE_OUTCOME / RELIABILITY。",
-      "implementation_location": "tests/behavior/f07/test-f07-017.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-018",
       "function_id": "F07",
       "criterion": "pagehide可 best-effort flush。",
       "test_id": "TEST-F07-AC-018",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "pagehide可 best-effort flush。",
-      "implementation_location": "tests/behavior/f07/test-f07-ac-018.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-019",
       "function_id": "F07",
       "criterion": "Share Open與Restore Ready分開量。",
       "test_id": "TEST-F07-019",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Share Open與Restore Ready分開量。",
-      "implementation_location": "tests/behavior/f07/test-f07-019.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-020",
       "function_id": "F07",
       "criterion": "Runtime Ready與Meaningful Use分開量。",
       "test_id": "TEST-F07-020",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Runtime Ready與Meaningful Use分開量。",
-      "implementation_location": "tests/contracts/f07/test-f07-020.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-021",
       "function_id": "F07",
       "criterion": "technical Successful Intent與Useful Intent分開量。",
       "test_id": "TEST-F07-AC-021",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "technical Successful Intent與Useful Intent分開量。",
-      "implementation_location": "tests/behavior/f07/test-f07-ac-021.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-022",
       "function_id": "F07",
       "criterion": "anonymous repeat不用 fingerprint修正。",
       "test_id": "TEST-F07-022",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "anonymous repeat不用 fingerprint修正。",
-      "implementation_location": "tests/behavior/f07/test-f07-022.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-023",
       "function_id": "F07",
       "criterion": "cost per successful/useful intent可從 canonical evidence計算。",
       "test_id": "TEST-F07-AC-023",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "cost per successful/useful intent可從 canonical evidence計算。",
-      "implementation_location": "tests/evidence/f07/test-f07-ac-023.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-024",
       "function_id": "F07",
       "criterion": "semantic mismatch可與原 intent / Blueprint關聯。",
       "test_id": "TEST-F07-AC-024",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "semantic mismatch可與原 intent / Blueprint關聯。",
-      "implementation_location": "tests/behavior/f07/test-f07-ac-024.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-025",
       "function_id": "F07",
       "criterion": "recovery success可與 recovery episode關聯。",
       "test_id": "TEST-F07-AC-025",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "recovery success可與 recovery episode關聯。",
-      "implementation_location": "tests/behavior/f07/test-f07-ac-025.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-026",
       "function_id": "F07",
       "criterion": "raw product_event 90-day retention可執行。",
       "test_id": "TEST-F07-026",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "raw product_event 90-day retention可執行。",
-      "implementation_location": "tests/evidence/f07/test-f07-026.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-027",
       "function_id": "F07",
       "criterion": "non-identifying aggregate可在 raw deletion後保留。",
       "test_id": "TEST-F07-AC-027",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "non-identifying aggregate可在 raw deletion後保留。",
-      "implementation_location": "tests/behavior/f07/test-f07-ac-027.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-028",
       "function_id": "F07",
       "criterion": "evidence rejection/drop/queue expiry本身可觀測。",
       "test_id": "TEST-F07-AC-028",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "evidence rejection/drop/queue expiry本身可觀測。",
-      "implementation_location": "tests/evidence/f07/test-f07-ac-028.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F07-AC-029",
       "function_id": "F07",
       "criterion": "DEBUG_ONLY不默認 durable到 production product_event。",
       "test_id": "TEST-F07-029",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "DEBUG_ONLY不默認 durable到 production product_event。",
-      "implementation_location": "tests/evidence/f07/test-f07-029.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-001",
       "function_id": "F12",
       "criterion": "source Fxx error code保持唯一 technical identity。",
       "test_id": "TEST-F12-001",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "source Fxx error code保持唯一 technical identity。",
-      "implementation_location": "tests/behavior/f12/test-f12-001.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-002",
       "function_id": "F12",
       "criterion": "F12不重新編號 source errors。",
       "test_id": "TEST-F12-AC-002",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "F12不重新編號 source errors。",
-      "implementation_location": "tests/behavior/f12/test-f12-ac-002.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-003",
       "function_id": "F12",
       "criterion": "same error context + policy version產生 deterministic RecoveryState。",
       "test_id": "TEST-F12-003",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "same error context + policy version產生 deterministic RecoveryState。",
-      "implementation_location": "tests/contracts/f12/test-f12-003.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-004",
       "function_id": "F12",
       "criterion": "security/integrity failure優先於 convenience recovery。",
       "test_id": "TEST-F12-004",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "security/integrity failure優先於 convenience recovery。",
-      "implementation_location": "tests/contracts/f12/test-f12-004.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-005",
       "function_id": "F12",
       "criterion": "recoverable Create failure保留 prompt / intent context。",
       "test_id": "TEST-F12-005",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "recoverable Create failure保留 prompt / intent context。",
-      "implementation_location": "tests/behavior/f12/test-f12-005.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-006",
       "function_id": "F12",
       "criterion": "Refine/Remix/Correction failure保留 last-known-good App。",
       "test_id": "TEST-F12-006",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Refine/Remix/Correction failure保留 last-known-good App。",
-      "implementation_location": "tests/behavior/f12/test-f12-006.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-007",
       "function_id": "F12",
       "criterion": "Runtime action failure保留 F03 last committed state。",
       "test_id": "TEST-F12-007",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Runtime action failure保留 F03 last committed state。",
-      "implementation_location": "tests/contracts/f12/test-f12-007.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-008",
       "function_id": "F12",
       "criterion": "DO_NOT_PERSIST內容不因 Recovery被 durable保存。",
       "test_id": "TEST-F12-008",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "DO_NOT_PERSIST內容不因 Recovery被 durable保存。",
-      "implementation_location": "tests/contracts/f12/test-f12-008.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-009",
       "function_id": "F12",
       "criterion": "material context loss會告知 User。",
       "test_id": "TEST-F12-AC-009",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "material context loss會告知 User。",
-      "implementation_location": "tests/behavior/f12/test-f12-ac-009.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-010",
       "function_id": "F12",
       "criterion": "automatic retry有上限。",
       "test_id": "TEST-F12-010",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "automatic retry有上限。",
-      "implementation_location": "tests/contracts/f12/test-f12-010.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-011",
       "function_id": "F12",
       "criterion": "terminal/security failure不提供必然無效 Retry。",
       "test_id": "TEST-F12-011",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "terminal/security failure不提供必然無效 Retry。",
-      "implementation_location": "tests/contracts/f12/test-f12-011.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-012",
       "function_id": "F12",
       "criterion": "unsupported flow提供 Edit/Simplify而不是無限 Retry。",
       "test_id": "TEST-F12-AC-012",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "unsupported flow提供 Edit/Simplify而不是無限 Retry。",
-      "implementation_location": "tests/contracts/f12/test-f12-ac-012.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-013",
       "function_id": "F12",
       "criterion": "每個 blocking recoverable failure 至少有 1 個有效 next action。",
       "test_id": "TEST-F12-013",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "每個 blocking recoverable failure 至少有 1 個有效 next action。",
-      "implementation_location": "tests/contracts/f12/test-f12-013.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-014",
       "function_id": "F12",
       "criterion": "visible next actions通常不超過3個。",
       "test_id": "TEST-F12-AC-014",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "visible next actions通常不超過3個。",
-      "implementation_location": "tests/behavior/f12/test-f12-ac-014.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-015",
       "function_id": "F12",
       "criterion": "Consumer不看到 raw stack / SQL / provider secret。",
       "test_id": "TEST-F12-015",
-      "verification_type": "AUTOMATED_E2E",
-      "fixture_strategy": "browser recovery fixture injecting representative technical failures and asserting consumer-safe presentation",
       "expected_observable": "Consumer不看到 raw stack / SQL / provider secret。",
-      "implementation_location": "tests/e2e/f12/test-f12-015.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "END_TO_END",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-016",
       "function_id": "F12",
       "criterion": "raw HTTP status不是主 consumer message。",
       "test_id": "TEST-F12-AC-016",
-      "verification_type": "AUTOMATED_E2E",
-      "fixture_strategy": "browser recovery fixture injecting representative technical failures and asserting consumer-safe presentation",
       "expected_observable": "raw HTTP status不是主 consumer message。",
-      "implementation_location": "tests/e2e/f12/test-f12-ac-016.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "END_TO_END",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-017",
       "function_id": "F12",
       "criterion": "component-level failure能局部呈現，不強制全App失效。",
       "test_id": "TEST-F12-017",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "component-level failure能局部呈現，不強制全App失效。",
-      "implementation_location": "tests/behavior/f12/test-f12-017.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-018",
       "function_id": "F12",
       "criterion": "semantic mismatch導向 F16，不呈現technical error。",
       "test_id": "TEST-F12-018",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "semantic mismatch導向 F16，不呈現technical error。",
-      "implementation_location": "tests/behavior/f12/test-f12-018.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-019",
       "function_id": "F12",
       "criterion": "blocking recovery keyboard可操作。",
       "test_id": "TEST-F12-AC-019",
-      "verification_type": "AUTOMATED_E2E",
-      "fixture_strategy": "browser fixture with deterministic Function state and user actions",
       "expected_observable": "blocking recovery keyboard可操作。",
-      "implementation_location": "tests/e2e/f12/test-f12-ac-019.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "END_TO_END",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-020",
       "function_id": "F12",
       "criterion": "每個 User-visible recovery episode 有 episode ID。",
       "test_id": "TEST-F12-020",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "每個 User-visible recovery episode 有 episode ID。",
-      "implementation_location": "tests/contracts/f12/test-f12-020.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-021",
       "function_id": "F12",
       "criterion": "retry click不等於 recovered。",
       "test_id": "TEST-F12-021",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "retry click不等於 recovered。",
-      "implementation_location": "tests/contracts/f12/test-f12-021.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-022",
       "function_id": "F12",
       "criterion": "recovered / abandoned / terminated可區分。",
       "test_id": "TEST-F12-AC-022",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "recovered / abandoned / terminated可區分。",
-      "implementation_location": "tests/behavior/f12/test-f12-ac-022.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-023",
       "function_id": "F12",
       "criterion": "recovery event不包含 raw preserved context。",
       "test_id": "TEST-F12-023",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "recovery event不包含 raw preserved context。",
-      "implementation_location": "tests/evidence/f12/test-f12-023.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-024",
       "function_id": "F12",
       "criterion": "F07可計算 recovery success rate。",
       "test_id": "TEST-F12-AC-024",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "F07可計算 recovery success rate。",
-      "implementation_location": "tests/evidence/f12/test-f12-ac-024.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-025",
       "function_id": "F12",
       "criterion": "F12不建立第二套 public recovery backend。",
       "test_id": "TEST-F12-025",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "F12不建立第二套 public recovery backend。",
-      "implementation_location": "tests/behavior/f12/test-f12-025.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-026",
       "function_id": "F12",
       "criterion": "Recovery不 mutation immutable Blueprint。",
       "test_id": "TEST-F12-AC-026",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Recovery不 mutation immutable Blueprint。",
-      "implementation_location": "tests/contracts/f12/test-f12-ac-026.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-027",
       "function_id": "F12",
       "criterion": "Recovery不繞過 F02/F04 trust / compatibility。",
       "test_id": "TEST-F12-027",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Recovery不繞過 F02/F04 trust / compatibility。",
-      "implementation_location": "tests/contracts/f12/test-f12-027.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-028",
       "function_id": "F12",
       "criterion": "telemetry failure本身不阻斷產品 recovery。",
       "test_id": "TEST-F12-AC-028",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "telemetry failure本身不阻斷產品 recovery。",
-      "implementation_location": "tests/evidence/f12/test-f12-ac-028.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-029",
       "function_id": "F12",
       "criterion": "F03-ERR-021在integrity成立時依F12-POL-011保留last-known-good App並回APP_CURRENT。",
       "test_id": "TEST-F12-029",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic recovery fixture for F03-ERR-021 with proven Runtime integrity",
       "expected_observable": "RecoveryState保留approved context、safe_surface為APP_CURRENT且提供budget-aware actions。",
-      "implementation_location": "tests/behavior/f12/test-f12-029.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-030",
       "function_id": "F12",
       "criterion": "integrity/critical precedence高於TIMEOUT convenience recovery；無法證明安全時不得回正常Runtime。",
       "test_id": "TEST-F12-030",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "paired F03-ERR-021 and F03-ERR-018 recovery contexts",
       "expected_observable": "F03-ERR-018由F12-POL-001產生CRITICAL terminal state，沒有unsafe Retry或APP_CURRENT return。",
-      "implementation_location": "tests/behavior/f12/test-f12-030.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F12-AC-031",
       "function_id": "F12",
       "criterion": "同一recovery episode每次Retry都建立新的F03 operation token，且只有safe continuation成立才標RECOVERED。",
       "test_id": "TEST-F12-031",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "recovery episode fixture with failed retry, successful retry and exhausted budget",
       "expected_observable": "episode identity與operation identity分離；retry click不等於RECOVERED。",
-      "implementation_location": "tests/contracts/f12/test-f12-031.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-001",
       "function_id": "F16",
       "criterion": "semantic mismatch不被分類為 technical Runtime error。",
       "test_id": "TEST-F16-001",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "semantic mismatch不被分類為 technical Runtime error。",
-      "implementation_location": "tests/contracts/f16/test-f16-001.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-002",
       "function_id": "F16",
       "criterion": "feature addition / input-schema change可路由 F06而不是硬塞 F16。",
       "test_id": "TEST-F16-002",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "feature addition / input-schema change可路由 F06而不是硬塞 F16。",
-      "implementation_location": "tests/contracts/f16/test-f16-002.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-003",
       "function_id": "F16",
       "criterion": "base Blueprint永不 mutation。",
       "test_id": "TEST-F16-003",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "base Blueprint永不 mutation。",
-      "implementation_location": "tests/contracts/f16/test-f16-003.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-004",
       "function_id": "F16",
       "criterion": "Correction Delta不是 executable JSON patch。",
       "test_id": "TEST-F16-004",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Correction Delta不是 executable JSON patch。",
-      "implementation_location": "tests/behavior/f16/test-f16-004.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-005",
       "function_id": "F16",
       "criterion": "child完整走 F02。",
       "test_id": "TEST-F16-005",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "child完整走 F02。",
-      "implementation_location": "tests/behavior/f16/test-f16-005.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-006",
       "function_id": "F16",
       "criterion": "corrected child建立 CORRECT lineage且無 self-lineage。",
       "test_id": "TEST-F16-006",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "corrected child建立 CORRECT lineage且無 self-lineage。",
-      "implementation_location": "tests/contracts/f16/test-f16-006.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-007",
       "function_id": "F16",
       "criterion": "replay input只來自 user-editable input-bound mutable state。",
       "test_id": "TEST-F16-007",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "replay input只來自 user-editable input-bound mutable state。",
-      "implementation_location": "tests/contracts/f16/test-f16-007.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-008",
       "function_id": "F16",
       "criterion": "DERIVED / internal capability state不自動進 replay inputs。",
       "test_id": "TEST-F16-AC-008",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "DERIVED / internal capability state不自動進 replay inputs。",
-      "implementation_location": "tests/contracts/f16/test-f16-ac-008.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-009",
       "function_id": "F16",
       "criterion": "SENSITIVE值不預設 durable保存。",
       "test_id": "TEST-F16-009",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "SENSITIVE值不預設 durable保存。",
-      "implementation_location": "tests/contracts/f16/test-f16-009.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-010",
       "function_id": "F16",
       "criterion": "DO_NOT_PERSIST值永不 durable保存。",
       "test_id": "TEST-F16-010",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "DO_NOT_PERSIST值永不 durable保存。",
-      "implementation_location": "tests/contracts/f16/test-f16-010.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-011",
       "function_id": "F16",
       "criterion": "protected value仍可在同一 Browser session MEMORY_ONLY replay。",
       "test_id": "TEST-F16-AC-011",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "protected value仍可在同一 Browser session MEMORY_ONLY replay。",
-      "implementation_location": "tests/contracts/f16/test-f16-ac-011.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-012",
       "function_id": "F16",
       "criterion": "replay前 child input keys/types/constraints全部驗證。",
       "test_id": "TEST-F16-012",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "replay前 child input keys/types/constraints全部驗證。",
-      "implementation_location": "tests/contracts/f16/test-f16-012.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-013",
       "function_id": "F16",
       "criterion": "incompatible input不 silent drop/coerce。",
       "test_id": "TEST-F16-AC-013",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "incompatible input不 silent drop/coerce。",
-      "implementation_location": "tests/behavior/f16/test-f16-ac-013.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-014",
       "function_id": "F16",
       "criterion": "exact replay做不到時comparison標 LIMITED，不假裝 apples-to-apples。",
       "test_id": "TEST-F16-014",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "exact replay做不到時comparison標 LIMITED，不假裝 apples-to-apples。",
-      "implementation_location": "tests/contracts/f16/test-f16-014.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-015",
       "function_id": "F16",
       "criterion": "User不需重新輸入可安全 replay的 NORMAL inputs。",
       "test_id": "TEST-F16-AC-015",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "User不需重新輸入可安全 replay的 NORMAL inputs。",
-      "implementation_location": "tests/contracts/f16/test-f16-ac-015.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-016",
       "function_id": "F16",
       "criterion": "correction failure不破壞 current App。",
       "test_id": "TEST-F16-016",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "correction failure不破壞 current App。",
-      "implementation_location": "tests/behavior/f16/test-f16-016.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-017",
       "function_id": "F16",
       "criterion": "Compare可看到 previous/new result與change summary。",
       "test_id": "TEST-F16-017",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Compare可看到 previous/new result與change summary。",
-      "implementation_location": "tests/behavior/f16/test-f16-017.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-018",
       "function_id": "F16",
       "criterion": "Accept New切到 child但不刪 base。",
       "test_id": "TEST-F16-AC-018",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Accept New切到 child但不刪 base。",
-      "implementation_location": "tests/behavior/f16/test-f16-ac-018.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-019",
       "function_id": "F16",
       "criterion": "Keep Previous不刪 child / lineage。",
       "test_id": "TEST-F16-AC-019",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Keep Previous不刪 child / lineage。",
-      "implementation_location": "tests/contracts/f16/test-f16-ac-019.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-020",
       "function_id": "F16",
       "criterion": "Adjust Again建立新 correction lifecycle。",
       "test_id": "TEST-F16-AC-020",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Adjust Again建立新 correction lifecycle。",
-      "implementation_location": "tests/behavior/f16/test-f16-ac-020.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-021",
       "function_id": "F16",
       "criterion": "Revert前重新做 trust / compatibility check。",
       "test_id": "TEST-F16-021",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "Revert前重新做 trust / compatibility check。",
-      "implementation_location": "tests/contracts/f16/test-f16-021.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-022",
       "function_id": "F16",
       "criterion": "correction create retry不 duplicate before snapshot / correction record。",
       "test_id": "TEST-F16-022",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "correction create retry不 duplicate before snapshot / correction record。",
-      "implementation_location": "tests/contracts/f16/test-f16-022.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-023",
       "function_id": "F16",
       "criterion": "comparison retry不 duplicate after snapshot。",
       "test_id": "TEST-F16-AC-023",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "comparison retry不 duplicate after snapshot。",
-      "implementation_location": "tests/contracts/f16/test-f16-ac-023.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-024",
       "function_id": "F16",
       "criterion": "stale decision不能覆蓋新 correction outcome。",
       "test_id": "TEST-F16-024",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "stale decision不能覆蓋新 correction outcome。",
-      "implementation_location": "tests/behavior/f16/test-f16-024.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-025",
       "function_id": "F16",
       "criterion": "before/new/after hashes符合 consistency invariant。",
       "test_id": "TEST-F16-025",
-      "verification_type": "AUTOMATED_E2E",
-      "fixture_strategy": "browser fixture with deterministic Function state and user actions",
       "expected_observable": "before/new/after hashes符合 consistency invariant。",
-      "implementation_location": "tests/e2e/f16/test-f16-025.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "END_TO_END",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-026",
       "function_id": "F16",
       "criterion": "result_snapshot只在 correction / explicit compare flow durable建立，不是每次 Runtime。",
       "test_id": "TEST-F16-AC-026",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "result_snapshot只在 correction / explicit compare flow durable建立，不是每次 Runtime。",
-      "implementation_location": "tests/contracts/f16/test-f16-ac-026.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-027",
       "function_id": "F16",
       "criterion": "semantic mismatch、generated、accepted、rejected、reverted可分開量測。",
       "test_id": "TEST-F16-027",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "semantic mismatch、generated、accepted、rejected、reverted可分開量測。",
-      "implementation_location": "tests/evidence/f16/test-f16-027.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-028",
       "function_id": "F16",
       "criterion": "correction accepted不等於技術 generated。",
       "test_id": "TEST-F16-AC-028",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "correction accepted不等於技術 generated。",
-      "implementation_location": "tests/behavior/f16/test-f16-ac-028.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-029",
       "function_id": "F16",
       "criterion": "telemetry不含 raw input/result/feedback。",
       "test_id": "TEST-F16-029",
-      "verification_type": "RUNTIME_EVIDENCE",
-      "fixture_strategy": "event fixture + registry-valid telemetry stream + aggregation assertion",
       "expected_observable": "telemetry不含 raw input/result/feedback。",
-      "implementation_location": "tests/evidence/f16/test-f16-029.md",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "RUNTIME_EVIDENCE",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-030",
       "function_id": "F16",
       "criterion": "F07可把 correction outcome連回 base/new Blueprint。",
       "test_id": "TEST-F16-AC-030",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "F07可把 correction outcome連回 base/new Blueprint。",
-      "implementation_location": "tests/behavior/f16/test-f16-ac-030.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-031",
       "function_id": "F16",
       "criterion": "Client不能用 arbitrary Blueprint body作 correction child。",
       "test_id": "TEST-F16-AC-031",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "Client不能用 arbitrary Blueprint body作 correction child。",
-      "implementation_location": "tests/behavior/f16/test-f16-ac-031.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-032",
       "function_id": "F16",
       "criterion": "replay不能繞過 F03 state/type constraints。",
       "test_id": "TEST-F16-032",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "replay不能繞過 F03 state/type constraints。",
-      "implementation_location": "tests/contracts/f16/test-f16-032.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-033",
       "function_id": "F16",
       "criterion": "unsafe/revoked previous Blueprint不可 Revert執行。",
       "test_id": "TEST-F16-AC-033",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "typed contract fixture covering valid + invalid boundary input",
       "expected_observable": "unsafe/revoked previous Blueprint不可 Revert執行。",
-      "implementation_location": "tests/contracts/f16/test-f16-ac-033.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F16-AC-034",
       "function_id": "F16",
       "criterion": "correction technical failure進 F12；semantic mismatch本身不進 F12 error。",
       "test_id": "TEST-F16-AC-034",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "deterministic Function fixture exercising criterion preconditions",
       "expected_observable": "correction technical failure進 F12；semantic mismatch本身不進 F12 error。",
-      "implementation_location": "tests/behavior/f16/test-f16-ac-034.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-025",
       "function_id": "F01",
       "criterion": "CREATE v1 使用固定六 checkpoint plan；同一 progress operation 的 completed set 必須 monotonic。",
       "test_id": "TEST-F01-PROG-001",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "CREATE fast-path + clarification fixtures asserting fixed plan ids and monotonic completed set",
       "expected_observable": "六 checkpoint plan固定，completed checkpoints只增不減。",
-      "implementation_location": "tests/contracts/f01/test-f01-prog-001.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-026",
       "function_id": "F01",
       "criterion": "Clarification / Assumption waiting 不改 denominator、不推進 progress；material Intent edit開始新的 logical progress operation。",
       "test_id": "TEST-F01-PROG-002",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "multi-round clarification + material intent edit fixture",
       "expected_observable": "等待 User 時 progress凍結；material edit後新 operation不沿用舊 completed count。",
-      "implementation_location": "tests/behavior/f01/test-f01-prog-002.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-027",
       "function_id": "F01",
       "criterion": "CREATE API success response提供可驗證 progress snapshot；不得依 elapsed time補進度。",
       "test_id": "TEST-F01-PROG-003",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "API response fixtures across /intents, /answers, /compile",
       "expected_observable": "progress snapshot只包含 plan/completed truth；等待期間無 time-based inflation。",
-      "implementation_location": "tests/contracts/f01/test-f01-prog-003.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-028",
       "function_id": "F01",
       "criterion": "network retry不重複 checkpoint；User-triggered retry建立新 progress operation並只重建仍有效 truth。",
       "test_id": "TEST-F01-PROG-004",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "idempotent network retry + recovery retry fixtures",
       "expected_observable": "same-key retry無 duplicate completion；new retry不直接複製舊百分比。",
-      "implementation_location": "tests/behavior/f01/test-f01-prog-004.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F01-AC-029",
       "function_id": "F01",
       "criterion": "validation-driven recompose不回退 completed checkpoint；只有 F02 PASS 才完成 BLUEPRINT_VALIDATED。",
       "test_id": "TEST-F01-PROG-005",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "F02 reject -> bounded recompose -> pass/fail fixtures",
       "expected_observable": "progress monotonic；BLUEPRINT_VALIDATED只在最終 F02 PASS。",
-      "implementation_location": "tests/behavior/f01/test-f01-prog-005.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-033",
       "function_id": "F00",
       "criterion": "S02 composite Create progress只由 F01六 checkpoint + F03 APP_READY truth組成；F00不得自行完成 source-owned checkpoint。",
       "test_id": "TEST-F00-PROG-001",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "owner-tagged F01/F03 progress projection fixture",
       "expected_observable": "overall progress只隨 source owner truth推進。",
-      "implementation_location": "tests/behavior/f00/test-f00-prog-001.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-034",
       "function_id": "F00",
       "criterion": "Clarification / Assumption waiting凍結 Create progress並停止 processing animation。",
       "test_id": "TEST-F00-PROG-002",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "S02 clarification and assumption waiting fixtures",
       "expected_observable": "等待 User期間 percent不前進、processing animation停止。",
-      "implementation_location": "tests/behavior/f00/test-f00-prog-002.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-035",
       "function_id": "F00",
       "criterion": "F01 VALIDATED最多呈現 composite 6/7（85%）；只有 F03 READY才可呈現100%。",
       "test_id": "TEST-F00-PROG-003",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "validated-not-hydrated + F03 ready fixtures",
       "expected_observable": "VALIDATED時不顯示100%；F03 READY後才100%。",
-      "implementation_location": "tests/behavior/f00/test-f00-prog-003.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-036",
       "function_id": "F00",
       "criterion": "Normal S03 必須讓 User 明確選擇「修改這個 App → S05A/REFINE」或「改成我的版本 → S05B/REMIX」；UI不得依 ownership、Shared來源或其他 metadata替 User猜 intent。",
       "test_id": "TEST-F00-036",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "Normal S03 desktop + mobile chooser fixtures across own/shared source contexts",
       "expected_observable": "兩條 consumer action明確且 routing正確；source/ownership變化不會自動選 relation。",
-      "implementation_location": "tests/behavior/f00/test-f00-036.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-037",
       "function_id": "F00",
       "criterion": "從既有 S05「查看原版」進 S03 Inspection Mode時，必須保留同一 S05 session/path/draft/preview context，依 origin提供返回修改畫面或返回新版預覽，且不得建立第二個 S05 session。",
       "test_id": "TEST-F00-037",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "S05 Composer-origin + Preview-origin returnable inspection fixtures",
       "expected_observable": "Inspection可操作 source App；return回原 session/context；無 nested S05。",
-      "implementation_location": "tests/behavior/f00/test-f00-037.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F00-AC-038",
       "function_id": "F00",
       "criterion": "Phase 1 Inspiration Capsule 的 Try/Fork 必須進 editable prefill → F01 Create；不得套用 Shared App use-as-is restore semantics。",
       "test_id": "TEST-F00-038",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "Inspiration Capsule Try/Fork fixture",
       "expected_observable": "Capsule開啟 editable prefill並進 F01 Create，沒有直接 hydrate existing Blueprint。",
-      "implementation_location": "tests/behavior/f00/test-f00-038.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F05-AC-022",
       "function_id": "F05",
       "criterion": "Shared App Restore READY後可直接 use-as-is；單純 open/use不得建立 REMIX lineage，只有 User明確選「改成我的版本」才進 F06 Remix。",
       "test_id": "TEST-F05-022",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "share restore READY + normal use + later explicit remix fixture",
       "expected_observable": "restore建立 fresh Runtime Instance並可直接使用；open/use無 remix lineage；explicit remix才建立。",
-      "implementation_location": "tests/behavior/f05/test-f05-022.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-024",
       "function_id": "F06",
       "criterion": "REFINE / REMIX intent必須由 User明確選擇；ownership、Shared來源或目前頁面不得自動決定 relation_type。",
       "test_id": "TEST-F06-024",
-      "verification_type": "AUTOMATED_CONTRACT",
-      "fixture_strategy": "same source Blueprint exercised through explicit Refine and Remix selections",
       "expected_observable": "relation_type只由 explicit selected intent決定，source metadata不覆寫。",
-      "implementation_location": "tests/contracts/f06/test-f06-024.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "CONTRACT",
+      "required_for_build_freeze": true
     },
     {
       "acceptance_id": "F06-AC-025",
       "function_id": "F06",
       "criterion": "S05「查看原版」的 returnable inspection不得建立第二個 F06/S05 change session；返回後必須續用原 session/draft/Preview context。",
       "test_id": "TEST-F06-025",
-      "verification_type": "AUTOMATED_BEHAVIOR",
-      "fixture_strategy": "active S05A/S05B session → source inspection → return fixtures",
       "expected_observable": "session id unchanged；draft/preview preserved；no duplicate lineage/change operation created。",
-      "implementation_location": "tests/behavior/f06/test-f06-025.spec.ts",
-      "contract_status": "READY_FOR_IMPLEMENTATION",
-      "required_for_spec": true
+      "contract_status": "ACTIVE",
+      "proof_scope": "BEHAVIOR",
+      "required_for_build_freeze": true
     }
   ]
 }

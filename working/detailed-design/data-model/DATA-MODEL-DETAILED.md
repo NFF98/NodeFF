@@ -1,12 +1,14 @@
 # appf2 Data Model — Detailed Design
 
-> Structure migration preservation file. Content below is preserved from the former phase files. Dedup / semantic cleanup is intentionally deferred.
+> 狀態：Working Current Truth — consolidated multi-phase detailed owner。
+>
+> Phase 1 section = BUILD_FREEZE_READY candidate；Phase 2 / 3 / 4+ sections = DEFERRED baseline。Future sections 同檔存在不代表 implementation activation。
 
 # appf2 Data Model — Phase 1 Detailed Contract
 
 > Shared invariants / module index：`../../common-core/DATA-MODEL.md`
 >
-> Status：BUILD_FREEZE_READY / Phase 1 Current Truth。本文是 Phase 1 detailed data contract；Phase 2+ additions 不得偷偷加入本檔。
+> Status：BUILD_FREEZE_READY / STEP2_REVIEWED / Phase 1 Current Truth。Phase 2+ additions 只能存在於本檔明確標示的 deferred sections，不得污染 Phase 1 contract或自動進 Build Freeze。
 
 # 3. Phase 1 Data Zones
 
@@ -790,26 +792,26 @@ Function 可以增加自己的欄位 / table proposal，但若跨 Function 共�
 
 ---
 
-# 17. Cursor Implementation Boundary
+# 17. Build Freeze Handoff Constraints
 
-當本文升格為 Spec 後，Cursor 建 DB / migration 時必須：
+當 Phase 1 Data contract 被 Human-approved Build Freeze 納入時，frozen implementation truth 必須保留：
 
-1. 依 canonical table / relation 實作；
-2. 不把 Browser Instance 變成 server-write-every-click；
-3. 不建立 Dedicated Vector DB；
-4. 不把 Capability Registry 做成 Phase 1 dynamic DB service；
-5. 不修改 Blueprint immutable model；
-6. 不使用 cascade delete 破壞 lineage / evidence；
-7. 不把 arbitrary JSON 當 replacement for relational identity；
-8. migration 必須保留 rollback / forward-fix strategy；
-9. schema change 必須能 trace 回 DATA / Function requirement；
-10. 若 Function spec 與本文衝突，停止並回 Design Review。
+1. canonical table / relation semantics；
+2. Browser Instance 不變成 server-write-every-click；
+3. Phase 1 不引入 Dedicated Vector DB；
+4. Capability Registry 不變成 Phase 1 dynamic DB service；
+5. Blueprint immutable model 不被修改；
+6. lineage / evidence 不被 destructive cascade delete破壞；
+7. relational identity 不被 arbitrary JSON 取代；
+8. schema change 必須保留 migration / rollback or forward-fix safety；
+9. schema change 可 trace 回 DATA / Function requirement；
+10. 若 frozen Function truth 與 shared data invariant 衝突，必須回 appf2-design Review / Rebaseline。
 
----
+Migration tool、SQL layout、test placement與 execution procedure由 appf2-build決定。
 
 # 18. Canonical Data Acceptance
 
-以下是 Shared Data Model 的 Working Acceptance；升 Spec 時需轉成 stable AC IDs 與 executable DB / integration tests。
+以下是 Shared Data Model 的 observable Product truth；stable mapping由 `working/detailed-design/registries/acceptance-test-registry.json` 與相關 Fxx Acceptance承接，test implementation由 appf2-build擁有。
 
 1. 同一 validated Blueprint content 只能有一份 canonical durable body。
 2. Blueprint body 不可原地 mutation。
@@ -824,26 +826,25 @@ Function 可以增加自己的欄位 / table proposal，但若跨 Function 共�
 11. 未來 Vector index 不取代 PostgreSQL durable truth。
 12. Account / Realtime / Commerce 擴張不得要求改寫 immutable Blueprint core。
 
----
+# 19. Function-owned Detail / Deferred Decisions
 
-# 19. Open Function-level Decisions
-
-以下不是 Data Model blocker，由對應 Function 決定後回填：
+以下 detail 由 Function canonical owner 管理，**不是 Phase 1 shared Data blocker，也不得在本文複製第二份 schema truth**：
 
 - F01：Structured Intent / Resolved Intent exact JSON schema。
-- F02：canonical JSON serialization、content hash algorithm/version、trust compatibility details。
+- F02：canonical JSON serialization、content hash algorithm/version、trust compatibility。
 - F03：Instance / Result serialization subset。
-- F05：share expiry/revocation self-service UX after F08 ownership。
-- F07：anonymous ID issuance / event batching implementation details。
-- F16：Correction Delta implementation schema details。
+- F07：anonymous identity issuance、event batching與 evidence ingestion detail。
+- F16：Correction Delta / snapshot semantics。
 
-已閉合的 shared decisions：
+Future deferred：
+- F05 authenticated share expiry / revocation self-service UX 依 F08 ownership activation再設計。
 
-- Intent durable lifecycle + intent_version：本文 §6.2。
+Shared decisions已閉合：
+- Intent durable lifecycle + `intent_version`：本文 §6.2。
 - Mutation idempotency persistence：本文 §6.11，PostgreSQL，24h。
 - raw_intent / result_snapshot / Browser draft retention：本文 §13 + F07 privacy matrix。
 
-這些 decision 不應由 Cursor 自行發明。
+> Function-owned detail若改變跨 Function durable invariant，仍必須回本文 Review；不得由 appf2-build自行發明。
 
 # Conclusion
 

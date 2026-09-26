@@ -1,7 +1,7 @@
 # appf2 Execution Admission Contract
 
-> 狀態：BUILD_FREEZE_READY / Phase 1 — Working Current Truth。
-> Legacy Formal Spec reference：RETIRED / NO-USE；Build implementation snapshot 改由 Human-approved Build Freeze → appf2-build BS-*。
+> 狀態：BUILD_FREEZE_READY / STEP2_REVIEWED / Phase 1 — Working Current Truth。
+> Build Freeze / implementation boundary：`working/common-core/DESIGN-TO-DELIVERY.md`。
 > Canonical Role：把 immutable Blueprint content delivery 與 mutable current trust / compatibility decision分開，確保 CDN舊body不能繞過 revoke / incompatibility。
 
 # 1. Problem

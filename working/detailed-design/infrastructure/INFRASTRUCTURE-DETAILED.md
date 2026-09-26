@@ -1,10 +1,16 @@
 # appf2 Infrastructure — Detailed Design
 
-> Structure migration preservation file. Content below is preserved from the former phase files. Dedup / semantic cleanup is intentionally deferred.
+> 狀態：Working Current Truth — consolidated multi-phase detailed owner。
+>
+> Phase 1 section = BUILD_FREEZE_READY candidate；Phase 2 / 3 / 4+ sections = DEFERRED baseline。Future infrastructure content 同檔存在不代表 provider / scaling activation。
 
 # appf2 Infrastructure — Phase 1
 
+> Status：BUILD_FREEZE_READY / STEP2_REVIEWED。
+>
 > Shared infrastructure truth：`../../common-core/INFRA-ARCHITECTURE.md`
+>
+> Phase 1 scope 只包含本 section 明確啟用的 provider / plane / storage baseline；後續 Phase section 必須經 Evidence + Human approval + Build Freeze inclusion。
 
 # 4. 為什麼是 Cloudflare Edge + Supabase Postgres
 

@@ -1,6 +1,6 @@
 # S03 — App / Runtime
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → appf2-build locked BS-*。
+> Governance：本檔為 UI/UX Working Current Truth；Build Freeze / delivery lifecycle 以 `working/common-core/DESIGN-TO-DELIVERY.md` 為準。
 
 > Screen ID：S03
 >
@@ -8,11 +8,11 @@
 >
 > Phase：Phase 1
 >
-> Screen-level canonical owner：`working/UI-UX/screens/S03-APP-RUNTIME.md`
+> Screen-level canonical owner：`working/detailed-design/UI-UX/screens/S03-APP-RUNTIME.md`
 >
 > Function behavior sources：F00 Experience Shell + F03 Runtime Execution。
 >
-> 本文件的 ④A Low-fi direction與 Runtime Loading / Timeout Function Delta已完成 User Review；仍不是 Formal Spec或 Cursor implementation authority。
+> 本文件的 ④A Low-fi direction與 Runtime Loading / Timeout Function Delta已完成 User Review；implementation input 仍需 Human-approved Build Freeze。
 
 # 1. User Outcome
 
@@ -182,7 +182,7 @@ Share 不離開 S03 主 context。
 
 Share pending / success / failure 都保留 App。
 
-O01 詳細 presentation 見 `working/UI-UX/overlays/O01-SHARE.md`。
+O01 詳細 presentation 見 `working/detailed-design/UI-UX/overlays/O01-SHARE.md`。
 
 # 10. Remix / Refine Entry — S05A / S05B
 
@@ -266,7 +266,7 @@ User 已在 O05 Low-fi 明確要求：
 
 > **S03 normal local Runtime interaction 也要顯示 global loading。**
 
-Working F00/F03/F12已閉合此 Material Delta；既有 Legacy Formal Spec 已 RETIRED / NO-USE，待 pre-Build Freeze reconciliation一次同步。
+Working F00/F03/F12已閉合並完成 STEP2 reconciliation；Build Freeze直接讀整合後 canonical Working truth。
 
 Low-fi presentation contract：
 - 每次被 F03 accepted / admitted 的 Runtime interaction都建立 operation token並進入 logical global processing state；不是等到 commit後才開始。
@@ -323,7 +323,7 @@ User 已確認：
 >
 > Implementation precedence：
 > 1. 本節 Step 1–4；
-> 2. `working/UI-UX/DESIGN-SYSTEM.md`；
+> 2. `working/detailed-design/UI-UX/DESIGN-SYSTEM.md`；
 > 3. approved visual reference；
 > 4. 其他示意圖。
 >
@@ -717,7 +717,7 @@ Canonical replacement reference：
 
 Canonical path：
 
-`working/UI-UX/references/S03-App-Runtime-Highfi-v2.png`
+`working/detailed-design/UI-UX/references/S03-App-Runtime-Highfi-v2.png`
 
 Repository PNG blob SHA：
 
@@ -744,7 +744,7 @@ Reference boundary：
 - 任何 Structure / Geometry / Visual Rule / image reference改動，必須 reopen對應 Step。
 - 若後續需要 component anatomy / overlay stacking / operation-state mapping等額外細節，可新增 `Step 4.5 — <Layer Name> Lock`。
 - Step 4.5不得偷改 Step 1–4；涉及 Function behavior必須回相關 Fxx Working Delta Review。
-- Legacy Formal Spec 已 RETIRED / NO-USE；待 Build Freeze reconciliation。
+- STEP2 content reconciliation已完成；仍待 Final Audit + Human-approved Build Freeze。
 
 ### Final Cross-Screen High-fi Review — CLOSED / VERIFIED
 

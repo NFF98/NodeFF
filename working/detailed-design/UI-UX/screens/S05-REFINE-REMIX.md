@@ -1,6 +1,6 @@
 # S05 — Refine / Remix Workspace
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → appf2-build locked BS-*。
+> Governance：本檔為 UI/UX Working Current Truth；Build Freeze / delivery lifecycle 以 `working/common-core/DESIGN-TO-DELIVERY.md` 為準。
 
 > Screen ID：S05
 >
@@ -8,11 +8,11 @@
 >
 > Phase：Phase 1
 >
-> Screen-level canonical owner：`working/UI-UX/screens/S05-REFINE-REMIX.md`
+> Screen-level canonical owner：`working/detailed-design/UI-UX/screens/S05-REFINE-REMIX.md`
 >
 > Function behavior sources：F06 Remix / Refine + F00 Experience Shell + F01 Intent Compilation + F03 Runtime。
 >
-> 本文件的④A Low-fi與④B High-fi Step 1–4已完成 User Review；Legacy Formal Spec 已 RETIRED / NO-USE，Cursor implementation仍 HOLD。
+> 本文件的④A Low-fi與④B High-fi Step 1–4已完成 User Review；implementation input 仍需 Human-approved Build Freeze。
 
 # 1. User Outcome
 
@@ -20,13 +20,11 @@ S05 的核心任務：
 
 > **User 不用從頭重做，就能以目前 App 為基礎描述想改什麼；原版始終安全，新版先 Preview，再由 User 決定採用、保留舊版或繼續調整。**
 
-# 2. Refine vs Remix — Low-fi Historical Direction
+# 2. Refine vs Remix — Current Consumer Paths
 
-> **④B Step 1 已 supersede 此 Low-fi 合併方向。Current Truth：S05A「修改這個 App」與 S05B「改成我的版本」必須拆成兩條明確 consumer path；技術元件可以共用，但 UI 不得再以模糊的 Refine / Remix 合併入口呈現。**
+> **Current Truth：S05A「修改這個 App」與 S05B「改成我的版本」是兩條明確 consumer path；技術元件可共用，但 UI 不得用模糊 Refine / Remix 合併入口替 User 猜 intent。**
 
-Low-fi 原先建議共用同一個 S05 Workspace；此點已被 ④B Step 1 更新。
-
-Difference 同時用 **relation label + version visual marker** 說清楚：
+Difference 用 **relation label + version visual marker** 說清楚：
 
 - **Refine**（internal relation）→ Consumer UI：**修改這個 App**；延續目前 App，做下一版。
 - **Remix**（internal relation）→ Consumer UI：**改成我的版本**；以目前 App 為底稿，做衍生版本。
@@ -1271,7 +1269,7 @@ Cursor不得：
 >
 > Canonical path：
 >
-> `working/UI-UX/references/S05-Highfi-v1.png`
+> `working/detailed-design/UI-UX/references/S05-Highfi-v1.png`
 >
 > Repository PNG blob SHA：
 >
@@ -1305,10 +1303,10 @@ Cursor不得：
 S05 ④B Step 1–4 已完成 User Review並鎖定。
 
 - S05 High-fi：**CLOSED / WORKING BASELINE**。
-- Canonical PNG：`working/UI-UX/references/S05-Highfi-v1.png`。
+- Canonical PNG：`working/detailed-design/UI-UX/references/S05-Highfi-v1.png`。
 - Structure / Geometry / Visual Rules / Visual Reference 的 material change 必須 reopen 對應 Step。
 - Cross-screen follow-up已於 2026-09-24決定：Normal S03明確承接 S05A `修改這個 App`與 S05B `改成我的版本`；Mobile `修改`先開 explicit chooser。
-- Legacy Formal Spec 已 RETIRED / NO-USE，待 pre-Build Freeze reconciliation。
+- STEP2 content reconciliation已完成；仍待 Final Audit + Human-approved Build Freeze。
 
 ### Final Cross-Screen High-fi Review — CLOSED / VERIFIED
 

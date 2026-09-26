@@ -1,6 +1,6 @@
 # Phase 1 Screen Inventory
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → appf2-build locked BS-*。
+> Governance：本檔為 UI/UX Working Current Truth；Build Freeze / delivery lifecycle 以 `working/common-core/DESIGN-TO-DELIVERY.md` 為準。
 
 > 狀態：WORKING UI/UX — S01–S06 + O01–O05 ④B CLOSED / FG-01–FG-07 CLOSED / FINAL CROSS-SCREEN HIGH-FI REVIEW CLOSED / VERIFIED
 >
@@ -8,7 +8,7 @@
 >
 > **Canonical Boundary：**
 > - 本目錄擁有 Screen composition、visual hierarchy、responsive behavior、presentation mapping、Low-fi / High-fi UI decision。
-> - `working/functions/Fxx-*.md` 仍擁有 Function behavior、state semantics、API、Data、Runtime、Error、Security、Evidence 與 Acceptance。
+> - `working/detailed-design/functions/Fxx-*.md` 仍擁有 Function behavior、state semantics、API、Data、Runtime、Error、Security、Evidence 與 Acceptance。
 > - Screen 文件不得自行發明新的 Function behavior；若畫面設計需要改產品行為，必須回到相關 Fxx Working Design Review。
 > - 目前文件仍屬 Working，不是 Cursor implementation authority。
 
@@ -142,7 +142,7 @@ Step 1 — Structure Lock
 
 必須：
 1. User明確批准 final Desktop / Mobile visual；
-2. Approved PNG存入 `working/UI-UX/references/`；
+2. Approved PNG存入 `working/detailed-design/UI-UX/references/`；
 3. Screen / Overlay文件 embed canonical image path；
 4. 明文記錄 image boundary：圖片不覆蓋文字 contract / Fxx Function truth；
 5. 更新 Screen Inventory status；
@@ -338,7 +338,7 @@ Current Build Freeze destination：`NFF98/appf2-build/build-spec/baselines/BS-*/
 
 User 已確認目前策略：
 
-- 現階段 **不更新 Formal Spec**。
+- 現階段不建立 appf2-build locked baseline；必須先完成 Final Audit與 Human approval。
 - 先完成：
   1. F00/F03/F12 Runtime Loading + Timeout Working Function Delta Review（**完成：2026-09-22**）；
   2. Cross-Screen Consistency Review（**完成：2026-09-22**）；
@@ -357,7 +357,7 @@ Final verification：
 - S03 v2 canonical PNG：path / SHA / non-zero size驗證完成。
 - 其餘 10 張 canonical PNG：path / SHA / non-zero size驗證完成，未重畫。
 - F00 / F05 / F06：FG-02 / FG-03 Function truth已同步。
-- working/registries/acceptance-test-registry.json：F00-AC-036/037/038、F05-AC-022、F06-AC-025均已有 automated test mapping，狀態 READY_FOR_IMPLEMENTATION。
+- working/detailed-design/registries/acceptance-test-registry.json：F00-AC-036/037/038、F05-AC-022、F06-AC-025均已有 automated test mapping，狀態 ACTIVE。
 - Final re-audit：**0 個新的 material finding**。
 
 下一個 Gate：
@@ -368,22 +368,22 @@ Final verification：
 - Build Freeze 尚未開始，直到 User明確開始下一個 Gate。
 - Cursor implementation維持 HOLD。
 - Working仍是唯一 Current Truth。
-- 不因 Final UI Gate關閉而自動 promotion Formal Spec。
+- Final UI Gate關閉不等於自動 Build Freeze；仍需 Final Audit + Human approval。
 
 ## 9.1 Approved Visual References — Current
 
 ~~~text
-S01  working/UI-UX/references/S01-Discover-Start-Highfi-v1.png
-S02  working/UI-UX/references/S02-Create-Workspace-Highfi-v1.png
-S03  working/UI-UX/references/S03-App-Runtime-Highfi-v2.png  # canonical; SHA 47d281d5d184b47855a5c406e26c11aa2801a238
-S04  working/UI-UX/references/S04-Highfi-v1.png
-S05  working/UI-UX/references/S05-Highfi-v1.png
-S06  working/UI-UX/references/S06-Hi-FI-Debug-v1.png
-O01  working/UI-UX/references/O01-Hi-FI-v1.png
-O02  working/UI-UX/references/O02-Hi-FI-v1.png
-O03  working/UI-UX/references/O03-Hi-FI-v1.png
-O04  working/UI-UX/references/O04-Hi-FI-v1.png
-O05  working/UI-UX/references/O05-Hi-FI-v1.png
+S01  working/detailed-design/UI-UX/references/S01-Discover-Start-Highfi-v1.png
+S02  working/detailed-design/UI-UX/references/S02-Create-Workspace-Highfi-v1.png
+S03  working/detailed-design/UI-UX/references/S03-App-Runtime-Highfi-v2.png  # canonical; SHA 47d281d5d184b47855a5c406e26c11aa2801a238
+S04  working/detailed-design/UI-UX/references/S04-Highfi-v1.png
+S05  working/detailed-design/UI-UX/references/S05-Highfi-v1.png
+S06  working/detailed-design/UI-UX/references/S06-Hi-FI-Debug-v1.png
+O01  working/detailed-design/UI-UX/references/O01-Hi-FI-v1.png
+O02  working/detailed-design/UI-UX/references/O02-Hi-FI-v1.png
+O03  working/detailed-design/UI-UX/references/O03-Hi-FI-v1.png
+O04  working/detailed-design/UI-UX/references/O04-Hi-FI-v1.png
+O05  working/detailed-design/UI-UX/references/O05-Hi-FI-v1.png
 ~~~
 
 > Reference images是 implementation reference，不覆蓋 Step 1–3 textual contract / Design System / Fxx Function truth。

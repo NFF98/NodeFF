@@ -1,7 +1,7 @@
 # appf2 Canonical Data Model
 
 > 狀態：Working Current Truth — Shared Data Model Index / Invariants。本文只保留跨 Phase 不應重複的資料原則；Phase-specific schema / tables / migration additions 拆到 `working/detailed-design/data-model/`。
-> Legacy Formal Spec reference：RETIRED / NO-USE；Build implementation snapshot 改由 Human-approved Build Freeze → appf2-build BS-*。
+> Build Freeze / delivery governance：`working/common-core/DESIGN-TO-DELIVERY.md`。
 >
 > Delivery / Traceability 規則以 `working/common-core/DESIGN-TO-DELIVERY.md` 為準；Infrastructure boundary 以 `working/common-core/INFRA-ARCHITECTURE.md` 為準。
 
@@ -106,18 +106,23 @@ Application 透過 appf2-owned repository / service interface 使用資料層。
 
 ---
 
-# 3. Phase Data Model Modules
+# 3. Detailed Data Model Owner / Phase Applicability
 
-Shared invariants 留在本文件；每個 Phase 的詳細 schema 只存在一個 phase module，不把 Phase 2／3／4 additions 一直塞回同一份長文件。
+Shared invariants 只在本文定義一次；所有 detailed schema 由單一 canonical owner 管理：
 
-- Phase 1 detailed model：`working/detailed-design/data-model/PHASE-1.md`
-- Phase 2 extensions：`working/detailed-design/data-model/PHASE-2.md`
-- Phase 3 extensions：`working/detailed-design/data-model/PHASE-3.md`
-- Phase 4+ extensions：`working/detailed-design/data-model/PHASE-4-PLUS.md`
+~~~text
+working/detailed-design/data-model/DATA-MODEL-DETAILED.md
+~~~
 
-Current implementation owner：
+該檔內以 section 區分：
+- Phase 1 Detailed Contract：目前 Build Freeze candidate。
+- Phase 2 Extensions：deferred。
+- Phase 3 Extensions：deferred。
+- Phase 4+ Extensions：deferred。
 
-> **Phase 1 Build Freeze 讀 shared invariants + PHASE-1.md；未被該 Phase 啟用的 future module 不進 implementation scope。**
+Phase 是 applicability / activation metadata，不再形成平行 phase files。
+
+> Build Freeze 只包含該次 Human-approved Phase scope；同一 detailed file 中的 future sections 不會因「同檔存在」自動進 implementation scope。
 
 # 4. Cross-Phase Future Execution Rule
 

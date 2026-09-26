@@ -1,7 +1,7 @@
 # F05 — Share / Restore
 
-> 狀態：BUILD_FREEZE_READY
-> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved appf2-build locked BS-*。
+> 狀態：BUILD_FREEZE_READY / STEP2_REVIEWED
+> Governance：Current Truth = this Working file；Build Freeze / implementation boundary 以 `working/common-core/DESIGN-TO-DELIVERY.md` 為準。
 >
 > Canonical Role：Phase 1 Share Creation、Public Share Resolution、Blueprint Restore、Recipient Entry UX 與 Share Reliability 的 Working Current Truth。
 >
@@ -950,7 +950,7 @@ Future F08：
 
 # 36. Open Decisions
 
-目前沒有阻擋 Phase 1 Core Spec Gate 的 open decision。
+目前沒有阻擋 Phase 1 Build Freeze Gate 的 open decision。
 
 已閉合：
 

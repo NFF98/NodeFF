@@ -1,6 +1,6 @@
 # O03 — Recovery Overlay
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → appf2-build locked BS-*。
+> Governance：本檔為 UI/UX Working Current Truth；Build Freeze / delivery lifecycle 以 `working/common-core/DESIGN-TO-DELIVERY.md` 為準。
 
 > Overlay ID：O03
 >
@@ -8,11 +8,11 @@
 >
 > Phase：Phase 1
 >
-> Screen-level canonical owner：`working/UI-UX/overlays/O03-RECOVERY.md`
+> Screen-level canonical owner：`working/detailed-design/UI-UX/overlays/O03-RECOVERY.md`
 >
 > Function behavior source：F12 Humanized Recovery + F00 Experience Shell。
 >
-> ④A Low-fi與④B High-fi Step 1–4已完成 User Review並鎖定；Formal Spec與 Cursor implementation仍維持 HOLD。
+> ④A Low-fi與④B High-fi Step 1–4已完成 User Review並鎖定；implementation input 仍需 Human-approved Build Freeze。
 
 # 1. User Outcome
 
@@ -477,7 +477,7 @@ Preferred actions：
 
 不得顯示 `再試一次`，除非底層實際 failure是 transient dependency而不是 capability unsupported。
 
-### 13. Security / Integrity
+### 13. Security / Integrity — Behavior
 
 Security / integrity問題固定：
 - fail closed。
@@ -794,7 +794,7 @@ Rules：
 
 ### 2. Shared Semantic Palette
 
-O03 Step 3正式建立 cross-screen shared semantic palette；canonical token SSOT同步到 `working/UI-UX/DESIGN-SYSTEM.md`。
+O03 Step 3正式建立 cross-screen shared semantic palette；canonical token SSOT同步到 `working/detailed-design/UI-UX/DESIGN-SYSTEM.md`。
 
 ~~~text
 INFO
@@ -962,7 +962,7 @@ Rules：
 
 Critical UI必須冷靜、明確、不可誤操作。
 
-### 13. Security / Integrity
+### 13. Security / Integrity — Visual / Interaction Constraint
 
 Security / Integrity特別禁止：
 - `忽略並繼續`。
@@ -1065,7 +1065,7 @@ Severity永遠必須搭配文字與結構，不得只靠 icon或顏色。
 >
 > Canonical path：
 >
-> `working/UI-UX/references/O03-Hi-FI-v1.png`
+> `working/detailed-design/UI-UX/references/O03-Hi-FI-v1.png`
 >
 > Repository PNG blob SHA：
 >

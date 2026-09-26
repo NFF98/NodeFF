@@ -1,7 +1,7 @@
 # F00 — Experience Shell / 靈感精靈
 
-> 狀態：BUILD_FREEZE_READY + WORKING_DELTA_CLOSED / BUILD_FREEZE_RECONCILIATION_PENDING
-> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved appf2-build locked BS-*。
+> 狀態：BUILD_FREEZE_READY / STEP2_REVIEWED
+> Governance：Current Truth = this Working file；Build Freeze / implementation boundary 以 `working/common-core/DESIGN-TO-DELIVERY.md` 為準。
 >
 > Canonical Role：Phase 1 Consumer Experience Shell、Creation UX、Clarification / Assumption UX、Runtime Frame、Result Feedback Entry、Share / Remix / Recovery Entry 的 Working Current Truth。
 >
@@ -1065,7 +1065,7 @@ Core Flow：
 
 Runtime / Product Loop：
 
-- F00-AC-008 normal Runtime interaction不觸發 global shell loading。**Working disposition：SUPERSEDED；保留原 stable ID / 原語意，待 pre-Build Freeze reconciliation標記 deprecated，不重用或改寫。**
+- F00-AC-008 normal Runtime interaction不觸發 global shell loading。**Working disposition：SUPERSEDED / DEPRECATED_FOR_BUILD_FREEZE；保留 stable ID / 原語意，由 F00-AC-029–032取代，不重用或改寫。**
 - F00-AC-009 APP surface可到 Share / Remix / Correction入口。
 - F00-AC-010 correction failure不破壞 current App。
 - F00-AC-011 Compare可 Accept New / Keep Previous / Adjust Again。
@@ -1172,7 +1172,7 @@ Prompt → Clarify only if needed → Build → Use
 
 # 41. Open Decisions
 
-目前沒有阻擋 Phase 1 Core Spec Gate 的 open decision。
+目前沒有阻擋 Phase 1 Build Freeze Gate 的 open decision。
 
 已閉合：
 
@@ -1211,9 +1211,9 @@ DISCOVER
 
 ## Closed Working Delta — Runtime Global Loading + Timeout
 
-> 狀態：WORKING_DELTA_CLOSED（2026-09-22）/ BUILD_FREEZE_RECONCILIATION_PENDING
+> 狀態：WORKING_DELTA_CLOSED（2026-09-22）/ STEP2_RECONCILED
 >
-> Legacy Formal Spec：**RETIRED / NO-USE**。既有 Formal F00-UX-022 / F00-AC-008仍保持原文；待 pre-Build Freeze reconciliation一次同步。
+> STEP2 reconciliation：Runtime loading / timeout delta 已整合回 canonical sections；F00-AC-008保留 stable ID但已 superseded，不再進 Build Freeze required set。
 >
 > 來源：Phase 1 O05 Low-fi Review + DESIGN-WORKBENCH。
 
@@ -1249,7 +1249,7 @@ Presentation：
 - 不為了讓 loading 可見而刻意延長完成時間。
 - Hard Timeout後若 last-known-good Runtime integrity成立，F12回到安全 S03；否則進 O03 terminal safe-state。
 
-### F00 Acceptance Delta
+### F00 Acceptance Delta — Runtime Processing / Timeout
 
 新增 `F00-AC-029`–`F00-AC-032` 與 `TEST-F00-029`–`TEST-F00-032`；machine-readable mapping同步在 `working/detailed-design/registries/acceptance-test-registry.json`。
 
@@ -1259,7 +1259,7 @@ F03 operation truth與 F12 recovery truth分別由其 Working文件擁有；F00�
 
 ## Closed Working Delta — S02 Composite Create Progress Projection
 
-> 狀態：**WORKING_DELTA_CLOSED（2026-09-23） / BUILD_FREEZE_RECONCILIATION_PENDING**
+> 狀態：**WORKING_DELTA_CLOSED（2026-09-23） / STEP2_RECONCILED**
 >
 > Source Delta：`SD-20260922-002 — F01 Creation Progress Checkpoint Contract`。
 >
@@ -1326,7 +1326,7 @@ Clarification / Assumption Review：
 - User回答後再進後續 processing。
 - 等待期間不得推進 %。
 
-### F00 Acceptance Delta
+### F00 Acceptance Delta — Create Progress / Cross-Screen
 
 新增：
 

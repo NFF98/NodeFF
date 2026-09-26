@@ -1,6 +1,6 @@
 # O05 — Loading / Building / Hydration States
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → appf2-build locked BS-*。
+> Governance：本檔為 UI/UX Working Current Truth；Build Freeze / delivery lifecycle 以 `working/common-core/DESIGN-TO-DELIVERY.md` 為準。
 
 > Overlay / State ID：O05
 >
@@ -8,11 +8,11 @@
 >
 > Phase：Phase 1
 >
-> Screen-level canonical owner：`working/UI-UX/overlays/O05-LOADING-BUILDING-HYDRATION.md`
+> Screen-level canonical owner：`working/detailed-design/UI-UX/overlays/O05-LOADING-BUILDING-HYDRATION.md`
 >
 > Function behavior sources：F00 Experience Shell + F01 + F03 + F05 + F06 + F12 + F16。
 >
-> 本文件的 ④A Low-fi direction與 Runtime Loading / Timeout Function Delta已完成 User Review；仍不是 Formal Spec或 Cursor implementation authority。
+> 本文件的 ④A Low-fi direction與 Runtime Loading / Timeout Function Delta已完成 User Review；implementation input 仍需 Human-approved Build Freeze。
 
 # 1. User Outcome
 
@@ -1181,7 +1181,7 @@ Required：
 >
 > Canonical path：
 >
-> `working/UI-UX/references/O05-Hi-FI-v1.png`
+> `working/detailed-design/UI-UX/references/O05-Hi-FI-v1.png`
 >
 > Repository PNG blob SHA：
 >
@@ -1223,7 +1223,7 @@ Current Truth：
 - F00 S02 composite Create progress已閉合。
 - F03仍擁有 hydration / APP_READY truth。
 - O05仍只做 presentation，不擁有 checkpoint truth。
-- Legacy Formal Spec 已 RETIRED / NO-USE；promotion / verification pending。
+- STEP2 content reconciliation已完成；仍待 Final Audit + Human-approved Build Freeze。
 
 ### Final Cross-Screen High-fi Review — CLOSED / VERIFIED
 

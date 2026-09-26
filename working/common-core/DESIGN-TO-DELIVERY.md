@@ -56,7 +56,7 @@ appf2-build Delivery
 working/common-core/APP-ARCHITECTURE.md
 → system boundary / top architecture
 
-working/common-core/APP-DETAILED-DESIGN-OVERVIEW.md
+working/detailed-design/APP-DETAILED-DESIGN-OVERVIEW.md
 → Function Portfolio / dependency / phase / release scope
 
 working/common-core/DATA-MODEL.md
@@ -188,33 +188,37 @@ Phase Boundary
 6. appf2-build baseline merge 後 immutable。
 7. 後續 semantic change 必須回 appf2 Working，再建立新 baseline；不得改舊 baseline。
 
-# 8. Build Spec → Backlog / Sprint
+# 8. Build Freeze Handoff → appf2-build
 
-appf2-build Backlog / Sprint 必須由 active Locked Build Spec 派生。
+appf2-design 只定義 Build Freeze handoff 必須保留的 traceability，不擁有 Backlog / Sprint / Cursor execution mechanics。
 
-每個 work item 至少可追蹤：
+每個 frozen implementation item 至少必須能追蹤：
 
-```text
+~~~text
 Build Spec ID
+source Working commit
 Function ID
 Requirement / Contract ID(s)
 Acceptance ID(s)
 Test ID(s)
 Dependency
-Implementation scope
-```
+Phase scope
+~~~
 
-不得讓 Cursor 從 Chat 或未批准 Working delta 建正式 implementation task。
+Backlog shape、Sprint lifecycle、task execution與 evidence recording由 `NFF98/appf2-build` canonical rules 擁有。
 
-# 9. Acceptance → Executable Test
+不得讓 appf2-build 從 Chat、未批准 Working delta 或 implementation convenience 發明 Product Truth。
 
-Acceptance 是 Test 的來源。
+# 9. Acceptance → Proof Handoff
 
-每個 Critical Acceptance 必須有 automated test，或明確標記 manual / runtime evidence test 並說明原因。
+Acceptance 是「什麼必須被證明」的 Product Design truth。
 
-規則：
+Canonical design-side conventions：
+`working/common-core/ACCEPTANCE-CONVENTIONS.md`
 
-> Test 驗證 frozen Build Spec，不重新發明 Product Truth。
+Build Freeze 帶出 stable Acceptance ID、Test ID、Proof Scope 與 Expected Observable；fixture、test placement、runner、CI、evidence artifact與 pass/fail execution 全部由 appf2-build 擁有。
+
+> Build 驗證 frozen Product Truth，不重新發明 Product Truth。
 
 # 10. Executable Policy
 
@@ -274,26 +278,18 @@ Should we improve / expand / stop?
 
 不得為 Debug 無限制收集敏感資料。
 
-# 14. Release Gate
+# 14. Release Ownership Boundary
 
-Release authority 在 `NFF98/appf2-build`。
+Release authority 完全在 `NFF98/appf2-build`。
 
-Release 至少要求：
+appf2-design 只提供 frozen Product / Acceptance truth；不維護 CI job、release checklist、deployment procedure 或 evidence storage mechanics。
 
-```text
-Locked Build Spec
-+ required implementation complete
-+ Acceptance tests pass
-+ security / permission checks pass
-+ compatibility checks pass
-+ runtime smoke tests pass
-+ Humanized Recovery verified
-+ required evidence exists
-+ known blockers = 0
-+ required User release approval
-```
+Release 必須遵守的 Design invariants只有：
 
-Build Success ≠ Release。
+- 不得釋出違反 locked Build Spec 的 implementation；
+- required Acceptance 必須有可追蹤 proof；
+- Material Product / UX / API / Data / Runtime / Security change 必須先回 appf2 Working；
+- Build Success 不等於 Product truth可被偷偷改寫。
 
 # 15. Production Evidence Loop
 
@@ -336,26 +332,20 @@ appf2-build Finding
 → rebind backlog / sprint
 ```
 
-# 17. Cursor Contract
+# 17. Build Execution Ownership
 
-Cursor：
+Cursor / Agent rules、write scope、task execution、test placement、CI 與 release automation 的 canonical owner 是 `NFF98/appf2-build`。
 
-```text
-Read active appf2-build Locked Build Spec
-→ work only on active Sprint task
-→ preserve contracts
-→ write/update mapped tests
-→ record evidence
-→ report Finding / blocker
-```
+appf2-design 不維護第二套 Cursor instruction。
 
-Cursor 不得：
-- 發明產品行為
-- 改 Top Architecture
-- 自創 API / DB contract
-- 用實作方便性覆蓋 Acceptance
-- 直接修改 locked Build Spec
-- 由 raw demand 建 Product Truth
+Design 只要求 frozen implementation：
+
+- 讀取 active locked Build Spec；
+- preserve frozen Product contracts；
+- 發現 Product / Contract mismatch 時回報 Finding，而不是在 implementation 中自行決策；
+- Material change 必須回 appf2 Working → Human approval → new Build Freeze / Rebaseline。
+
+實際 agent mechanics 以 appf2-build 的 `AGENTS.md`、`.cursor/rules/`、`delivery/` 與 `harness/` 為唯一 authority。
 
 # 18. Software Engineering Guardrails
 
@@ -375,25 +365,23 @@ Cursor 不得：
 
 # 19. Per-Phase Application
 
-Design-to-Delivery governance 本身跨 Phase 共用，不為 Phase 2 / 3 複製另一份流程。
+Design-to-Delivery governance 跨 Phase 共用，不為 Phase 2 / 3+ 複製另一套流程。
 
-每次 Build Freeze 必須從 Product Roadmap 與 Function Portfolio 明確選定該次 Phase scope。
+Current Phase 1 / Build Freeze candidate：
 
-Current Phase 1 / NOW BUILD：
-
-```text
+~~~text
 F00 F01 F02 F03 F04 F05 F06 F07 F12 F16
-```
+~~~
 
-Canonical Phase scope：
-- Product / Business：`working/common-core/BUSINESS-PLAN.md#preserved-product-roadmap-contentPHASE-1.md`
-- Architecture：`working/common-core/APP-ARCHITECTURE.md#preserved-architecture-evolution-contentPHASE-1.md`
-- Infrastructure：`working/detailed-design/infrastructure/PHASE-1.md`
-- Data：`working/detailed-design/data-model/PHASE-1.md`
-- Capability：`working/common-core/CAPABILITY-FABRIC.md#preserved-capability-roadmap-contentPHASE-1.md`
-- Function portfolio：`working/common-core/APP-DETAILED-DESIGN-OVERVIEW.md`
+Canonical scope owners：
+- Product / Business：`working/common-core/BUSINESS-PLAN.md` 的 `appf2 Product Roadmap — Phase 1` section。
+- Architecture：`working/common-core/APP-ARCHITECTURE.md` 的 `appf2 Architecture Evolution — Phase 1` section。
+- Infrastructure：`working/detailed-design/infrastructure/INFRASTRUCTURE-DETAILED.md` 的 Phase 1 section。
+- Data：`working/detailed-design/data-model/DATA-MODEL-DETAILED.md` 的 Phase 1 Detailed Contract。
+- Capability：`working/common-core/CAPABILITY-FABRIC.md` 的 `appf2 Capability Roadmap — Phase 1` section。
+- Function portfolio：`working/detailed-design/APP-DETAILED-DESIGN-OVERVIEW.md`。
 
-中長期 module 可以先存在作 deferred design，但 **未經 Evidence Gate + Human approval + Build Freeze inclusion 就不是 implementation scope**。
+Phase 2 / 3+ content 可以存在於同一 canonical owner 內作 deferred baseline，但 **日期不 unlock scope**。只有 Evidence + Human approval + Build Freeze inclusion 才成為 implementation truth。
 
 # 20. Definition of Done
 

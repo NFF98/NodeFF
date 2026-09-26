@@ -72,16 +72,16 @@ appf2 採四段節奏，而不是把未來能力全部塞進 Phase 1。
 
 # 4. Phase Roadmap Index
 
-商業核心、五大產品原則、KPI 與 Strategic Guardrails 留在本文件；每一 Phase 的目標、能力、Gate 與商業假設拆到 roadmap，避免 Business Plan 隨時間無限增長。
+Phase roadmap 不再拆成平行檔案；本檔後段以單一 canonical owner 保留 Phase sections：
 
-- Phase 1：`working/common-core/BUSINESS-PLAN.md#preserved-product-roadmap-contentPHASE-1.md`
-- Phase 2：`working/common-core/BUSINESS-PLAN.md#preserved-product-roadmap-contentPHASE-2.md`
-- Phase 3：`working/common-core/BUSINESS-PLAN.md#preserved-product-roadmap-contentPHASE-3.md`
-- Phase 4+：`working/common-core/BUSINESS-PLAN.md#preserved-product-roadmap-contentPHASE-4-PLUS.md`
+- `appf2 Product Roadmap — Phase 1`：0–1 個月 Core Proof。
+- `appf2 Product Roadmap — Phase 2`：Reuse / Identity / Creator Value。
+- `appf2 Product Roadmap — Phase 3`：Scale Readiness。
+- `appf2 Product Roadmap — Phase 4+`：Intent Commerce / Capability Network。
 
-> Phase advancement = Evidence-gated，不因日曆自動發生。
+前段只擁有跨 Phase 商業核心、產品原則、KPI 與 Strategic Guardrails；後段只擁有 phase-specific goal / gate / hypothesis，避免 duplicate truth。
 
----
+> Roadmap 日期是 planning horizon，不是 implementation unlock。Phase activation 仍需 Evidence + Human approval。
 
 # 5. 商業 Flywheel
 
@@ -208,9 +208,9 @@ appf2 的發展順序不是：
 
 ---
 
-# Preserved Product Roadmap Content
+# Product Roadmap Sections
 
-> Structure migration preservation block. Content below is preserved from the former files. Dedup / semantic cleanup is intentionally deferred.
+> Consolidated canonical roadmap。Phase labels describe planning / evidence gates；日期本身不 unlock implementation.
 
 # appf2 Product Roadmap — Phase 1
 

@@ -1,6 +1,6 @@
 # S04 — Shared App Entry / Restore
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → appf2-build locked BS-*。
+> Governance：本檔為 UI/UX Working Current Truth；Build Freeze / delivery lifecycle 以 `working/common-core/DESIGN-TO-DELIVERY.md` 為準。
 
 > Screen ID：S04
 >
@@ -8,11 +8,11 @@
 >
 > Phase：Phase 1
 >
-> Screen-level canonical owner：`working/UI-UX/screens/S04-SHARED-APP-ENTRY.md`
+> Screen-level canonical owner：`working/detailed-design/UI-UX/screens/S04-SHARED-APP-ENTRY.md`
 >
 > Function behavior sources：F05 Share / Restore + F00 Experience Shell + F03 Runtime。
 >
-> 本文件的 ④A Low-fi 與 ④B High-fi Step 1–4 已完成 User Review；Legacy Formal Spec 已 RETIRED / NO-USE，待 pre-Build Freeze reconciliation。
+> 本文件的 ④A Low-fi 與 ④B High-fi Step 1–4 已完成 User Review；STEP2 content reconciliation已完成，仍需 Human-approved Build Freeze 才能成為 implementation input。
 
 ### Final Cross-Screen High-fi Review — CLOSED / VERIFIED
 
@@ -872,7 +872,7 @@ Next：
 >
 > Canonical path：
 >
-> `working/UI-UX/references/S04-Highfi-v1.png`
+> `working/detailed-design/UI-UX/references/S04-Highfi-v1.png`
 >
 > Repository PNG blob SHA：
 >
@@ -883,7 +883,7 @@ Next：
 > User approved：2026-09-22
 >
 > Approved visual reference：
-> \`working/UI-UX/references/S04-Highfi-v1.png\`
+> \`working/detailed-design/UI-UX/references/S04-Highfi-v1.png\`
 
 ![S04 Shared App Entry High-fi v1](../references/S04-Highfi-v1.png)
 

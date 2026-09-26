@@ -1,6 +1,6 @@
 # appf2 技術護城河
 
-> 狀態：Working。本文描述 appf2 技術護城河的核心模型與發展順序；除非依 SSOT 流程正式升格，否則不具正式規格效力。
+> 狀態：Working Strategic Context。本文描述 appf2 技術護城河與發展順序；它不直接成為 implementation contract。Architecture / Capability / Function / Data / UI 的 executable Product Truth 仍由各自 canonical Working owner 定義。
 
 # 1. 核心命題
 

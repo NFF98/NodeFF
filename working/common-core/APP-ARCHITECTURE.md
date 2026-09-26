@@ -1,6 +1,6 @@
 # appf2 App Architecture
 
-> 狀態：Working Architecture Baseline。本文只回答四件事：**appf2 有哪些系統、每個系統負責什麼結果、核心流程怎麼跑、1／3／6 個月怎麼長。** Function 實作細節由 APP-DETAILED-DESIGN-OVERVIEW.md 與 working/detailed-design/functions/ 承接。
+> 狀態：Working Architecture Baseline。本文只回答四件事：**appf2 有哪些系統、每個系統負責什麼結果、核心流程怎麼跑、1／3／6 個月怎麼長。** Function 詳細 Product Design 由 `working/detailed-design/APP-DETAILED-DESIGN-OVERVIEW.md` 與 `working/detailed-design/functions/` 承接。
 
 # 1. Architecture Thesis
 
@@ -591,20 +591,17 @@ Blueprint Revision A
 
 # 11. Architecture Evolution Index
 
-共用核心架構留在本文件；各 Phase 的新增／解鎖內容拆到獨立 evolution 文件，避免本檔隨 Phase 2／3／4 持續膨脹。
+Phase 是本 canonical architecture 的 **applicability / activation metadata**，不是另一組檔案或第二份 SSOT。
 
-> **Phase files 只描述該階段新增或啟用什麼，不複製本文件的 shared core。**
+本檔後段保留四個 evolution sections：
+- `appf2 Architecture Evolution — Phase 1`：Core Proof。
+- `appf2 Architecture Evolution — Phase 2`：Reuse / Identity / Creator。
+- `appf2 Architecture Evolution — Phase 3`：Scale Readiness。
+- `appf2 Architecture Evolution — Phase 4+`：Intent Commerce / Capability Network / Orchestration。
 
-- Phase 1 / Core Proof：`working/common-core/APP-ARCHITECTURE.md#preserved-architecture-evolution-contentPHASE-1.md`
-- Phase 2 / Reuse・Identity・Creator：`working/common-core/APP-ARCHITECTURE.md#preserved-architecture-evolution-contentPHASE-2.md`
-- Phase 3 / Scale Readiness：`working/common-core/APP-ARCHITECTURE.md#preserved-architecture-evolution-contentPHASE-3.md`
-- Phase 4+ / Commerce・Network・Orchestration：`working/common-core/APP-ARCHITECTURE.md#preserved-architecture-evolution-contentPHASE-4-PLUS.md`
+共用 architecture invariants 只在前段定義一次；Phase section 只能描述新增 / 啟用 / defer 的 architecture delta，不複製 shared core。
 
-解鎖規則仍然是：
-
-> **Evidence 決定是否進下一階段；日期本身不自動解鎖。**
-
----
+> 日期本身不啟用 implementation scope；實際 inclusion 由 Evidence + Human approval + Build Freeze 決定。
 
 # 12. 什麼保持不變？什麼可以演進？
 
@@ -717,9 +714,9 @@ appf2 有什麼？
 
 ---
 
-# Preserved Architecture Evolution Content
+# Architecture Evolution Sections
 
-> Structure migration preservation block. Content below is preserved from the former files. Dedup / semantic cleanup is intentionally deferred.
+> Consolidated canonical content。Phase 1 = current Build Freeze candidate；later Phase sections remain deferred until Evidence + Human approval.
 
 # appf2 Architecture Evolution — Phase 1
 

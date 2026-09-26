@@ -2,9 +2,9 @@
 
 > `working/` = appf2 唯一可修改的 Product Design Current Truth。
 >
-> 結構狀態：**STRUCTURE_READY / CONTENT_REVIEW_PENDING**
+> 狀態：**STRUCTURE_READY / CONTENT_REVIEW_COMPLETE / FINAL_AUDIT_PENDING**
 >
-> 目前只代表目錄與 semantic ownership 結構已定案；內容仍需進行 Quality Review / Dedup / Consistency Audit。尚未達到 Build Freeze。
+> 2026-09-26 已完成 STEP 2 Working Content Quality Review：Cleanup + Completeness。已處理 stale authority/path、retired governance、Design↔Build ownership、phase consolidation、registry metadata、closed delta reconciliation 與可直接判定的內容缺口；尚未 Human-approved Build Freeze。
 
 ## Canonical Structure
 
@@ -75,10 +75,15 @@ appf2-build 負責 implementation / delivery governance；appf2 不重複維護 
 
 ## Current Next Step
 
-1. 逐檔 Content Quality Review。
-2. Dedup：同一 semantic truth 只能留在一個 canonical owner。
-3. 修正 cross-reference / ownership / consistency。
-4. 確認 Phase 1 Build Freeze set。
-5. User 批准後才建立 appf2-build locked baseline。
+STEP 2 已完成；下一個 gate 不再重做內容清理，而是 Final Audit / Build Freeze sequence：
+
+1. Cross-file consistency re-audit。
+2. Acceptance mapping audit。
+3. UI/UX consistency audit。
+4. Registry integrity audit。
+5. 確認 Phase 1 Build Freeze inventory。
+6. User 明確批准後才建立 appf2-build locked baseline。
+
+Working Review / migration 規則：`working/common-core/DESIGN-TO-DELIVERY.md#23-working-content-quality-review--build-freeze-migration-rule`。
 
 > **Structure Ready ≠ Content Ready ≠ Build Freeze Ready。**

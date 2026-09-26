@@ -1,6 +1,6 @@
 # S01 — Discover / Start
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → appf2-build locked BS-*。
+> Governance：本檔為 UI/UX Working Current Truth；Build Freeze / delivery lifecycle 以 `working/common-core/DESIGN-TO-DELIVERY.md` 為準。
 
 > Screen ID：S01
 >
@@ -8,9 +8,9 @@
 >
 > Phase：Phase 1
 >
-> Screen-level canonical owner：`working/UI-UX/screens/S01-DISCOVER-START.md`
+> Screen-level canonical owner：`working/detailed-design/UI-UX/screens/S01-DISCOVER-START.md`
 >
-> Function behavior source：`working/functions/F00-EXPERIENCE-SHELL.md`（Working Current Truth；Legacy Formal Spec 已 RETIRED / NO-USE）
+> Function behavior source：`working/detailed-design/functions/F00-EXPERIENCE-SHELL.md`（Working Current Truth）
 >
 > 注意：本文件只固定目前已確認的 Screen-level UI/UX。若需要改 F00 behavior contract，必須回 F00 Working Review。
 
@@ -216,7 +216,7 @@ Phase 1 S01 Header：
 >
 > Implementation precedence：
 > 1. 本節 Step 1–4；
-> 2. `working/UI-UX/DESIGN-SYSTEM.md`；
+> 2. `working/detailed-design/UI-UX/DESIGN-SYSTEM.md`；
 > 3. approved visual reference；
 > 4. 其他示意圖。
 >
@@ -224,7 +224,7 @@ Phase 1 S01 Header：
 
 ## Step 1 — Structure Lock ✅
 
-### Header
+### Header — Structure
 
 Desktop：
 
@@ -245,7 +245,7 @@ Mobile：
 - Header只保留必要 brand / page chrome。
 - 主要 navigation由底部 nav承接。
 
-### Hero
+### Hero — Structure
 
 - 主標固定：**意圖就是 App**。
 - 副標目前不顯示；保留 breathing room。
@@ -386,14 +386,14 @@ S01套用：**Clean Creator Canvas + Playful Energy**。
 - Teal → Aqua → Yellow gradient只用於有限 brand / creation moments，不整頁鋪滿。
 - 不使用大型霓虹 glow、重陰影、高飽和彩虹分類。
 
-### Header
+### Header — Visual Treatment
 
 - active navigation = Teal text + subtle indicator。
 - 不使用大型 filled tab。
 - icon / control touch target ≥44 CSS px。
 - `我的 App · Soon`不能只靠顏色表示 unavailable。
 
-### Hero
+### Hero — Visual Treatment
 
 - 主標是主要 brand statement。
 - Teal可用於文字 / small accent。
@@ -445,7 +445,7 @@ Approved visual：
 
 Canonical path：
 
-`working/UI-UX/references/S01-Discover-Start-Highfi-v1.png`
+`working/detailed-design/UI-UX/references/S01-Discover-Start-Highfi-v1.png`
 
 Repository PNG blob SHA：
 
@@ -465,7 +465,7 @@ Reference boundary：
 - 任何已批准 Structure / Geometry / Visual Rule / image reference改動，必須 reopen對應 Step。
 - 若後續 Cursor需要額外 component anatomy / state matrix / animation detail，可新增 `Step 4.5 — <Layer Name> Lock`；不得用 Step 4.5 偷改 Step 1–4。
 - 涉及 Function behavior則回 F00/F01 Working Review。
-- Legacy Formal Spec 已 RETIRED / NO-USE；待 Build Freeze reconciliation。
+- STEP2 content reconciliation已完成；仍待 Final Audit + Human-approved Build Freeze。
 
 ### Final Cross-Screen High-fi Review — CLOSED / VERIFIED
 

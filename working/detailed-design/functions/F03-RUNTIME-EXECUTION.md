@@ -1,7 +1,7 @@
 # F03 — Runtime Execution / Semantics
 
-> 狀態：BUILD_FREEZE_READY + WORKING_DELTA_CLOSED / BUILD_FREEZE_RECONCILIATION_PENDING
-> Legacy Formal Spec reference：RETIRED / NO-USE。Current Truth = this Working file；implementation snapshot = Human-approved appf2-build locked BS-*。
+> 狀態：BUILD_FREEZE_READY / STEP2_REVIEWED
+> Governance：Current Truth = this Working file；Build Freeze / implementation boundary 以 `working/common-core/DESIGN-TO-DELIVERY.md` 為準。
 >
 > Canonical Role：Phase 1 Browser Runtime Semantics 的 Working Current Truth。
 >
@@ -1574,7 +1574,7 @@ INCOMPATIBLE
 
 # 47. Open Decisions
 
-目前沒有阻擋 Phase 1 Core Spec Gate 的 open decision。
+目前沒有阻擋 Phase 1 Build Freeze Gate 的 open decision。
 
 已閉合：
 
@@ -1610,9 +1610,9 @@ Validated immutable Blueprint
 
 ## Closed Working Delta — Runtime Interaction Processing / Timeout
 
-> 狀態：WORKING_DELTA_CLOSED（2026-09-22）/ BUILD_FREEZE_RECONCILIATION_PENDING
+> 狀態：WORKING_DELTA_CLOSED（2026-09-22）/ STEP2_RECONCILED
 >
-> Formal Spec：**暫不修改**；本 Working contract待 pre-Build Freeze reconciliation一次同步。
+> STEP2 reconciliation：本 delta 已整合回 canonical Runtime / Error / Evidence / Acceptance sections；Build Freeze 直接讀整合後 Working truth。
 >
 > Canonical detail已整合至 §16.1–§16.4、Error / Evidence、Acceptance / Test sections。
 

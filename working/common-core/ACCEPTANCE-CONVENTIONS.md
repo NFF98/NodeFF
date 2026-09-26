@@ -1,46 +1,51 @@
-# appf2 Acceptance / Test Contract Conventions
+# appf2 Acceptance Contract Conventions
 
 > 狀態：BUILD_FREEZE_READY / Phase 1 — Working Current Truth。
-> Legacy Formal Spec reference：RETIRED / NO-USE；Build implementation snapshot 改由 Human-approved Build Freeze → appf2-build BS-*。
-> Canonical Role：把 Fxx Acceptance Criteria 轉成可實作、可測試、可追蹤的 Test Contract。
+>
+> Canonical Role：定義 **what must be proven**：Acceptance meaning、stable Acceptance/Test mapping、observable truth 與 Build Freeze proof requirement。
+>
+> Build-owned test implementation（fixture、framework、test placement、Cursor execution、CI、evidence recording、release gate）不在本文定義；邊界以 `working/common-core/DESIGN-TO-DELIVERY.md` 為準。
 
 # 1. Core Rule
 
-Acceptance 是產品/Function 的 observable truth；Test 是驗證方式。
+Acceptance 是 Product / Function 的 observable truth。
 
-每個 Required Acceptance 必須有至少一個 stable Test Contract：
+Test mapping 的目的不是在 Design repo 寫測試程式，而是確保每個 Required Acceptance 都能在 Build Freeze 後被唯一追蹤並證明。
+
+Canonical mapping：
 
 ~~~text
 Acceptance ID
 → Test ID
-→ verification type
-→ fixture / setup
-→ expected observable
-→ implementation location
+→ Proof Scope
+→ Expected Observable
+→ Build Freeze Requirement
 ~~~
 
-Test 不重新發明產品行為。
+appf2-design 擁有「必須證明什麼」；appf2-build 擁有「實際怎麼測、放哪裡、怎麼執行與記錄證據」。
 
-# 2. Verification Types
+# 2. Proof Scope
+
+Design registry 使用 proof scope 描述必須在哪一層觀察正確性，而不是指定測試工具：
 
 ~~~text
-AUTOMATED_CONTRACT
-= API / Data / Security / Schema / Runtime boundary contract
+CONTRACT
+= API / Data / Security / Schema / Runtime boundary observable
 
-AUTOMATED_BEHAVIOR
-= deterministic Function behavior / policy
+BEHAVIOR
+= deterministic Function behavior / policy observable
 
-AUTOMATED_E2E
-= Browser / UX / interaction flow
+END_TO_END
+= user-visible browser / UX / interaction outcome
 
 RUNTIME_EVIDENCE
-= event stream / production-like evidence assertion
+= event / production-like evidence outcome
 
-MANUAL_REVIEW
-= 只有不適合可靠自動化的 copy / qualitative review
+HUMAN_REVIEW
+= 只有無法可靠自動判定的 qualitative observable
 ~~~
 
-MANUAL_REVIEW 必須是例外，不得用來逃避可自動化 contract。
+`HUMAN_REVIEW` 必須是例外；可 deterministic 證明的 truth 不得因實作方便而降級成人工檢查。
 
 # 3. Working Registry
 
@@ -48,52 +53,83 @@ MANUAL_REVIEW 必須是例外，不得用來逃避可自動化 contract。
 working/detailed-design/registries/acceptance-test-registry.json
 ~~~
 
-Registry 是 machine-readable mapping；Acceptance meaning仍由各 Fxx 擁有。
+Registry 是 machine-readable Design traceability；Acceptance meaning仍由各 Fxx canonical owner 擁有。
 
-# 4. Implementation Rule
-
-BUILD_FREEZE_READY 代表 Product Design / Acceptance contract 已足夠進 Build Freeze Review，不代表 implementation 或 test 已完成。
-
-Implementation 階段 Cursor：
-
-1. 依 implementation_location 建立 test artifact。
-2. 不改 expected_observable 來配合 code。
-3. 若測試發現 Spec矛盾，回 Design/Spec，不自行修改 contract。
-4. IMPLEMENTED 之後，Required tests通過才可標 TESTED。
-
-# 5. Runtime Evidence
-
-RUNTIME_EVIDENCE test 必須：
-
-- 使用 F07 registry-valid event；
-- 明確 aggregation / success definition；
-- 不以單次 click當 outcome；
-- 不要求敏感 raw payload。
-
-# 6. Manual Review
-
-Manual test artifact至少記：
+Design registry 至少保存：
 
 ~~~text
-setup
-steps
-expected observable
-reviewer
-result
-evidence reference
+acceptance_id
+function_id
+criterion
+test_id
+proof_scope
+expected_observable
+contract_status
+required_for_build_freeze
+superseded_by / deprecated metadata when applicable
 ~~~
 
-# 7. Traceability
+Design registry **不得**保存 test fixture strategy、test file placement、CI job 或 Cursor execution instruction。
 
-CI / review至少檢查：
+# 4. Stable ID / Lifecycle
 
-- every Required AC has registry entry；
+- Acceptance ID 與 Test ID 不重用。
+- Active Acceptance 可進 Build Freeze。
+- Superseded Acceptance 保留 ID 與 replacement trace，但 `required_for_build_freeze = false`。
+- Deprecated / superseded truth 不得被新 Test ID 偷偷重新賦予不同 meaning。
+- Acceptance meaning 改變屬 Product Design change，必須回 canonical Working owner。
+
+# 5. Runtime Evidence Boundary
+
+若某個 Acceptance 的 proof scope = `RUNTIME_EVIDENCE`，Design 必須定義：
+
+- 要觀察的 outcome；
+- 必要 event / metric semantics；
+- privacy / forbidden raw payload boundary；
+- success / failure meaning。
+
+Batching、storage、query、test harness、artifact placement與 CI execution 屬 appf2-build。
+
+# 6. Build Freeze Handoff
+
+Human-approved Build Freeze 必須帶出：
+
+~~~text
+Acceptance ID
+Test ID
+Proof Scope
+Expected Observable
+Required / Superseded status
+source Working commit
+~~~
+
+appf2-build 再為這些 immutable Design truths建立：
+
+~~~text
+fixture / setup
+test implementation
+test placement
+runner / CI
+evidence artifact
+pass / fail result
+~~~
+
+Build 不得修改 expected observable 來配合 code；若 frozen truth矛盾，回 appf2-design做 Material Review / Rebaseline。
+
+# 7. Design-side Traceability Gate
+
+Build Freeze 前至少確認：
+
+- every Required Acceptance 有唯一 registry entry；
+- Acceptance ID unique；
 - Test ID unique；
-- implementation_location unique；
-- verification_type valid；
+- proof_scope valid；
 - expected_observable non-empty；
-- deprecated AC不可被新 Test重用。
+- superseded Acceptance 不再 required；
+- registry與 Fxx Acceptance meaning一致。
+
+這些是 Design truth integrity checks，不等於 CI / release execution。
 
 # Conclusion
 
-Working Design完成 Acceptance meaning；Test Contract讓 Implementation知道「怎麼證明它真的完成」。
+> **appf2-design 定義「什麼叫做完成」；appf2-build 決定「怎麼證明完成」。**

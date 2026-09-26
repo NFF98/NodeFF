@@ -1,6 +1,6 @@
 # O04 — Revert Confirmation
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → appf2-build locked BS-*。
+> Governance：本檔為 UI/UX Working Current Truth；Build Freeze / delivery lifecycle 以 `working/common-core/DESIGN-TO-DELIVERY.md` 為準。
 
 > Overlay ID：O04
 >
@@ -8,11 +8,11 @@
 >
 > Phase：Phase 1
 >
-> Screen-level canonical owner：`working/UI-UX/overlays/O04-REVERT-CONFIRMATION.md`
+> Screen-level canonical owner：`working/detailed-design/UI-UX/overlays/O04-REVERT-CONFIRMATION.md`
 >
 > Function behavior source：F00 Experience Shell + F16 Result Correction。
 >
-> ④A Low-fi與④B High-fi Step 1–4已完成 User Review並鎖定；Formal Spec與 Cursor implementation仍維持 HOLD。
+> ④A Low-fi與④B High-fi Step 1–4已完成 User Review並鎖定；implementation input 仍需 Human-approved Build Freeze。
 
 # 1. User Outcome
 
@@ -903,7 +903,7 @@ Confirm → Processing transition ≤ 240ms
 >
 > Canonical path：
 >
-> `working/UI-UX/references/O04-Hi-FI-v1.png`
+> `working/detailed-design/UI-UX/references/O04-Hi-FI-v1.png`
 >
 > Repository PNG blob SHA：
 >

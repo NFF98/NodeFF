@@ -1,12 +1,12 @@
 # appf2 UI/UX Design System
 
-> **GOVERNANCE NOTICE**：本檔內任何 `spec/`、Formal Spec、Spec Promotion 字樣均屬 **RETIRED / NO-USE FOR CURRENT AUTHORITY**。Current UI/UX Truth = 本 Working；current next gate = Build Freeze reconciliation → Human approval → appf2-build locked BS-*。
+> Governance：本檔為 UI/UX Working Current Truth；Build Freeze / delivery lifecycle 以 `working/common-core/DESIGN-TO-DELIVERY.md` 為準。
 
 > 狀態：**WORKING — HIGH-FI BASELINE APPROVED / FINAL CROSS-SCREEN VERIFIED**
 >
 > Phase：Phase 1
 >
-> Canonical owner：`working/UI-UX/DESIGN-SYSTEM.md`
+> Canonical owner：`working/detailed-design/UI-UX/DESIGN-SYSTEM.md`
 >
 > Approved by User：2026-09-22
 >
@@ -14,7 +14,7 @@
 >
 > 本文件擁有 visual / presentation rules，不改寫 Fxx Function behavior、Runtime、Data、API、Error、Security、Evidence 或 Acceptance semantics。
 >
-> Formal Spec、Backlog / Sprint、Cursor implementation 仍維持 HOLD。
+> 尚未 Human-approved Build Freeze；本檔不擁有 Backlog / Sprint / Cursor execution mechanics。
 
 ---
 
@@ -801,7 +801,7 @@ Final re-audit結果：
 
 > **0 個新的 material cross-screen finding。**
 
-下一個 gate不是再做 High-fi，而是依 User既定流程進行 **pre-Build Freeze reconciliation**；在 User明確開始該 Gate前，Formal Spec與 Cursor implementation維持 HOLD。
+下一個 gate不是再做 High-fi，而是 **Final Audit → Human approval → Build Freeze**；未經 Human-approved Build Freeze不得成為 implementation input。
 
 ---
 
