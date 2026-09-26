@@ -117,6 +117,23 @@ Build Freeze **不是複製全部 Working**。目前 candidate 共 **47 個 sour
 
 這些可供 provenance / strategy / future design參考，但不得因同 repo存在就自動進 Phase 1 implementation baseline。
 
+## Phase 1 Freeze Audit Marker Convention
+
+2026-09-26 Final Audit 後，所有 **36 個可投影的 Phase 1 textual / JSON source artifacts** 都必須自帶 Freeze Audit boundary marker：
+
+~~~text
+PHASE 1 FREEZE AUDIT: PASS
+scope = Phase 1 applicable truth only
+eligibility = Human-approved Build Freeze required
+exclude = Phase 2/3+ + deferred content
+~~~
+
+Markdown 以文件頂部單行 boundary marker 表示；3 個 machine-readable registry 以 `phase_1_freeze_audit` metadata 表示。
+
+11 張 approved High-fi PNG 是 immutable binary reference，不改檔案本體以避免破壞已驗證 SHA；其 Phase 1 Freeze eligibility 由 `PHASE1-SCREEN-INVENTORY.md`、對應 Screen / Overlay owner與本 README 的 47-artifact inventory共同承接。
+
+> Marker = Final Audit passed；**Marker 本身不等於 Human approval，也不等於已執行 Build Freeze。**
+
 ## Current Next Step
 
 只剩 Human Gate：

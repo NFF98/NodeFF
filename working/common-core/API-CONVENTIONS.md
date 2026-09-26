@@ -1,5 +1,7 @@
 # appf2 Shared API Conventions
 
+> **PHASE 1 FREEZE AUDIT：PASS — Phase 1 applicable truth passed Final Audit and is eligible for Human-approved Build Freeze; Phase 2/3+ and deferred content are excluded.**
+
 > 狀態：BUILD_FREEZE_READY / STEP2_REVIEWED / Phase 1 — Working Current Truth。
 > Build Freeze / implementation boundary：`working/common-core/DESIGN-TO-DELIVERY.md`。
 > Canonical Role：所有 Phase 1 public HTTP APIs 的共同 transport、identity、idempotency、concurrency、error、rate-limit、timeout 與 versioning contract。

@@ -1,5 +1,7 @@
 # appf2 Acceptance Contract Conventions
 
+> **PHASE 1 FREEZE AUDIT：PASS — Phase 1 applicable truth passed Final Audit and is eligible for Human-approved Build Freeze; Phase 2/3+ and deferred content are excluded.**
+
 > 狀態：BUILD_FREEZE_READY / Phase 1 — Working Current Truth。
 >
 > Canonical Role：定義 **what must be proven**：Acceptance meaning、stable Acceptance/Test mapping、observable truth 與 Build Freeze proof requirement。

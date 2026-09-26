@@ -1,5 +1,15 @@
 {
   "registry_version": "1.1.1",
+  "phase_1_freeze_audit": {
+    "status": "PASS",
+    "scope": "PHASE_1_APPLICABLE_TRUTH_ONLY",
+    "eligibility": "HUMAN_APPROVED_BUILD_FREEZE_REQUIRED",
+    "excludes": [
+      "PHASE_2_PLUS",
+      "DEFERRED_CONTENT"
+    ],
+    "audited_on": "2026-09-26"
+  },
   "owner": "working/detailed-design/registries/evidence-event-registry.json",
   "source_of_truth": "Fxx event contracts + F07 evidence policy",
   "entries": [

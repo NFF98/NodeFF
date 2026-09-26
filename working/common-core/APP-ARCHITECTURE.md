@@ -1,5 +1,7 @@
 # appf2 App Architecture
 
+> **PHASE 1 FREEZE AUDIT：PASS — Phase 1 applicable truth passed Final Audit and is eligible for Human-approved Build Freeze; Phase 2/3+ and deferred content are excluded.**
+
 > 狀態：Working Architecture Baseline。本文只回答四件事：**appf2 有哪些系統、每個系統負責什麼結果、核心流程怎麼跑、1／3／6 個月怎麼長。** Function 詳細 Product Design 由 `working/detailed-design/APP-DETAILED-DESIGN-OVERVIEW.md` 與 `working/detailed-design/functions/` 承接。
 
 # 1. Architecture Thesis

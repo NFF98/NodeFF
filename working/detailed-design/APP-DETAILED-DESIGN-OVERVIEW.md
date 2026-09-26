@@ -1,5 +1,7 @@
 # appf2 App Detailed Design Overview
 
+> **PHASE 1 FREEZE AUDIT：PASS — Phase 1 applicable truth passed Final Audit and is eligible for Human-approved Build Freeze; Phase 2/3+ and deferred content are excluded.**
+
 > Governance：Product Design Current Truth = appf2 Working；implementation input only after Human-approved Build Freeze → appf2-build locked BS-*。詳細 lifecycle 以 `working/common-core/DESIGN-TO-DELIVERY.md` 為準。
 
 > 狀態：Working Design Baseline。

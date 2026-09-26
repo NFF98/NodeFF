@@ -1,5 +1,7 @@
 # appf2 Capability Fabric
 
+> **PHASE 1 FREEZE AUDIT：PASS — Phase 1 applicable truth passed Final Audit and is eligible for Human-approved Build Freeze; Phase 2/3+ and deferred content are excluded.**
+
 > 狀態：Working Architecture Baseline。本文定義 appf2 的原子能力模型、Capability Card Contract、成熟度、Coverage Resolution 與 1／3／6 個月發展策略。Capability Fabric 是產品能力邊界，不是 Component 清單。
 
 # 1. Capability Fabric 是什麼

@@ -1,5 +1,7 @@
 # appf2 Canonical Data Model
 
+> **PHASE 1 FREEZE AUDIT：PASS — Phase 1 applicable truth passed Final Audit and is eligible for Human-approved Build Freeze; Phase 2/3+ and deferred content are excluded.**
+
 > 狀態：Working Current Truth — Shared Data Model Index / Invariants。本文只保留跨 Phase 不應重複的資料原則；Phase-specific schema / tables / migration additions 拆到 `working/detailed-design/data-model/`。
 > Build Freeze / delivery governance：`working/common-core/DESIGN-TO-DELIVERY.md`。
 >

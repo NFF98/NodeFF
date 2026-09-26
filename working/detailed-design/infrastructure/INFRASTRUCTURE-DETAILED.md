@@ -1,5 +1,7 @@
 # appf2 Infrastructure — Detailed Design
 
+> **PHASE 1 FREEZE AUDIT：PASS — Phase 1 applicable truth passed Final Audit and is eligible for Human-approved Build Freeze; Phase 2/3+ and deferred content are excluded.**
+
 > 狀態：Working Current Truth — consolidated multi-phase detailed owner。
 >
 > Phase 1 section = BUILD_FREEZE_READY candidate；Phase 2 / 3 / 4+ sections = DEFERRED baseline。Future infrastructure content 同檔存在不代表 provider / scaling activation。
