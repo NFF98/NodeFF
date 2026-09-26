@@ -474,9 +474,9 @@ Intent Embedding
 - attribution；
 - publishing；
 - save / history；
-- premium entitlement。
+- non-enforcing cost / future entitlement metadata hooks。
 
-這些是 metadata / identity layer，不修改 immutable Blueprint core。
+Phase 2 不部署 F13 entitlement / metering enforcement；這些只作未來 compatibility hooks，且不修改 immutable Blueprint core。
 
 ## Realtime
 

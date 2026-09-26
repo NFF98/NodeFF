@@ -12,7 +12,7 @@
 >
 > Function behavior sources：F16 Result Correction + F00 Experience Shell + F03 Runtime。
 >
-> ④A Low-fi與④B High-fi Step 1–4已完成 User Review並鎖定；Build Freeze 與 Cursor implementation 仍維持 HOLD。
+> ④A Low-fi與④B High-fi Step 1–4已完成 User Review並鎖定；implementation input 仍需 Human-approved Build Freeze。
 
 # 1. User Outcome
 

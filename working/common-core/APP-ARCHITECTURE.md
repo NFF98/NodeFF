@@ -766,7 +766,9 @@ appf2 有什麼？
 - publishing
 - semantic retrieval when evidence exists
 - realtime only when proven
-- premium entitlement metadata
+- cost / provider metadata may exist only as non-enforcing future hooks
+
+Phase 2 不啟用 F13 entitlement / metering enforcement。
 
 架構 Gate：
 
@@ -790,7 +792,7 @@ appf2 有什麼？
 - semantic reuse quality
 - external capability pilot
 - runtime AI / heavy job where proven
-- metering / entitlement enforcement
+- F13 metering / entitlement enforcement when evidence-gated
 - operational evidence
 
 架構 Gate：

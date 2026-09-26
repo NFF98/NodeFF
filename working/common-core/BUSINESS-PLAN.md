@@ -214,7 +214,7 @@ appf2 的發展順序不是：
 
 # appf2 Product Roadmap — Phase 1
 
-> Shared business truth：`../../core/BUSINESS-PLAN.md`
+> Shared business truth：`working/common-core/BUSINESS-PLAN.md`
 
 # 4. 0–1 個月：證明核心循環
 
@@ -320,7 +320,7 @@ First Value 前原則上不要求註冊。
 
 # appf2 Product Roadmap — Phase 2
 
-> Shared business truth：`../../core/BUSINESS-PLAN.md`
+> Shared business truth：`working/common-core/BUSINESS-PLAN.md`
 
 # 5. 第 2–3 個月：Reuse、Identity、Creator Value
 
@@ -373,7 +373,7 @@ anonymous_id
 - Publishing
 - Cross-device
 - Private artifact
-- Paid entitlement
+- account-gated durable value
 
 ## 5.3 Creator Value
 
@@ -383,10 +383,10 @@ anonymous_id
 - publishing
 - reusable Blueprint family
 - creator profile
-- premium artifact / capability
+- creator artifact / reusable family value signals
 - creator analytics
 
-不先假設 Creator Economy 一定成立。
+不先假設 Creator Economy 一定成立；paid entitlement / monetization enforcement屬 Phase 3+，不得由 Phase 2 creator work偷偷啟用 F13。
 
 ## 3 個月 Gate
 
@@ -408,7 +408,7 @@ anonymous_id
 
 # appf2 Product Roadmap — Phase 3
 
-> Shared business truth：`../../core/BUSINESS-PLAN.md`
+> Shared business truth：`working/common-core/BUSINESS-PLAN.md`
 
 # 6. 第 4–6 個月：Scale Readiness
 
@@ -480,7 +480,7 @@ Intent
 
 # appf2 Product Roadmap — Phase 4+
 
-> Shared business truth：`../../core/BUSINESS-PLAN.md`
+> Shared business truth：`working/common-core/BUSINESS-PLAN.md`
 
 # 7. 6 個月後：Intent Commerce / Capability Network
 

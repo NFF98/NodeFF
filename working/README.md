@@ -2,9 +2,9 @@
 
 > `working/` = appf2 唯一可修改的 Product Design Current Truth。
 >
-> 狀態：**STRUCTURE_READY / CONTENT_REVIEW_COMPLETE / FINAL_AUDIT_PENDING**
+> 狀態：**STRUCTURE_READY / CONTENT_REVIEW_COMPLETE / FINAL_AUDIT_COMPLETE / HUMAN_APPROVAL_PENDING**
 >
-> 2026-09-26 已完成 STEP 2 Working Content Quality Review：Cleanup + Completeness。已處理 stale authority/path、retired governance、Design↔Build ownership、phase consolidation、registry metadata、closed delta reconciliation 與可直接判定的內容缺口；尚未 Human-approved Build Freeze。
+> 2026-09-26 已完成 STEP 2 Working Content Quality Review 與 Final Audit。Final Audit 已完成 Cross-file Consistency、Acceptance Mapping、UI/UX Consistency、Registry Integrity 與 Phase 1 Build Freeze Inventory；目前沒有已知 Phase 1 Build Freeze blocker。尚未 Human-approved Build Freeze。
 
 ## Canonical Structure
 
@@ -73,17 +73,57 @@ appf2 Working
 
 appf2-build 負責 implementation / delivery governance；appf2 不重複維護 Cursor execution rules。
 
+## Final Audit Result — 2026-09-26
+
+Final Audit 結論：**PASS / HUMAN APPROVAL REQUIRED BEFORE BUILD FREEZE**。
+
+已驗證：
+- 53 / 53 Working text / JSON：0 stale path、0 retired pending lifecycle、0 duplicate heading。
+- Phase 1 Functions：`F00 F01 F02 F03 F04 F05 F06 F07 F12 F16` 全部維持 `BUILD_FREEZE_READY / STEP2_REVIEWED`。
+- Acceptance Registry：285 entries；284 ACTIVE + 1 SUPERSEDED；Acceptance ID / Test ID unique；proof scope合法。
+- Phase 1 Function ↔ Acceptance / Event / Error Registry：0 missing / 0 orphan。
+- Recovery Registry：所有引用的 `F12-POL-*` 都有 canonical definition。
+- UI/UX：S01–S06 + O01–O05 cross-screen truth一致；11 / 11 approved PNG SHA unchanged。
+- Phase scope：Phase 2 = F08/F09/F10 + evidence-unlocked Creator / PMF work；F11/F13/F14/F15/F17 = Phase 3+ deferred / evidence-gated。
+- 日期本身不 unlock任何 deferred Function。
+
+Final Audit 修正的 material / structural findings：
+1. F13 entitlement / metering 從舊 2–6 月混合 scope 完整收回 Phase 3+。
+2. Business / Capability appendix 與 Detailed Overview 的 stale canonical references修正。
+3. S06 舊 execution-boundary wording收斂回 Human-approved Build Freeze boundary。
+
+## Phase 1 Build Freeze Candidate Inventory
+
+Build Freeze **不是複製全部 Working**。目前 candidate 共 **47 個 source artifacts**：
+
+### Include / Project into locked Build Spec
+
+- Shared implementation truth（7）：`APP-ARCHITECTURE.md`、`CAPABILITY-FABRIC.md`、`DATA-MODEL.md`、`INFRA-ARCHITECTURE.md`、`API-CONVENTIONS.md`、`ACCEPTANCE-CONVENTIONS.md`、`EXECUTION-ADMISSION.md`。
+- Scope owner（1）：`working/detailed-design/APP-DETAILED-DESIGN-OVERVIEW.md` 的 Phase 1 scope。
+- Detailed Data / Infrastructure（2）：只投影 Phase 1 section，不把 future Phase sections帶入 implementation。
+- Phase 1 Functions（10）：`F00 F01 F02 F03 F04 F05 F06 F07 F12 F16`。
+- UI/UX（24）：13 個 textual contracts + 11 個 approved reference PNG。
+- Machine-readable registries（3）：Acceptance / Evidence / Recovery。
+
+### Reference-only / Do Not Copy as Build Spec Truth
+
+- `working/common-core/BUSINESS-PLAN.md`
+- `working/common-core/TECHNICAL-MOAT.md`
+- `working/common-core/DESIGN-TO-DELIVERY.md`
+- `working/README.md`
+- `working/DESIGN-WORKBENCH.md`
+- Deferred Functions：`F08 F09 F10 F11 F13 F14 F15 F17`
+- Data / Infrastructure 的 Phase 2 / 3 / 4+ sections
+
+這些可供 provenance / strategy / future design參考，但不得因同 repo存在就自動進 Phase 1 implementation baseline。
+
 ## Current Next Step
 
-STEP 2 已完成；下一個 gate 不再重做內容清理，而是 Final Audit / Build Freeze sequence：
+只剩 Human Gate：
 
-1. Cross-file consistency re-audit。
-2. Acceptance mapping audit。
-3. UI/UX consistency audit。
-4. Registry integrity audit。
-5. 確認 Phase 1 Build Freeze inventory。
-6. User 明確批准後才建立 appf2-build locked baseline。
+1. User Review Final Audit result。
+2. User 明確批准 **Phase 1 Build Freeze**。
+3. 才把上述 approved Phase 1 truth投影為 `NFF98/appf2-build` 第一個 immutable `BS-*` baseline。
+4. Build Freeze 後才進 Backlog → Sprint → Cursor → Test → Evidence → Release。
 
-Working Review / migration 規則：`working/common-core/DESIGN-TO-DELIVERY.md#23-working-content-quality-review--build-freeze-migration-rule`。
-
-> **Structure Ready ≠ Content Ready ≠ Build Freeze Ready。**
+> **Final Audit Complete ≠ Build Freeze。沒有 Human approval，不建立 appf2-build baseline。**

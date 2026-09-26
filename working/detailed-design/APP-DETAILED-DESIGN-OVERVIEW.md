@@ -64,21 +64,21 @@ working/common-core/DESIGN-TO-DELIVERY.md
 | F00 | Experience Shell / 靈感精靈 | User 能容易開始、Refine、Remix、Recovery | 0–1 月 | BUILD_FREEZE_READY | `functions/F00-EXPERIENCE-SHELL.md` |
 | F01 | Intent Compilation + Model Gateway | Intent → Blueprint Candidate | 0–1 月 | BUILD_FREEZE_READY | `functions/F01-INTENT-COMPILATION.md` |
 | F02 | Blueprint Validation / Trust Admission | 不可信 Blueprint 不進 Runtime | 0–1 月 | BUILD_FREEZE_READY | `functions/F02-BLUEPRINT-VALIDATION.md` |
-| F03 | Runtime Execution | Blueprint → Interactive App | 0–1 月 | BUILD_FREEZE_READY | `functions/F03-RUNTIME-EXECUTION.md` |
+| F03 | Runtime Execution | Blueprint → Interactive App | 0–1 月 | BUILD_FREEZE_READY | `working/detailed-design/functions/F03-RUNTIME-EXECUTION.md` |
 | F04 | Capability Registry / Resolution | Compiler / Validator / Runtime 共用能力真相 | 0–1 月 | BUILD_FREEZE_READY | `functions/F04-CAPABILITY-REGISTRY.md` |
 | F05 | Share / Restore | Link → Recipient 可立即使用 | 0–1 月 | BUILD_FREEZE_READY | `functions/F05-SHARE-RESTORE.md` |
 | F06 | Remix / Refine | Existing App → Semantic Delta → New Blueprint | 0–1 月 | BUILD_FREEZE_READY | `functions/F06-REMIX-REFINE.md` |
-| F07 | Anonymous Identity & Evidence | No-login continuity + PMF evidence | 0–1 月 | BUILD_FREEZE_READY | `functions/F07-ANONYMOUS-IDENTITY-EVIDENCE.md` |
-| F08 | Durable Identity / Ownership | Anonymous → Account → Ownership | 2–3 月 | DEFERRED_BASELINE | `functions/F08-DURABLE-IDENTITY-OWNERSHIP.md` |
-| F09 | Realtime Room | 多人共享 Instance State | 2–3 月 | DEFERRED_BASELINE | `functions/F09-REALTIME-ROOM.md` |
-| F10 | Blueprint Reuse / Retrieval | Trusted Blueprint reuse | 2–3 月 | DEFERRED_BASELINE | `functions/F10-BLUEPRINT-REUSE-RETRIEVAL.md` |
-| F11 | External Capability Execution | AI / API / Heavy Work 受控執行 | 4–6 月 | DEFERRED_BASELINE | `functions/F11-EXTERNAL-CAPABILITY-EXECUTION.md` |
-| F12 | Humanized Recovery Orchestration | 技術錯誤 → 可理解、可繼續 UX | 0–1 月 | BUILD_FREEZE_READY | `functions/F12-HUMANIZED-RECOVERY.md` |
-| F13 | Entitlement / Metering | Premium / Costly Capability 可控可量測 | 2–6 月 | DEFERRED_BASELINE | `functions/F13-ENTITLEMENT-METERING.md` |
-| F14 | Provider Registry / Certification | External Capability 可被信任與版本化 | 6 月後 | DEFERRED_BASELINE | `functions/F14-PROVIDER-REGISTRY-CERTIFICATION.md` |
-| F15 | Transaction / Settlement | Commerce Outcome 可追蹤、對帳、結算 | 6 月後 | DEFERRED_BASELINE | `functions/F15-TRANSACTION-SETTLEMENT.md` |
-| F16 | Result Feedback / Logic Correction | 錯誤結果可修正、比較、回退 | 0–1 月 | BUILD_FREEZE_READY | `functions/F16-RESULT-CORRECTION.md` |
-| F17 | Heterogeneous Workflow Orchestration | 多異質 steps 完成同一 Outcome | 6 月後 | DEFERRED_BASELINE | `functions/F17-WORKFLOW-ORCHESTRATION.md` |
+| F07 | Anonymous Identity & Evidence | No-login continuity + PMF evidence | 0–1 月 | BUILD_FREEZE_READY | `working/detailed-design/functions/F07-ANONYMOUS-IDENTITY-EVIDENCE.md` |
+| F08 | Durable Identity / Ownership | Anonymous → Account → Ownership | Phase 2 / 2–3 月 | DEFERRED_BASELINE | `functions/F08-DURABLE-IDENTITY-OWNERSHIP.md` |
+| F09 | Realtime Room | 多人共享 Instance State | Phase 2 / evidence-gated | DEFERRED_BASELINE | `functions/F09-REALTIME-ROOM.md` |
+| F10 | Blueprint Reuse / Retrieval | Trusted Blueprint reuse | Phase 2 / 2–3 月 | DEFERRED_BASELINE | `functions/F10-BLUEPRINT-REUSE-RETRIEVAL.md` |
+| F11 | External Capability Execution | AI / API / Heavy Work 受控執行 | Phase 3+ / evidence-gated | DEFERRED_BASELINE | `functions/F11-EXTERNAL-CAPABILITY-EXECUTION.md` |
+| F12 | Humanized Recovery Orchestration | 技術錯誤 → 可理解、可繼續 UX | 0–1 月 | BUILD_FREEZE_READY | `working/detailed-design/functions/F12-HUMANIZED-RECOVERY.md` |
+| F13 | Entitlement / Metering | Premium / Costly Capability 可控可量測 | Phase 3+ / evidence-gated | DEFERRED_BASELINE | `functions/F13-ENTITLEMENT-METERING.md` |
+| F14 | Provider Registry / Certification | External Capability 可被信任與版本化 | Phase 3+ / later activation | DEFERRED_BASELINE | `functions/F14-PROVIDER-REGISTRY-CERTIFICATION.md` |
+| F15 | Transaction / Settlement | Commerce Outcome 可追蹤、對帳、結算 | Phase 3+ / later activation | DEFERRED_BASELINE | `functions/F15-TRANSACTION-SETTLEMENT.md` |
+| F16 | Result Feedback / Logic Correction | 錯誤結果可修正、比較、回退 | 0–1 月 | BUILD_FREEZE_READY | `working/detailed-design/functions/F16-RESULT-CORRECTION.md` |
+| F17 | Heterogeneous Workflow Orchestration | 多異質 steps 完成同一 Outcome | Phase 3+ / evidence-gated | DEFERRED_BASELINE | `functions/F17-WORKFLOW-ORCHESTRATION.md` |
 
 Deferred baseline 的存在不等於 activation；只有 `BUILD_FREEZE_READY` Function 才可進當期 Build Freeze candidate set。
 
@@ -197,40 +197,33 @@ Create works
 
 Build 成功不等於 Release 1 完成。
 
-## Release 2 — Durable Value，2–3 月
+## Release 2 — Durable Value / Phase 2
 
 ~~~text
 F08 + F10
-+ F09 if proven
-+ F13 Basic
++ F09 only if realtime use case is proven
++ evidence-unlocked Creator / PMF work
 + hardening of Release 1
 ~~~
 
 Outcome：
 > Reuse → Identity → Ownership → Creator Value
 
-## Release 3 — Scale Readiness，4–6 月
+Phase 2 **不啟用 F13 entitlement / metering**；需要的 static cost / capability metadata 可留在 Capability Fabric，但不形成 premium enforcement system。
+
+## Release 3+ — Scale / External / Commerce
 
 ~~~text
-F11
-+ F13 Production
+F11 + F13
++ F14 + F15 + F17 when their evidence gates are met
 + reliability / compatibility / cost hardening
++ Intent Commerce / Capability Network expansion
 ~~~
 
 Outcome：
-> External / Paid Capability 可以安全接入
+> External / Paid Capability、Commerce 與 heterogeneous orchestration 能在既有 trust boundary內逐步啟用
 
-## Continuous Platform Releases，6 月後
-
-~~~text
-F14 + F15 + F17
-+ provider / commerce / orchestration expansion
-~~~
-
-Outcome：
-> Intent Commerce / Capability Network / Heterogeneous Orchestration 持續擴張
-
-日期不自動解鎖下一 Phase；Evidence Gate 才解鎖。
+Phase 3+ 可以有不同 activation horizon；**日期不自動解鎖任何 Function**。只有 Evidence + Human approval + complete Detailed Design + Build Freeze inclusion 才解鎖。
 
 ---
 
@@ -240,14 +233,14 @@ Outcome：
 
 | Contract | Canonical Home |
 |---|---|
-| Blueprint / Trust Admission | `functions/F02-BLUEPRINT-VALIDATION.md` + `DATA-MODEL.md` |
+| Blueprint / Trust Admission | `working/detailed-design/functions/F02-BLUEPRINT-VALIDATION.md` + `working/common-core/DATA-MODEL.md` |
 | Runtime Semantics | `functions/F03-RUNTIME-EXECUTION.md` |
-| Capability Contract / Registry | `core/CAPABILITY-FABRIC.md` + `functions/F04-CAPABILITY-REGISTRY.md` |
+| Capability Contract / Registry | `working/common-core/CAPABILITY-FABRIC.md` + `working/detailed-design/functions/F04-CAPABILITY-REGISTRY.md` |
 | Result Quality / Logic Correction | `functions/F16-RESULT-CORRECTION.md` |
 | Recovery | `functions/F12-HUMANIZED-RECOVERY.md` |
 | Anonymous Evidence | `functions/F07-ANONYMOUS-IDENTITY-EVIDENCE.md` |
-| Durable Identity / Ownership | `functions/F08-DURABLE-IDENTITY-OWNERSHIP.md` + `DATA-MODEL.md` |
-| Delivery / Acceptance / Release Gate | `DESIGN-TO-DELIVERY.md` |
+| Durable Identity / Ownership | `working/detailed-design/functions/F08-DURABLE-IDENTITY-OWNERSHIP.md` + `working/common-core/DATA-MODEL.md` |
+| Delivery / Acceptance / Release Gate | `working/common-core/DESIGN-TO-DELIVERY.md` |
 
 ---
 
@@ -278,7 +271,7 @@ User Outcome
 
 1. Function 是 User Outcome，不是單純 technical module。
 2. Frontend / Backend / Runtime 必須在同一 Function flow 裡一起設計。
-3. Architecture 決定邊界，Cursor 不發明新架構。
+3. Architecture 決定邊界；implementation 不得自行發明 Product / System architecture。
 4. 所有跨 Function Contract 只能有 canonical source。
 5. Error / Recovery 是功能本身，不是最後補上的例外。
 6. Result Correction 是核心 UX，不是把錯誤 Prompt 叫 User 從頭重做。

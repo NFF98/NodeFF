@@ -527,7 +527,7 @@ Capability Fabric 的發展順序：
 
 # appf2 Capability Roadmap — Phase 1
 
-> Shared capability contract：`../../core/CAPABILITY-FABRIC.md`
+> Shared capability contract：`working/common-core/CAPABILITY-FABRIC.md`
 
 # 11. 0–1 個月：Core Capability Set
 
@@ -572,7 +572,7 @@ Recovery / Notice presentation
 
 # appf2 Capability Roadmap — Phase 2
 
-> Shared capability contract：`../../core/CAPABILITY-FABRIC.md`
+> Shared capability contract：`working/common-core/CAPABILITY-FABRIC.md`
 
 # 12. 第 2–3 個月：Reuse / Identity / Creator Capability
 
@@ -588,9 +588,11 @@ Recovery / Notice presentation
 - durable state
 - save / history
 - publishing hooks
-- premium entitlement
+- non-enforcing cost / entitlement metadata hooks only
 - realtime only where use case proves it
 - semantic reuse metadata
+
+Phase 2 不啟用 F13 premium enforcement / metering；真正 entitlement execution屬 Phase 3+。
 
 這一階段 Capability 的主要要求從：
 
@@ -607,7 +609,7 @@ Recovery / Notice presentation
 
 # appf2 Capability Roadmap — Phase 3
 
-> Shared capability contract：`../../core/CAPABILITY-FABRIC.md`
+> Shared capability contract：`working/common-core/CAPABILITY-FABRIC.md`
 
 # 13. 第 4–6 個月：Scale Readiness / External Capability Pilot
 
@@ -637,7 +639,7 @@ Recovery / Notice presentation
 
 # appf2 Capability Roadmap — Phase 4+
 
-> Shared capability contract：`../../core/CAPABILITY-FABRIC.md`
+> Shared capability contract：`working/common-core/CAPABILITY-FABRIC.md`
 
 # 14. 6 個月後：Capability Network + Orchestration
 

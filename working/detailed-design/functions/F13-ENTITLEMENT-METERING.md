@@ -4,7 +4,7 @@
 >
 > Activation Gate：日期本身不 unlock；只有 Evidence + Human approval + complete Detailed Design + Build Freeze inclusion 才可進 implementation scope。
 >
-> Horizon：2–6 月
+> Horizon：Phase 3+ / evidence-gated（earliest activation after Phase 2 evidence）
 >
 > Delivery 規則：`working/common-core/DESIGN-TO-DELIVERY.md`
 >
@@ -12,35 +12,28 @@
 
 # 1. Migrated Current Truth
 
-## Basic — 2–3 月
+## Activation Baseline — Phase 3+
 
-第 2–3 個月只做必要底座：
+Phase 2 可在 Capability Fabric保留 **non-enforcing** cost / entitlement compatibility metadata，但 **F13 本身不啟用**。
 
-- capability cost class
-- entitlement metadata
-- quota / usage record
-- explicit premium boundary
+F13 activation至少包含：
 
-不做完整 marketplace settlement。
+- entitlement policy / scope；
+- quota / usage record；
+- explicit premium boundary；
+- usage metering；
+- premium enforcement；
+- provider cost attribution；
+- auditability。
 
-Acceptance：
-
-- free / paid capability boundary 可被 Runtime / Gateway 正確 enforce
-- cost-bearing action 不能偷偷執行
-
-## Production — 4–6 月
-
-增加：
-
-- usage metering
-- quota
-- premium enforcement
-- provider cost attribution
-- auditability
+不因 metadata存在就宣稱 premium system已啟用，也不先做完整 marketplace settlement。
 
 Acceptance：
 
-> 使用多少、花多少、誰有權限，必須可重建。
+- free / paid capability boundary 可被 Runtime / Gateway 正確 enforce；
+- cost-bearing action 不能偷偷執行；
+- 使用多少、花多少、誰有權限可重建；
+- enforcement / metering failure不可 silently allow paid execution。
 
 # Status Note
 
